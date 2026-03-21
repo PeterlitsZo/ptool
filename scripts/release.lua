@@ -35,7 +35,7 @@ local status = p.run({
 })
 local unexpected = {}
 for line in status.stdout:gmatch("[^\n]+") do
-  local file = line:sub(4)
+  local file = line:match("^.. (.+)$")
   if file ~= "CHANGELOG.md" then
     unexpected[#unexpected + 1] = line
   end
