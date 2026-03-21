@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build ${{ matrix.asset_name }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            asset_name: linux-amd64
+          - runner: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            asset_name: linux-arm64
+          - runner: macos-14
+            target: aarch64-apple-darwin
+            asset_name: macos-arm64
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Select stable Rust toolchain
+        run: rustup default stable
+
+      - name: Build release binary
+        run: cargo build --locked --release --target "${{ matrix.target }}" --bin ptool
+
+      - name: Package release artifact
+        id: package
+        run: |
+          version="${GITHUB_REF_NAME}"
+          archive_name="ptool-${version}-${{ matrix.asset_name }}.tar.gz"
+          mkdir -p dist/stage
+          cp "target/${{ matrix.target }}/release/ptool" dist/stage/ptool
+          tar -C dist/stage -czf "dist/${archive_name}" ptool
+          echo "archive_name=${archive_name}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload packaged artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.asset_name }}
+          path: dist/${{ steps.package.outputs.archive_name }}
+          if-no-files-found: error
+
+  publish:
+    name: Publish GitHub release
+    runs-on: ubuntu-24.04
+    needs: build
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download packaged artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: package-*
+          path: dist
+          merge-multiple: true
+
+      - name: Generate checksums
+        run: |
+          cd dist
+          shasum -a 256 *.tar.gz > SHA256SUMS
+
+      - name: Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          prerelease_flag=""
+
+          case "$tag" in
+            *-alpha*|*-beta*|*-rc*)
+              prerelease_flag="--prerelease"
+              ;;
+          esac
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" dist/*.tar.gz dist/SHA256SUMS --clobber
+          else
+            gh release create "$tag" dist/*.tar.gz dist/SHA256SUMS \
+              --title "$tag" \
+              --generate-notes \
+              $prerelease_flag
+          fi
