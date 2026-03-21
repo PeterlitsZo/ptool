@@ -23,6 +23,30 @@ if not p.re.compile(valid_methods_re):is_match(args.method) then
   error(msg, 0)
 end
 
+-- Ensure the working tree is clean before releasing. Only CHANGELOG.md is
+-- allowed to have uncommitted changes (since the user updates it before
+-- running this script). Without this check, untracked or uncommitted files
+-- (such as .github/workflows/release.yml) would be missing from the release
+-- commit and the tag, which could prevent CI workflows from triggering.
+local status = p.run({
+  cmd = "git",
+  args = {"status", "--porcelain"},
+  stdout = "capture",
+})
+local unexpected = {}
+for line in status.stdout:gmatch("[^\n]+") do
+  local file = line:sub(4)
+  if file ~= "CHANGELOG.md" then
+    unexpected[#unexpected + 1] = line
+  end
+end
+if #unexpected > 0 then
+  error(
+    "Working tree is not clean. Please commit all changes before releasing:\n"
+    .. table.concat(unexpected, "\n"), 0
+  )
+end
+
 -- Update the version in Cargo.toml.
 local cargo_text = p.fs.read("Cargo.toml")
 local version_path = { "package", "version" }

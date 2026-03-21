@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Added a pre-flight check to the release script (`scripts/release.lua`) that
+  ensures the working tree is clean before creating a release. This prevents the
+  issue where untracked or uncommitted files (such as
+  `.github/workflows/release.yml`) are missing from the tagged commit, which
+  would cause CI workflows not to trigger.
+
 ## v0.1.0-alpha.1 (2026-03-21)
 
 ### Added
