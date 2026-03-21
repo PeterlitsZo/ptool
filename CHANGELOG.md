@@ -10,6 +10,8 @@
 - Centralized Lua API registration and runtime state in `LuaWorld`, making all
   exported `ptool` modules delegate through a single runtime object while
   keeping the default working-directory behavior unchanged.
+- Added `ptool.template.render(template, context)` powered by MiniJinja for
+  Jinja-style string template rendering.
 
 ## v0.1.0-alpha.1 (2026-03-21)
 

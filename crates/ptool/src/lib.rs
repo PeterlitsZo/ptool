@@ -8,6 +8,7 @@ mod re;
 mod runner;
 mod script_args;
 mod semver;
+mod template;
 mod text;
 mod toml;
 mod version;

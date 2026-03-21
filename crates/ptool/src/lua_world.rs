@@ -154,6 +154,15 @@ impl LuaWorld {
         crate::toml::remove(input, path)
     }
 
+    pub(crate) fn template_render(
+        &self,
+        lua: &Lua,
+        template: String,
+        context: Value,
+    ) -> mlua::Result<String> {
+        crate::template::render(lua, template, context)
+    }
+
     pub(crate) fn path_join(&self, segments: Variadic<String>) -> mlua::Result<String> {
         crate::path::join(segments)
     }

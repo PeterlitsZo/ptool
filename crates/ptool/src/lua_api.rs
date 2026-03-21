@@ -41,6 +41,7 @@ fn create_ptool_module(
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
     let semver_module = create_ptool_semver_module(lua, Rc::clone(&world))?;
+    let template_module = create_ptool_template_module(lua, Rc::clone(&world))?;
     let toml_module = create_ptool_toml_module(lua, world)?;
     module.set("run", run_fn)?;
     module.set("config", config_fn)?;
@@ -53,6 +54,7 @@ fn create_ptool_module(
     module.set("path", path_module)?;
     module.set("re", re_module)?;
     module.set("semver", semver_module)?;
+    module.set("template", template_module)?;
     module.set("toml", toml_module)?;
     Ok(module)
 }
@@ -221,4 +223,16 @@ fn create_ptool_semver_module(
     semver_module.set("compare", compare_fn)?;
     semver_module.set("bump", bump_fn)?;
     Ok(semver_module)
+}
+
+fn create_ptool_template_module(
+    lua: &Lua,
+    world: Rc<RefCell<crate::LuaWorld>>,
+) -> mlua::Result<Table> {
+    let template_module = lua.create_table()?;
+    let render_fn = lua.create_function(move |lua, (template, context): (String, Value)| {
+        world.borrow().template_render(lua, template, context)
+    })?;
+    template_module.set("render", render_fn)?;
+    Ok(template_module)
 }

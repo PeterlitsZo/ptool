@@ -140,8 +140,8 @@ leading indentation on each line and trimming leading and trailing blank lines.
 
 ```lua
 local str = ptool.unindent([[
-    | line 1
-    | line 2
+  | line 1
+  | line 2
 ]])
 ```
 
@@ -735,6 +735,45 @@ The `args` above is equivalent to:
 ```lua
 {"clippy", "--all-targets", "--", "-D", "warnings"}
 ```
+
+## ptool.template.render
+
+> `v0.1.0` - Introduced.
+
+`ptool.template.render(template, context)` renders a Jinja-style template string
+and returns the rendered result.
+
+- `template` (string, required): The template source text.
+- `context` (any serializable Lua value, required): The template context.
+- Returns: The rendered string.
+
+Example:
+
+```lua
+local template = ptool.unindent([[
+  | {% if user.active %}
+  | Hello, {{ user.name }}!
+  | {% else %}
+  | Inactive user: {{ user.name }}
+  | {% endif %}
+  | Items:
+  | {% for item in items %}
+  | - {{ item }}
+  | {% endfor %}
+]])
+local result = ptool.template.render(template, {
+  user = { name = "alice", active = true },
+  items = { "one", "two", "three" },
+})
+
+print(result)
+```
+
+Notes:
+
+- The context must be serializable to data values.
+- Lua values such as `function`, `thread`, and unsupported `userdata` are not
+  accepted as template context values.
 
 ## ptool.args.arg
 

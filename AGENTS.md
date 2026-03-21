@@ -51,7 +51,8 @@ The `<subject>` should be a short description of the change in English. Keep it
 concise and clear. You need to review all changed files and summarize the most
 important change (for example, if the project includes both a refactor and a
 documentation update, the subject should describe the refactor rather than the
-documentation update). End it with a English full stop.
+documentation update). End it with a English full stop. The first letter of the
+subject should be capitalized.
 
 When the user asks you to commit, you should commit only the files that are
 already staged and leave unstaged working tree files untouched.
