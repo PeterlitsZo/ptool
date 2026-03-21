@@ -1,3 +1,4 @@
+use crate::lua_world::RunConfig;
 use inquire::{Confirm, InquireError};
 use jiff::Zoned;
 use mlua::{Lua, Table, Value, Variadic};
@@ -11,13 +12,6 @@ enum StreamMode {
     Inherit,
     Capture,
     Null,
-}
-
-#[derive(Clone, Copy, Debug)]
-pub(crate) struct RunDefaults {
-    pub(crate) echo: bool,
-    pub(crate) check: bool,
-    pub(crate) confirm: bool,
 }
 
 struct RunOptions {
@@ -45,15 +39,16 @@ struct RunCallOverrides {
 pub(crate) fn run_command(
     lua: &Lua,
     args: Variadic<Value>,
-    defaults: RunDefaults,
+    current_dir: &Path,
+    defaults: RunConfig,
 ) -> mlua::Result<Value> {
     let options = parse_run_options(args, defaults)?;
     let cmd_for_error = options.cmd.clone();
+    let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
 
     let display = if options.echo || options.confirm {
-        let cwd = resolve_display_cwd(options.cwd.as_deref()).map_err(mlua::Error::external)?;
         let command = format_command_for_display(&options.cmd, &options.args);
-        Some((cwd, command))
+        Some((resolved_cwd.clone(), command))
     } else {
         None
     };
@@ -74,10 +69,7 @@ pub(crate) fn run_command(
 
     let mut command = ProcessCommand::new(&options.cmd);
     command.args(options.args);
-
-    if let Some(dir) = options.cwd {
-        command.current_dir(dir);
-    }
+    command.current_dir(&resolved_cwd);
 
     if let Some(vars) = options.env {
         for pair in vars.pairs::<String, String>() {
@@ -103,7 +95,7 @@ pub(crate) fn run_command(
     build_run_result(lua, output.status, stdout, stderr, cmd_for_error)
 }
 
-fn parse_run_options(args: Variadic<Value>, defaults: RunDefaults) -> mlua::Result<RunOptions> {
+fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result<RunOptions> {
     match args.len() {
         0 => Err(mlua::Error::runtime("ptool.run requires arguments")),
         1 => match args.first() {
@@ -201,7 +193,7 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunDefaults) -> mlua::Resu
     }
 }
 
-fn parse_full_options_table(options: Table, defaults: RunDefaults) -> mlua::Result<RunOptions> {
+fn parse_full_options_table(options: Table, defaults: RunConfig) -> mlua::Result<RunOptions> {
     let Some(cmd) = options.get::<Option<String>>("cmd")? else {
         return Err(mlua::Error::runtime(
             "ptool.run options mode requires `cmd`",
@@ -314,7 +306,7 @@ fn apply_overrides(
     cmd: String,
     args: Vec<String>,
     overrides: RunCallOverrides,
-    defaults: RunDefaults,
+    defaults: RunConfig,
 ) -> RunOptions {
     RunOptions {
         cmd,
@@ -489,18 +481,18 @@ fn parse_shell_words(input: &str, context: &str) -> mlua::Result<Vec<String>> {
         .ok_or_else(|| mlua::Error::runtime(format!("{context} failed to parse as shell words")))
 }
 
-fn resolve_display_cwd(cwd: Option<&str>) -> std::io::Result<PathBuf> {
-    let base = std::env::current_dir()?;
+fn resolve_run_cwd(current_dir: &Path, cwd: Option<&str>) -> PathBuf {
+    let base = current_dir.to_path_buf();
     match cwd {
         Some(dir) => {
             let path = PathBuf::from(dir);
             if path.is_absolute() {
-                Ok(path)
+                path
             } else {
-                Ok(base.join(path))
+                base.join(path)
             }
         }
-        None => Ok(base),
+        None => base,
     }
 }
 

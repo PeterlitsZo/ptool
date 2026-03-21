@@ -1,0 +1,253 @@
+use mlua::{Lua, Table, Value, Variadic};
+use std::path::{Path, PathBuf};
+
+#[derive(Clone, Copy, Debug)]
+pub struct RunConfig {
+    pub echo: bool,
+    pub check: bool,
+    pub confirm: bool,
+}
+
+impl Default for RunConfig {
+    fn default() -> Self {
+        Self {
+            echo: true,
+            check: false,
+            confirm: false,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct LuaWorldConfig {
+    pub run: RunConfig,
+}
+
+#[derive(Debug)]
+pub struct LuaWorld {
+    current_dir: PathBuf,
+    config: LuaWorldConfig,
+}
+
+impl LuaWorld {
+    pub fn new() -> std::io::Result<Self> {
+        Ok(Self {
+            current_dir: std::env::current_dir()?,
+            config: LuaWorldConfig::default(),
+        })
+    }
+
+    pub fn current_dir(&self) -> &Path {
+        &self.current_dir
+    }
+
+    pub fn config(&self) -> &LuaWorldConfig {
+        &self.config
+    }
+
+    pub(crate) fn run(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Value> {
+        crate::exec::run_command(lua, args, self.current_dir(), self.config.run)
+    }
+
+    pub(crate) fn configure(&mut self, options: Table) -> mlua::Result<()> {
+        let mut next_run = self.config.run;
+
+        for pair in options.pairs::<Value, Value>() {
+            let (key, value) = pair?;
+            let key = match key {
+                Value::String(key) => key.to_str()?.to_string(),
+                _ => {
+                    return Err(mlua::Error::runtime(
+                        "ptool.config(options) keys must be strings",
+                    ));
+                }
+            };
+
+            match key.as_str() {
+                "run" => {
+                    let Value::Table(run_options) = value else {
+                        return Err(mlua::Error::runtime(
+                            "ptool.config(options) `run` must be a table",
+                        ));
+                    };
+                    apply_run_config(&mut next_run, run_options)?;
+                }
+                _ => {
+                    return Err(mlua::Error::runtime(format!(
+                        "ptool.config(options) unknown field `{key}`"
+                    )));
+                }
+            }
+        }
+
+        self.config.run = next_run;
+        Ok(())
+    }
+
+    pub(crate) fn require_version(&self, required_version: String) -> mlua::Result<()> {
+        crate::version::ensure_min_ptool_version(&required_version)
+    }
+
+    pub(crate) fn unindent(&self, input: String) -> String {
+        crate::text::unindent_text(&input)
+    }
+
+    pub(crate) fn create_script_arg_builder(
+        &self,
+        id: String,
+        kind: String,
+        options: Option<Table>,
+    ) -> mlua::Result<crate::script_args::ScriptArgBuilder> {
+        crate::script_args::create_script_arg_builder(id, kind, options)
+    }
+
+    pub(crate) fn parse_script_args(
+        &self,
+        lua: &Lua,
+        schema: Table,
+        script_name: &str,
+        script_args: &[String],
+    ) -> mlua::Result<Table> {
+        crate::script_args::parse_script_args(lua, schema, script_name, script_args)
+    }
+
+    pub(crate) fn shell_split(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
+        let Some(parts) = shlex::split(&input) else {
+            return Err(mlua::Error::runtime("ptool.sh.split failed to parse input"));
+        };
+        lua.create_sequence_from(parts)
+    }
+
+    pub(crate) fn http_request(&self, options: Table) -> mlua::Result<crate::http::HttpResponse> {
+        crate::http::request(options)
+    }
+
+    pub(crate) fn fs_read(&self, path: String) -> mlua::Result<String> {
+        crate::fs::read(path)
+    }
+
+    pub(crate) fn fs_write(&self, path: String, content: String) -> mlua::Result<()> {
+        crate::fs::write(path, content)
+    }
+
+    pub(crate) fn fs_mkdir(&self, path: String) -> mlua::Result<()> {
+        crate::fs::mkdir(path)
+    }
+
+    pub(crate) fn fs_exists(&self, path: String) -> bool {
+        crate::fs::exists(path)
+    }
+
+    pub(crate) fn toml_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Table> {
+        crate::toml::parse(lua, input)
+    }
+
+    pub(crate) fn toml_get(&self, lua: &Lua, input: Value, path: Value) -> mlua::Result<Value> {
+        crate::toml::get(lua, input, path)
+    }
+
+    pub(crate) fn toml_set(&self, input: Value, path: Value, value: Value) -> mlua::Result<String> {
+        crate::toml::set(input, path, value)
+    }
+
+    pub(crate) fn toml_remove(&self, input: Value, path: Value) -> mlua::Result<String> {
+        crate::toml::remove(input, path)
+    }
+
+    pub(crate) fn path_join(&self, segments: Variadic<String>) -> mlua::Result<String> {
+        crate::path::join(segments)
+    }
+
+    pub(crate) fn path_normalize(&self, path: String) -> mlua::Result<String> {
+        crate::path::normalize(path)
+    }
+
+    pub(crate) fn path_abspath(&self, args: Variadic<String>) -> mlua::Result<String> {
+        crate::path::abspath_from_args(args, self.current_dir())
+    }
+
+    pub(crate) fn path_relpath(&self, args: Variadic<String>) -> mlua::Result<String> {
+        crate::path::relpath_from_args(args, self.current_dir())
+    }
+
+    pub(crate) fn path_isabs(&self, path: String) -> mlua::Result<bool> {
+        crate::path::isabs(path)
+    }
+
+    pub(crate) fn path_dirname(&self, path: String) -> mlua::Result<String> {
+        crate::path::dirname(path)
+    }
+
+    pub(crate) fn path_basename(&self, path: String) -> mlua::Result<String> {
+        crate::path::basename(path)
+    }
+
+    pub(crate) fn path_extname(&self, path: String) -> mlua::Result<String> {
+        crate::path::extname(path)
+    }
+
+    pub(crate) fn re_compile(&self, args: Variadic<Value>) -> mlua::Result<crate::re::LuaRegex> {
+        crate::re::compile(args)
+    }
+
+    pub(crate) fn re_escape(&self, text: String) -> String {
+        crate::re::escape(&text)
+    }
+
+    pub(crate) fn semver_parse(&self, version: Value) -> mlua::Result<crate::semver::LuaSemVer> {
+        crate::semver::parse(version)
+    }
+
+    pub(crate) fn semver_is_valid(&self, version: Value) -> bool {
+        crate::semver::is_valid(version)
+    }
+
+    pub(crate) fn semver_compare(&self, a: Value, b: Value) -> mlua::Result<i64> {
+        crate::semver::compare(a, b)
+    }
+
+    pub(crate) fn semver_bump(
+        &self,
+        version: Value,
+        op: String,
+    ) -> mlua::Result<crate::semver::LuaSemVer> {
+        crate::semver::bump(version, op)
+    }
+}
+
+fn apply_run_config(run: &mut RunConfig, options: Table) -> mlua::Result<()> {
+    for pair in options.pairs::<Value, Value>() {
+        let (key, value) = pair?;
+        let key = match key {
+            Value::String(key) => key.to_str()?.to_string(),
+            _ => {
+                return Err(mlua::Error::runtime(
+                    "ptool.config(options.run) keys must be strings",
+                ));
+            }
+        };
+
+        match key.as_str() {
+            "echo" => run.echo = parse_config_bool(value, "ptool.config(options.run)", "echo")?,
+            "check" => run.check = parse_config_bool(value, "ptool.config(options.run)", "check")?,
+            "confirm" => {
+                run.confirm = parse_config_bool(value, "ptool.config(options.run)", "confirm")?
+            }
+            _ => {
+                return Err(mlua::Error::runtime(format!(
+                    "ptool.config(options.run) unknown field `{key}`"
+                )));
+            }
+        }
+    }
+    Ok(())
+}
+
+fn parse_config_bool(value: Value, context: &str, key: &str) -> mlua::Result<bool> {
+    match value {
+        Value::Boolean(value) => Ok(value),
+        _ => Err(mlua::Error::runtime(format!(
+            "{context} `{key}` must be a boolean"
+        ))),
+    }
+}

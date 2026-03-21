@@ -7,6 +7,9 @@
 - Split the project into a Cargo workspace with `crates/ptool` for the core
   library and `crates/ptool-cli` for the CLI, while keeping the `ptool`
   executable name and `ptool run` behavior unchanged.
+- Centralized Lua API registration and runtime state in `LuaWorld`, making all
+  exported `ptool` modules delegate through a single runtime object while
+  keeping the default working-directory behavior unchanged.
 
 ## v0.1.0-alpha.1 (2026-03-21)
 

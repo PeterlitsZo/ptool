@@ -2,6 +2,7 @@ mod exec;
 mod fs;
 mod http;
 mod lua_api;
+mod lua_world;
 mod path;
 mod re;
 mod runner;
@@ -11,4 +12,5 @@ mod text;
 mod toml;
 mod version;
 
+pub use lua_world::{LuaWorld, LuaWorldConfig, RunConfig};
 pub use runner::run_script;

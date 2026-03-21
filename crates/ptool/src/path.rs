@@ -23,15 +23,25 @@ pub(crate) fn normalize(path: String) -> mlua::Result<String> {
     Ok(path_to_string(&normalize_path(Path::new(&path))))
 }
 
-pub(crate) fn abspath_from_args(args: Variadic<String>) -> mlua::Result<String> {
+pub(crate) fn abspath_from_args(
+    args: Variadic<String>,
+    current_dir: &Path,
+) -> mlua::Result<String> {
     let (path, base) = parse_path_and_base_args(args, "ptool.path.abspath(path[, base])")?;
-    abspath(path, base)
+    abspath(path, base, current_dir)
 }
 
-pub(crate) fn relpath_from_args(args: Variadic<String>) -> mlua::Result<String> {
+pub(crate) fn relpath_from_args(
+    args: Variadic<String>,
+    current_dir: &Path,
+) -> mlua::Result<String> {
     let (path, base) = parse_path_and_base_args(args, "ptool.path.relpath(path[, base])")?;
 
-    let base_dir = resolve_base_dir(base.as_deref(), "ptool.path.relpath(path[, base])")?;
+    let base_dir = resolve_base_dir(
+        base.as_deref(),
+        current_dir,
+        "ptool.path.relpath(path[, base])",
+    )?;
     let target_path = resolve_path_with_base(&path, &base_dir);
     Ok(path_to_string(&make_relative_path(&base_dir, &target_path)))
 }
@@ -90,9 +100,13 @@ pub(crate) fn extname(path: String) -> mlua::Result<String> {
     Ok(base[dot_index..].to_string())
 }
 
-fn abspath(path: String, base: Option<String>) -> mlua::Result<String> {
+fn abspath(path: String, base: Option<String>, current_dir: &Path) -> mlua::Result<String> {
     ensure_non_empty(&path, "ptool.path.abspath(path[, base])")?;
-    let base_dir = resolve_base_dir(base.as_deref(), "ptool.path.abspath(path[, base])")?;
+    let base_dir = resolve_base_dir(
+        base.as_deref(),
+        current_dir,
+        "ptool.path.abspath(path[, base])",
+    )?;
     let absolute = resolve_path_with_base(&path, &base_dir);
     Ok(path_to_string(&absolute))
 }
@@ -129,11 +143,12 @@ fn ensure_non_empty(input: &str, context: &str) -> mlua::Result<()> {
     Ok(())
 }
 
-fn resolve_base_dir(base: Option<&str>, context: &str) -> mlua::Result<PathBuf> {
-    let cwd = std::env::current_dir().map_err(|err| {
-        mlua::Error::runtime(format!("{context} failed to get current dir: {err}"))
-    })?;
-
+fn resolve_base_dir(
+    base: Option<&str>,
+    current_dir: &Path,
+    context: &str,
+) -> mlua::Result<PathBuf> {
+    let cwd = normalize_path(current_dir);
     let base_dir = match base {
         Some(base) => {
             ensure_non_empty(base, context)?;

@@ -1,3 +1,6 @@
+use std::cell::RefCell;
+use std::rc::Rc;
+
 use mlua::Lua;
 
 pub fn run_script(
@@ -7,7 +10,8 @@ pub fn run_script(
     let script = std::fs::read_to_string(filename)?;
     let script = strip_shebang(&script);
     let lua = Lua::new();
-    crate::lua_api::install_ptool_module(&lua, filename, script_args)?;
+    let world = Rc::new(RefCell::new(crate::LuaWorld::new()?));
+    crate::lua_api::install_ptool_module(&lua, world, filename, script_args)?;
     lua.load(script).set_name(filename).exec()?;
     Ok(())
 }
