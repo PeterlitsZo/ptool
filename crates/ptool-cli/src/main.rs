@@ -3,20 +3,7 @@ use indoc::formatdoc;
 use std::ffi::OsStr;
 use std::process;
 
-mod exec;
-mod fs;
-mod http;
-mod lua_api;
-mod path;
-mod re;
-mod runner;
-mod script_args;
-mod semver;
-mod text;
-mod toml;
-mod version;
-
-const APP_NAME: &str = env!("CARGO_PKG_NAME");
+const APP_NAME: &str = "ptool";
 const APP_VERSION: &str = env!("CARGO_PKG_VERSION");
 const APP_ABOUT: &str = "The PTOOL CLI";
 
@@ -69,7 +56,7 @@ fn main() {
             filename,
             script_args,
         }) => {
-            if let Err(err) = runner::run(&filename, &script_args) {
+            if let Err(err) = ptool::run_script(&filename, &script_args) {
                 eprintln!("Failed to run Lua script `{filename}`: {err}");
                 process::exit(1);
             }

@@ -1,0 +1,13 @@
+[package]
+name = "ptool-cli"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "ptool"
+path = "src/main.rs"
+
+[dependencies]
+clap_lex = "1.1.0"
+indoc = "2.0.7"
+ptool = { path = "../ptool" }

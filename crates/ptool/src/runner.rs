@@ -1,6 +1,6 @@
 use mlua::Lua;
 
-pub(crate) fn run(
+pub fn run_script(
     filename: &str,
     script_args: &[String],
 ) -> Result<(), Box<dyn std::error::Error>> {

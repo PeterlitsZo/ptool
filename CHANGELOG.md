@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Split the project into a Cargo workspace with `crates/ptool` for the core
+  library and `crates/ptool-cli` for the CLI, while keeping the `ptool`
+  executable name and `ptool run` behavior unchanged.
+
 ## v0.1.0-alpha.1 (2026-03-21)
 
 ### Added
