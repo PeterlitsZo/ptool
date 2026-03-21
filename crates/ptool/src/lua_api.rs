@@ -31,6 +31,8 @@ fn create_ptool_module(
     let use_fn = lua.create_function(move |_, required_version: String| {
         use_state.borrow().require_version(required_version)
     })?;
+    let cd_state = Rc::clone(&world);
+    let cd_fn = lua.create_function(move |_, path: String| cd_state.borrow_mut().cd(path))?;
     let unindent_state = Rc::clone(&world);
     let unindent_fn =
         lua.create_function(move |_, input: String| Ok(unindent_state.borrow().unindent(input)))?;
@@ -46,6 +48,7 @@ fn create_ptool_module(
     module.set("run", run_fn)?;
     module.set("config", config_fn)?;
     module.set("use", use_fn)?;
+    module.set("cd", cd_fn)?;
     module.set("unindent", unindent_fn)?;
     module.set("args", args_module)?;
     module.set("sh", shell_module)?;

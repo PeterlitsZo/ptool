@@ -180,6 +180,29 @@ ptool.config({
 })
 ```
 
+## ptool.cd
+
+> `v0.1.0` - Introduced.
+
+`ptool.cd(path)` updates `ptool`'s runtime current directory.
+
+- `path` (string, required): Target directory path, absolute or relative.
+
+Behavior:
+
+- Relative paths are resolved from the current `ptool` runtime directory.
+- The target must exist and must be a directory.
+- This updates `ptool` runtime state and affects APIs that use runtime cwd
+  (such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`).
+
+Example:
+
+```lua
+ptool.cd("foobar")
+local res = ptool.run({ cmd = "pwd", stdout = "capture" })
+print(res.stdout)
+```
+
 ## ptool.run
 
 > `v0.1.0` - Introduced.

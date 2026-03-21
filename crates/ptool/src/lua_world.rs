@@ -45,6 +45,26 @@ impl LuaWorld {
         &self.config
     }
 
+    pub(crate) fn cd(&mut self, dir: String) -> mlua::Result<()> {
+        ensure_non_empty(&dir, "ptool.cd(path)")?;
+        let target = Path::new(&dir);
+        let target = if target.is_absolute() {
+            target.to_path_buf()
+        } else {
+            self.current_dir.join(target)
+        };
+        let target = std::fs::canonicalize(&target)
+            .map_err(|err| mlua::Error::runtime(format!("ptool.cd `{dir}` failed: {err}")))?;
+        if !target.is_dir() {
+            return Err(mlua::Error::runtime(format!(
+                "ptool.cd `{dir}` failed: not a directory"
+            )));
+        }
+
+        self.current_dir = target;
+        Ok(())
+    }
+
     pub(crate) fn run(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Value> {
         crate::exec::run_command(lua, args, self.current_dir(), self.config.run)
     }
@@ -259,4 +279,13 @@ fn parse_config_bool(value: Value, context: &str, key: &str) -> mlua::Result<boo
             "{context} `{key}` must be a boolean"
         ))),
     }
+}
+
+fn ensure_non_empty(input: &str, context: &str) -> mlua::Result<()> {
+    if input.is_empty() {
+        return Err(mlua::Error::runtime(format!(
+            "{context} does not accept empty string"
+        )));
+    }
+    Ok(())
 }
