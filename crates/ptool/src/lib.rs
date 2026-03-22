@@ -1,3 +1,4 @@
+mod db;
 mod exec;
 mod fs;
 mod http;

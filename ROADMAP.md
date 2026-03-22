@@ -10,11 +10,14 @@
 - [x] Support regular expressions.
 - [x] Support capturing stdout, stderr, and exit codes from `ptool.run`.
 - [x] Support rendering ninja2 templates.
-- [ ] Extract Lua-related features into a `LuaWorld` struct that maintains state
+- [x] Extract Lua-related features into a `LuaWorld` struct that maintains state
   and provides related methods.
 - [ ] Support terminal colors.
-- [ ] Support database interaction.
-- [ ] Maintain the current directory inside `LuaWorld`, and support functions
+- [x] Support database interaction.
+- [x] Maintain the current directory inside `LuaWorld`, and support functions
   such as `p.cd`.
 - [ ] Better error handling.
 - [ ] Support a TUI toolkit.
+- [ ] Support a subcommand `version`.
+- [ ] Support a document website.
+- [ ] Support a simple function to "dump" table.

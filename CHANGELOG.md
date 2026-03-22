@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Added
+
+- Added `ptool.db` powered by `sqlx`, with synchronous Lua-facing APIs for
+  connecting to SQLite, PostgreSQL, and MySQL, plus query helpers such as
+  `query`, `query_one`, `scalar`, `execute`, and callback-based transactions.
+- Added `ptool.template.render(template, context)` powered by MiniJinja for
+  Jinja-style string template rendering.
+- Added `ptool.cd(path)` to change `ptool` runtime working directory for
+  subsequent operations such as `ptool.run` and `ptool.path` path resolution.
+
 ### Changed
 
 - Split the project into a Cargo workspace with `crates/ptool` for the core
@@ -10,10 +20,6 @@
 - Centralized Lua API registration and runtime state in `LuaWorld`, making all
   exported `ptool` modules delegate through a single runtime object while
   keeping the default working-directory behavior unchanged.
-- Added `ptool.template.render(template, context)` powered by MiniJinja for
-  Jinja-style string template rendering.
-- Added `ptool.cd(path)` to change `ptool` runtime working directory for
-  subsequent operations such as `ptool.run` and `ptool.path` path resolution.
 
 ## v0.1.0-alpha.1 (2026-03-21)
 

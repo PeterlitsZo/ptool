@@ -1,5 +1,7 @@
 use mlua::{Lua, Table, Value, Variadic};
 use std::path::{Path, PathBuf};
+use std::rc::Rc;
+use tokio::runtime::Runtime;
 
 #[derive(Clone, Copy, Debug)]
 pub struct RunConfig {
@@ -27,13 +29,19 @@ pub struct LuaWorldConfig {
 pub struct LuaWorld {
     current_dir: PathBuf,
     config: LuaWorldConfig,
+    db_runtime: Rc<Runtime>,
 }
 
 impl LuaWorld {
     pub fn new() -> std::io::Result<Self> {
+        sqlx::any::install_default_drivers();
+        let db_runtime = tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()?;
         Ok(Self {
             current_dir: std::env::current_dir()?,
             config: LuaWorldConfig::default(),
+            db_runtime: Rc::new(db_runtime),
         })
     }
 
@@ -140,6 +148,10 @@ impl LuaWorld {
 
     pub(crate) fn http_request(&self, options: Table) -> mlua::Result<crate::http::HttpResponse> {
         crate::http::request(options)
+    }
+
+    pub(crate) fn db_connect(&self, value: Value) -> mlua::Result<crate::db::LuaDbConnection> {
+        crate::db::connect(value, self.current_dir(), Rc::clone(&self.db_runtime))
     }
 
     pub(crate) fn fs_read(&self, path: String) -> mlua::Result<String> {

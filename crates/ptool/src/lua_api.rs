@@ -39,6 +39,7 @@ fn create_ptool_module(
     let args_module = create_ptool_args_module(lua, Rc::clone(&world), script_name, script_args)?;
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
+    let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
@@ -53,6 +54,7 @@ fn create_ptool_module(
     module.set("args", args_module)?;
     module.set("sh", shell_module)?;
     module.set("http", http_module)?;
+    module.set("db", db_module)?;
     module.set("fs", fs_module)?;
     module.set("path", path_module)?;
     module.set("re", re_module)?;
@@ -107,6 +109,14 @@ fn create_ptool_http_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
         lua.create_function(move |_, options: Table| world.borrow().http_request(options))?;
     http_module.set("request", request_fn)?;
     Ok(http_module)
+}
+
+fn create_ptool_db_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let db_module = lua.create_table()?;
+    let connect_fn =
+        lua.create_function(move |_, value: Value| world.borrow().db_connect(value))?;
+    db_module.set("connect", connect_fn)?;
+    Ok(db_module)
 }
 
 fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
