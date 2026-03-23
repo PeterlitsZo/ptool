@@ -25,7 +25,7 @@ end
 
 -- Update the version in Cargo.toml.
 local cargo_text = p.fs.read("Cargo.toml")
-local version_path = { "package", "version" }
+local version_path = { "workspace", "package", "version" }
 local current_version = p.semver.parse(p.toml.get(cargo_text, version_path))
 local next_version = current_version:bump(args.method)
 local next_version_str = next_version:to_string()
@@ -41,7 +41,7 @@ p.run("echo", {"I am sure that I updated CHANGELOG.md"}, { confirm = true })
 p.run("git add Cargo.toml Cargo.lock CHANGELOG.md")
 p.run(
   "git",
-  {"commit", "-m", 'chore: Release "' .. next_version_str .. '"'},
+  {"commit", "-m", 'chore: Release "' .. next_version_str .. '".'},
   { confirm = true }
 )
 p.run("git tag " .. tag_name)
