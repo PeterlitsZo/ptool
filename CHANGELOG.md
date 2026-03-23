@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Switched the GitHub release workflow to build Linux artifacts for
+  `x86_64-unknown-linux-musl` and `aarch64-unknown-linux-musl`, using Zig via
+  `cargo-zigbuild` for cross-platform release packaging.
+
 ## v0.1.0-alpha.2 (2026-03-23)
 
 ### Added
