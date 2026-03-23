@@ -11,6 +11,10 @@
   Jinja-style string template rendering.
 - Added `ptool.cd(path)` to change `ptool` runtime working directory for
   subsequent operations such as `ptool.run` and `ptool.path` path resolution.
+- Added `ptool.ssh`, including `connect`, connection metadata fields, remote
+  command execution via `Connection:run(...)`, and explicit connection teardown
+  with `Connection:close()`, with scripting documentation for SSH targets,
+  authentication, host-key policies, and stream handling.
 
 ### Changed
 

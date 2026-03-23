@@ -21,3 +21,5 @@
 - [ ] Support a subcommand `version`.
 - [ ] Support a document website.
 - [ ] Support a simple function to "dump" table.
+- [ ] Support sending files with rsync or scp.
+- [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime.
