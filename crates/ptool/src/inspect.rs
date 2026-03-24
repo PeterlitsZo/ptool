@@ -2,6 +2,7 @@ use mlua::{String as LuaString, Table, Value};
 use std::collections::HashSet;
 
 const DEFAULT_INDENT: &str = "  ";
+const DEFAULT_INLINE_WIDTH: usize = 80;
 const CYCLE_MARKER: &str = "<cycle>";
 const MAX_DEPTH_MARKER: &str = "<max-depth>";
 
@@ -188,8 +189,13 @@ impl Renderer {
             return Ok("{}".to_string());
         }
 
+        let inline = render_inline_table(&entries);
         if !self.options.multiline {
-            return Ok(format!("{{ {} }}", entries.join(", ")));
+            return Ok(inline);
+        }
+
+        if self.should_render_table_inline(&inline, &entries, depth) {
+            return Ok(inline);
         }
 
         let current_indent = self.options.indent.repeat(depth);
@@ -206,6 +212,19 @@ impl Renderer {
         rendered.push('}');
         Ok(rendered)
     }
+
+    fn should_render_table_inline(&self, inline: &str, entries: &[String], depth: usize) -> bool {
+        let current_indent_width = self.options.indent.repeat(depth).chars().count();
+
+        !entries
+            .iter()
+            .any(|entry| entry.contains('\n') || entry.contains('\r'))
+            && current_indent_width + inline.chars().count() <= DEFAULT_INLINE_WIDTH
+    }
+}
+
+fn render_inline_table(entries: &[String]) -> String {
+    format!("{{ {} }}", entries.join(", "))
 }
 
 fn is_array_index_key(key: &Value, array_len: usize) -> bool {

@@ -18,8 +18,9 @@
   such as `p.cd`.
 - [ ] Better error handling.
 - [ ] Support a TUI toolkit.
-- [ ] Support a subcommand `version`.
+- [x] Support a subcommand `version`.
 - [ ] Support a document website.
-- [ ] Support a simple function to "dump" table.
+- [x] Support a simple function to "dump" table.
 - [ ] Support sending files with rsync or scp.
 - [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime.
+- [ ] Do not change line-number if there is shebang.
