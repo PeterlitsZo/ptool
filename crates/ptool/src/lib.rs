@@ -2,6 +2,7 @@ mod db;
 mod exec;
 mod fs;
 mod http;
+mod inspect;
 mod lua_api;
 mod lua_world;
 mod path;

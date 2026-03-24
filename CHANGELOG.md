@@ -6,6 +6,9 @@
 
 - Added the `ptool version` subcommand to print the current CLI version, with
   dedicated help output and argument validation.
+- Added `ptool.inspect(value[, options])` to render Lua values as readable
+  Lua-style strings, including table formatting with nested structures, stable
+  key ordering, and cycle-safe output.
 
 ### Changed
 

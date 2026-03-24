@@ -120,6 +120,10 @@ impl LuaWorld {
         crate::text::unindent_text(&input)
     }
 
+    pub(crate) fn inspect(&self, value: Value, options: Option<Table>) -> mlua::Result<String> {
+        crate::inspect::render(value, options)
+    }
+
     pub(crate) fn create_script_arg_builder(
         &self,
         id: String,

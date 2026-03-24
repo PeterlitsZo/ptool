@@ -152,6 +152,46 @@ local str = [[line 1
 line 2]]
 ```
 
+## ptool.inspect
+
+> `v0.1.0` - Introduced.
+
+`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-style
+string. It is primarily intended for debugging and displaying table contents.
+
+- `value` (any, required): The Lua value to inspect.
+- `options` (table, optional): Rendering options. Supported fields:
+  - `indent` (string, optional): Indentation used for each nesting level.
+    Defaults to two spaces.
+  - `multiline` (boolean, optional): Whether tables are rendered across multiple
+    lines. Defaults to `true`.
+  - `max_depth` (integer, optional): Maximum nesting depth to render. Deeper
+    values are replaced with `<max-depth>`.
+- Returns: `string`.
+
+Behavior:
+
+- Array-like entries (`1..n`) are rendered first.
+- Remaining table fields are rendered after the array part in stable key order.
+- Identifier-like string keys are rendered as `key = value`; other keys are
+  rendered as `[key] = value`.
+- Recursive table references are rendered as `<cycle>`.
+- Functions, threads, and userdata are rendered as placeholder values such as
+  `<function>` and `<userdata>`.
+
+Example:
+
+```lua
+local value = {
+  "hello",
+  user = { name = "alice", tags = {"dev", "ops"} },
+}
+value.self = value
+
+print(ptool.inspect(value))
+print(ptool.inspect(value, { multiline = false }))
+```
+
 ## ptool.config
 
 > `v0.1.0` - Introduced.
