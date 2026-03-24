@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Added
+
+- Added the `ptool version` subcommand to print the current CLI version, with
+  dedicated help output and argument validation.
+
 ### Changed
 
 - Switched the GitHub release workflow to build Linux artifacts for

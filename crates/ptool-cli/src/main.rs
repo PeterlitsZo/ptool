@@ -20,6 +20,7 @@ enum ParsedCli {
 enum UsageKind {
     Top,
     Run,
+    Version,
 }
 
 #[derive(Debug)]
@@ -40,6 +41,13 @@ impl ParseError {
         Self {
             message: message.into(),
             usage: UsageKind::Run,
+        }
+    }
+
+    fn version(message: impl Into<String>) -> Self {
+        Self {
+            message: message.into(),
+            usage: UsageKind::Version,
         }
     }
 }
@@ -68,6 +76,7 @@ fn main() {
             match err.usage {
                 UsageKind::Top => eprintln!("{}", top_usage(bin)),
                 UsageKind::Run => eprintln!("{}", run_usage(bin)),
+                UsageKind::Version => eprintln!("{}", version_usage(bin)),
             }
             process::exit(2);
         }
@@ -90,10 +99,11 @@ fn parse_cli(
             Ok(ParsedCli::ExitSuccess)
         }
         "-V" | "--version" => {
-            println!("{} {}", APP_NAME, APP_VERSION);
+            print_version();
             Ok(ParsedCli::ExitSuccess)
         }
         "run" => parse_run(raw, cursor, bin),
+        "version" => parse_version(raw, cursor, bin),
         value if value.starts_with('-') => Err(ParseError::top(format!(
             "unexpected argument `{value}` found"
         ))),
@@ -147,6 +157,31 @@ fn parse_run(
     })
 }
 
+fn parse_version(
+    raw: &RawArgs,
+    cursor: &mut clap_lex::ArgCursor,
+    bin: &OsStr,
+) -> Result<ParsedCli, ParseError> {
+    if let Some(next) = raw.next(cursor) {
+        let value = parsed_arg_to_string(next.to_value_os(), "argument")?;
+        if value == "-h" || value == "--help" {
+            println!("{}", version_usage(bin));
+            return Ok(ParsedCli::ExitSuccess);
+        }
+
+        return Err(ParseError::version(format!(
+            "unexpected argument `{value}` found"
+        )));
+    }
+
+    print_version();
+    Ok(ParsedCli::ExitSuccess)
+}
+
+fn print_version() {
+    println!("{} {}", APP_NAME, APP_VERSION);
+}
+
 fn parsed_arg_to_string(value: &OsStr, field: &str) -> Result<String, ParseError> {
     value
         .to_str()
@@ -163,6 +198,7 @@ fn top_usage(bin: &OsStr) -> String {
 
         Commands:
           run      Run ptool script
+          version  Print version
 
         Options:
           -h, --help     Print help
@@ -183,5 +219,17 @@ fn run_usage(bin: &OsStr) -> String {
 
         Options:
           -h, --help      Print help
+    "# }
+}
+
+fn version_usage(bin: &OsStr) -> String {
+    let bin = bin.to_string_lossy();
+    formatdoc! { r#"
+        Print ptool version
+
+        Usage: {bin} version
+
+        Options:
+          -h, --help  Print help
     "# }
 }
