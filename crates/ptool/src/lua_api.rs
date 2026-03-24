@@ -145,12 +145,16 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     let mkdir_state = Rc::clone(&world);
     let mkdir_fn =
         lua.create_function(move |_, path: String| mkdir_state.borrow().fs_mkdir(path))?;
+    let exists_state = Rc::clone(&world);
     let exists_fn =
-        lua.create_function(move |_, path: String| Ok(world.borrow().fs_exists(path)))?;
+        lua.create_function(move |_, path: String| Ok(exists_state.borrow().fs_exists(path)))?;
+    let copy_fn =
+        lua.create_function(move |lua, args: Variadic<Value>| world.borrow().fs_copy(lua, args))?;
     fs_module.set("read", read_fn)?;
     fs_module.set("write", write_fn)?;
     fs_module.set("mkdir", mkdir_fn)?;
     fs_module.set("exists", exists_fn)?;
+    fs_module.set("copy", copy_fn)?;
     Ok(fs_module)
 }
 

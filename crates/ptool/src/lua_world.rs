@@ -178,6 +178,10 @@ impl LuaWorld {
         crate::fs::exists(path)
     }
 
+    pub(crate) fn fs_copy(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
+        crate::fs::copy(lua, args)
+    }
+
     pub(crate) fn toml_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Table> {
         crate::toml::parse(lua, input)
     }

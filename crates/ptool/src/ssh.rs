@@ -14,11 +14,21 @@ use tokio::runtime::Runtime;
 const CONNECT_SIGNATURE: &str = "ptool.ssh.connect(target_or_options)";
 const RUN_SIGNATURE: &str = "ptool.ssh.Connection:run(...)";
 const CLOSE_SIGNATURE: &str = "ptool.ssh.Connection:close()";
+const PATH_SIGNATURE: &str = "ptool.ssh.Connection:path(path)";
+const UPLOAD_SIGNATURE: &str = "ptool.ssh.Connection:upload(local_path, remote_path[, options])";
+const DOWNLOAD_SIGNATURE: &str =
+    "ptool.ssh.Connection:download(remote_path, local_path[, options])";
 
 #[derive(Clone)]
 pub(crate) struct LuaSshConnection {
     runtime: Rc<Runtime>,
     state: Rc<RefCell<ConnectionState>>,
+}
+
+#[derive(Clone)]
+pub(crate) struct LuaSshPath {
+    connection: LuaSshConnection,
+    path: String,
 }
 
 struct ConnectionState {
@@ -89,6 +99,35 @@ struct ExecResult {
     stderr: Option<String>,
 }
 
+struct BinaryExecResult {
+    code: Option<i64>,
+    stdout: Vec<u8>,
+    stderr: Vec<u8>,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub(crate) struct TransferOptions {
+    pub(crate) parents: bool,
+    pub(crate) overwrite: bool,
+    pub(crate) echo: bool,
+}
+
+impl Default for TransferOptions {
+    fn default() -> Self {
+        Self {
+            parents: false,
+            overwrite: true,
+            echo: false,
+        }
+    }
+}
+
+pub(crate) struct TransferResult {
+    pub(crate) bytes: u64,
+    pub(crate) from: String,
+    pub(crate) to: String,
+}
+
 pub(crate) fn connect(
     value: Value,
     current_dir: &Path,
@@ -137,7 +176,26 @@ impl UserData for LuaSshConnection {
         methods.add_method("run", |lua, this, args: Variadic<Value>| {
             this.run(lua, args)
         });
+        methods.add_method("path", |_, this, path: String| this.path(path));
+        methods.add_method("upload", |lua, this, args: Variadic<Value>| {
+            this.upload(lua, args)
+        });
+        methods.add_method("download", |lua, this, args: Variadic<Value>| {
+            this.download(lua, args)
+        });
         methods.add_method("close", |_, this, ()| this.close());
+    }
+}
+
+impl UserData for LuaSshPath {
+    fn add_fields<F: UserDataFields<Self>>(fields: &mut F) {
+        fields.add_field_method_get("host", |_, this| Ok(this.connection.info().host.clone()));
+        fields.add_field_method_get("user", |_, this| Ok(this.connection.info().user.clone()));
+        fields.add_field_method_get("port", |_, this| Ok(i64::from(this.connection.info().port)));
+        fields.add_field_method_get("target", |_, this| {
+            Ok(this.connection.info().target.clone())
+        });
+        fields.add_field_method_get("path", |_, this| Ok(this.path.clone()));
     }
 }
 
@@ -150,6 +208,26 @@ impl LuaSshConnection {
         let options = parse_run_call(args)?;
         let result = self.exec_internal(options)?;
         build_exec_result(lua, result, self.info().target)
+    }
+
+    fn path(&self, path: String) -> mlua::Result<LuaSshPath> {
+        ensure_non_empty_string(&path, PATH_SIGNATURE, "path")?;
+        Ok(LuaSshPath {
+            connection: self.clone(),
+            path,
+        })
+    }
+
+    fn upload(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
+        let (local_path, remote_path, options) = parse_upload_call(self, args)?;
+        let result = self.upload_file(Path::new(&local_path), &remote_path, options)?;
+        build_transfer_result(lua, result)
+    }
+
+    fn download(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
+        let (remote_path, local_path, options) = parse_download_call(self, args)?;
+        let result = self.download_file(&remote_path, Path::new(&local_path), options)?;
+        build_transfer_result(lua, result)
     }
 
     fn close(&self) -> mlua::Result<()> {
@@ -253,6 +331,497 @@ impl LuaSshConnection {
 
             Ok(result)
         })
+    }
+
+    pub(crate) fn upload_file(
+        &self,
+        local_path: &Path,
+        remote_path: &str,
+        options: TransferOptions,
+    ) -> mlua::Result<TransferResult> {
+        ensure_local_file(local_path, UPLOAD_SIGNATURE, "local_path")?;
+        ensure_non_empty_string(remote_path, UPLOAD_SIGNATURE, "remote_path")?;
+
+        let content = std::fs::read(local_path).map_err(|err| {
+            mlua::Error::runtime(format!(
+                "{UPLOAD_SIGNATURE} failed to read `{}`: {err}",
+                local_path.display()
+            ))
+        })?;
+
+        if options.echo {
+            println!(
+                "[ssh upload {}] {} -> {}",
+                self.info().target,
+                local_path.display(),
+                remote_path
+            );
+        }
+
+        let command = build_upload_command(remote_path, options)?;
+        self.exec_binary_internal(UPLOAD_SIGNATURE, &command, Some(content), false)?;
+
+        Ok(TransferResult {
+            bytes: std::fs::metadata(local_path)
+                .map(|metadata| metadata.len())
+                .unwrap_or(0),
+            from: local_path.display().to_string(),
+            to: format!("{}:{}", self.info().target, remote_path),
+        })
+    }
+
+    pub(crate) fn download_file(
+        &self,
+        remote_path: &str,
+        local_path: &Path,
+        options: TransferOptions,
+    ) -> mlua::Result<TransferResult> {
+        ensure_non_empty_string(remote_path, DOWNLOAD_SIGNATURE, "remote_path")?;
+
+        prepare_local_destination(local_path, options, DOWNLOAD_SIGNATURE, "local_path")?;
+
+        if options.echo {
+            println!(
+                "[ssh download {}] {} -> {}",
+                self.info().target,
+                remote_path,
+                local_path.display()
+            );
+        }
+
+        let command = build_download_command(remote_path)?;
+        let result = self.exec_binary_internal(DOWNLOAD_SIGNATURE, &command, None, true)?;
+
+        write_local_file(
+            local_path,
+            &result.stdout,
+            options,
+            DOWNLOAD_SIGNATURE,
+            "local_path",
+        )?;
+
+        Ok(TransferResult {
+            bytes: u64::try_from(result.stdout.len()).map_err(|_| {
+                mlua::Error::runtime(format!(
+                    "{DOWNLOAD_SIGNATURE} downloaded file is too large to report size"
+                ))
+            })?,
+            from: format!("{}:{}", self.info().target, remote_path),
+            to: local_path.display().to_string(),
+        })
+    }
+
+    fn exec_binary_internal(
+        &self,
+        context: &str,
+        command: &str,
+        stdin: Option<Vec<u8>>,
+        capture_stdout: bool,
+    ) -> mlua::Result<BinaryExecResult> {
+        let info = self.info();
+
+        let mut state = self.state.borrow_mut();
+        let session = state.session.as_mut().ok_or_else(|| {
+            mlua::Error::runtime(format!("{context} cannot use a closed connection"))
+        })?;
+
+        let command = command.to_string();
+        self.runtime.block_on(async {
+            let mut channel = session.channel_open_session().await.map_err(|err| {
+                ssh_error(
+                    context,
+                    format!("failed to open session channel for `{command}`: {err}"),
+                )
+            })?;
+            channel
+                .exec(true, command.as_bytes())
+                .await
+                .map_err(|err| {
+                    ssh_error(
+                        context,
+                        format!("failed to execute remote command `{command}`: {err}"),
+                    )
+                })?;
+
+            if let Some(stdin) = stdin {
+                let mut cursor = std::io::Cursor::new(stdin);
+                channel.data(&mut cursor).await.map_err(|err| {
+                    ssh_error(
+                        context,
+                        format!("failed to write stdin for `{command}`: {err}"),
+                    )
+                })?;
+                channel.eof().await.map_err(|err| {
+                    ssh_error(
+                        context,
+                        format!("failed to send EOF for `{command}`: {err}"),
+                    )
+                })?;
+            }
+
+            let mut stdout = Vec::new();
+            let mut stderr = Vec::new();
+            let mut code = None;
+
+            while let Some(msg) = channel.wait().await {
+                match msg {
+                    ChannelMsg::Data { data } => {
+                        if capture_stdout {
+                            stdout.extend_from_slice(&data);
+                        }
+                    }
+                    ChannelMsg::ExtendedData { data, ext: 1 } => stderr.extend_from_slice(&data),
+                    ChannelMsg::ExitStatus { exit_status } => code = Some(i64::from(exit_status)),
+                    ChannelMsg::ExitSignal { .. } => code = None,
+                    _ => {}
+                }
+            }
+
+            let result = BinaryExecResult {
+                code,
+                stdout,
+                stderr,
+            };
+
+            if result.code != Some(0) {
+                return Err(build_binary_exec_failed_error(
+                    context,
+                    &info.target,
+                    &command,
+                    result.code,
+                    &result.stderr,
+                ));
+            }
+
+            Ok(result)
+        })
+    }
+}
+
+impl LuaSshPath {
+    pub(crate) fn connection(&self) -> LuaSshConnection {
+        self.connection.clone()
+    }
+
+    pub(crate) fn path(&self) -> &str {
+        &self.path
+    }
+}
+
+fn parse_upload_call(
+    connection: &LuaSshConnection,
+    args: Variadic<Value>,
+) -> mlua::Result<(String, String, TransferOptions)> {
+    if !(2..=3).contains(&args.len()) {
+        return Err(mlua::Error::runtime(format!(
+            "{UPLOAD_SIGNATURE} expects 2 or 3 arguments"
+        )));
+    }
+
+    let local_path = match &args[0] {
+        Value::String(value) => value.to_str()?.to_string(),
+        _ => {
+            return Err(mlua::Error::runtime(format!(
+                "{UPLOAD_SIGNATURE} `local_path` must be a string"
+            )));
+        }
+    };
+    ensure_non_empty_string(&local_path, UPLOAD_SIGNATURE, "local_path")?;
+
+    let remote_path = parse_connection_remote_path_arg(
+        connection,
+        args[1].clone(),
+        UPLOAD_SIGNATURE,
+        "remote_path",
+    )?;
+
+    let options = parse_transfer_options(args.get(2).cloned(), UPLOAD_SIGNATURE)?;
+    Ok((local_path, remote_path, options))
+}
+
+fn parse_download_call(
+    connection: &LuaSshConnection,
+    args: Variadic<Value>,
+) -> mlua::Result<(String, String, TransferOptions)> {
+    if !(2..=3).contains(&args.len()) {
+        return Err(mlua::Error::runtime(format!(
+            "{DOWNLOAD_SIGNATURE} expects 2 or 3 arguments"
+        )));
+    }
+
+    let remote_path = parse_connection_remote_path_arg(
+        connection,
+        args[0].clone(),
+        DOWNLOAD_SIGNATURE,
+        "remote_path",
+    )?;
+
+    let local_path = match &args[1] {
+        Value::String(value) => value.to_str()?.to_string(),
+        _ => {
+            return Err(mlua::Error::runtime(format!(
+                "{DOWNLOAD_SIGNATURE} `local_path` must be a string"
+            )));
+        }
+    };
+    ensure_non_empty_string(&local_path, DOWNLOAD_SIGNATURE, "local_path")?;
+
+    let options = parse_transfer_options(args.get(2).cloned(), DOWNLOAD_SIGNATURE)?;
+    Ok((remote_path, local_path, options))
+}
+
+fn parse_connection_remote_path_arg(
+    connection: &LuaSshConnection,
+    value: Value,
+    context: &str,
+    field: &str,
+) -> mlua::Result<String> {
+    match value {
+        Value::String(path) => {
+            let path = path.to_str()?.to_string();
+            ensure_non_empty_string(&path, context, field)?;
+            Ok(path)
+        }
+        Value::UserData(_) => {
+            let remote = parse_remote_path_value(value, context, field)?;
+            if !remote.matches_connection(connection) {
+                return Err(mlua::Error::runtime(format!(
+                    "{context} `{field}` must belong to the current connection"
+                )));
+            }
+            Ok(remote.path().to_string())
+        }
+        _ => Err(mlua::Error::runtime(format!(
+            "{context} `{field}` must be a string or a remote path from `conn:path(...)`"
+        ))),
+    }
+}
+
+pub(crate) fn parse_remote_path_value(
+    value: Value,
+    context: &str,
+    field: &str,
+) -> mlua::Result<LuaSshPath> {
+    match value {
+        Value::String(path) => {
+            let path = path.to_str()?.to_string();
+            ensure_non_empty_string(&path, context, field)?;
+            Err(mlua::Error::runtime(format!(
+                "{context} `{field}` must be a remote path from `conn:path(...)`"
+            )))
+        }
+        Value::UserData(userdata) => {
+            if !userdata.is::<LuaSshPath>() {
+                return Err(mlua::Error::runtime(format!(
+                    "{context} `{field}` must be a remote path from `conn:path(...)`"
+                )));
+            }
+            Ok(userdata.borrow::<LuaSshPath>()?.clone())
+        }
+        _ => Err(mlua::Error::runtime(format!(
+            "{context} `{field}` must be a remote path from `conn:path(...)`"
+        ))),
+    }
+}
+
+pub(crate) fn parse_transfer_options(
+    value: Option<Value>,
+    context: &str,
+) -> mlua::Result<TransferOptions> {
+    let Some(value) = value else {
+        return Ok(TransferOptions::default());
+    };
+
+    match value {
+        Value::Nil => Ok(TransferOptions::default()),
+        Value::Table(table) => Ok(TransferOptions {
+            parents: table.get::<Option<bool>>("parents")?.unwrap_or(false),
+            overwrite: table.get::<Option<bool>>("overwrite")?.unwrap_or(true),
+            echo: table.get::<Option<bool>>("echo")?.unwrap_or(false),
+        }),
+        _ => Err(mlua::Error::runtime(format!(
+            "{context} options must be a table"
+        ))),
+    }
+}
+
+pub(crate) fn build_transfer_result(lua: &Lua, result: TransferResult) -> mlua::Result<Table> {
+    let table = lua.create_table()?;
+    let bytes = i64::try_from(result.bytes).map_err(|_| {
+        mlua::Error::runtime("ptool transfer result is too large to represent in Lua")
+    })?;
+    table.set("bytes", bytes)?;
+    table.set("from", result.from)?;
+    table.set("to", result.to)?;
+    Ok(table)
+}
+
+fn build_upload_command(remote_path: &str, options: TransferOptions) -> mlua::Result<String> {
+    let mut prefixes = Vec::new();
+    if options.parents
+        && let Some(parent) = remote_parent_path(remote_path)
+    {
+        prefixes.push(format!(
+            "mkdir -p {}",
+            shell_quote(parent, UPLOAD_SIGNATURE, "remote_path")?
+        ));
+    }
+    if !options.overwrite {
+        prefixes.push(format!(
+            "test ! -e {}",
+            shell_quote(remote_path, UPLOAD_SIGNATURE, "remote_path")?
+        ));
+    }
+
+    let mut command = prefixes.join(" && ");
+    if !command.is_empty() {
+        command.push_str(" && ");
+    }
+    command.push_str("cat > ");
+    command.push_str(&shell_quote(remote_path, UPLOAD_SIGNATURE, "remote_path")?);
+    Ok(command)
+}
+
+fn build_download_command(remote_path: &str) -> mlua::Result<String> {
+    Ok(format!(
+        "cat {}",
+        shell_quote(remote_path, DOWNLOAD_SIGNATURE, "remote_path")?
+    ))
+}
+
+fn shell_quote(value: &str, context: &str, field: &str) -> mlua::Result<String> {
+    try_quote(value)
+        .map(|value| value.into_owned())
+        .map_err(|err| mlua::Error::runtime(format!("{context} invalid `{field}`: {err}")))
+}
+
+fn remote_parent_path(path: &str) -> Option<&str> {
+    let parent = Path::new(path).parent()?;
+    if parent.as_os_str().is_empty() {
+        return None;
+    }
+    parent.to_str()
+}
+
+fn ensure_non_empty_string(value: &str, context: &str, field: &str) -> mlua::Result<()> {
+    if value.is_empty() {
+        return Err(mlua::Error::runtime(format!(
+            "{context} `{field}` must not be empty"
+        )));
+    }
+    Ok(())
+}
+
+fn ensure_local_file(path: &Path, context: &str, field: &str) -> mlua::Result<()> {
+    let metadata = std::fs::metadata(path).map_err(|err| {
+        mlua::Error::runtime(format!(
+            "{context} failed to access `{}`: {err}",
+            path.display()
+        ))
+    })?;
+    if !metadata.is_file() {
+        return Err(mlua::Error::runtime(format!(
+            "{context} `{field}` must be a file: `{}`",
+            path.display()
+        )));
+    }
+    Ok(())
+}
+
+fn prepare_local_destination(
+    path: &Path,
+    options: TransferOptions,
+    context: &str,
+    field: &str,
+) -> mlua::Result<()> {
+    if options.parents
+        && let Some(parent) = path
+            .parent()
+            .filter(|parent| !parent.as_os_str().is_empty())
+    {
+        std::fs::create_dir_all(parent).map_err(|err| {
+            mlua::Error::runtime(format!(
+                "{context} failed to create parent directory `{}`: {err}",
+                parent.display()
+            ))
+        })?;
+    }
+
+    if !options.overwrite && path.exists() {
+        return Err(mlua::Error::runtime(format!(
+            "{context} `{field}` already exists: `{}`",
+            path.display()
+        )));
+    }
+
+    Ok(())
+}
+
+fn write_local_file(
+    path: &Path,
+    content: &[u8],
+    options: TransferOptions,
+    context: &str,
+    field: &str,
+) -> mlua::Result<()> {
+    let mut open_options = std::fs::OpenOptions::new();
+    open_options.write(true).create(true).truncate(true);
+    if !options.overwrite {
+        open_options.create_new(true);
+    }
+
+    let mut file = open_options.open(path).map_err(|err| {
+        mlua::Error::runtime(format!(
+            "{context} failed to open `{}`: {err}",
+            path.display()
+        ))
+    })?;
+
+    use std::io::Write as _;
+    file.write_all(content).map_err(|err| {
+        mlua::Error::runtime(format!(
+            "{context} failed to write `{}`: {err}",
+            path.display()
+        ))
+    })?;
+    file.flush().map_err(|err| {
+        mlua::Error::runtime(format!(
+            "{context} failed to flush `{}`: {err}",
+            path.display()
+        ))
+    })?;
+
+    if path.is_dir() {
+        return Err(mlua::Error::runtime(format!(
+            "{context} `{field}` must not be a directory: `{}`",
+            path.display()
+        )));
+    }
+
+    Ok(())
+}
+
+fn build_binary_exec_failed_error(
+    context: &str,
+    target: &str,
+    command: &str,
+    code: Option<i64>,
+    stderr: &[u8],
+) -> mlua::Error {
+    let mut message = format!("{context} remote command `{command}` on `{target}` failed");
+    if let Some(code) = code {
+        message.push_str(&format!(" with status {code}"));
+    }
+    let stderr = String::from_utf8_lossy(stderr);
+    if !stderr.trim().is_empty() {
+        message.push_str(&format!(": {}", stderr.trim_end()));
+    }
+    mlua::Error::runtime(message)
+}
+
+impl LuaSshPath {
+    fn matches_connection(&self, connection: &LuaSshConnection) -> bool {
+        Rc::ptr_eq(&self.connection.state, &connection.state)
     }
 }
 

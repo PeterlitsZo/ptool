@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added file transfer support across `ptool.fs.copy` and `ptool.ssh`, including
+  local-to-local copies, local uploads, remote downloads, reusable
+  `conn:path(...)` remote path values, and transfer options such as `parents`,
+  `overwrite`, and `echo`.
+
 ## v0.1.0-alpha.3 (2026-03-24)
 
 ### Added
