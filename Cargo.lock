@@ -2420,7 +2420,7 @@ dependencies = [
 
 [[package]]
 name = "ptool"
-version = "0.1.0-alpha.4"
+version = "0.1.0"
 dependencies = [
  "clap",
  "clap_lex",
@@ -2444,7 +2444,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-cli"
-version = "0.1.0-alpha.4"
+version = "0.1.0"
 dependencies = [
  "clap_lex",
  "indoc",

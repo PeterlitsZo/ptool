@@ -3,5 +3,5 @@ members = ["crates/ptool", "crates/ptool-cli"]
 resolver = "3"
 
 [workspace.package]
-version = "0.1.0-alpha.4"
+version = "0.1.0"
 edition = "2024"
