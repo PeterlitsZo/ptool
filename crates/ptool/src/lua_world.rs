@@ -8,6 +8,7 @@ pub struct RunConfig {
     pub echo: bool,
     pub check: bool,
     pub confirm: bool,
+    pub retry: bool,
 }
 
 impl Default for RunConfig {
@@ -16,6 +17,7 @@ impl Default for RunConfig {
             echo: true,
             check: false,
             confirm: false,
+            retry: false,
         }
     }
 }
@@ -303,6 +305,7 @@ fn apply_run_config(run: &mut RunConfig, options: Table) -> mlua::Result<()> {
             "confirm" => {
                 run.confirm = parse_config_bool(value, "ptool.config(options.run)", "confirm")?
             }
+            "retry" => run.retry = parse_config_bool(value, "ptool.config(options.run)", "retry")?,
             _ => {
                 return Err(mlua::Error::runtime(format!(
                     "ptool.config(options.run) unknown field `{key}`"

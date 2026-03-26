@@ -5,7 +5,7 @@ use mlua::{Lua, Table, Value, Variadic};
 use owo_colors::OwoColorize;
 use std::path::{Path, PathBuf};
 use std::process::Command as ProcessCommand;
-use std::process::{ExitStatus, Stdio};
+use std::process::{ExitStatus, Output, Stdio};
 
 #[derive(Clone, Copy)]
 enum StreamMode {
@@ -24,6 +24,7 @@ struct RunOptions {
     stderr: StreamMode,
     check: bool,
     confirm: bool,
+    retry: bool,
 }
 
 struct RunCallOverrides {
@@ -34,6 +35,7 @@ struct RunCallOverrides {
     stderr: Option<StreamMode>,
     check: Option<bool>,
     confirm: Option<bool>,
+    retry: Option<bool>,
 }
 
 pub(crate) fn run_command(
@@ -46,7 +48,7 @@ pub(crate) fn run_command(
     let cmd_for_error = options.cmd.clone();
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
 
-    let display = if options.echo || options.confirm {
+    let display = if options.echo || options.confirm || (options.check && options.retry) {
         let command = format_command_for_display(&options.cmd, &options.args);
         Some((resolved_cwd.clone(), command))
     } else {
@@ -67,11 +69,52 @@ pub(crate) fn run_command(
         confirm_before_run(display_cwd, display_command, &cmd_for_error)?;
     }
 
-    let mut command = ProcessCommand::new(&options.cmd);
-    command.args(options.args);
-    command.current_dir(&resolved_cwd);
+    let mut is_retry = false;
+    loop {
+        if is_retry && options.echo {
+            let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+                mlua::Error::runtime("ptool.run internal error: missing display info")
+            })?;
+            print_command_echo(display_cwd, display_command);
+        }
 
-    if let Some(vars) = options.env {
+        let output = run_process(&options, &resolved_cwd)?;
+        let stdout = bytes_to_captured_string(&output.stdout, options.stdout);
+        let stderr = bytes_to_captured_string(&output.stderr, options.stderr);
+        if options.check && !output.status.success() {
+            if options.retry {
+                let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+                    mlua::Error::runtime("ptool.run internal error: missing display info")
+                })?;
+                if prompt_retry_after_failure(
+                    display_cwd,
+                    display_command,
+                    output.status.code(),
+                    stderr.as_deref(),
+                    &cmd_for_error,
+                )? {
+                    is_retry = true;
+                    continue;
+                }
+            }
+
+            return Err(build_run_failed_error(
+                &cmd_for_error,
+                output.status.code(),
+                stderr.as_deref(),
+            ));
+        }
+
+        return build_run_result(lua, output.status, stdout, stderr, cmd_for_error);
+    }
+}
+
+fn run_process(options: &RunOptions, resolved_cwd: &Path) -> mlua::Result<Output> {
+    let mut command = ProcessCommand::new(&options.cmd);
+    command.args(&options.args);
+    command.current_dir(resolved_cwd);
+
+    if let Some(vars) = options.env.clone() {
         for pair in vars.pairs::<String, String>() {
             let (key, value) = pair?;
             command.env(key, value);
@@ -81,18 +124,7 @@ pub(crate) fn run_command(
     apply_stream_mode_for_stdout(&mut command, options.stdout);
     apply_stream_mode_for_stderr(&mut command, options.stderr);
 
-    let output = command.output().map_err(mlua::Error::external)?;
-    let stdout = bytes_to_captured_string(&output.stdout, options.stdout);
-    let stderr = bytes_to_captured_string(&output.stderr, options.stderr);
-    if options.check && !output.status.success() {
-        return Err(build_run_failed_error(
-            &cmd_for_error,
-            output.status.code(),
-            stderr.as_deref(),
-        ));
-    }
-
-    build_run_result(lua, output.status, stdout, stderr, cmd_for_error)
+    command.output().map_err(mlua::Error::external)
 }
 
 fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result<RunOptions> {
@@ -111,6 +143,7 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                     stderr: StreamMode::Inherit,
                     check: defaults.check,
                     confirm: defaults.confirm,
+                    retry: defaults.retry,
                 })
             }
             Some(Value::Table(options)) => parse_full_options_table(options.clone(), defaults),
@@ -129,6 +162,7 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                 stderr: StreamMode::Inherit,
                 check: defaults.check,
                 confirm: defaults.confirm,
+                retry: defaults.retry,
             }),
             (Some(Value::String(cmd_or_cmdline)), Some(Value::Table(second_table))) => {
                 if looks_like_options_table(second_table)? {
@@ -147,6 +181,7 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                         stderr: StreamMode::Inherit,
                         check: defaults.check,
                         confirm: defaults.confirm,
+                        retry: defaults.retry,
                     })
                 }
             }
@@ -224,6 +259,9 @@ fn parse_full_options_table(options: Table, defaults: RunConfig) -> mlua::Result
     let confirm = options
         .get::<Option<bool>>("confirm")?
         .unwrap_or(defaults.confirm);
+    let retry = options
+        .get::<Option<bool>>("retry")?
+        .unwrap_or(defaults.retry);
 
     Ok(RunOptions {
         cmd,
@@ -235,6 +273,7 @@ fn parse_full_options_table(options: Table, defaults: RunConfig) -> mlua::Result
         stderr,
         check,
         confirm,
+        retry,
     })
 }
 
@@ -299,6 +338,7 @@ fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallO
         stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?,
         check: options.get::<Option<bool>>("check")?,
         confirm: options.get::<Option<bool>>("confirm")?,
+        retry: options.get::<Option<bool>>("retry")?,
     })
 }
 
@@ -318,6 +358,7 @@ fn apply_overrides(
         stderr: overrides.stderr.unwrap_or(StreamMode::Inherit),
         check: overrides.check.unwrap_or(defaults.check),
         confirm: overrides.confirm.unwrap_or(defaults.confirm),
+        retry: overrides.retry.unwrap_or(defaults.retry),
     }
 }
 
@@ -459,6 +500,65 @@ fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::R
             "ptool.run command `{cmd_for_error}` confirmation failed: {err}"
         ))),
     }
+}
+
+fn prompt_retry_after_failure(
+    cwd: &Path,
+    command: &str,
+    code: Option<i32>,
+    stderr: Option<&str>,
+    cmd_for_error: &str,
+) -> mlua::Result<bool> {
+    let code = code
+        .map(|value| value.to_string())
+        .unwrap_or_else(|| "terminated by signal".to_string());
+    let prompt = format!("Command failed with status {code}. Retry -- {command}?");
+    let help_msg = build_retry_help_message(cwd, stderr);
+    match Confirm::new(&prompt)
+        .with_default(true)
+        .with_help_message(&help_msg)
+        .prompt()
+    {
+        Ok(answer) => Ok(answer),
+        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(mlua::Error::runtime(format!(
+            "ptool.run command `{cmd_for_error}` failed and retry requires an interactive TTY"
+        ))),
+        Err(InquireError::OperationCanceled | InquireError::OperationInterrupted) => {
+            Err(mlua::Error::runtime(format!(
+                "ptool.run retry for command `{cmd_for_error}` cancelled by user"
+            )))
+        }
+        Err(err) => Err(mlua::Error::runtime(format!(
+            "ptool.run retry prompt for command `{cmd_for_error}` failed: {err}"
+        ))),
+    }
+}
+
+fn build_retry_help_message(cwd: &Path, stderr: Option<&str>) -> String {
+    let mut help_msg = format!("The cwd is {}", cwd.display());
+    if let Some(stderr_summary) = summarize_stderr_for_prompt(stderr) {
+        help_msg.push_str("\nStderr: ");
+        help_msg.push_str(&stderr_summary);
+    }
+    help_msg
+}
+
+fn summarize_stderr_for_prompt(stderr: Option<&str>) -> Option<String> {
+    let stderr = stderr?.trim();
+    if stderr.is_empty() {
+        return None;
+    }
+
+    let summary = stderr.replace('\n', " | ");
+    let mut truncated = String::new();
+    for (index, ch) in summary.chars().enumerate() {
+        if index >= 160 {
+            truncated.push('…');
+            break;
+        }
+        truncated.push(ch);
+    }
+    Some(truncated)
 }
 
 fn parse_cmdline_to_cmd_and_args(input: &str) -> mlua::Result<(String, Vec<String>)> {

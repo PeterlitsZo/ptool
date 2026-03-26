@@ -306,6 +306,8 @@ Currently supported fields:
     Defaults to `false`.
   - `confirm` (boolean, optional): Whether to require confirmation before
     execution by default. Defaults to `false`.
+  - `retry` (boolean, optional): Whether to ask the user whether to retry after
+    a failed execution when `check = true`. Defaults to `false`.
 
 Example:
 
@@ -315,6 +317,7 @@ ptool.config({
     echo = false,
     check = true,
     confirm = false,
+    retry = false,
   },
 })
 ```
@@ -388,6 +391,8 @@ Return value rules:
 - The default value of `check` comes from `ptool.config({ run = { check = ... }
   })`. If not configured, it defaults to `false`. When `check = false`, callers
   can inspect `ok` themselves or call `res:assert_ok()`.
+- When both `check = true` and `retry = true`, `ptool.run` asks whether the
+  failed command should be retried before raising the final error.
 
 Example:
 
@@ -427,6 +432,10 @@ following fields:
 - `confirm` (boolean, optional): Whether to ask the user for confirmation before
   execution. If omitted, the value from `ptool.config({ run = { confirm = ... }
   })` is used; if that is also unset, the default is `false`.
+- `retry` (boolean, optional): Whether to ask the user whether to retry after a
+  failed execution when `check = true`. If omitted, the value from
+  `ptool.config({ run = { retry = ... } })` is used; if that is also unset, the
+  default is `false`.
 - `stdout` (string, optional): Stdout handling strategy. Supported values:
   - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Capture into `res.stdout`.
@@ -439,6 +448,10 @@ following fields:
   - If the user refuses the execution, an error is raised immediately.
   - If the current environment is not interactive (no TTY), an error is raised
     immediately.
+- When `retry = true` and `check = true`:
+  - If the command fails, `ptool.run` asks whether to retry the same command.
+  - If the current environment is not interactive (no TTY), an error is raised
+    immediately instead of prompting for retry.
 
 Example:
 

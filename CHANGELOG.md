@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added `retry` support for `ptool.run`.
 - Added `ptool.ask(prompt[, options])` for interactive text prompts in Lua
   scripts, with support for `default`, `help`, and `placeholder` options.
 

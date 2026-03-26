@@ -10,7 +10,9 @@
 - [ ] Support the REPL mode, with `ptool repl` subcommand.
 - [ ] Support detect OS and arch.
 - [ ] Let `ptool.fs.mkdir` support `exist_ok` option.
+- [ ] Add the install script.
 - [ ] Add README about how to install ptool, etc.
+- [ ] Add a `ptool.run_capture` as a shortcut.
 
 # v0.1.0
 
