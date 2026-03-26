@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added MiniJinja JSON and URL-encoding support for `ptool.template.render`
+  templates by enabling the upstream `json` and `urlencode` features.
 - Added the `ptool.str` module for common string operations in Lua scripts,
   including trimming, prefix/suffix checks, splitting, joining, replacing,
   repeating, prefix/suffix cutting, and line indentation helpers.

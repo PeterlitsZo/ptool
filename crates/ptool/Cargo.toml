@@ -9,7 +9,7 @@ clap_lex = "1.1.0"
 indoc = "2.0.7"
 inquire = "0.9.4"
 jiff = "0.2.23"
-minijinja = "2.18.0"
+minijinja = { version = "2.18.0", features = ["json", "urlencode"]}
 mlua = { version = "0.11.2", features = ["lua54", "serde", "vendored"] }
 owo-colors = "4.3.0"
 regex = "1.12.3"
@@ -22,4 +22,3 @@ sqlx = { version = "0.8.6", features = ["any", "sqlite", "postgres", "mysql", "r
 tokio = { version = "1.50.0", features = ["rt", "time", "net"] }
 toml = "1.0.7"
 toml_edit = "0.25.5"
-
