@@ -8,6 +8,10 @@
   local-to-local copies, local uploads, remote downloads, reusable
   `conn:path(...)` remote path values, and transfer options such as `parents`,
   `overwrite`, and `echo`.
+- Added the `ptool.ansi` module for styling terminal text, including
+  `ptool.ansi.style(text[, options])`, foreground-color shortcuts such as
+  `ptool.ansi.red(...)`, TTY-aware default enablement, and support for bold,
+  dimmed, italic, and underline text attributes.
 
 ## v0.1.0-alpha.3 (2026-03-24)
 

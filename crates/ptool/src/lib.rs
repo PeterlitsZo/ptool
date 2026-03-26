@@ -1,3 +1,4 @@
+mod ansi;
 mod db;
 mod exec;
 mod fs;

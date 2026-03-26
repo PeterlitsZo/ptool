@@ -124,6 +124,19 @@ impl LuaWorld {
         crate::inspect::render(value, options)
     }
 
+    pub(crate) fn ansi_style(&self, text: String, options: Option<Table>) -> mlua::Result<String> {
+        crate::ansi::style(text, options, None)
+    }
+
+    pub(crate) fn ansi_color(
+        &self,
+        text: String,
+        options: Option<Table>,
+        color: &'static str,
+    ) -> mlua::Result<String> {
+        crate::ansi::style(text, options, Some(color))
+    }
+
     pub(crate) fn create_script_arg_builder(
         &self,
         id: String,

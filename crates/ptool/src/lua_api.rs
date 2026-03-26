@@ -40,6 +40,7 @@ fn create_ptool_module(
     let inspect_fn = lua.create_function(move |_, (value, options): (Value, Option<Table>)| {
         inspect_state.borrow().inspect(value, options)
     })?;
+    let ansi_module = create_ptool_ansi_module(lua, Rc::clone(&world))?;
     let args_module = create_ptool_args_module(lua, Rc::clone(&world), script_name, script_args)?;
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
@@ -57,6 +58,7 @@ fn create_ptool_module(
     module.set("cd", cd_fn)?;
     module.set("unindent", unindent_fn)?;
     module.set("inspect", inspect_fn)?;
+    module.set("ansi", ansi_module)?;
     module.set("args", args_module)?;
     module.set("sh", shell_module)?;
     module.set("http", http_module)?;
@@ -108,6 +110,36 @@ fn create_ptool_shell_module(
         lua.create_function(move |lua, input: String| world.borrow().shell_split(lua, input))?;
     shell_module.set("split", split_fn)?;
     Ok(shell_module)
+}
+
+fn create_ptool_ansi_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let ansi_module = lua.create_table()?;
+
+    let style_state = Rc::clone(&world);
+    let style_fn = lua.create_function(move |_, (text, options): (String, Option<Table>)| {
+        style_state.borrow().ansi_style(text, options)
+    })?;
+    ansi_module.set("style", style_fn)?;
+
+    for (name, color) in [
+        ("black", "black"),
+        ("red", "red"),
+        ("green", "green"),
+        ("yellow", "yellow"),
+        ("blue", "blue"),
+        ("magenta", "magenta"),
+        ("cyan", "cyan"),
+        ("white", "white"),
+    ] {
+        let color_state = Rc::clone(&world);
+        let color_fn =
+            lua.create_function(move |_, (text, options): (String, Option<Table>)| {
+                color_state.borrow().ansi_color(text, options, color)
+            })?;
+        ansi_module.set(name, color_fn)?;
+    }
+
+    Ok(ansi_module)
 }
 
 fn create_ptool_http_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
