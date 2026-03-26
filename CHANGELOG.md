@@ -18,6 +18,9 @@
 - Changed `ptool.semver.bump` to support the `release` operation, allowing
   prerelease versions such as `1.2.3-rc.2` to be converted to the stable
   `1.2.3` form.
+- Changed `ptool.template.render` to use chainable undefined semantics so
+  nested missing values such as `foo.bar.baz` can still be handled by filters
+  like `default(...)` instead of failing early.
 
 ## v0.1.0-alpha.4 (2026-03-26)
 

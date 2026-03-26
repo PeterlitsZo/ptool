@@ -1653,6 +1653,18 @@ Notes:
 - The context must be serializable to data values.
 - Lua values such as `function`, `thread`, and unsupported `userdata` are not
   accepted as template context values.
+- Missing values use chainable undefined semantics. This means nested lookups
+  such as `foo.bar.baz` can be passed to filters like `default(...)` without
+  raising an error. When rendered directly without a fallback, undefined values
+  become an empty string.
+
+```lua
+local template = ptool.unindent([[
+  | {{ foo.bar.baz | default("N/A") }}
+]])
+
+print(ptool.template.render(template, {})) -- N/A
+```
 
 ## ptool.args.arg
 

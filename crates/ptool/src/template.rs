@@ -1,4 +1,4 @@
-use minijinja::Environment;
+use minijinja::{Environment, UndefinedBehavior};
 use mlua::{Lua, LuaSerdeExt, Value};
 use serde_json::Value as JsonValue;
 
@@ -8,6 +8,7 @@ pub(crate) fn render(lua: &Lua, template: String, context: Value) -> mlua::Resul
     let data = context_to_json(lua, context)?;
 
     let mut env = Environment::new();
+    env.set_undefined_behavior(UndefinedBehavior::Chainable);
     env.add_template(TEMPLATE_NAME, &template)
         .map_err(|err| mlua::Error::runtime(format!("ptool.template.render failed: {err}")))?;
     let tpl = env
