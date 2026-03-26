@@ -13,6 +13,10 @@
 - [ ] Add the install script.
 - [ ] Add README about how to install ptool, etc.
 - [ ] Add a `ptool.run_capture` as a shortcut.
+- [ ] Support to calculate the SHA256, etc.
+- [ ] Support to parse URL, IP, IP + port, etc.
+- [ ] Support `p.fs.glob`, etc.
+- [ ] Make `p.ssh`'s connection support `:exists`, `:is_file`, `:is_dir`, etc.
 
 # v0.1.0
 

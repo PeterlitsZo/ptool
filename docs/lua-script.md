@@ -846,6 +846,9 @@ fields and methods:
   - `conn.target` (string)
 - Methods:
   - `conn:run(...)` -> `table`
+  - `conn:path(path)` -> `userdata`
+  - `conn:upload(local_path, remote_path[, options])` -> `table`
+  - `conn:download(remote_path, local_path[, options])` -> `table`
   - `conn:close()` -> `nil`
 
 ## ptool.ssh.Connection:run
@@ -948,6 +951,107 @@ local res2 = ssh:run({
 })
 
 print(res2.stdout)
+```
+
+## ptool.ssh.Connection:path
+
+> `v0.1.0-alpha.4` - Introduced.
+
+`conn:path(path)` creates a reusable remote path value bound to the current SSH
+connection.
+
+- `path` (string, required): The remote path.
+- Returns: A remote path userdata that can be passed to
+  `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+local remote_release = ssh:path("/srv/app/releases/current.tar.gz")
+
+ssh:download(remote_release, "./tmp/current.tar.gz")
+```
+
+## ptool.ssh.Connection:upload
+
+> `v0.1.0-alpha.4` - Introduced.
+
+`conn:upload(local_path, remote_path[, options])` uploads a local file to the
+remote host.
+
+- `local_path` (string, required): The local file to upload.
+- `remote_path` (string|remote path, required): The destination path on the
+  remote host. It can be a string or a value created by `conn:path(...)`.
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
+  - `bytes` (integer): The number of bytes uploaded.
+  - `from` (string): The local source path.
+  - `to` (string): The remote destination path.
+
+Supported transfer options:
+
+- `parents` (boolean, optional): Create the parent directory of `remote_path`
+  before uploading. Defaults to `false`.
+- `overwrite` (boolean, optional): Whether an existing destination file may be
+  replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing
+  it. Defaults to `false`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+local remote_tarball = ssh:path("/srv/app/releases/current.tar.gz")
+
+local res = ssh:upload("./dist/app.tar.gz", remote_tarball, {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+## ptool.ssh.Connection:download
+
+> `v0.1.0-alpha.4` - Introduced.
+
+`conn:download(remote_path, local_path[, options])` downloads a remote file to a
+local path.
+
+- `remote_path` (string|remote path, required): The source path on the remote
+  host. It can be a string or a value created by `conn:path(...)`.
+- `local_path` (string, required): The local destination path.
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
+  - `bytes` (integer): The number of bytes downloaded.
+  - `from` (string): The remote source path.
+  - `to` (string): The local destination path.
+
+Supported transfer options:
+
+- `parents` (boolean, optional): Create the parent directory of `local_path`
+  before downloading. Defaults to `false`.
+- `overwrite` (boolean, optional): Whether an existing destination file may be
+  replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing
+  it. Defaults to `false`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ssh:download("/srv/app/logs/app.log", "./tmp/app.log", {
+  parents = true,
+  overwrite = false,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.from)
 ```
 
 ## ptool.ssh.Connection:close

@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added Lua scripting documentation for `ptool.ssh.Connection:path`,
+  `Connection:upload`, and `Connection:download`, including reusable remote
+  path values, transfer options, and usage examples.
+
 ## v0.1.0
 
 ### Added
