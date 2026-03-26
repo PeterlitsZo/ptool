@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
+- Changed shebang preprocessing so `ptool run` preserves Lua source line
+  numbers by replacing the shebang line with a blank line instead of removing
+  it entirely.
+
 ### Added
 
 - Added file transfer support across `ptool.fs.copy` and `ptool.ssh`, including

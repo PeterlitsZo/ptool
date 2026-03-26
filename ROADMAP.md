@@ -5,6 +5,8 @@
 - [ ] Support a document website.
 - [ ] Better error handling.
 - [ ] Remove non-essential built-in Lua modules.
+- [ ] Support `ptool.map`, etc. for FP-style operations on tables.
+- [ ] Make the `ptool.run`'s echo style more pretty (two lines).
 
 # v0.1.0
 
@@ -26,7 +28,7 @@
 - [x] Support a subcommand `version`.
 - [x] Support a simple function to "dump" table.
 - [x] Support sending files with rsync or scp.
-- [ ] Do not change line-number if there is shebang.
+- [x] Do not change line-number if there is shebang.
 - [ ] Add README about how to install ptool, etc.
 - [ ] Support ask for user's input.
 - [ ] Make `p.run` can retry if failed.
