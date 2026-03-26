@@ -192,6 +192,44 @@ print(ptool.inspect(value))
 print(ptool.inspect(value, { multiline = false }))
 ```
 
+## ptool.ask
+
+> `v0.1.0` - Introduced.
+
+`ptool.ask(prompt[, options])` asks the user for a line of text and returns the
+answer.
+
+- `prompt` (string, required): The prompt shown to the user.
+- `options` (table, optional): Prompt options. Supported fields:
+  - `default` (string, optional): Default value used when the user submits an
+    empty answer.
+  - `help` (string, optional): Extra help text shown below the prompt.
+  - `placeholder` (string, optional): Placeholder text shown before the user
+    starts typing.
+- Returns: `string`.
+
+Behavior:
+
+- Requires an interactive TTY. Running it in a non-interactive environment
+  raises an error.
+- If the user cancels the prompt, the script raises an error.
+- Unknown option names or invalid option value types raise an error.
+
+Example:
+
+```lua
+local name = ptool.ask("Your name?", {
+  placeholder = "Alice",
+  help = "Press Enter to confirm",
+})
+
+local city = ptool.ask("City?", {
+  default = "Shanghai",
+})
+
+print(string.format("Hello, %s from %s!", name, city))
+```
+
 ## ptool.ansi.style
 
 > `v0.1.0` - Introduced.

@@ -124,6 +124,10 @@ impl LuaWorld {
         crate::inspect::render(value, options)
     }
 
+    pub(crate) fn ask(&self, prompt: String, options: Option<Table>) -> mlua::Result<String> {
+        crate::prompt::ask(prompt, options)
+    }
+
     pub(crate) fn ansi_style(&self, text: String, options: Option<Table>) -> mlua::Result<String> {
         crate::ansi::style(text, options, None)
     }

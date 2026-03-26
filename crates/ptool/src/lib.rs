@@ -7,6 +7,7 @@ mod inspect;
 mod lua_api;
 mod lua_world;
 mod path;
+mod prompt;
 mod re;
 mod runner;
 mod script_args;

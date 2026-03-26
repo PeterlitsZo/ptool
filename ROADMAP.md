@@ -8,6 +8,9 @@
 - [ ] Support `ptool.map`, etc. for FP-style operations on tables.
 - [ ] Make the `ptool.run`'s echo style more pretty (two lines).
 - [ ] Support the REPL mode, with `ptool repl` subcommand.
+- [ ] Support detect OS and arch.
+- [ ] Let `ptool.fs.mkdir` support `exist_ok` option.
+- [ ] Add README about how to install ptool, etc.
 
 # v0.1.0
 
@@ -30,7 +33,6 @@
 - [x] Support a simple function to "dump" table.
 - [x] Support sending files with rsync or scp.
 - [x] Do not change line-number if there is shebang.
-- [ ] Add README about how to install ptool, etc.
 - [ ] Support ask for user's input.
 - [ ] Make `p.run` can retry if failed.
 - [ ] Add `p.str` table for helpful string functions, such as `p.str.trim`,

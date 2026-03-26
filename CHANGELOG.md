@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added `ptool.ask(prompt[, options])` for interactive text prompts in Lua
+  scripts, with support for `default`, `help`, and `placeholder` options.
+
 ## v0.1.0-alpha.4 (2026-03-26)
 
 ### Changed

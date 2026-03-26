@@ -40,6 +40,10 @@ fn create_ptool_module(
     let inspect_fn = lua.create_function(move |_, (value, options): (Value, Option<Table>)| {
         inspect_state.borrow().inspect(value, options)
     })?;
+    let ask_state = Rc::clone(&world);
+    let ask_fn = lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
+        ask_state.borrow().ask(prompt, options)
+    })?;
     let ansi_module = create_ptool_ansi_module(lua, Rc::clone(&world))?;
     let args_module = create_ptool_args_module(lua, Rc::clone(&world), script_name, script_args)?;
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
@@ -58,6 +62,7 @@ fn create_ptool_module(
     module.set("cd", cd_fn)?;
     module.set("unindent", unindent_fn)?;
     module.set("inspect", inspect_fn)?;
+    module.set("ask", ask_fn)?;
     module.set("ansi", ansi_module)?;
     module.set("args", args_module)?;
     module.set("sh", shell_module)?;
