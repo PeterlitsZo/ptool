@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added the `ptool.str` module for common string operations in Lua scripts,
+  including trimming, prefix/suffix checks, splitting, joining, replacing,
+  repeating, prefix/suffix cutting, and line indentation helpers.
 - Added `retry` support for `ptool.run`.
 - Added `ptool.ask(prompt[, options])` for interactive text prompts in Lua
   scripts, with support for `default`, `help`, and `placeholder` options.

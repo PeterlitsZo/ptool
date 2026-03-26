@@ -35,7 +35,7 @@
 - [x] Support a simple function to "dump" table.
 - [x] Support sending files with rsync or scp.
 - [x] Do not change line-number if there is shebang.
-- [ ] Support ask for user's input.
-- [ ] Make `p.run` can retry if failed.
-- [ ] Add `p.str` table for helpful string functions, such as `p.str.trim`,
+- [x] Support ask for user's input.
+- [x] Make `p.run` can retry if failed.
+- [x] Add `p.str` table for helpful string functions, such as `p.str.trim`,
   `p.str.split`, etc.

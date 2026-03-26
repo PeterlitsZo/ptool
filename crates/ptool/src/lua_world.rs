@@ -258,6 +258,82 @@ impl LuaWorld {
         crate::path::extname(path)
     }
 
+    pub(crate) fn str_trim(&self, input: String) -> String {
+        crate::strings::trim(input)
+    }
+
+    pub(crate) fn str_trim_start(&self, input: String) -> String {
+        crate::strings::trim_start(input)
+    }
+
+    pub(crate) fn str_trim_end(&self, input: String) -> String {
+        crate::strings::trim_end(input)
+    }
+
+    pub(crate) fn str_is_blank(&self, input: String) -> bool {
+        crate::strings::is_blank(input)
+    }
+
+    pub(crate) fn str_starts_with(&self, input: String, prefix: String) -> bool {
+        crate::strings::starts_with(input, prefix)
+    }
+
+    pub(crate) fn str_ends_with(&self, input: String, suffix: String) -> bool {
+        crate::strings::ends_with(input, suffix)
+    }
+
+    pub(crate) fn str_contains(&self, input: String, needle: String) -> bool {
+        crate::strings::contains(input, needle)
+    }
+
+    pub(crate) fn str_split(
+        &self,
+        lua: &Lua,
+        input: String,
+        separator: String,
+        options: Option<Table>,
+    ) -> mlua::Result<Table> {
+        crate::strings::split(lua, input, separator, options)
+    }
+
+    pub(crate) fn str_split_lines(
+        &self,
+        lua: &Lua,
+        input: String,
+        options: Option<Table>,
+    ) -> mlua::Result<Table> {
+        crate::strings::split_lines(lua, input, options)
+    }
+
+    pub(crate) fn str_join(&self, parts: Table, separator: String) -> mlua::Result<String> {
+        crate::strings::join(parts, separator)
+    }
+
+    pub(crate) fn str_replace(&self, args: Variadic<Value>) -> mlua::Result<String> {
+        crate::strings::replace(args)
+    }
+
+    pub(crate) fn str_repeat(&self, input: String, count: i64) -> mlua::Result<String> {
+        crate::strings::repeat(input, count)
+    }
+
+    pub(crate) fn str_cut_prefix(&self, input: String, prefix: String) -> String {
+        crate::strings::cut_prefix(input, prefix)
+    }
+
+    pub(crate) fn str_cut_suffix(&self, input: String, suffix: String) -> String {
+        crate::strings::cut_suffix(input, suffix)
+    }
+
+    pub(crate) fn str_indent(
+        &self,
+        input: String,
+        prefix: String,
+        options: Option<Table>,
+    ) -> mlua::Result<String> {
+        crate::strings::indent(input, prefix, options)
+    }
+
     pub(crate) fn re_compile(&self, args: Variadic<Value>) -> mlua::Result<crate::re::LuaRegex> {
         crate::re::compile(args)
     }

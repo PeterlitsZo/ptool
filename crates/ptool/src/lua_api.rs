@@ -53,6 +53,7 @@ fn create_ptool_module(
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
+    let str_module = create_ptool_str_module(lua, Rc::clone(&world))?;
     let semver_module = create_ptool_semver_module(lua, Rc::clone(&world))?;
     let template_module = create_ptool_template_module(lua, Rc::clone(&world))?;
     let toml_module = create_ptool_toml_module(lua, world)?;
@@ -72,6 +73,7 @@ fn create_ptool_module(
     module.set("fs", fs_module)?;
     module.set("path", path_module)?;
     module.set("re", re_module)?;
+    module.set("str", str_module)?;
     module.set("semver", semver_module)?;
     module.set("template", template_module)?;
     module.set("toml", toml_module)?;
@@ -267,6 +269,93 @@ fn create_ptool_re_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     re_module.set("compile", compile_fn)?;
     re_module.set("escape", escape_fn)?;
     Ok(re_module)
+}
+
+fn create_ptool_str_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let str_module = lua.create_table()?;
+
+    let trim_state = Rc::clone(&world);
+    let trim_fn =
+        lua.create_function(move |_, input: String| Ok(trim_state.borrow().str_trim(input)))?;
+    let trim_start_state = Rc::clone(&world);
+    let trim_start_fn = lua.create_function(move |_, input: String| {
+        Ok(trim_start_state.borrow().str_trim_start(input))
+    })?;
+    let trim_end_state = Rc::clone(&world);
+    let trim_end_fn = lua
+        .create_function(move |_, input: String| Ok(trim_end_state.borrow().str_trim_end(input)))?;
+    let is_blank_state = Rc::clone(&world);
+    let is_blank_fn = lua
+        .create_function(move |_, input: String| Ok(is_blank_state.borrow().str_is_blank(input)))?;
+    let starts_with_state = Rc::clone(&world);
+    let starts_with_fn = lua.create_function(move |_, (input, prefix): (String, String)| {
+        Ok(starts_with_state.borrow().str_starts_with(input, prefix))
+    })?;
+    let ends_with_state = Rc::clone(&world);
+    let ends_with_fn = lua.create_function(move |_, (input, suffix): (String, String)| {
+        Ok(ends_with_state.borrow().str_ends_with(input, suffix))
+    })?;
+    let contains_state = Rc::clone(&world);
+    let contains_fn = lua.create_function(move |_, (input, needle): (String, String)| {
+        Ok(contains_state.borrow().str_contains(input, needle))
+    })?;
+    let split_state = Rc::clone(&world);
+    let split_fn = lua.create_function(
+        move |lua, (input, separator, options): (String, String, Option<Table>)| {
+            split_state
+                .borrow()
+                .str_split(lua, input, separator, options)
+        },
+    )?;
+    let split_lines_state = Rc::clone(&world);
+    let split_lines_fn =
+        lua.create_function(move |lua, (input, options): (String, Option<Table>)| {
+            split_lines_state
+                .borrow()
+                .str_split_lines(lua, input, options)
+        })?;
+    let join_state = Rc::clone(&world);
+    let join_fn = lua.create_function(move |_, (parts, separator): (Table, String)| {
+        join_state.borrow().str_join(parts, separator)
+    })?;
+    let replace_state = Rc::clone(&world);
+    let replace_fn = lua.create_function(move |_, args: Variadic<Value>| {
+        replace_state.borrow().str_replace(args)
+    })?;
+    let repeat_state = Rc::clone(&world);
+    let repeat_fn = lua.create_function(move |_, (input, count): (String, i64)| {
+        repeat_state.borrow().str_repeat(input, count)
+    })?;
+    let cut_prefix_state = Rc::clone(&world);
+    let cut_prefix_fn = lua.create_function(move |_, (input, prefix): (String, String)| {
+        Ok(cut_prefix_state.borrow().str_cut_prefix(input, prefix))
+    })?;
+    let cut_suffix_state = Rc::clone(&world);
+    let cut_suffix_fn = lua.create_function(move |_, (input, suffix): (String, String)| {
+        Ok(cut_suffix_state.borrow().str_cut_suffix(input, suffix))
+    })?;
+    let indent_fn = lua.create_function(
+        move |_, (input, prefix, options): (String, String, Option<Table>)| {
+            world.borrow().str_indent(input, prefix, options)
+        },
+    )?;
+
+    str_module.set("trim", trim_fn)?;
+    str_module.set("trim_start", trim_start_fn)?;
+    str_module.set("trim_end", trim_end_fn)?;
+    str_module.set("is_blank", is_blank_fn)?;
+    str_module.set("starts_with", starts_with_fn)?;
+    str_module.set("ends_with", ends_with_fn)?;
+    str_module.set("contains", contains_fn)?;
+    str_module.set("split", split_fn)?;
+    str_module.set("split_lines", split_lines_fn)?;
+    str_module.set("join", join_fn)?;
+    str_module.set("replace", replace_fn)?;
+    str_module.set("repeat", repeat_fn)?;
+    str_module.set("cut_prefix", cut_prefix_fn)?;
+    str_module.set("cut_suffix", cut_suffix_fn)?;
+    str_module.set("indent", indent_fn)?;
+    Ok(str_module)
 }
 
 fn create_ptool_semver_module(
