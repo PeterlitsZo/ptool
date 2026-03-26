@@ -84,6 +84,8 @@ jobs:
     needs: build
     permissions:
       contents: write
+    env:
+      R2_BUCKET: peterlits
 
     steps:
       - name: Check out repository
@@ -100,6 +102,19 @@ jobs:
         run: |
           cd dist
           shasum -a 256 *.tar.gz > SHA256SUMS
+
+      - name: Install Wrangler
+        run: npm install --global wrangler@4
+
+      - name: Upload dist directory to Cloudflare R2
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          find dist -type f -print0 | while IFS= read -r -d '' file; do
+            relative_path="${file#dist/}"
+            wrangler r2 object put "${R2_BUCKET}/ptool/release/${GITHUB_REF_NAME}/${relative_path}" --remote --file "$file"
+          done
 
       - name: Create or update GitHub release
         env:

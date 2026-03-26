@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Changed the release workflow to upload packaged `*.tar.gz` artifacts and
+  `SHA256SUMS` to the Cloudflare R2 release bucket for each Git tag.
 - Changed shebang preprocessing so `ptool run` preserves Lua source line
   numbers by replacing the shebang line with a blank line instead of removing
   it entirely.

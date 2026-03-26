@@ -7,6 +7,7 @@
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Support `ptool.map`, etc. for FP-style operations on tables.
 - [ ] Make the `ptool.run`'s echo style more pretty (two lines).
+- [ ] Support the REPL mode, with `ptool repl` subcommand.
 
 # v0.1.0
 
