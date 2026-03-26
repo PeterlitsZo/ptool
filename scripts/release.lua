@@ -14,11 +14,11 @@ local args = p.args.parse({
 })
 
 -- Validate arguments.
-local valid_methods_re = "^(alpha|beta|rc|patch|minor|major)$"
+local valid_methods_re = "^(alpha|beta|rc|release|patch|minor|major)$"
 if not p.re.compile(valid_methods_re):is_match(args.method) then
   local msg = (
-    "Unknown release method `%s`, expected one of: alpha, beta, rc, patch, "
-    .. "minor, major."
+    "Unknown release method `%s`, expected one of: alpha, beta, rc, release, "
+    .. "patch, minor, major."
   ):format(args.method)
   error(msg, 0)
 end

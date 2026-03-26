@@ -92,13 +92,16 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 `ptool.semver.bump(v, op)` returns a new version object after applying the bump.
 
 - `v` (string|Version, required): The original version.
-- `op` (string, required): One of `major`, `minor`, `patch`, `alpha`, `beta`, or
-  `rc`.
+- `op` (string, required): One of `major`, `minor`, `patch`, `release`,
+  `alpha`, `beta`, or `rc`.
 - Returns: `Version`.
 
 ```lua
 local v = ptool.semver.bump("1.2.3", "alpha")
 print(tostring(v)) -- 1.2.4-alpha.1
+
+local stable = ptool.semver.bump("1.2.4-rc.2", "release")
+print(tostring(stable)) -- 1.2.4
 ```
 
 ## ptool.semver.Version
@@ -128,6 +131,8 @@ Prerelease bump rules:
   patch version, then enters the target channel starting from `.1`.
 - Bumping within the same channel increments the sequence number, such as
   `alpha.1 -> alpha.2`.
+- `release` removes prerelease and build metadata while keeping the same
+  `major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`.
 - Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade is
   not (for example, `rc -> beta` raises an error).
 

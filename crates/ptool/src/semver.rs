@@ -140,11 +140,12 @@ fn bump_version(version: Version, op: &str, signature: &str) -> mlua::Result<Ver
         "major" => bump_major(version),
         "minor" => bump_minor(version),
         "patch" => bump_patch(version),
+        "release" => bump_release(version),
         "alpha" => bump_prerelease(version, PreChannel::Alpha, signature),
         "beta" => bump_prerelease(version, PreChannel::Beta, signature),
         "rc" => bump_prerelease(version, PreChannel::Rc, signature),
         _ => Err(mlua::Error::runtime(format!(
-            "{signature} `op` must be one of `major`, `minor`, `patch`, `alpha`, `beta`, `rc`"
+            "{signature} `op` must be one of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`"
         ))),
     }
 }
@@ -177,6 +178,12 @@ fn bump_patch(mut version: Version) -> mlua::Result<Version> {
         .patch
         .checked_add(1)
         .ok_or_else(|| mlua::Error::runtime("ptool.semver.bump patch overflow"))?;
+    version.pre = Prerelease::EMPTY;
+    version.build = BuildMetadata::EMPTY;
+    Ok(version)
+}
+
+fn bump_release(mut version: Version) -> mlua::Result<Version> {
     version.pre = Prerelease::EMPTY;
     version.build = BuildMetadata::EMPTY;
     Ok(version)

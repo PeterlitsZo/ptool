@@ -13,6 +13,12 @@
 - Added `ptool.ask(prompt[, options])` for interactive text prompts in Lua
   scripts, with support for `default`, `help`, and `placeholder` options.
 
+### Changed
+
+- Changed `ptool.semver.bump` to support the `release` operation, allowing
+  prerelease versions such as `1.2.3-rc.2` to be converted to the stable
+  `1.2.3` form.
+
 ## v0.1.0-alpha.4 (2026-03-26)
 
 ### Changed
