@@ -8,6 +8,11 @@
   `Connection:upload`, and `Connection:download`, including reusable remote
   path values, transfer options, and usage examples.
 
+### Changed
+
+- Changed `ptool.ssh.connect` to honor `ssh -G` identity ordering and to keep
+  trying later private keys when earlier auto-discovered keys cannot be loaded.
+
 ## v0.1.0
 
 ### Added

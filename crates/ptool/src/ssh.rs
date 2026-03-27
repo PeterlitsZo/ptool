@@ -6,6 +6,7 @@ use std::borrow::Cow;
 use std::cell::RefCell;
 use std::env;
 use std::path::{Path, PathBuf};
+use std::process::Command as ProcessCommand;
 use std::rc::Rc;
 use std::sync::Arc;
 use std::time::Duration;
@@ -58,23 +59,38 @@ enum HostKeyPolicy {
 }
 
 enum AuthMethod {
-    PrivateKey {
-        path: PathBuf,
-        passphrase: Option<String>,
-    },
-    Password {
-        password: String,
-    },
+    PrivateKeys { keys: Vec<PrivateKeyOption> },
+    Password { password: String },
+}
+
+struct PrivateKeyOption {
+    path: PathBuf,
+    passphrase: Option<String>,
+    required: bool,
 }
 
 struct ConnectOptions {
     host: String,
+    connect_host: String,
     user: String,
     port: u16,
     auth: AuthMethod,
     host_key: HostKeyPolicy,
     connect_timeout_ms: u64,
     keepalive_interval_ms: Option<u64>,
+}
+
+#[derive(Default)]
+struct SshConfigOptions {
+    host: Option<String>,
+    hostname: Option<String>,
+    user: Option<String>,
+    port: Option<u16>,
+    identity_files: Vec<PathBuf>,
+    user_known_hosts_files: Vec<PathBuf>,
+    strict_host_key_checking: Option<String>,
+    connect_timeout_ms: Option<u64>,
+    server_alive_interval_ms: Option<u64>,
 }
 
 struct ExecOptions {
@@ -148,7 +164,7 @@ pub(crate) fn connect(
     };
 
     let config = build_client_config(&options);
-    let addr = (options.host.as_str(), options.port);
+    let addr = (options.connect_host.as_str(), options.port);
     let mut session = runtime
         .block_on(async { client::connect(config, addr, handler).await })
         .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?;
@@ -860,31 +876,62 @@ fn authenticate_session(
     options: &ConnectOptions,
 ) -> mlua::Result<()> {
     let user = options.user.clone();
-    let auth_result = match &options.auth {
-        AuthMethod::PrivateKey { path, passphrase } => {
-            let key = keys::load_secret_key(path, passphrase.as_deref())
-                .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?;
+    let authenticated = match &options.auth {
+        AuthMethod::PrivateKeys { keys: key_options } => {
             let hash_alg = runtime
                 .block_on(session.best_supported_rsa_hash())
                 .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?
                 .flatten();
-            runtime
-                .block_on(async {
-                    session
-                        .authenticate_publickey(
-                            user,
-                            PrivateKeyWithHashAlg::new(Arc::new(key), hash_alg),
-                        )
-                        .await
-                })
-                .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?
+            let mut authenticated = false;
+            let mut attempted = false;
+            let mut last_load_error = None;
+
+            for key_option in key_options {
+                let key =
+                    match keys::load_secret_key(&key_option.path, key_option.passphrase.as_deref())
+                    {
+                        Ok(key) => key,
+                        Err(err) => {
+                            let err = ssh_error(CONNECT_SIGNATURE, err);
+                            if key_option.required {
+                                return Err(err);
+                            }
+                            last_load_error = Some(err);
+                            continue;
+                        }
+                    };
+                attempted = true;
+                let auth_result = runtime
+                    .block_on(async {
+                        session
+                            .authenticate_publickey(
+                                user.clone(),
+                                PrivateKeyWithHashAlg::new(Arc::new(key), hash_alg),
+                            )
+                            .await
+                    })
+                    .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?;
+                if auth_result.success() {
+                    authenticated = true;
+                    break;
+                }
+            }
+
+            if attempted {
+                authenticated
+            } else if let Some(err) = last_load_error {
+                return Err(err);
+            } else {
+                false
+            }
         }
         AuthMethod::Password { password } => runtime
             .block_on(async { session.authenticate_password(user, password).await })
-            .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?,
+            .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?
+            .success(),
     };
 
-    if !auth_result.success() {
+    if !authenticated {
         return Err(mlua::Error::runtime(format!(
             "{CONNECT_SIGNATURE} authentication failed for `{}`",
             options.user
@@ -925,37 +972,60 @@ fn build_connect_options(
         parse_target_string(&target)?
     };
 
-    let host = table
+    let requested_host = table
         .as_ref()
         .and_then(|options| options.get::<Option<String>>("host").transpose())
         .transpose()?
         .or(parsed.host)
         .ok_or_else(|| mlua::Error::runtime(format!("{CONNECT_SIGNATURE} requires `host`")))?;
 
-    let user = table
+    let requested_user = table
         .as_ref()
         .and_then(|options| options.get::<Option<String>>("user").transpose())
         .transpose()?
-        .or(parsed.user)
-        .unwrap_or_else(default_ssh_user);
+        .or(parsed.user);
 
-    let port = table
+    let requested_port = table
         .as_ref()
         .and_then(|options| options.get::<Option<i64>>("port").transpose())
         .transpose()?
         .map(parse_port)
         .transpose()?
-        .or(parsed.port)
+        .or(parsed.port);
+
+    let ssh_config =
+        resolve_ssh_config(&requested_host, requested_user.as_deref(), requested_port)?;
+
+    let host = ssh_config
+        .as_ref()
+        .and_then(|config| config.host.clone())
+        .unwrap_or_else(|| requested_host.clone());
+    let connect_host = ssh_config
+        .as_ref()
+        .and_then(|config| config.hostname.clone())
+        .unwrap_or_else(|| host.clone());
+
+    let user = requested_user
+        .or_else(|| ssh_config.as_ref().and_then(|config| config.user.clone()))
+        .unwrap_or_else(default_ssh_user);
+
+    let port = requested_port
+        .or_else(|| ssh_config.as_ref().and_then(|config| config.port))
         .unwrap_or(22);
 
-    let auth = parse_auth_options(table.as_ref(), current_dir)?;
-    let host_key = parse_host_key_options(table.as_ref(), current_dir)?;
+    let auth = parse_auth_options(table.as_ref(), current_dir, ssh_config.as_ref())?;
+    let host_key = parse_host_key_options(table.as_ref(), current_dir, ssh_config.as_ref())?;
     let connect_timeout_ms = table
         .as_ref()
         .and_then(|options| options.get::<Option<i64>>("connect_timeout_ms").transpose())
         .transpose()?
         .map(|value| parse_positive_u64(value, CONNECT_SIGNATURE, "connect_timeout_ms"))
         .transpose()?
+        .or_else(|| {
+            ssh_config
+                .as_ref()
+                .and_then(|config| config.connect_timeout_ms)
+        })
         .unwrap_or(10_000);
     let keepalive_interval_ms = table
         .as_ref()
@@ -967,9 +1037,15 @@ fn build_connect_options(
         .transpose()?
         .map(|value| parse_positive_u64(value, CONNECT_SIGNATURE, "keepalive_interval_ms"))
         .transpose()?;
+    let keepalive_interval_ms = keepalive_interval_ms.or_else(|| {
+        ssh_config
+            .as_ref()
+            .and_then(|config| config.server_alive_interval_ms)
+    });
 
     Ok(ConnectOptions {
         host,
+        connect_host,
         user,
         port,
         auth,
@@ -1048,7 +1124,140 @@ fn parse_target_string(target: &str) -> mlua::Result<ParsedTarget> {
     })
 }
 
-fn parse_auth_options(table: Option<&Table>, current_dir: &Path) -> mlua::Result<AuthMethod> {
+fn resolve_ssh_config(
+    host: &str,
+    user: Option<&str>,
+    port: Option<u16>,
+) -> mlua::Result<Option<SshConfigOptions>> {
+    let mut command = ProcessCommand::new("ssh");
+    command.arg("-G");
+    if let Some(user) = user {
+        command.arg("-l");
+        command.arg(user);
+    }
+    if let Some(port) = port {
+        command.arg("-p");
+        command.arg(port.to_string());
+    }
+    command.arg(host);
+
+    let output = match command.output() {
+        Ok(output) => output,
+        Err(err) if err.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+        Err(err) => {
+            return Err(mlua::Error::runtime(format!(
+                "{CONNECT_SIGNATURE} failed to run `ssh -G`: {err}"
+            )));
+        }
+    };
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        let details = stderr.trim();
+        return Err(mlua::Error::runtime(if details.is_empty() {
+            format!("{CONNECT_SIGNATURE} `ssh -G` failed for `{host}`")
+        } else {
+            format!("{CONNECT_SIGNATURE} `ssh -G` failed for `{host}`: {details}")
+        }));
+    }
+
+    parse_ssh_config_output(&String::from_utf8_lossy(&output.stdout)).map(Some)
+}
+
+fn parse_ssh_config_output(output: &str) -> mlua::Result<SshConfigOptions> {
+    let mut config = SshConfigOptions::default();
+
+    for line in output.lines() {
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+
+        let Some(index) = line.find(char::is_whitespace) else {
+            continue;
+        };
+        let key = &line[..index];
+        let value = line[index..].trim_start();
+
+        match key {
+            "host" if !value.is_empty() => config.host = Some(value.to_string()),
+            "hostname" if !value.is_empty() => config.hostname = Some(value.to_string()),
+            "user" if !value.is_empty() => config.user = Some(value.to_string()),
+            "port" if !value.is_empty() => {
+                config.port = Some(parse_ssh_config_port(value)?);
+            }
+            "identityfile" if !value.eq_ignore_ascii_case("none") => {
+                config.identity_files.push(resolve_ssh_config_path(value));
+            }
+            "userknownhostsfile" => {
+                config.user_known_hosts_files = split_ssh_config_values(value)
+                    .into_iter()
+                    .filter(|item| !item.eq_ignore_ascii_case("none"))
+                    .map(|item| resolve_ssh_config_path(&item))
+                    .collect();
+            }
+            "stricthostkeychecking" if !value.is_empty() => {
+                config.strict_host_key_checking = Some(value.to_string());
+            }
+            "connecttimeout" => {
+                config.connect_timeout_ms = parse_ssh_config_duration_ms(value, key, false)?;
+            }
+            "serveraliveinterval" => {
+                config.server_alive_interval_ms = parse_ssh_config_duration_ms(value, key, true)?;
+            }
+            _ => {}
+        }
+    }
+
+    Ok(config)
+}
+
+fn split_ssh_config_values(value: &str) -> Vec<String> {
+    shlex::split(value).unwrap_or_else(|| value.split_whitespace().map(str::to_string).collect())
+}
+
+fn parse_ssh_config_port(value: &str) -> mlua::Result<u16> {
+    let port = value.parse::<i64>().map_err(|_| {
+        mlua::Error::runtime(format!(
+            "{CONNECT_SIGNATURE} `ssh -G` returned invalid port `{value}`"
+        ))
+    })?;
+    parse_port(port)
+}
+
+fn parse_ssh_config_duration_ms(
+    value: &str,
+    key: &str,
+    zero_is_none: bool,
+) -> mlua::Result<Option<u64>> {
+    if value.eq_ignore_ascii_case("none") {
+        return Ok(None);
+    }
+
+    let seconds = value.parse::<i64>().map_err(|_| {
+        mlua::Error::runtime(format!(
+            "{CONNECT_SIGNATURE} `ssh -G` returned invalid `{key}` `{value}`"
+        ))
+    })?;
+    if seconds == 0 && zero_is_none {
+        return Ok(None);
+    }
+    let seconds = parse_positive_u64(seconds, CONNECT_SIGNATURE, key)?;
+    seconds
+        .checked_mul(1000)
+        .ok_or_else(|| mlua::Error::runtime(format!("{CONNECT_SIGNATURE} `{key}` is too large")))
+        .map(Some)
+}
+
+fn resolve_ssh_config_path(path: &str) -> PathBuf {
+    PathBuf::from(expand_home(path).into_owned())
+}
+
+fn parse_auth_options(
+    table: Option<&Table>,
+    current_dir: &Path,
+    ssh_config: Option<&SshConfigOptions>,
+) -> mlua::Result<AuthMethod> {
     if let Some(table) = table
         && let Some(auth) = table.get::<Option<Table>>("auth")?
     {
@@ -1059,15 +1268,19 @@ fn parse_auth_options(table: Option<&Table>, current_dir: &Path) -> mlua::Result
         if let Some(path) = auth.get::<Option<String>>("private_key_file")? {
             let path = resolve_local_path(&path, current_dir);
             let passphrase = auth.get::<Option<String>>("private_key_passphrase")?;
-            return Ok(AuthMethod::PrivateKey { path, passphrase });
+            return Ok(AuthMethod::PrivateKeys {
+                keys: vec![PrivateKeyOption {
+                    path,
+                    passphrase,
+                    required: true,
+                }],
+            });
         }
     }
 
-    if let Some(path) = find_default_private_key() {
-        return Ok(AuthMethod::PrivateKey {
-            path,
-            passphrase: None,
-        });
+    let keys = find_private_key_candidates(ssh_config);
+    if !keys.is_empty() {
+        return Ok(AuthMethod::PrivateKeys { keys });
     }
 
     Err(mlua::Error::runtime(format!(
@@ -1078,12 +1291,22 @@ fn parse_auth_options(table: Option<&Table>, current_dir: &Path) -> mlua::Result
 fn parse_host_key_options(
     table: Option<&Table>,
     current_dir: &Path,
+    ssh_config: Option<&SshConfigOptions>,
 ) -> mlua::Result<HostKeyPolicy> {
+    let default_policy = ssh_config
+        .map(|config| match config.strict_host_key_checking.as_deref() {
+            Some("no") | Some("off") => HostKeyPolicy::Ignore,
+            _ => HostKeyPolicy::KnownHosts {
+                path: config.user_known_hosts_files.first().cloned(),
+            },
+        })
+        .unwrap_or(HostKeyPolicy::KnownHosts { path: None });
+
     let Some(table) = table else {
-        return Ok(HostKeyPolicy::KnownHosts { path: None });
+        return Ok(default_policy);
     };
     let Some(host_key) = table.get::<Option<Table>>("host_key")? else {
-        return Ok(HostKeyPolicy::KnownHosts { path: None });
+        return Ok(default_policy);
     };
 
     let verify = host_key
@@ -1466,13 +1689,41 @@ fn default_ssh_user() -> String {
         .unwrap_or_else(|| "root".to_string())
 }
 
-fn find_default_private_key() -> Option<PathBuf> {
-    let home = home_dir_string()?;
+fn find_private_key_candidates(ssh_config: Option<&SshConfigOptions>) -> Vec<PrivateKeyOption> {
+    let paths = ssh_config
+        .filter(|config| !config.identity_files.is_empty())
+        .map(|config| config.identity_files.clone())
+        .unwrap_or_else(find_default_private_keys);
+
+    let mut keys = Vec::new();
+    for path in paths {
+        if !path.is_file()
+            || keys
+                .iter()
+                .any(|candidate: &PrivateKeyOption| candidate.path == path)
+        {
+            continue;
+        }
+        keys.push(PrivateKeyOption {
+            path,
+            passphrase: None,
+            required: false,
+        });
+    }
+
+    keys
+}
+
+fn find_default_private_keys() -> Vec<PathBuf> {
+    let Some(home) = home_dir_string() else {
+        return Vec::new();
+    };
     let ssh_dir = PathBuf::from(home).join(".ssh");
     ["id_ed25519", "id_rsa", "id_ecdsa"]
         .iter()
         .map(|name| ssh_dir.join(name))
-        .find(|path| path.is_file())
+        .filter(|path| path.is_file())
+        .collect()
 }
 
 fn looks_like_array_table(table: &Table) -> mlua::Result<bool> {
