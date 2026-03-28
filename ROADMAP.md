@@ -2,6 +2,7 @@
 
 - [ ] Rename `ptool` crate to `ptool-lua`.
 - [ ] Support more OS and arch.
+- [ ] Make the document website better.
 
 # v0.2.0
 
@@ -13,7 +14,7 @@
 - [ ] Support `ptool.map`, etc. for FP-style operations on tables.
 - [ ] Make the `ptool.run`'s echo style more pretty (two lines).
 - [ ] Support the REPL mode, with `ptool repl` subcommand.
-- [ ] Support detect OS and arch.
+- [x] Support detect OS and arch.
 - [ ] Let `ptool.fs.mkdir` support `exist_ok` option.
 - [x] Add the install script.
 - [ ] Add README about how to install ptool, etc.

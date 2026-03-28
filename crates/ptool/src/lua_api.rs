@@ -56,6 +56,7 @@ fn create_ptool_module(
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
+    let platform_module = create_ptool_platform_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
     let str_module = create_ptool_str_module(lua, Rc::clone(&world))?;
     let semver_module = create_ptool_semver_module(lua, Rc::clone(&world))?;
@@ -77,6 +78,7 @@ fn create_ptool_module(
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
     module.set("path", path_module)?;
+    module.set("platform", platform_module)?;
     module.set("re", re_module)?;
     module.set("str", str_module)?;
     module.set("semver", semver_module)?;
@@ -200,6 +202,22 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     fs_module.set("exists", exists_fn)?;
     fs_module.set("copy", copy_fn)?;
     Ok(fs_module)
+}
+
+fn create_ptool_platform_module(
+    lua: &Lua,
+    world: Rc<RefCell<crate::LuaWorld>>,
+) -> mlua::Result<Table> {
+    let platform_module = lua.create_table()?;
+    let os_state = Rc::clone(&world);
+    let os_fn = lua.create_function(move |_, ()| Ok(os_state.borrow().platform_os()))?;
+    let arch_state = Rc::clone(&world);
+    let arch_fn = lua.create_function(move |_, ()| Ok(arch_state.borrow().platform_arch()))?;
+    let target_fn = lua.create_function(move |_, ()| Ok(world.borrow().platform_target()))?;
+    platform_module.set("os", os_fn)?;
+    platform_module.set("arch", arch_fn)?;
+    platform_module.set("target", target_fn)?;
+    Ok(platform_module)
 }
 
 fn create_ptool_toml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

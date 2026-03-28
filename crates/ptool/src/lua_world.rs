@@ -152,6 +152,25 @@ impl LuaWorld {
         Ok(self.engine.ansi_style(text, options))
     }
 
+    pub(crate) fn platform_os(&self) -> String {
+        match self.engine.current_os() {
+            ptool_engine::OS::Linux => "linux".to_string(),
+            ptool_engine::OS::Macos => "macos".to_string(),
+            ptool_engine::OS::Windows => "windows".to_string(),
+        }
+    }
+
+    pub(crate) fn platform_arch(&self) -> String {
+        match self.engine.current_arch() {
+            ptool_engine::Arch::X86_64 => "amd64".to_string(),
+            ptool_engine::Arch::Aarch64 => "arm64".to_string(),
+        }
+    }
+
+    pub(crate) fn platform_target(&self) -> String {
+        format!("{}-{}", self.platform_os(), self.platform_arch())
+    }
+
     pub(crate) fn create_script_arg_builder(
         &self,
         id: String,

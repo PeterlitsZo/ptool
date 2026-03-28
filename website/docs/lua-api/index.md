@@ -18,6 +18,7 @@
 - `ptool.http`
 - `ptool.db`
 - `ptool.ssh`
+- `ptool.platform`
 - `ptool.path`
 - `ptool.toml`
 - `ptool.re`
