@@ -98,36 +98,72 @@ jobs:
           path: dist
           merge-multiple: true
 
+      - name: Classify release channel
+        id: release_channel
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          is_prerelease=false
+
+          case "$tag" in
+            *-alpha*|*-beta*|*-rc*)
+              is_prerelease=true
+              ;;
+          esac
+
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "is_prerelease=${is_prerelease}" >> "$GITHUB_OUTPUT"
+
       - name: Generate checksums
         run: |
           cd dist
           shasum -a 256 *.tar.gz > SHA256SUMS
 
+      - name: Generate stable release metadata
+        if: steps.release_channel.outputs.is_prerelease != 'true'
+        run: |
+          printf '%s\n' "${{ steps.release_channel.outputs.tag }}" > dist/LATEST
+
       - name: Install Wrangler
         run: npm install --global wrangler@4
 
-      - name: Upload dist directory to Cloudflare R2
+      - name: Upload versioned release artifacts to Cloudflare R2
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          find dist -type f -print0 | while IFS= read -r -d '' file; do
-            relative_path="${file#dist/}"
-            wrangler r2 object put "${R2_BUCKET}/ptool/release/${GITHUB_REF_NAME}/${relative_path}" --remote --file "$file"
+          for file in dist/*.tar.gz dist/SHA256SUMS; do
+            name="$(basename "$file")"
+            wrangler r2 object put "${R2_BUCKET}/ptool/release/${{ steps.release_channel.outputs.tag }}/${name}" --remote --file "$file"
           done
+
+      - name: Upload stable release aliases to Cloudflare R2
+        if: steps.release_channel.outputs.is_prerelease != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          version_prefix="ptool-${{ steps.release_channel.outputs.tag }}-"
+
+          for file in dist/*.tar.gz; do
+            name="$(basename "$file")"
+            asset_suffix="${name#${version_prefix}}"
+            latest_name="ptool-${asset_suffix}"
+            wrangler r2 object put "${R2_BUCKET}/ptool/release/latest/${latest_name}" --remote --file "$file"
+          done
+
+          wrangler r2 object put "${R2_BUCKET}/ptool/release/latest/SHA256SUMS" --remote --file dist/SHA256SUMS
+          wrangler r2 object put "${R2_BUCKET}/ptool/release/LATEST" --remote --file dist/LATEST
 
       - name: Create or update GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tag="${GITHUB_REF_NAME}"
+          tag="${{ steps.release_channel.outputs.tag }}"
           prerelease_flag=""
 
-          case "$tag" in
-            *-alpha*|*-beta*|*-rc*)
-              prerelease_flag="--prerelease"
-              ;;
-          esac
+          if [ "${{ steps.release_channel.outputs.is_prerelease }}" = 'true' ]; then
+            prerelease_flag="--prerelease"
+          fi
 
           if gh release view "$tag" >/dev/null 2>&1; then
             gh release upload "$tag" dist/*.tar.gz dist/SHA256SUMS --clobber

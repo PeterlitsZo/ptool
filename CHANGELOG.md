@@ -14,6 +14,9 @@
 
 - Changed `ptool.ssh.connect` to honor `ssh -G` identity ordering and to keep
   trying later private keys when earlier auto-discovered keys cannot be loaded.
+- Changed the release workflow so stable releases also publish fixed download
+  aliases under `ptool/release/latest/` plus a `ptool/release/LATEST` marker,
+  while prereleases keep using only versioned release paths.
 
 ## v0.1.0
 
