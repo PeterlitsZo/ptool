@@ -1,3 +1,7 @@
+# v0.3.0
+
+- [ ] Rename `ptool` crate to `ptool-lua`.
+
 # v0.2.0
 
 - [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime.
@@ -10,7 +14,7 @@
 - [ ] Support the REPL mode, with `ptool repl` subcommand.
 - [ ] Support detect OS and arch.
 - [ ] Let `ptool.fs.mkdir` support `exist_ok` option.
-- [ ] Add the install script.
+- [x] Add the install script.
 - [ ] Add README about how to install ptool, etc.
 - [x] Add a `ptool.run_capture` as a shortcut.
 - [ ] Support to calculate the SHA256, etc.

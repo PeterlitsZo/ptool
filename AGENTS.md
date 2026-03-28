@@ -10,6 +10,16 @@ Here, `<file>` is a Lua script. `ptool` executes it with the embedded Lua
 interpreter and injects a large set of utility functions (registered under the
 `ptool` table and also accessible through `p`).
 
+## Project Structure
+
+- `ptool` is responsible for Lua-facing functionality. It handles Lua runtime
+  integration and Lua API exposure, and should delegate shared core logic to
+  `ptool-engine` when appropriate.
+- `ptool-engine` is responsible for core logic that is not specific to the Lua
+  integration layer.
+- `ptool-cli` is responsible for CLI behavior and should delegate library
+  functionality to `ptool`.
+
 ## Documentation
 
 - `docs/lua-script.md` is the Lua scripting documentation and describes the

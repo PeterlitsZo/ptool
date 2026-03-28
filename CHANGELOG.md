@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added a simple `scripts/install.sh` installer that downloads the latest
+  platform-specific `ptool-<os>-<arch>.tar.gz` archive and installs `ptool`
+  into `~/.local/bin`.
 - Added `ptool.run_capture`, which mirrors `ptool.run` while defaulting both
   `stdout` and `stderr` to captured output, and documented the new Lua API.
 - Added Lua scripting documentation for `ptool.ssh.Connection:path`,
@@ -12,6 +15,8 @@
 
 ### Changed
 
+- Changed the release workflow so stable releases also publish the installer at
+  `ptool/install.sh` in Cloudflare R2.
 - Changed `ptool.ssh.connect` to honor `ssh -G` identity ordering and to keep
   trying later private keys when earlier auto-discovered keys cannot be loaded.
 - Changed the release workflow so stable releases also publish fixed download

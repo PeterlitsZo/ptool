@@ -154,6 +154,14 @@ jobs:
           wrangler r2 object put "${R2_BUCKET}/ptool/release/latest/SHA256SUMS" --remote --file dist/SHA256SUMS
           wrangler r2 object put "${R2_BUCKET}/ptool/release/LATEST" --remote --file dist/LATEST
 
+      - name: Upload install script to Cloudflare R2
+        if: steps.release_channel.outputs.is_prerelease != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          wrangler r2 object put "${R2_BUCKET}/ptool/install.sh" --remote --file scripts/install.sh
+
       - name: Create or update GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
