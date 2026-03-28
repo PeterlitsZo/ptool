@@ -10,6 +10,7 @@
 - [ ] Support `ptool.ssh.Connection:run_capture`.
 - [ ] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
+- [ ] Make document support i18n.
 
 # v0.2.0
 
@@ -19,7 +20,7 @@
 - [ ] Better error handling.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Support `ptool.map`, etc. for FP-style operations on tables.
-- [ ] Make the `ptool.run`'s echo style more pretty (two lines).
+- [x] Make the `ptool.run`'s echo style more pretty (two lines).
 - [x] Support the REPL mode, with `ptool repl` subcommand.
 - [x] Support detect OS and arch.
 - [x] Let `ptool.fs.mkdir` support `exist_ok` option.

@@ -682,9 +682,11 @@ fn print_command_echo(cwd: &Path, command: &str) {
     let cwd_segment = cwd.display().to_string();
 
     print!(
-        "{} {} {}",
+        "{} {} {}\n{} {}",
+        "┌".dimmed(),
         time_segment.bright_black().bold(),
         cwd_segment.cyan().bold(),
+        "└".dimmed(),
         "$".green().bold(),
     );
     print_command_self(command);
