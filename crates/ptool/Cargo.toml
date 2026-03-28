@@ -12,6 +12,7 @@ jiff = "0.2.23"
 minijinja = { version = "2.18.0", features = ["json", "urlencode"]}
 mlua = { version = "0.11.2", features = ["lua54", "serde", "vendored"] }
 owo-colors = "4.3.0"
+ptool-engine = { version = "0.1.0", path = "../ptool-engine" }
 regex = "1.12.3"
 reqwest = { version = "0.13.2", default-features = false, features = ["blocking", "rustls"] }
 russh = "0.58.0"

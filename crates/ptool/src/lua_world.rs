@@ -1,4 +1,5 @@
 use mlua::{Lua, Table, Value, Variadic};
+use ptool_engine::PtoolEngine;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
 use tokio::runtime::Runtime;
@@ -32,6 +33,7 @@ pub struct LuaWorld {
     current_dir: PathBuf,
     config: LuaWorldConfig,
     db_runtime: Rc<Runtime>,
+    engine: PtoolEngine,
 }
 
 impl LuaWorld {
@@ -44,6 +46,7 @@ impl LuaWorld {
             current_dir: std::env::current_dir()?,
             config: LuaWorldConfig::default(),
             db_runtime: Rc::new(db_runtime),
+            engine: PtoolEngine::new(),
         })
     }
 
@@ -135,7 +138,8 @@ impl LuaWorld {
     }
 
     pub(crate) fn ansi_style(&self, text: String, options: Option<Table>) -> mlua::Result<String> {
-        crate::ansi::style(text, options, None)
+        let options = crate::ansi::style_options(options, None)?;
+        Ok(self.engine.ansi_style(text, options))
     }
 
     pub(crate) fn ansi_color(
@@ -144,7 +148,8 @@ impl LuaWorld {
         options: Option<Table>,
         color: &'static str,
     ) -> mlua::Result<String> {
-        crate::ansi::style(text, options, Some(color))
+        let options = crate::ansi::style_options(options, Some(color))?;
+        Ok(self.engine.ansi_style(text, options))
     }
 
     pub(crate) fn create_script_arg_builder(

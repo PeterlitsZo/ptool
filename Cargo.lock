@@ -2430,6 +2430,7 @@ dependencies = [
  "minijinja",
  "mlua",
  "owo-colors",
+ "ptool-engine",
  "regex",
  "reqwest",
  "russh",
@@ -2449,6 +2450,13 @@ dependencies = [
  "clap_lex",
  "indoc",
  "ptool",
+]
+
+[[package]]
+name = "ptool-engine"
+version = "0.1.0"
+dependencies = [
+ "owo-colors",
 ]
 
 [[package]]

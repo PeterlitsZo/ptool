@@ -57,7 +57,11 @@ subject should be capitalized.
 When the user asks you to commit, you should commit only the files that are
 already staged and leave unstaged working tree files untouched.
 
-Before committing, you need to update `CHANGELOG.md` and ask the user to confirm
-that it looks correct. After confirmation, add `CHANGELOG.md` to the staging
-area and then commit. You may also check whether documentation changes are
-needed (the `docs/` directory) and update them together if necessary.
+Before committing, consider whether `CHANGELOG.md` needs an update and keep it
+concise. Prefer adding only user-visible changes such as new features,
+behavioral changes, compatibility-impacting fixes, or important bug fixes.
+Pure internal refactors that do not affect functionality should generally not be
+added to `CHANGELOG.md`. If you do update `CHANGELOG.md`, ask the user to
+confirm that it looks correct, then add `CHANGELOG.md` to the staging area
+before committing. You may also check whether documentation changes are needed
+(the `docs/` directory) and update them together if necessary.
