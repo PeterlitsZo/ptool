@@ -14,6 +14,7 @@
 ## Modules
 
 - `ptool.semver`
+- `ptool.hash`
 - `ptool.ansi`
 - `ptool.http`
 - `ptool.db`

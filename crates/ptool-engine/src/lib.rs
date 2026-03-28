@@ -1,4 +1,5 @@
 mod ansi;
+mod hash;
 mod platform;
 
 pub use ansi::{Color, StyleOptions};
@@ -22,5 +23,17 @@ impl PtoolEngine {
 
     pub fn current_arch(&self) -> Arch {
         platform::detect_current_arch()
+    }
+
+    pub fn hash_sha256_hex(&self, bytes: &[u8]) -> String {
+        hash::sha256_hex(bytes)
+    }
+
+    pub fn hash_sha1_hex(&self, bytes: &[u8]) -> String {
+        hash::sha1_hex(bytes)
+    }
+
+    pub fn hash_md5_hex(&self, bytes: &[u8]) -> String {
+        hash::md5_hex(bytes)
     }
 }

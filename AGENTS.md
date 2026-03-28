@@ -38,6 +38,15 @@ interpreter and injects a large set of utility functions (registered under the
   after confirming that a doc change is indeed needed.
 - Do not add tests unless the user explicitly requests them, to avoid test
   bloat.
+- When editing documentation, especially API version markers such as
+  ``> `v0.x.y` - Introduced.``, always target the exact section with enough
+  surrounding context to avoid changing similarly worded entries elsewhere. Do
+  not use broad search-and-replace for repeated version marker text without
+  first narrowing the target section.
+- When adding new non-Lua core capabilities, implement the core business logic
+  in `ptool-engine` by default. Keep `ptool` focused on Lua-facing adaptation,
+  argument conversion, and API exposure unless there is a clear reason the logic
+  must stay in the Lua integration layer.
 
 ## Behavioral Rules
 

@@ -11,6 +11,10 @@
 - [ ] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
 - [ ] Make document support i18n.
+- [ ] Make REPL support readline-like features.
+- [ ] Fix the local variable not working in REPL.
+- [ ] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
+      this.
 
 # v0.2.0
 

@@ -1,4 +1,4 @@
-use mlua::{Lua, Table, Value, Variadic};
+use mlua::{Lua, String as LuaString, Table, Value, Variadic};
 use ptool_engine::PtoolEngine;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
@@ -199,6 +199,18 @@ impl LuaWorld {
 
     pub(crate) fn http_request(&self, options: Table) -> mlua::Result<crate::http::HttpResponse> {
         crate::http::request(options)
+    }
+
+    pub(crate) fn hash_sha256(&self, input: LuaString) -> String {
+        self.engine.hash_sha256_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha1(&self, input: LuaString) -> String {
+        self.engine.hash_sha1_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_md5(&self, input: LuaString) -> String {
+        self.engine.hash_md5_hex(&input.as_bytes())
     }
 
     pub(crate) fn db_connect(&self, value: Value) -> mlua::Result<crate::db::LuaDbConnection> {

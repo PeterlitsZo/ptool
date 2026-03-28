@@ -1,4 +1,4 @@
-use mlua::{Lua, Table, Value, Variadic};
+use mlua::{Lua, String as LuaString, Table, Value, Variadic};
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -51,6 +51,7 @@ fn create_ptool_module(
     let ansi_module = create_ptool_ansi_module(lua, Rc::clone(&world))?;
     let args_module = create_ptool_args_module(lua, Rc::clone(&world), script_name, script_args)?;
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
+    let hash_module = create_ptool_hash_module(lua, Rc::clone(&world))?;
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
@@ -73,6 +74,7 @@ fn create_ptool_module(
     module.set("ansi", ansi_module)?;
     module.set("args", args_module)?;
     module.set("sh", shell_module)?;
+    module.set("hash", hash_module)?;
     module.set("http", http_module)?;
     module.set("db", db_module)?;
     module.set("ssh", ssh_module)?;
@@ -162,6 +164,22 @@ fn create_ptool_http_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
         lua.create_function(move |_, options: Table| world.borrow().http_request(options))?;
     http_module.set("request", request_fn)?;
     Ok(http_module)
+}
+
+fn create_ptool_hash_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let hash_module = lua.create_table()?;
+    let sha256_state = Rc::clone(&world);
+    let sha256_fn = lua
+        .create_function(move |_, input: LuaString| Ok(sha256_state.borrow().hash_sha256(input)))?;
+    let sha1_state = Rc::clone(&world);
+    let sha1_fn =
+        lua.create_function(move |_, input: LuaString| Ok(sha1_state.borrow().hash_sha1(input)))?;
+    let md5_fn =
+        lua.create_function(move |_, input: LuaString| Ok(world.borrow().hash_md5(input)))?;
+    hash_module.set("sha256", sha256_fn)?;
+    hash_module.set("sha1", sha1_fn)?;
+    hash_module.set("md5", md5_fn)?;
+    Ok(hash_module)
 }
 
 fn create_ptool_db_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
