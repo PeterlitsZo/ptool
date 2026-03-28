@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `ptool.run_capture`, which mirrors `ptool.run` while defaulting both
+  `stdout` and `stderr` to captured output, and documented the new Lua API.
 - Added Lua scripting documentation for `ptool.ssh.Connection:path`,
   `Connection:upload`, and `Connection:download`, including reusable remote
   path values, transfer options, and usage examples.

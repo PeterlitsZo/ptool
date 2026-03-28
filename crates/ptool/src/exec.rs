@@ -14,6 +14,22 @@ enum StreamMode {
     Null,
 }
 
+#[derive(Clone, Copy)]
+struct StreamDefaults {
+    stdout: StreamMode,
+    stderr: StreamMode,
+}
+
+const RUN_STREAM_DEFAULTS: StreamDefaults = StreamDefaults {
+    stdout: StreamMode::Inherit,
+    stderr: StreamMode::Inherit,
+};
+
+const RUN_CAPTURE_STREAM_DEFAULTS: StreamDefaults = StreamDefaults {
+    stdout: StreamMode::Capture,
+    stderr: StreamMode::Capture,
+};
+
 struct RunOptions {
     cmd: String,
     args: Vec<String>,
@@ -44,7 +60,32 @@ pub(crate) fn run_command(
     current_dir: &Path,
     defaults: RunConfig,
 ) -> mlua::Result<Value> {
-    let options = parse_run_options(args, defaults)?;
+    run_command_with_stream_defaults(lua, args, current_dir, defaults, RUN_STREAM_DEFAULTS)
+}
+
+pub(crate) fn run_capture_command(
+    lua: &Lua,
+    args: Variadic<Value>,
+    current_dir: &Path,
+    defaults: RunConfig,
+) -> mlua::Result<Value> {
+    run_command_with_stream_defaults(
+        lua,
+        args,
+        current_dir,
+        defaults,
+        RUN_CAPTURE_STREAM_DEFAULTS,
+    )
+}
+
+fn run_command_with_stream_defaults(
+    lua: &Lua,
+    args: Variadic<Value>,
+    current_dir: &Path,
+    defaults: RunConfig,
+    stream_defaults: StreamDefaults,
+) -> mlua::Result<Value> {
+    let options = parse_run_options(args, defaults, stream_defaults)?;
     let cmd_for_error = options.cmd.clone();
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
 
@@ -127,7 +168,11 @@ fn run_process(options: &RunOptions, resolved_cwd: &Path) -> mlua::Result<Output
     command.output().map_err(mlua::Error::external)
 }
 
-fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result<RunOptions> {
+fn parse_run_options(
+    args: Variadic<Value>,
+    defaults: RunConfig,
+    stream_defaults: StreamDefaults,
+) -> mlua::Result<RunOptions> {
     match args.len() {
         0 => Err(mlua::Error::runtime("ptool.run requires arguments")),
         1 => match args.first() {
@@ -139,14 +184,16 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                     cwd: None,
                     env: None,
                     echo: defaults.echo,
-                    stdout: StreamMode::Inherit,
-                    stderr: StreamMode::Inherit,
+                    stdout: stream_defaults.stdout,
+                    stderr: stream_defaults.stderr,
                     check: defaults.check,
                     confirm: defaults.confirm,
                     retry: defaults.retry,
                 })
             }
-            Some(Value::Table(options)) => parse_full_options_table(options.clone(), defaults),
+            Some(Value::Table(options)) => {
+                parse_full_options_table(options.clone(), defaults, stream_defaults)
+            }
             _ => Err(mlua::Error::runtime(
                 "ptool.run expects a command string or an options table",
             )),
@@ -158,8 +205,8 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                 cwd: None,
                 env: None,
                 echo: defaults.echo,
-                stdout: StreamMode::Inherit,
-                stderr: StreamMode::Inherit,
+                stdout: stream_defaults.stdout,
+                stderr: stream_defaults.stderr,
                 check: defaults.check,
                 confirm: defaults.confirm,
                 retry: defaults.retry,
@@ -169,7 +216,13 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                     let (cmd, args) = parse_cmdline_to_cmd_and_args(&cmd_or_cmdline.to_str()?)?;
                     let overrides =
                         parse_overrides_table(second_table.clone(), "ptool.run(cmdline, options)")?;
-                    Ok(apply_overrides(cmd, args, overrides, defaults))
+                    Ok(apply_overrides(
+                        cmd,
+                        args,
+                        overrides,
+                        defaults,
+                        stream_defaults,
+                    ))
                 } else {
                     Ok(RunOptions {
                         cmd: cmd_or_cmdline.to_str()?.to_owned(),
@@ -177,8 +230,8 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                         cwd: None,
                         env: None,
                         echo: defaults.echo,
-                        stdout: StreamMode::Inherit,
-                        stderr: StreamMode::Inherit,
+                        stdout: stream_defaults.stdout,
+                        stderr: stream_defaults.stderr,
                         check: defaults.check,
                         confirm: defaults.confirm,
                         retry: defaults.retry,
@@ -202,6 +255,7 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                     parse_argsline(&argsline.to_str()?)?,
                     overrides,
                     defaults,
+                    stream_defaults,
                 ))
             }
             (
@@ -216,6 +270,7 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
                     parse_string_list(args_table)?,
                     overrides,
                     defaults,
+                    stream_defaults,
                 ))
             }
             _ => Err(mlua::Error::runtime(
@@ -228,7 +283,11 @@ fn parse_run_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result
     }
 }
 
-fn parse_full_options_table(options: Table, defaults: RunConfig) -> mlua::Result<RunOptions> {
+fn parse_full_options_table(
+    options: Table,
+    defaults: RunConfig,
+    stream_defaults: StreamDefaults,
+) -> mlua::Result<RunOptions> {
     let Some(cmd) = options.get::<Option<String>>("cmd")? else {
         return Err(mlua::Error::runtime(
             "ptool.run options mode requires `cmd`",
@@ -246,13 +305,13 @@ fn parse_full_options_table(options: Table, defaults: RunConfig) -> mlua::Result
         "stdout",
         "ptool.run(options)",
     )?
-    .unwrap_or(StreamMode::Inherit);
+    .unwrap_or(stream_defaults.stdout);
     let stderr = parse_stream_mode(
         options.get::<Option<String>>("stderr")?,
         "stderr",
         "ptool.run(options)",
     )?
-    .unwrap_or(StreamMode::Inherit);
+    .unwrap_or(stream_defaults.stderr);
     let check = options
         .get::<Option<bool>>("check")?
         .unwrap_or(defaults.check);
@@ -347,6 +406,7 @@ fn apply_overrides(
     args: Vec<String>,
     overrides: RunCallOverrides,
     defaults: RunConfig,
+    stream_defaults: StreamDefaults,
 ) -> RunOptions {
     RunOptions {
         cmd,
@@ -354,8 +414,8 @@ fn apply_overrides(
         cwd: overrides.cwd,
         env: overrides.env,
         echo: overrides.echo.unwrap_or(defaults.echo),
-        stdout: overrides.stdout.unwrap_or(StreamMode::Inherit),
-        stderr: overrides.stderr.unwrap_or(StreamMode::Inherit),
+        stdout: overrides.stdout.unwrap_or(stream_defaults.stdout),
+        stderr: overrides.stderr.unwrap_or(stream_defaults.stderr),
         check: overrides.check.unwrap_or(defaults.check),
         confirm: overrides.confirm.unwrap_or(defaults.confirm),
         retry: overrides.retry.unwrap_or(defaults.retry),

@@ -480,6 +480,39 @@ print(res.stderr)
 res:assert_ok()
 ```
 
+## ptool.run_capture
+
+> `Unreleased` - Introduced.
+
+`ptool.run_capture` executes external commands from Rust with the same call
+forms, argument rules, return value rules, and options as `ptool.run`.
+
+The difference is only the default stream handling:
+
+- `stdout` defaults to `"capture"`.
+- `stderr` defaults to `"capture"`.
+
+You can still override either field explicitly in `options`.
+
+Example:
+
+```lua
+local res = ptool.run_capture("echo hello world")
+print(res.stdout)
+
+local res2 = ptool.run_capture({
+  cmd = "sh",
+  args = {"-c", "printf 'out'; printf 'err' >&2"},
+})
+print(res2.stdout)
+print(res2.stderr)
+
+local res3 = ptool.run_capture("echo hello", {
+  stderr = "inherit",
+})
+print(res3.stdout)
+```
+
 ## ptool.http.request
 
 > `v0.1.0` - Introduced.

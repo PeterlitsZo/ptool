@@ -24,6 +24,10 @@ fn create_ptool_module(
     let run_state = Rc::clone(&world);
     let run_fn =
         lua.create_function(move |lua, args: Variadic<Value>| run_state.borrow().run(lua, args))?;
+    let run_capture_state = Rc::clone(&world);
+    let run_capture_fn = lua.create_function(move |lua, args: Variadic<Value>| {
+        run_capture_state.borrow().run_capture(lua, args)
+    })?;
     let config_state = Rc::clone(&world);
     let config_fn =
         lua.create_function(move |_, options: Table| config_state.borrow_mut().configure(options))?;
@@ -58,6 +62,7 @@ fn create_ptool_module(
     let template_module = create_ptool_template_module(lua, Rc::clone(&world))?;
     let toml_module = create_ptool_toml_module(lua, world)?;
     module.set("run", run_fn)?;
+    module.set("run_capture", run_capture_fn)?;
     module.set("config", config_fn)?;
     module.set("use", use_fn)?;
     module.set("cd", cd_fn)?;
