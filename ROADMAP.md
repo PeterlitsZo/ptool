@@ -3,6 +3,8 @@
 - [ ] Rename `ptool` crate to `ptool-lua`.
 - [ ] Support more OS and arch.
 - [ ] Make the document website better.
+- [ ] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
+- [ ] Let `release.lua` use `p.ask`.
 
 # v0.2.0
 

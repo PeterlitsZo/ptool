@@ -2420,7 +2420,7 @@ dependencies = [
 
 [[package]]
 name = "ptool"
-version = "0.1.0"
+version = "0.2.0-alpha.1"
 dependencies = [
  "clap",
  "clap_lex",
@@ -2445,7 +2445,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-cli"
-version = "0.1.0"
+version = "0.2.0-alpha.1"
 dependencies = [
  "clap_lex",
  "indoc",
@@ -2454,7 +2454,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-engine"
-version = "0.1.0"
+version = "0.2.0-alpha.1"
 dependencies = [
  "owo-colors",
 ]

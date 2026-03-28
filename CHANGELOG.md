@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.2.0-alpha.1 (2026-03-28)
 
 ### Added
 
@@ -27,7 +27,7 @@
   aliases under `ptool/release/latest/` plus a `ptool/release/LATEST` marker,
   while prereleases keep using only versioned release paths.
 
-## v0.1.0
+## v0.1.0 (2026-03-27)
 
 ### Added
 
