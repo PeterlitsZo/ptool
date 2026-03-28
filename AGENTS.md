@@ -22,8 +22,9 @@ interpreter and injects a large set of utility functions (registered under the
 
 ## Documentation
 
-- `docs/lua-script.md` is the Lua scripting documentation and describes the
-  provided utility functions.
+- `website/docs/` contains the current Docusaurus documentation content.
+- `website/` contains the Docusaurus site project and frontend assets.
+- `docs-backup/` stores the previous Markdown documentation for reference.
 
 ## Development Tips
 
@@ -74,4 +75,4 @@ Pure internal refactors that do not affect functionality should generally not be
 added to `CHANGELOG.md`. If you do update `CHANGELOG.md`, ask the user to
 confirm that it looks correct, then add `CHANGELOG.md` to the staging area
 before committing. You may also check whether documentation changes are needed
-(the `docs/` directory) and update them together if necessary.
+(the `website/docs/` directory) and update them together if necessary.

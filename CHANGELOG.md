@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added a Docusaurus documentation site under `website/`, with a new homepage,
+  structured getting-started pages, and a dedicated API reference section.
 - Added a simple `scripts/install.sh` installer that downloads the latest
   platform-specific `ptool-<os>-<arch>.tar.gz` archive and installs `ptool`
   into `~/.local/bin`.

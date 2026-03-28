@@ -1,4 +1,4 @@
-# Lua Script Documentation
+# Lua API Reference
 
 `ptool run <lua_file>` runs a Lua script and injects the global variable `ptool`
 (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`).
@@ -272,7 +272,7 @@ print(ptool.ansi.style("warning", {
 }))
 ```
 
-## ptool.ansi.<color>
+## ptool.ansi.\<color\>
 
 > `v0.1.0` - Introduced.
 

@@ -1,12 +1,13 @@
 # v0.3.0
 
 - [ ] Rename `ptool` crate to `ptool-lua`.
+- [ ] Support more OS and arch.
 
 # v0.2.0
 
 - [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime.
 - [ ] Support a TUI toolkit.
-- [ ] Support a document website.
+- [x] Support a document website.
 - [ ] Better error handling.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Support `ptool.map`, etc. for FP-style operations on tables.
