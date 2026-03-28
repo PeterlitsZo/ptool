@@ -3,6 +3,7 @@ use std::fs as stdfs;
 use std::path::Path;
 
 const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
+const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
 
 pub(crate) fn read(path: String) -> mlua::Result<String> {
     stdfs::read_to_string(&path)
@@ -14,13 +15,70 @@ pub(crate) fn write(path: String, content: String) -> mlua::Result<()> {
         .map_err(|err| mlua::Error::runtime(format!("ptool.fs.write `{path}` failed: {err}")))
 }
 
-pub(crate) fn mkdir(path: String) -> mlua::Result<()> {
+pub(crate) fn mkdir(path: String, options: Option<Table>) -> mlua::Result<()> {
+    let options = MkdirOptions::parse(options)?;
+    if !options.exist_ok && Path::new(&path).is_dir() {
+        return Err(mlua::Error::runtime(format!(
+            "{MKDIR_SIGNATURE} `{path}` already exists"
+        )));
+    }
+
     stdfs::create_dir_all(&path)
-        .map_err(|err| mlua::Error::runtime(format!("ptool.fs.mkdir `{path}` failed: {err}")))
+        .map_err(|err| mlua::Error::runtime(format!("{MKDIR_SIGNATURE} `{path}` failed: {err}")))
 }
 
 pub(crate) fn exists(path: String) -> bool {
     Path::new(&path).exists()
+}
+
+#[derive(Debug, Clone, Copy)]
+struct MkdirOptions {
+    exist_ok: bool,
+}
+
+impl Default for MkdirOptions {
+    fn default() -> Self {
+        Self { exist_ok: true }
+    }
+}
+
+impl MkdirOptions {
+    fn parse(options: Option<Table>) -> mlua::Result<Self> {
+        let mut parsed = Self::default();
+        let Some(options) = options else {
+            return Ok(parsed);
+        };
+
+        for pair in options.pairs::<Value, Value>() {
+            let (key, value) = pair?;
+            let key = match key {
+                Value::String(key) => key.to_str()?.to_string(),
+                _ => {
+                    return Err(mlua::Error::runtime(format!(
+                        "{MKDIR_SIGNATURE} option keys must be strings"
+                    )));
+                }
+            };
+
+            match key.as_str() {
+                "exist_ok" => match value {
+                    Value::Boolean(value) => parsed.exist_ok = value,
+                    _ => {
+                        return Err(mlua::Error::runtime(format!(
+                            "{MKDIR_SIGNATURE} `exist_ok` must be a boolean"
+                        )));
+                    }
+                },
+                _ => {
+                    return Err(mlua::Error::runtime(format!(
+                        "{MKDIR_SIGNATURE} unknown option `{key}`"
+                    )));
+                }
+            }
+        }
+
+        Ok(parsed)
+    }
 }
 
 pub(crate) fn copy(lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {

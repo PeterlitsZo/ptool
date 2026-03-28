@@ -8,6 +8,8 @@
 - [ ] Make the `install.sh` support installing a specific version, e.g.
       `install.sh 0.2.0-alpha.1`.
 - [ ] Support `ptool.ssh.Connection:run_capture`.
+- [ ] Make ssh connection's can also echo the command.
+- [ ] Change the avatar icon of the document website.
 
 # v0.2.0
 
@@ -20,7 +22,7 @@
 - [ ] Make the `ptool.run`'s echo style more pretty (two lines).
 - [x] Support the REPL mode, with `ptool repl` subcommand.
 - [x] Support detect OS and arch.
-- [ ] Let `ptool.fs.mkdir` support `exist_ok` option.
+- [x] Let `ptool.fs.mkdir` support `exist_ok` option.
 - [x] Add the install script.
 - [x] Add README about how to install ptool, etc.
 - [x] Add a `ptool.run_capture` as a shortcut.

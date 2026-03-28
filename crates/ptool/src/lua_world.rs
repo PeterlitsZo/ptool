@@ -217,8 +217,8 @@ impl LuaWorld {
         crate::fs::write(path, content)
     }
 
-    pub(crate) fn fs_mkdir(&self, path: String) -> mlua::Result<()> {
-        crate::fs::mkdir(path)
+    pub(crate) fn fs_mkdir(&self, path: String, options: Option<Table>) -> mlua::Result<()> {
+        crate::fs::mkdir(path, options)
     }
 
     pub(crate) fn fs_exists(&self, path: String) -> bool {

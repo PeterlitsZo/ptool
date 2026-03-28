@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## v0.2.0-alpha.1 (2026-03-28)
 
 ### Added
