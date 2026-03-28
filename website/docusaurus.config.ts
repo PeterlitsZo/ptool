@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://peterlitszo.github.io',
-  baseUrl: '/ptool/',
+  url: 'https://ptool.peterlits.net',
+  baseUrl: '/',
   organizationName: 'PeterlitsZo',
   projectName: 'ptool',
   onBrokenLinks: 'throw',
