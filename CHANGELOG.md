@@ -7,6 +7,8 @@
 - Added a simple `scripts/install.sh` installer that downloads the latest
   platform-specific `ptool-<os>-<arch>.tar.gz` archive and installs `ptool`
   into `~/.local/bin`.
+- Added a top-level `README.md` with a one-line install command that downloads
+  `https://peterlits.net/ptool/install.sh` and runs it.
 - Added `ptool.run_capture`, which mirrors `ptool.run` while defaulting both
   `stdout` and `stderr` to captured output, and documented the new Lua API.
 - Added Lua scripting documentation for `ptool.ssh.Connection:path`,
