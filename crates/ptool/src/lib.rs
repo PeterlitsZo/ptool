@@ -20,4 +20,4 @@ mod toml;
 mod version;
 
 pub use lua_world::{LuaWorld, LuaWorldConfig, RunConfig};
-pub use runner::run_script;
+pub use runner::{run_repl, run_script};

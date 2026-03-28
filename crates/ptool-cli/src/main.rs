@@ -13,6 +13,7 @@ enum ParsedCli {
         filename: String,
         script_args: Vec<String>,
     },
+    Repl,
     ExitSuccess,
 }
 
@@ -20,6 +21,7 @@ enum ParsedCli {
 enum UsageKind {
     Top,
     Run,
+    Repl,
     Version,
 }
 
@@ -50,6 +52,13 @@ impl ParseError {
             usage: UsageKind::Version,
         }
     }
+
+    fn repl(message: impl Into<String>) -> Self {
+        Self {
+            message: message.into(),
+            usage: UsageKind::Repl,
+        }
+    }
 }
 
 fn main() {
@@ -69,6 +78,12 @@ fn main() {
                 process::exit(1);
             }
         }
+        Ok(ParsedCli::Repl) => {
+            if let Err(err) = ptool::run_repl() {
+                eprintln!("Failed to start REPL: {err}");
+                process::exit(1);
+            }
+        }
         Ok(ParsedCli::ExitSuccess) => {}
         Err(err) => {
             eprintln!("error: {}", err.message);
@@ -76,6 +91,7 @@ fn main() {
             match err.usage {
                 UsageKind::Top => eprintln!("{}", top_usage(bin)),
                 UsageKind::Run => eprintln!("{}", run_usage(bin)),
+                UsageKind::Repl => eprintln!("{}", repl_usage(bin)),
                 UsageKind::Version => eprintln!("{}", version_usage(bin)),
             }
             process::exit(2);
@@ -103,6 +119,7 @@ fn parse_cli(
             Ok(ParsedCli::ExitSuccess)
         }
         "run" => parse_run(raw, cursor, bin),
+        "repl" => parse_repl(raw, cursor, bin),
         "version" => parse_version(raw, cursor, bin),
         value if value.starts_with('-') => Err(ParseError::top(format!(
             "unexpected argument `{value}` found"
@@ -157,6 +174,26 @@ fn parse_run(
     })
 }
 
+fn parse_repl(
+    raw: &RawArgs,
+    cursor: &mut clap_lex::ArgCursor,
+    bin: &OsStr,
+) -> Result<ParsedCli, ParseError> {
+    if let Some(next) = raw.next(cursor) {
+        let value = parsed_arg_to_string(next.to_value_os(), "argument")?;
+        if value == "-h" || value == "--help" {
+            println!("{}", repl_usage(bin));
+            return Ok(ParsedCli::ExitSuccess);
+        }
+
+        return Err(ParseError::repl(format!(
+            "unexpected argument `{value}` found"
+        )));
+    }
+
+    Ok(ParsedCli::Repl)
+}
+
 fn parse_version(
     raw: &RawArgs,
     cursor: &mut clap_lex::ArgCursor,
@@ -198,6 +235,7 @@ fn top_usage(bin: &OsStr) -> String {
 
         Commands:
           run      Run ptool script
+          repl     Start interactive Lua REPL
           version  Print version
 
         Options:
@@ -219,6 +257,18 @@ fn run_usage(bin: &OsStr) -> String {
 
         Options:
           -h, --help      Print help
+    "# }
+}
+
+fn repl_usage(bin: &OsStr) -> String {
+    let bin = bin.to_string_lossy();
+    formatdoc! { r#"
+        Start interactive Lua REPL
+
+        Usage: {bin} repl
+
+        Options:
+          -h, --help  Print help
     "# }
 }
 

@@ -5,6 +5,9 @@
 - [ ] Make the document website better.
 - [ ] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
 - [ ] Let `release.lua` use `p.ask`.
+- [ ] Make the `install.sh` support installing a specific version, e.g.
+      `install.sh 0.2.0-alpha.1`.
+- [ ] Support `ptool.ssh.Connection:run_capture`.
 
 # v0.2.0
 
@@ -15,11 +18,11 @@
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Support `ptool.map`, etc. for FP-style operations on tables.
 - [ ] Make the `ptool.run`'s echo style more pretty (two lines).
-- [ ] Support the REPL mode, with `ptool repl` subcommand.
+- [x] Support the REPL mode, with `ptool repl` subcommand.
 - [x] Support detect OS and arch.
 - [ ] Let `ptool.fs.mkdir` support `exist_ok` option.
 - [x] Add the install script.
-- [ ] Add README about how to install ptool, etc.
+- [x] Add README about how to install ptool, etc.
 - [x] Add a `ptool.run_capture` as a shortcut.
 - [ ] Support to calculate the SHA256, etc.
 - [ ] Support to parse URL, IP, IP + port, etc.
