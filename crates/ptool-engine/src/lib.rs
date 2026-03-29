@@ -1,20 +1,40 @@
 mod ansi;
+mod db;
 mod error;
 mod hash;
 mod net;
 mod platform;
 
 pub use ansi::{Color, StyleOptions};
+pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
+use std::path::Path;
+use std::sync::Arc;
+use tokio::runtime::{Builder, Runtime};
 
-#[derive(Debug, Default)]
-pub struct PtoolEngine;
+#[derive(Debug)]
+pub struct PtoolEngine {
+    runtime: Arc<Runtime>,
+}
+
+impl Default for PtoolEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl PtoolEngine {
     pub fn new() -> Self {
-        Self
+        let runtime = Builder::new_multi_thread()
+            .enable_all()
+            .build()
+            .expect("failed to build ptool-engine tokio runtime");
+
+        Self {
+            runtime: Arc::new(runtime),
+        }
     }
 
     pub fn ansi_style(&self, text: String, options: StyleOptions) -> String {
@@ -51,5 +71,9 @@ impl PtoolEngine {
 
     pub fn parse_host_port(&self, input: &str) -> Result<HostPortParts> {
         net::parse_host_port(input)
+    }
+
+    pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {
+        db::connect(Arc::clone(&self.runtime), url, current_dir)
     }
 }

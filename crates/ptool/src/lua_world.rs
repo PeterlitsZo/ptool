@@ -32,20 +32,19 @@ pub struct LuaWorldConfig {
 pub struct LuaWorld {
     current_dir: PathBuf,
     config: LuaWorldConfig,
-    db_runtime: Rc<Runtime>,
+    runtime: Rc<Runtime>,
     engine: PtoolEngine,
 }
 
 impl LuaWorld {
     pub fn new() -> std::io::Result<Self> {
-        sqlx::any::install_default_drivers();
-        let db_runtime = tokio::runtime::Builder::new_current_thread()
+        let runtime = tokio::runtime::Builder::new_current_thread()
             .enable_all()
             .build()?;
         Ok(Self {
             current_dir: std::env::current_dir()?,
             config: LuaWorldConfig::default(),
-            db_runtime: Rc::new(db_runtime),
+            runtime: Rc::new(runtime),
             engine: PtoolEngine::new(),
         })
     }
@@ -226,11 +225,11 @@ impl LuaWorld {
     }
 
     pub(crate) fn db_connect(&self, value: Value) -> mlua::Result<crate::db::LuaDbConnection> {
-        crate::db::connect(value, self.current_dir(), Rc::clone(&self.db_runtime))
+        crate::db::connect(value, self.current_dir(), &self.engine)
     }
 
     pub(crate) fn ssh_connect(&self, value: Value) -> mlua::Result<crate::ssh::LuaSshConnection> {
-        crate::ssh::connect(value, self.current_dir(), Rc::clone(&self.db_runtime))
+        crate::ssh::connect(value, self.current_dir(), Rc::clone(&self.runtime))
     }
 
     pub(crate) fn fs_read(&self, path: String) -> mlua::Result<String> {

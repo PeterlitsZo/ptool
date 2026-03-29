@@ -7,6 +7,7 @@ pub enum ErrorKind {
     InvalidHost,
     InvalidPort,
     InvalidHostPort,
+    Db,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

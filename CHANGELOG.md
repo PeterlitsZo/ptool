@@ -6,6 +6,9 @@
 
 - Added the `ptool.net` module with `parse_url`, `parse_ip`, and
   `parse_host_port` helpers for parsing network identifiers in Lua scripts.
+- Added engine-backed database connection support in `ptool-engine` via
+  `PtoolEngine::db_connect`, with a public `DbConnection` type for shared DB
+  operations outside the Lua integration layer.
 
 ## v0.2.0-alpha.1 (2026-03-28)
 

@@ -7,6 +7,8 @@
 - [ ] Let `release.lua` use `p.ask`.
 - [ ] Make the `install.sh` support installing a specific version, e.g.
       `install.sh 0.2.0-alpha.1`.
+- [ ] Make the `install.sh` support installing to a specified directory, e.g.
+      `install.sh --dir /usr/local/bin`.
 - [ ] Support `ptool.ssh.Connection:run_capture`.
 - [ ] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
@@ -15,15 +17,17 @@
 - [ ] Fix the local variable not working in REPL.
 - [ ] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
       this.
+- [ ] Support a TUI toolkit.
+- [ ] Better error handling.
+- [ ] Remove non-essential built-in Lua modules.
+- [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 
 # v0.2.0
 
-- [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime.
-- [ ] Support a TUI toolkit.
+- [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime,
+      and move some core logic from `ptool` into `ptool-engine`.
 - [x] Support a document website.
-- [ ] Better error handling.
-- [ ] Remove non-essential built-in Lua modules.
-- [ ] Support `ptool.map`, etc. for FP-style operations on tables.
+- [ ] ~~Support `ptool.map`, etc. for FP-style operations on tables.~~
 - [x] Make the `ptool.run`'s echo style more pretty (two lines).
 - [x] Support the REPL mode, with `ptool repl` subcommand.
 - [x] Support detect OS and arch.
