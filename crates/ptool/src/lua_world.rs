@@ -233,23 +233,23 @@ impl LuaWorld {
     }
 
     pub(crate) fn fs_read(&self, path: String) -> mlua::Result<String> {
-        crate::fs::read(path)
+        crate::fs::read(&self.engine, path)
     }
 
     pub(crate) fn fs_write(&self, path: String, content: String) -> mlua::Result<()> {
-        crate::fs::write(path, content)
+        crate::fs::write(&self.engine, path, content)
     }
 
     pub(crate) fn fs_mkdir(&self, path: String, options: Option<Table>) -> mlua::Result<()> {
-        crate::fs::mkdir(path, options)
+        crate::fs::mkdir(&self.engine, path, options)
     }
 
     pub(crate) fn fs_exists(&self, path: String) -> bool {
-        crate::fs::exists(path)
+        crate::fs::exists(&self.engine, path)
     }
 
     pub(crate) fn fs_copy(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
-        crate::fs::copy(lua, args)
+        crate::fs::copy(&self.engine, lua, args)
     }
 
     pub(crate) fn toml_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Table> {

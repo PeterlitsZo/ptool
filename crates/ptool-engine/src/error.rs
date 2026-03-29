@@ -1,12 +1,17 @@
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum ErrorKind {
     EmptyInput,
+    EmptyPath,
     InvalidUrl,
     InvalidIp,
     MissingPort,
     InvalidHost,
     InvalidPort,
     InvalidHostPort,
+    InvalidFsOption,
+    AlreadyExists,
+    NotAFile,
+    Io,
     Db,
 }
 

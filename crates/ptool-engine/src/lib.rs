@@ -1,6 +1,7 @@
 mod ansi;
 mod db;
 mod error;
+mod fs;
 mod hash;
 mod net;
 mod platform;
@@ -8,6 +9,7 @@ mod platform;
 pub use ansi::{Color, StyleOptions};
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
+pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
 use std::path::Path;
@@ -59,6 +61,31 @@ impl PtoolEngine {
 
     pub fn hash_md5_hex(&self, bytes: &[u8]) -> String {
         hash::md5_hex(bytes)
+    }
+
+    pub fn fs_read(&self, path: &str) -> Result<String> {
+        fs::read(path)
+    }
+
+    pub fn fs_write(&self, path: &str, content: &str) -> Result<()> {
+        fs::write(path, content)
+    }
+
+    pub fn fs_mkdir(&self, path: &str, options: FsMkdirOptions) -> Result<()> {
+        fs::mkdir(path, options)
+    }
+
+    pub fn fs_exists(&self, path: &str) -> bool {
+        fs::exists(path)
+    }
+
+    pub fn fs_copy_local(
+        &self,
+        src: &str,
+        dst: &str,
+        options: FsCopyOptions,
+    ) -> Result<FsCopyResult> {
+        fs::copy_local(src, dst, options)
     }
 
     pub fn parse_url(&self, input: &str) -> Result<UrlParts> {

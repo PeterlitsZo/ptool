@@ -1,87 +1,40 @@
 use mlua::{Lua, Table, Value, Variadic};
-use std::fs as stdfs;
+use ptool_engine::{
+    Error as EngineError, ErrorKind as EngineErrorKind, FsCopyOptions, FsMkdirOptions, PtoolEngine,
+};
 use std::path::Path;
 
 const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
 const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
 
-pub(crate) fn read(path: String) -> mlua::Result<String> {
-    stdfs::read_to_string(&path)
-        .map_err(|err| mlua::Error::runtime(format!("ptool.fs.read `{path}` failed: {err}")))
+pub(crate) fn read(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
+    engine
+        .fs_read(&path)
+        .map_err(|err| mlua::Error::runtime(format!("ptool.fs.read `{path}` failed: {}", err.msg)))
 }
 
-pub(crate) fn write(path: String, content: String) -> mlua::Result<()> {
-    stdfs::write(&path, content)
-        .map_err(|err| mlua::Error::runtime(format!("ptool.fs.write `{path}` failed: {err}")))
+pub(crate) fn write(engine: &PtoolEngine, path: String, content: String) -> mlua::Result<()> {
+    engine
+        .fs_write(&path, &content)
+        .map_err(|err| mlua::Error::runtime(format!("ptool.fs.write `{path}` failed: {}", err.msg)))
 }
 
-pub(crate) fn mkdir(path: String, options: Option<Table>) -> mlua::Result<()> {
-    let options = MkdirOptions::parse(options)?;
-    if !options.exist_ok && Path::new(&path).is_dir() {
-        return Err(mlua::Error::runtime(format!(
-            "{MKDIR_SIGNATURE} `{path}` already exists"
-        )));
-    }
-
-    stdfs::create_dir_all(&path)
-        .map_err(|err| mlua::Error::runtime(format!("{MKDIR_SIGNATURE} `{path}` failed: {err}")))
+pub(crate) fn mkdir(
+    engine: &PtoolEngine,
+    path: String,
+    options: Option<Table>,
+) -> mlua::Result<()> {
+    let options = parse_mkdir_options(options)?;
+    engine
+        .fs_mkdir(&path, options)
+        .map_err(|err| fs_mkdir_error(&path, err))
 }
 
-pub(crate) fn exists(path: String) -> bool {
-    Path::new(&path).exists()
+pub(crate) fn exists(engine: &PtoolEngine, path: String) -> bool {
+    engine.fs_exists(&path)
 }
 
-#[derive(Debug, Clone, Copy)]
-struct MkdirOptions {
-    exist_ok: bool,
-}
-
-impl Default for MkdirOptions {
-    fn default() -> Self {
-        Self { exist_ok: true }
-    }
-}
-
-impl MkdirOptions {
-    fn parse(options: Option<Table>) -> mlua::Result<Self> {
-        let mut parsed = Self::default();
-        let Some(options) = options else {
-            return Ok(parsed);
-        };
-
-        for pair in options.pairs::<Value, Value>() {
-            let (key, value) = pair?;
-            let key = match key {
-                Value::String(key) => key.to_str()?.to_string(),
-                _ => {
-                    return Err(mlua::Error::runtime(format!(
-                        "{MKDIR_SIGNATURE} option keys must be strings"
-                    )));
-                }
-            };
-
-            match key.as_str() {
-                "exist_ok" => match value {
-                    Value::Boolean(value) => parsed.exist_ok = value,
-                    _ => {
-                        return Err(mlua::Error::runtime(format!(
-                            "{MKDIR_SIGNATURE} `exist_ok` must be a boolean"
-                        )));
-                    }
-                },
-                _ => {
-                    return Err(mlua::Error::runtime(format!(
-                        "{MKDIR_SIGNATURE} unknown option `{key}`"
-                    )));
-                }
-            }
-        }
-
-        Ok(parsed)
-    }
-}
-
-pub(crate) fn copy(lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
+pub(crate) fn copy(engine: &PtoolEngine, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
     if !(2..=3).contains(&args.len()) {
         return Err(mlua::Error::runtime(format!(
             "{COPY_SIGNATURE} expects 2 or 3 arguments"
@@ -94,7 +47,19 @@ pub(crate) fn copy(lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
 
     let result = match (src, dst) {
         (CopyEndpoint::Local(src), CopyEndpoint::Local(dst)) => {
-            copy_local_to_local(&src, &dst, options)?
+            let options = FsCopyOptions {
+                parents: options.parents,
+                overwrite: options.overwrite,
+                echo: options.echo,
+            };
+            let result = engine
+                .fs_copy_local(&src, &dst, options)
+                .map_err(fs_copy_error)?;
+            crate::ssh::TransferResult {
+                bytes: result.bytes,
+                from: result.from,
+                to: result.to,
+            }
         }
         (CopyEndpoint::Local(src), CopyEndpoint::Remote(dst)) => {
             dst.connection()
@@ -137,58 +102,6 @@ fn parse_copy_endpoint(value: Value, field: &str) -> mlua::Result<CopyEndpoint> 
     }
 }
 
-fn copy_local_to_local(
-    src: &str,
-    dst: &str,
-    options: crate::ssh::TransferOptions,
-) -> mlua::Result<crate::ssh::TransferResult> {
-    let src_path = Path::new(src);
-    let metadata = stdfs::metadata(src_path).map_err(|err| {
-        mlua::Error::runtime(format!("{COPY_SIGNATURE} failed to access `{src}`: {err}"))
-    })?;
-    if !metadata.is_file() {
-        return Err(mlua::Error::runtime(format!(
-            "{COPY_SIGNATURE} `src` must be a file: `{src}`"
-        )));
-    }
-
-    let dst_path = Path::new(dst);
-    if options.parents
-        && let Some(parent) = dst_path
-            .parent()
-            .filter(|parent| !parent.as_os_str().is_empty())
-    {
-        stdfs::create_dir_all(parent).map_err(|err| {
-            mlua::Error::runtime(format!(
-                "{COPY_SIGNATURE} failed to create parent directory `{}`: {err}",
-                parent.display()
-            ))
-        })?;
-    }
-
-    if !options.overwrite && dst_path.exists() {
-        return Err(mlua::Error::runtime(format!(
-            "{COPY_SIGNATURE} `dst` already exists: `{dst}`"
-        )));
-    }
-
-    if options.echo {
-        println!("[copy] {src} -> {dst}");
-    }
-
-    let bytes = stdfs::copy(src_path, dst_path).map_err(|err| {
-        mlua::Error::runtime(format!(
-            "{COPY_SIGNATURE} failed to copy `{src}` to `{dst}`: {err}"
-        ))
-    })?;
-
-    Ok(crate::ssh::TransferResult {
-        bytes,
-        from: src.to_string(),
-        to: dst.to_string(),
-    })
-}
-
 fn ensure_non_empty_string(value: &str, field: &str) -> mlua::Result<()> {
     if value.is_empty() {
         return Err(mlua::Error::runtime(format!(
@@ -196,4 +109,54 @@ fn ensure_non_empty_string(value: &str, field: &str) -> mlua::Result<()> {
         )));
     }
     Ok(())
+}
+
+fn parse_mkdir_options(options: Option<Table>) -> mlua::Result<FsMkdirOptions> {
+    let mut parsed = FsMkdirOptions::default();
+    let Some(options) = options else {
+        return Ok(parsed);
+    };
+
+    for pair in options.pairs::<Value, Value>() {
+        let (key, value) = pair?;
+        let key = match key {
+            Value::String(key) => key.to_str()?.to_string(),
+            _ => {
+                return Err(mlua::Error::runtime(format!(
+                    "{MKDIR_SIGNATURE} option keys must be strings"
+                )));
+            }
+        };
+
+        match key.as_str() {
+            "exist_ok" => match value {
+                Value::Boolean(value) => parsed.exist_ok = value,
+                _ => {
+                    return Err(mlua::Error::runtime(format!(
+                        "{MKDIR_SIGNATURE} `exist_ok` must be a boolean"
+                    )));
+                }
+            },
+            _ => {
+                return Err(mlua::Error::runtime(format!(
+                    "{MKDIR_SIGNATURE} unknown option `{key}`"
+                )));
+            }
+        }
+    }
+
+    Ok(parsed)
+}
+
+fn fs_mkdir_error(path: &str, err: EngineError) -> mlua::Error {
+    match err.kind {
+        EngineErrorKind::AlreadyExists => {
+            mlua::Error::runtime(format!("{MKDIR_SIGNATURE} `{path}` already exists"))
+        }
+        _ => mlua::Error::runtime(format!("{MKDIR_SIGNATURE} `{path}` failed: {}", err.msg)),
+    }
+}
+
+fn fs_copy_error(err: EngineError) -> mlua::Error {
+    mlua::Error::runtime(format!("{COPY_SIGNATURE} {}", err.msg))
 }
