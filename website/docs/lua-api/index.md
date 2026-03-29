@@ -15,6 +15,7 @@
 
 - `ptool.semver`
 - `ptool.hash`
+- `ptool.net`
 - `ptool.ansi`
 - `ptool.http`
 - `ptool.db`

@@ -6,6 +6,7 @@ mod http;
 mod inspect;
 mod lua_api;
 mod lua_world;
+mod net;
 mod path;
 mod prompt;
 mod re;

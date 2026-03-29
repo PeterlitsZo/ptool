@@ -36,7 +36,7 @@ interpreter and injects a large set of utility functions (registered under the
   they are truly necessary.
 - If documentation needs to be changed, ask the user first and only modify it
   after confirming that a doc change is indeed needed.
-- Do not add tests unless the user explicitly requests them, to avoid test
+- DO NOT add unit tests unless the user explicitly requests them, to avoid test
   bloat.
 - When editing documentation, especially API version markers such as
   ``> `v0.x.y` - Introduced.``, always target the exact section with enough
@@ -56,7 +56,36 @@ interpreter and injects a large set of utility functions (registered under the
   confirm whether the revert is needed. If you determine that reverting is
   unnecessary, just ignore the changes.
 
-## Git Commit and Message Conventions
+## When You Need to Commit
+
+WHEN THE USER ASKS YOU TO COMMIT, you MUST follow this section.
+
+### Before Committing
+
+Before committing, you MUST:
+
+- Consider whether `CHANGELOG.md` needs an update and keep it concise. Prefer
+  adding only user-visible changes such as new features, behavioral changes,
+  compatibility-impacting fixes, or important bug fixes. Pure internal refactors
+  that do not affect functionality should generally not be added to
+  `CHANGELOG.md`. If you do update `CHANGELOG.md`, ask the user to confirm that
+  it looks correct, then add `CHANGELOG.md` to the staging area before
+  committing.
+- Consider whether the documentation needs an update. If you are unsure, ask the
+  user to confirm whether a doc update is needed. The documentations list are:
+
+  - `README.md`
+  - `website/docs/` (Docusaurus documentation content)
+
+### Tips
+
+- When the user asks you to commit, you MUST commit only the files that are
+  already staged and leave unstaged working tree files untouched.
+- If you want to run `git commit` command, you MUST ask the user to confirm. (If
+  the user ask you to commit, you still MUST ask the user to confirm before you
+  REALLY run the `git commit` command)
+
+### Git Commit Message
 
 Git commit messages use the following format:
 
@@ -73,15 +102,3 @@ important change (for example, if the project includes both a refactor and a
 documentation update, the subject should describe the refactor rather than the
 documentation update). End it with a English full stop. The first letter of the
 subject should be capitalized.
-
-When the user asks you to commit, you should commit only the files that are
-already staged and leave unstaged working tree files untouched.
-
-Before committing, consider whether `CHANGELOG.md` needs an update and keep it
-concise. Prefer adding only user-visible changes such as new features,
-behavioral changes, compatibility-impacting fixes, or important bug fixes.
-Pure internal refactors that do not affect functionality should generally not be
-added to `CHANGELOG.md`. If you do update `CHANGELOG.md`, ask the user to
-confirm that it looks correct, then add `CHANGELOG.md` to the staging area
-before committing. You may also check whether documentation changes are needed
-(the `website/docs/` directory) and update them together if necessary.

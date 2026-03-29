@@ -201,6 +201,18 @@ impl LuaWorld {
         crate::http::request(options)
     }
 
+    pub(crate) fn net_parse_url(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
+        crate::net::parse_url(lua, &self.engine, input)
+    }
+
+    pub(crate) fn net_parse_ip(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
+        crate::net::parse_ip(lua, &self.engine, input)
+    }
+
+    pub(crate) fn net_parse_host_port(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
+        crate::net::parse_host_port(lua, &self.engine, input)
+    }
+
     pub(crate) fn hash_sha256(&self, input: LuaString) -> String {
         self.engine.hash_sha256_hex(&input.as_bytes())
     }

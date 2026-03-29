@@ -2475,6 +2475,7 @@ dependencies = [
  "owo-colors",
  "sha1 0.11.0",
  "sha2 0.11.0",
+ "url",
 ]
 
 [[package]]

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Added
+
+- Added the `ptool.net` module with `parse_url`, `parse_ip`, and
+  `parse_host_port` helpers for parsing network identifiers in Lua scripts.
+
 ## v0.2.0-alpha.1 (2026-03-28)
 
 ### Added

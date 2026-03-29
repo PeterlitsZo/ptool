@@ -53,6 +53,7 @@ fn create_ptool_module(
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
     let hash_module = create_ptool_hash_module(lua, Rc::clone(&world))?;
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
+    let net_module = create_ptool_net_module(lua, Rc::clone(&world))?;
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
@@ -76,6 +77,7 @@ fn create_ptool_module(
     module.set("sh", shell_module)?;
     module.set("hash", hash_module)?;
     module.set("http", http_module)?;
+    module.set("net", net_module)?;
     module.set("db", db_module)?;
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
@@ -164,6 +166,25 @@ fn create_ptool_http_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
         lua.create_function(move |_, options: Table| world.borrow().http_request(options))?;
     http_module.set("request", request_fn)?;
     Ok(http_module)
+}
+
+fn create_ptool_net_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let net_module = lua.create_table()?;
+    let parse_url_state = Rc::clone(&world);
+    let parse_url_fn = lua.create_function(move |lua, input: String| {
+        parse_url_state.borrow().net_parse_url(lua, input)
+    })?;
+    let parse_ip_state = Rc::clone(&world);
+    let parse_ip_fn = lua.create_function(move |lua, input: String| {
+        parse_ip_state.borrow().net_parse_ip(lua, input)
+    })?;
+    let parse_host_port_fn = lua.create_function(move |lua, input: String| {
+        world.borrow().net_parse_host_port(lua, input)
+    })?;
+    net_module.set("parse_url", parse_url_fn)?;
+    net_module.set("parse_ip", parse_ip_fn)?;
+    net_module.set("parse_host_port", parse_host_port_fn)?;
+    Ok(net_module)
 }
 
 fn create_ptool_hash_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

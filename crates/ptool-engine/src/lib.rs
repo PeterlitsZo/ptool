@@ -1,8 +1,12 @@
 mod ansi;
+mod error;
 mod hash;
+mod net;
 mod platform;
 
 pub use ansi::{Color, StyleOptions};
+pub use error::{Error, ErrorKind, Result};
+pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
 
 #[derive(Debug, Default)]
@@ -35,5 +39,17 @@ impl PtoolEngine {
 
     pub fn hash_md5_hex(&self, bytes: &[u8]) -> String {
         hash::md5_hex(bytes)
+    }
+
+    pub fn parse_url(&self, input: &str) -> Result<UrlParts> {
+        net::parse_url(input)
+    }
+
+    pub fn parse_ip(&self, input: &str) -> Result<IpParts> {
+        net::parse_ip(input)
+    }
+
+    pub fn parse_host_port(&self, input: &str) -> Result<HostPortParts> {
+        net::parse_host_port(input)
     }
 }
