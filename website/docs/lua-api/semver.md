@@ -1,0 +1,98 @@
+# SemVer API
+
+Version parsing, validation, comparison, and bumping helpers live under `ptool.semver` and `p.semver`.
+
+## ptool.semver.parse
+
+> `v0.1.0` - Introduced.
+
+`ptool.semver.parse(version)` parses a version string and returns a `Version`
+UserData.
+
+- `version` (string, required): A semantic version string, optionally prefixed
+  with `v`.
+
+```lua
+local v = ptool.semver.parse("v1.2.3-alpha.1+build.9")
+print(v.major, v.minor, v.patch)
+print(v.pre, v.build)
+print(tostring(v))
+```
+
+## ptool.semver.is_valid
+
+> `v0.1.0` - Introduced.
+
+`ptool.semver.is_valid(version)` checks whether a version string is valid.
+
+- `version` (string, required): A semantic version string.
+- Returns: `boolean`.
+
+```lua
+print(ptool.semver.is_valid("1.2.3")) -- true
+print(ptool.semver.is_valid("x.y.z")) -- false
+```
+
+## ptool.semver.compare
+
+> `v0.1.0` - Introduced.
+
+`ptool.semver.compare(a, b)` compares two versions.
+
+- `a` / `b` (string|Version, required): A version string or a `Version` object.
+- Returns: `-1 | 0 | 1`.
+
+```lua
+print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
+```
+
+## ptool.semver.bump
+
+> `v0.1.0` - Introduced.
+
+`ptool.semver.bump(v, op)` returns a new version object after applying the bump.
+
+- `v` (string|Version, required): The original version.
+- `op` (string, required): One of `major`, `minor`, `patch`, `release`,
+  `alpha`, `beta`, or `rc`.
+- Returns: `Version`.
+
+```lua
+local v = ptool.semver.bump("1.2.3", "alpha")
+print(tostring(v)) -- 1.2.4-alpha.1
+
+local stable = ptool.semver.bump("1.2.4-rc.2", "release")
+print(tostring(stable)) -- 1.2.4
+```
+
+## ptool.semver.Version
+
+> `v0.1.0` - Introduced.
+
+`ptool.semver.parse(...)` and `ptool.semver.bump(...)` return a `Version`
+UserData with the following fields and methods:
+
+- Fields:
+  - `major` (integer)
+  - `minor` (integer)
+  - `patch` (integer)
+  - `pre` (string|nil)
+  - `build` (string|nil)
+- Methods:
+  - `v:compare(other)` -> `-1|0|1`
+  - `v:bump(op)` -> `Version`
+  - `v:to_string()` -> `string`
+- Metamethods:
+  - `tostring(v)` is available.
+  - `==`, `<`, and `<=` comparisons are supported.
+
+Prerelease bump rules:
+
+- Bumping a stable version to `alpha`, `beta`, or `rc` first increments the
+  patch version, then enters the target channel starting from `.1`.
+- Bumping within the same channel increments the sequence number, such as
+  `alpha.1 -> alpha.2`.
+- `release` removes prerelease and build metadata while keeping the same
+  `major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`.
+- Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade is
+  not (for example, `rc -> beta` raises an error).

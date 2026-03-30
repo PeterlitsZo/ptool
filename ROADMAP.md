@@ -21,6 +21,7 @@
 - [ ] Better error handling.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
+- [ ] Let the SSH connection support upload directories.
 
 # v0.2.0
 
@@ -38,7 +39,7 @@
 - [x] Support to calculate the SHA256, etc.
 - [x] Support to parse URL, IP, IP + port, etc.
 - [x] Support `p.fs.glob`, etc.
-- [ ] Make `p.ssh`'s connection support `:exists`, `:is_file`, `:is_dir`, etc.
+- [x] Make `p.ssh`'s connection support `:exists`, `:is_file`, `:is_dir`, etc.
 
 # v0.1.0
 

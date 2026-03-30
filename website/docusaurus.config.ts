@@ -77,8 +77,8 @@ const config: Config = {
           title: 'Reference',
           items: [
             {
-              label: 'Lua API',
-              to: '/docs/lua-api/reference',
+              label: 'Lua API Overview',
+              to: '/docs/lua-api',
             },
             {
               label: 'Changelog',

@@ -29,6 +29,7 @@ ptool.run("echo", {"hello", "world"})
 ## Start here
 
 - Read [Getting Started](./getting-started.md) for the basic scripting flow.
-- Use [Lua API Overview](./lua-api/index.md) to see the available modules.
-- Use [Lua API Reference](./lua-api/reference.md) when you need the full
-  function reference.
+- Use [Lua API Overview](./lua-api/index.md) to browse the core APIs and
+  available modules.
+- Jump to [Core Lua API](./lua-api/core.md) or a module page such as
+  [Args API](./lua-api/args.md) when you need the detailed function reference.

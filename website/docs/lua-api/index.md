@@ -2,37 +2,28 @@
 
 `ptool` exposes a broad set of helpers through `ptool` and `p`.
 
-## Core entrypoints
+## Core APIs
 
-- `ptool.use`
-- `ptool.run`
-- `ptool.run_capture`
-- `ptool.ask`
-- `ptool.config`
-- `ptool.cd`
+- [Core Lua API](./core.md)
+- [Args API](./args.md)
 
 ## Modules
 
-- `ptool.semver`
-- `ptool.hash`
-- `ptool.net`
-- `ptool.ansi`
-- `ptool.http`
-- `ptool.db`
-- `ptool.ssh`
-- `ptool.platform`
-- `ptool.path`
-- `ptool.toml`
-- `ptool.re`
-- `ptool.str`
-- `ptool.fs`
-- `ptool.sh`
-- `ptool.template`
-- `ptool.args`
+- [SemVer API](./semver.md)
+- [Hash API](./hash.md)
+- [Network API](./net.md)
+- [Platform API](./platform.md)
+- [ANSI API](./ansi.md)
+- [HTTP API](./http.md)
+- [Database API](./db.md)
+- [SSH API](./ssh.md)
+- [Path API](./path.md)
+- [TOML API](./toml.md)
+- [Regex API](./re.md)
+- [String API](./str.md)
+- [Filesystem API](./fs.md)
+- [Shell API](./sh.md)
+- [Template API](./template.md)
 
-## Reference
-
-The current site keeps the API reference in one page while the content is being
-restructured into smaller module pages.
-
-- [Open the full Lua API Reference](./reference.md)
+Use this page as the entrypoint, then jump to the module page you need for the
+full function reference.

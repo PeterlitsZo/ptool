@@ -58,7 +58,7 @@ function HomepageHeader(): ReactNode {
                 'button button--lg button--outline button--secondary',
                 styles.secondaryButton,
               )}
-              to="/docs/lua-api/reference">
+              to="/docs/lua-api">
               Lua API
             </Link>
           </div>
@@ -69,8 +69,8 @@ function HomepageHeader(): ReactNode {
             <code>{script}</code>
           </pre>
           <p className={styles.panelNote}>
-            Start with the guide, then use the full API reference as your
-            scripting manual.
+            Start with the guide, then jump into the module-based Lua API docs
+            as your scripting manual.
           </p>
         </div>
       </div>

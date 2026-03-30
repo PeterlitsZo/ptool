@@ -39,5 +39,5 @@ This lets you execute the script directly once it has the executable bit.
 
 ## Next steps
 
-- For an overview of the available modules, see [Lua API Overview](./lua-api/index.md).
-- For the full API details, see [Lua API Reference](./lua-api/reference.md).
+- For an overview of the core APIs and available modules, see [Lua API Overview](./lua-api/index.md).
+- For detailed API docs, open [Core Lua API](./lua-api/core.md) or the module page you need, such as [Args API](./lua-api/args.md).
