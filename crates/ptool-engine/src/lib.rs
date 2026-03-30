@@ -5,6 +5,7 @@ mod fs;
 mod hash;
 mod net;
 mod platform;
+mod ssh;
 
 pub use ansi::{Color, StyleOptions};
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
@@ -12,6 +13,10 @@ pub use error::{Error, ErrorKind, Result};
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
+pub use ssh::{
+    SshAuthRequest, SshConnectRequest, SshConnection, SshConnectionInfo, SshExecOptions,
+    SshExecResult, SshHostKeyRequest, SshStreamMode, SshTransferOptions, SshTransferResult,
+};
 use std::path::Path;
 use std::sync::Arc;
 use tokio::runtime::{Builder, Runtime};
@@ -102,5 +107,13 @@ impl PtoolEngine {
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {
         db::connect(Arc::clone(&self.runtime), url, current_dir)
+    }
+
+    pub fn ssh_connect(
+        &self,
+        request: SshConnectRequest,
+        current_dir: &Path,
+    ) -> Result<SshConnection> {
+        ssh::connect(Arc::clone(&self.runtime), request, current_dir)
     }
 }

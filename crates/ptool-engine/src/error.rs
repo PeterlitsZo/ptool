@@ -13,6 +13,7 @@ pub enum ErrorKind {
     NotAFile,
     Io,
     Db,
+    Ssh,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

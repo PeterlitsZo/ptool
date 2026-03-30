@@ -1,8 +1,6 @@
 use mlua::{Lua, String as LuaString, Table, Value, Variadic};
 use ptool_engine::PtoolEngine;
 use std::path::{Path, PathBuf};
-use std::rc::Rc;
-use tokio::runtime::Runtime;
 
 #[derive(Clone, Copy, Debug)]
 pub struct RunConfig {
@@ -32,19 +30,14 @@ pub struct LuaWorldConfig {
 pub struct LuaWorld {
     current_dir: PathBuf,
     config: LuaWorldConfig,
-    runtime: Rc<Runtime>,
     engine: PtoolEngine,
 }
 
 impl LuaWorld {
     pub fn new() -> std::io::Result<Self> {
-        let runtime = tokio::runtime::Builder::new_current_thread()
-            .enable_all()
-            .build()?;
         Ok(Self {
             current_dir: std::env::current_dir()?,
             config: LuaWorldConfig::default(),
-            runtime: Rc::new(runtime),
             engine: PtoolEngine::new(),
         })
     }
@@ -229,7 +222,7 @@ impl LuaWorld {
     }
 
     pub(crate) fn ssh_connect(&self, value: Value) -> mlua::Result<crate::ssh::LuaSshConnection> {
-        crate::ssh::connect(value, self.current_dir(), Rc::clone(&self.runtime))
+        crate::ssh::connect(value, self.current_dir(), &self.engine)
     }
 
     pub(crate) fn fs_read(&self, path: String) -> mlua::Result<String> {
