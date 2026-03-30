@@ -11,9 +11,15 @@ const CONNECT_SIGNATURE: &str = "ptool.ssh.connect(target_or_options)";
 const RUN_SIGNATURE: &str = "ptool.ssh.Connection:run(...)";
 const CLOSE_SIGNATURE: &str = "ptool.ssh.Connection:close()";
 const PATH_SIGNATURE: &str = "ptool.ssh.Connection:path(path)";
+const EXISTS_SIGNATURE: &str = "ptool.ssh.Connection:exists(path)";
+const IS_FILE_SIGNATURE: &str = "ptool.ssh.Connection:is_file(path)";
+const IS_DIR_SIGNATURE: &str = "ptool.ssh.Connection:is_dir(path)";
 const UPLOAD_SIGNATURE: &str = "ptool.ssh.Connection:upload(local_path, remote_path[, options])";
 const DOWNLOAD_SIGNATURE: &str =
     "ptool.ssh.Connection:download(remote_path, local_path[, options])";
+const REMOTE_PATH_EXISTS_SIGNATURE: &str = "ptool.ssh.RemotePath:exists()";
+const REMOTE_PATH_IS_FILE_SIGNATURE: &str = "ptool.ssh.RemotePath:is_file()";
+const REMOTE_PATH_IS_DIR_SIGNATURE: &str = "ptool.ssh.RemotePath:is_dir()";
 
 pub(crate) type TransferOptions = SshTransferOptions;
 pub(crate) type TransferResult = SshTransferResult;
@@ -54,6 +60,9 @@ impl UserData for LuaSshConnection {
             this.run(lua, args)
         });
         methods.add_method("path", |_, this, path: String| this.path(path));
+        methods.add_method("exists", |_, this, value: Value| this.exists(value));
+        methods.add_method("is_file", |_, this, value: Value| this.is_file(value));
+        methods.add_method("is_dir", |_, this, value: Value| this.is_dir(value));
         methods.add_method("upload", |lua, this, args: Variadic<Value>| {
             this.upload(lua, args)
         });
@@ -71,6 +80,12 @@ impl UserData for LuaSshPath {
         fields.add_field_method_get("port", |_, this| Ok(i64::from(this.connection.info().port)));
         fields.add_field_method_get("target", |_, this| Ok(this.connection.info().target));
         fields.add_field_method_get("path", |_, this| Ok(this.path.clone()));
+    }
+
+    fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
+        methods.add_method("exists", |_, this, ()| this.exists());
+        methods.add_method("is_file", |_, this, ()| this.is_file());
+        methods.add_method("is_dir", |_, this, ()| this.is_dir());
     }
 }
 
@@ -98,6 +113,27 @@ impl LuaSshConnection {
             connection: self.clone(),
             path,
         })
+    }
+
+    fn exists(&self, value: Value) -> mlua::Result<bool> {
+        let path = parse_connection_remote_path_arg(self, value, EXISTS_SIGNATURE, "path")?;
+        self.connection
+            .exists(&path)
+            .map_err(|err| ssh_error(EXISTS_SIGNATURE, err))
+    }
+
+    fn is_file(&self, value: Value) -> mlua::Result<bool> {
+        let path = parse_connection_remote_path_arg(self, value, IS_FILE_SIGNATURE, "path")?;
+        self.connection
+            .is_file(&path)
+            .map_err(|err| ssh_error(IS_FILE_SIGNATURE, err))
+    }
+
+    fn is_dir(&self, value: Value) -> mlua::Result<bool> {
+        let path = parse_connection_remote_path_arg(self, value, IS_DIR_SIGNATURE, "path")?;
+        self.connection
+            .is_dir(&path)
+            .map_err(|err| ssh_error(IS_DIR_SIGNATURE, err))
     }
 
     fn upload(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
@@ -152,6 +188,27 @@ impl LuaSshPath {
 
     fn matches_connection(&self, connection: &LuaSshConnection) -> bool {
         self.connection.matches_connection(connection)
+    }
+
+    fn exists(&self) -> mlua::Result<bool> {
+        self.connection
+            .connection
+            .exists(self.path())
+            .map_err(|err| ssh_error(REMOTE_PATH_EXISTS_SIGNATURE, err))
+    }
+
+    fn is_file(&self) -> mlua::Result<bool> {
+        self.connection
+            .connection
+            .is_file(self.path())
+            .map_err(|err| ssh_error(REMOTE_PATH_IS_FILE_SIGNATURE, err))
+    }
+
+    fn is_dir(&self) -> mlua::Result<bool> {
+        self.connection
+            .connection
+            .is_dir(self.path())
+            .map_err(|err| ssh_error(REMOTE_PATH_IS_DIR_SIGNATURE, err))
     }
 }
 

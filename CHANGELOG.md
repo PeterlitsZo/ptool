@@ -13,6 +13,9 @@
   scripts, with support for recursive `**` matches, `ptool.cd(...)`-relative
   pattern resolution, stable sorted results, and shell-style hidden-file
   matching.
+- Added remote path predicate helpers to `ptool.ssh`, including
+  `Connection:exists`, `Connection:is_file`, `Connection:is_dir`, and matching
+  methods on reusable `conn:path(...)` remote path values.
 
 ## v0.2.0-alpha.1 (2026-03-28)
 

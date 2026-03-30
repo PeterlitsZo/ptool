@@ -374,6 +374,40 @@ impl SshConnection {
         })
     }
 
+    pub fn exists(&self, remote_path: &str) -> Result<bool> {
+        self.check_remote_path("exists", remote_path, "-e")
+    }
+
+    pub fn is_file(&self, remote_path: &str) -> Result<bool> {
+        self.check_remote_path("is_file", remote_path, "-f")
+    }
+
+    pub fn is_dir(&self, remote_path: &str) -> Result<bool> {
+        self.check_remote_path("is_dir", remote_path, "-d")
+    }
+
+    fn check_remote_path(
+        &self,
+        operation: &str,
+        remote_path: &str,
+        test_flag: &str,
+    ) -> Result<bool> {
+        ensure_non_empty_string(remote_path, "remote_path")?;
+
+        let command = build_remote_path_test_command(remote_path, test_flag)?;
+        let code = self.exec_binary_status(command.as_str())?;
+        match code {
+            Some(0) => Ok(true),
+            Some(1) => Ok(false),
+            _ => Err(build_remote_path_test_failed_error(
+                &self.info().target,
+                operation,
+                remote_path,
+                code,
+            )),
+        }
+    }
+
     fn exec_binary(
         &self,
         command: &str,
@@ -448,6 +482,42 @@ impl SshConnection {
             }
 
             Ok(result)
+        })
+    }
+
+    fn exec_binary_status(&self, command: &str) -> Result<Option<i64>> {
+        let mut state = self.state.borrow_mut();
+        let session = state
+            .session
+            .as_mut()
+            .ok_or_else(|| ssh_error("cannot use a closed connection"))?;
+
+        let command = command.to_string();
+        self.runtime.block_on(async {
+            let mut channel = session.channel_open_session().await.map_err(|err| {
+                ssh_error(format!(
+                    "failed to open session channel for `{command}`: {err}"
+                ))
+            })?;
+            channel
+                .exec(true, command.as_bytes())
+                .await
+                .map_err(|err| {
+                    ssh_error(format!(
+                        "failed to execute remote command `{command}`: {err}"
+                    ))
+                })?;
+
+            let mut code = None;
+            while let Some(msg) = channel.wait().await {
+                match msg {
+                    ChannelMsg::ExitStatus { exit_status } => code = Some(i64::from(exit_status)),
+                    ChannelMsg::ExitSignal { .. } => code = None,
+                    _ => {}
+                }
+            }
+
+            Ok(code)
         })
     }
 }
@@ -863,6 +933,13 @@ fn build_download_command(remote_path: &str) -> Result<String> {
     Ok(format!("cat {}", shell_quote(remote_path, "remote_path")?))
 }
 
+fn build_remote_path_test_command(remote_path: &str, test_flag: &str) -> Result<String> {
+    Ok(format!(
+        "test {test_flag} {}",
+        shell_quote(remote_path, "remote_path")?
+    ))
+}
+
 fn shell_quote(value: &str, field: &str) -> Result<String> {
     try_quote(value)
         .map(|value| value.into_owned())
@@ -965,6 +1042,19 @@ fn build_binary_exec_failed_error(
     let stderr = String::from_utf8_lossy(stderr);
     if !stderr.trim().is_empty() {
         message.push_str(&format!(": {}", stderr.trim_end()));
+    }
+    ssh_error(message)
+}
+
+fn build_remote_path_test_failed_error(
+    target: &str,
+    operation: &str,
+    remote_path: &str,
+    code: Option<i64>,
+) -> Error {
+    let mut message = format!("failed to {operation} remote path `{remote_path}` on `{target}`");
+    if let Some(code) = code {
+        message.push_str(&format!(" with status {code}"));
     }
     ssh_error(message)
 }
