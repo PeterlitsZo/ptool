@@ -24,7 +24,7 @@
 
 # v0.2.0
 
-- [ ] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime,
+- [x] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime,
       and move some core logic from `ptool` into `ptool-engine`.
 - [x] Support a document website.
 - [ ] ~~Support `ptool.map`, etc. for FP-style operations on tables.~~
@@ -37,7 +37,7 @@
 - [x] Add a `ptool.run_capture` as a shortcut.
 - [x] Support to calculate the SHA256, etc.
 - [x] Support to parse URL, IP, IP + port, etc.
-- [ ] Support `p.fs.glob`, etc.
+- [x] Support `p.fs.glob`, etc.
 - [ ] Make `p.ssh`'s connection support `:exists`, `:is_file`, `:is_dir`, etc.
 
 # v0.1.0

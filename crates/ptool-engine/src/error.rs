@@ -2,6 +2,7 @@
 pub enum ErrorKind {
     EmptyInput,
     EmptyPath,
+    InvalidGlob,
     InvalidUrl,
     InvalidIp,
     MissingPort,

@@ -241,6 +241,10 @@ impl LuaWorld {
         crate::fs::exists(&self.engine, path)
     }
 
+    pub(crate) fn fs_glob(&self, lua: &Lua, pattern: String) -> mlua::Result<Table> {
+        crate::fs::glob(&self.engine, self.current_dir(), lua, pattern)
+    }
+
     pub(crate) fn fs_copy(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
         crate::fs::copy(&self.engine, lua, args)
     }

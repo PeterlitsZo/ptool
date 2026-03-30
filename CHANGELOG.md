@@ -9,6 +9,10 @@
 - Added engine-backed database connection support in `ptool-engine` via
   `PtoolEngine::db_connect`, with a public `DbConnection` type for shared DB
   operations outside the Lua integration layer.
+- Added `ptool.fs.glob(pattern)` for Unix-style filesystem globbing in Lua
+  scripts, with support for recursive `**` matches, `ptool.cd(...)`-relative
+  pattern resolution, stable sorted results, and shell-style hidden-file
+  matching.
 
 ## v0.2.0-alpha.1 (2026-03-28)
 

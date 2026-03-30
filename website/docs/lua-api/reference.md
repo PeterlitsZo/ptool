@@ -1928,6 +1928,25 @@ if ptool.fs.exists("tmp/hello.txt") then
 end
 ```
 
+## ptool.fs.glob
+
+> `v0.2.0` - Introduced.
+
+`ptool.fs.glob(pattern)` matches filesystem paths using Unix-style glob syntax
+and returns a string array of matched paths sorted lexicographically.
+
+- `pattern` (string, required): A glob pattern. Relative patterns are resolved
+  from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
+- Hidden files and directories are matched only when the corresponding pattern
+  component explicitly starts with `.`.
+
+```lua
+ptool.cd("src")
+
+local rust_files = ptool.fs.glob("**/*.rs")
+local hidden = ptool.fs.glob("**/.secret/*.txt")
+```
+
 ## ptool.sh.split
 
 > `v0.1.0` - Introduced.

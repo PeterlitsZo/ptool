@@ -5,6 +5,7 @@ use ptool_engine::{
 use std::path::Path;
 
 const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
+const GLOB_SIGNATURE: &str = "ptool.fs.glob(pattern)";
 const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
 
 pub(crate) fn read(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
@@ -32,6 +33,18 @@ pub(crate) fn mkdir(
 
 pub(crate) fn exists(engine: &PtoolEngine, path: String) -> bool {
     engine.fs_exists(&path)
+}
+
+pub(crate) fn glob(
+    engine: &PtoolEngine,
+    base_dir: &Path,
+    lua: &Lua,
+    pattern: String,
+) -> mlua::Result<Table> {
+    let matches = engine.fs_glob(&pattern, base_dir).map_err(|err| {
+        mlua::Error::runtime(format!("{GLOB_SIGNATURE} `{pattern}` failed: {}", err.msg))
+    })?;
+    lua.create_sequence_from(matches)
 }
 
 pub(crate) fn copy(engine: &PtoolEngine, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {

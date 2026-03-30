@@ -84,6 +84,10 @@ impl PtoolEngine {
         fs::exists(path)
     }
 
+    pub fn fs_glob(&self, pattern: &str, base_dir: &Path) -> Result<Vec<String>> {
+        fs::glob(pattern, base_dir)
+    }
+
     pub fn fs_copy_local(
         &self,
         src: &str,
