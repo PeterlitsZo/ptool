@@ -2295,7 +2295,32 @@ dependencies = [
 ]
 
 [[package]]
-name = "ptool"
+name = "ptool-cli"
+version = "0.2.0"
+dependencies = [
+ "clap_lex",
+ "indoc",
+ "ptool-lua",
+]
+
+[[package]]
+name = "ptool-engine"
+version = "0.2.0"
+dependencies = [
+ "glob",
+ "md5 0.8.0",
+ "owo-colors",
+ "russh",
+ "sha1 0.11.0",
+ "sha2 0.11.0",
+ "shlex",
+ "sqlx",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "ptool-lua"
 version = "0.2.0"
 dependencies = [
  "clap",
@@ -2314,31 +2339,6 @@ dependencies = [
  "shlex",
  "toml",
  "toml_edit",
-]
-
-[[package]]
-name = "ptool-cli"
-version = "0.2.0"
-dependencies = [
- "clap_lex",
- "indoc",
- "ptool",
-]
-
-[[package]]
-name = "ptool-engine"
-version = "0.2.0"
-dependencies = [
- "glob",
- "md5 0.8.0",
- "owo-colors",
- "russh",
- "sha1 0.11.0",
- "sha2 0.11.0",
- "shlex",
- "sqlx",
- "tokio",
- "url",
 ]
 
 [[package]]

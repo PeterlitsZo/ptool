@@ -10,4 +10,4 @@ path = "src/main.rs"
 [dependencies]
 clap_lex = "1.1.0"
 indoc = "2.0.7"
-ptool = { path = "../ptool" }
+ptool-lua = { path = "../ptool-lua" }
