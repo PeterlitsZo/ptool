@@ -101,6 +101,7 @@ Fields and methods:
   - `conn.target` (string)
 - Methods:
   - `conn:run(...)` -> `table`
+  - `conn:run_capture(...)` -> `table`
   - `conn:path(path)` -> `RemotePath`
   - `conn:exists(path)` -> `boolean`
   - `conn:is_file(path)` -> `boolean`
@@ -211,6 +212,47 @@ local res2 = ssh:run({
 })
 
 print(res2.stdout)
+```
+
+### run_capture
+
+> `Unreleased` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:run_capture`.
+
+`conn:run_capture(...)` executes a remote command through the current SSH
+connection.
+
+It accepts the same call forms, argument rules, return value rules, and options
+as `conn:run(...)`.
+
+The difference is only the default stream handling:
+
+- `stdout` defaults to `"capture"`.
+- `stderr` defaults to `"capture"`.
+
+You can still override either field explicitly in `options`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ssh:run_capture("uname -a")
+print(res.stdout)
+
+local res2 = ssh:run_capture({
+  cmd = "sh",
+  args = {"-c", "printf 'out'; printf 'err' >&2"},
+  cwd = "/srv/app",
+})
+print(res2.stdout)
+print(res2.stderr)
+
+local res3 = ssh:run_capture("echo hello", {
+  stderr = "inherit",
+})
+print(res3.stdout)
 ```
 
 ### path

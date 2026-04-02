@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+
+- Added `ptool.ssh.Connection:run_capture`, which mirrors
+  `Connection:run(...)` while defaulting both `stdout` and `stderr` to
+  captured output, and documented the new SSH Lua API.
+
 ### Changed
 
 - Expanded platform detection, Lua `ptool.platform` arch reporting, release

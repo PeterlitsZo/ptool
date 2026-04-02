@@ -9,6 +9,7 @@ use std::path::Path;
 
 const CONNECT_SIGNATURE: &str = "ptool.ssh.connect(target_or_options)";
 const RUN_SIGNATURE: &str = "ptool.ssh.Connection:run(...)";
+const RUN_CAPTURE_SIGNATURE: &str = "ptool.ssh.Connection:run_capture(...)";
 const CLOSE_SIGNATURE: &str = "ptool.ssh.Connection:close()";
 const PATH_SIGNATURE: &str = "ptool.ssh.Connection:path(path)";
 const EXISTS_SIGNATURE: &str = "ptool.ssh.Connection:exists(path)";
@@ -23,6 +24,22 @@ const REMOTE_PATH_IS_DIR_SIGNATURE: &str = "ptool.ssh.RemotePath:is_dir()";
 
 pub(crate) type TransferOptions = SshTransferOptions;
 pub(crate) type TransferResult = SshTransferResult;
+
+#[derive(Clone, Copy)]
+struct ExecStreamDefaults {
+    stdout: SshStreamMode,
+    stderr: SshStreamMode,
+}
+
+const RUN_STREAM_DEFAULTS: ExecStreamDefaults = ExecStreamDefaults {
+    stdout: SshStreamMode::Inherit,
+    stderr: SshStreamMode::Inherit,
+};
+
+const RUN_CAPTURE_STREAM_DEFAULTS: ExecStreamDefaults = ExecStreamDefaults {
+    stdout: SshStreamMode::Capture,
+    stderr: SshStreamMode::Capture,
+};
 
 #[derive(Clone)]
 pub(crate) struct LuaSshConnection {
@@ -58,6 +75,9 @@ impl UserData for LuaSshConnection {
     fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
         methods.add_method("run", |lua, this, args: Variadic<Value>| {
             this.run(lua, args)
+        });
+        methods.add_method("run_capture", |lua, this, args: Variadic<Value>| {
+            this.run_capture(lua, args)
         });
         methods.add_method("path", |_, this, path: String| this.path(path));
         methods.add_method("exists", |_, this, value: Value| this.exists(value));
@@ -104,6 +124,15 @@ impl LuaSshConnection {
             .connection
             .run(options)
             .map_err(|err| ssh_error(RUN_SIGNATURE, err))?;
+        build_exec_result(lua, result, self.info().target)
+    }
+
+    fn run_capture(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
+        let options = parse_run_capture_call(args)?;
+        let result = self
+            .connection
+            .run(options)
+            .map_err(|err| ssh_error(RUN_CAPTURE_SIGNATURE, err))?;
         build_exec_result(lua, result, self.info().target)
     }
 
@@ -425,47 +454,68 @@ pub(crate) fn build_transfer_result(lua: &Lua, result: TransferResult) -> mlua::
 }
 
 fn parse_run_call(args: Variadic<Value>) -> mlua::Result<SshExecOptions> {
+    parse_run_call_with_defaults(args, RUN_SIGNATURE, RUN_STREAM_DEFAULTS)
+}
+
+fn parse_run_capture_call(args: Variadic<Value>) -> mlua::Result<SshExecOptions> {
+    parse_run_call_with_defaults(args, RUN_CAPTURE_SIGNATURE, RUN_CAPTURE_STREAM_DEFAULTS)
+}
+
+fn parse_run_call_with_defaults(
+    args: Variadic<Value>,
+    context: &str,
+    stream_defaults: ExecStreamDefaults,
+) -> mlua::Result<SshExecOptions> {
     match args.len() {
         0 => Err(mlua::Error::runtime(format!(
-            "{RUN_SIGNATURE} requires arguments"
+            "{context} requires arguments"
         ))),
         1 => match args.first() {
             Some(Value::String(command)) => Ok(SshExecOptions {
                 command: command.to_str()?.to_string(),
                 stdin: None,
                 echo: false,
-                stdout: SshStreamMode::Inherit,
-                stderr: SshStreamMode::Inherit,
+                stdout: stream_defaults.stdout,
+                stderr: stream_defaults.stderr,
                 check: false,
             }),
-            Some(Value::Table(options)) => parse_run_options_table(options.clone()),
+            Some(Value::Table(options)) => {
+                parse_run_options_table(options.clone(), context, stream_defaults)
+            }
             _ => Err(mlua::Error::runtime(format!(
-                "{RUN_SIGNATURE} expects a command string or an options table"
+                "{context} expects a command string or an options table"
             ))),
         },
         2 => match (args.first(), args.get(1)) {
             (Some(Value::String(command_or_cmdline)), Some(Value::Table(second))) => {
-                if looks_like_array_table(second)? {
+                if looks_like_array_table(second, context)? {
                     build_exec_options_from_parts(
                         command_or_cmdline.to_str()?.to_string(),
                         parse_string_list(second)?,
                         None,
+                        context,
+                        stream_defaults,
                     )
                 } else {
-                    let options = parse_exec_overrides(second.clone(), RUN_SIGNATURE)?;
+                    let options = parse_exec_overrides(second.clone(), context)?;
                     build_exec_options_from_cmdline(
                         command_or_cmdline.to_str()?.to_string(),
                         options,
+                        stream_defaults,
                     )
                 }
             }
             (Some(Value::String(command)), Some(Value::String(argsline))) => {
-                let args = parse_argsline(&argsline.to_str()?)?;
-                build_exec_options_from_parts(command.to_str()?.to_string(), args, None)
+                let args = parse_argsline(&argsline.to_str()?, context)?;
+                build_exec_options_from_parts(
+                    command.to_str()?.to_string(),
+                    args,
+                    None,
+                    context,
+                    stream_defaults,
+                )
             }
-            _ => Err(mlua::Error::runtime(format!(
-                "{RUN_SIGNATURE} invalid arguments"
-            ))),
+            _ => Err(mlua::Error::runtime(format!("{context} invalid arguments"))),
         },
         3 => match (args.first(), args.get(1), args.get(2)) {
             (
@@ -473,9 +523,15 @@ fn parse_run_call(args: Variadic<Value>) -> mlua::Result<SshExecOptions> {
                 Some(Value::String(argsline)),
                 Some(Value::Table(options)),
             ) => {
-                let args = parse_argsline(&argsline.to_str()?)?;
-                let options = parse_exec_overrides(options.clone(), RUN_SIGNATURE)?;
-                build_exec_options_from_parts(command.to_str()?.to_string(), args, Some(options))
+                let args = parse_argsline(&argsline.to_str()?, context)?;
+                let options = parse_exec_overrides(options.clone(), context)?;
+                build_exec_options_from_parts(
+                    command.to_str()?.to_string(),
+                    args,
+                    Some(options),
+                    context,
+                    stream_defaults,
+                )
             }
             (
                 Some(Value::String(command)),
@@ -483,15 +539,19 @@ fn parse_run_call(args: Variadic<Value>) -> mlua::Result<SshExecOptions> {
                 Some(Value::Table(options)),
             ) => {
                 let args = parse_string_list(args)?;
-                let options = parse_exec_overrides(options.clone(), RUN_SIGNATURE)?;
-                build_exec_options_from_parts(command.to_str()?.to_string(), args, Some(options))
+                let options = parse_exec_overrides(options.clone(), context)?;
+                build_exec_options_from_parts(
+                    command.to_str()?.to_string(),
+                    args,
+                    Some(options),
+                    context,
+                    stream_defaults,
+                )
             }
-            _ => Err(mlua::Error::runtime(format!(
-                "{RUN_SIGNATURE} invalid arguments"
-            ))),
+            _ => Err(mlua::Error::runtime(format!("{context} invalid arguments"))),
         },
         _ => Err(mlua::Error::runtime(format!(
-            "{RUN_SIGNATURE} accepts at most 3 arguments"
+            "{context} accepts at most 3 arguments"
         ))),
     }
 }
@@ -527,13 +587,14 @@ fn parse_exec_overrides(options: Table, context: &str) -> mlua::Result<ExecOverr
 fn build_exec_options_from_cmdline(
     command: String,
     options: ExecOverrides,
+    stream_defaults: ExecStreamDefaults,
 ) -> mlua::Result<SshExecOptions> {
     Ok(SshExecOptions {
         command,
         stdin: options.stdin,
         echo: options.echo.unwrap_or(false),
-        stdout: options.stdout.unwrap_or(SshStreamMode::Inherit),
-        stderr: options.stderr.unwrap_or(SshStreamMode::Inherit),
+        stdout: options.stdout.unwrap_or(stream_defaults.stdout),
+        stderr: options.stderr.unwrap_or(stream_defaults.stderr),
         check: options.check.unwrap_or(false),
     })
 }
@@ -542,9 +603,12 @@ fn build_exec_options_from_parts(
     cmd: String,
     args: Vec<String>,
     options: Option<ExecOverrides>,
+    context: &str,
+    stream_defaults: ExecStreamDefaults,
 ) -> mlua::Result<SshExecOptions> {
     let command = quote_words_for_shell(
         std::iter::once(cmd.as_str()).chain(args.iter().map(String::as_str)),
+        context,
     )?;
     let options = options.unwrap_or(ExecOverrides {
         stdin: None,
@@ -558,13 +622,17 @@ fn build_exec_options_from_parts(
         command,
         stdin: options.stdin,
         echo: options.echo.unwrap_or(false),
-        stdout: options.stdout.unwrap_or(SshStreamMode::Inherit),
-        stderr: options.stderr.unwrap_or(SshStreamMode::Inherit),
+        stdout: options.stdout.unwrap_or(stream_defaults.stdout),
+        stderr: options.stderr.unwrap_or(stream_defaults.stderr),
         check: options.check.unwrap_or(false),
     })
 }
 
-fn parse_run_options_table(options: Table) -> mlua::Result<SshExecOptions> {
+fn parse_run_options_table(
+    options: Table,
+    context: &str,
+    stream_defaults: ExecStreamDefaults,
+) -> mlua::Result<SshExecOptions> {
     let cmd: Option<String> = options.get("cmd")?;
     let args = options.get::<Option<Table>>("args")?;
     let env = options.get::<Option<Table>>("env")?;
@@ -574,36 +642,27 @@ fn parse_run_options_table(options: Table) -> mlua::Result<SshExecOptions> {
         (Some(cmd), Some(args)) => quote_words_for_shell(
             std::iter::once(cmd.as_str())
                 .chain(parse_string_list(&args)?.iter().map(String::as_str)),
+            context,
         )?,
         (Some(cmd), None) => try_quote(&cmd)
             .map(|value| value.into_owned())
-            .map_err(|err| {
-                mlua::Error::runtime(format!("{RUN_SIGNATURE} invalid command: {err}"))
-            })?,
+            .map_err(|err| mlua::Error::runtime(format!("{context} invalid command: {err}")))?,
         (None, _) => {
             return Err(mlua::Error::runtime(format!(
-                "{RUN_SIGNATURE} options mode requires `cmd`"
+                "{context} options mode requires `cmd`"
             )));
         }
     };
 
-    let command = wrap_remote_command(base_command, cwd, env)?;
+    let command = wrap_remote_command(base_command, cwd, env, context)?;
     Ok(SshExecOptions {
         command,
-        stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, RUN_SIGNATURE)?,
+        stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, context)?,
         echo: options.get::<Option<bool>>("echo")?.unwrap_or(false),
-        stdout: parse_stream_mode(
-            options.get::<Option<String>>("stdout")?,
-            "stdout",
-            RUN_SIGNATURE,
-        )?
-        .unwrap_or(SshStreamMode::Inherit),
-        stderr: parse_stream_mode(
-            options.get::<Option<String>>("stderr")?,
-            "stderr",
-            RUN_SIGNATURE,
-        )?
-        .unwrap_or(SshStreamMode::Inherit),
+        stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?
+            .unwrap_or(stream_defaults.stdout),
+        stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?
+            .unwrap_or(stream_defaults.stderr),
         check: options.get::<Option<bool>>("check")?.unwrap_or(false),
     })
 }
@@ -612,12 +671,13 @@ fn wrap_remote_command(
     command: String,
     cwd: Option<String>,
     env: Option<Table>,
+    context: &str,
 ) -> mlua::Result<String> {
     let mut prefixes = Vec::new();
 
     if let Some(cwd) = cwd {
         let quoted = try_quote(&cwd)
-            .map_err(|err| mlua::Error::runtime(format!("{RUN_SIGNATURE} invalid `cwd`: {err}")))?;
+            .map_err(|err| mlua::Error::runtime(format!("{context} invalid `cwd`: {err}")))?;
         prefixes.push(format!("cd {quoted}"));
     }
 
@@ -627,13 +687,11 @@ fn wrap_remote_command(
             let (key, value) = pair?;
             if key.is_empty() {
                 return Err(mlua::Error::runtime(format!(
-                    "{RUN_SIGNATURE} `env` keys must not be empty"
+                    "{context} `env` keys must not be empty"
                 )));
             }
             let quoted = try_quote(&value).map_err(|err| {
-                mlua::Error::runtime(format!(
-                    "{RUN_SIGNATURE} invalid env value for `{key}`: {err}"
-                ))
+                mlua::Error::runtime(format!("{context} invalid env value for `{key}`: {err}"))
             })?;
             env_parts.push(format!("{key}={quoted}"));
         }
@@ -715,7 +773,7 @@ fn parse_positive_u64(value: i64, context: &str, field: &str) -> mlua::Result<u6
         .map_err(|_| mlua::Error::runtime(format!("{context} `{field}` is too large")))
 }
 
-fn looks_like_array_table(table: &Table) -> mlua::Result<bool> {
+fn looks_like_array_table(table: &Table, context: &str) -> mlua::Result<bool> {
     let mut count = 0usize;
     let mut max = 0usize;
     for pair in table.pairs::<Value, Value>() {
@@ -726,9 +784,8 @@ fn looks_like_array_table(table: &Table) -> mlua::Result<bool> {
         if index <= 0 {
             return Ok(false);
         }
-        let index = usize::try_from(index).map_err(|_| {
-            mlua::Error::runtime(format!("{RUN_SIGNATURE} array argument is too large"))
-        })?;
+        let index = usize::try_from(index)
+            .map_err(|_| mlua::Error::runtime(format!("{context} array argument is too large")))?;
         count += 1;
         max = max.max(index);
     }
@@ -743,19 +800,22 @@ fn parse_string_list(table: &Table) -> mlua::Result<Vec<String>> {
     Ok(values)
 }
 
-fn parse_argsline(input: &str) -> mlua::Result<Vec<String>> {
+fn parse_argsline(input: &str, context: &str) -> mlua::Result<Vec<String>> {
     shlex::split(input)
-        .ok_or_else(|| mlua::Error::runtime(format!("{RUN_SIGNATURE} failed to parse args string")))
+        .ok_or_else(|| mlua::Error::runtime(format!("{context} failed to parse args string")))
 }
 
-fn quote_words_for_shell<'a>(words: impl IntoIterator<Item = &'a str>) -> mlua::Result<String> {
+fn quote_words_for_shell<'a>(
+    words: impl IntoIterator<Item = &'a str>,
+    context: &str,
+) -> mlua::Result<String> {
     let mut quoted = Vec::new();
     for word in words {
         quoted.push(
             try_quote(word)
                 .map(|value| value.into_owned())
                 .map_err(|err| {
-                    mlua::Error::runtime(format!("{RUN_SIGNATURE} invalid argument: {err}"))
+                    mlua::Error::runtime(format!("{context} invalid argument: {err}"))
                 })?,
         );
     }
