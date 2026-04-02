@@ -4,26 +4,32 @@
 
 ## Core APIs
 
-- [Core Lua API](./core.md)
-- [Args API](./args.md)
+- [Core Lua API](./core.md): Script lifecycle, process execution, config, and
+  terminal helpers.
 
 ## Modules
 
-- [SemVer API](./semver.md)
-- [Hash API](./hash.md)
-- [Network API](./net.md)
-- [Platform API](./platform.md)
-- [ANSI API](./ansi.md)
-- [HTTP API](./http.md)
-- [Database API](./db.md)
-- [SSH API](./ssh.md)
-- [Path API](./path.md)
-- [TOML API](./toml.md)
-- [Regex API](./re.md)
-- [String API](./str.md)
-- [Filesystem API](./fs.md)
-- [Shell API](./sh.md)
-- [Template API](./template.md)
+- [Args API](./args.md): Command-line argument schema parsing for Lua scripts.
+- [SemVer API](./semver.md): Parse, compare, and bump semantic versions.
+- [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
+- [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.
+- [Platform API](./platform.md): Detect the current OS, architecture, and target
+  triple.
+- [ANSI API](./ansi.md): Build styled terminal output with ANSI escape
+  sequences.
+- [HTTP API](./http.md): Send HTTP requests and consume response bodies.
+- [Database API](./db.md): Open database connections and run SQL queries.
+- [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer
+  files.
+- [Path API](./path.md): Manipulate paths lexically without touching the
+  filesystem.
+- [TOML API](./toml.md): Parse, read, update, and remove TOML values.
+- [Regex API](./re.md): Compile regexes and search, capture, replace, or split
+  text.
+- [String API](./str.md): Trim, split, join, replace, and format strings.
+- [Filesystem API](./fs.md): Read, write, create, and glob filesystem paths.
+- [Shell API](./sh.md): Split shell-like command lines into argument arrays.
+- [Template API](./template.md): Render text templates from Lua data.
 
 Use this page as the entrypoint, then jump to the module page you need for the
 full function reference.

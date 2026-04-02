@@ -10,6 +10,9 @@ Lexical path helpers are available under `ptool.path` and `p.path`.
 normalized path.
 
 - `segments` (string, at least one): Path segments.
+- Returns: `string`.
+
+Example:
 
 ```lua
 print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
@@ -23,6 +26,9 @@ print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
 and `..`).
 
 - `path` (string, required): The input path.
+- Returns: `string`.
+
+Example:
 
 ```lua
 print(ptool.path.normalize("./a/../b")) -- b
@@ -37,7 +43,10 @@ print(ptool.path.normalize("./a/../b")) -- b
 - `path` (string, required): The input path.
 - `base` (string, optional): The base directory. If omitted, the current process
   working directory is used.
+- Returns: `string`.
 - Accepts only 1 or 2 string arguments.
+
+Example:
 
 ```lua
 print(ptool.path.abspath("src"))
@@ -54,7 +63,10 @@ print(ptool.path.abspath("lib", "/tmp/demo"))
 - `path` (string, required): The target path.
 - `base` (string, optional): The starting directory. If omitted, the current
   process working directory is used.
+- Returns: `string`.
 - Accepts only 1 or 2 string arguments.
+
+Example:
 
 ```lua
 print(ptool.path.relpath("src/main.rs", "/tmp/project"))
@@ -69,6 +81,8 @@ print(ptool.path.relpath("src/main.rs", "/tmp/project"))
 - `path` (string, required): The input path.
 - Returns: `boolean`.
 
+Example:
+
 ```lua
 print(ptool.path.isabs("/tmp")) -- true
 ```
@@ -80,6 +94,9 @@ print(ptool.path.isabs("/tmp")) -- true
 `ptool.path.dirname(path)` returns the directory-name portion.
 
 - `path` (string, required): The input path.
+- Returns: `string`.
+
+Example:
 
 ```lua
 print(ptool.path.dirname("a/b/c.txt")) -- a/b
@@ -93,6 +110,9 @@ print(ptool.path.dirname("a/b/c.txt")) -- a/b
 portion).
 
 - `path` (string, required): The input path.
+- Returns: `string`.
+
+Example:
 
 ```lua
 print(ptool.path.basename("a/b/c.txt")) -- c.txt
@@ -106,6 +126,9 @@ print(ptool.path.basename("a/b/c.txt")) -- c.txt
 extension, it returns an empty string.
 
 - `path` (string, required): The input path.
+- Returns: `string`.
+
+Example:
 
 ```lua
 print(ptool.path.extname("a/b/c.txt")) -- .txt

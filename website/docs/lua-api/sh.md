@@ -6,8 +6,13 @@ Shell parsing helpers are available under `ptool.sh` and `p.sh`.
 
 > `v0.1.0` - Introduced.
 
-`ptool.sh.split` parses a command string using shell-style rules and returns an
-argument array.
+`ptool.sh.split(command)` parses a command string using shell-style rules and
+returns an argument array.
+
+- `command` (string, required): The command string to split.
+- Returns: `string[]`.
+
+Example:
 
 ```lua
 local args = ptool.sh.split("clippy --all-targets -- -D warnings")

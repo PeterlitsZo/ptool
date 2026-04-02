@@ -7,10 +7,12 @@ Version parsing, validation, comparison, and bumping helpers live under `ptool.s
 > `v0.1.0` - Introduced.
 
 `ptool.semver.parse(version)` parses a version string and returns a `Version`
-UserData.
+object.
 
 - `version` (string, required): A semantic version string, optionally prefixed
   with `v`.
+
+Example:
 
 ```lua
 local v = ptool.semver.parse("v1.2.3-alpha.1+build.9")
@@ -65,12 +67,16 @@ local stable = ptool.semver.bump("1.2.4-rc.2", "release")
 print(tostring(stable)) -- 1.2.4
 ```
 
-## ptool.semver.Version
+## Version
 
 > `v0.1.0` - Introduced.
 
-`ptool.semver.parse(...)` and `ptool.semver.bump(...)` return a `Version`
-UserData with the following fields and methods:
+`Version` represents a parsed semantic version returned by
+`ptool.semver.parse(...)` or `ptool.semver.bump(...)`.
+
+It is implemented as a Lua userdata.
+
+Fields and methods:
 
 - Fields:
   - `major` (integer)
@@ -85,6 +91,34 @@ UserData with the following fields and methods:
 - Metamethods:
   - `tostring(v)` is available.
   - `==`, `<`, and `<=` comparisons are supported.
+
+### compare
+
+Canonical API name: `ptool.semver.Version:compare`.
+
+`v:compare(other)` compares the current version with `other`.
+
+- `other` (string|Version, required): A version string or another `Version`
+  object.
+- Returns: `-1 | 0 | 1`.
+
+### bump
+
+Canonical API name: `ptool.semver.Version:bump`.
+
+`v:bump(op)` returns a new `Version` object after applying the bump.
+
+- `op` (string, required): One of `major`, `minor`, `patch`, `release`,
+  `alpha`, `beta`, or `rc`.
+- Returns: `Version`.
+
+### to_string
+
+Canonical API name: `ptool.semver.Version:to_string`.
+
+`v:to_string()` returns the canonical string form of the version.
+
+- Returns: `string`.
 
 Prerelease bump rules:
 

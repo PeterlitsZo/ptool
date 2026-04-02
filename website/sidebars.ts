@@ -4,13 +4,8 @@ const sidebars: SidebarsConfig = {
   docsSidebar: [
     {
       type: 'category',
-      label: 'Introduction',
+      label: 'Getting Started',
       items: ['intro'],
-    },
-    {
-      type: 'category',
-      label: 'Guides',
-      items: ['getting-started'],
     },
     {
       type: 'category',

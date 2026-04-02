@@ -17,7 +17,7 @@ print(ptool.platform.os()) -- macos
 Behavior:
 
 - This reports the local machine running `ptool run`.
-- Only `linux`, `macos`, and `windows` are supported.
+- `ptool` currently exposes `linux`, `macos`, and `windows`.
 
 ## ptool.platform.arch
 
@@ -25,7 +25,7 @@ Behavior:
 
 `ptool.platform.arch()` returns the CPU architecture of the current machine.
 
-- Returns: `amd64 | arm64`.
+- Returns: `amd64 | arm64 | x86 | arm | riscv64`.
 
 ```lua
 print(ptool.platform.arch()) -- arm64
@@ -35,7 +35,9 @@ Behavior:
 
 - `x86_64` is exposed as `amd64`.
 - `aarch64` is exposed as `arm64`.
-- Only `x86_64` and `aarch64` are supported by `ptool`.
+- 32-bit x86 variants such as `x86` and `i686` are exposed as `x86`.
+- 32-bit ARM variants such as `armv7l` are exposed as `arm`.
+- `riscv64` is exposed as `riscv64`.
 
 ## ptool.platform.target
 
@@ -48,7 +50,7 @@ current machine.
 
 ```lua
 local target = ptool.platform.target()
-print(target) -- macos-arm64
+print(target) -- linux-riscv64
 ```
 
 Behavior:
@@ -56,3 +58,6 @@ Behavior:
 - The result is always `ptool.platform.os() .. "-" .. ptool.platform.arch()`.
 - This is intended for platform-based branching such as selecting download
   artifacts.
+- Common values include `linux-amd64`, `linux-arm64`, `linux-x86`,
+  `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, and
+  `windows-amd64`.

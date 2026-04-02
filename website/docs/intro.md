@@ -1,4 +1,4 @@
-# ptool
+# Getting Started
 
 `ptool` runs Lua scripts and injects a standard library for practical
 automation.
@@ -12,11 +12,54 @@ ptool run <file>
 When a script runs, `ptool` exposes its API through the global `ptool` table
 and the shorter alias `p`.
 
+## Install
+
+On Linux and macOS, install `ptool` with the release installer:
+
+```sh
+curl -fsSL https://peterlits.net/ptool/install.sh | bash
+```
+
+The installer downloads the latest prebuilt release for the current platform,
+installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed.
+
+## Minimal script
+
 ```lua
 ptool.use("v0.1.0")
 
 ptool.run("echo", {"hello", "world"})
 ```
+
+`ptool.use(...)` declares the minimum required `ptool` version for the script.
+This keeps scripts explicit about the API version they expect and fails early
+on older runtimes. See [Core Lua API](./lua-api/core.md) for details.
+
+Run it with:
+
+```sh
+ptool run script.lua
+```
+
+## Passing arguments
+
+You can pass extra CLI arguments after the script path:
+
+```sh
+ptool run script.lua --name alice -v a.txt b.txt
+```
+
+Parse them inside the script with `ptool.args.parse(...)`.
+
+## Shebang scripts
+
+`ptool` supports shebang files, so a script can start with:
+
+```text
+#!/usr/bin/env ptool run
+```
+
+This lets you execute the script directly once it has the executable bit.
 
 ## What you get
 
@@ -26,10 +69,11 @@ ptool.run("echo", {"hello", "world"})
 - CLI-oriented helpers for running commands, parsing arguments, and asking for
   interactive input.
 
-## Start here
+## Next steps
 
-- Read [Getting Started](./getting-started.md) for the basic scripting flow.
 - Use [Lua API Overview](./lua-api/index.md) to browse the core APIs and
   available modules.
-- Jump to [Core Lua API](./lua-api/core.md) or a module page such as
-  [Args API](./lua-api/args.md) when you need the detailed function reference.
+- Start with [Core Lua API](./lua-api/core.md) for version gating, process
+  execution, config, and script lifecycle helpers.
+- Open a module page such as [Args API](./lua-api/args.md) when you need the
+  detailed reference for a specific feature set.

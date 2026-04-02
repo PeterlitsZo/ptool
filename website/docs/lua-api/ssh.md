@@ -7,7 +7,7 @@ SSH connection, remote execution, and file transfer helpers are available under 
 > `v0.1.0` - Introduced.
 
 `ptool.ssh.connect(target_or_options)` opens an SSH connection and returns a
-`Connection` UserData.
+`Connection` object.
 
 Arguments:
 
@@ -83,12 +83,16 @@ local ssh = ptool.ssh.connect({
 })
 ```
 
-## ptool.ssh.Connection
+## Connection
 
 > `v0.1.0` - Introduced.
 
-`ptool.ssh.connect(...)` returns a `Connection` UserData with the following
-fields and methods:
+`Connection` represents an open SSH connection returned by
+`ptool.ssh.connect()`.
+
+It is implemented as a Lua userdata.
+
+Fields and methods:
 
 - Fields:
   - `conn.host` (string)
@@ -97,7 +101,7 @@ fields and methods:
   - `conn.target` (string)
 - Methods:
   - `conn:run(...)` -> `table`
-  - `conn:path(path)` -> `userdata`
+  - `conn:path(path)` -> `RemotePath`
   - `conn:exists(path)` -> `boolean`
   - `conn:is_file(path)` -> `boolean`
   - `conn:is_dir(path)` -> `boolean`
@@ -105,9 +109,11 @@ fields and methods:
   - `conn:download(remote_path, local_path[, options])` -> `table`
   - `conn:close()` -> `nil`
 
-## ptool.ssh.Connection:run
+### run
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:run`.
 
 `conn:run(...)` executes a remote command through the current SSH connection.
 
@@ -207,20 +213,18 @@ local res2 = ssh:run({
 print(res2.stdout)
 ```
 
-## ptool.ssh.Connection:path
+### path
 
 > `v0.1.0` - Introduced.
 
-`conn:path(path)` creates a reusable remote path value bound to the current SSH
-connection.
+Canonical API name: `ptool.ssh.Connection:path`.
+
+`conn:path(path)` creates a reusable `RemotePath` object bound to the current
+SSH connection.
 
 - `path` (string, required): The remote path.
-- Returns: A remote path userdata that can be passed to
+- Returns: A `RemotePath` object that can be passed to
   `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`.
-- The returned remote path also supports:
-  - `remote:exists()` -> `boolean`
-  - `remote:is_file()` -> `boolean`
-  - `remote:is_dir()` -> `boolean`
 
 Example:
 
@@ -231,9 +235,11 @@ local remote_release = ssh:path("/srv/app/releases/current.tar.gz")
 ssh:download(remote_release, "./tmp/current.tar.gz")
 ```
 
-## ptool.ssh.Connection:exists
+### exists
 
 > `v0.2.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:exists`.
 
 `conn:exists(path)` checks whether a remote path exists.
 
@@ -250,9 +256,11 @@ print(ssh:exists("/srv/app"))
 print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 ```
 
-## ptool.ssh.Connection:is_file
+### is_file
 
 > `v0.2.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:is_file`.
 
 `conn:is_file(path)` checks whether a remote path exists and is a regular file.
 
@@ -271,9 +279,11 @@ if ssh:is_file(remote_tarball) then
 end
 ```
 
-## ptool.ssh.Connection:is_dir
+### is_dir
 
 > `v0.2.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:is_dir`.
 
 `conn:is_dir(path)` checks whether a remote path exists and is a directory.
 
@@ -292,9 +302,11 @@ if releases:is_dir() then
 end
 ```
 
-## ptool.ssh.Connection:upload
+### upload
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:upload`.
 
 `conn:upload(local_path, remote_path[, options])` uploads a local file to the
 remote host.
@@ -333,9 +345,11 @@ print(res.bytes)
 print(res.to)
 ```
 
-## ptool.ssh.Connection:download
+### download
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:download`.
 
 `conn:download(remote_path, local_path[, options])` downloads a remote file to a
 local path.
@@ -373,9 +387,11 @@ print(res.bytes)
 print(res.from)
 ```
 
-## ptool.ssh.Connection:close
+### close
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:close`.
 
 `conn:close()` closes the SSH connection.
 
@@ -389,4 +405,68 @@ Example:
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
 ssh:close()
+```
+
+## RemotePath
+
+> `v0.1.0` - Introduced.
+
+`RemotePath` represents a remote path bound to a `Connection` and returned by
+`conn:path(path)`.
+
+It is implemented as a Lua userdata.
+
+Methods:
+
+- `remote:exists()` -> `boolean`
+- `remote:is_file()` -> `boolean`
+- `remote:is_dir()` -> `boolean`
+
+### exists
+
+`remote:exists()` checks whether the remote path exists.
+
+- Returns: `true` when the remote path exists, otherwise `false`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+local remote_release = ssh:path("/srv/app/releases/current.tar.gz")
+
+print(remote_release:exists())
+```
+
+### is_file
+
+`remote:is_file()` checks whether the remote path exists and is a regular file.
+
+- Returns: `true` when the remote path is a file, otherwise `false`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+local remote_tarball = ssh:path("/srv/app/releases/current.tar.gz")
+
+if remote_tarball:is_file() then
+  print("release tarball exists")
+end
+```
+
+### is_dir
+
+`remote:is_dir()` checks whether the remote path exists and is a directory.
+
+- Returns: `true` when the remote path is a directory, otherwise `false`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+local releases = ssh:path("/srv/app/releases")
+
+if releases:is_dir() then
+  print("releases directory is ready")
+end
 ```

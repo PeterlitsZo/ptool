@@ -7,7 +7,7 @@ Database connection and query helpers are available under `ptool.db` and `p.db`.
 > `v0.1.0` - Introduced.
 
 `ptool.db.connect(url_or_options)` opens a database connection and returns a
-`Connection` UserData.
+`Connection` object.
 
 Supported databases:
 
@@ -47,12 +47,16 @@ local db = ptool.db.connect({
 })
 ```
 
-## ptool.db.Connection
+## Connection
 
 > `v0.1.0` - Introduced.
 
-`ptool.db.connect(...)` returns a `Connection` UserData with the following
-methods:
+`Connection` represents an open database connection returned by
+`ptool.db.connect()`.
+
+It is implemented as a Lua userdata.
+
+Methods:
 
 - `db:query(sql, params?)` -> `table`
 - `db:query_one(sql, params?)` -> `table|nil`
@@ -89,9 +93,11 @@ Result value rules:
 - If a query result contains duplicate column names, an error is raised. Use SQL
   aliases such as `AS` to disambiguate them.
 
-## ptool.db.Connection:query
+### query
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.db.Connection:query`.
 
 `db:query(sql, params?)` executes a query and returns a table with:
 
@@ -115,9 +121,11 @@ print(res.rows[1].name)
 print(res.rows[2].name)
 ```
 
-## ptool.db.Connection:query_one
+### query_one
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.db.Connection:query_one`.
 
 `db:query_one(sql, params?)` returns the first row as a table, or `nil` if the
 query returns no rows.
@@ -131,9 +139,11 @@ if row then
 end
 ```
 
-## ptool.db.Connection:scalar
+### scalar
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.db.Connection:scalar`.
 
 `db:scalar(sql, params?)` returns the first column of the first row, or `nil` if
 the query returns no rows.
@@ -145,9 +155,11 @@ local count = db:scalar("select count(*) from users")
 print(count)
 ```
 
-## ptool.db.Connection:execute
+### execute
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.db.Connection:execute`.
 
 `db:execute(sql, params?)` executes a statement and returns a table with:
 
@@ -160,9 +172,11 @@ local res = db:execute("update users set name = ? where id = ?", {"alice-2", 1})
 print(res.rows_affected)
 ```
 
-## ptool.db.Connection:transaction
+### transaction
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.db.Connection:transaction`.
 
 `db:transaction(fn)` runs `fn(tx)` inside a database transaction.
 
@@ -200,9 +214,11 @@ print(ok) -- false
 print(tostring(err))
 ```
 
-## ptool.db.Connection:close
+### close
 
 > `v0.1.0` - Introduced.
+
+Canonical API name: `ptool.db.Connection:close`.
 
 `db:close()` closes the connection.
 
