@@ -127,8 +127,13 @@ impl PtoolEngine {
         semver::strip_prerelease(version)
     }
 
-    pub fn semver_bump(&self, version: SemverVersion, op: &str) -> Result<SemverVersion> {
-        semver::bump(version, op)
+    pub fn semver_bump(
+        &self,
+        version: SemverVersion,
+        op: &str,
+        channel: Option<&str>,
+    ) -> Result<SemverVersion> {
+        semver::bump(version, op, channel)
     }
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {

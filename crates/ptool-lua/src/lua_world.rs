@@ -409,8 +409,9 @@ impl LuaWorld {
         &self,
         version: Value,
         op: String,
+        channel: Option<String>,
     ) -> mlua::Result<crate::semver::LuaSemVer> {
-        crate::semver::bump(&self.engine, version, op)
+        crate::semver::bump(&self.engine, version, op, channel)
     }
 }
 

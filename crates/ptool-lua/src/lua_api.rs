@@ -441,8 +441,11 @@ fn create_ptool_semver_module(
     let compare_fn = lua.create_function(move |_, (a, b): (Value, Value)| {
         compare_state.borrow().semver_compare(a, b)
     })?;
-    let bump_fn =
-        lua.create_function(move |_, (v, op): (Value, String)| world.borrow().semver_bump(v, op))?;
+    let bump_fn = lua.create_function(
+        move |_, (v, op, channel): (Value, String, Option<String>)| {
+            world.borrow().semver_bump(v, op, channel)
+        },
+    )?;
     semver_module.set("parse", parse_fn)?;
     semver_module.set("is_valid", is_valid_fn)?;
     semver_module.set("compare", compare_fn)?;

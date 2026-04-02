@@ -27,18 +27,46 @@ pub(crate) fn strip_prerelease(version: SemverVersion) -> SemverVersion {
     SemverVersion::new(version.major, version.minor, version.patch)
 }
 
-pub(crate) fn bump(version: SemverVersion, op: &str) -> Result<SemverVersion> {
+pub(crate) fn bump(
+    version: SemverVersion,
+    op: &str,
+    channel: Option<&str>,
+) -> Result<SemverVersion> {
     match op {
-        "major" => bump_major(version),
-        "minor" => bump_minor(version),
-        "patch" => bump_patch(version),
-        "release" => Ok(bump_release(version)),
-        "alpha" => bump_prerelease(version, PreChannel::Alpha),
-        "beta" => bump_prerelease(version, PreChannel::Beta),
-        "rc" => bump_prerelease(version, PreChannel::Rc),
+        "major" => {
+            ensure_channel_unused(channel)?;
+            bump_major(version)
+        }
+        "minor" => {
+            ensure_channel_unused(channel)?;
+            bump_minor(version)
+        }
+        "patch" => {
+            ensure_channel_unused(channel)?;
+            bump_patch(version)
+        }
+        "release" => {
+            ensure_channel_unused(channel)?;
+            Ok(bump_release(version))
+        }
+        "alpha" => {
+            ensure_channel_unused(channel)?;
+            bump_prerelease(version, PreChannel::Alpha)
+        }
+        "beta" => {
+            ensure_channel_unused(channel)?;
+            bump_prerelease(version, PreChannel::Beta)
+        }
+        "rc" => {
+            ensure_channel_unused(channel)?;
+            bump_prerelease(version, PreChannel::Rc)
+        }
+        "prepatch" => bump_prepatch(version, parse_target_channel(channel)?),
+        "preminor" => bump_preminor(version, parse_target_channel(channel)?),
+        "premajor" => bump_premajor(version, parse_target_channel(channel)?),
         _ => Err(Error::new(
             ErrorKind::InvalidSemverOperation,
-            "`op` must be one of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`",
+            "`op` must be one of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, `premajor`",
         )),
     }
 }
@@ -82,6 +110,21 @@ fn bump_release(mut version: SemverVersion) -> SemverVersion {
     version
 }
 
+fn bump_prepatch(version: SemverVersion, target: PreChannel) -> Result<SemverVersion> {
+    let version = bump_patch(version)?;
+    start_prerelease(version, target)
+}
+
+fn bump_preminor(version: SemverVersion, target: PreChannel) -> Result<SemverVersion> {
+    let version = bump_minor(version)?;
+    start_prerelease(version, target)
+}
+
+fn bump_premajor(version: SemverVersion, target: PreChannel) -> Result<SemverVersion> {
+    let version = bump_major(version)?;
+    start_prerelease(version, target)
+}
+
 fn bump_prerelease(version: SemverVersion, target: PreChannel) -> Result<SemverVersion> {
     let mut version = version;
     version.build = SemverBuildMetadata::EMPTY;
@@ -116,6 +159,32 @@ fn bump_prerelease(version: SemverVersion, target: PreChannel) -> Result<SemverV
 
     version.pre = parse_prerelease(&format!("{}.{}", target.as_str(), next_number))?;
     Ok(version)
+}
+
+fn start_prerelease(mut version: SemverVersion, target: PreChannel) -> Result<SemverVersion> {
+    version.pre = parse_prerelease(&format!("{}.1", target.as_str()))?;
+    version.build = SemverBuildMetadata::EMPTY;
+    Ok(version)
+}
+
+fn ensure_channel_unused(channel: Option<&str>) -> Result<()> {
+    if channel.is_some() {
+        return Err(Error::new(
+            ErrorKind::InvalidSemverOperation,
+            "`channel` is only supported for `prepatch`, `preminor`, and `premajor`",
+        ));
+    }
+    Ok(())
+}
+
+fn parse_target_channel(channel: Option<&str>) -> Result<PreChannel> {
+    let value = channel.unwrap_or("alpha");
+    PreChannel::parse(value).ok_or_else(|| {
+        Error::new(
+            ErrorKind::InvalidSemverOperation,
+            format!("`channel` must be one of `alpha`, `beta`, `rc`, got `{value}`"),
+        )
+    })
 }
 
 fn parse_prerelease(value: &str) -> Result<SemverPrerelease> {

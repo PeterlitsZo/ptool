@@ -9,25 +9,44 @@ local args = p.args.parse({
   about = "Help you release the project.",
   args = {
     p.args.arg("method", "positional"):required()
-        :help("Release method, one of: alpha, beta, rc, patch, minor, major."),
+        :help(
+          "Release method, one of: alpha, beta, rc, release, patch, minor, "
+          .. "major, prepatch, preminor, premajor."
+        ),
+    p.args.arg("channel", "string", {
+      long = "channel",
+      help = "Prerelease channel for prepatch/preminor/premajor: alpha, beta, or rc.",
+    }),
   },
 })
 
 -- Validate arguments.
-local valid_methods_re = "^(alpha|beta|rc|release|patch|minor|major)$"
+local valid_methods_re = "^(alpha|beta|rc|release|patch|minor|major|prepatch|preminor|premajor)$"
 if not p.re.compile(valid_methods_re):is_match(args.method) then
   local msg = (
     "Unknown release method `%s`, expected one of: alpha, beta, rc, release, "
-    .. "patch, minor, major."
+    .. "patch, minor, major, prepatch, preminor, premajor."
   ):format(args.method)
   error(msg, 0)
+end
+
+local valid_channels_re = "^(alpha|beta|rc)$"
+local is_pre_method = p.re.compile("^pre(patch|minor|major)$"):is_match(args.method)
+if args.channel ~= nil and not p.re.compile(valid_channels_re):is_match(args.channel) then
+  error(
+    ("Unknown prerelease channel `%s`, expected one of: alpha, beta, rc."):format(args.channel),
+    0
+  )
+end
+if args.channel ~= nil and not is_pre_method then
+  error("`--channel` is only supported with prepatch, preminor, or premajor.", 0)
 end
 
 -- Update the version in Cargo.toml.
 local cargo_text = p.fs.read("Cargo.toml")
 local version_path = { "workspace", "package", "version" }
 local current_version = p.semver.parse(p.toml.get(cargo_text, version_path))
-local next_version = current_version:bump(args.method)
+local next_version = current_version:bump(args.method, args.channel)
 local next_version_str = next_version:to_string()
 local updated_cargo = p.toml.set(
   cargo_text, version_path, next_version_str
@@ -55,5 +74,8 @@ p.run("git push origin " .. tag_name, { confirm = true })
 
 -- Show related information.
 print(("Release method: %s"):format(args.method))
+if is_pre_method then
+  print(("Prerelease channel: %s"):format(args.channel or "alpha"))
+end
 print(("Version: %s -> %s"):format(current_version, next_version))
 print(("Tag: %s"):format(tag_name))

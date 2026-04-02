@@ -7,7 +7,7 @@ use std::cmp::Ordering;
 
 const PARSE_SIGNATURE: &str = "ptool.semver.parse(version)";
 const COMPARE_SIGNATURE: &str = "ptool.semver.compare(a, b)";
-const BUMP_SIGNATURE: &str = "ptool.semver.bump(v, op)";
+const BUMP_SIGNATURE: &str = "ptool.semver.bump(v, op[, channel])";
 
 #[derive(Clone)]
 pub(crate) struct LuaSemVer {
@@ -39,9 +39,14 @@ pub(crate) fn compare(engine: &PtoolEngine, a: Value, b: Value) -> mlua::Result<
     Ok(ordering_to_i64(engine.semver_compare(&left, &right)))
 }
 
-pub(crate) fn bump(engine: &PtoolEngine, version: Value, op: String) -> mlua::Result<LuaSemVer> {
+pub(crate) fn bump(
+    engine: &PtoolEngine,
+    version: Value,
+    op: String,
+    channel: Option<String>,
+) -> mlua::Result<LuaSemVer> {
     let version = parse_version_arg(engine, version, BUMP_SIGNATURE, "v")?;
-    let bumped = bump_version(engine, version, &op, BUMP_SIGNATURE)?;
+    let bumped = bump_version(engine, version, &op, channel.as_deref(), BUMP_SIGNATURE)?;
     Ok(LuaSemVer {
         engine: engine.clone(),
         version: bumped,
@@ -70,18 +75,22 @@ impl UserData for LuaSemVer {
             ))
         });
 
-        methods.add_method("bump", |_, this, op: String| {
-            let bumped = bump_version(
-                &this.engine,
-                this.version.clone(),
-                &op,
-                "ptool.semver.Version:bump(op)",
-            )?;
-            Ok(LuaSemVer {
-                engine: this.engine.clone(),
-                version: bumped,
-            })
-        });
+        methods.add_method(
+            "bump",
+            |_, this, (op, channel): (String, Option<String>)| {
+                let bumped = bump_version(
+                    &this.engine,
+                    this.version.clone(),
+                    &op,
+                    channel.as_deref(),
+                    "ptool.semver.Version:bump(op[, channel])",
+                )?;
+                Ok(LuaSemVer {
+                    engine: this.engine.clone(),
+                    version: bumped,
+                })
+            },
+        );
 
         methods.add_method("to_string", |_, this, ()| Ok(this.version.to_string()));
 
@@ -169,10 +178,11 @@ fn bump_version(
     engine: &PtoolEngine,
     version: SemverVersion,
     op: &str,
+    channel: Option<&str>,
     signature: &str,
 ) -> mlua::Result<SemverVersion> {
     engine
-        .semver_bump(version, op)
+        .semver_bump(version, op, channel)
         .map_err(|err| to_bump_lua_error(signature, err))
 }
 
