@@ -5,6 +5,8 @@ pub enum ErrorKind {
     InvalidGlob,
     InvalidUrl,
     InvalidIp,
+    InvalidSemver,
+    InvalidSemverOperation,
     MissingPort,
     InvalidHost,
     InvalidPort,
@@ -14,6 +16,7 @@ pub enum ErrorKind {
     NotAFile,
     Io,
     Db,
+    SemverOverflow,
     Ssh,
 }
 

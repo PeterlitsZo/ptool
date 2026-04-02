@@ -5,6 +5,7 @@ mod fs;
 mod hash;
 mod net;
 mod platform;
+mod semver;
 mod ssh;
 
 pub use ansi::{Color, StyleOptions};
@@ -13,6 +14,7 @@ pub use error::{Error, ErrorKind, Result};
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
+pub use semver::{SemverBuildMetadata, SemverPrerelease, SemverVersion};
 pub use ssh::{
     SshAuthRequest, SshConnectRequest, SshConnection, SshConnectionInfo, SshExecOptions,
     SshExecResult, SshHostKeyRequest, SshStreamMode, SshTransferOptions, SshTransferResult,
@@ -21,7 +23,7 @@ use std::path::Path;
 use std::sync::Arc;
 use tokio::runtime::{Builder, Runtime};
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct PtoolEngine {
     runtime: Arc<Runtime>,
 }
@@ -107,6 +109,26 @@ impl PtoolEngine {
 
     pub fn parse_host_port(&self, input: &str) -> Result<HostPortParts> {
         net::parse_host_port(input)
+    }
+
+    pub fn semver_parse(&self, input: &str) -> Result<SemverVersion> {
+        semver::parse(input)
+    }
+
+    pub fn semver_is_valid(&self, input: &str) -> bool {
+        semver::is_valid(input)
+    }
+
+    pub fn semver_compare(&self, a: &SemverVersion, b: &SemverVersion) -> std::cmp::Ordering {
+        semver::compare(a, b)
+    }
+
+    pub fn semver_strip_prerelease(&self, version: SemverVersion) -> SemverVersion {
+        semver::strip_prerelease(version)
+    }
+
+    pub fn semver_bump(&self, version: SemverVersion, op: &str) -> Result<SemverVersion> {
+        semver::bump(version, op)
     }
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {

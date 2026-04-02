@@ -114,7 +114,7 @@ impl LuaWorld {
     }
 
     pub(crate) fn require_version(&self, required_version: String) -> mlua::Result<()> {
-        crate::version::ensure_min_ptool_version(&required_version)
+        crate::version::ensure_min_ptool_version(&self.engine, &required_version)
     }
 
     pub(crate) fn unindent(&self, input: String) -> String {
@@ -394,15 +394,15 @@ impl LuaWorld {
     }
 
     pub(crate) fn semver_parse(&self, version: Value) -> mlua::Result<crate::semver::LuaSemVer> {
-        crate::semver::parse(version)
+        crate::semver::parse(&self.engine, version)
     }
 
     pub(crate) fn semver_is_valid(&self, version: Value) -> bool {
-        crate::semver::is_valid(version)
+        crate::semver::is_valid(&self.engine, version)
     }
 
     pub(crate) fn semver_compare(&self, a: Value, b: Value) -> mlua::Result<i64> {
-        crate::semver::compare(a, b)
+        crate::semver::compare(&self.engine, a, b)
     }
 
     pub(crate) fn semver_bump(
@@ -410,7 +410,7 @@ impl LuaWorld {
         version: Value,
         op: String,
     ) -> mlua::Result<crate::semver::LuaSemVer> {
-        crate::semver::bump(version, op)
+        crate::semver::bump(&self.engine, version, op)
     }
 }
 

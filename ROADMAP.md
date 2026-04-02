@@ -10,7 +10,7 @@
 - [x] Support more OS and arch.
 - [ ] Make the document website better.
 - [ ] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
-- [ ] Let `release.lua` use `p.ask`.
+- [x] Let `release.lua` use `p.ask`.
 - [ ] Make the `install.sh` support installing a specific version, e.g.
       `install.sh 0.2.0-alpha.1`.
 - [ ] Make the `install.sh` support installing to a specified directory, e.g.
