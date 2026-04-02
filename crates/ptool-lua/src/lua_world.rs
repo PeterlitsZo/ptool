@@ -156,6 +156,9 @@ impl LuaWorld {
         match self.engine.current_arch() {
             ptool_engine::Arch::X86_64 => "amd64".to_string(),
             ptool_engine::Arch::Aarch64 => "arm64".to_string(),
+            ptool_engine::Arch::X86 => "x86".to_string(),
+            ptool_engine::Arch::Arm => "arm".to_string(),
+            ptool_engine::Arch::Riscv64 => "riscv64".to_string(),
         }
     }
 

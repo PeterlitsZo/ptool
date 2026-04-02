@@ -1,7 +1,7 @@
 # v0.3.0
 
-- [ ] Rename `ptool` crate to `ptool-lua`.
-- [ ] Support more OS and arch.
+- [x] Rename `ptool` crate to `ptool-lua`.
+- [x] Support more OS and arch.
 - [ ] Make the document website better.
 - [ ] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
 - [ ] Let `release.lua` use `p.ask`.
@@ -22,6 +22,7 @@
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 - [ ] Let the SSH connection support upload directories.
+- [ ] Support the subcommand for `ptool.args`.
 
 # v0.2.0
 

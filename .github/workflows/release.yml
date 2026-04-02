@@ -15,6 +15,9 @@ jobs:
   build:
     name: Build ${{ matrix.asset_name }}
     runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
@@ -23,14 +26,50 @@ jobs:
             target: x86_64-unknown-linux-musl
             asset_name: linux-amd64
             use_zigbuild: true
+            binary_name: ptool
+            archive_ext: tar.gz
           - runner: ubuntu-24.04-arm
             target: aarch64-unknown-linux-musl
             asset_name: linux-arm64
             use_zigbuild: true
+            binary_name: ptool
+            archive_ext: tar.gz
+          - runner: ubuntu-24.04
+            target: i686-unknown-linux-musl
+            asset_name: linux-x86
+            use_zigbuild: true
+            binary_name: ptool
+            archive_ext: tar.gz
+          - runner: ubuntu-24.04
+            target: armv7-unknown-linux-musleabihf
+            asset_name: linux-arm
+            use_zigbuild: true
+            binary_name: ptool
+            archive_ext: tar.gz
+          - runner: ubuntu-24.04
+            target: riscv64gc-unknown-linux-musl
+            asset_name: linux-riscv64
+            use_zigbuild: true
+            binary_name: ptool
+            archive_ext: tar.gz
+          - runner: macos-13
+            target: x86_64-apple-darwin
+            asset_name: macos-amd64
+            use_zigbuild: false
+            binary_name: ptool
+            archive_ext: tar.gz
           - runner: macos-14
             target: aarch64-apple-darwin
             asset_name: macos-arm64
             use_zigbuild: false
+            binary_name: ptool
+            archive_ext: tar.gz
+          - runner: windows-2022
+            target: x86_64-pc-windows-msvc
+            asset_name: windows-amd64
+            use_zigbuild: false
+            binary_name: ptool.exe
+            archive_ext: zip
 
     steps:
       - name: Check out repository
@@ -65,10 +104,18 @@ jobs:
         id: package
         run: |
           version="${GITHUB_REF_NAME}"
-          archive_name="ptool-${version}-${{ matrix.asset_name }}.tar.gz"
+          archive_name="ptool-${version}-${{ matrix.asset_name }}.${{ matrix.archive_ext }}"
           mkdir -p dist/stage
-          cp "target/${{ matrix.target }}/release/ptool" dist/stage/ptool
-          tar -C dist/stage -czf "dist/${archive_name}" ptool
+          cp "target/${{ matrix.target }}/release/${{ matrix.binary_name }}" \
+            "dist/stage/${{ matrix.binary_name }}"
+
+          if [ "${{ matrix.archive_ext }}" = 'zip' ]; then
+            powershell.exe -NoProfile -Command \
+              "Compress-Archive -Path 'dist/stage/${{ matrix.binary_name }}' -DestinationPath 'dist/${archive_name}' -Force"
+          else
+            tar -C dist/stage -czf "dist/${archive_name}" "${{ matrix.binary_name }}"
+          fi
+
           echo "archive_name=${archive_name}" >> "$GITHUB_OUTPUT"
 
       - name: Upload packaged artifact
@@ -81,6 +128,9 @@ jobs:
   publish:
     name: Publish GitHub release
     runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
     needs: build
     permissions:
       contents: write
@@ -116,7 +166,7 @@ jobs:
       - name: Generate checksums
         run: |
           cd dist
-          shasum -a 256 *.tar.gz > SHA256SUMS
+          shasum -a 256 ./*.tar.gz ./*.zip > SHA256SUMS
 
       - name: Generate stable release metadata
         if: steps.release_channel.outputs.is_prerelease != 'true'
@@ -131,7 +181,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          for file in dist/*.tar.gz dist/SHA256SUMS; do
+          for file in dist/*.tar.gz dist/*.zip dist/SHA256SUMS; do
             name="$(basename "$file")"
             wrangler r2 object put "${R2_BUCKET}/ptool/release/${{ steps.release_channel.outputs.tag }}/${name}" --remote --file "$file"
           done
@@ -144,7 +194,7 @@ jobs:
         run: |
           version_prefix="ptool-${{ steps.release_channel.outputs.tag }}-"
 
-          for file in dist/*.tar.gz; do
+          for file in dist/*.tar.gz dist/*.zip; do
             name="$(basename "$file")"
             asset_suffix="${name#${version_prefix}}"
             latest_name="ptool-${asset_suffix}"
@@ -174,9 +224,9 @@ jobs:
           fi
 
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" dist/*.tar.gz dist/SHA256SUMS --clobber
+            gh release upload "$tag" dist/*.tar.gz dist/*.zip dist/SHA256SUMS --clobber
           else
-            gh release create "$tag" dist/*.tar.gz dist/SHA256SUMS \
+            gh release create "$tag" dist/*.tar.gz dist/*.zip dist/SHA256SUMS \
               --title "$tag" \
               --generate-notes \
               $prerelease_flag

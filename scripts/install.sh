@@ -29,6 +29,15 @@ detect_asset() {
         aarch64|arm64)
           printf '%s\n' 'linux-arm64'
           ;;
+        x86|i386|i486|i586|i686)
+          printf '%s\n' 'linux-x86'
+          ;;
+        arm|armv6l|armv7l)
+          printf '%s\n' 'linux-arm'
+          ;;
+        riscv64|riscv64gc)
+          printf '%s\n' 'linux-riscv64'
+          ;;
         *)
           printf 'Error: unsupported Linux architecture: %s\n' "$arch" >&2
           exit 1
@@ -37,6 +46,9 @@ detect_asset() {
       ;;
     Darwin)
       case "$arch" in
+        x86_64|amd64)
+          printf '%s\n' 'macos-amd64'
+          ;;
         aarch64|arm64)
           printf '%s\n' 'macos-arm64'
           ;;

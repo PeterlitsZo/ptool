@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Expanded platform detection, Lua `ptool.platform` arch reporting, release
+  artifacts, and the install script to cover more Linux, macOS, and Windows
+  targets, including `x86`, `arm`, and `riscv64` support where applicable.
+
 ## v0.2.0 (2026-03-30)
 
 ### Added
