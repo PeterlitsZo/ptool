@@ -1,3 +1,9 @@
+# v0.4.0
+
+- [ ] Support just `#!/usr/bin/env ptool`.
+- [ ] Echo for SSH connection's `:run` and `:run_capture`.
+- [ ] Make the `p.ask` more powerful.
+
 # v0.3.0
 
 - [x] Rename `ptool` crate to `ptool-lua`.

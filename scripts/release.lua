@@ -37,8 +37,13 @@ p.fs.write("Cargo.toml", updated_cargo)
 -- Commit, tag, and push.
 local tag_name = "v" .. next_version_str
 p.run("cargo build")
-p.run("echo", {"I am sure that I updated CHANGELOG.md"}, { confirm = true })
-p.run("git add Cargo.toml Cargo.lock CHANGELOG.md")
+local update_changelog = p.ask(
+  "Do you update the CHANGELOG.md file (Enter 'Yes' to continue)?",
+  { default = "No" }
+)
+if update_changelog ~= "Yes" then
+  error("Please update the CHANGELOG.md file before releasing.", 0)
+end
 p.run(
   "git",
   {"commit", "-m", 'chore: Release "' .. next_version_str .. '".'},
