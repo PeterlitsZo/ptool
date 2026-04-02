@@ -1,7 +1,7 @@
-#!/usr/bin/env ptool run
+#!/usr/bin/env -S ptool run
 
-p.use("v0.1.0")
-p.config({ run = { check = true } })
+p.use("v0.2.0")
+p.config{ run = { check = true } }
 
 -- Parse arguments.
 local args = p.args.parse({
