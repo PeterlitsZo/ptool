@@ -7,6 +7,9 @@
 - Expanded platform detection, Lua `ptool.platform` arch reporting, release
   artifacts, and the install script to cover more Linux, macOS, and Windows
   targets, including `x86`, `arm`, and `riscv64` support where applicable.
+- Changed `scripts/install.sh` to accept an optional full release tag such as
+  `v0.2.0`, so users can install a specific version instead of only the latest
+  stable release.
 
 ## v0.2.0 (2026-03-30)
 

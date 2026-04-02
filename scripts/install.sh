@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-BASE_URL="https://peterlits.net/ptool/release/latest"
+RELEASE_BASE_URL="https://peterlits.net/ptool/release"
 INSTALL_DIR="${HOME}/.local/bin"
 tmpdir=""
 
@@ -11,6 +11,45 @@ need_cmd() {
     printf 'Error: required command not found: %s\n' "$1" >&2
     exit 1
   fi
+}
+
+usage() {
+  cat >&2 <<'EOF'
+Usage: install.sh [<tag>]
+
+Install the latest stable release by default, or install a specific release tag
+such as v0.2.0 or v0.2.0-alpha.1.
+EOF
+}
+
+parse_tag() {
+  case "$#" in
+    0)
+      printf '%s\n' ''
+      ;;
+    1)
+      case "$1" in
+        v*)
+          if [[ "$1" == */* ]]; then
+            printf 'Error: release tag must not contain `/`: %s\n' "$1" >&2
+            usage
+            exit 1
+          fi
+          printf '%s\n' "$1"
+          ;;
+        *)
+          printf 'Error: expected a full release tag such as v0.2.0: %s\n' "$1" >&2
+          usage
+          exit 1
+          ;;
+      esac
+      ;;
+    *)
+      printf 'Error: expected at most one release tag argument.\n' >&2
+      usage
+      exit 1
+      ;;
+  esac
 }
 
 detect_asset() {
@@ -73,14 +112,24 @@ cleanup() {
 
 main() {
   local asset archive_name archive_url archive_path extracted_path dest_path
+  local release_tag release_path
 
   need_cmd curl
   need_cmd tar
   need_cmd mktemp
 
+  release_tag="$(parse_tag "$@")"
   asset="$(detect_asset)"
-  archive_name="ptool-${asset}.tar.gz"
-  archive_url="${BASE_URL}/${archive_name}"
+
+  if [ -n "$release_tag" ]; then
+    release_path="${RELEASE_BASE_URL}/${release_tag}"
+    archive_name="ptool-${release_tag}-${asset}.tar.gz"
+  else
+    release_path="${RELEASE_BASE_URL}/latest"
+    archive_name="ptool-${asset}.tar.gz"
+  fi
+
+  archive_url="${release_path}/${archive_name}"
 
   tmpdir="$(mktemp -d)"
   trap cleanup EXIT

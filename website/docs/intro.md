@@ -23,6 +23,12 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash
 The installer downloads the latest prebuilt release for the current platform,
 installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed.
 
+To install a specific release tag instead of the latest stable release:
+
+```sh
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
+```
+
 ## Minimal script
 
 ```lua
