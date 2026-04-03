@@ -19,7 +19,15 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'zh-Hans'],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en',
+      },
+      'zh-Hans': {
+        htmlLang: 'zh-CN',
+      },
+    },
   },
 
   presets: [
@@ -48,6 +56,10 @@ const config: Config = {
           sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Docs',
+        },
+        {
+          type: 'localeDropdown',
+          position: 'left',
         },
         {
           href: 'https://github.com/PeterlitsZo/ptool/blob/main/CHANGELOG.md',

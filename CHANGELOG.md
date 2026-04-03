@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added zh-Hans i18n support for the Docusaurus docs site, including a locale
+  switcher, a translated homepage, and localized Chinese documentation pages.
 - Added `ptool.ssh.Connection:run_capture`, which mirrors
   `Connection:run(...)` while defaulting both `stdout` and `stderr` to
   captured output, and documented the new SSH Lua API.

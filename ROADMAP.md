@@ -1,8 +1,9 @@
 # v0.4.0
 
 - [ ] Support just `#!/usr/bin/env ptool`.
-- [ ] Echo for SSH connection's `:run` and `:run_capture`.
 - [ ] Make the `p.ask` more powerful.
+- [ ] More i18n support.
+- [ ] Support show the user and host in `p.run`, ssh connection's `run`, etc.
 
 # v0.3.0
 
@@ -11,14 +12,14 @@
 - [ ] Make the document website better.
 - [ ] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
 - [x] Let `release.lua` use `p.ask`.
-- [ ] Make the `install.sh` support installing a specific version, e.g.
+- [x] Make the `install.sh` support installing a specific version, e.g.
       `install.sh 0.2.0-alpha.1`.
 - [ ] Make the `install.sh` support installing to a specified directory, e.g.
       `install.sh --dir /usr/local/bin`.
 - [ ] Support `ptool.ssh.Connection:run_capture`.
 - [ ] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
-- [ ] Make document support i18n.
+- [x] Make document support i18n.
 - [ ] Make REPL support readline-like features.
 - [ ] Fix the local variable not working in REPL.
 - [ ] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
