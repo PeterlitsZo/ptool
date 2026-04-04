@@ -3,7 +3,7 @@
 set -euo pipefail
 
 RELEASE_BASE_URL="https://peterlits.net/ptool/release"
-INSTALL_DIR="${HOME}/.local/bin"
+DEFAULT_INSTALL_DIR="${HOME}/.local/bin"
 tmpdir=""
 
 need_cmd() {
@@ -15,41 +15,66 @@ need_cmd() {
 
 usage() {
   cat >&2 <<'EOF'
-Usage: install.sh [<tag>]
+Usage: install.sh [--bin-dir=<path>] [<tag>]
 
 Install the latest stable release by default, or install a specific release tag
 such as v0.2.0 or v0.2.0-alpha.1.
+
+Options:
+  --bin-dir=<path>   Install the ptool binary into <path> instead of ~/.local/bin.
 EOF
 }
 
-parse_tag() {
-  case "$#" in
-    0)
-      printf '%s\n' ''
-      ;;
-    1)
-      case "$1" in
-        v*)
-          if [[ "$1" == */* ]]; then
-            printf 'Error: release tag must not contain `/`: %s\n' "$1" >&2
-            usage
-            exit 1
-          fi
-          printf '%s\n' "$1"
-          ;;
-        *)
-          printf 'Error: expected a full release tag such as v0.2.0: %s\n' "$1" >&2
+parse_args() {
+  INSTALL_DIR="${DEFAULT_INSTALL_DIR}"
+  RELEASE_TAG=""
+
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      --bin-dir)
+        if [ "$#" -lt 2 ]; then
+          printf 'Error: --bin-dir requires a path.\n' >&2
           usage
           exit 1
-          ;;
-      esac
-      ;;
-    *)
-      printf 'Error: expected at most one release tag argument.\n' >&2
-      usage
-      exit 1
-      ;;
-  esac
+        fi
+        INSTALL_DIR="$2"
+        shift 2
+        ;;
+      --bin-dir=*)
+        INSTALL_DIR="${1#--bin-dir=}"
+        shift
+        ;;
+      --help|-h)
+        usage
+        exit 0
+        ;;
+      v*)
+        if [ -n "$RELEASE_TAG" ]; then
+          printf 'Error: expected at most one release tag argument.\n' >&2
+          usage
+          exit 1
+        fi
+        if [[ "$1" == */* ]]; then
+          printf 'Error: release tag must not contain `/`: %s\n' "$1" >&2
+          usage
+          exit 1
+        fi
+        RELEASE_TAG="$1"
+        shift
+        ;;
+      *)
+        printf 'Error: unrecognized argument: %s\n' "$1" >&2
+        usage
+        exit 1
+        ;;
+    esac
+  done
+
+  if [ -z "$INSTALL_DIR" ]; then
+    printf 'Error: --bin-dir must not be empty.\n' >&2
+    usage
+    exit 1
+  fi
 }
 
 detect_asset() {
@@ -112,18 +137,18 @@ cleanup() {
 
 main() {
   local asset archive_name archive_url archive_path extracted_path dest_path
-  local release_tag release_path
+  local release_path
 
   need_cmd curl
   need_cmd tar
   need_cmd mktemp
 
-  release_tag="$(parse_tag "$@")"
+  parse_args "$@"
   asset="$(detect_asset)"
 
-  if [ -n "$release_tag" ]; then
-    release_path="${RELEASE_BASE_URL}/${release_tag}"
-    archive_name="ptool-${release_tag}-${asset}.tar.gz"
+  if [ -n "$RELEASE_TAG" ]; then
+    release_path="${RELEASE_BASE_URL}/${RELEASE_TAG}"
+    archive_name="ptool-${RELEASE_TAG}-${asset}.tar.gz"
   else
     release_path="${RELEASE_BASE_URL}/latest"
     archive_name="ptool-${asset}.tar.gz"

@@ -14,6 +14,12 @@ Install a specific release tag:
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
 ```
 
+Install into a custom binary directory:
+
+```bash
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
+```
+
 ## Usage
 
 ```bash

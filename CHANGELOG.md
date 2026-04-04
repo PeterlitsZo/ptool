@@ -18,6 +18,8 @@
 - Changed `scripts/install.sh` to accept an optional full release tag such as
   `v0.2.0`, so users can install a specific version instead of only the latest
   stable release.
+- Changed `scripts/install.sh` to accept `--bin-dir`, so users can install the
+  `ptool` binary into a custom directory instead of only `~/.local/bin`.
 - Expanded `ptool.semver.bump` with `prepatch`, `preminor`, and `premajor`
   operations plus an optional prerelease channel, and updated
   `scripts/release.lua` to support channel-aware prerelease bumps.

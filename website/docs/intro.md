@@ -29,6 +29,12 @@ To install a specific release tag instead of the latest stable release:
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
 ```
 
+To install into a custom binary directory instead of `~/.local/bin`:
+
+```sh
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
+```
+
 ## Minimal script
 
 ```lua

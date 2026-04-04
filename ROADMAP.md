@@ -4,19 +4,20 @@
 - [ ] Make the `p.ask` more powerful.
 - [ ] More i18n support.
 - [ ] Support show the user and host in `p.run`, ssh connection's `run`, etc.
+- [ ] Let `p.fs.write` and `p.fs.read` support bytes.
 
 # v0.3.0
 
 - [x] Rename `ptool` crate to `ptool-lua`.
 - [x] Support more OS and arch.
 - [ ] Make the document website better.
-- [ ] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
+- [x] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
 - [x] Let `release.lua` use `p.ask`.
 - [x] Make the `install.sh` support installing a specific version, e.g.
       `install.sh 0.2.0-alpha.1`.
-- [ ] Make the `install.sh` support installing to a specified directory, e.g.
+- [x] Make the `install.sh` support installing to a specified directory, e.g.
       `install.sh --dir /usr/local/bin`.
-- [ ] Support `ptool.ssh.Connection:run_capture`.
+- [x] Support `ptool.ssh.Connection:run_capture`.
 - [ ] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
 - [x] Make document support i18n.
