@@ -1,6 +1,7 @@
 mod ansi;
 mod db;
 mod error;
+mod exec;
 mod fs;
 mod hash;
 mod net;
@@ -11,6 +12,10 @@ mod ssh;
 pub use ansi::{Color, StyleOptions};
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
+pub use exec::{
+    RunOptions, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
+    resolve_run_cwd, run_command,
+};
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
@@ -138,6 +143,10 @@ impl PtoolEngine {
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {
         db::connect(Arc::clone(&self.runtime), url, current_dir)
+    }
+
+    pub fn run_command(&self, options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
+        exec::run_command(options, current_dir)
     }
 
     pub fn ssh_connect(

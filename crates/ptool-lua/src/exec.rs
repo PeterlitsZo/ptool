@@ -3,16 +3,13 @@ use inquire::{Confirm, InquireError};
 use jiff::Zoned;
 use mlua::{Lua, Table, Value, Variadic};
 use owo_colors::OwoColorize;
-use std::path::{Path, PathBuf};
-use std::process::Command as ProcessCommand;
-use std::process::{ExitStatus, Output, Stdio};
+use ptool_engine::{
+    PtoolEngine, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
+    resolve_run_cwd,
+};
+use std::path::Path;
 
-#[derive(Clone, Copy)]
-enum StreamMode {
-    Inherit,
-    Capture,
-    Null,
-}
+type StreamMode = RunStreamMode;
 
 #[derive(Clone, Copy)]
 struct StreamDefaults {
@@ -31,13 +28,8 @@ const RUN_CAPTURE_STREAM_DEFAULTS: StreamDefaults = StreamDefaults {
 };
 
 struct RunOptions {
-    cmd: String,
-    args: Vec<String>,
-    cwd: Option<String>,
-    env: Option<Table>,
+    inner: ptool_engine::RunOptions,
     echo: bool,
-    stdout: StreamMode,
-    stderr: StreamMode,
     check: bool,
     confirm: bool,
     retry: bool,
@@ -45,7 +37,7 @@ struct RunOptions {
 
 struct RunCallOverrides {
     cwd: Option<String>,
-    env: Option<Table>,
+    env: Option<Vec<(String, String)>>,
     echo: Option<bool>,
     stdout: Option<StreamMode>,
     stderr: Option<StreamMode>,
@@ -58,21 +50,31 @@ pub(crate) fn run_command(
     lua: &Lua,
     args: Variadic<Value>,
     current_dir: &Path,
-    defaults: RunConfig,
-) -> mlua::Result<Value> {
-    run_command_with_stream_defaults(lua, args, current_dir, defaults, RUN_STREAM_DEFAULTS)
-}
-
-pub(crate) fn run_capture_command(
-    lua: &Lua,
-    args: Variadic<Value>,
-    current_dir: &Path,
+    engine: &PtoolEngine,
     defaults: RunConfig,
 ) -> mlua::Result<Value> {
     run_command_with_stream_defaults(
         lua,
         args,
         current_dir,
+        engine,
+        defaults,
+        RUN_STREAM_DEFAULTS,
+    )
+}
+
+pub(crate) fn run_capture_command(
+    lua: &Lua,
+    args: Variadic<Value>,
+    current_dir: &Path,
+    engine: &PtoolEngine,
+    defaults: RunConfig,
+) -> mlua::Result<Value> {
+    run_command_with_stream_defaults(
+        lua,
+        args,
+        current_dir,
+        engine,
         defaults,
         RUN_CAPTURE_STREAM_DEFAULTS,
     )
@@ -82,15 +84,16 @@ fn run_command_with_stream_defaults(
     lua: &Lua,
     args: Variadic<Value>,
     current_dir: &Path,
+    engine: &PtoolEngine,
     defaults: RunConfig,
     stream_defaults: StreamDefaults,
 ) -> mlua::Result<Value> {
     let options = parse_run_options(args, defaults, stream_defaults)?;
-    let cmd_for_error = options.cmd.clone();
-    let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
+    let cmd_for_error = options.inner.cmd.clone();
+    let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
 
     let display = if options.echo || options.confirm || (options.check && options.retry) {
-        let command = format_command_for_display(&options.cmd, &options.args);
+        let command = format_command_for_display(&options.inner.cmd, &options.inner.args);
         Some((resolved_cwd.clone(), command))
     } else {
         None
@@ -119,10 +122,10 @@ fn run_command_with_stream_defaults(
             print_command_echo(display_cwd, display_command);
         }
 
-        let output = run_process(&options, &resolved_cwd)?;
-        let stdout = bytes_to_captured_string(&output.stdout, options.stdout);
-        let stderr = bytes_to_captured_string(&output.stderr, options.stderr);
-        if options.check && !output.status.success() {
+        let result = engine
+            .run_command(&options.inner, current_dir)
+            .map_err(engine_error)?;
+        if options.check && !result.ok {
             if options.retry {
                 let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
                     mlua::Error::runtime("ptool.run internal error: missing display info")
@@ -130,8 +133,8 @@ fn run_command_with_stream_defaults(
                 if prompt_retry_after_failure(
                     display_cwd,
                     display_command,
-                    output.status.code(),
-                    stderr.as_deref(),
+                    result.code,
+                    result.stderr.as_deref(),
                     &cmd_for_error,
                 )? {
                     is_retry = true;
@@ -141,31 +144,13 @@ fn run_command_with_stream_defaults(
 
             return Err(build_run_failed_error(
                 &cmd_for_error,
-                output.status.code(),
-                stderr.as_deref(),
+                result.code,
+                result.stderr.as_deref(),
             ));
         }
 
-        return build_run_result(lua, output.status, stdout, stderr, cmd_for_error);
+        return build_run_result(lua, result, cmd_for_error);
     }
-}
-
-fn run_process(options: &RunOptions, resolved_cwd: &Path) -> mlua::Result<Output> {
-    let mut command = ProcessCommand::new(&options.cmd);
-    command.args(&options.args);
-    command.current_dir(resolved_cwd);
-
-    if let Some(vars) = options.env.clone() {
-        for pair in vars.pairs::<String, String>() {
-            let (key, value) = pair?;
-            command.env(key, value);
-        }
-    }
-
-    apply_stream_mode_for_stdout(&mut command, options.stdout);
-    apply_stream_mode_for_stderr(&mut command, options.stderr);
-
-    command.output().map_err(mlua::Error::external)
 }
 
 fn parse_run_options(
@@ -179,13 +164,15 @@ fn parse_run_options(
             Some(Value::String(cmdline)) => {
                 let (cmd, args) = parse_cmdline_to_cmd_and_args(&cmdline.to_str()?)?;
                 Ok(RunOptions {
-                    cmd,
-                    args,
-                    cwd: None,
-                    env: None,
+                    inner: ptool_engine::RunOptions {
+                        cmd,
+                        args,
+                        cwd: None,
+                        env: Vec::new(),
+                        stdout: stream_defaults.stdout,
+                        stderr: stream_defaults.stderr,
+                    },
                     echo: defaults.echo,
-                    stdout: stream_defaults.stdout,
-                    stderr: stream_defaults.stderr,
                     check: defaults.check,
                     confirm: defaults.confirm,
                     retry: defaults.retry,
@@ -200,13 +187,15 @@ fn parse_run_options(
         },
         2 => match (args.first(), args.get(1)) {
             (Some(Value::String(cmd)), Some(Value::String(argsline))) => Ok(RunOptions {
-                cmd: cmd.to_str()?.to_owned(),
-                args: parse_argsline(&argsline.to_str()?)?,
-                cwd: None,
-                env: None,
+                inner: ptool_engine::RunOptions {
+                    cmd: cmd.to_str()?.to_owned(),
+                    args: parse_argsline(&argsline.to_str()?)?,
+                    cwd: None,
+                    env: Vec::new(),
+                    stdout: stream_defaults.stdout,
+                    stderr: stream_defaults.stderr,
+                },
                 echo: defaults.echo,
-                stdout: stream_defaults.stdout,
-                stderr: stream_defaults.stderr,
                 check: defaults.check,
                 confirm: defaults.confirm,
                 retry: defaults.retry,
@@ -225,13 +214,15 @@ fn parse_run_options(
                     ))
                 } else {
                     Ok(RunOptions {
-                        cmd: cmd_or_cmdline.to_str()?.to_owned(),
-                        args: parse_string_list(second_table)?,
-                        cwd: None,
-                        env: None,
+                        inner: ptool_engine::RunOptions {
+                            cmd: cmd_or_cmdline.to_str()?.to_owned(),
+                            args: parse_string_list(second_table)?,
+                            cwd: None,
+                            env: Vec::new(),
+                            stdout: stream_defaults.stdout,
+                            stderr: stream_defaults.stderr,
+                        },
                         echo: defaults.echo,
-                        stdout: stream_defaults.stdout,
-                        stderr: stream_defaults.stderr,
                         check: defaults.check,
                         confirm: defaults.confirm,
                         retry: defaults.retry,
@@ -296,7 +287,7 @@ fn parse_full_options_table(
 
     let args = parse_named_args(&options)?;
     let cwd: Option<String> = options.get("cwd")?;
-    let env: Option<Table> = options.get("env")?;
+    let env = parse_env_table(options.get::<Option<Table>>("env")?)?;
     let echo = options
         .get::<Option<bool>>("echo")?
         .unwrap_or(defaults.echo);
@@ -323,13 +314,15 @@ fn parse_full_options_table(
         .unwrap_or(defaults.retry);
 
     Ok(RunOptions {
-        cmd,
-        args,
-        cwd,
-        env,
+        inner: ptool_engine::RunOptions {
+            cmd,
+            args,
+            cwd,
+            env,
+            stdout,
+            stderr,
+        },
         echo,
-        stdout,
-        stderr,
         check,
         confirm,
         retry,
@@ -391,7 +384,7 @@ fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallO
 
     Ok(RunCallOverrides {
         cwd: options.get("cwd")?,
-        env: options.get("env")?,
+        env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
         echo: options.get::<Option<bool>>("echo")?,
         stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?,
         stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?,
@@ -409,13 +402,15 @@ fn apply_overrides(
     stream_defaults: StreamDefaults,
 ) -> RunOptions {
     RunOptions {
-        cmd,
-        args,
-        cwd: overrides.cwd,
-        env: overrides.env,
+        inner: ptool_engine::RunOptions {
+            cmd,
+            args,
+            cwd: overrides.cwd,
+            env: overrides.env.unwrap_or_default(),
+            stdout: overrides.stdout.unwrap_or(stream_defaults.stdout),
+            stderr: overrides.stderr.unwrap_or(stream_defaults.stderr),
+        },
         echo: overrides.echo.unwrap_or(defaults.echo),
-        stdout: overrides.stdout.unwrap_or(stream_defaults.stdout),
-        stderr: overrides.stderr.unwrap_or(stream_defaults.stderr),
         check: overrides.check.unwrap_or(defaults.check),
         confirm: overrides.confirm.unwrap_or(defaults.confirm),
         retry: overrides.retry.unwrap_or(defaults.retry),
@@ -424,18 +419,16 @@ fn apply_overrides(
 
 fn build_run_result(
     lua: &Lua,
-    status: ExitStatus,
-    stdout: Option<String>,
-    stderr: Option<String>,
+    run_result: RunResult,
     cmd_for_error: String,
 ) -> mlua::Result<Value> {
     let result = lua.create_table()?;
-    result.set("ok", status.success())?;
-    result.set("code", status.code().map(i64::from))?;
-    if let Some(stdout) = stdout {
+    result.set("ok", run_result.ok)?;
+    result.set("code", run_result.code.map(i64::from))?;
+    if let Some(stdout) = run_result.stdout {
         result.set("stdout", stdout)?;
     }
-    if let Some(stderr) = stderr {
+    if let Some(stderr) = run_result.stderr {
         result.set("stderr", stderr)?;
     }
 
@@ -482,58 +475,12 @@ fn parse_stream_mode(
     Ok(Some(mode))
 }
 
-fn apply_stream_mode_for_stdout(command: &mut ProcessCommand, mode: StreamMode) {
-    match mode {
-        StreamMode::Inherit => {
-            command.stdout(Stdio::inherit());
-        }
-        StreamMode::Capture => {
-            command.stdout(Stdio::piped());
-        }
-        StreamMode::Null => {
-            command.stdout(Stdio::null());
-        }
-    }
-}
-
-fn apply_stream_mode_for_stderr(command: &mut ProcessCommand, mode: StreamMode) {
-    match mode {
-        StreamMode::Inherit => {
-            command.stderr(Stdio::inherit());
-        }
-        StreamMode::Capture => {
-            command.stderr(Stdio::piped());
-        }
-        StreamMode::Null => {
-            command.stderr(Stdio::null());
-        }
-    }
-}
-
-fn bytes_to_captured_string(bytes: &[u8], mode: StreamMode) -> Option<String> {
-    match mode {
-        StreamMode::Capture => Some(String::from_utf8_lossy(bytes).to_string()),
-        StreamMode::Inherit | StreamMode::Null => None,
-    }
-}
-
 fn build_run_failed_error(
     cmd_for_error: &str,
     code: Option<i32>,
     stderr: Option<&str>,
 ) -> mlua::Error {
-    let code = code
-        .map(|value| value.to_string())
-        .unwrap_or_else(|| "terminated by signal".to_string());
-    let mut message = format!("ptool.run command `{cmd_for_error}` failed with status {code}");
-    if let Some(stderr) = stderr {
-        let stderr = stderr.trim();
-        if !stderr.is_empty() {
-            message.push_str(": ");
-            message.push_str(stderr);
-        }
-    }
-    mlua::Error::runtime(message)
+    mlua::Error::runtime(format_run_failed_message(cmd_for_error, code, stderr))
 }
 
 fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::Result<()> {
@@ -641,41 +588,6 @@ fn parse_shell_words(input: &str, context: &str) -> mlua::Result<Vec<String>> {
         .ok_or_else(|| mlua::Error::runtime(format!("{context} failed to parse as shell words")))
 }
 
-fn resolve_run_cwd(current_dir: &Path, cwd: Option<&str>) -> PathBuf {
-    let base = current_dir.to_path_buf();
-    match cwd {
-        Some(dir) => {
-            let path = PathBuf::from(dir);
-            if path.is_absolute() {
-                path
-            } else {
-                base.join(path)
-            }
-        }
-        None => base,
-    }
-}
-
-fn format_command_for_display(cmd: &str, args: &[String]) -> String {
-    let mut parts = Vec::with_capacity(args.len() + 1);
-    parts.push(shell_quote(cmd));
-    for arg in args {
-        parts.push(shell_quote(arg));
-    }
-    parts.join(" ")
-}
-
-fn shell_quote(value: &str) -> String {
-    const SAFE_CHARS: &str =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._/:@%+=";
-    if !value.is_empty() && value.chars().all(|ch| SAFE_CHARS.contains(ch)) {
-        return value.to_string();
-    }
-
-    let escaped = value.replace('\'', "'\"'\"'");
-    format!("'{escaped}'")
-}
-
 fn print_command_echo(cwd: &Path, command: &str) {
     let time = Zoned::now().strftime("%Y-%m-%d %H:%M:%S").to_string();
     let time_segment = format!("[{time}]");
@@ -704,4 +616,27 @@ fn print_command_self(command: &str) {
         print!("\n{} {}", "...".dimmed(), line.to_string().bold());
     }
     println!();
+}
+
+fn parse_env_table(env: Option<Table>) -> mlua::Result<Vec<(String, String)>> {
+    let Some(env) = env else {
+        return Ok(Vec::new());
+    };
+
+    let mut vars = Vec::new();
+    for pair in env.pairs::<String, String>() {
+        vars.push(pair?);
+    }
+    Ok(vars)
+}
+
+fn parse_optional_env_table(env: Option<Table>) -> mlua::Result<Option<Vec<(String, String)>>> {
+    match env {
+        Some(env) => Ok(Some(parse_env_table(Some(env))?)),
+        None => Ok(None),
+    }
+}
+
+fn engine_error(err: ptool_engine::Error) -> mlua::Error {
+    mlua::Error::runtime(err.to_string())
 }
