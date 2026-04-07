@@ -199,7 +199,7 @@ impl LuaWorld {
     }
 
     pub(crate) fn http_request(&self, options: Table) -> mlua::Result<crate::http::HttpResponse> {
-        crate::http::request(options)
+        crate::http::request(&self.engine, options)
     }
 
     pub(crate) fn net_parse_url(&self, lua: &Lua, input: String) -> mlua::Result<Table> {

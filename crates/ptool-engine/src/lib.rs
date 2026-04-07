@@ -4,6 +4,7 @@ mod error;
 mod exec;
 mod fs;
 mod hash;
+mod http;
 mod net;
 mod platform;
 mod semver;
@@ -17,6 +18,7 @@ pub use exec::{
     resolve_run_cwd, run_command,
 };
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
+pub use http::{HttpRequestOptions, HttpResponse};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
 pub use semver::{SemverBuildMetadata, SemverPrerelease, SemverVersion};
@@ -114,6 +116,10 @@ impl PtoolEngine {
 
     pub fn parse_host_port(&self, input: &str) -> Result<HostPortParts> {
         net::parse_host_port(input)
+    }
+
+    pub fn http_request(&self, options: HttpRequestOptions) -> Result<HttpResponse> {
+        http::request(options)
     }
 
     pub fn semver_parse(&self, input: &str) -> Result<SemverVersion> {
