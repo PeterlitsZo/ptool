@@ -5,6 +5,7 @@
 - [ ] More i18n support.
 - [ ] Support show the user and host in `p.run`, ssh connection's `run`, etc.
 - [ ] Let `p.fs.write` and `p.fs.read` support bytes.
+- [ ] Let the `glob` function support working_dir optioon.
 
 # v0.3.0
 

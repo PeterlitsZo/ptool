@@ -6,6 +6,7 @@ mod fs;
 mod hash;
 mod http;
 mod net;
+mod path;
 mod platform;
 mod semver;
 mod ssh;
@@ -63,6 +64,52 @@ impl PtoolEngine {
 
     pub fn current_arch(&self) -> Arch {
         platform::detect_current_arch()
+    }
+
+    pub fn path_join<I, S>(&self, segments: I) -> Result<String>
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<str>,
+    {
+        path::join(segments)
+    }
+
+    pub fn path_normalize(&self, path: &str) -> Result<String> {
+        path::normalize(path)
+    }
+
+    pub fn path_abspath(
+        &self,
+        path: &str,
+        base: Option<&str>,
+        current_dir: &Path,
+    ) -> Result<String> {
+        path::abspath(path, base, current_dir)
+    }
+
+    pub fn path_relpath(
+        &self,
+        path: &str,
+        base: Option<&str>,
+        current_dir: &Path,
+    ) -> Result<String> {
+        path::relpath(path, base, current_dir)
+    }
+
+    pub fn path_isabs(&self, path: &str) -> Result<bool> {
+        path::isabs(path)
+    }
+
+    pub fn path_dirname(&self, path: &str) -> Result<String> {
+        path::dirname(path)
+    }
+
+    pub fn path_basename(&self, path: &str) -> Result<String> {
+        path::basename(path)
+    }
+
+    pub fn path_extname(&self, path: &str) -> Result<String> {
+        path::extname(path)
     }
 
     pub fn hash_sha256_hex(&self, bytes: &[u8]) -> String {

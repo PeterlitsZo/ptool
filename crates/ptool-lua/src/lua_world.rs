@@ -284,35 +284,35 @@ impl LuaWorld {
     }
 
     pub(crate) fn path_join(&self, segments: Variadic<String>) -> mlua::Result<String> {
-        crate::path::join(segments)
+        crate::path::join(&self.engine, segments)
     }
 
     pub(crate) fn path_normalize(&self, path: String) -> mlua::Result<String> {
-        crate::path::normalize(path)
+        crate::path::normalize(&self.engine, path)
     }
 
     pub(crate) fn path_abspath(&self, args: Variadic<String>) -> mlua::Result<String> {
-        crate::path::abspath_from_args(args, self.current_dir())
+        crate::path::abspath_from_args(&self.engine, args, self.current_dir())
     }
 
     pub(crate) fn path_relpath(&self, args: Variadic<String>) -> mlua::Result<String> {
-        crate::path::relpath_from_args(args, self.current_dir())
+        crate::path::relpath_from_args(&self.engine, args, self.current_dir())
     }
 
     pub(crate) fn path_isabs(&self, path: String) -> mlua::Result<bool> {
-        crate::path::isabs(path)
+        crate::path::isabs(&self.engine, path)
     }
 
     pub(crate) fn path_dirname(&self, path: String) -> mlua::Result<String> {
-        crate::path::dirname(path)
+        crate::path::dirname(&self.engine, path)
     }
 
     pub(crate) fn path_basename(&self, path: String) -> mlua::Result<String> {
-        crate::path::basename(path)
+        crate::path::basename(&self.engine, path)
     }
 
     pub(crate) fn path_extname(&self, path: String) -> mlua::Result<String> {
-        crate::path::extname(path)
+        crate::path::extname(&self.engine, path)
     }
 
     pub(crate) fn str_trim(&self, input: String) -> String {
