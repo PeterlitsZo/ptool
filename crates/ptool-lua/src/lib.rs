@@ -1,4 +1,5 @@
 mod ansi;
+mod command_echo;
 mod db;
 mod exec;
 mod fs;

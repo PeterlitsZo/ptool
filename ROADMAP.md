@@ -6,6 +6,10 @@
 - [ ] Support show the user and host in `p.run`, ssh connection's `run`, etc.
 - [ ] Let `p.fs.write` and `p.fs.read` support bytes.
 - [ ] Let the `glob` function support working_dir optioon.
+- [ ] Support a TUI toolkit.
+- [ ] Better error handling.
+- [ ] Fix the local variable not working in REPL.
+- [ ] Make REPL support readline-like features.
 
 # v0.3.0
 
@@ -19,15 +23,11 @@
 - [x] Make the `install.sh` support installing to a specified directory, e.g.
       `install.sh --dir /usr/local/bin`.
 - [x] Support `ptool.ssh.Connection:run_capture`.
-- [ ] Make ssh connection's can also echo the command.
+- [x] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
 - [x] Make document support i18n.
-- [ ] Make REPL support readline-like features.
-- [ ] Fix the local variable not working in REPL.
 - [ ] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
       this.
-- [ ] Support a TUI toolkit.
-- [ ] Better error handling.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 - [ ] Let the SSH connection support upload directories.

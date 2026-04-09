@@ -58,6 +58,7 @@ pub struct SshConnectionInfo {
 #[derive(Clone, Debug)]
 pub struct SshExecOptions {
     pub command: String,
+    pub display_cwd: Option<String>,
     pub stdin: Option<Vec<u8>>,
     pub echo: bool,
     pub stdout: SshStreamMode,
@@ -237,9 +238,6 @@ impl SshConnection {
 
     pub fn run(&self, options: SshExecOptions) -> Result<SshExecResult> {
         let info = self.info();
-        if options.echo {
-            println!("[ssh {}] {}", info.target, options.command);
-        }
 
         let mut state = self.state.borrow_mut();
         let session = state
@@ -307,6 +305,14 @@ impl SshConnection {
 
             Ok(result)
         })
+    }
+
+    pub fn resolve_display_cwd(&self, cwd: Option<&str>) -> Result<String> {
+        match cwd {
+            Some(cwd) if Path::new(cwd).is_absolute() => Ok(cwd.to_string()),
+            Some(cwd) => self.detect_remote_cwd_in(cwd),
+            None => self.detect_remote_cwd(),
+        }
     }
 
     pub fn upload_file(
@@ -519,6 +525,25 @@ impl SshConnection {
 
             Ok(code)
         })
+    }
+
+    fn detect_remote_cwd(&self) -> Result<String> {
+        self.detect_remote_cwd_with_command("pwd")
+    }
+
+    fn detect_remote_cwd_in(&self, cwd: &str) -> Result<String> {
+        let quoted = try_quote(cwd)
+            .map_err(|err| ssh_error(format!("invalid remote cwd `{cwd}`: {err}")))?;
+        self.detect_remote_cwd_with_command(format!("cd {quoted} && pwd").as_str())
+    }
+
+    fn detect_remote_cwd_with_command(&self, command: &str) -> Result<String> {
+        let result = self.exec_binary(command, None, true)?;
+        let cwd = String::from_utf8_lossy(&result.stdout).trim().to_string();
+        if cwd.is_empty() {
+            return Err(ssh_error("failed to determine remote cwd"));
+        }
+        Ok(cwd)
     }
 }
 

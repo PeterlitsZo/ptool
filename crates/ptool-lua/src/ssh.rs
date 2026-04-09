@@ -1,3 +1,4 @@
+use crate::command_echo::print_ssh_command_echo;
 use mlua::{Lua, Table, UserData, UserDataFields, UserDataMethods, Value, Variadic};
 use ptool_engine::{
     Error as EngineError, PtoolEngine, SshAuthRequest, SshConnectRequest, SshConnection,
@@ -119,7 +120,15 @@ impl LuaSshConnection {
     }
 
     fn run(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
-        let options = parse_run_call(args)?;
+        let mut options = parse_run_call(args)?;
+        if options.echo {
+            let display_cwd = self
+                .connection
+                .resolve_display_cwd(options.display_cwd.as_deref())
+                .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
+            print_ssh_command_echo(&self.info().target, &display_cwd, &options.command);
+            options.echo = false;
+        }
         let result = self
             .connection
             .run(options)
@@ -128,7 +137,15 @@ impl LuaSshConnection {
     }
 
     fn run_capture(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
-        let options = parse_run_capture_call(args)?;
+        let mut options = parse_run_capture_call(args)?;
+        if options.echo {
+            let display_cwd = self
+                .connection
+                .resolve_display_cwd(options.display_cwd.as_deref())
+                .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
+            print_ssh_command_echo(&self.info().target, &display_cwd, &options.command);
+            options.echo = false;
+        }
         let result = self
             .connection
             .run(options)
@@ -473,8 +490,9 @@ fn parse_run_call_with_defaults(
         1 => match args.first() {
             Some(Value::String(command)) => Ok(SshExecOptions {
                 command: command.to_str()?.to_string(),
+                display_cwd: None,
                 stdin: None,
-                echo: false,
+                echo: true,
                 stdout: stream_defaults.stdout,
                 stderr: stream_defaults.stderr,
                 check: false,
@@ -591,8 +609,9 @@ fn build_exec_options_from_cmdline(
 ) -> mlua::Result<SshExecOptions> {
     Ok(SshExecOptions {
         command,
+        display_cwd: None,
         stdin: options.stdin,
-        echo: options.echo.unwrap_or(false),
+        echo: options.echo.unwrap_or(true),
         stdout: options.stdout.unwrap_or(stream_defaults.stdout),
         stderr: options.stderr.unwrap_or(stream_defaults.stderr),
         check: options.check.unwrap_or(false),
@@ -620,8 +639,9 @@ fn build_exec_options_from_parts(
 
     Ok(SshExecOptions {
         command,
+        display_cwd: None,
         stdin: options.stdin,
-        echo: options.echo.unwrap_or(false),
+        echo: options.echo.unwrap_or(true),
         stdout: options.stdout.unwrap_or(stream_defaults.stdout),
         stderr: options.stderr.unwrap_or(stream_defaults.stderr),
         check: options.check.unwrap_or(false),
@@ -654,11 +674,13 @@ fn parse_run_options_table(
         }
     };
 
+    let display_cwd = cwd.clone();
     let command = wrap_remote_command(base_command, cwd, env, context)?;
     Ok(SshExecOptions {
         command,
+        display_cwd,
         stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, context)?,
-        echo: options.get::<Option<bool>>("echo")?.unwrap_or(false),
+        echo: options.get::<Option<bool>>("echo")?.unwrap_or(true),
         stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?
             .unwrap_or(stream_defaults.stdout),
         stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?

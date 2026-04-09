@@ -153,7 +153,7 @@ When `conn:run(options)` is used, `options` currently supports:
   remote shell command.
 - `stdin` (string, optional): String sent to the remote process stdin.
 - `echo` (boolean, optional): Whether to echo the remote command before
-  execution. Defaults to `false`.
+  execution. Defaults to `true`.
 - `check` (boolean, optional): Whether to raise an error immediately when the
   exit status is not `0`. Defaults to `false`.
 - `stdout` (string, optional): Stdout handling strategy. Supported values:
@@ -169,7 +169,7 @@ When the shortcut forms are used, the `options` table supports only:
 
 - `stdin` (string, optional): String sent to the remote process stdin.
 - `echo` (boolean, optional): Whether to echo the remote command before
-  execution. Defaults to `false`.
+  execution. Defaults to `true`.
 - `check` (boolean, optional): Whether to raise an error immediately when the
   exit status is not `0`. Defaults to `false`.
 - `stdout` (string, optional): Stdout handling strategy. Supported values:

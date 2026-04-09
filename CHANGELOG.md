@@ -15,6 +15,9 @@
 - Expanded platform detection, Lua `ptool.platform` arch reporting, release
   artifacts, and the install script to cover more Linux, macOS, and Windows
   targets, including `x86`, `arm`, and `riscv64` support where applicable.
+- Changed `ptool.ssh.Connection:run(...)` and `run_capture(...)` to echo remote
+  commands by default, including the SSH target and resolved remote working
+  directory in the echoed output when available.
 - Changed `scripts/install.sh` to accept an optional full release tag such as
   `v0.2.0`, so users can install a specific version instead of only the latest
   stable release.

@@ -1,8 +1,7 @@
+use crate::command_echo::print_local_command_echo;
 use crate::lua_world::RunConfig;
 use inquire::{Confirm, InquireError};
-use jiff::Zoned;
 use mlua::{Lua, Table, Value, Variadic};
-use owo_colors::OwoColorize;
 use ptool_engine::{
     PtoolEngine, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
     resolve_run_cwd,
@@ -103,7 +102,7 @@ fn run_command_with_stream_defaults(
         let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
             mlua::Error::runtime("ptool.run internal error: missing display info")
         })?;
-        print_command_echo(display_cwd, display_command);
+        print_local_command_echo(display_cwd, display_command);
     }
 
     if options.confirm {
@@ -119,7 +118,7 @@ fn run_command_with_stream_defaults(
             let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
                 mlua::Error::runtime("ptool.run internal error: missing display info")
             })?;
-            print_command_echo(display_cwd, display_command);
+            print_local_command_echo(display_cwd, display_command);
         }
 
         let result = engine
@@ -586,36 +585,6 @@ fn parse_argsline(input: &str) -> mlua::Result<Vec<String>> {
 fn parse_shell_words(input: &str, context: &str) -> mlua::Result<Vec<String>> {
     shlex::split(input)
         .ok_or_else(|| mlua::Error::runtime(format!("{context} failed to parse as shell words")))
-}
-
-fn print_command_echo(cwd: &Path, command: &str) {
-    let time = Zoned::now().strftime("%Y-%m-%d %H:%M:%S").to_string();
-    let time_segment = format!("[{time}]");
-    let cwd_segment = cwd.display().to_string();
-
-    print!(
-        "{} {} {}\n{} {}",
-        "┌".dimmed(),
-        time_segment.bright_black().bold(),
-        cwd_segment.cyan().bold(),
-        "└".dimmed(),
-        "$".green().bold(),
-    );
-    print_command_self(command);
-}
-
-fn print_command_self(command: &str) {
-    let mut lines = command.split('\n');
-    let Some(first) = lines.next() else {
-        println!();
-        return;
-    };
-
-    print!(" {}", first);
-    for line in lines {
-        print!("\n{} {}", "...".dimmed(), line.to_string().bold());
-    }
-    println!();
 }
 
 fn parse_env_table(env: Option<Table>) -> mlua::Result<Vec<(String, String)>> {
