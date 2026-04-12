@@ -1,42 +1,12 @@
-use clap::{Arg, ArgAction, Command, value_parser};
 use mlua::{AnyUserData, Lua, Table, UserData, UserDataMethods, Value};
+use ptool_engine::{
+    ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
+    ScriptArgValues, ScriptArgsSchema,
+};
 use std::collections::HashSet;
 use std::process;
 
 const ARG_FACTORY_SIGNATURE: &str = "ptool.args.arg(id, kind, options)";
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-enum ScriptArgKind {
-    Flag,
-    String,
-    Int,
-    Positional,
-}
-
-#[derive(Clone, Debug)]
-enum ScriptArgDefault {
-    String(String),
-    Int(i64),
-}
-
-#[derive(Clone, Debug)]
-struct ScriptArgSpec {
-    id: String,
-    kind: ScriptArgKind,
-    long: Option<String>,
-    short: Option<char>,
-    help: Option<String>,
-    required: bool,
-    multiple: bool,
-    default: Option<ScriptArgDefault>,
-}
-
-#[derive(Debug)]
-struct ScriptArgsSchema {
-    name: String,
-    about: Option<String>,
-    args: Vec<ScriptArgSpec>,
-}
 
 #[derive(Clone, Debug)]
 pub(crate) struct ScriptArgBuilder {
@@ -141,25 +111,54 @@ pub(crate) fn parse_script_args(
     script_args: &[String],
 ) -> mlua::Result<Table> {
     let schema = parse_script_args_schema(schema, default_name)?;
-    let matches = match try_parse_script_matches(&schema, script_args) {
-        Ok(matches) => matches,
+    let parsed = match ptool_engine::parse_script_args(&schema, script_args) {
+        Ok(parsed) => parsed,
         Err(err) => {
             let _ = err.print();
             process::exit(err.exit_code());
         }
     };
-    script_arg_matches_to_lua(lua, &schema, &matches)
+    parsed_script_args_to_lua(lua, &parsed)
 }
 
 fn parse_script_args_schema(schema: Table, default_name: &str) -> mlua::Result<ScriptArgsSchema> {
     let name = schema
         .get::<Option<String>>("name")?
         .unwrap_or_else(|| default_name.to_string());
+    parse_script_args_schema_with_context(schema, name, "ptool.args.parse(schema)", true)
+}
+
+fn parse_script_args_schema_with_context(
+    schema: Table,
+    name: String,
+    context: &str,
+    is_root: bool,
+) -> mlua::Result<ScriptArgsSchema> {
     let about: Option<String> = schema.get("about")?;
-    let Some(args_table) = schema.get::<Option<Table>>("args")? else {
-        return Err(mlua::Error::runtime(
-            "ptool.args.parse(schema) requires schema.args",
-        ));
+    let args = parse_script_arg_specs(
+        schema.get::<Option<Table>>("args")?,
+        &format!("{context}.args"),
+    )?;
+    let subcommands = parse_script_subcommands(
+        schema.get::<Option<Table>>("subcommands")?,
+        &format!("{context}.subcommands"),
+    )?;
+    let parsed = ScriptArgsSchema {
+        name,
+        about,
+        args,
+        subcommands,
+    };
+    ptool_engine::validate_script_args_schema(&parsed, context, is_root).map_err(engine_error)?;
+    Ok(parsed)
+}
+
+fn parse_script_arg_specs(
+    args_table: Option<Table>,
+    context: &str,
+) -> mlua::Result<Vec<ScriptArgSpec>> {
+    let Some(args_table) = args_table else {
+        return Ok(Vec::new());
     };
 
     let mut args = Vec::new();
@@ -169,14 +168,55 @@ fn parse_script_args_schema(schema: Table, default_name: &str) -> mlua::Result<S
         let arg = parse_script_arg_spec(arg_value?, index + 1, args_count)?;
         if !seen_ids.insert(arg.id.clone()) {
             return Err(mlua::Error::runtime(format!(
-                "ptool.args.parse duplicate argument id `{}`",
+                "{context} duplicate argument id `{}`",
                 arg.id
             )));
         }
         args.push(arg);
     }
+    Ok(args)
+}
 
-    Ok(ScriptArgsSchema { name, about, args })
+fn parse_script_subcommands(
+    subcommands_table: Option<Table>,
+    context: &str,
+) -> mlua::Result<Vec<ScriptArgsSchema>> {
+    let Some(subcommands_table) = subcommands_table else {
+        return Ok(Vec::new());
+    };
+
+    let mut entries = Vec::new();
+    for pair in subcommands_table.pairs::<Value, Value>() {
+        let (key, value) = pair?;
+        let name = match key {
+            Value::String(name) => name.to_str()?.to_string(),
+            _ => {
+                return Err(mlua::Error::runtime(format!(
+                    "{context} keys must be strings"
+                )));
+            }
+        };
+        let Value::Table(schema) = value else {
+            return Err(mlua::Error::runtime(format!(
+                "{context}.{name} must be a table"
+            )));
+        };
+        entries.push((name, schema));
+    }
+
+    entries.sort_by(|a, b| a.0.cmp(&b.0));
+
+    let mut subcommands = Vec::with_capacity(entries.len());
+    for (name, schema) in entries {
+        let subcommand = parse_script_args_schema_with_context(
+            schema,
+            name.clone(),
+            &format!("{context}.{name}"),
+            false,
+        )?;
+        subcommands.push(subcommand);
+    }
+    Ok(subcommands)
 }
 
 fn parse_script_arg_spec(value: Value, index: usize, total: usize) -> mlua::Result<ScriptArgSpec> {
@@ -227,7 +267,7 @@ fn parse_script_arg_spec_from_table(
         multiple,
         default: default_value,
     };
-    validate_script_arg_spec(&spec, &context, index, total)?;
+    ptool_engine::validate_script_arg_spec(&spec, &context, index, total).map_err(engine_error)?;
     Ok(spec)
 }
 
@@ -243,7 +283,7 @@ fn parse_script_arg_spec_from_builder(
         ))
     })?;
     let spec = builder.spec.clone();
-    validate_script_arg_spec(&spec, &context, index, total)?;
+    ptool_engine::validate_script_arg_spec(&spec, &context, index, total).map_err(engine_error)?;
     Ok(spec)
 }
 
@@ -313,55 +353,6 @@ fn parse_default_value(
     }
 }
 
-fn validate_script_arg_spec(
-    spec: &ScriptArgSpec,
-    context: &str,
-    index: usize,
-    total: usize,
-) -> mlua::Result<()> {
-    validate_script_arg_spec_base(spec, context)?;
-    if matches!(spec.kind, ScriptArgKind::Positional) && spec.multiple && index != total {
-        return Err(mlua::Error::runtime(format!(
-            "{context} positional argument with multiple=true must be the last entry"
-        )));
-    }
-    Ok(())
-}
-
-fn validate_script_arg_spec_base(spec: &ScriptArgSpec, context: &str) -> mlua::Result<()> {
-    if matches!(spec.kind, ScriptArgKind::Positional) {
-        if spec.long.is_some() {
-            return Err(mlua::Error::runtime(format!(
-                "{context} positional argument cannot set `long`"
-            )));
-        }
-        if spec.short.is_some() {
-            return Err(mlua::Error::runtime(format!(
-                "{context} positional argument cannot set `short`"
-            )));
-        }
-        if spec.default.is_some() {
-            return Err(mlua::Error::runtime(format!(
-                "{context} positional argument cannot set `default`"
-            )));
-        }
-    }
-
-    if spec.multiple && !matches!(spec.kind, ScriptArgKind::String | ScriptArgKind::Positional) {
-        return Err(mlua::Error::runtime(format!(
-            "{context} only string/positional support multiple=true"
-        )));
-    }
-
-    if spec.default.is_some() && spec.multiple {
-        return Err(mlua::Error::runtime(format!(
-            "{context} does not support default with multiple=true"
-        )));
-    }
-
-    Ok(())
-}
-
 fn apply_builder_options(spec: &mut ScriptArgSpec, options: Table) -> mlua::Result<()> {
     if let Some(long) = options.get::<Option<String>>("long")? {
         spec.long = Some(long);
@@ -394,120 +385,33 @@ fn apply_builder_options(spec: &mut ScriptArgSpec, options: Table) -> mlua::Resu
     Ok(())
 }
 
-fn try_parse_script_matches(
-    schema: &ScriptArgsSchema,
-    script_args: &[String],
-) -> Result<clap::ArgMatches, clap::Error> {
-    let mut command = build_script_arg_command(schema);
-    let mut argv = Vec::with_capacity(script_args.len() + 1);
-    argv.push(schema.name.clone());
-    argv.extend(script_args.iter().cloned());
-    command.try_get_matches_from_mut(argv)
-}
-
-fn build_script_arg_command(schema: &ScriptArgsSchema) -> Command {
-    let mut command = Command::new(schema.name.clone());
-    if let Some(about) = &schema.about {
-        command = command.about(about.clone());
+fn parsed_script_args_to_lua(lua: &Lua, parsed: &ParsedScriptArgs) -> mlua::Result<Table> {
+    let values = script_arg_values_to_lua(lua, &parsed.values)?;
+    if parsed.command_path.is_empty() {
+        return Ok(values);
     }
 
-    let mut positional_index = 1;
-    for arg in &schema.args {
-        let mut clap_arg = Arg::new(arg.id.clone());
-        if let Some(help) = &arg.help {
-            clap_arg = clap_arg.help(help.clone());
-        }
-
-        match arg.kind {
-            ScriptArgKind::Flag => {
-                clap_arg = clap_arg.action(ArgAction::SetTrue).required(arg.required);
-            }
-            ScriptArgKind::String => {
-                clap_arg = clap_arg
-                    .value_parser(value_parser!(String))
-                    .required(arg.required);
-                if arg.multiple {
-                    clap_arg = clap_arg.action(ArgAction::Append).num_args(1..);
-                } else {
-                    clap_arg = clap_arg.action(ArgAction::Set);
-                }
-                if let Some(ScriptArgDefault::String(default)) = &arg.default {
-                    clap_arg = clap_arg.default_value(default.clone());
-                }
-            }
-            ScriptArgKind::Int => {
-                clap_arg = clap_arg
-                    .action(ArgAction::Set)
-                    .value_parser(value_parser!(i64))
-                    .required(arg.required);
-                if let Some(ScriptArgDefault::Int(default)) = arg.default.as_ref() {
-                    clap_arg = clap_arg.default_value(default.to_string());
-                }
-            }
-            ScriptArgKind::Positional => {
-                clap_arg = clap_arg.index(positional_index).required(arg.required);
-                positional_index += 1;
-                if arg.multiple {
-                    clap_arg = clap_arg.action(ArgAction::Append).num_args(0..);
-                } else {
-                    clap_arg = clap_arg.action(ArgAction::Set);
-                }
-            }
-        }
-
-        if let Some(long) = &arg.long {
-            clap_arg = clap_arg.long(long.clone());
-        }
-        if let Some(short) = arg.short {
-            clap_arg = clap_arg.short(short);
-        }
-        command = command.arg(clap_arg);
-    }
-
-    command
-}
-
-fn script_arg_matches_to_lua(
-    lua: &Lua,
-    schema: &ScriptArgsSchema,
-    matches: &clap::ArgMatches,
-) -> mlua::Result<Table> {
-    let values = lua.create_table()?;
-    for arg in &schema.args {
-        match arg.kind {
-            ScriptArgKind::Flag => {
-                values.set(arg.id.as_str(), matches.get_flag(&arg.id))?;
-            }
-            ScriptArgKind::String => {
-                if arg.multiple {
-                    let list = matches
-                        .get_many::<String>(&arg.id)
-                        .map(|items| items.cloned().collect::<Vec<_>>())
-                        .unwrap_or_default();
-                    values.set(arg.id.as_str(), strings_to_lua_table(lua, &list)?)?;
-                } else if let Some(value) = matches.get_one::<String>(&arg.id) {
-                    values.set(arg.id.as_str(), value.clone())?;
-                }
-            }
-            ScriptArgKind::Int => {
-                if let Some(value) = matches.get_one::<i64>(&arg.id) {
-                    values.set(arg.id.as_str(), *value)?;
-                }
-            }
-            ScriptArgKind::Positional => {
-                if arg.multiple {
-                    let list = matches
-                        .get_many::<String>(&arg.id)
-                        .map(|items| items.cloned().collect::<Vec<_>>())
-                        .unwrap_or_default();
-                    values.set(arg.id.as_str(), strings_to_lua_table(lua, &list)?)?;
-                } else if let Some(value) = matches.get_one::<String>(&arg.id) {
-                    values.set(arg.id.as_str(), value.clone())?;
-                }
-            }
-        }
-    }
+    values.set(
+        "command_path",
+        strings_to_lua_table(lua, &parsed.command_path)?,
+    )?;
+    values.set("args", script_arg_values_to_lua(lua, &parsed.args)?)?;
     Ok(values)
+}
+
+fn script_arg_values_to_lua(lua: &Lua, values: &ScriptArgValues) -> mlua::Result<Table> {
+    let table = lua.create_table()?;
+    for (key, value) in values {
+        match value {
+            ScriptArgValue::Flag(value) => table.set(key.as_str(), *value)?,
+            ScriptArgValue::String(value) => table.set(key.as_str(), value.clone())?,
+            ScriptArgValue::Strings(values) => {
+                table.set(key.as_str(), strings_to_lua_table(lua, values)?)?;
+            }
+            ScriptArgValue::Int(value) => table.set(key.as_str(), *value)?,
+        }
+    }
+    Ok(table)
 }
 
 fn strings_to_lua_table(lua: &Lua, values: &[String]) -> mlua::Result<Table> {
@@ -516,4 +420,12 @@ fn strings_to_lua_table(lua: &Lua, values: &[String]) -> mlua::Result<Table> {
         table.set(index + 1, value.clone())?;
     }
     Ok(table)
+}
+
+fn validate_script_arg_spec_base(spec: &ScriptArgSpec, context: &str) -> mlua::Result<()> {
+    ptool_engine::validate_script_arg_spec_base(spec, context).map_err(engine_error)
+}
+
+fn engine_error(err: ptool_engine::Error) -> mlua::Error {
+    mlua::Error::runtime(err.to_string())
 }

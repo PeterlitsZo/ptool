@@ -8,6 +8,7 @@ mod http;
 mod net;
 mod path;
 mod platform;
+mod script_args;
 mod semver;
 mod ssh;
 
@@ -22,6 +23,11 @@ pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS};
+pub use script_args::{
+    ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
+    ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,
+    validate_script_arg_spec, validate_script_arg_spec_base, validate_script_args_schema,
+};
 pub use semver::{SemverBuildMetadata, SemverPrerelease, SemverVersion};
 pub use ssh::{
     SshAuthRequest, SshConnectRequest, SshConnection, SshConnectionInfo, SshExecOptions,

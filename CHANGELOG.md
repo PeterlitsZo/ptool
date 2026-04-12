@@ -9,6 +9,9 @@
 - Added `ptool.ssh.Connection:run_capture`, which mirrors
   `Connection:run(...)` while defaulting both `stdout` and `stderr` to
   captured output, and documented the new SSH Lua API.
+- Added subcommand support to `ptool.args.parse(...)`, including nested
+  subcommands, shared command-tree options, and documented Lua schema/return
+  value support.
 
 ### Changed
 

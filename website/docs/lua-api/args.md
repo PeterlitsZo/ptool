@@ -49,6 +49,8 @@ local res = ptool.args.parse({
 ## ptool.args.parse
 
 > `v0.1.0` - Introduced.
+>
+> `v0.3.0` - Added `subcommands` support.
 
 `ptool.args.parse(schema)` parses script arguments with `clap` and returns a
 table indexed by `id`.
@@ -76,10 +78,15 @@ print("Hello, " .. res.name .. "!")
 - `name` (string, optional): The command name, used in help output. Defaults to
   the script file name.
 - `about` (string, optional): Help description.
-- `args` (table, required): An array of argument definitions. Each item supports
+- `args` (table, optional): An array of argument definitions. Each item supports
   two forms:
   - An argument table.
   - A builder object returned by `ptool.args.arg(...)`.
+- `subcommands` (table, optional): A map of subcommand name to subcommand
+  schema. Each subcommand schema supports `about`, `args`, and `subcommands`
+  recursively.
+
+At least one of `args` or `subcommands` must be provided.
 
 Argument table fields:
 
@@ -102,6 +109,41 @@ Argument table fields:
   to `false`.
 - `default` (string/integer, optional): The default value.
 
+When `subcommands` is present, the current command's `args` act as shared
+options for that command tree, and are accepted before or after the selected
+subcommand.
+
+Example with subcommands:
+
+```lua
+local res = ptool.args.parse({
+  name = "demo",
+  args = {
+    ptool.args.arg("verbose", "flag", { short = "v" }),
+    ptool.args.arg("config", "string"),
+  },
+  subcommands = {
+    build = {
+      args = {
+        ptool.args.arg("release", "flag"),
+      },
+      subcommands = {
+        web = {
+          args = {
+            ptool.args.arg("out", "string"):required(),
+          },
+        },
+      },
+    },
+    clean = {
+      args = {
+        ptool.args.arg("all", "flag"),
+      },
+    },
+  },
+})
+```
+
 ### Constraints
 
 - The following constraints apply to both argument tables and builder syntax.
@@ -112,6 +154,13 @@ Argument table fields:
 - `multiple = true` is supported only for `string` and `positional`.
 - `default` is supported only for `string` and `int`, and cannot be used
   together with `multiple = true`.
+- When `subcommands` is present, `positional` arguments are not allowed in that
+  same schema.
+- When `subcommands` is present at the top level, argument ids `command_path`
+  and `args` are reserved.
+- Along one selected subcommand path, ancestor and descendant subcommands cannot
+  reuse the same argument `id`, because their values are merged into one `args`
+  table.
 
 ### Return Value
 
@@ -121,3 +170,26 @@ A Lua table is returned where keys are `id` and value types are as follows:
 - `string` -> `string` (or `string[]` when `multiple = true`)
 - `int` -> `integer`
 - `positional` -> `string` (or `string[]` when `multiple = true`)
+
+When `subcommands` is not present, the return value stays flat as above.
+
+When `subcommands` is present, the return value has this shape:
+
+- Top-level `args` values are returned directly on the top-level table.
+- `command_path` -> `string[]`: The matched subcommand path, for example
+  `{"build", "web"}`.
+- `args` -> `table`: The merged argument values from the matched subcommand path.
+
+For example:
+
+```lua
+{
+  verbose = true,
+  config = "cfg.toml",
+  command_path = { "build", "web" },
+  args = {
+    release = true,
+    out = "dist",
+  },
+}
+```
