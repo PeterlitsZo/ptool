@@ -10,6 +10,7 @@
 - [ ] Better error handling.
 - [ ] Fix the local variable not working in REPL.
 - [ ] Make REPL support readline-like features.
+- [ ] Support `split_lines` function.
 
 # v0.3.0
 
@@ -26,12 +27,12 @@
 - [x] Make ssh connection's can also echo the command.
 - [ ] Change the avatar icon of the document website.
 - [x] Make document support i18n.
-- [ ] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
+- [x] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
       this.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 - [ ] Let the SSH connection support upload directories.
-- [ ] Support the subcommand for `ptool.args`.
+- [x] Support the subcommand for `ptool.args`.
 
 # v0.2.0
 

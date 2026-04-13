@@ -58,9 +58,18 @@ local c = ptool.ssh.connect("[2001:db8::10]:2222")
 
 主机密钥行为：
 
-- 如果省略 `known_hosts_file`，则使用默认的 known_hosts 位置。
+- 如果省略 `known_hosts_file`，`ptool` 会在可用时跟随 `ssh -G`
+  给出的主机密钥配置。
+- 如果 `ssh -G` 提供了一个或多个 `UserKnownHostsFile` 路径，`ptool`
+  会按顺序检查这些文件，只要其中任意一个匹配当前服务端密钥就会通过校验。
+- 如果 `ssh -G` 将 `StrictHostKeyChecking` 设为 `no` 或 `off`，`ptool`
+  默认会跳过主机密钥校验。
+- 否则，当没有显式配置 `UserKnownHostsFile` 时，会使用默认的 known_hosts
+  位置。
 - 相对 `known_hosts_file` 路径会从当前 `ptool` 运行时目录解析。
 - `known_hosts_file` 中的 `~` 和 `~/...` 会被展开。
+- 当显式提供 `known_hosts_file` 时，它会覆盖 `ssh -G`
+  提供的默认主机密钥来源。
 
 示例：
 

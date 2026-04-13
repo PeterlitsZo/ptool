@@ -62,10 +62,19 @@ Authentication behavior:
 
 Host key behavior:
 
-- When `known_hosts_file` is omitted, the default known_hosts location is used.
+- When `known_hosts_file` is omitted, `ptool` follows `ssh -G` host-key
+  settings when available.
+- If `ssh -G` provides one or more `UserKnownHostsFile` paths, `ptool` checks
+  them in order and accepts the server key when any configured file matches.
+- If `ssh -G` sets `StrictHostKeyChecking no` or `off`, `ptool` defaults to
+  skipping host key verification.
+- Otherwise, when no explicit `UserKnownHostsFile` is configured, the default
+  known_hosts location is used.
 - Relative `known_hosts_file` paths are resolved from the current `ptool`
   runtime directory.
 - `~` and `~/...` are expanded in `known_hosts_file`.
+- When `known_hosts_file` is provided explicitly, it overrides the default
+  host-key source from `ssh -G`.
 
 Example:
 

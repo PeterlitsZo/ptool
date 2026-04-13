@@ -118,7 +118,10 @@ struct SshClientHandler {
 
 #[derive(Clone, Debug)]
 enum HostKeyPolicy {
-    KnownHosts { path: Option<PathBuf> },
+    KnownHosts {
+        paths: Vec<PathBuf>,
+        use_default_path: bool,
+    },
     Ignore,
 }
 
@@ -556,13 +559,30 @@ impl client::Handler for SshClientHandler {
     ) -> std::result::Result<bool, Self::Error> {
         match &self.policy {
             HostKeyPolicy::Ignore => Ok(true),
-            HostKeyPolicy::KnownHosts { path } => {
-                let check = if let Some(path) = path {
-                    keys::check_known_hosts_path(&self.host, self.port, server_public_key, path)
-                } else {
-                    keys::check_known_hosts(&self.host, self.port, server_public_key)
-                };
-                check.map_err(russh::Error::from)
+            HostKeyPolicy::KnownHosts {
+                paths,
+                use_default_path,
+            } => {
+                if *use_default_path {
+                    return keys::check_known_hosts(&self.host, self.port, server_public_key)
+                        .map_err(russh::Error::from);
+                }
+
+                let mut matched = false;
+                for path in paths {
+                    match keys::check_known_hosts_path(
+                        &self.host,
+                        self.port,
+                        server_public_key,
+                        path,
+                    ) {
+                        Ok(true) => matched = true,
+                        Ok(false) => {}
+                        Err(err) => return Err(russh::Error::from(err)),
+                    }
+                }
+
+                Ok(matched)
             }
         }
     }
@@ -914,19 +934,30 @@ fn parse_host_key_options(
         .map(|config| match config.strict_host_key_checking.as_deref() {
             Some("no") | Some("off") => HostKeyPolicy::Ignore,
             _ => HostKeyPolicy::KnownHosts {
-                path: config.user_known_hosts_files.first().cloned(),
+                paths: config.user_known_hosts_files.clone(),
+                use_default_path: config.user_known_hosts_files.is_empty(),
             },
         })
-        .unwrap_or(HostKeyPolicy::KnownHosts { path: None });
+        .unwrap_or(HostKeyPolicy::KnownHosts {
+            paths: Vec::new(),
+            use_default_path: true,
+        });
 
     let Some(request) = request else {
         return Ok(default_policy);
     };
 
     match request {
-        SshHostKeyRequest::KnownHosts { path } => Ok(HostKeyPolicy::KnownHosts {
-            path: path.map(|path| resolve_local_path(&path, current_dir)),
-        }),
+        SshHostKeyRequest::KnownHosts { path } => match path {
+            Some(path) => Ok(HostKeyPolicy::KnownHosts {
+                paths: vec![resolve_local_path(&path, current_dir)],
+                use_default_path: false,
+            }),
+            None => Ok(HostKeyPolicy::KnownHosts {
+                paths: Vec::new(),
+                use_default_path: true,
+            }),
+        },
         SshHostKeyRequest::Ignore => Ok(HostKeyPolicy::Ignore),
     }
 }
