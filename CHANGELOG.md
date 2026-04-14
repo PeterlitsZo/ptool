@@ -12,6 +12,10 @@
 - Added subcommand support to `ptool.args.parse(...)`, including nested
   subcommands, shared command-tree options, and documented Lua schema/return
   value support.
+- Added recursive directory transfers to `ptool.ssh.Connection:upload(...)`
+  and `Connection:download(...)`, and extended `ptool.fs.copy(...)` so
+  local/remote copies can move directories through the same SSH-backed path
+  transfer API.
 
 ### Changed
 

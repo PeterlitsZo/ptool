@@ -184,13 +184,13 @@ impl LuaSshConnection {
 
     fn upload(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
         let (local_path, remote_path, options) = parse_upload_call(self, args)?;
-        let result = self.upload_file(Path::new(&local_path), &remote_path, options)?;
+        let result = self.upload_path(Path::new(&local_path), &remote_path, options)?;
         build_transfer_result(lua, result)
     }
 
     fn download(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
         let (remote_path, local_path, options) = parse_download_call(self, args)?;
-        let result = self.download_file(&remote_path, Path::new(&local_path), options)?;
+        let result = self.download_path(&remote_path, Path::new(&local_path), options)?;
         build_transfer_result(lua, result)
     }
 
@@ -200,25 +200,25 @@ impl LuaSshConnection {
             .map_err(|err| ssh_error(CLOSE_SIGNATURE, err))
     }
 
-    pub(crate) fn upload_file(
+    pub(crate) fn upload_path(
         &self,
         local_path: &Path,
         remote_path: &str,
         options: TransferOptions,
     ) -> mlua::Result<TransferResult> {
         self.connection
-            .upload_file(local_path, remote_path, options)
+            .upload_path(local_path, remote_path, options)
             .map_err(|err| ssh_error(UPLOAD_SIGNATURE, err))
     }
 
-    pub(crate) fn download_file(
+    pub(crate) fn download_path(
         &self,
         remote_path: &str,
         local_path: &Path,
         options: TransferOptions,
     ) -> mlua::Result<TransferResult> {
         self.connection
-            .download_file(remote_path, local_path, options)
+            .download_path(remote_path, local_path, options)
             .map_err(|err| ssh_error(DOWNLOAD_SIGNATURE, err))
     }
 }

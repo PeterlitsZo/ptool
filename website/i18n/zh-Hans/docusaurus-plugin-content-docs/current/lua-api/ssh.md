@@ -344,14 +344,15 @@ end
 
 规范 API 名称：`ptool.ssh.Connection:upload`。
 
-`conn:upload(local_path, remote_path[, options])` 将本地文件上传到远程主机。
+`conn:upload(local_path, remote_path[, options])` 将本地文件或目录上传到远程主机。
 
-- `local_path`（string，必填）：要上传的本地文件。
+- `local_path`（string，必填）：要上传的本地文件或目录。
 - `remote_path`（string|remote path，必填）：远程目标路径。可以是字符串，也可以是
   `conn:path(...)` 创建的值。
 - `options`（table，可选）：传输选项。
 - 返回：包含以下字段的表：
-  - `bytes`（integer）：已上传字节数。
+  - `bytes`（integer）：已上传的普通文件字节数。上传目录时，它等于目录内所有已上传
+    文件大小之和。
   - `from`（string）：本地源路径。
   - `to`（string）：远程目标路径。
 
@@ -361,6 +362,15 @@ end
   `false`。
 - `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
 - `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
+
+目录行为：
+
+- 当 `local_path` 是文件时，行为保持不变。
+- 当 `local_path` 是目录且 `remote_path` 不存在时，`remote_path` 会成为目标目录根。
+- 当 `local_path` 是目录且 `remote_path` 已存在并且是目录时，会在其下按源目录的
+  basename 创建目标目录。
+- `overwrite = false` 时，如果最终目标目录已存在，则会报错。
+- 上传目录时，远程主机需要提供 `tar`。
 
 示例：
 
@@ -378,20 +388,36 @@ print(res.bytes)
 print(res.to)
 ```
 
+目录示例：
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ssh:upload("./dist/assets", "/srv/app/releases", {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to) -- deploy@example.com:22:/srv/app/releases
+```
+
 ### download
 
 > `v0.1.0` - 引入。
 
 规范 API 名称：`ptool.ssh.Connection:download`。
 
-`conn:download(remote_path, local_path[, options])` 将远程文件下载到本地路径。
+`conn:download(remote_path, local_path[, options])` 将远程文件或目录下载到本地路径。
 
 - `remote_path`（string|remote path，必填）：远程源路径。可以是字符串，也可以是
   `conn:path(...)` 创建的值。
 - `local_path`（string，必填）：本地目标路径。
 - `options`（table，可选）：传输选项。
 - 返回：包含以下字段的表：
-  - `bytes`（integer）：已下载字节数。
+  - `bytes`（integer）：已下载的普通文件字节数。下载目录时，它等于目录内所有已下载
+    文件大小之和。
   - `from`（string）：远程源路径。
   - `to`（string）：本地目标路径。
 
@@ -402,6 +428,15 @@ print(res.to)
 - `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
 - `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
 
+目录行为：
+
+- 当 `remote_path` 是文件时，行为保持不变。
+- 当 `remote_path` 是目录且 `local_path` 不存在时，`local_path` 会成为目标目录根。
+- 当 `remote_path` 是目录且 `local_path` 已存在并且是目录时，会在其下按远程源目录的
+  basename 创建目标目录。
+- `overwrite = false` 时，如果最终目标目录已存在，则会报错。
+- 下载目录时，远程主机需要提供 `tar`。
+
 示例：
 
 ```lua
@@ -410,6 +445,21 @@ local ssh = ptool.ssh.connect("deploy@example.com")
 local res = ssh:download("/srv/app/logs/app.log", "./tmp/app.log", {
   parents = true,
   overwrite = false,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.from)
+```
+
+目录示例：
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ssh:download("/srv/app/releases/assets", "./tmp/releases", {
+  parents = true,
+  overwrite = true,
   echo = true,
 })
 

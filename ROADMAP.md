@@ -11,12 +11,15 @@
 - [ ] Fix the local variable not working in REPL.
 - [ ] Make REPL support readline-like features.
 - [ ] Support `split_lines` function.
+- [ ] Make the document website better.
+- [ ] Change the avatar icon of the document website.
+- [ ] Remove non-essential built-in Lua modules.
+- [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 
 # v0.3.0
 
 - [x] Rename `ptool` crate to `ptool-lua`.
 - [x] Support more OS and arch.
-- [ ] Make the document website better.
 - [x] How to bump version from `0.1.0` to `0.2.0-alpha.1`?
 - [x] Let `release.lua` use `p.ask`.
 - [x] Make the `install.sh` support installing a specific version, e.g.
@@ -25,14 +28,12 @@
       `install.sh --dir /usr/local/bin`.
 - [x] Support `ptool.ssh.Connection:run_capture`.
 - [x] Make ssh connection's can also echo the command.
-- [ ] Change the avatar icon of the document website.
 - [x] Make document support i18n.
 - [x] Why sometime I need use `host_key = { verify = "ignore" }`? I need to fix
       this.
-- [ ] Remove non-essential built-in Lua modules.
-- [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
-- [ ] Let the SSH connection support upload directories.
+- [x] Let the SSH connection support upload directories.
 - [x] Support the subcommand for `ptool.args`.
+- [ ] Remove `russh` and just use `ssh` command.
 
 # v0.2.0
 

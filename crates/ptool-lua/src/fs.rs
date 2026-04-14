@@ -76,11 +76,11 @@ pub(crate) fn copy(engine: &PtoolEngine, lua: &Lua, args: Variadic<Value>) -> ml
         }
         (CopyEndpoint::Local(src), CopyEndpoint::Remote(dst)) => {
             dst.connection()
-                .upload_file(Path::new(&src), dst.path(), options)?
+                .upload_path(Path::new(&src), dst.path(), options)?
         }
         (CopyEndpoint::Remote(src), CopyEndpoint::Local(dst)) => {
             src.connection()
-                .download_file(src.path(), Path::new(&dst), options)?
+                .download_path(src.path(), Path::new(&dst), options)?
         }
         (CopyEndpoint::Remote(_), CopyEndpoint::Remote(_)) => {
             return Err(mlua::Error::runtime(format!(

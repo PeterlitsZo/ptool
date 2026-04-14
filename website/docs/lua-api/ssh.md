@@ -359,15 +359,16 @@ end
 
 Canonical API name: `ptool.ssh.Connection:upload`.
 
-`conn:upload(local_path, remote_path[, options])` uploads a local file to the
-remote host.
+`conn:upload(local_path, remote_path[, options])` uploads a local file or
+directory to the remote host.
 
-- `local_path` (string, required): The local file to upload.
+- `local_path` (string, required): The local file or directory to upload.
 - `remote_path` (string|remote path, required): The destination path on the
   remote host. It can be a string or a value created by `conn:path(...)`.
 - `options` (table, optional): Transfer options.
 - Returns: A table with the following fields:
-  - `bytes` (integer): The number of bytes uploaded.
+  - `bytes` (integer): The number of regular-file bytes uploaded. When a
+    directory is uploaded, this is the sum of the uploaded file sizes.
   - `from` (string): The local source path.
   - `to` (string): The remote destination path.
 
@@ -379,6 +380,18 @@ Supported transfer options:
   replaced. Defaults to `true`.
 - `echo` (boolean, optional): Whether to print the transfer before executing
   it. Defaults to `false`.
+
+Directory behavior:
+
+- When `local_path` is a file, the behavior is unchanged.
+- When `local_path` is a directory and `remote_path` does not exist,
+  `remote_path` becomes the destination directory root.
+- When `local_path` is a directory and `remote_path` already exists as a
+  directory, the source directory is created under it using the source
+  directory basename.
+- `overwrite = false` rejects an already-existing destination directory for the
+  final directory root.
+- Directory uploads require `tar` to be available on the remote host.
 
 Example:
 
@@ -396,21 +409,37 @@ print(res.bytes)
 print(res.to)
 ```
 
+Directory example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ssh:upload("./dist/assets", "/srv/app/releases", {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to) -- deploy@example.com:22:/srv/app/releases
+```
+
 ### download
 
 > `v0.1.0` - Introduced.
 
 Canonical API name: `ptool.ssh.Connection:download`.
 
-`conn:download(remote_path, local_path[, options])` downloads a remote file to a
-local path.
+`conn:download(remote_path, local_path[, options])` downloads a remote file or
+directory to a local path.
 
 - `remote_path` (string|remote path, required): The source path on the remote
   host. It can be a string or a value created by `conn:path(...)`.
 - `local_path` (string, required): The local destination path.
 - `options` (table, optional): Transfer options.
 - Returns: A table with the following fields:
-  - `bytes` (integer): The number of bytes downloaded.
+  - `bytes` (integer): The number of regular-file bytes downloaded. When a
+    directory is downloaded, this is the sum of the downloaded file sizes.
   - `from` (string): The remote source path.
   - `to` (string): The local destination path.
 
@@ -423,6 +452,18 @@ Supported transfer options:
 - `echo` (boolean, optional): Whether to print the transfer before executing
   it. Defaults to `false`.
 
+Directory behavior:
+
+- When `remote_path` is a file, the behavior is unchanged.
+- When `remote_path` is a directory and `local_path` does not exist,
+  `local_path` becomes the destination directory root.
+- When `remote_path` is a directory and `local_path` already exists as a
+  directory, the remote source directory is created under it using the remote
+  directory basename.
+- `overwrite = false` rejects an already-existing destination directory for the
+  final directory root.
+- Directory downloads require `tar` to be available on the remote host.
+
 Example:
 
 ```lua
@@ -431,6 +472,21 @@ local ssh = ptool.ssh.connect("deploy@example.com")
 local res = ssh:download("/srv/app/logs/app.log", "./tmp/app.log", {
   parents = true,
   overwrite = false,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.from)
+```
+
+Directory example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ssh:download("/srv/app/releases/assets", "./tmp/releases", {
+  parents = true,
+  overwrite = true,
   echo = true,
 })
 

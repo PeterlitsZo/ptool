@@ -5,11 +5,13 @@ use shlex::try_quote;
 use std::borrow::Cow;
 use std::cell::RefCell;
 use std::env;
+use std::fs::File;
 use std::path::{Path, PathBuf};
 use std::process::Command as ProcessCommand;
 use std::rc::Rc;
 use std::sync::Arc;
-use std::time::Duration;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use tar::{Archive, Builder};
 use tokio::runtime::Runtime;
 
 #[derive(Clone, Debug, Default)]
@@ -173,6 +175,65 @@ struct BinaryExecResult {
     code: Option<i64>,
     stdout: Vec<u8>,
     stderr: Vec<u8>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum LocalPathKind {
+    File,
+    Directory,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum RemotePathKind {
+    File,
+    Directory,
+}
+
+struct TempArchivePath {
+    path: PathBuf,
+}
+
+impl TempArchivePath {
+    fn create(prefix: &str) -> Result<Self> {
+        let nanos = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_nanos();
+        let base_dir = env::temp_dir();
+
+        for attempt in 0..1024 {
+            let path = base_dir.join(format!(
+                "ptool-{prefix}-{}-{nanos}-{attempt}.tar",
+                std::process::id()
+            ));
+            match std::fs::OpenOptions::new()
+                .write(true)
+                .create_new(true)
+                .open(&path)
+            {
+                Ok(_) => return Ok(Self { path }),
+                Err(err) if err.kind() == std::io::ErrorKind::AlreadyExists => continue,
+                Err(err) => {
+                    return Err(ssh_error(format!(
+                        "failed to create temporary archive `{}`: {err}",
+                        path.display()
+                    )));
+                }
+            }
+        }
+
+        Err(ssh_error("failed to allocate a temporary archive path"))
+    }
+
+    fn path(&self) -> &Path {
+        &self.path
+    }
+}
+
+impl Drop for TempArchivePath {
+    fn drop(&mut self) {
+        let _ = std::fs::remove_file(&self.path);
+    }
 }
 
 pub fn connect(
@@ -352,6 +413,18 @@ impl SshConnection {
         })
     }
 
+    pub fn upload_path(
+        &self,
+        local_path: &Path,
+        remote_path: &str,
+        options: SshTransferOptions,
+    ) -> Result<SshTransferResult> {
+        match classify_local_path(local_path, "local_path")? {
+            LocalPathKind::File => self.upload_file(local_path, remote_path, options),
+            LocalPathKind::Directory => self.upload_directory(local_path, remote_path, options),
+        }
+    }
+
     pub fn download_file(
         &self,
         remote_path: &str,
@@ -381,6 +454,18 @@ impl SshConnection {
             from: format!("{}:{}", self.info().target, remote_path),
             to: local_path.display().to_string(),
         })
+    }
+
+    pub fn download_path(
+        &self,
+        remote_path: &str,
+        local_path: &Path,
+        options: SshTransferOptions,
+    ) -> Result<SshTransferResult> {
+        match self.classify_remote_path(remote_path)? {
+            RemotePathKind::File => self.download_file(remote_path, local_path, options),
+            RemotePathKind::Directory => self.download_directory(remote_path, local_path, options),
+        }
     }
 
     pub fn exists(&self, remote_path: &str) -> Result<bool> {
@@ -415,6 +500,146 @@ impl SshConnection {
                 code,
             )),
         }
+    }
+
+    fn classify_remote_path(&self, remote_path: &str) -> Result<RemotePathKind> {
+        ensure_non_empty_string(remote_path, "remote_path")?;
+
+        if self.is_file(remote_path)? {
+            return Ok(RemotePathKind::File);
+        }
+        if self.is_dir(remote_path)? {
+            return Ok(RemotePathKind::Directory);
+        }
+        if self.exists(remote_path)? {
+            return Err(ssh_error(format!(
+                "unsupported remote path type: `{remote_path}`"
+            )));
+        }
+        Err(ssh_error(format!(
+            "remote path does not exist: `{remote_path}`"
+        )))
+    }
+
+    fn upload_directory(
+        &self,
+        local_path: &Path,
+        remote_path: &str,
+        options: SshTransferOptions,
+    ) -> Result<SshTransferResult> {
+        ensure_local_dir(local_path, "local_path")?;
+        ensure_non_empty_string(remote_path, "remote_path")?;
+
+        let destination_root =
+            self.resolve_remote_directory_destination(local_path, remote_path, options)?;
+        if options.echo {
+            println!(
+                "[ssh upload {}] {} -> {}",
+                self.info().target,
+                local_path.display(),
+                remote_path
+            );
+        }
+
+        let archive_path = TempArchivePath::create("ssh-upload")?;
+        let bytes = create_directory_archive(local_path, archive_path.path())?;
+        let archive_bytes = std::fs::read(archive_path.path()).map_err(|err| {
+            ssh_error(format!(
+                "failed to read temporary archive `{}`: {err}",
+                archive_path.path().display()
+            ))
+        })?;
+        let command = build_upload_directory_command(
+            &destination_root,
+            !self.exists(&destination_root)?,
+            options,
+        )?;
+        self.exec_binary(command.as_str(), Some(archive_bytes), false)?;
+
+        Ok(SshTransferResult {
+            bytes,
+            from: local_path.display().to_string(),
+            to: format!("{}:{}", self.info().target, remote_path),
+        })
+    }
+
+    fn download_directory(
+        &self,
+        remote_path: &str,
+        local_path: &Path,
+        options: SshTransferOptions,
+    ) -> Result<SshTransferResult> {
+        ensure_non_empty_string(remote_path, "remote_path")?;
+
+        let source_root = normalize_remote_path(remote_path);
+        let destination_root =
+            self.resolve_local_directory_destination(&source_root, local_path, options)?;
+        if options.echo {
+            println!(
+                "[ssh download {}] {} -> {}",
+                self.info().target,
+                remote_path,
+                local_path.display()
+            );
+        }
+
+        let command = build_download_directory_command(&source_root)?;
+        let result = self.exec_binary(command.as_str(), None, true)?;
+        let archive_path = TempArchivePath::create("ssh-download")?;
+        std::fs::write(archive_path.path(), &result.stdout).map_err(|err| {
+            ssh_error(format!(
+                "failed to write temporary archive `{}`: {err}",
+                archive_path.path().display()
+            ))
+        })?;
+        let bytes = unpack_directory_archive(archive_path.path(), &destination_root)?;
+
+        Ok(SshTransferResult {
+            bytes,
+            from: format!("{}:{}", self.info().target, remote_path),
+            to: local_path.display().to_string(),
+        })
+    }
+
+    fn resolve_remote_directory_destination(
+        &self,
+        local_path: &Path,
+        remote_path: &str,
+        options: SshTransferOptions,
+    ) -> Result<String> {
+        let remote_path = normalize_remote_path(remote_path);
+        let destination_root = if self.exists(&remote_path)? {
+            if !self.is_dir(&remote_path)? {
+                return Err(ssh_error(format!(
+                    "`remote_path` must be a directory for directory upload: `{remote_path}`"
+                )));
+            }
+            join_remote_path(&remote_path, &path_basename(local_path, "local_path")?)
+        } else {
+            remote_path
+        };
+        validate_remote_directory_destination(self, &destination_root, options)
+    }
+
+    fn resolve_local_directory_destination(
+        &self,
+        remote_path: &str,
+        local_path: &Path,
+        options: SshTransferOptions,
+    ) -> Result<PathBuf> {
+        let destination_root = if local_path.exists() {
+            if !local_path.is_dir() {
+                return Err(ssh_error(format!(
+                    "`local_path` must be a directory for directory download: `{}`",
+                    local_path.display()
+                )));
+            }
+            local_path.join(remote_basename(remote_path)?)
+        } else {
+            local_path.to_path_buf()
+        };
+        prepare_local_directory_destination(&destination_root, options)?;
+        Ok(destination_root)
     }
 
     fn exec_binary(
@@ -989,6 +1214,37 @@ fn build_download_command(remote_path: &str) -> Result<String> {
     Ok(format!("cat {}", shell_quote(remote_path, "remote_path")?))
 }
 
+fn build_upload_directory_command(
+    remote_root: &str,
+    create_root: bool,
+    options: SshTransferOptions,
+) -> Result<String> {
+    let mut prefixes = Vec::new();
+    if create_root {
+        let mkdir = if options.parents { "mkdir -p" } else { "mkdir" };
+        prefixes.push(format!(
+            "{mkdir} {}",
+            shell_quote(remote_root, "remote_path")?
+        ));
+    }
+
+    let mut command = prefixes.join(" && ");
+    if !command.is_empty() {
+        command.push_str(" && ");
+    }
+    command.push_str("cd ");
+    command.push_str(&shell_quote(remote_root, "remote_path")?);
+    command.push_str(" && tar -xf -");
+    Ok(command)
+}
+
+fn build_download_directory_command(remote_path: &str) -> Result<String> {
+    Ok(format!(
+        "cd {} && tar -cf - .",
+        shell_quote(remote_path, "remote_path")?
+    ))
+}
+
 fn build_remote_path_test_command(remote_path: &str, test_flag: &str) -> Result<String> {
     Ok(format!(
         "test {test_flag} {}",
@@ -1029,6 +1285,33 @@ fn ensure_local_file(path: &Path, field: &str) -> Result<()> {
     Ok(())
 }
 
+fn ensure_local_dir(path: &Path, field: &str) -> Result<()> {
+    let metadata = std::fs::metadata(path)
+        .map_err(|err| ssh_error(format!("failed to access `{}`: {err}", path.display())))?;
+    if !metadata.is_dir() {
+        return Err(ssh_error(format!(
+            "`{field}` must be a directory: `{}`",
+            path.display()
+        )));
+    }
+    Ok(())
+}
+
+fn classify_local_path(path: &Path, field: &str) -> Result<LocalPathKind> {
+    let metadata = std::fs::metadata(path)
+        .map_err(|err| ssh_error(format!("failed to access `{}`: {err}", path.display())))?;
+    if metadata.is_file() {
+        return Ok(LocalPathKind::File);
+    }
+    if metadata.is_dir() {
+        return Ok(LocalPathKind::Directory);
+    }
+    Err(ssh_error(format!(
+        "`{field}` must be a file or directory: `{}`",
+        path.display()
+    )))
+}
+
 fn prepare_local_destination(path: &Path, options: SshTransferOptions, field: &str) -> Result<()> {
     if options.parents
         && let Some(parent) = path
@@ -1050,6 +1333,37 @@ fn prepare_local_destination(path: &Path, options: SshTransferOptions, field: &s
         )));
     }
 
+    Ok(())
+}
+
+fn prepare_local_directory_destination(path: &Path, options: SshTransferOptions) -> Result<()> {
+    if path.exists() {
+        if !path.is_dir() {
+            return Err(ssh_error(format!(
+                "directory destination must not be a file: `{}`",
+                path.display()
+            )));
+        }
+        if !options.overwrite {
+            return Err(ssh_error(format!(
+                "directory destination already exists: `{}`",
+                path.display()
+            )));
+        }
+        return Ok(());
+    }
+
+    let create_result = if options.parents {
+        std::fs::create_dir_all(path)
+    } else {
+        std::fs::create_dir(path)
+    };
+    create_result.map_err(|err| {
+        ssh_error(format!(
+            "failed to create destination directory `{}`: {err}",
+            path.display()
+        ))
+    })?;
     Ok(())
 }
 
@@ -1083,6 +1397,192 @@ fn write_local_file(
     }
 
     Ok(())
+}
+
+fn create_directory_archive(source_dir: &Path, archive_path: &Path) -> Result<u64> {
+    let file = File::create(archive_path).map_err(|err| {
+        ssh_error(format!(
+            "failed to create archive `{}`: {err}",
+            archive_path.display()
+        ))
+    })?;
+    let mut builder = Builder::new(file);
+    let bytes = append_directory_contents(&mut builder, source_dir, source_dir)?;
+    builder.finish().map_err(|err| {
+        ssh_error(format!(
+            "failed to finalize archive `{}`: {err}",
+            archive_path.display()
+        ))
+    })?;
+    Ok(bytes)
+}
+
+fn append_directory_contents(
+    builder: &mut Builder<File>,
+    source_dir: &Path,
+    current_dir: &Path,
+) -> Result<u64> {
+    let mut entries = std::fs::read_dir(current_dir)
+        .map_err(|err| ssh_error(format!("failed to read `{}`: {err}", current_dir.display())))?
+        .collect::<std::result::Result<Vec<_>, _>>()
+        .map_err(|err| ssh_error(format!("failed to read `{}`: {err}", current_dir.display())))?;
+    entries.sort_by_key(|entry| entry.file_name());
+
+    let mut total_bytes = 0u64;
+    for entry in entries {
+        let path = entry.path();
+        let relative = path
+            .strip_prefix(source_dir)
+            .map_err(|err| {
+                ssh_error(format!(
+                    "failed to resolve archive entry `{}`: {err}",
+                    path.display()
+                ))
+            })?
+            .to_path_buf();
+        let metadata = std::fs::symlink_metadata(&path)
+            .map_err(|err| ssh_error(format!("failed to access `{}`: {err}", path.display())))?;
+
+        if metadata.is_dir() {
+            builder.append_dir(&relative, &path).map_err(|err| {
+                ssh_error(format!(
+                    "failed to append directory `{}` to archive: {err}",
+                    path.display()
+                ))
+            })?;
+            total_bytes =
+                total_bytes.saturating_add(append_directory_contents(builder, source_dir, &path)?);
+        } else {
+            builder
+                .append_path_with_name(&path, &relative)
+                .map_err(|err| {
+                    ssh_error(format!(
+                        "failed to append `{}` to archive: {err}",
+                        path.display()
+                    ))
+                })?;
+            if metadata.is_file() {
+                total_bytes = total_bytes.saturating_add(metadata.len());
+            }
+        }
+    }
+
+    Ok(total_bytes)
+}
+
+fn unpack_directory_archive(archive_path: &Path, destination_root: &Path) -> Result<u64> {
+    let file = File::open(archive_path).map_err(|err| {
+        ssh_error(format!(
+            "failed to open archive `{}`: {err}",
+            archive_path.display()
+        ))
+    })?;
+    let mut archive = Archive::new(file);
+    let mut bytes = 0u64;
+
+    let entries = archive.entries().map_err(|err| {
+        ssh_error(format!(
+            "failed to read archive `{}`: {err}",
+            archive_path.display()
+        ))
+    })?;
+
+    for entry in entries {
+        let mut entry = entry.map_err(|err| {
+            ssh_error(format!(
+                "failed to read archive entry from `{}`: {err}",
+                archive_path.display()
+            ))
+        })?;
+        let entry_type = entry.header().entry_type();
+        let size = entry.header().size().map_err(|err| {
+            ssh_error(format!(
+                "failed to read archive entry size from `{}`: {err}",
+                archive_path.display()
+            ))
+        })?;
+        let unpacked = entry.unpack_in(destination_root).map_err(|err| {
+            ssh_error(format!(
+                "failed to extract archive `{}` into `{}`: {err}",
+                archive_path.display(),
+                destination_root.display()
+            ))
+        })?;
+        if !unpacked {
+            return Err(ssh_error(format!(
+                "archive `{}` contains an entry outside `{}`",
+                archive_path.display(),
+                destination_root.display()
+            )));
+        }
+        if entry_type.is_file() {
+            bytes = bytes.saturating_add(size);
+        }
+    }
+
+    Ok(bytes)
+}
+
+fn validate_remote_directory_destination(
+    connection: &SshConnection,
+    remote_root: &str,
+    options: SshTransferOptions,
+) -> Result<String> {
+    if connection.exists(remote_root)? {
+        if !connection.is_dir(remote_root)? {
+            return Err(ssh_error(format!(
+                "directory destination must not be a file: `{remote_root}`"
+            )));
+        }
+        if !options.overwrite {
+            return Err(ssh_error(format!(
+                "directory destination already exists: `{remote_root}`"
+            )));
+        }
+    }
+    Ok(remote_root.to_string())
+}
+
+fn path_basename(path: &Path, field: &str) -> Result<String> {
+    path.file_name()
+        .and_then(|name| name.to_str())
+        .map(std::string::ToString::to_string)
+        .ok_or_else(|| {
+            ssh_error(format!(
+                "failed to determine `{field}` basename from `{}`",
+                path.display()
+            ))
+        })
+}
+
+fn remote_basename(path: &str) -> Result<String> {
+    Path::new(normalize_remote_path(path).as_str())
+        .file_name()
+        .and_then(|name| name.to_str())
+        .map(std::string::ToString::to_string)
+        .ok_or_else(|| {
+            ssh_error(format!(
+                "failed to determine remote path basename: `{path}`"
+            ))
+        })
+}
+
+fn normalize_remote_path(path: &str) -> String {
+    let trimmed = path.trim_end_matches('/');
+    if trimmed.is_empty() {
+        "/".to_string()
+    } else {
+        trimmed.to_string()
+    }
+}
+
+fn join_remote_path(base: &str, child: &str) -> String {
+    let base = normalize_remote_path(base);
+    if base == "/" {
+        format!("/{child}")
+    } else {
+        format!("{base}/{child}")
+    }
 }
 
 fn build_binary_exec_failed_error(
