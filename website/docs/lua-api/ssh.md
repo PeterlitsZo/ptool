@@ -6,8 +6,10 @@ SSH connection, remote execution, and file transfer helpers are available under 
 
 > `v0.1.0` - Introduced.
 
-`ptool.ssh.connect(target_or_options)` opens an SSH connection and returns a
-`Connection` object.
+`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle backed
+by the system `ssh` command and returns a `Connection` object.
+
+`ssh` must be available on `PATH`.
 
 Arguments:
 
@@ -39,15 +41,20 @@ local c = ptool.ssh.connect("[2001:db8::10]:2222")
 
 - `private_key_file` (string, optional): Path to a private key file.
 - `private_key_passphrase` (string, optional): Passphrase for the private key.
-- `password` (string, optional): Password-based authentication.
+  This is currently not supported.
+- `password` (string, optional): Password-based authentication. This is
+  currently not supported.
 
 Authentication behavior:
 
-- If `auth.password` is provided, password authentication is used.
-- Otherwise, if `auth.private_key_file` is provided, public-key
-  authentication is used with that key.
-- Otherwise, `ptool` tries these default private key files in order:
-  `~/.ssh/id_ed25519`, `~/.ssh/id_rsa`, `~/.ssh/id_ecdsa`.
+- If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key
+  via `-i` and also sets `IdentitiesOnly=yes`.
+- If `auth.private_key_passphrase` or `auth.password` is provided,
+  `ptool.ssh.connect(...)` fails because this API does not pass those secrets
+  to the system `ssh` command.
+- Otherwise, authentication is delegated to the local OpenSSH setup, including
+  settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`,
+  `ssh-agent`, and certificates.
 - Relative key paths are resolved from the current `ptool` runtime directory,
   so they follow `ptool.cd(...)`.
 - `~` and `~/...` are expanded in key paths.
@@ -62,19 +69,19 @@ Authentication behavior:
 
 Host key behavior:
 
-- When `known_hosts_file` is omitted, `ptool` follows `ssh -G` host-key
-  settings when available.
-- If `ssh -G` provides one or more `UserKnownHostsFile` paths, `ptool` checks
-  them in order and accepts the server key when any configured file matches.
-- If `ssh -G` sets `StrictHostKeyChecking no` or `off`, `ptool` defaults to
-  skipping host key verification.
-- Otherwise, when no explicit `UserKnownHostsFile` is configured, the default
-  known_hosts location is used.
+- If `verify = "ignore"`, `ptool` invokes `ssh` with
+  `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`.
+- If `verify = "known_hosts"` and `known_hosts_file` is provided, `ptool`
+  invokes `ssh` with `StrictHostKeyChecking=yes` and that
+  `UserKnownHostsFile`.
+- If `verify = "known_hosts"` and `known_hosts_file` is omitted, or when
+  `host_key` is omitted entirely, host key handling is delegated to the local
+  OpenSSH configuration and defaults.
 - Relative `known_hosts_file` paths are resolved from the current `ptool`
   runtime directory.
 - `~` and `~/...` are expanded in `known_hosts_file`.
 - When `known_hosts_file` is provided explicitly, it overrides the default
-  host-key source from `ssh -G`.
+  `UserKnownHostsFile` used by the local `ssh` command for this connection.
 
 Example:
 
@@ -96,7 +103,7 @@ local ssh = ptool.ssh.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` represents an open SSH connection returned by
+`Connection` represents an OpenSSH-backed connection handle returned by
 `ptool.ssh.connect()`.
 
 It is implemented as a Lua userdata.
@@ -500,7 +507,7 @@ print(res.from)
 
 Canonical API name: `ptool.ssh.Connection:close`.
 
-`conn:close()` closes the SSH connection.
+`conn:close()` closes the SSH connection handle.
 
 Behavior:
 

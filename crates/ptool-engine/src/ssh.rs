@@ -1,16 +1,16 @@
 use crate::{Error, ErrorKind, Result};
-use russh::keys::{self, PrivateKeyWithHashAlg};
-use russh::{ChannelMsg, Disconnect, client};
 use shlex::try_quote;
 use std::borrow::Cow;
 use std::cell::RefCell;
 use std::env;
 use std::fs::File;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
-use std::process::Command as ProcessCommand;
+use std::process::{Command as ProcessCommand, Output, Stdio};
 use std::rc::Rc;
 use std::sync::Arc;
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use std::thread;
+use std::time::{SystemTime, UNIX_EPOCH};
 use tar::{Archive, Builder};
 use tokio::runtime::Runtime;
 
@@ -45,7 +45,6 @@ pub enum SshHostKeyRequest {
 
 #[derive(Clone)]
 pub struct SshConnection {
-    runtime: Arc<Runtime>,
     state: Rc<RefCell<ConnectionState>>,
 }
 
@@ -107,62 +106,31 @@ pub struct SshTransferResult {
 }
 
 struct ConnectionState {
-    session: Option<client::Handle<SshClientHandler>>,
+    closed: bool,
     info: SshConnectionInfo,
-}
-
-#[derive(Clone, Debug)]
-struct SshClientHandler {
-    policy: HostKeyPolicy,
-    host: String,
-    port: u16,
-}
-
-#[derive(Clone, Debug)]
-enum HostKeyPolicy {
-    KnownHosts {
-        paths: Vec<PathBuf>,
-        use_default_path: bool,
-    },
-    Ignore,
-}
-
-#[derive(Clone, Debug)]
-enum AuthMethod {
-    PrivateKeys { keys: Vec<PrivateKeyOption> },
-    Password { password: String },
-}
-
-#[derive(Clone, Debug)]
-struct PrivateKeyOption {
-    path: PathBuf,
-    passphrase: Option<String>,
-    required: bool,
+    options: ConnectOptions,
 }
 
 #[derive(Clone, Debug)]
 struct ConnectOptions {
     host: String,
-    connect_host: String,
-    user: String,
-    port: u16,
-    auth: AuthMethod,
-    host_key: HostKeyPolicy,
-    connect_timeout_ms: u64,
+    requested_user: Option<String>,
+    requested_port: Option<u16>,
+    auth: Option<AuthMethod>,
+    host_key: Option<HostKeyPolicy>,
+    connect_timeout_ms: Option<u64>,
     keepalive_interval_ms: Option<u64>,
 }
 
-#[derive(Clone, Debug, Default)]
-struct SshConfigOptions {
-    host: Option<String>,
-    hostname: Option<String>,
-    user: Option<String>,
-    port: Option<u16>,
-    identity_files: Vec<PathBuf>,
-    user_known_hosts_files: Vec<PathBuf>,
-    strict_host_key_checking: Option<String>,
-    connect_timeout_ms: Option<u64>,
-    server_alive_interval_ms: Option<u64>,
+#[derive(Clone, Debug)]
+enum AuthMethod {
+    PrivateKeyFile { path: PathBuf },
+}
+
+#[derive(Clone, Debug)]
+enum HostKeyPolicy {
+    KnownHosts { path: Option<PathBuf> },
+    Ignore,
 }
 
 struct ParsedTarget {
@@ -191,6 +159,12 @@ enum RemotePathKind {
 
 struct TempArchivePath {
     path: PathBuf,
+}
+
+enum ProcessOutputMode {
+    Capture,
+    Inherit,
+    Null,
 }
 
 impl TempArchivePath {
@@ -237,37 +211,36 @@ impl Drop for TempArchivePath {
 }
 
 pub fn connect(
-    runtime: Arc<Runtime>,
+    _runtime: Arc<Runtime>,
     request: SshConnectRequest,
     current_dir: &Path,
 ) -> Result<SshConnection> {
+    ensure_ssh_available()?;
+
     let options = build_connect_options(request, current_dir)?;
     let info = SshConnectionInfo {
-        target: format!("{}@{}:{}", options.user, options.host, options.port),
+        target: format!(
+            "{}@{}:{}",
+            options
+                .requested_user
+                .clone()
+                .unwrap_or_else(default_ssh_user),
+            options.host,
+            options.requested_port.unwrap_or(22)
+        ),
         host: options.host.clone(),
-        user: options.user.clone(),
-        port: options.port,
+        user: options
+            .requested_user
+            .clone()
+            .unwrap_or_else(default_ssh_user),
+        port: options.requested_port.unwrap_or(22),
     };
-
-    let handler = SshClientHandler {
-        policy: options.host_key.clone(),
-        host: options.host.clone(),
-        port: options.port,
-    };
-
-    let config = build_client_config(&options);
-    let addr = (options.connect_host.as_str(), options.port);
-    let mut session = runtime
-        .block_on(async { client::connect(config, addr, handler).await })
-        .map_err(|err| ssh_error(format!("failed to connect to `{}`: {err}", info.target)))?;
-
-    authenticate_session(&runtime, &mut session, &options)?;
 
     Ok(SshConnection {
-        runtime,
         state: Rc::new(RefCell::new(ConnectionState {
-            session: Some(session),
+            closed: false,
             info,
+            options,
         })),
     })
 }
@@ -282,93 +255,34 @@ impl SshConnection {
     }
 
     pub fn close(&self) -> Result<()> {
-        let session = {
-            let mut state = self.state.borrow_mut();
-            state.session.take()
-        };
-
-        if let Some(session) = session {
-            self.runtime
-                .block_on(async {
-                    session
-                        .disconnect(Disconnect::ByApplication, "", "English")
-                        .await
-                })
-                .map_err(|err| ssh_error(format!("failed to disconnect: {err}")))?;
-        }
-
+        self.state.borrow_mut().closed = true;
         Ok(())
     }
 
     pub fn run(&self, options: SshExecOptions) -> Result<SshExecResult> {
         let info = self.info();
+        let exec = self.exec_ssh(
+            &options.command,
+            options.stdin,
+            process_output_mode(options.stdout),
+            process_output_mode(options.stderr),
+        )?;
 
-        let mut state = self.state.borrow_mut();
-        let session = state
-            .session
-            .as_mut()
-            .ok_or_else(|| ssh_error("cannot use a closed connection"))?;
+        let result = SshExecResult {
+            code: exec.code,
+            stdout: bytes_to_captured_string(exec.stdout, options.stdout),
+            stderr: bytes_to_captured_string(exec.stderr, options.stderr),
+        };
 
-        let command = options.command.clone();
-        self.runtime.block_on(async {
-            let mut channel = session.channel_open_session().await.map_err(|err| {
-                ssh_error(format!(
-                    "failed to open session channel for `{command}`: {err}"
-                ))
-            })?;
-            channel
-                .exec(true, command.as_bytes())
-                .await
-                .map_err(|err| {
-                    ssh_error(format!(
-                        "failed to execute remote command `{command}`: {err}"
-                    ))
-                })?;
+        if options.check && result.code != Some(0) {
+            return Err(build_exec_failed_error(
+                &info.target,
+                &options.command,
+                &result,
+            ));
+        }
 
-            if let Some(stdin) = options.stdin {
-                let mut cursor = std::io::Cursor::new(stdin);
-                channel.data(&mut cursor).await.map_err(|err| {
-                    ssh_error(format!("failed to write stdin for `{command}`: {err}"))
-                })?;
-                channel.eof().await.map_err(|err| {
-                    ssh_error(format!("failed to send EOF for `{command}`: {err}"))
-                })?;
-            }
-
-            let mut stdout_bytes = Vec::new();
-            let mut stderr_bytes = Vec::new();
-            let mut code = None;
-
-            while let Some(msg) = channel.wait().await {
-                match msg {
-                    ChannelMsg::Data { data } => {
-                        handle_output(&mut stdout_bytes, options.stdout, &data)
-                    }
-                    ChannelMsg::ExtendedData { data, ext: 1 } => {
-                        handle_output(&mut stderr_bytes, options.stderr, &data)
-                    }
-                    ChannelMsg::ExitStatus { exit_status } => {
-                        code = Some(i64::from(exit_status));
-                    }
-                    ChannelMsg::ExitSignal { .. } => {
-                        code = None;
-                    }
-                    _ => {}
-                }
-            }
-
-            let result = SshExecResult {
-                code,
-                stdout: bytes_to_captured_string(stdout_bytes, options.stdout),
-                stderr: bytes_to_captured_string(stderr_bytes, options.stderr),
-            };
-
-            if options.check && result.code != Some(0) {
-                return Err(build_exec_failed_error(&info.target, &command, &result));
-            }
-
-            Ok(result)
-        })
+        Ok(result)
     }
 
     pub fn resolve_display_cwd(&self, cwd: Option<&str>) -> Result<String> {
@@ -445,7 +359,6 @@ impl SshConnection {
 
         let command = build_download_command(remote_path)?;
         let result = self.exec_binary(command.as_str(), None, true)?;
-
         write_local_file(local_path, &result.stdout, options, "local_path")?;
 
         Ok(SshTransferResult {
@@ -478,6 +391,14 @@ impl SshConnection {
 
     pub fn is_dir(&self, remote_path: &str) -> Result<bool> {
         self.check_remote_path("is_dir", remote_path, "-d")
+    }
+
+    fn ensure_open_options(&self) -> Result<ConnectOptions> {
+        let state = self.state.borrow();
+        if state.closed {
+            return Err(ssh_error("cannot use a closed connection"));
+        }
+        Ok(state.options.clone())
     }
 
     fn check_remote_path(
@@ -649,110 +570,37 @@ impl SshConnection {
         capture_stdout: bool,
     ) -> Result<BinaryExecResult> {
         let info = self.info();
+        let result = self.exec_ssh(
+            command,
+            stdin,
+            if capture_stdout {
+                ProcessOutputMode::Capture
+            } else {
+                ProcessOutputMode::Null
+            },
+            ProcessOutputMode::Capture,
+        )?;
 
-        let mut state = self.state.borrow_mut();
-        let session = state
-            .session
-            .as_mut()
-            .ok_or_else(|| ssh_error("cannot use a closed connection"))?;
+        if result.code != Some(0) {
+            return Err(build_binary_exec_failed_error(
+                &info.target,
+                command,
+                result.code,
+                &result.stderr,
+            ));
+        }
 
-        let command = command.to_string();
-        self.runtime.block_on(async {
-            let mut channel = session.channel_open_session().await.map_err(|err| {
-                ssh_error(format!(
-                    "failed to open session channel for `{command}`: {err}"
-                ))
-            })?;
-            channel
-                .exec(true, command.as_bytes())
-                .await
-                .map_err(|err| {
-                    ssh_error(format!(
-                        "failed to execute remote command `{command}`: {err}"
-                    ))
-                })?;
-
-            if let Some(stdin) = stdin {
-                let mut cursor = std::io::Cursor::new(stdin);
-                channel.data(&mut cursor).await.map_err(|err| {
-                    ssh_error(format!("failed to write stdin for `{command}`: {err}"))
-                })?;
-                channel.eof().await.map_err(|err| {
-                    ssh_error(format!("failed to send EOF for `{command}`: {err}"))
-                })?;
-            }
-
-            let mut stdout = Vec::new();
-            let mut stderr = Vec::new();
-            let mut code = None;
-
-            while let Some(msg) = channel.wait().await {
-                match msg {
-                    ChannelMsg::Data { data } => {
-                        if capture_stdout {
-                            stdout.extend_from_slice(&data);
-                        }
-                    }
-                    ChannelMsg::ExtendedData { data, ext: 1 } => stderr.extend_from_slice(&data),
-                    ChannelMsg::ExitStatus { exit_status } => code = Some(i64::from(exit_status)),
-                    ChannelMsg::ExitSignal { .. } => code = None,
-                    _ => {}
-                }
-            }
-
-            let result = BinaryExecResult {
-                code,
-                stdout,
-                stderr,
-            };
-
-            if result.code != Some(0) {
-                return Err(build_binary_exec_failed_error(
-                    &info.target,
-                    &command,
-                    result.code,
-                    &result.stderr,
-                ));
-            }
-
-            Ok(result)
-        })
+        Ok(result)
     }
 
     fn exec_binary_status(&self, command: &str) -> Result<Option<i64>> {
-        let mut state = self.state.borrow_mut();
-        let session = state
-            .session
-            .as_mut()
-            .ok_or_else(|| ssh_error("cannot use a closed connection"))?;
-
-        let command = command.to_string();
-        self.runtime.block_on(async {
-            let mut channel = session.channel_open_session().await.map_err(|err| {
-                ssh_error(format!(
-                    "failed to open session channel for `{command}`: {err}"
-                ))
-            })?;
-            channel
-                .exec(true, command.as_bytes())
-                .await
-                .map_err(|err| {
-                    ssh_error(format!(
-                        "failed to execute remote command `{command}`: {err}"
-                    ))
-                })?;
-
-            let mut code = None;
-            while let Some(msg) = channel.wait().await {
-                match msg {
-                    ChannelMsg::ExitStatus { exit_status } => code = Some(i64::from(exit_status)),
-                    ChannelMsg::ExitSignal { .. } => code = None,
-                    _ => {}
-                }
-            }
-
-            Ok(code)
-        })
+        self.exec_ssh(
+            command,
+            None,
+            ProcessOutputMode::Null,
+            ProcessOutputMode::Null,
+        )
+        .map(|result| result.code)
     }
 
     fn detect_remote_cwd(&self) -> Result<String> {
@@ -773,43 +621,31 @@ impl SshConnection {
         }
         Ok(cwd)
     }
+
+    fn exec_ssh(
+        &self,
+        remote_command: &str,
+        stdin: Option<Vec<u8>>,
+        stdout_mode: ProcessOutputMode,
+        stderr_mode: ProcessOutputMode,
+    ) -> Result<BinaryExecResult> {
+        let options = self.ensure_open_options()?;
+        let mut command = build_ssh_command(&options, remote_command);
+        run_ssh_command(&mut command, stdin, stdout_mode, stderr_mode)
+    }
 }
 
-impl client::Handler for SshClientHandler {
-    type Error = russh::Error;
-
-    async fn check_server_key(
-        &mut self,
-        server_public_key: &russh::keys::PublicKey,
-    ) -> std::result::Result<bool, Self::Error> {
-        match &self.policy {
-            HostKeyPolicy::Ignore => Ok(true),
-            HostKeyPolicy::KnownHosts {
-                paths,
-                use_default_path,
-            } => {
-                if *use_default_path {
-                    return keys::check_known_hosts(&self.host, self.port, server_public_key)
-                        .map_err(russh::Error::from);
-                }
-
-                let mut matched = false;
-                for path in paths {
-                    match keys::check_known_hosts_path(
-                        &self.host,
-                        self.port,
-                        server_public_key,
-                        path,
-                    ) {
-                        Ok(true) => matched = true,
-                        Ok(false) => {}
-                        Err(err) => return Err(russh::Error::from(err)),
-                    }
-                }
-
-                Ok(matched)
-            }
+fn ensure_ssh_available() -> Result<()> {
+    match ProcessCommand::new("ssh").arg("-V").output() {
+        Ok(output) if output.status.success() => Ok(()),
+        Ok(output) => Err(ssh_error(format!(
+            "`ssh -V` failed{}",
+            format_subprocess_stderr(&output)
+        ))),
+        Err(err) if err.kind() == std::io::ErrorKind::NotFound => {
+            Err(ssh_error("`ssh` is not available on PATH"))
         }
+        Err(err) => Err(ssh_error(format!("failed to execute `ssh -V`: {err}"))),
     }
 }
 
@@ -824,139 +660,260 @@ fn build_connect_options(request: SshConnectRequest, current_dir: &Path) -> Resu
         parse_target_string(&request.target)?
     };
 
-    let requested_host = request
+    let host = request
         .host
         .or(parsed.host)
         .filter(|host| !host.is_empty())
         .ok_or_else(|| ssh_error("requires `host`"))?;
-    let requested_user = request.user.or(parsed.user);
-    let requested_port = request.port.or(parsed.port);
-
-    let ssh_config =
-        resolve_ssh_config(&requested_host, requested_user.as_deref(), requested_port)?;
-
-    let host = ssh_config
-        .as_ref()
-        .and_then(|config| config.host.clone())
-        .unwrap_or_else(|| requested_host.clone());
-    let connect_host = ssh_config
-        .as_ref()
-        .and_then(|config| config.hostname.clone())
-        .unwrap_or_else(|| host.clone());
-
-    let user = requested_user
-        .or_else(|| ssh_config.as_ref().and_then(|config| config.user.clone()))
-        .unwrap_or_else(default_ssh_user);
-
-    let port = requested_port
-        .or_else(|| ssh_config.as_ref().and_then(|config| config.port))
-        .unwrap_or(22);
-
-    let auth = parse_auth_options(request.auth, current_dir, ssh_config.as_ref())?;
-    let host_key = parse_host_key_options(request.host_key, current_dir, ssh_config.as_ref())?;
-    let connect_timeout_ms = request
-        .connect_timeout_ms
-        .or_else(|| {
-            ssh_config
-                .as_ref()
-                .and_then(|config| config.connect_timeout_ms)
-        })
-        .unwrap_or(10_000);
-    let keepalive_interval_ms = request.keepalive_interval_ms.or_else(|| {
-        ssh_config
-            .as_ref()
-            .and_then(|config| config.server_alive_interval_ms)
-    });
 
     Ok(ConnectOptions {
         host,
-        connect_host,
-        user,
-        port,
-        auth,
-        host_key,
-        connect_timeout_ms,
-        keepalive_interval_ms,
+        requested_user: request.user.or(parsed.user),
+        requested_port: request.port.or(parsed.port),
+        auth: parse_auth_options(request.auth, current_dir)?,
+        host_key: parse_host_key_options(request.host_key, current_dir),
+        connect_timeout_ms: request.connect_timeout_ms,
+        keepalive_interval_ms: request.keepalive_interval_ms,
     })
 }
 
-fn build_client_config(options: &ConnectOptions) -> Arc<client::Config> {
-    Arc::new(client::Config {
-        inactivity_timeout: Some(Duration::from_millis(options.connect_timeout_ms)),
-        keepalive_interval: options.keepalive_interval_ms.map(Duration::from_millis),
-        ..client::Config::default()
-    })
-}
-
-fn authenticate_session(
-    runtime: &Runtime,
-    session: &mut client::Handle<SshClientHandler>,
-    options: &ConnectOptions,
-) -> Result<()> {
-    let user = options.user.clone();
-    let authenticated = match &options.auth {
-        AuthMethod::PrivateKeys { keys: key_options } => {
-            let hash_alg = runtime
-                .block_on(session.best_supported_rsa_hash())
-                .map_err(|err| ssh_error(format!("failed to inspect server algorithms: {err}")))?
-                .flatten();
-            let mut authenticated = false;
-            let mut attempted = false;
-            let mut last_load_error = None;
-
-            for key_option in key_options {
-                let key =
-                    match keys::load_secret_key(&key_option.path, key_option.passphrase.as_deref())
-                    {
-                        Ok(key) => key,
-                        Err(err) => {
-                            let err = ssh_error(err.to_string());
-                            if key_option.required {
-                                return Err(err);
-                            }
-                            last_load_error = Some(err);
-                            continue;
-                        }
-                    };
-                attempted = true;
-                let auth_result = runtime
-                    .block_on(async {
-                        session
-                            .authenticate_publickey(
-                                user.clone(),
-                                PrivateKeyWithHashAlg::new(Arc::new(key), hash_alg),
-                            )
-                            .await
-                    })
-                    .map_err(|err| ssh_error(format!("authentication failed: {err}")))?;
-                if auth_result.success() {
-                    authenticated = true;
-                    break;
-                }
-            }
-
-            if attempted {
-                authenticated
-            } else if let Some(err) = last_load_error {
-                return Err(err);
-            } else {
-                false
-            }
-        }
-        AuthMethod::Password { password } => runtime
-            .block_on(async { session.authenticate_password(user, password).await })
-            .map_err(|err| ssh_error(format!("authentication failed: {err}")))?
-            .success(),
+fn parse_auth_options(
+    request: Option<SshAuthRequest>,
+    current_dir: &Path,
+) -> Result<Option<AuthMethod>> {
+    let Some(request) = request else {
+        return Ok(None);
     };
 
-    if !authenticated {
-        return Err(ssh_error(format!(
-            "authentication failed for `{}`",
-            options.user
-        )));
+    match request {
+        SshAuthRequest::PrivateKeyFile { path, passphrase } => {
+            if passphrase.is_some() {
+                return Err(ssh_error(
+                    "`auth.private_key_passphrase` is not supported when using system `ssh`",
+                ));
+            }
+            Ok(Some(AuthMethod::PrivateKeyFile {
+                path: resolve_local_path(&path, current_dir),
+            }))
+        }
+        SshAuthRequest::Password { .. } => Err(ssh_error(
+            "`auth.password` is not supported when using system `ssh`; configure OpenSSH authentication instead",
+        )),
+    }
+}
+
+fn parse_host_key_options(
+    request: Option<SshHostKeyRequest>,
+    current_dir: &Path,
+) -> Option<HostKeyPolicy> {
+    match request {
+        Some(SshHostKeyRequest::KnownHosts { path }) => Some(HostKeyPolicy::KnownHosts {
+            path: path.map(|path| resolve_local_path(&path, current_dir)),
+        }),
+        Some(SshHostKeyRequest::Ignore) => Some(HostKeyPolicy::Ignore),
+        None => None,
+    }
+}
+
+fn build_ssh_command(options: &ConnectOptions, remote_command: &str) -> ProcessCommand {
+    let mut command = ProcessCommand::new("ssh");
+    command.arg("-T");
+
+    if let Some(user) = options.requested_user.as_deref() {
+        command.arg("-l");
+        command.arg(user);
     }
 
-    Ok(())
+    if let Some(port) = options.requested_port {
+        command.arg("-p");
+        command.arg(port.to_string());
+    }
+
+    if let Some(connect_timeout_ms) = options.connect_timeout_ms {
+        command.arg("-o");
+        command.arg(format!(
+            "ConnectTimeout={}",
+            duration_millis_to_ssh_seconds(connect_timeout_ms)
+        ));
+    }
+
+    if let Some(keepalive_interval_ms) = options.keepalive_interval_ms {
+        command.arg("-o");
+        command.arg(format!(
+            "ServerAliveInterval={}",
+            duration_millis_to_ssh_seconds(keepalive_interval_ms)
+        ));
+    }
+
+    if let Some(auth) = &options.auth {
+        match auth {
+            AuthMethod::PrivateKeyFile { path } => {
+                command.arg("-i");
+                command.arg(path);
+                command.arg("-o");
+                command.arg("IdentitiesOnly=yes");
+            }
+        }
+    }
+
+    if let Some(host_key) = &options.host_key {
+        match host_key {
+            HostKeyPolicy::KnownHosts { path } => {
+                command.arg("-o");
+                command.arg("StrictHostKeyChecking=yes");
+                if let Some(path) = path {
+                    command.arg("-o");
+                    command.arg(format!("UserKnownHostsFile={}", path.display()));
+                }
+            }
+            HostKeyPolicy::Ignore => {
+                command.arg("-o");
+                command.arg("StrictHostKeyChecking=no");
+                command.arg("-o");
+                command.arg("UserKnownHostsFile=/dev/null");
+            }
+        }
+    }
+
+    command.arg(&options.host);
+    command.arg(remote_command);
+    command
+}
+
+fn run_ssh_command(
+    command: &mut ProcessCommand,
+    stdin: Option<Vec<u8>>,
+    stdout_mode: ProcessOutputMode,
+    stderr_mode: ProcessOutputMode,
+) -> Result<BinaryExecResult> {
+    configure_stdio(command, stdin.is_some(), &stdout_mode, &stderr_mode);
+
+    let mut child = command
+        .spawn()
+        .map_err(|err| ssh_error(format!("failed to spawn `ssh`: {err}")))?;
+
+    let stdin_handle = stdin.and_then(|bytes| {
+        child.stdin.take().map(|mut pipe| {
+            thread::spawn(move || -> std::io::Result<()> {
+                pipe.write_all(&bytes)?;
+                pipe.flush()?;
+                Ok(())
+            })
+        })
+    });
+
+    let stdout_handle = child.stdout.take().map(spawn_reader_thread);
+    let stderr_handle = child.stderr.take().map(spawn_reader_thread);
+
+    let status = child
+        .wait()
+        .map_err(|err| ssh_error(format!("failed to wait for `ssh`: {err}")))?;
+
+    if let Some(handle) = stdin_handle {
+        finish_io_thread(handle, "stdin")?;
+    }
+
+    let stdout = collect_process_output(stdout_handle, &stdout_mode, "stdout")?;
+    let stderr = collect_process_output(stderr_handle, &stderr_mode, "stderr")?;
+
+    Ok(BinaryExecResult {
+        code: status.code().map(i64::from),
+        stdout,
+        stderr,
+    })
+}
+
+fn configure_stdio(
+    command: &mut ProcessCommand,
+    has_stdin: bool,
+    stdout_mode: &ProcessOutputMode,
+    stderr_mode: &ProcessOutputMode,
+) {
+    command.stdin(if has_stdin {
+        Stdio::piped()
+    } else {
+        Stdio::null()
+    });
+    command.stdout(match stdout_mode {
+        ProcessOutputMode::Capture => Stdio::piped(),
+        ProcessOutputMode::Inherit => Stdio::inherit(),
+        ProcessOutputMode::Null => Stdio::null(),
+    });
+    command.stderr(match stderr_mode {
+        ProcessOutputMode::Capture => Stdio::piped(),
+        ProcessOutputMode::Inherit => Stdio::inherit(),
+        ProcessOutputMode::Null => Stdio::null(),
+    });
+}
+
+fn spawn_reader_thread<R>(mut reader: R) -> thread::JoinHandle<std::io::Result<Vec<u8>>>
+where
+    R: Read + Send + 'static,
+{
+    thread::spawn(move || {
+        let mut buffer = Vec::new();
+        reader.read_to_end(&mut buffer)?;
+        Ok(buffer)
+    })
+}
+
+fn finish_io_thread(
+    handle: thread::JoinHandle<std::io::Result<()>>,
+    stream_name: &str,
+) -> Result<()> {
+    match handle.join() {
+        Ok(Ok(())) => Ok(()),
+        Ok(Err(err)) => Err(ssh_error(format!(
+            "failed to write {stream_name} for `ssh`: {err}"
+        ))),
+        Err(_) => Err(ssh_error(format!(
+            "failed to join {stream_name} writer thread for `ssh`"
+        ))),
+    }
+}
+
+fn collect_process_output(
+    handle: Option<thread::JoinHandle<std::io::Result<Vec<u8>>>>,
+    mode: &ProcessOutputMode,
+    stream_name: &str,
+) -> Result<Vec<u8>> {
+    match mode {
+        ProcessOutputMode::Capture => match handle {
+            Some(handle) => match handle.join() {
+                Ok(Ok(buffer)) => Ok(buffer),
+                Ok(Err(err)) => Err(ssh_error(format!(
+                    "failed to read {stream_name} from `ssh`: {err}"
+                ))),
+                Err(_) => Err(ssh_error(format!(
+                    "failed to join {stream_name} reader thread for `ssh`"
+                ))),
+            },
+            None => Ok(Vec::new()),
+        },
+        ProcessOutputMode::Inherit | ProcessOutputMode::Null => Ok(Vec::new()),
+    }
+}
+
+fn format_subprocess_stderr(output: &Output) -> String {
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    let stderr = stderr.trim();
+    if stderr.is_empty() {
+        String::new()
+    } else {
+        format!(": {stderr}")
+    }
+}
+
+fn process_output_mode(mode: SshStreamMode) -> ProcessOutputMode {
+    match mode {
+        SshStreamMode::Capture => ProcessOutputMode::Capture,
+        SshStreamMode::Inherit => ProcessOutputMode::Inherit,
+        SshStreamMode::Null => ProcessOutputMode::Null,
+    }
+}
+
+fn duration_millis_to_ssh_seconds(value: u64) -> u64 {
+    value.div_ceil(1000)
 }
 
 fn parse_target_string(target: &str) -> Result<ParsedTarget> {
@@ -1007,184 +964,6 @@ fn parse_target_string(target: &str) -> Result<ParsedTarget> {
         user,
         port,
     })
-}
-
-fn resolve_ssh_config(
-    host: &str,
-    user: Option<&str>,
-    port: Option<u16>,
-) -> Result<Option<SshConfigOptions>> {
-    let mut command = ProcessCommand::new("ssh");
-    command.arg("-G");
-    if let Some(user) = user {
-        command.arg("-l");
-        command.arg(user);
-    }
-    if let Some(port) = port {
-        command.arg("-p");
-        command.arg(port.to_string());
-    }
-    command.arg(host);
-
-    let output = match command.output() {
-        Ok(output) => output,
-        Err(err) if err.kind() == std::io::ErrorKind::NotFound => return Ok(None),
-        Err(err) => return Err(ssh_error(format!("failed to run `ssh -G`: {err}"))),
-    };
-
-    if !output.status.success() {
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        let details = stderr.trim();
-        return Err(ssh_error(if details.is_empty() {
-            format!("`ssh -G` failed for `{host}`")
-        } else {
-            format!("`ssh -G` failed for `{host}`: {details}")
-        }));
-    }
-
-    parse_ssh_config_output(&String::from_utf8_lossy(&output.stdout)).map(Some)
-}
-
-fn parse_ssh_config_output(output: &str) -> Result<SshConfigOptions> {
-    let mut config = SshConfigOptions::default();
-
-    for line in output.lines() {
-        let line = line.trim();
-        if line.is_empty() {
-            continue;
-        }
-
-        let Some(index) = line.find(char::is_whitespace) else {
-            continue;
-        };
-        let key = &line[..index];
-        let value = line[index..].trim_start();
-
-        match key {
-            "host" if !value.is_empty() => config.host = Some(value.to_string()),
-            "hostname" if !value.is_empty() => config.hostname = Some(value.to_string()),
-            "user" if !value.is_empty() => config.user = Some(value.to_string()),
-            "port" if !value.is_empty() => {
-                config.port = Some(parse_ssh_config_port(value)?);
-            }
-            "identityfile" if !value.eq_ignore_ascii_case("none") => {
-                config.identity_files.push(resolve_ssh_config_path(value));
-            }
-            "userknownhostsfile" => {
-                config.user_known_hosts_files = split_ssh_config_values(value)
-                    .into_iter()
-                    .filter(|item| !item.eq_ignore_ascii_case("none"))
-                    .map(|item| resolve_ssh_config_path(&item))
-                    .collect();
-            }
-            "stricthostkeychecking" if !value.is_empty() => {
-                config.strict_host_key_checking = Some(value.to_string());
-            }
-            "connecttimeout" => {
-                config.connect_timeout_ms = parse_ssh_config_duration_ms(value, key, false)?;
-            }
-            "serveraliveinterval" => {
-                config.server_alive_interval_ms = parse_ssh_config_duration_ms(value, key, true)?;
-            }
-            _ => {}
-        }
-    }
-
-    Ok(config)
-}
-
-fn split_ssh_config_values(value: &str) -> Vec<String> {
-    shlex::split(value).unwrap_or_else(|| value.split_whitespace().map(str::to_string).collect())
-}
-
-fn parse_ssh_config_port(value: &str) -> Result<u16> {
-    let port = value
-        .parse::<i64>()
-        .map_err(|_| ssh_error(format!("`ssh -G` returned invalid port `{value}`")))?;
-    parse_port(port)
-}
-
-fn parse_ssh_config_duration_ms(value: &str, key: &str, zero_is_none: bool) -> Result<Option<u64>> {
-    if value.eq_ignore_ascii_case("none") {
-        return Ok(None);
-    }
-
-    let seconds = value
-        .parse::<i64>()
-        .map_err(|_| ssh_error(format!("`ssh -G` returned invalid `{key}` `{value}`")))?;
-    if seconds == 0 && zero_is_none {
-        return Ok(None);
-    }
-    let seconds = parse_positive_u64(seconds, key)?;
-    seconds
-        .checked_mul(1000)
-        .ok_or_else(|| ssh_error(format!("`{key}` is too large")))
-        .map(Some)
-}
-
-fn parse_auth_options(
-    request: Option<SshAuthRequest>,
-    current_dir: &Path,
-    ssh_config: Option<&SshConfigOptions>,
-) -> Result<AuthMethod> {
-    if let Some(request) = request {
-        return Ok(match request {
-            SshAuthRequest::Password { password } => AuthMethod::Password { password },
-            SshAuthRequest::PrivateKeyFile { path, passphrase } => AuthMethod::PrivateKeys {
-                keys: vec![PrivateKeyOption {
-                    path: resolve_local_path(&path, current_dir),
-                    passphrase,
-                    required: true,
-                }],
-            },
-        });
-    }
-
-    let keys = find_private_key_candidates(ssh_config);
-    if !keys.is_empty() {
-        return Ok(AuthMethod::PrivateKeys { keys });
-    }
-
-    Err(ssh_error(
-        "requires `auth.password` or `auth.private_key_file`",
-    ))
-}
-
-fn parse_host_key_options(
-    request: Option<SshHostKeyRequest>,
-    current_dir: &Path,
-    ssh_config: Option<&SshConfigOptions>,
-) -> Result<HostKeyPolicy> {
-    let default_policy = ssh_config
-        .map(|config| match config.strict_host_key_checking.as_deref() {
-            Some("no") | Some("off") => HostKeyPolicy::Ignore,
-            _ => HostKeyPolicy::KnownHosts {
-                paths: config.user_known_hosts_files.clone(),
-                use_default_path: config.user_known_hosts_files.is_empty(),
-            },
-        })
-        .unwrap_or(HostKeyPolicy::KnownHosts {
-            paths: Vec::new(),
-            use_default_path: true,
-        });
-
-    let Some(request) = request else {
-        return Ok(default_policy);
-    };
-
-    match request {
-        SshHostKeyRequest::KnownHosts { path } => match path {
-            Some(path) => Ok(HostKeyPolicy::KnownHosts {
-                paths: vec![resolve_local_path(&path, current_dir)],
-                use_default_path: false,
-            }),
-            None => Ok(HostKeyPolicy::KnownHosts {
-                paths: Vec::new(),
-                use_default_path: true,
-            }),
-        },
-        SshHostKeyRequest::Ignore => Ok(HostKeyPolicy::Ignore),
-    }
 }
 
 fn build_upload_command(remote_path: &str, options: SshTransferOptions) -> Result<String> {
@@ -1383,7 +1162,6 @@ fn write_local_file(
         .open(path)
         .map_err(|err| ssh_error(format!("failed to open `{}`: {err}", path.display())))?;
 
-    use std::io::Write as _;
     file.write_all(content)
         .map_err(|err| ssh_error(format!("failed to write `{}`: {err}", path.display())))?;
     file.flush()
@@ -1615,18 +1393,6 @@ fn build_remote_path_test_failed_error(
     ssh_error(message)
 }
 
-fn handle_output(buffer: &mut Vec<u8>, mode: SshStreamMode, data: &[u8]) {
-    match mode {
-        SshStreamMode::Inherit => {
-            use std::io::Write as _;
-            let _ = std::io::stdout().write_all(data);
-            let _ = std::io::stdout().flush();
-        }
-        SshStreamMode::Capture => buffer.extend_from_slice(data),
-        SshStreamMode::Null => {}
-    }
-}
-
 fn bytes_to_captured_string(bytes: Vec<u8>, mode: SshStreamMode) -> Option<String> {
     match mode {
         SshStreamMode::Capture => Some(String::from_utf8_lossy(&bytes).to_string()),
@@ -1663,17 +1429,6 @@ fn parse_port_string(value: &str) -> Result<u16> {
     parse_port(port)
 }
 
-fn parse_positive_u64(value: i64, field: &str) -> Result<u64> {
-    if value <= 0 {
-        return Err(ssh_error(format!("`{field}` must be > 0")));
-    }
-    u64::try_from(value).map_err(|_| ssh_error(format!("`{field}` is too large")))
-}
-
-fn resolve_ssh_config_path(path: &str) -> PathBuf {
-    PathBuf::from(expand_home(path).into_owned())
-}
-
 fn resolve_local_path(path: &str, current_dir: &Path) -> PathBuf {
     let expanded = expand_home(path);
     let path = PathBuf::from(expanded.into_owned());
@@ -1707,43 +1462,6 @@ fn default_ssh_user() -> String {
         .ok()
         .filter(|value| !value.is_empty())
         .unwrap_or_else(|| "root".to_string())
-}
-
-fn find_private_key_candidates(ssh_config: Option<&SshConfigOptions>) -> Vec<PrivateKeyOption> {
-    let paths = ssh_config
-        .filter(|config| !config.identity_files.is_empty())
-        .map(|config| config.identity_files.clone())
-        .unwrap_or_else(find_default_private_keys);
-
-    let mut keys = Vec::new();
-    for path in paths {
-        if !path.is_file()
-            || keys
-                .iter()
-                .any(|candidate: &PrivateKeyOption| candidate.path == path)
-        {
-            continue;
-        }
-        keys.push(PrivateKeyOption {
-            path,
-            passphrase: None,
-            required: false,
-        });
-    }
-
-    keys
-}
-
-fn find_default_private_keys() -> Vec<PathBuf> {
-    let Some(home) = home_dir_string() else {
-        return Vec::new();
-    };
-    let ssh_dir = PathBuf::from(home).join(".ssh");
-    ["id_ed25519", "id_rsa", "id_ecdsa"]
-        .iter()
-        .map(|name| ssh_dir.join(name))
-        .filter(|path| path.is_file())
-        .collect()
 }
 
 fn ssh_error(msg: impl Into<String>) -> Error {

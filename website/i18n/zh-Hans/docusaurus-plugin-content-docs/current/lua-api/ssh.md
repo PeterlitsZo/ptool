@@ -6,8 +6,10 @@ SSH 连接、远程执行和文件传输辅助能力位于 `ptool.ssh` 和 `p.ss
 
 > `v0.1.0` - 引入。
 
-`ptool.ssh.connect(target_or_options)` 打开 SSH 连接，并返回一个 `Connection`
-对象。
+`ptool.ssh.connect(target_or_options)` 会准备一个由系统 `ssh` 命令驱动的
+SSH 连接句柄，并返回一个 `Connection` 对象。
+
+运行环境中必须能在 `PATH` 中找到 `ssh`。
 
 参数：
 
@@ -36,15 +38,18 @@ local c = ptool.ssh.connect("[2001:db8::10]:2222")
 `auth` 字段：
 
 - `private_key_file`（string，可选）：私钥文件路径。
-- `private_key_passphrase`（string，可选）：私钥口令。
-- `password`（string，可选）：密码认证所用的密码。
+- `private_key_passphrase`（string，可选）：私钥口令。目前不支持。
+- `password`（string，可选）：密码认证所用的密码。目前不支持。
 
 认证行为：
 
-- 如果提供了 `auth.password`，则使用密码认证。
-- 否则，如果提供了 `auth.private_key_file`，则使用该私钥做公钥认证。
-- 否则，`ptool` 会按顺序尝试这些默认私钥文件：
-  `~/.ssh/id_ed25519`、`~/.ssh/id_rsa`、`~/.ssh/id_ecdsa`。
+- 如果提供了 `auth.private_key_file`，`ptool` 会通过 `-i` 将该私钥传给
+  `ssh`，并同时设置 `IdentitiesOnly=yes`。
+- 如果提供了 `auth.private_key_passphrase` 或 `auth.password`，
+  `ptool.ssh.connect(...)` 会失败，因为该 API 不会把这些密钥材料直接传给
+  系统 `ssh` 命令。
+- 否则，认证完全交给本机 OpenSSH 配置处理，包括 `IdentityFile`、
+  `ProxyJump`、`ProxyCommand`、`ssh-agent` 和证书等机制。
 - 相对私钥路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` 的影响。
 - 私钥路径中的 `~` 和 `~/...` 会被展开。
 
@@ -58,18 +63,17 @@ local c = ptool.ssh.connect("[2001:db8::10]:2222")
 
 主机密钥行为：
 
-- 如果省略 `known_hosts_file`，`ptool` 会在可用时跟随 `ssh -G`
-  给出的主机密钥配置。
-- 如果 `ssh -G` 提供了一个或多个 `UserKnownHostsFile` 路径，`ptool`
-  会按顺序检查这些文件，只要其中任意一个匹配当前服务端密钥就会通过校验。
-- 如果 `ssh -G` 将 `StrictHostKeyChecking` 设为 `no` 或 `off`，`ptool`
-  默认会跳过主机密钥校验。
-- 否则，当没有显式配置 `UserKnownHostsFile` 时，会使用默认的 known_hosts
-  位置。
+- 如果 `verify = "ignore"`，`ptool` 会给 `ssh` 传入
+  `StrictHostKeyChecking=no` 和 `UserKnownHostsFile=/dev/null`。
+- 如果 `verify = "known_hosts"` 且提供了 `known_hosts_file`，`ptool`
+  会给 `ssh` 传入 `StrictHostKeyChecking=yes`，并设置对应的
+  `UserKnownHostsFile`。
+- 如果 `verify = "known_hosts"` 但省略了 `known_hosts_file`，或者整个
+  `host_key` 都被省略，则主机密钥处理交给本机 OpenSSH 配置和默认行为。
 - 相对 `known_hosts_file` 路径会从当前 `ptool` 运行时目录解析。
 - `known_hosts_file` 中的 `~` 和 `~/...` 会被展开。
-- 当显式提供 `known_hosts_file` 时，它会覆盖 `ssh -G`
-  提供的默认主机密钥来源。
+- 当显式提供 `known_hosts_file` 时，它会覆盖本次连接中本机 `ssh` 命令默认
+  使用的 `UserKnownHostsFile`。
 
 示例：
 
@@ -91,7 +95,7 @@ local ssh = ptool.ssh.connect({
 
 > `v0.1.0` - 引入。
 
-`Connection` 表示由 `ptool.ssh.connect()` 返回的已打开 SSH 连接。
+`Connection` 表示由 `ptool.ssh.connect()` 返回的、基于 OpenSSH 的连接句柄。
 
 它实现为 Lua userdata。
 
@@ -473,7 +477,7 @@ print(res.from)
 
 规范 API 名称：`ptool.ssh.Connection:close`。
 
-`conn:close()` 关闭 SSH 连接。
+`conn:close()` 关闭 SSH 连接句柄。
 
 行为说明：
 

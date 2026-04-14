@@ -33,9 +33,10 @@
 - Expanded `ptool.semver.bump` with `prepatch`, `preminor`, and `premajor`
   operations plus an optional prerelease channel, and updated
   `scripts/release.lua` to support channel-aware prerelease bumps.
-- Changed SSH host key verification to honor all `UserKnownHostsFile` entries
-  from `ssh -G`, so default `known_hosts` verification better matches OpenSSH
-  behavior.
+- Changed `ptool.ssh` to execute through the system OpenSSH client instead of
+  the embedded SSH implementation, so SSH config, jump hosts, agent-based
+  authentication, and other OpenSSH behaviors now follow the local `ssh`
+  command more closely.
 
 ## v0.2.0 (2026-03-30)
 
