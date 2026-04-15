@@ -52,7 +52,7 @@ jobs:
             use_zigbuild: true
             binary_name: ptool
             archive_ext: tar.gz
-          - runner: macos-13
+          - runner: macos-15-intel
             target: x86_64-apple-darwin
             asset_name: macos-amd64
             use_zigbuild: false

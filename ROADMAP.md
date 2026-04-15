@@ -33,7 +33,7 @@
       this.
 - [x] Let the SSH connection support upload directories.
 - [x] Support the subcommand for `ptool.args`.
-- [ ] Remove `russh` and just use `ssh` command.
+- [x] Remove `russh` and just use `ssh` command.
 
 # v0.2.0
 

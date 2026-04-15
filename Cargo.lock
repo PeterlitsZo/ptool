@@ -1541,7 +1541,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-cli"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "clap_lex",
  "indoc",
@@ -1550,7 +1550,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-engine"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "clap",
  "glob",
@@ -1570,7 +1570,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-lua"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "clap_lex",
  "indoc",
