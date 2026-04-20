@@ -1,8 +1,10 @@
 use std::cell::RefCell;
-use std::io::{self, BufRead, IsTerminal, Write};
+use std::io::{self, IsTerminal, Write};
 use std::rc::Rc;
 
 use mlua::{Error as LuaError, Lua, MultiValue};
+use rustyline::DefaultEditor;
+use rustyline::error::ReadlineError;
 
 const REPL_SCRIPT_NAME: &str = "=(ptool repl)";
 const REPL_PROMPT: &str = ">>> ";
@@ -28,8 +30,7 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let (lua, world) = create_lua_runtime(REPL_SCRIPT_NAME, &[])?;
-    let stdin = io::stdin();
-    let mut stdin = stdin.lock();
+    let mut editor = DefaultEditor::new()?;
     let mut stdout = io::stdout().lock();
     let mut chunk = String::new();
     let mut prompt = REPL_PROMPT;
@@ -38,21 +39,28 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
     writeln!(stdout, "Press Ctrl-D to exit.")?;
 
     loop {
-        write!(stdout, "{prompt}")?;
-        stdout.flush()?;
+        let line = match editor.readline(prompt) {
+            Ok(line) => line,
+            Err(ReadlineError::Interrupted) => {
+                chunk.clear();
+                prompt = REPL_PROMPT;
+                continue;
+            }
+            Err(ReadlineError::Eof) => {
+                writeln!(stdout)?;
+                break;
+            }
+            Err(err) => return Err(err.into()),
+        };
 
-        let mut line = String::new();
-        let read = stdin.read_line(&mut line)?;
-        if read == 0 {
-            writeln!(stdout)?;
-            break;
+        if !line.is_empty() {
+            editor.add_history_entry(line.as_str())?;
         }
 
-        let line = line.trim_end_matches(['\r', '\n']);
         if !chunk.is_empty() {
             chunk.push('\n');
         }
-        chunk.push_str(line);
+        chunk.push_str(&line);
 
         match lua
             .load(&chunk)

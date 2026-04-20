@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added readline-style line editing to `ptool repl`, including arrow-key cursor
+  movement, in-session history navigation, multi-line input reset on `Ctrl-C`,
+  and cleaner interactive Lua experimentation.
+
 ## v0.3.0 (2026-04-15)
 
 ### Added

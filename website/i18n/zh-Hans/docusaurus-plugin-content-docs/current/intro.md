@@ -8,6 +8,12 @@
 ptool run <file>
 ```
 
+如果你想交互式试用 Lua 表达式或 `ptool` API，也可以使用：
+
+```sh
+ptool repl
+```
+
 脚本运行时，`ptool` 会通过全局表 `ptool` 以及更短的别名 `p` 暴露 API。
 
 ## 安装
@@ -68,12 +74,14 @@ ptool run script.lua --name alice -v a.txt b.txt
 ## 你能得到什么
 
 - 一个支持 shebang 文件的脚本运行器。
+- 一个可交互使用的 REPL，方便直接试验 Lua 表达式和 `ptool` API。
 - 一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、
   HTTP、SSH、数据库和模板。
 - 一组面向命令行场景的辅助能力，用于执行命令、解析参数和进行交互式输入。
 
 ## 下一步
 
+- 查看 [REPL](./repl.md) 了解交互式使用方式、多行输入和键盘行为。
 - 使用 [Lua API 概览](./lua-api/index.md) 浏览核心 API 和可用模块。
 - 从 [Core Lua API](./lua-api/core.md) 开始了解版本门禁、进程执行、配置和脚本
   生命周期辅助能力。

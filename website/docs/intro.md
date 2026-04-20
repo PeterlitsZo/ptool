@@ -9,6 +9,12 @@ The main entrypoint today is:
 ptool run <file>
 ```
 
+For interactive exploration, `ptool` also provides:
+
+```sh
+ptool repl
+```
+
 When a script runs, `ptool` exposes its API through the global `ptool` table
 and the shorter alias `p`.
 
@@ -76,6 +82,7 @@ This lets you execute the script directly once it has the executable bit.
 ## What you get
 
 - A script runner that understands shebang files.
+- An interactive REPL for trying Lua expressions and `ptool` APIs directly.
 - Lua helpers for semver, paths, files, TOML, regexes, strings, HTTP, SSH,
   databases, and templates.
 - CLI-oriented helpers for running commands, parsing arguments, and asking for
@@ -83,6 +90,8 @@ This lets you execute the script directly once it has the executable bit.
 
 ## Next steps
 
+- Open [REPL](./repl.md) for interactive usage, multi-line input, and keyboard
+  behavior.
 - Use [Lua API Overview](./lua-api/index.md) to browse the core APIs and
   available modules.
 - Start with [Core Lua API](./lua-api/core.md) for version gating, process
