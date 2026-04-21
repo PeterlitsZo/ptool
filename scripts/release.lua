@@ -1,7 +1,7 @@
 #!/usr/bin/env -S ptool run
 
-p.use("v0.2.0")
-p.config{ run = { check = true } }
+p.use("v0.3.0")
+p.config { run = { check = true } }
 
 -- Parse arguments.
 local args = p.args.parse({
@@ -63,9 +63,10 @@ local update_changelog = p.ask(
 if update_changelog ~= "Yes" then
   error("Please update the CHANGELOG.md file before releasing.", 0)
 end
+p.run("git add CHANGELOG.md Cargo.toml Cargo.lock")
 p.run(
   "git",
-  {"commit", "-m", 'chore: Release "' .. next_version_str .. '".'},
+  { "commit", "-m", 'chore: Release "' .. next_version_str .. '".' },
   { confirm = true }
 )
 p.run("git tag " .. tag_name)

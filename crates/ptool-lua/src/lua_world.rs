@@ -202,6 +202,19 @@ impl LuaWorld {
         crate::http::request(&self.engine, options)
     }
 
+    pub(crate) fn json_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Value> {
+        crate::json::parse(lua, input)
+    }
+
+    pub(crate) fn json_stringify(
+        &self,
+        lua: &Lua,
+        value: Value,
+        options: Option<Table>,
+    ) -> mlua::Result<String> {
+        crate::json::stringify(lua, value, options)
+    }
+
     pub(crate) fn net_parse_url(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
         crate::net::parse_url(lua, &self.engine, input)
     }

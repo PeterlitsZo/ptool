@@ -53,6 +53,7 @@ fn create_ptool_module(
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
     let hash_module = create_ptool_hash_module(lua, Rc::clone(&world))?;
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
+    let json_module = create_ptool_json_module(lua, Rc::clone(&world))?;
     let net_module = create_ptool_net_module(lua, Rc::clone(&world))?;
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
@@ -77,6 +78,7 @@ fn create_ptool_module(
     module.set("sh", shell_module)?;
     module.set("hash", hash_module)?;
     module.set("http", http_module)?;
+    module.set("json", json_module)?;
     module.set("net", net_module)?;
     module.set("db", db_module)?;
     module.set("ssh", ssh_module)?;
@@ -166,6 +168,20 @@ fn create_ptool_http_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
         lua.create_function(move |_, options: Table| world.borrow().http_request(options))?;
     http_module.set("request", request_fn)?;
     Ok(http_module)
+}
+
+fn create_ptool_json_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let json_module = lua.create_table()?;
+    let parse_state = Rc::clone(&world);
+    let parse_fn =
+        lua.create_function(move |lua, input: Value| parse_state.borrow().json_parse(lua, input))?;
+    let stringify_fn =
+        lua.create_function(move |lua, (value, options): (Value, Option<Table>)| {
+            world.borrow().json_stringify(lua, value, options)
+        })?;
+    json_module.set("parse", parse_fn)?;
+    json_module.set("stringify", stringify_fn)?;
+    Ok(json_module)
 }
 
 fn create_ptool_net_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

@@ -1,20 +1,25 @@
-# v0.4.0
+# v0.5.0
 
 - [ ] Support just `#!/usr/bin/env ptool`.
+- [ ] Support a TUI toolkit.
 - [ ] Make the `p.ask` more powerful.
+
+# v0.4.0
+
 - [ ] More i18n support.
 - [ ] Support show the user and host in `p.run`, ssh connection's `run`, etc.
 - [ ] Let `p.fs.write` and `p.fs.read` support bytes.
 - [ ] Let the `glob` function support working_dir optioon.
-- [ ] Support a TUI toolkit.
 - [ ] Better error handling.
 - [ ] Fix the local variable not working in REPL.
-- [ ] Make REPL support readline-like features.
-- [ ] Support `split_lines` function.
+- [x] Make REPL support readline-like features.
+- [x] Support `split_lines` function.
 - [ ] Make the document website better.
 - [ ] Change the avatar icon of the document website.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
+- [x] Support JSON API.
+- [ ] Support more TOML API.
 
 # v0.3.0
 

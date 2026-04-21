@@ -1,6 +1,5 @@
 use minijinja::{Environment, UndefinedBehavior};
-use mlua::{Lua, LuaSerdeExt, Value};
-use serde_json::Value as JsonValue;
+use mlua::{Lua, Value};
 
 const TEMPLATE_NAME: &str = "__ptool_inline_template__";
 
@@ -18,8 +17,6 @@ pub(crate) fn render(lua: &Lua, template: String, context: Value) -> mlua::Resul
         .map_err(|err| mlua::Error::runtime(format!("ptool.template.render failed: {err}")))
 }
 
-fn context_to_json(lua: &Lua, context: Value) -> mlua::Result<JsonValue> {
-    lua.from_value(context).map_err(|err| {
-        mlua::Error::runtime(format!("ptool.template.render invalid context: {err}"))
-    })
+fn context_to_json(lua: &Lua, context: Value) -> mlua::Result<serde_json::Value> {
+    crate::json::lua_value_to_json(lua, context, "ptool.template.render invalid context")
 }

@@ -19,6 +19,7 @@ const sidebars: SidebarsConfig = {
         'lua-api/platform',
         'lua-api/ansi',
         'lua-api/http',
+        'lua-api/json',
         'lua-api/db',
         'lua-api/ssh',
         'lua-api/path',

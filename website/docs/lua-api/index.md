@@ -18,6 +18,7 @@
 - [ANSI API](./ansi.md): Build styled terminal output with ANSI escape
   sequences.
 - [HTTP API](./http.md): Send HTTP requests and consume response bodies.
+- [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
 - [Database API](./db.md): Open database connections and run SQL queries.
 - [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer
   files.

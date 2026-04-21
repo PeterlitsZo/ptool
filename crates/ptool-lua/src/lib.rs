@@ -5,6 +5,7 @@ mod exec;
 mod fs;
 mod http;
 mod inspect;
+mod json;
 mod lua_api;
 mod lua_world;
 mod net;

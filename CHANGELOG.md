@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added `ptool.json.parse(...)` and `ptool.json.stringify(...)` for JSON parsing
+  and serialization in Lua scripts, with English and zh-Hans API docs.
 - Added readline-style line editing to `ptool repl`, including arrow-key cursor
   movement, in-session history navigation, multi-line input reset on `Ctrl-C`,
   and cleaner interactive Lua experimentation.

@@ -2,7 +2,6 @@ use mlua::{Lua, Table, UserData, UserDataFields, UserDataMethods, Value};
 use ptool_engine::{
     Error as EngineError, HttpRequestOptions, HttpResponse as EngineHttpResponse, PtoolEngine,
 };
-use serde_json::Value as JsonValue;
 
 const REQUEST_SIGNATURE: &str = "ptool.http.request(options)";
 
@@ -88,8 +87,12 @@ impl UserData for HttpResponse {
         });
 
         methods.add_method_mut("json", |lua, this, ()| {
-            let json: JsonValue = this.inner.json().map_err(to_lua_response_error)?;
-            json_value_to_lua(lua, &json)
+            let json = this.inner.json().map_err(to_lua_response_error)?;
+            crate::json::json_value_to_lua(
+                lua,
+                &json,
+                "ptool.http response json has unsupported number",
+            )
         });
 
         methods.add_method_mut("bytes", |lua, this, ()| {
@@ -105,45 +108,4 @@ fn to_lua_request_error(err: EngineError) -> mlua::Error {
 
 fn to_lua_response_error(err: EngineError) -> mlua::Error {
     mlua::Error::runtime(format!("ptool.http {}", err.msg))
-}
-
-fn json_value_to_lua(lua: &Lua, value: &JsonValue) -> mlua::Result<Value> {
-    match value {
-        JsonValue::Null => Ok(Value::Nil),
-        JsonValue::Bool(value) => Ok(Value::Boolean(*value)),
-        JsonValue::Number(value) => json_number_to_lua(value),
-        JsonValue::String(value) => Ok(Value::String(lua.create_string(value)?)),
-        JsonValue::Array(values) => {
-            let table = lua.create_table()?;
-            for (index, item) in values.iter().enumerate() {
-                table.raw_set(index + 1, json_value_to_lua(lua, item)?)?;
-            }
-            Ok(Value::Table(table))
-        }
-        JsonValue::Object(values) => {
-            let table = lua.create_table()?;
-            for (key, item) in values {
-                table.raw_set(key.as_str(), json_value_to_lua(lua, item)?)?;
-            }
-            Ok(Value::Table(table))
-        }
-    }
-}
-
-fn json_number_to_lua(value: &serde_json::Number) -> mlua::Result<Value> {
-    if let Some(number) = value.as_i64() {
-        return Ok(Value::Integer(number));
-    }
-    if let Some(number) = value.as_u64() {
-        if let Ok(number) = i64::try_from(number) {
-            return Ok(Value::Integer(number));
-        }
-        return Ok(Value::Number(number as f64));
-    }
-    if let Some(number) = value.as_f64() {
-        return Ok(Value::Number(number));
-    }
-    Err(mlua::Error::runtime(
-        "ptool.http response json has unsupported number",
-    ))
 }

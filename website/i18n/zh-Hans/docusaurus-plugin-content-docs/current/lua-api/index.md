@@ -15,6 +15,7 @@
 - [Platform API](./platform.md)：检测当前操作系统、CPU 架构和目标三元组。
 - [ANSI API](./ansi.md)：用 ANSI 转义序列构造带样式的终端输出。
 - [HTTP API](./http.md)：发送 HTTP 请求并读取响应体。
+- [JSON API](./json.md)：解析 JSON 文本，并把 Lua 值序列化为 JSON。
 - [Database API](./db.md)：打开数据库连接并执行 SQL 查询。
 - [SSH API](./ssh.md)：连接远程主机、执行命令并传输文件。
 - [Path API](./path.md)：以纯词法方式处理路径，不触碰真实文件系统。
