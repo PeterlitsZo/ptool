@@ -90,6 +90,7 @@ fn run_command_with_stream_defaults(
     let options = parse_run_options(args, defaults, stream_defaults)?;
     let cmd_for_error = options.inner.cmd.clone();
     let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
+    let local_user_host = options.echo.then(|| engine.current_user_host());
 
     let display = if options.echo || options.confirm || (options.check && options.retry) {
         let command = format_command_for_display(&options.inner.cmd, &options.inner.args);
@@ -102,7 +103,15 @@ fn run_command_with_stream_defaults(
         let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
             mlua::Error::runtime("ptool.run internal error: missing display info")
         })?;
-        print_local_command_echo(display_cwd, display_command);
+        let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+            mlua::Error::runtime("ptool.run internal error: missing local user/host info")
+        })?;
+        print_local_command_echo(
+            &local_user_host.user,
+            &local_user_host.host,
+            display_cwd,
+            display_command,
+        );
     }
 
     if options.confirm {
@@ -118,7 +127,15 @@ fn run_command_with_stream_defaults(
             let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
                 mlua::Error::runtime("ptool.run internal error: missing display info")
             })?;
-            print_local_command_echo(display_cwd, display_command);
+            let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+                mlua::Error::runtime("ptool.run internal error: missing local user/host info")
+            })?;
+            print_local_command_echo(
+                &local_user_host.user,
+                &local_user_host.host,
+                display_cwd,
+                display_command,
+            );
         }
 
         let result = engine

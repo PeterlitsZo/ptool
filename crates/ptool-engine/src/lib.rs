@@ -22,7 +22,7 @@ pub use exec::{
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
-pub use platform::{Arch, OS};
+pub use platform::{Arch, OS, UserHost};
 pub use script_args::{
     ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
     ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,
@@ -70,6 +70,10 @@ impl PtoolEngine {
 
     pub fn current_arch(&self) -> Arch {
         platform::detect_current_arch()
+    }
+
+    pub fn current_user_host(&self) -> UserHost {
+        platform::detect_current_user_host()
     }
 
     pub fn path_join<I, S>(&self, segments: I) -> Result<String>

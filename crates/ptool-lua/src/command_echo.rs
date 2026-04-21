@@ -2,14 +2,17 @@ use jiff::Zoned;
 use owo_colors::OwoColorize;
 use std::path::Path;
 
-pub(crate) fn print_local_command_echo(cwd: &Path, command: &str) {
-    print_command_echo(&[cwd.display().to_string()], command);
+pub(crate) fn print_local_command_echo(user: &str, host: &str, cwd: &Path, command: &str) {
+    print_command_echo(
+        &[format_user_host(user, host), cwd.display().to_string()],
+        command,
+    );
 }
 
-pub(crate) fn print_ssh_command_echo(target: &str, cwd: &str, command: &str) {
+pub(crate) fn print_ssh_command_echo(user: &str, host: &str, port: u16, cwd: &str, command: &str) {
     print_command_echo(
         &[
-            format!("ssh {target}"),
+            format_ssh_target(user, host, port),
             if cwd.is_empty() {
                 "<unknown remote cwd>".to_string()
             } else {
@@ -44,4 +47,22 @@ fn print_command_self(command: &str) {
         print!("\n{} {}", "...".dimmed(), line.to_string().bold());
     }
     println!();
+}
+
+fn format_user_host(user: &str, host: &str) -> String {
+    let host = if host.contains(':') {
+        format!("[{host}]")
+    } else {
+        host.to_string()
+    };
+    format!("{user}@{host}")
+}
+
+fn format_ssh_target(user: &str, host: &str, port: u16) -> String {
+    let target = format_user_host(user, host);
+    if port == 22 {
+        format!("ssh {target}")
+    } else {
+        format!("ssh {target}:{port}")
+    }
 }

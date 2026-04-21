@@ -121,36 +121,50 @@ impl LuaSshConnection {
 
     fn run(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
         let mut options = parse_run_call(args)?;
+        let info = self.info();
         if options.echo {
             let display_cwd = self
                 .connection
                 .resolve_display_cwd(options.display_cwd.as_deref())
                 .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
-            print_ssh_command_echo(&self.info().target, &display_cwd, &options.command);
+            print_ssh_command_echo(
+                &info.user,
+                &info.host,
+                info.port,
+                &display_cwd,
+                &options.command,
+            );
             options.echo = false;
         }
         let result = self
             .connection
             .run(options)
             .map_err(|err| ssh_error(RUN_SIGNATURE, err))?;
-        build_exec_result(lua, result, self.info().target)
+        build_exec_result(lua, result, info.target)
     }
 
     fn run_capture(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
         let mut options = parse_run_capture_call(args)?;
+        let info = self.info();
         if options.echo {
             let display_cwd = self
                 .connection
                 .resolve_display_cwd(options.display_cwd.as_deref())
                 .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
-            print_ssh_command_echo(&self.info().target, &display_cwd, &options.command);
+            print_ssh_command_echo(
+                &info.user,
+                &info.host,
+                info.port,
+                &display_cwd,
+                &options.command,
+            );
             options.echo = false;
         }
         let result = self
             .connection
             .run(options)
             .map_err(|err| ssh_error(RUN_CAPTURE_SIGNATURE, err))?;
-        build_exec_result(lua, result, self.info().target)
+        build_exec_result(lua, result, info.target)
     }
 
     fn path(&self, path: String) -> mlua::Result<LuaSshPath> {

@@ -7,6 +7,8 @@
 - Added readline-style line editing to `ptool repl`, including arrow-key cursor
   movement, in-session history navigation, multi-line input reset on `Ctrl-C`,
   and cleaner interactive Lua experimentation.
+- Changed `ptool.run`, `ptool.run_capture`, and SSH command echo output to show
+  the current `user@host` together with the relevant working directory.
 
 ## v0.3.0 (2026-04-15)
 
