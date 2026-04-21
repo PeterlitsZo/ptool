@@ -19,13 +19,27 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'zh-Hans'],
+    locales: ['en', 'zh-Hans', 'es', 'pt-BR', 'ja'],
     localeConfigs: {
       en: {
         htmlLang: 'en',
+        label: 'English',
       },
       'zh-Hans': {
         htmlLang: 'zh-CN',
+        label: '简体中文',
+      },
+      es: {
+        htmlLang: 'es',
+        label: 'Español',
+      },
+      'pt-BR': {
+        htmlLang: 'pt-BR',
+        label: 'Português (Brasil)',
+      },
+      ja: {
+        htmlLang: 'ja-JP',
+        label: '日本語',
       },
     },
   },

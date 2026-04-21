@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added Spanish, Brazilian Portuguese, and Japanese i18n support for the
+  Docusaurus docs site, including localized theme strings, homepage text, and
+  translated documentation pages.
 - Added `ptool.json.parse(...)` and `ptool.json.stringify(...)` for JSON parsing
   and serialization in Lua scripts, with English and zh-Hans API docs.
 - Added readline-style line editing to `ptool repl`, including arrow-key cursor

@@ -67,7 +67,11 @@ function HomepageHeader(): ReactNode {
           <Heading as="h1" className={styles.heroTitle}>
             {siteConfig.title}
           </Heading>
-          <p className={styles.heroSubtitle}>{siteConfig.tagline}</p>
+          <p className={styles.heroSubtitle}>
+            <Translate id="homepage.tagline">
+              Lua-powered scripting for shell and automation workflows.
+            </Translate>
+          </p>
           <p className={styles.heroBody}>
             <Translate id="homepage.heroBody">
               Build small, sharp automation scripts with Lua, then ship them

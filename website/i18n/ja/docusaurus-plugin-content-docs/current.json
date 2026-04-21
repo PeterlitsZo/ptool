@@ -1,10 +1,10 @@
 {
   "version.label": {
-    "message": "当前开发版",
+    "message": "現在の開発版",
     "description": "The label for version current"
   },
   "sidebar.docsSidebar.category.Guide": {
-    "message": "指南",
+    "message": "ガイド",
     "description": "The label for category 'Guide' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Lua API": {

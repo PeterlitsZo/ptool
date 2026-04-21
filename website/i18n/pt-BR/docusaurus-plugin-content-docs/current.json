@@ -1,14 +1,14 @@
 {
   "version.label": {
-    "message": "当前开发版",
+    "message": "Versão de desenvolvimento atual",
     "description": "The label for version current"
   },
   "sidebar.docsSidebar.category.Guide": {
-    "message": "指南",
+    "message": "Guia",
     "description": "The label for category 'Guide' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Lua API": {
-    "message": "Lua API",
+    "message": "API de Lua",
     "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
   }
 }
