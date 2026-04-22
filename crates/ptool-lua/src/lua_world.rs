@@ -198,8 +198,12 @@ impl LuaWorld {
         lua.create_sequence_from(parts)
     }
 
-    pub(crate) fn http_request(&self, options: Table) -> mlua::Result<crate::http::HttpResponse> {
-        crate::http::request(&self.engine, options)
+    pub(crate) fn http_request(
+        &self,
+        lua: &Lua,
+        options: Table,
+    ) -> mlua::Result<crate::http::HttpResponse> {
+        crate::http::request(lua, &self.engine, options)
     }
 
     pub(crate) fn json_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Value> {

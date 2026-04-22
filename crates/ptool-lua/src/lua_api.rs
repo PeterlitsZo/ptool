@@ -165,7 +165,7 @@ fn create_ptool_ansi_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
 fn create_ptool_http_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
     let http_module = lua.create_table()?;
     let request_fn =
-        lua.create_function(move |_, options: Table| world.borrow().http_request(options))?;
+        lua.create_function(move |lua, options: Table| world.borrow().http_request(lua, options))?;
     http_module.set("request", request_fn)?;
     Ok(http_module)
 }

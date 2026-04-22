@@ -9,6 +9,7 @@ pub enum ErrorKind {
     InvalidHttpMethod,
     InvalidHttpHeader,
     InvalidHttpTimeout,
+    InvalidHttpOptions,
     InvalidSemver,
     InvalidSemverOperation,
     MissingPort,

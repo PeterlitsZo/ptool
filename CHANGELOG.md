@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Enhanced `p.http.request(...)` with query/form/JSON request helpers, redirect
+  and auth options, richer response header APIs, cached response bodies, and
+  synchronized HTTP documentation across all supported locales.
 - Added Spanish, Brazilian Portuguese, and Japanese i18n support for the
   Docusaurus docs site, including localized theme strings, homepage text, and
   translated documentation pages.

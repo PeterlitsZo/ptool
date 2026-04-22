@@ -23,8 +23,8 @@ interpreter and injects a large set of utility functions (registered under the
 ## Documentation
 
 - `website/docs/` contains the current Docusaurus documentation content.
+- `website/i18n/` contains the localized Docusaurus documentation content.
 - `website/` contains the Docusaurus site project and frontend assets.
-- `docs-backup/` stores the previous Markdown documentation for reference.
 
 ## Development Tips
 
@@ -37,6 +37,9 @@ interpreter and injects a large set of utility functions (registered under the
   justified by the code.
 - If documentation may need to change, you MUST ask the user first. Do not
   modify documentation speculatively.
+- When editing documentation under `website/docs/`, you MUST also update the
+  corresponding files under every locale in `website/i18n/` in the same task so
+  localized docs stay in sync.
 - DO NOT add unit tests unless the user explicitly requests them, to avoid test
   bloat.
 - When editing documentation, especially API version markers such as
