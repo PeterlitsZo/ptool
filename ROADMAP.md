@@ -22,8 +22,8 @@
 - [x] Support show the user and host in `p.run`, ssh connection's `run`, etc.
 - [x] Enhance `p.http.request`.
 - [x] Let `p.fs.write` and `p.fs.read` support bytes.
-- [ ] Better error handling.
-- [ ] Fix the local variable not working in REPL.
+- [x] Better error handling.
+- [x] Fix the local variable not working in REPL.
 - [x] Make REPL support readline-like features.
 - [x] Support `split_lines` function.
 - [ ] Change the avatar icon of the document website.

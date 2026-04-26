@@ -1,8 +1,9 @@
 use std::cell::RefCell;
 use std::io::{self, IsTerminal, Write};
+use std::ops::Range;
 use std::rc::Rc;
 
-use mlua::{Error as LuaError, Lua, MultiValue};
+use mlua::{Error as LuaError, Lua, MultiValue, Table};
 use rustyline::DefaultEditor;
 use rustyline::error::ReadlineError;
 
@@ -30,6 +31,7 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let (lua, world) = create_lua_runtime(REPL_SCRIPT_NAME, &[])?;
+    let repl_env = create_repl_environment(&lua)?;
     let mut editor = DefaultEditor::new()?;
     let mut stdout = io::stdout().lock();
     let mut chunk = String::new();
@@ -62,9 +64,12 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
         }
         chunk.push_str(&line);
 
+        let prepared_chunk = preprocess_repl_chunk(&chunk);
+
         match lua
-            .load(&chunk)
+            .load(&prepared_chunk)
             .set_name(REPL_SCRIPT_NAME)
+            .set_environment(repl_env.clone())
             .eval::<MultiValue>()
         {
             Ok(values) => {
@@ -91,6 +96,168 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     Ok(())
+}
+
+fn create_repl_environment(lua: &Lua) -> mlua::Result<Table> {
+    let env = lua.create_table()?;
+    let mt = lua.create_table()?;
+    mt.set("__index", lua.globals())?;
+    env.set_metatable(Some(mt))?;
+    env.set("_G", env.clone())?;
+    Ok(env)
+}
+
+fn preprocess_repl_chunk(chunk: &str) -> String {
+    let local_ranges = find_top_level_local_ranges(chunk);
+    if local_ranges.is_empty() {
+        return chunk.to_string();
+    }
+
+    let mut rewritten = chunk.to_string();
+    for range in local_ranges.into_iter().rev() {
+        rewritten.replace_range(range, "     ");
+    }
+    rewritten
+}
+
+fn find_top_level_local_ranges(chunk: &str) -> Vec<Range<usize>> {
+    #[derive(Clone, Copy)]
+    enum ScanState {
+        Normal,
+        ShortString(u8),
+        LongString(usize),
+        LineComment,
+        LongComment(usize),
+    }
+
+    let bytes = chunk.as_bytes();
+    let mut ranges = Vec::new();
+    let mut depth = 0usize;
+    let mut idx = 0usize;
+    let mut state = ScanState::Normal;
+
+    while idx < bytes.len() {
+        match state {
+            ScanState::Normal => {
+                if bytes[idx] == b'-' && bytes.get(idx + 1) == Some(&b'-') {
+                    idx += 2;
+                    if let Some(equals) = long_bracket_open_equals(bytes, idx) {
+                        idx += equals + 2;
+                        state = ScanState::LongComment(equals);
+                    } else {
+                        state = ScanState::LineComment;
+                    }
+                    continue;
+                }
+
+                if let Some(equals) = long_bracket_open_equals(bytes, idx) {
+                    idx += equals + 2;
+                    state = ScanState::LongString(equals);
+                    continue;
+                }
+
+                if matches!(bytes[idx], b'\'' | b'"') {
+                    state = ScanState::ShortString(bytes[idx]);
+                    idx += 1;
+                    continue;
+                }
+
+                if is_identifier_start(bytes[idx]) {
+                    let start = idx;
+                    idx += 1;
+                    while idx < bytes.len() && is_identifier_continue(bytes[idx]) {
+                        idx += 1;
+                    }
+
+                    let token = &chunk[start..idx];
+                    match token {
+                        "local" if depth == 0 => ranges.push(start..idx),
+                        "function" | "do" | "then" | "repeat" => depth += 1,
+                        "end" | "until" => depth = depth.saturating_sub(1),
+                        _ => {}
+                    }
+                    continue;
+                }
+
+                idx += 1;
+            }
+            ScanState::ShortString(quote) => {
+                if bytes[idx] == b'\\' {
+                    idx += 1;
+                    if idx < bytes.len() {
+                        idx += 1;
+                    }
+                    continue;
+                }
+
+                if bytes[idx] == quote {
+                    state = ScanState::Normal;
+                }
+                idx += 1;
+            }
+            ScanState::LongString(equals) => {
+                if let Some(close_len) = long_bracket_close_len(bytes, idx, equals) {
+                    idx += close_len;
+                    state = ScanState::Normal;
+                } else {
+                    idx += 1;
+                }
+            }
+            ScanState::LineComment => {
+                if bytes[idx] == b'\n' {
+                    state = ScanState::Normal;
+                }
+                idx += 1;
+            }
+            ScanState::LongComment(equals) => {
+                if let Some(close_len) = long_bracket_close_len(bytes, idx, equals) {
+                    idx += close_len;
+                    state = ScanState::Normal;
+                } else {
+                    idx += 1;
+                }
+            }
+        }
+    }
+
+    ranges
+}
+
+fn long_bracket_open_equals(bytes: &[u8], start: usize) -> Option<usize> {
+    if bytes.get(start) != Some(&b'[') {
+        return None;
+    }
+
+    let mut idx = start + 1;
+    while bytes.get(idx) == Some(&b'=') {
+        idx += 1;
+    }
+
+    (bytes.get(idx) == Some(&b'[')).then_some(idx - start - 1)
+}
+
+fn long_bracket_close_len(bytes: &[u8], start: usize, equals: usize) -> Option<usize> {
+    if bytes.get(start) != Some(&b']') {
+        return None;
+    }
+
+    let mut idx = start + 1;
+    for _ in 0..equals {
+        if bytes.get(idx) != Some(&b'=') {
+            return None;
+        }
+        idx += 1;
+    }
+
+    (bytes.get(idx) == Some(&b']')).then_some(idx - start + 1)
+}
+
+fn is_identifier_start(byte: u8) -> bool {
+    byte == b'_' || byte.is_ascii_alphabetic()
+}
+
+fn is_identifier_continue(byte: u8) -> bool {
+    is_identifier_start(byte) || byte.is_ascii_digit()
 }
 
 fn create_lua_runtime(

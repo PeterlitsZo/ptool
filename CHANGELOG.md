@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed `ptool repl` so top-level `local` bindings now remain available across
+  later REPL inputs within the same session.
 - Added `ptool.try(...)` for structured Lua-side error handling, and changed
   command and runtime failures across `ptool.run`, `assert_ok()`, REPL, and the
   CLI to carry richer error metadata such as `kind`, `op`, `path`, `cmd`, and
