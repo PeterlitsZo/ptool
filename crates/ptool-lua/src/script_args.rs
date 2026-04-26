@@ -427,5 +427,5 @@ fn validate_script_arg_spec_base(spec: &ScriptArgSpec, context: &str) -> mlua::R
 }
 
 fn engine_error(err: ptool_engine::Error) -> mlua::Error {
-    mlua::Error::runtime(err.to_string())
+    crate::lua_error::lua_error_from_engine(err, "ptool.args")
 }

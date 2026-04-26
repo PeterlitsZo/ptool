@@ -368,12 +368,14 @@ fn http_status_error(status: StatusCode, url: &str) -> Error {
     http_error(format!(
         "request failed with HTTP status {status} for `{url}`"
     ))
+    .with_url(url)
+    .with_status(i32::from(status.as_u16()))
 }
 
 fn invalid_http_options(msg: impl Into<String>) -> Error {
-    Error::new(ErrorKind::InvalidHttpOptions, msg)
+    Error::new(ErrorKind::InvalidHttpOptions, msg).with_op("ptool.http.request")
 }
 
 fn http_error(msg: impl Into<String>) -> Error {
-    Error::new(ErrorKind::Http, msg)
+    Error::new(ErrorKind::Http, msg).with_op("ptool.http.request")
 }

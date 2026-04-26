@@ -1,10 +1,10 @@
 use crate::command_echo::print_local_command_echo;
+use crate::lua_error::{self, LuaError};
 use crate::lua_world::RunConfig;
 use inquire::{Confirm, InquireError};
 use mlua::{Lua, Table, Value, Variadic};
 use ptool_engine::{
-    PtoolEngine, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
-    resolve_run_cwd,
+    PtoolEngine, RunResult, RunStreamMode, format_command_for_display, resolve_run_cwd,
 };
 use std::path::Path;
 
@@ -101,10 +101,22 @@ fn run_command_with_stream_defaults(
 
     if options.echo {
         let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
-            mlua::Error::runtime("ptool.run internal error: missing display info")
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.run internal error: missing display info",
+                )
+                .with_op("ptool.run"),
+            )
         })?;
         let local_user_host = local_user_host.as_ref().ok_or_else(|| {
-            mlua::Error::runtime("ptool.run internal error: missing local user/host info")
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.run internal error: missing local user/host info",
+                )
+                .with_op("ptool.run"),
+            )
         })?;
         print_local_command_echo(
             &local_user_host.user,
@@ -116,7 +128,13 @@ fn run_command_with_stream_defaults(
 
     if options.confirm {
         let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
-            mlua::Error::runtime("ptool.run internal error: missing display info")
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.run internal error: missing display info",
+                )
+                .with_op("ptool.run"),
+            )
         })?;
         confirm_before_run(display_cwd, display_command, &cmd_for_error)?;
     }
@@ -125,10 +143,22 @@ fn run_command_with_stream_defaults(
     loop {
         if is_retry && options.echo {
             let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
-                mlua::Error::runtime("ptool.run internal error: missing display info")
+                lua_error::to_mlua_error(
+                    LuaError::new(
+                        "internal_error",
+                        "ptool.run internal error: missing display info",
+                    )
+                    .with_op("ptool.run"),
+                )
             })?;
             let local_user_host = local_user_host.as_ref().ok_or_else(|| {
-                mlua::Error::runtime("ptool.run internal error: missing local user/host info")
+                lua_error::to_mlua_error(
+                    LuaError::new(
+                        "internal_error",
+                        "ptool.run internal error: missing local user/host info",
+                    )
+                    .with_op("ptool.run"),
+                )
             })?;
             print_local_command_echo(
                 &local_user_host.user,
@@ -140,11 +170,17 @@ fn run_command_with_stream_defaults(
 
         let result = engine
             .run_command(&options.inner, current_dir)
-            .map_err(engine_error)?;
+            .map_err(|err| engine_error(err, &cmd_for_error, &resolved_cwd))?;
         if options.check && !result.ok {
             if options.retry {
                 let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
-                    mlua::Error::runtime("ptool.run internal error: missing display info")
+                    lua_error::to_mlua_error(
+                        LuaError::new(
+                            "internal_error",
+                            "ptool.run internal error: missing display info",
+                        )
+                        .with_op("ptool.run"),
+                    )
                 })?;
                 if prompt_retry_after_failure(
                     display_cwd,
@@ -162,10 +198,16 @@ fn run_command_with_stream_defaults(
                 &cmd_for_error,
                 result.code,
                 result.stderr.as_deref(),
+                Some(&resolved_cwd.display().to_string()),
             ));
         }
 
-        return build_run_result(lua, result, cmd_for_error);
+        return build_run_result(
+            lua,
+            result,
+            cmd_for_error,
+            resolved_cwd.display().to_string(),
+        );
     }
 }
 
@@ -175,7 +217,10 @@ fn parse_run_options(
     stream_defaults: StreamDefaults,
 ) -> mlua::Result<RunOptions> {
     match args.len() {
-        0 => Err(mlua::Error::runtime("ptool.run requires arguments")),
+        0 => Err(lua_error::invalid_argument(
+            "ptool.run",
+            "requires arguments",
+        )),
         1 => match args.first() {
             Some(Value::String(cmdline)) => {
                 let (cmd, args) = parse_cmdline_to_cmd_and_args(&cmdline.to_str()?)?;
@@ -197,8 +242,9 @@ fn parse_run_options(
             Some(Value::Table(options)) => {
                 parse_full_options_table(options.clone(), defaults, stream_defaults)
             }
-            _ => Err(mlua::Error::runtime(
-                "ptool.run expects a command string or an options table",
+            _ => Err(lua_error::invalid_argument(
+                "ptool.run",
+                "expects a command string or an options table",
             )),
         },
         2 => match (args.first(), args.get(1)) {
@@ -245,8 +291,9 @@ fn parse_run_options(
                     })
                 }
             }
-            _ => Err(mlua::Error::runtime(
-                "ptool.run(cmd, args) expects (string, table|string)",
+            _ => Err(lua_error::invalid_argument(
+                "ptool.run(cmd, args)",
+                "expects (string, table|string)",
             )),
         },
         3 => match (args.first(), args.get(1), args.get(2)) {
@@ -280,12 +327,14 @@ fn parse_run_options(
                     stream_defaults,
                 ))
             }
-            _ => Err(mlua::Error::runtime(
-                "ptool.run(cmd, args, options) expects (string, table|string, table)",
+            _ => Err(lua_error::invalid_argument(
+                "ptool.run(cmd, args, options)",
+                "expects (string, table|string, table)",
             )),
         },
-        _ => Err(mlua::Error::runtime(
-            "ptool.run accepts at most 3 arguments",
+        _ => Err(lua_error::invalid_argument(
+            "ptool.run",
+            "accepts at most 3 arguments",
         )),
     }
 }
@@ -296,8 +345,9 @@ fn parse_full_options_table(
     stream_defaults: StreamDefaults,
 ) -> mlua::Result<RunOptions> {
     let Some(cmd) = options.get::<Option<String>>("cmd")? else {
-        return Err(mlua::Error::runtime(
-            "ptool.run options mode requires `cmd`",
+        return Err(lua_error::invalid_argument(
+            "ptool.run(options)",
+            "requires `cmd`",
         ));
     };
 
@@ -393,9 +443,10 @@ fn has_key(options: &Table, key: &str) -> mlua::Result<bool> {
 
 fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallOverrides> {
     if has_key(&options, "cmd")? || has_key(&options, "args")? {
-        return Err(mlua::Error::runtime(format!(
-            "{context} options table does not allow `cmd` or `args`"
-        )));
+        return Err(lua_error::invalid_option(
+            context,
+            "options table does not allow `cmd` or `args`",
+        ));
     }
 
     Ok(RunCallOverrides {
@@ -437,10 +488,13 @@ fn build_run_result(
     lua: &Lua,
     run_result: RunResult,
     cmd_for_error: String,
+    cwd_for_error: String,
 ) -> mlua::Result<Value> {
     let result = lua.create_table()?;
     result.set("ok", run_result.ok)?;
     result.set("code", run_result.code.map(i64::from))?;
+    result.set("cmd", cmd_for_error.clone())?;
+    result.set("cwd", cwd_for_error.clone())?;
     if let Some(stdout) = run_result.stdout {
         result.set("stdout", stdout)?;
     }
@@ -449,6 +503,7 @@ fn build_run_result(
     }
 
     let assert_cmd_for_error = cmd_for_error.clone();
+    let assert_cwd_for_error = cwd_for_error.clone();
     let assert_ok_fn = lua.create_function(move |_, this: Table| {
         let ok = this.get::<bool>("ok")?;
         if ok {
@@ -462,6 +517,7 @@ fn build_run_result(
             &assert_cmd_for_error,
             code,
             stderr.as_deref(),
+            Some(&assert_cwd_for_error),
         ))
     })?;
     result.set("assert_ok", assert_ok_fn)?;
@@ -483,9 +539,10 @@ fn parse_stream_mode(
         "capture" => StreamMode::Capture,
         "null" => StreamMode::Null,
         _ => {
-            return Err(mlua::Error::runtime(format!(
-                "{context} `{field_name}` must be one of `inherit`, `capture`, `null`"
-            )));
+            return Err(lua_error::invalid_option(
+                context,
+                format!("`{field_name}` must be one of `inherit`, `capture`, `null`"),
+            ));
         }
     };
     Ok(Some(mode))
@@ -495,8 +552,13 @@ fn build_run_failed_error(
     cmd_for_error: &str,
     code: Option<i32>,
     stderr: Option<&str>,
+    cwd_for_error: Option<&str>,
 ) -> mlua::Error {
-    mlua::Error::runtime(format_run_failed_message(cmd_for_error, code, stderr))
+    let mut err = LuaError::command_failed("ptool.run", cmd_for_error, code, stderr);
+    if let Some(cwd) = cwd_for_error {
+        err = err.with_cwd(cwd);
+    }
+    lua_error::to_mlua_error(err)
 }
 
 fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::Result<()> {
@@ -508,20 +570,43 @@ fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::R
         .prompt()
     {
         Ok(true) => Ok(()),
-        Ok(false) => Err(mlua::Error::runtime(format!(
-            "ptool.run command `{cmd_for_error}` cancelled by user"
-        ))),
-        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(mlua::Error::runtime(format!(
-            "ptool.run command `{cmd_for_error}` requires confirmation, but no interactive TTY is available"
-        ))),
+        Ok(false) => Err(
+            LuaError::cancelled("ptool.run", format!("command `{cmd_for_error}` cancelled by user"))
+                .with_cmd(cmd_for_error)
+                .with_cwd(cwd.display().to_string())
+                .into_mlua_error(),
+        ),
+        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(
+            LuaError::not_interactive(
+                "ptool.run",
+                format!(
+                    "command `{cmd_for_error}` requires confirmation, but no interactive TTY is available"
+                ),
+            )
+            .with_cmd(cmd_for_error)
+            .with_cwd(cwd.display().to_string())
+            .into_mlua_error(),
+        ),
         Err(InquireError::OperationCanceled | InquireError::OperationInterrupted) => {
-            Err(mlua::Error::runtime(format!(
-                "ptool.run command `{cmd_for_error}` cancelled by user"
-            )))
+            Err(
+                LuaError::cancelled(
+                    "ptool.run",
+                    format!("command `{cmd_for_error}` cancelled by user"),
+                )
+                .with_cmd(cmd_for_error)
+                .with_cwd(cwd.display().to_string())
+                .into_mlua_error(),
+            )
         }
-        Err(err) => Err(mlua::Error::runtime(format!(
-            "ptool.run command `{cmd_for_error}` confirmation failed: {err}"
-        ))),
+        Err(err) => Err(
+            LuaError::prompt_failed(
+                "ptool.run",
+                format!("command `{cmd_for_error}` confirmation failed: {err}"),
+            )
+            .with_cmd(cmd_for_error)
+            .with_cwd(cwd.display().to_string())
+            .into_mlua_error(),
+        ),
     }
 }
 
@@ -543,17 +628,29 @@ fn prompt_retry_after_failure(
         .prompt()
     {
         Ok(answer) => Ok(answer),
-        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(mlua::Error::runtime(format!(
-            "ptool.run command `{cmd_for_error}` failed and retry requires an interactive TTY"
-        ))),
+        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(LuaError::not_interactive(
+            "ptool.run",
+            format!("command `{cmd_for_error}` failed and retry requires an interactive TTY"),
+        )
+        .with_cmd(cmd_for_error)
+        .with_cwd(cwd.display().to_string())
+        .into_mlua_error()),
         Err(InquireError::OperationCanceled | InquireError::OperationInterrupted) => {
-            Err(mlua::Error::runtime(format!(
-                "ptool.run retry for command `{cmd_for_error}` cancelled by user"
-            )))
+            Err(LuaError::cancelled(
+                "ptool.run",
+                format!("retry for command `{cmd_for_error}` cancelled by user"),
+            )
+            .with_cmd(cmd_for_error)
+            .with_cwd(cwd.display().to_string())
+            .into_mlua_error())
         }
-        Err(err) => Err(mlua::Error::runtime(format!(
-            "ptool.run retry prompt for command `{cmd_for_error}` failed: {err}"
-        ))),
+        Err(err) => Err(LuaError::prompt_failed(
+            "ptool.run",
+            format!("retry prompt for command `{cmd_for_error}` failed: {err}"),
+        )
+        .with_cmd(cmd_for_error)
+        .with_cwd(cwd.display().to_string())
+        .into_mlua_error()),
     }
 }
 
@@ -588,8 +685,9 @@ fn parse_cmdline_to_cmd_and_args(input: &str) -> mlua::Result<(String, Vec<Strin
     let parts = parse_shell_words(input, "ptool.run command string")?;
     let mut iter = parts.into_iter();
     let Some(cmd) = iter.next() else {
-        return Err(mlua::Error::runtime(
-            "ptool.run command string must not be empty",
+        return Err(lua_error::invalid_argument(
+            "ptool.run command string",
+            "must not be empty",
         ));
     };
     Ok((cmd, iter.collect()))
@@ -601,7 +699,7 @@ fn parse_argsline(input: &str) -> mlua::Result<Vec<String>> {
 
 fn parse_shell_words(input: &str, context: &str) -> mlua::Result<Vec<String>> {
     shlex::split(input)
-        .ok_or_else(|| mlua::Error::runtime(format!("{context} failed to parse as shell words")))
+        .ok_or_else(|| lua_error::invalid_argument(context, "failed to parse as shell words"))
 }
 
 fn parse_env_table(env: Option<Table>) -> mlua::Result<Vec<(String, String)>> {
@@ -623,6 +721,13 @@ fn parse_optional_env_table(env: Option<Table>) -> mlua::Result<Option<Vec<(Stri
     }
 }
 
-fn engine_error(err: ptool_engine::Error) -> mlua::Error {
-    mlua::Error::runtime(err.to_string())
+fn engine_error(err: ptool_engine::Error, cmd: &str, cwd: &Path) -> mlua::Error {
+    let mut err = LuaError::from_engine(err, "ptool.run");
+    if err.cmd.is_none() {
+        err = err.with_cmd(cmd);
+    }
+    if err.cwd.is_none() {
+        err = err.with_cwd(cwd.display().to_string());
+    }
+    lua_error::to_mlua_error(err)
 }

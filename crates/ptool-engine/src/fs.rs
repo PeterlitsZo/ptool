@@ -40,25 +40,26 @@ pub struct FsCopyResult {
 
 pub fn read(path: &str) -> Result<Vec<u8>> {
     ensure_non_empty_path(path)?;
-    fs::read(path).map_err(io_error)
+    fs::read(path).map_err(|err| io_error(err).with_op("ptool.fs.read").with_path(path))
 }
 
 pub fn write(path: &str, content: &[u8]) -> Result<()> {
     ensure_non_empty_path(path)?;
-    fs::write(path, content).map_err(io_error)
+    fs::write(path, content).map_err(|err| io_error(err).with_op("ptool.fs.write").with_path(path))
 }
 
 pub fn mkdir(path: &str, options: FsMkdirOptions) -> Result<()> {
     ensure_non_empty_path(path)?;
 
     if !options.exist_ok && Path::new(path).is_dir() {
-        return Err(Error::new(
-            ErrorKind::AlreadyExists,
-            format!("`{path}` already exists"),
-        ));
+        return Err(
+            Error::new(ErrorKind::AlreadyExists, format!("`{path}` already exists"))
+                .with_op("ptool.fs.mkdir")
+                .with_path(path),
+        );
     }
 
-    fs::create_dir_all(path).map_err(io_error)
+    fs::create_dir_all(path).map_err(|err| io_error(err).with_op("ptool.fs.mkdir").with_path(path))
 }
 
 pub fn exists(path: &str) -> bool {
@@ -78,11 +79,19 @@ pub fn glob(pattern: &str, base_dir: &Path) -> Result<Vec<String>> {
             require_literal_leading_dot: false,
         },
     )
-    .map_err(|err| Error::new(ErrorKind::InvalidGlob, err.to_string()))?;
+    .map_err(|err| {
+        Error::new(ErrorKind::InvalidGlob, err.to_string())
+            .with_op("ptool.fs.glob")
+            .with_input(original_pattern)
+    })?;
 
     let mut matches = Vec::new();
     for entry in entries {
-        let path = entry.map_err(|err| Error::new(ErrorKind::Io, err.to_string()))?;
+        let path = entry.map_err(|err| {
+            Error::new(ErrorKind::Io, err.to_string())
+                .with_op("ptool.fs.glob")
+                .with_input(original_pattern)
+        })?;
         if allows_hidden_match(original_pattern, base_dir, &path)? {
             matches.push(path_to_string(path));
         }
@@ -97,13 +106,18 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
     ensure_non_empty_named_path(dst, "dst")?;
 
     let src_path = Path::new(src);
-    let metadata = fs::metadata(src_path)
-        .map_err(|err| Error::new(ErrorKind::Io, format!("failed to access `{src}`: {err}")))?;
+    let metadata = fs::metadata(src_path).map_err(|err| {
+        Error::new(ErrorKind::Io, format!("failed to access `{src}`: {err}"))
+            .with_op("ptool.fs.copy")
+            .with_path(src)
+    })?;
     if !metadata.is_file() {
         return Err(Error::new(
             ErrorKind::NotAFile,
             format!("`src` must be a file: `{src}`"),
-        ));
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(src));
     }
 
     let dst_path = Path::new(dst);
@@ -120,6 +134,8 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
                     parent.display()
                 ),
             )
+            .with_op("ptool.fs.copy")
+            .with_path(parent.display().to_string())
         })?;
     }
 
@@ -127,7 +143,9 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
         return Err(Error::new(
             ErrorKind::AlreadyExists,
             format!("`dst` already exists: `{dst}`"),
-        ));
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(dst));
     }
 
     if options.echo {
@@ -139,6 +157,8 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
             ErrorKind::Io,
             format!("failed to copy `{src}` to `{dst}`: {err}"),
         )
+        .with_op("ptool.fs.copy")
+        .with_path(dst)
     })?;
 
     Ok(FsCopyResult {

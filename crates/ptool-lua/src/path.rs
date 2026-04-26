@@ -13,9 +13,10 @@ const EXTNAME_SIGNATURE: &str = "ptool.path.extname(path)";
 
 pub(crate) fn join(engine: &PtoolEngine, segments: Variadic<String>) -> mlua::Result<String> {
     if segments.is_empty() {
-        return Err(mlua::Error::runtime(format!(
-            "{JOIN_SIGNATURE} requires at least one segment"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            JOIN_SIGNATURE,
+            "requires at least one segment",
+        ));
     }
 
     for segment in segments.iter() {
@@ -24,14 +25,14 @@ pub(crate) fn join(engine: &PtoolEngine, segments: Variadic<String>) -> mlua::Re
 
     engine
         .path_join(segments.iter().map(String::as_str))
-        .map_err(|err| mlua::Error::runtime(format!("{JOIN_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, JOIN_SIGNATURE))
 }
 
 pub(crate) fn normalize(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
     ensure_non_empty(&path, NORMALIZE_SIGNATURE)?;
     engine
         .path_normalize(&path)
-        .map_err(|err| mlua::Error::runtime(format!("{NORMALIZE_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, NORMALIZE_SIGNATURE))
 }
 
 pub(crate) fn abspath_from_args(
@@ -51,35 +52,35 @@ pub(crate) fn relpath_from_args(
     let (path, base) = parse_path_and_base_args(args, RELPATH_SIGNATURE)?;
     engine
         .path_relpath(&path, base.as_deref(), current_dir)
-        .map_err(|err| mlua::Error::runtime(format!("{RELPATH_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, RELPATH_SIGNATURE))
 }
 
 pub(crate) fn isabs(engine: &PtoolEngine, path: String) -> mlua::Result<bool> {
     ensure_non_empty(&path, ISABS_SIGNATURE)?;
     engine
         .path_isabs(&path)
-        .map_err(|err| mlua::Error::runtime(format!("{ISABS_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, ISABS_SIGNATURE))
 }
 
 pub(crate) fn dirname(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
     ensure_non_empty(&path, DIRNAME_SIGNATURE)?;
     engine
         .path_dirname(&path)
-        .map_err(|err| mlua::Error::runtime(format!("{DIRNAME_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, DIRNAME_SIGNATURE))
 }
 
 pub(crate) fn basename(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
     ensure_non_empty(&path, BASENAME_SIGNATURE)?;
     engine
         .path_basename(&path)
-        .map_err(|err| mlua::Error::runtime(format!("{BASENAME_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, BASENAME_SIGNATURE))
 }
 
 pub(crate) fn extname(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
     ensure_non_empty(&path, EXTNAME_SIGNATURE)?;
     engine
         .path_extname(&path)
-        .map_err(|err| mlua::Error::runtime(format!("{EXTNAME_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, EXTNAME_SIGNATURE))
 }
 
 fn abspath(
@@ -91,7 +92,7 @@ fn abspath(
     ensure_non_empty(&path, ABSPATH_SIGNATURE)?;
     engine
         .path_abspath(&path, base.as_deref(), current_dir)
-        .map_err(|err| mlua::Error::runtime(format!("{ABSPATH_SIGNATURE} failed: {}", err.msg)))
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, ABSPATH_SIGNATURE))
 }
 
 fn parse_path_and_base_args(
@@ -111,17 +112,19 @@ fn parse_path_and_base_args(
             ensure_non_empty(&base, context)?;
             Ok((path, Some(base)))
         }
-        _ => Err(mlua::Error::runtime(format!(
-            "{context} accepts 1 or 2 string arguments"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            context,
+            "accepts 1 or 2 string arguments",
+        )),
     }
 }
 
 fn ensure_non_empty(input: &str, context: &str) -> mlua::Result<()> {
     if input.is_empty() {
-        return Err(mlua::Error::runtime(format!(
-            "{context} does not accept empty string"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            context,
+            "does not accept empty string",
+        ));
     }
     Ok(())
 }

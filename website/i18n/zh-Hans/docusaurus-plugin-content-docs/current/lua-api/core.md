@@ -184,6 +184,74 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.try
+
+> `v0.4.0` - 引入。
+
+`ptool.try(fn)` 会执行 `fn`，并把抛出的错误转换成返回值。
+
+- `fn`（function，必填）：要执行的回调。
+- 返回：`ok, value, err`。
+
+返回值规则：
+
+- 成功时，`ok = true`，`err = nil`，`value` 是回调返回结果。
+- 如果回调没有返回值，`value` 为 `nil`。
+- 如果回调只返回一个值，`value` 就是该值本身。
+- 如果回调返回多个值，`value` 是一个类数组 table。
+- 失败时，`ok = false`，`value = nil`，`err` 是一个 table。
+
+结构化错误字段：
+
+- `kind`（string）：稳定的错误类别，例如 `io_error`、`command_failed`、
+  `invalid_argument`、`http_error` 或 `lua_error`。
+- `message`（string）：便于阅读的错误消息。
+- `op`（string，可选）：发生错误的 API 或操作名，例如 `ptool.fs.read`。
+- `detail`（string，可选）：额外的失败细节。
+- `path`（string，可选）：文件系统错误涉及的路径。
+- `input`（string，可选）：解析或校验失败时的原始输入。
+- `cmd`（string，可选）：命令执行失败时的命令名。
+- `status`（integer，可选）：退出码或 HTTP 状态码（如果可用）。
+- `stderr`（string，可选）：命令失败时捕获到的 stderr。
+- `url`（string，可选）：HTTP 失败涉及的 URL。
+- `cwd`（string，可选）：命令执行时实际使用的工作目录。
+- `target`（string，可选）：SSH 相关命令失败时的目标主机。
+- `retryable`（boolean）：是否适合重试。默认值为 `false`。
+
+行为说明：
+
+- `ptool` 自带 API 抛出的都是结构化错误。`ptool.try` 会把它们转换成上面的
+  `err` table，方便调用方根据 `err.kind` 和其他字段做分支处理。
+- 普通 Lua 错误也会被捕获。这种情况下，`err.kind` 为 `lua_error`，并且只保证
+  `message` 一定存在。
+- 对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`
+  和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。
+
+示例：
+
+```lua
+local ok, content, err = ptool.try(function()
+  return ptool.fs.read("missing.txt")
+end)
+
+if not ok and err.kind == "io_error" then
+  print(err.op, err.path)
+end
+
+local ok2, _, err2 = ptool.try(function()
+  local res = ptool.run({
+    cmd = "sh",
+    args = {"-c", "echo bad >&2; exit 7"},
+    stderr = "capture",
+  })
+  res:assert_ok()
+end)
+
+if not ok2 and err2.kind == "command_failed" then
+  print(err2.cmd, err2.status, err2.stderr)
+end
+```
+
 ## ptool.run
 
 > `v0.1.0` - 引入。
@@ -221,15 +289,20 @@ ptool.run({ cmd = "echo", args = {"hello"}, stdout = "capture" })
 - 总是返回一个 table，包含以下字段：
   - `ok`（boolean）：退出码是否为 `0`。
   - `code`（integer|nil）：进程退出码。如果进程因信号终止，则为 `nil`。
+  - `cmd`（string）：本次执行使用的命令名。
+  - `cwd`（string）：本次执行实际使用的工作目录。
   - `stdout`（string，可选）：当 `stdout = "capture"` 时提供。
   - `stderr`（string，可选）：当 `stderr = "capture"` 时提供。
-  - `assert_ok(self)`（function）：当 `ok = false` 时抛出错误。错误信息会包含
-    退出码，以及可用时的 `stderr`。
+  - `assert_ok(self)`（function）：当 `ok = false` 时抛出结构化错误。错误类别
+    为 `command_failed`，并且可能包含 `cmd`、`status`、`stderr` 和 `cwd`。
 - `check` 的默认值来自 `ptool.config({ run = { check = ... } })`。如果未配置，
   默认是 `false`。当 `check = false` 时，调用方可以自行检查 `ok`，或者调用
   `res:assert_ok()`。
 - 当同时设置 `check = true` 和 `retry = true` 时，`ptool.run` 会在最终抛错前，
   询问是否要重试失败的命令。
+- 当 `check = true` 时，`ptool.run` 抛出的也是与 `res:assert_ok()` 相同的
+  `command_failed` 结构化错误。如果你想在 Lua 里捕获并检查它，使用
+  `ptool.try(...)`。
 
 示例：
 

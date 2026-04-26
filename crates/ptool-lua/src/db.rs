@@ -176,9 +176,10 @@ impl LuaDbConnection {
             (Ok(value), Ok(())) => Ok(value),
             (Err(err), Ok(())) => Err(err),
             (Ok(_), Err(err)) => Err(err),
-            (Err(callback_err), Err(finalize_err)) => Err(mlua::Error::runtime(format!(
-                "{TRANSACTION_SIGNATURE} callback failed: {callback_err}; rollback failed: {finalize_err}"
-            ))),
+            (Err(callback_err), Err(finalize_err)) => Err(crate::lua_error::prompt_failed(
+                TRANSACTION_SIGNATURE,
+                format!("callback failed: {callback_err}; rollback failed: {finalize_err}"),
+            )),
         }
     }
 
@@ -194,8 +195,9 @@ impl LuaDbTransaction {
         if self.active.get() {
             Ok(())
         } else {
-            Err(mlua::Error::runtime(
-                "ptool.db transaction handle is no longer active",
+            Err(crate::lua_error::invalid_argument(
+                TRANSACTION_SIGNATURE,
+                "transaction handle is no longer active",
             ))
         }
     }
@@ -253,15 +255,17 @@ fn parse_connect_value(value: Value) -> mlua::Result<String> {
         Value::String(text) => Ok(text.to_str()?.to_string()),
         Value::Table(options) => {
             let Some(url) = options.get::<Option<String>>("url")? else {
-                return Err(mlua::Error::runtime(format!(
-                    "{CONNECT_SIGNATURE} requires string `url` when called with a table"
-                )));
+                return Err(crate::lua_error::invalid_argument(
+                    CONNECT_SIGNATURE,
+                    "requires string `url` when called with a table",
+                ));
             };
             Ok(url)
         }
-        _ => Err(mlua::Error::runtime(format!(
-            "{CONNECT_SIGNATURE} expects a string or a table with `url`"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            CONNECT_SIGNATURE,
+            "expects a string or a table with `url`",
+        )),
     }
 }
 
@@ -287,24 +291,27 @@ fn parse_params(params: Option<Value>, signature: &str) -> mlua::Result<Option<D
                     let key = match key {
                         Value::String(key) => key.to_str()?.to_string(),
                         _ => {
-                            return Err(mlua::Error::runtime(format!(
-                                "{signature} named params keys must be strings"
-                            )));
+                            return Err(crate::lua_error::invalid_argument(
+                                signature,
+                                "named params keys must be strings",
+                            ));
                         }
                     };
                     if key.is_empty() {
-                        return Err(mlua::Error::runtime(format!(
-                            "{signature} named params keys must not be empty"
-                        )));
+                        return Err(crate::lua_error::invalid_argument(
+                            signature,
+                            "named params keys must not be empty",
+                        ));
                     }
                     values.insert(key, parse_bind_value(value, signature, None)?);
                 }
                 Ok(Some(DbParams::Named(values)))
             }
         }
-        _ => Err(mlua::Error::runtime(format!(
-            "{signature} `params` must be a table"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            signature,
+            "`params` must be a table",
+        )),
     }
 }
 
@@ -318,23 +325,30 @@ fn parse_bind_value(
         Value::Integer(value) => Ok(DbBindValue::Integer(value)),
         Value::Number(value) => {
             if !value.is_finite() {
-                return Err(mlua::Error::runtime(format!(
-                    "{signature} parameter must be a finite number"
-                )));
+                return Err(crate::lua_error::invalid_argument(
+                    signature,
+                    "parameter must be a finite number",
+                ));
             }
             Ok(DbBindValue::Number(value))
         }
         Value::String(value) => Ok(DbBindValue::String(value.to_str()?.to_string())),
-        Value::Nil => Err(mlua::Error::runtime(match index {
-            Some(index) => format!("{signature} params[{index}] does not support nil"),
-            None => format!("{signature} named params do not support nil"),
-        })),
-        _ => Err(mlua::Error::runtime(match index {
-            Some(index) => {
-                format!("{signature} params[{index}] only supports boolean/integer/number/string")
-            }
-            None => format!("{signature} named params only support boolean/integer/number/string"),
-        })),
+        Value::Nil => Err(crate::lua_error::invalid_argument(
+            signature,
+            match index {
+                Some(index) => format!("params[{index}] does not support nil"),
+                None => "named params do not support nil".to_string(),
+            },
+        )),
+        _ => Err(crate::lua_error::invalid_argument(
+            signature,
+            match index {
+                Some(index) => {
+                    format!("params[{index}] only supports boolean/integer/number/string")
+                }
+                None => "named params only support boolean/integer/number/string".to_string(),
+            },
+        )),
     }
 }
 
@@ -396,18 +410,18 @@ fn db_value_to_lua(lua: &Lua, value: DbValue) -> mlua::Result<Value> {
     }
 }
 
-fn db_error(signature: &str, err: impl std::fmt::Display) -> mlua::Error {
-    mlua::Error::runtime(format!("{signature} failed: {err}"))
+fn db_error(signature: &str, err: ptool_engine::Error) -> mlua::Error {
+    crate::lua_error::lua_error_from_engine(err, signature)
 }
 
 fn usize_to_i64(value: usize, signature: &str) -> mlua::Result<i64> {
     i64::try_from(value).map_err(|_| {
-        mlua::Error::runtime(format!("{signature} produced a value that is too large"))
+        crate::lua_error::invalid_argument(signature, "produced a value that is too large")
     })
 }
 
 fn u64_to_i64(value: u64, signature: &str) -> mlua::Result<i64> {
     i64::try_from(value).map_err(|_| {
-        mlua::Error::runtime(format!("{signature} produced a value that is too large"))
+        crate::lua_error::invalid_argument(signature, "produced a value that is too large")
     })
 }

@@ -7,6 +7,7 @@ mod http;
 mod inspect;
 mod json;
 mod lua_api;
+mod lua_error;
 mod lua_world;
 mod net;
 mod path;
@@ -24,3 +25,7 @@ mod version;
 
 pub use lua_world::{LuaWorld, LuaWorldConfig, RunConfig};
 pub use runner::{run_repl, run_script};
+
+pub fn format_error_report(err: &(dyn std::error::Error + 'static)) -> String {
+    lua_error::render_any_error(err)
+}

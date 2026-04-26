@@ -63,7 +63,7 @@ fn set_optional_host_kind(table: &Table, host_kind: Option<HostKind>) -> mlua::R
 }
 
 fn to_lua_error(context: &str, err: EngineError) -> mlua::Error {
-    mlua::Error::runtime(format!("{context}: {}", err.msg))
+    crate::lua_error::lua_error_from_engine(err, context)
 }
 
 fn host_kind_to_lua(host_kind: HostKind) -> &'static str {

@@ -498,9 +498,10 @@ fn parse_run_call_with_defaults(
     stream_defaults: ExecStreamDefaults,
 ) -> mlua::Result<SshExecOptions> {
     match args.len() {
-        0 => Err(mlua::Error::runtime(format!(
-            "{context} requires arguments"
-        ))),
+        0 => Err(crate::lua_error::invalid_argument(
+            context,
+            "requires arguments",
+        )),
         1 => match args.first() {
             Some(Value::String(command)) => Ok(SshExecOptions {
                 command: command.to_str()?.to_string(),
@@ -514,9 +515,10 @@ fn parse_run_call_with_defaults(
             Some(Value::Table(options)) => {
                 parse_run_options_table(options.clone(), context, stream_defaults)
             }
-            _ => Err(mlua::Error::runtime(format!(
-                "{context} expects a command string or an options table"
-            ))),
+            _ => Err(crate::lua_error::invalid_argument(
+                context,
+                "expects a command string or an options table",
+            )),
         },
         2 => match (args.first(), args.get(1)) {
             (Some(Value::String(command_or_cmdline)), Some(Value::Table(second))) => {
@@ -547,7 +549,10 @@ fn parse_run_call_with_defaults(
                     stream_defaults,
                 )
             }
-            _ => Err(mlua::Error::runtime(format!("{context} invalid arguments"))),
+            _ => Err(crate::lua_error::invalid_argument(
+                context,
+                "invalid arguments",
+            )),
         },
         3 => match (args.first(), args.get(1), args.get(2)) {
             (
@@ -580,11 +585,15 @@ fn parse_run_call_with_defaults(
                     stream_defaults,
                 )
             }
-            _ => Err(mlua::Error::runtime(format!("{context} invalid arguments"))),
+            _ => Err(crate::lua_error::invalid_argument(
+                context,
+                "invalid arguments",
+            )),
         },
-        _ => Err(mlua::Error::runtime(format!(
-            "{context} accepts at most 3 arguments"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            context,
+            "accepts at most 3 arguments",
+        )),
     }
 }
 
@@ -602,9 +611,10 @@ fn parse_exec_overrides(options: Table, context: &str) -> mlua::Result<ExecOverr
         || options.get::<Option<Value>>("env")?.is_some()
         || options.get::<Option<Value>>("cwd")?.is_some()
     {
-        return Err(mlua::Error::runtime(format!(
-            "{context} options table does not allow `cmd`, `args`, `cwd`, or `env`"
-        )));
+        return Err(crate::lua_error::invalid_option(
+            context,
+            "options table does not allow `cmd`, `args`, `cwd`, or `env`",
+        ));
     }
 
     Ok(ExecOverrides {
@@ -680,11 +690,14 @@ fn parse_run_options_table(
         )?,
         (Some(cmd), None) => try_quote(&cmd)
             .map(|value| value.into_owned())
-            .map_err(|err| mlua::Error::runtime(format!("{context} invalid command: {err}")))?,
+            .map_err(|err| {
+                crate::lua_error::invalid_argument(context, format!("invalid command: {err}"))
+            })?,
         (None, _) => {
-            return Err(mlua::Error::runtime(format!(
-                "{context} options mode requires `cmd`"
-            )));
+            return Err(crate::lua_error::invalid_argument(
+                context,
+                "options mode requires `cmd`",
+            ));
         }
     };
 
@@ -712,8 +725,9 @@ fn wrap_remote_command(
     let mut prefixes = Vec::new();
 
     if let Some(cwd) = cwd {
-        let quoted = try_quote(&cwd)
-            .map_err(|err| mlua::Error::runtime(format!("{context} invalid `cwd`: {err}")))?;
+        let quoted = try_quote(&cwd).map_err(|err| {
+            crate::lua_error::invalid_argument(context, format!("invalid `cwd`: {err}"))
+        })?;
         prefixes.push(format!("cd {quoted}"));
     }
 
@@ -722,12 +736,16 @@ fn wrap_remote_command(
         for pair in env.pairs::<String, String>() {
             let (key, value) = pair?;
             if key.is_empty() {
-                return Err(mlua::Error::runtime(format!(
-                    "{context} `env` keys must not be empty"
-                )));
+                return Err(crate::lua_error::invalid_argument(
+                    context,
+                    "`env` keys must not be empty",
+                ));
             }
             let quoted = try_quote(&value).map_err(|err| {
-                mlua::Error::runtime(format!("{context} invalid env value for `{key}`: {err}"))
+                crate::lua_error::invalid_argument(
+                    context,
+                    format!("invalid env value for `{key}`: {err}"),
+                )
             })?;
             env_parts.push(format!("{key}={quoted}"));
         }
@@ -768,14 +786,15 @@ fn build_exec_result(lua: &Lua, result: SshExecResult, target: String) -> mlua::
             let target: String = this.get("target")?;
             let code: Option<i64> = this.get("code")?;
             let stderr: Option<String> = this.get("stderr").ok();
-            let mut message = format!("ptool.ssh command on `{target}` failed");
-            if let Some(code) = code {
-                message.push_str(&format!(" with status {code}"));
-            }
-            if let Some(stderr) = stderr.filter(|value| !value.is_empty()) {
-                message.push_str(&format!(": {}", stderr.trim_end()));
-            }
-            Err(mlua::Error::runtime(message))
+            Err(crate::lua_error::to_mlua_error(
+                crate::lua_error::LuaError::command_failed(
+                    "ptool.ssh",
+                    &format!("ssh://{target}"),
+                    code.and_then(|value| i32::try_from(value).ok()),
+                    stderr.as_deref(),
+                )
+                .with_target(target),
+            ))
         })?,
     )?;
     Ok(table)
@@ -783,30 +802,33 @@ fn build_exec_result(lua: &Lua, result: SshExecResult, target: String) -> mlua::
 
 fn ensure_non_empty_string(value: &str, context: &str, field: &str) -> mlua::Result<()> {
     if value.is_empty() {
-        return Err(mlua::Error::runtime(format!(
-            "{context} `{field}` must not be empty"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            context,
+            format!("`{field}` must not be empty"),
+        ));
     }
     Ok(())
 }
 
 fn parse_port(value: i64) -> mlua::Result<u16> {
     if !(1..=65535).contains(&value) {
-        return Err(mlua::Error::runtime(format!(
-            "{CONNECT_SIGNATURE} `port` must be between 1 and 65535"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            CONNECT_SIGNATURE,
+            "`port` must be between 1 and 65535",
+        ));
     }
     Ok(value as u16)
 }
 
 fn parse_positive_u64(value: i64, context: &str, field: &str) -> mlua::Result<u64> {
     if value <= 0 {
-        return Err(mlua::Error::runtime(format!(
-            "{context} `{field}` must be > 0"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            context,
+            format!("`{field}` must be > 0"),
+        ));
     }
     u64::try_from(value)
-        .map_err(|_| mlua::Error::runtime(format!("{context} `{field}` is too large")))
+        .map_err(|_| crate::lua_error::invalid_argument(context, format!("`{field}` is too large")))
 }
 
 fn looks_like_array_table(table: &Table, context: &str) -> mlua::Result<bool> {
@@ -820,8 +842,9 @@ fn looks_like_array_table(table: &Table, context: &str) -> mlua::Result<bool> {
         if index <= 0 {
             return Ok(false);
         }
-        let index = usize::try_from(index)
-            .map_err(|_| mlua::Error::runtime(format!("{context} array argument is too large")))?;
+        let index = usize::try_from(index).map_err(|_| {
+            crate::lua_error::invalid_argument(context, "array argument is too large")
+        })?;
         count += 1;
         max = max.max(index);
     }
@@ -838,7 +861,7 @@ fn parse_string_list(table: &Table) -> mlua::Result<Vec<String>> {
 
 fn parse_argsline(input: &str, context: &str) -> mlua::Result<Vec<String>> {
     shlex::split(input)
-        .ok_or_else(|| mlua::Error::runtime(format!("{context} failed to parse args string")))
+        .ok_or_else(|| crate::lua_error::invalid_argument(context, "failed to parse args string"))
 }
 
 fn quote_words_for_shell<'a>(
@@ -851,7 +874,7 @@ fn quote_words_for_shell<'a>(
             try_quote(word)
                 .map(|value| value.into_owned())
                 .map_err(|err| {
-                    mlua::Error::runtime(format!("{context} invalid argument: {err}"))
+                    crate::lua_error::invalid_argument(context, format!("invalid argument: {err}"))
                 })?,
         );
     }
@@ -862,9 +885,10 @@ fn parse_stdin(value: Option<Value>, context: &str) -> mlua::Result<Option<Vec<u
     match value {
         None | Some(Value::Nil) => Ok(None),
         Some(Value::String(value)) => Ok(Some(value.as_bytes().to_vec())),
-        Some(_) => Err(mlua::Error::runtime(format!(
-            "{context} `stdin` must be a string"
-        ))),
+        Some(_) => Err(crate::lua_error::invalid_argument(
+            context,
+            "`stdin` must be a string",
+        )),
     }
 }
 
@@ -881,12 +905,13 @@ fn parse_stream_mode(
         "inherit" => Ok(Some(SshStreamMode::Inherit)),
         "capture" => Ok(Some(SshStreamMode::Capture)),
         "null" => Ok(Some(SshStreamMode::Null)),
-        _ => Err(mlua::Error::runtime(format!(
-            "{context} `{field}` must be `inherit`, `capture`, or `null`"
-        ))),
+        _ => Err(crate::lua_error::invalid_option(
+            context,
+            format!("`{field}` must be `inherit`, `capture`, or `null`"),
+        )),
     }
 }
 
 fn ssh_error(context: &str, err: EngineError) -> mlua::Error {
-    mlua::Error::runtime(format!("{context} {}", err.msg))
+    crate::lua_error::lua_error_from_engine(err, context)
 }

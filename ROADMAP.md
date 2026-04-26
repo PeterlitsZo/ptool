@@ -14,13 +14,14 @@
   - `p.tbl.filter`.
   - `p.tbl.join`.
   - etc.
+- [ ] Let document use better i18n solution.
 
 # v0.4.0
 
 - [x] More i18n support.
 - [x] Support show the user and host in `p.run`, ssh connection's `run`, etc.
 - [x] Enhance `p.http.request`.
-- [ ] Let `p.fs.write` and `p.fs.read` support bytes.
+- [x] Let `p.fs.write` and `p.fs.read` support bytes.
 - [ ] Better error handling.
 - [ ] Fix the local variable not working in REPL.
 - [x] Make REPL support readline-like features.

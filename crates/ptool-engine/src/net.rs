@@ -46,6 +46,8 @@ pub fn parse_url(input: &str) -> Result<UrlParts> {
             ErrorKind::InvalidUrl,
             format!("invalid URL {input:?}: {err}"),
         )
+        .with_op("ptool.net.parse_url")
+        .with_input(input)
     })?;
 
     let (host, host_kind) = match parsed.host() {
@@ -84,6 +86,8 @@ pub fn parse_ip(input: &str) -> Result<IpParts> {
             ErrorKind::InvalidIp,
             format!("invalid IP address {input:?}: {err}"),
         )
+        .with_op("ptool.net.parse_ip")
+        .with_input(input)
     })?;
 
     Ok(IpParts {
@@ -115,7 +119,9 @@ pub fn parse_host_port(input: &str) -> Result<HostPortParts> {
 
 fn ensure_non_empty(input: &str) -> Result<()> {
     if input.is_empty() {
-        return Err(Error::new(ErrorKind::EmptyInput, "empty input"));
+        return Err(
+            Error::new(ErrorKind::EmptyInput, "empty input").with_op("ptool.net.parse_host_port")
+        );
     }
     Ok(())
 }
@@ -126,7 +132,9 @@ fn parse_host_port_parts(input: &str) -> Result<(String, u16)> {
             return Err(Error::new(
                 ErrorKind::InvalidHostPort,
                 format!("invalid IPv6 host:port {input:?}"),
-            ));
+            )
+            .with_op("ptool.net.parse_host_port")
+            .with_input(input));
         };
 
         let host = &rest[..end];
@@ -135,38 +143,47 @@ fn parse_host_port_parts(input: &str) -> Result<(String, u16)> {
             return Err(Error::new(
                 ErrorKind::InvalidHostPort,
                 format!("invalid host:port {input:?}"),
-            ));
+            )
+            .with_op("ptool.net.parse_host_port")
+            .with_input(input));
         };
 
         if port.is_empty() || suffix.matches(':').count() != 1 {
             return Err(Error::new(
                 ErrorKind::InvalidHostPort,
                 format!("invalid host:port {input:?}"),
-            ));
+            )
+            .with_op("ptool.net.parse_host_port")
+            .with_input(input));
         }
 
         return Ok((host.to_string(), parse_port(port, input)?));
     }
 
     let Some((host, port)) = input.rsplit_once(':') else {
-        return Err(Error::new(
-            ErrorKind::MissingPort,
-            format!("missing port in {input:?}"),
-        ));
+        return Err(
+            Error::new(ErrorKind::MissingPort, format!("missing port in {input:?}"))
+                .with_op("ptool.net.parse_host_port")
+                .with_input(input),
+        );
     };
 
     if host.is_empty() || port.is_empty() {
         return Err(Error::new(
             ErrorKind::InvalidHostPort,
             format!("invalid host:port {input:?}"),
-        ));
+        )
+        .with_op("ptool.net.parse_host_port")
+        .with_input(input));
     }
 
     if host.contains(':') {
         return Err(Error::new(
             ErrorKind::InvalidHostPort,
             format!("IPv6 host with port must use `[addr]:port` in {input:?}"),
-        ));
+        )
+        .with_op("ptool.net.parse_host_port")
+        .with_input(input));
     }
 
     Ok((host.to_string(), parse_port(port, input)?))
@@ -178,6 +195,8 @@ fn parse_port(port: &str, input: &str) -> Result<u16> {
             ErrorKind::InvalidPort,
             format!("invalid port {port:?} in {input:?}: {err}"),
         )
+        .with_op("ptool.net.parse_host_port")
+        .with_input(input)
     })
 }
 
@@ -194,6 +213,8 @@ fn parse_host_value(host: &str, input: &str) -> Result<(String, HostKind)> {
             ErrorKind::InvalidHost,
             format!("invalid host {host:?} in {input:?}: {err}"),
         )
+        .with_op("ptool.net.parse_host_port")
+        .with_input(input)
     })
 }
 

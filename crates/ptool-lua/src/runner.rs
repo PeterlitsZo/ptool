@@ -79,7 +79,11 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
                 prompt = REPL_CONTINUATION_PROMPT;
             }
             Err(err) => {
-                writeln!(stdout, "error: {err}")?;
+                writeln!(
+                    stdout,
+                    "error: {}",
+                    crate::lua_error::render_error_report(&err)
+                )?;
                 chunk.clear();
                 prompt = REPL_PROMPT;
             }

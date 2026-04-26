@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Added `ptool.try(...)` for structured Lua-side error handling, and changed
+  command and runtime failures across `ptool.run`, `assert_ok()`, REPL, and the
+  CLI to carry richer error metadata such as `kind`, `op`, `path`, `cmd`, and
+  `status`.
 - Changed `ptool.fs.read(...)` and `ptool.fs.write(...)` to operate on raw byte
   strings, so Lua scripts can read and write binary files without separate
   byte-specific APIs, and synchronized the filesystem docs across all supported

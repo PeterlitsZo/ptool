@@ -1,4 +1,4 @@
-use mlua::{Lua, String as LuaString, Table, Value, Variadic};
+use mlua::{Function, Lua, MultiValue, String as LuaString, Table, Value, Variadic};
 use ptool_engine::PtoolEngine;
 use std::path::{Path, PathBuf};
 
@@ -58,12 +58,25 @@ impl LuaWorld {
         } else {
             self.current_dir.join(target)
         };
-        let target = std::fs::canonicalize(&target)
-            .map_err(|err| mlua::Error::runtime(format!("ptool.cd `{dir}` failed: {err}")))?;
+        let target = std::fs::canonicalize(&target).map_err(|err| {
+            crate::lua_error::to_mlua_error(
+                crate::lua_error::LuaError::new(
+                    "io_error",
+                    format!("ptool.cd `{dir}` failed: {err}"),
+                )
+                .with_op("ptool.cd")
+                .with_path(dir.clone()),
+            )
+        })?;
         if !target.is_dir() {
-            return Err(mlua::Error::runtime(format!(
-                "ptool.cd `{dir}` failed: not a directory"
-            )));
+            return Err(crate::lua_error::to_mlua_error(
+                crate::lua_error::LuaError::new(
+                    "not_a_directory",
+                    format!("ptool.cd `{dir}` failed: not a directory"),
+                )
+                .with_op("ptool.cd")
+                .with_path(dir),
+            ));
         }
 
         self.current_dir = target;
@@ -92,8 +105,9 @@ impl LuaWorld {
             let key = match key {
                 Value::String(key) => key.to_str()?.to_string(),
                 _ => {
-                    return Err(mlua::Error::runtime(
-                        "ptool.config(options) keys must be strings",
+                    return Err(crate::lua_error::invalid_option(
+                        "ptool.config(options)",
+                        "keys must be strings",
                     ));
                 }
             };
@@ -101,16 +115,18 @@ impl LuaWorld {
             match key.as_str() {
                 "run" => {
                     let Value::Table(run_options) = value else {
-                        return Err(mlua::Error::runtime(
-                            "ptool.config(options) `run` must be a table",
+                        return Err(crate::lua_error::invalid_option(
+                            "ptool.config(options)",
+                            "`run` must be a table",
                         ));
                     };
                     apply_run_config(&mut next_run, run_options)?;
                 }
                 _ => {
-                    return Err(mlua::Error::runtime(format!(
-                        "ptool.config(options) unknown field `{key}`"
-                    )));
+                    return Err(crate::lua_error::invalid_option(
+                        "ptool.config(options)",
+                        format!("unknown field `{key}`"),
+                    ));
                 }
             }
         }
@@ -133,6 +149,21 @@ impl LuaWorld {
 
     pub(crate) fn ask(&self, prompt: String, options: Option<Table>) -> mlua::Result<String> {
         crate::prompt::ask(prompt, options)
+    }
+
+    pub(crate) fn try_call(
+        &self,
+        lua: &Lua,
+        callback: Function,
+    ) -> mlua::Result<(bool, Value, Value)> {
+        match callback.call::<MultiValue>(()) {
+            Ok(values) => Ok((true, pack_try_success_values(lua, values)?, Value::Nil)),
+            Err(err) => Ok((
+                false,
+                Value::Nil,
+                Value::Table(crate::lua_error::caught_error_to_table(lua, &err)?),
+            )),
+        }
     }
 
     pub(crate) fn ansi_style(&self, text: String, options: Option<Table>) -> mlua::Result<String> {
@@ -193,7 +224,10 @@ impl LuaWorld {
 
     pub(crate) fn shell_split(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
         let Some(parts) = shlex::split(&input) else {
-            return Err(mlua::Error::runtime("ptool.sh.split failed to parse input"));
+            return Err(crate::lua_error::invalid_argument(
+                "ptool.sh.split",
+                "failed to parse input",
+            ));
         };
         lua.create_sequence_from(parts)
     }
@@ -444,8 +478,9 @@ fn apply_run_config(run: &mut RunConfig, options: Table) -> mlua::Result<()> {
         let key = match key {
             Value::String(key) => key.to_str()?.to_string(),
             _ => {
-                return Err(mlua::Error::runtime(
-                    "ptool.config(options.run) keys must be strings",
+                return Err(crate::lua_error::invalid_option(
+                    "ptool.config(options.run)",
+                    "keys must be strings",
                 ));
             }
         };
@@ -458,9 +493,10 @@ fn apply_run_config(run: &mut RunConfig, options: Table) -> mlua::Result<()> {
             }
             "retry" => run.retry = parse_config_bool(value, "ptool.config(options.run)", "retry")?,
             _ => {
-                return Err(mlua::Error::runtime(format!(
-                    "ptool.config(options.run) unknown field `{key}`"
-                )));
+                return Err(crate::lua_error::invalid_option(
+                    "ptool.config(options.run)",
+                    format!("unknown field `{key}`"),
+                ));
             }
         }
     }
@@ -470,17 +506,27 @@ fn apply_run_config(run: &mut RunConfig, options: Table) -> mlua::Result<()> {
 fn parse_config_bool(value: Value, context: &str, key: &str) -> mlua::Result<bool> {
     match value {
         Value::Boolean(value) => Ok(value),
-        _ => Err(mlua::Error::runtime(format!(
-            "{context} `{key}` must be a boolean"
-        ))),
+        _ => Err(crate::lua_error::invalid_option(
+            context,
+            format!("`{key}` must be a boolean"),
+        )),
     }
 }
 
 fn ensure_non_empty(input: &str, context: &str) -> mlua::Result<()> {
     if input.is_empty() {
-        return Err(mlua::Error::runtime(format!(
-            "{context} does not accept empty string"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            context,
+            "does not accept empty string",
+        ));
     }
     Ok(())
+}
+
+fn pack_try_success_values(lua: &Lua, values: MultiValue) -> mlua::Result<Value> {
+    match values.len() {
+        0 => Ok(Value::Nil),
+        1 => Ok(values.into_iter().next().unwrap_or(Value::Nil)),
+        _ => lua.create_sequence_from(values).map(Value::Table),
+    }
 }

@@ -200,6 +200,79 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.try
+
+> `v0.4.0` - Introduced.
+
+`ptool.try(fn)` は `fn` を実行し、送出されたエラーを戻り値に変換します。
+
+- `fn` (function, 必須): 実行するコールバック。
+- 戻り値: `ok, value, err`。
+
+戻り値ルール:
+
+- 成功時は `ok = true`、`err = nil` で、`value` にコールバックの戻り値が
+  入ります。
+- コールバックが値を返さない場合、`value` は `nil` です。
+- コールバックが 1 つだけ値を返す場合、`value` はその値自体です。
+- コールバックが複数の値を返す場合、`value` は配列風のテーブルです。
+- 失敗時は `ok = false`、`value = nil` で、`err` はテーブルです。
+
+構造化エラーフィールド:
+
+- `kind` (string): `io_error`、`command_failed`、`invalid_argument`、
+  `http_error`、`lua_error` などの安定したエラーカテゴリ。
+- `message` (string): 人間が読みやすいエラーメッセージ。
+- `op` (string, 任意): `ptool.fs.read` のような API または操作名。
+- `detail` (string, 任意): 追加の失敗詳細。
+- `path` (string, 任意): ファイルシステム失敗に関係するパス。
+- `input` (string, 任意): 解析や検証に失敗した元の入力。
+- `cmd` (string, 任意): コマンド失敗時のコマンド名。
+- `status` (integer, 任意): 利用可能な場合の終了ステータスまたは HTTP
+  ステータス。
+- `stderr` (string, 任意): コマンド失敗時にキャプチャされた stderr。
+- `url` (string, 任意): HTTP 失敗に関係する URL。
+- `cwd` (string, 任意): コマンド失敗時に実際に使われた作業ディレクトリ。
+- `target` (string, 任意): SSH 関連のコマンド失敗時の SSH ターゲット。
+- `retryable` (boolean): 再試行に意味があるかどうか。デフォルトは `false`
+  です。
+
+挙動:
+
+- `ptool` の API は構造化エラーを送出します。`ptool.try` はそれらを上記の
+  `err` テーブルへ変換するため、呼び出し側は `err.kind` や関連フィールドで
+  分岐できます。
+- 通常の Lua エラーも捕捉されます。その場合 `err.kind` は `lua_error` で、
+  `message` だけが保証されます。
+- `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、
+  `res:assert_ok()` のような API のエラー処理には `ptool.try` の使用を推奨
+  します。
+
+例:
+
+```lua
+local ok, content, err = ptool.try(function()
+  return ptool.fs.read("missing.txt")
+end)
+
+if not ok and err.kind == "io_error" then
+  print(err.op, err.path)
+end
+
+local ok2, _, err2 = ptool.try(function()
+  local res = ptool.run({
+    cmd = "sh",
+    args = {"-c", "echo bad >&2; exit 7"},
+    stderr = "capture",
+  })
+  res:assert_ok()
+end)
+
+if not ok2 and err2.kind == "command_failed" then
+  print(err2.cmd, err2.status, err2.stderr)
+end
+```
+
 ## ptool.run
 
 > `v0.1.0` - Introduced.
@@ -239,17 +312,22 @@ ptool.run({ cmd = "echo", args = {"hello"}, stdout = "capture" })
   - `ok` (boolean): 終了コードが `0` かどうか。
   - `code` (integer|nil): プロセス終了コード。シグナルで終了した場合は
     `nil` です。
+  - `cmd` (string): 実行に使われたコマンド名。
+  - `cwd` (string): 実行に使われた実際の作業ディレクトリ。
   - `stdout` (string, 任意): `stdout = "capture"` のとき存在します。
   - `stderr` (string, 任意): `stderr = "capture"` のとき存在します。
-  - `assert_ok(self)` (function): `ok = false` のときエラーにします。
-    エラーメッセージには終了コードと、利用可能なら `stderr` が
-    含まれます。
+  - `assert_ok(self)` (function): `ok = false` のとき構造化エラーを発生
+    させます。エラー種別は `command_failed` で、`cmd`、`status`、
+    `stderr`、`cwd` を含むことがあります。
 - `check` のデフォルト値は
   `ptool.config({ run = { check = ... } })` から取得されます。
   未設定ならデフォルトは `false` です。`check = false` のときは、
   呼び出し側が自分で `ok` を確認するか `res:assert_ok()` を呼べます。
 - `check = true` かつ `retry = true` の場合、`ptool.run` は失敗した
   コマンドを再試行するかどうかを最終エラー前に尋ねます。
+- `check = true` の場合、`ptool.run` は `res:assert_ok()` と同じ
+  `command_failed` 構造化エラーを送出します。Lua 側で捕捉して調べたいなら
+  `ptool.try(...)` を使ってください。
 
 例:
 

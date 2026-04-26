@@ -6,24 +6,25 @@ pub(crate) fn ensure_min_ptool_version(
     engine: &PtoolEngine,
     required_raw: &str,
 ) -> mlua::Result<()> {
-    let required = engine.semver_parse(required_raw).map_err(|err| {
-        mlua::Error::runtime(format!(
-            "ptool.use invalid version `{required_raw}`: {}",
-            err.msg
-        ))
-    })?;
-    let current_with_prerelease = engine.semver_parse(CURRENT_PTOOL_VERSION).map_err(|err| {
-        mlua::Error::runtime(format!(
-            "ptool internal version `{CURRENT_PTOOL_VERSION}` is invalid: {}",
-            err.msg
-        ))
-    })?;
+    let required = engine
+        .semver_parse(required_raw)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
+    let current_with_prerelease = engine
+        .semver_parse(CURRENT_PTOOL_VERSION)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
     let current = engine.semver_strip_prerelease(current_with_prerelease);
 
     if required > current {
-        return Err(mlua::Error::runtime(format!(
-            "ptool is too old: need at least v{required}, current version is v{current}"
-        )));
+        return Err(crate::lua_error::to_mlua_error(
+            crate::lua_error::LuaError::new(
+                "version_too_old",
+                format!(
+                    "ptool is too old: need at least v{required}, current version is v{current}"
+                ),
+            )
+            .with_op("ptool.use")
+            .with_detail(format!("required: v{required}, current: v{current}")),
+        ));
     }
 
     Ok(())

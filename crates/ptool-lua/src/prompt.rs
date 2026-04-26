@@ -27,15 +27,17 @@ pub(crate) fn ask(prompt: String, options: Option<Table>) -> mlua::Result<String
 
     match text.prompt() {
         Ok(value) => Ok(value),
-        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(mlua::Error::runtime(format!(
-            "{ASK_SIGNATURE} requires an interactive TTY"
-        ))),
+        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(crate::lua_error::not_interactive(
+            ASK_SIGNATURE,
+            "requires an interactive TTY",
+        )),
         Err(InquireError::OperationCanceled | InquireError::OperationInterrupted) => Err(
-            mlua::Error::runtime(format!("{ASK_SIGNATURE} cancelled by user")),
+            crate::lua_error::cancelled(ASK_SIGNATURE, "cancelled by user"),
         ),
-        Err(err) => Err(mlua::Error::runtime(format!(
-            "{ASK_SIGNATURE} failed: {err}"
-        ))),
+        Err(err) => Err(crate::lua_error::prompt_failed(
+            ASK_SIGNATURE,
+            format!("failed: {err}"),
+        )),
     }
 }
 
@@ -51,9 +53,10 @@ impl AskOptions {
             let key = match key {
                 Value::String(key) => key.to_str()?.to_string(),
                 _ => {
-                    return Err(mlua::Error::runtime(format!(
-                        "{ASK_SIGNATURE} option keys must be strings"
-                    )));
+                    return Err(crate::lua_error::invalid_option(
+                        ASK_SIGNATURE,
+                        "option keys must be strings",
+                    ));
                 }
             };
 
@@ -68,9 +71,10 @@ impl AskOptions {
                     parsed.placeholder = Some(parse_string_option(value, "placeholder")?);
                 }
                 _ => {
-                    return Err(mlua::Error::runtime(format!(
-                        "{ASK_SIGNATURE} unknown option `{key}`"
-                    )));
+                    return Err(crate::lua_error::invalid_option(
+                        ASK_SIGNATURE,
+                        format!("unknown option `{key}`"),
+                    ));
                 }
             }
         }
@@ -82,17 +86,19 @@ impl AskOptions {
 fn parse_string_option(value: Value, field: &str) -> mlua::Result<String> {
     match value {
         Value::String(value) => Ok(value.to_str()?.to_string()),
-        _ => Err(mlua::Error::runtime(format!(
-            "{ASK_SIGNATURE} `{field}` must be a string"
-        ))),
+        _ => Err(crate::lua_error::invalid_option(
+            ASK_SIGNATURE,
+            format!("`{field}` must be a string"),
+        )),
     }
 }
 
 fn ensure_non_empty(input: &str, signature: &str, field: &str) -> mlua::Result<()> {
     if input.is_empty() {
-        return Err(mlua::Error::runtime(format!(
-            "{signature} `{field}` must not be empty"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            signature,
+            format!("`{field}` must not be empty"),
+        ));
     }
     Ok(())
 }

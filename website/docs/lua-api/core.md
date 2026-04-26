@@ -196,6 +196,76 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.try
+
+> `v0.4.0` - Introduced.
+
+`ptool.try(fn)` runs `fn` and converts raised errors into return values.
+
+- `fn` (function, required): Callback to execute.
+- Returns: `ok, value, err`.
+
+Return value rules:
+
+- On success, `ok = true`, `err = nil`, and `value` contains the callback
+  result.
+- If the callback returns no values, `value` is `nil`.
+- If the callback returns one value, `value` is that value.
+- If the callback returns multiple values, `value` is an array-like table.
+- On failure, `ok = false`, `value = nil`, and `err` is a table.
+
+Structured error fields:
+
+- `kind` (string): Stable error category such as `io_error`,
+  `command_failed`, `invalid_argument`, `http_error`, or `lua_error`.
+- `message` (string): Human-readable error message.
+- `op` (string, optional): API or operation name such as `ptool.fs.read`.
+- `detail` (string, optional): Extra detail for the failure.
+- `path` (string, optional): Path involved in a filesystem failure.
+- `input` (string, optional): Original input that failed to parse or validate.
+- `cmd` (string, optional): Command name for command failures.
+- `status` (integer, optional): Exit status or HTTP status when available.
+- `stderr` (string, optional): Captured stderr for command failures.
+- `url` (string, optional): URL involved in an HTTP failure.
+- `cwd` (string, optional): Effective working directory for command failures.
+- `target` (string, optional): SSH target for SSH-related command failures.
+- `retryable` (boolean): Whether retrying may make sense. Defaults to `false`.
+
+Behavior:
+
+- `ptool` APIs raise structured errors. `ptool.try` converts them into the `err`
+  table above so callers can branch on `err.kind` and related fields.
+- Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`,
+  and only `message` is guaranteed.
+- `ptool.try` is the recommended way to handle errors from APIs such as
+  `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`,
+  and `res:assert_ok()`.
+
+Example:
+
+```lua
+local ok, content, err = ptool.try(function()
+  return ptool.fs.read("missing.txt")
+end)
+
+if not ok and err.kind == "io_error" then
+  print(err.op, err.path)
+end
+
+local ok2, _, err2 = ptool.try(function()
+  local res = ptool.run({
+    cmd = "sh",
+    args = {"-c", "echo bad >&2; exit 7"},
+    stderr = "capture",
+  })
+  res:assert_ok()
+end)
+
+if not ok2 and err2.kind == "command_failed" then
+  print(err2.cmd, err2.status, err2.stderr)
+end
+```
+
 ## ptool.run
 
 > `v0.1.0` - Introduced.
@@ -235,15 +305,21 @@ Return value rules:
   - `ok` (boolean): Whether the exit code is `0`.
   - `code` (integer|nil): The process exit code. If the process was terminated
     by a signal, this is `nil`.
+  - `cmd` (string): Command name used for the execution.
+  - `cwd` (string): Effective working directory used for the execution.
   - `stdout` (string, optional): Present when `stdout = "capture"`.
   - `stderr` (string, optional): Present when `stderr = "capture"`.
-  - `assert_ok(self)` (function): Raises an error when `ok = false`. The error
-    message includes the exit code and, if available, `stderr`.
+  - `assert_ok(self)` (function): Raises a structured error when `ok = false`.
+    The error kind is `command_failed`, and the error may include `cmd`,
+    `status`, `stderr`, and `cwd`.
 - The default value of `check` comes from `ptool.config({ run = { check = ... }
   })`. If not configured, it defaults to `false`. When `check = false`, callers
   can inspect `ok` themselves or call `res:assert_ok()`.
 - When both `check = true` and `retry = true`, `ptool.run` asks whether the
   failed command should be retried before raising the final error.
+- When `check = true`, `ptool.run` raises the same structured `command_failed`
+  error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to
+  catch and inspect it from Lua.
 
 Example:
 

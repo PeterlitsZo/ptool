@@ -23,8 +23,9 @@ pub(crate) fn request(
 fn parse_request_options(lua: &Lua, options: Table) -> mlua::Result<HttpRequestOptions> {
     validate_request_option_keys(&options)?;
     let Some(url) = options.get::<Option<String>>("url")? else {
-        return Err(mlua::Error::runtime(
-            "ptool.http.request(options) requires `url`",
+        return Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            "requires `url`",
         ));
     };
 
@@ -70,9 +71,10 @@ fn validate_request_option_keys(options: &Table) -> mlua::Result<()> {
         let key = match key {
             Value::String(value) => value.to_str()?.to_string(),
             _ => {
-                return Err(mlua::Error::runtime(format!(
-                    "{REQUEST_SIGNATURE} option keys must be strings"
-                )));
+                return Err(crate::lua_error::invalid_option(
+                    REQUEST_SIGNATURE,
+                    "option keys must be strings",
+                ));
             }
         };
 
@@ -81,9 +83,10 @@ fn validate_request_option_keys(options: &Table) -> mlua::Result<()> {
             | "connect_timeout_ms" | "follow_redirects" | "max_redirects" | "user_agent"
             | "basic_auth" | "bearer_token" | "fail_on_http_error" => {}
             _ => {
-                return Err(mlua::Error::runtime(format!(
-                    "{REQUEST_SIGNATURE} unknown option `{key}`"
-                )));
+                return Err(crate::lua_error::invalid_option(
+                    REQUEST_SIGNATURE,
+                    format!("unknown option `{key}`"),
+                ));
             }
         }
     }
@@ -130,8 +133,9 @@ fn parse_body(body: Option<Value>) -> mlua::Result<Option<Vec<u8>>> {
 
     match body {
         Value::String(value) => Ok(Some(value.as_bytes().to_vec())),
-        _ => Err(mlua::Error::runtime(
-            "ptool.http.request(options) `body` must be a string",
+        _ => Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            "`body` must be a string",
         )),
     }
 }
@@ -160,22 +164,25 @@ fn parse_basic_auth(value: Option<Table>) -> mlua::Result<Option<(String, String
         match key.as_str() {
             "username" | "password" => {}
             _ => {
-                return Err(mlua::Error::runtime(format!(
-                    "{REQUEST_SIGNATURE} `basic_auth` unknown option `{key}`"
-                )));
+                return Err(crate::lua_error::invalid_option(
+                    REQUEST_SIGNATURE,
+                    format!("`basic_auth` unknown option `{key}`"),
+                ));
             }
         }
     }
 
     let Some(username) = value.get::<Option<String>>("username")? else {
-        return Err(mlua::Error::runtime(format!(
-            "{REQUEST_SIGNATURE} `basic_auth.username` is required"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            "`basic_auth.username` is required",
+        ));
     };
     let Some(password) = value.get::<Option<String>>("password")? else {
-        return Err(mlua::Error::runtime(format!(
-            "{REQUEST_SIGNATURE} `basic_auth.password` is required"
-        )));
+        return Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            "`basic_auth.password` is required",
+        ));
     };
 
     Ok(Some((username, password)))
@@ -184,18 +191,20 @@ fn parse_basic_auth(value: Option<Table>) -> mlua::Result<Option<(String, String
 fn parse_string_key(value: Value, field: &str) -> mlua::Result<String> {
     match value {
         Value::String(value) => Ok(value.to_str()?.to_string()),
-        _ => Err(mlua::Error::runtime(format!(
-            "{REQUEST_SIGNATURE} `{field}` keys must be strings"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            format!("`{field}` keys must be strings"),
+        )),
     }
 }
 
 fn parse_string_value(value: Value, field: &str) -> mlua::Result<String> {
     match value {
         Value::String(value) => Ok(value.to_str()?.to_string()),
-        _ => Err(mlua::Error::runtime(format!(
-            "{REQUEST_SIGNATURE} `{field}` values must be strings"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            format!("`{field}` values must be strings"),
+        )),
     }
 }
 
@@ -205,9 +214,10 @@ fn parse_string_like_value(value: Value, field: &str) -> mlua::Result<String> {
         Value::Integer(value) => Ok(value.to_string()),
         Value::Number(value) => Ok(value.to_string()),
         Value::Boolean(value) => Ok(value.to_string()),
-        _ => Err(mlua::Error::runtime(format!(
-            "{REQUEST_SIGNATURE} `{field}` values must be strings, numbers, or booleans"
-        ))),
+        _ => Err(crate::lua_error::invalid_argument(
+            REQUEST_SIGNATURE,
+            format!("`{field}` values must be strings, numbers, or booleans"),
+        )),
     }
 }
 
@@ -277,9 +287,9 @@ impl UserData for HttpResponse {
 }
 
 fn to_lua_request_error(err: EngineError) -> mlua::Error {
-    mlua::Error::runtime(format!("{REQUEST_SIGNATURE} {}", err.msg))
+    crate::lua_error::lua_error_from_engine(err, REQUEST_SIGNATURE)
 }
 
 fn to_lua_response_error(err: EngineError) -> mlua::Error {
-    mlua::Error::runtime(format!("ptool.http {}", err.msg))
+    crate::lua_error::lua_error_from_engine(err, "ptool.http")
 }

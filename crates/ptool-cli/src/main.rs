@@ -74,13 +74,19 @@ fn main() {
             script_args,
         }) => {
             if let Err(err) = ptool_lua::run_script(&filename, &script_args) {
-                eprintln!("Failed to run Lua script `{filename}`: {err}");
+                eprintln!(
+                    "Failed to run Lua script `{filename}`:\n{}",
+                    ptool_lua::format_error_report(err.as_ref())
+                );
                 process::exit(1);
             }
         }
         Ok(ParsedCli::Repl) => {
             if let Err(err) = ptool_lua::run_repl() {
-                eprintln!("Failed to start REPL: {err}");
+                eprintln!(
+                    "Failed to start REPL:\n{}",
+                    ptool_lua::format_error_report(err.as_ref())
+                );
                 process::exit(1);
             }
         }

@@ -207,6 +207,84 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.try
+
+> `v0.4.0` - Introduced.
+
+`ptool.try(fn)` ejecuta `fn` y convierte los errores lanzados en valores de
+retorno.
+
+- `fn` (function, obligatorio): Callback que se va a ejecutar.
+- Devuelve: `ok, value, err`.
+
+Reglas del valor devuelto:
+
+- En caso de éxito, `ok = true`, `err = nil` y `value` contiene el resultado
+  del callback.
+- Si el callback no devuelve valores, `value` es `nil`.
+- Si el callback devuelve un solo valor, `value` es ese valor.
+- Si el callback devuelve varios valores, `value` es una tabla tipo arreglo.
+- En caso de fallo, `ok = false`, `value = nil` y `err` es una tabla.
+
+Campos de error estructurado:
+
+- `kind` (string): Categoría estable del error, como `io_error`,
+  `command_failed`, `invalid_argument`, `http_error` o `lua_error`.
+- `message` (string): Mensaje de error legible para humanos.
+- `op` (string, opcional): Nombre de la API u operación, como `ptool.fs.read`.
+- `detail` (string, opcional): Detalle adicional del fallo.
+- `path` (string, opcional): Ruta implicada en un fallo del sistema de
+  archivos.
+- `input` (string, opcional): Entrada original que no pudo analizarse o
+  validarse.
+- `cmd` (string, opcional): Nombre del comando en fallos de comandos.
+- `status` (integer, opcional): Código de salida o código HTTP cuando esté
+  disponible.
+- `stderr` (string, opcional): stderr capturado en fallos de comandos.
+- `url` (string, opcional): URL implicada en un fallo HTTP.
+- `cwd` (string, opcional): Directorio de trabajo efectivo en fallos de
+  comandos.
+- `target` (string, opcional): Objetivo SSH en fallos de comandos relacionados
+  con SSH.
+- `retryable` (boolean): Si tiene sentido reintentar. El valor por defecto es
+  `false`.
+
+Comportamiento:
+
+- Las APIs de `ptool` lanzan errores estructurados. `ptool.try` los convierte
+  en la tabla `err` anterior para que quien llama pueda ramificar según
+  `err.kind` y otros campos.
+- Los errores Lua normales también se capturan. En ese caso, `err.kind` es
+  `lua_error` y solo se garantiza `message`.
+- `ptool.try` es la forma recomendada de manejar errores de APIs como
+  `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })` y
+  `res:assert_ok()`.
+
+Ejemplo:
+
+```lua
+local ok, content, err = ptool.try(function()
+  return ptool.fs.read("missing.txt")
+end)
+
+if not ok and err.kind == "io_error" then
+  print(err.op, err.path)
+end
+
+local ok2, _, err2 = ptool.try(function()
+  local res = ptool.run({
+    cmd = "sh",
+    args = {"-c", "echo bad >&2; exit 7"},
+    stderr = "capture",
+  })
+  res:assert_ok()
+end)
+
+if not ok2 and err2.kind == "command_failed" then
+  print(err2.cmd, err2.status, err2.stderr)
+end
+```
+
 ## ptool.run
 
 > `v0.1.0` - Introduced.
@@ -251,17 +329,22 @@ Reglas de valor devuelto:
   - `ok` (boolean): Si el código de salida es `0`.
   - `code` (integer|nil): El código de salida del proceso. Si el proceso fue
     terminado por una señal, esto es `nil`.
+  - `cmd` (string): Nombre del comando usado para la ejecución.
+  - `cwd` (string): Directorio de trabajo efectivo usado para la ejecución.
   - `stdout` (string, opcional): Presente cuando `stdout = "capture"`.
   - `stderr` (string, opcional): Presente cuando `stderr = "capture"`.
-  - `assert_ok(self)` (function): Produce un error cuando `ok = false`. El
-    mensaje de error incluye el código de salida y, cuando esté disponible,
-    `stderr`.
+  - `assert_ok(self)` (function): Produce un error estructurado cuando
+    `ok = false`. El tipo de error es `command_failed` y puede incluir `cmd`,
+    `status`, `stderr` y `cwd`.
 - El valor por defecto de `check` proviene de
   `ptool.config({ run = { check = ... } })`. Si no se configura, el valor por
   defecto es `false`. Cuando `check = false`, quien llama puede inspeccionar
   `ok` por su cuenta o llamar a `res:assert_ok()`.
 - Cuando `check = true` y `retry = true`, `ptool.run` pregunta si debe
   reintentarse el comando fallido antes de producir el error final.
+- Cuando `check = true`, `ptool.run` produce el mismo error estructurado
+  `command_failed` que `res:assert_ok()`. Usa `ptool.try(...)` si quieres
+  capturarlo e inspeccionarlo desde Lua.
 
 Ejemplo:
 

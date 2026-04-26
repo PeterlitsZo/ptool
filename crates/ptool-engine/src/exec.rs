@@ -151,4 +151,7 @@ fn build_run_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {
             cwd.display()
         ),
     )
+    .with_op("ptool.run")
+    .with_cmd(cmd)
+    .with_detail(format!("cwd: {}", cwd.display()))
 }
