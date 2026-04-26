@@ -1,4 +1,4 @@
-use mlua::{Lua, Table, Value, Variadic};
+use mlua::{Lua, String as LuaString, Table, Value, Variadic};
 use ptool_engine::{
     Error as EngineError, ErrorKind as EngineErrorKind, FsCopyOptions, FsMkdirOptions, PtoolEngine,
 };
@@ -8,15 +8,16 @@ const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
 const GLOB_SIGNATURE: &str = "ptool.fs.glob(pattern)";
 const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
 
-pub(crate) fn read(engine: &PtoolEngine, path: String) -> mlua::Result<String> {
-    engine
-        .fs_read(&path)
-        .map_err(|err| mlua::Error::runtime(format!("ptool.fs.read `{path}` failed: {}", err.msg)))
+pub(crate) fn read(lua: &Lua, engine: &PtoolEngine, path: String) -> mlua::Result<LuaString> {
+    let content = engine.fs_read(&path).map_err(|err| {
+        mlua::Error::runtime(format!("ptool.fs.read `{path}` failed: {}", err.msg))
+    })?;
+    lua.create_string(&content)
 }
 
-pub(crate) fn write(engine: &PtoolEngine, path: String, content: String) -> mlua::Result<()> {
+pub(crate) fn write(engine: &PtoolEngine, path: String, content: LuaString) -> mlua::Result<()> {
     engine
-        .fs_write(&path, &content)
+        .fs_write(&path, content.as_bytes().as_ref())
         .map_err(|err| mlua::Error::runtime(format!("ptool.fs.write `{path}` failed: {}", err.msg)))
 }
 

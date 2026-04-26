@@ -6,33 +6,47 @@
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.read(path)` は UTF-8 テキストファイルを読み取り、文字列を
+`ptool.fs.read(path)` はファイルを生のバイト列として読み取り、Lua 文字列を
 返します。
 
 - `path` (string, 必須): ファイルパス。
 - 戻り値: `string`。
+
+注意:
+
+- 返される Lua 文字列には、ディスク上のファイルバイトがそのまま入ります。
+- テキストファイルは従来どおり扱えますが、バイナリファイルも読み取れます。
 
 例:
 
 ```lua
 local content = ptool.fs.read("README.md")
 print(content)
+
+local png = ptool.fs.read("logo.png")
+print(#png)
 ```
 
 ## ptool.fs.write
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` は文字列をファイルへ書き込み、既存の内容を
-上書きします。
+`ptool.fs.write(path, content)` は Lua 文字列を生のバイト列としてファイルへ
+書き込み、既存の内容を上書きします。
 
 - `path` (string, 必須): ファイルパス。
 - `content` (string, 必須): 書き込む内容。
+
+注意:
+
+- `content` は 1 バイトずつそのまま書き込まれます。
+- 埋め込み NUL バイトや非 UTF-8 バイトも保持されます。
 
 例:
 
 ```lua
 ptool.fs.write("tmp/hello.txt", "hello\n")
+ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 ```
 
 ## ptool.fs.mkdir

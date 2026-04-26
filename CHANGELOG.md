@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Changed `ptool.fs.read(...)` and `ptool.fs.write(...)` to operate on raw byte
+  strings, so Lua scripts can read and write binary files without separate
+  byte-specific APIs, and synchronized the filesystem docs across all supported
+  locales.
 - Enhanced `p.http.request(...)` with query/form/JSON request helpers, redirect
   and auth options, richer response header APIs, cached response bodies, and
   synchronized HTTP documentation across all supported locales.

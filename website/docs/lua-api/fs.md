@@ -6,32 +6,46 @@ Filesystem helpers are available under `ptool.fs` and `p.fs`.
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.read(path)` reads a UTF-8 text file and returns a string.
+`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string.
 
 - `path` (string, required): The file path.
 - Returns: `string`.
+
+Notes:
+
+- The returned Lua string contains the file bytes exactly as stored on disk.
+- Text files continue to work as before, but binary files are also supported.
 
 Example:
 
 ```lua
 local content = ptool.fs.read("README.md")
 print(content)
+
+local png = ptool.fs.read("logo.png")
+print(#png)
 ```
 
 ## ptool.fs.write
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` writes a string to a file, overwriting existing
-contents.
+`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes,
+overwriting existing contents.
 
 - `path` (string, required): The file path.
 - `content` (string, required): The content to write.
+
+Notes:
+
+- `content` is written byte-for-byte.
+- Embedded NUL bytes and non-UTF-8 bytes are preserved.
 
 Example:
 
 ```lua
 ptool.fs.write("tmp/hello.txt", "hello\n")
+ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 ```
 
 ## ptool.fs.mkdir

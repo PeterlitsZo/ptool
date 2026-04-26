@@ -134,11 +134,11 @@ impl PtoolEngine {
         hash::md5_hex(bytes)
     }
 
-    pub fn fs_read(&self, path: &str) -> Result<String> {
+    pub fn fs_read(&self, path: &str) -> Result<Vec<u8>> {
         fs::read(path)
     }
 
-    pub fn fs_write(&self, path: &str, content: &str) -> Result<()> {
+    pub fn fs_write(&self, path: &str, content: &[u8]) -> Result<()> {
         fs::write(path, content)
     }
 

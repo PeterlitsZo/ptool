@@ -6,32 +6,47 @@ As utilidades de sistema de arquivos estão disponíveis em `ptool.fs` e `p.fs`.
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.read(path)` lê um arquivo de texto UTF-8 e retorna uma string.
+`ptool.fs.read(path)` lê um arquivo como bytes brutos e retorna uma string Lua.
 
 - `path` (string, obrigatório): O caminho do arquivo.
 - Retorna: `string`.
+
+Notas:
+
+- A string Lua retornada contém exatamente os bytes armazenados em disco.
+- Arquivos de texto continuam funcionando como antes, e agora arquivos binários
+  também são suportados.
 
 Exemplo:
 
 ```lua
 local content = ptool.fs.read("README.md")
 print(content)
+
+local png = ptool.fs.read("logo.png")
+print(#png)
 ```
 
 ## ptool.fs.write
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` grava uma string em um arquivo, sobrescrevendo o
-conteúdo existente.
+`ptool.fs.write(path, content)` grava uma string Lua em um arquivo como bytes
+brutos, sobrescrevendo o conteúdo existente.
 
 - `path` (string, obrigatório): O caminho do arquivo.
 - `content` (string, obrigatório): O conteúdo a gravar.
+
+Notas:
+
+- `content` é gravado byte por byte.
+- Bytes NUL embutidos e bytes não UTF-8 são preservados.
 
 Exemplo:
 
 ```lua
 ptool.fs.write("tmp/hello.txt", "hello\n")
+ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 ```
 
 ## ptool.fs.mkdir

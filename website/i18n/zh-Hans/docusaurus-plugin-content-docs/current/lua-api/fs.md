@@ -6,31 +6,45 @@
 
 > `v0.1.0` - 引入。
 
-`ptool.fs.read(path)` 读取 UTF-8 文本文件并返回字符串。
+`ptool.fs.read(path)` 按原始字节读取文件，并返回一个 Lua 字符串。
 
 - `path`（string，必填）：文件路径。
 - 返回：`string`。
+
+说明：
+
+- 返回的 Lua 字符串会精确包含磁盘上的文件字节。
+- 文本文件依然可以像以前一样读取，同时也支持二进制文件。
 
 示例：
 
 ```lua
 local content = ptool.fs.read("README.md")
 print(content)
+
+local png = ptool.fs.read("logo.png")
+print(#png)
 ```
 
 ## ptool.fs.write
 
 > `v0.1.0` - 引入。
 
-`ptool.fs.write(path, content)` 向文件写入字符串，并覆盖已有内容。
+`ptool.fs.write(path, content)` 将 Lua 字符串按原始字节写入文件，并覆盖已有内容。
 
 - `path`（string，必填）：文件路径。
 - `content`（string，必填）：要写入的内容。
+
+说明：
+
+- `content` 会逐字节写入。
+- 内嵌 NUL 字节和非 UTF-8 字节都会被保留。
 
 示例：
 
 ```lua
 ptool.fs.write("tmp/hello.txt", "hello\n")
+ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 ```
 
 ## ptool.fs.mkdir

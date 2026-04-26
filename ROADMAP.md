@@ -6,12 +6,20 @@
 - [ ] Make the document website better.
 - [ ] Let the `glob` function support working_dir optioon.
 - [ ] Support `p.log` module.
+- [ ] Support `p.git` module.
+- [ ] Support `p.ask.select`, like:
+  - `p.ask.select("Select bump type", { "patch", "minor", "major", "skip" })`
+- [ ] Support `p.tbl` module for better Lua table functions.
+  - `p.tbl.map`.
+  - `p.tbl.filter`.
+  - `p.tbl.join`.
+  - etc.
 
 # v0.4.0
 
 - [x] More i18n support.
 - [x] Support show the user and host in `p.run`, ssh connection's `run`, etc.
-- [ ] Enhance `p.http.request`.
+- [x] Enhance `p.http.request`.
 - [ ] Let `p.fs.write` and `p.fs.read` support bytes.
 - [ ] Better error handling.
 - [ ] Fix the local variable not working in REPL.

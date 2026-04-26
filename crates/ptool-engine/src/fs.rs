@@ -38,12 +38,12 @@ pub struct FsCopyResult {
     pub to: String,
 }
 
-pub fn read(path: &str) -> Result<String> {
+pub fn read(path: &str) -> Result<Vec<u8>> {
     ensure_non_empty_path(path)?;
-    fs::read_to_string(path).map_err(io_error)
+    fs::read(path).map_err(io_error)
 }
 
-pub fn write(path: &str, content: &str) -> Result<()> {
+pub fn write(path: &str, content: &[u8]) -> Result<()> {
     ensure_non_empty_path(path)?;
     fs::write(path, content).map_err(io_error)
 }
