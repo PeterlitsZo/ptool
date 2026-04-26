@@ -24,7 +24,7 @@
   files.
 - [Path API](./path.md): Manipulate paths lexically without touching the
   filesystem.
-- [TOML API](./toml.md): Parse, read, update, and remove TOML values.
+- [TOML API](./toml.md): Parse, stringify, read, update, and remove TOML values.
 - [Regex API](./re.md): Compile regexes and search, capture, replace, or split
   text.
 - [String API](./str.md): Trim, split, join, replace, and format strings.

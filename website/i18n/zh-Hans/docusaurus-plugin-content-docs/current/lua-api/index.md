@@ -19,7 +19,7 @@
 - [Database API](./db.md)：打开数据库连接并执行 SQL 查询。
 - [SSH API](./ssh.md)：连接远程主机、执行命令并传输文件。
 - [Path API](./path.md)：以纯词法方式处理路径，不触碰真实文件系统。
-- [TOML API](./toml.md)：解析、读取、更新并删除 TOML 值。
+- [TOML API](./toml.md)：解析、序列化、读取、更新并删除 TOML 值。
 - [Regex API](./re.md)：编译正则，并对文本进行搜索、捕获、替换或切分。
 - [String API](./str.md)：裁剪、拆分、拼接、替换和格式化字符串。
 - [Filesystem API](./fs.md)：读取、写入、创建和 glob 文件系统路径。

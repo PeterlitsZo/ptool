@@ -28,7 +28,7 @@
   arquivos.
 - [API de caminhos](./path.md): Manipula caminhos lexicalmente sem tocar no
   sistema de arquivos.
-- [API TOML](./toml.md): Faz parse, lê, atualiza e remove valores TOML.
+- [API TOML](./toml.md): Faz parse, serializa, lê, atualiza e remove valores TOML.
 - [API de regex](./re.md): Compila regex e busca, captura, substitui ou divide
   texto.
 - [API de strings](./str.md): Remove espaços, divide, junta, substitui e

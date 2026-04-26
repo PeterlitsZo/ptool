@@ -310,19 +310,23 @@ impl LuaWorld {
     }
 
     pub(crate) fn toml_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Table> {
-        crate::toml::parse(lua, input)
+        crate::toml::parse(lua, &self.engine, input)
     }
 
     pub(crate) fn toml_get(&self, lua: &Lua, input: Value, path: Value) -> mlua::Result<Value> {
-        crate::toml::get(lua, input, path)
+        crate::toml::get(lua, &self.engine, input, path)
     }
 
     pub(crate) fn toml_set(&self, input: Value, path: Value, value: Value) -> mlua::Result<String> {
-        crate::toml::set(input, path, value)
+        crate::toml::set(&self.engine, input, path, value)
     }
 
     pub(crate) fn toml_remove(&self, input: Value, path: Value) -> mlua::Result<String> {
-        crate::toml::remove(input, path)
+        crate::toml::remove(&self.engine, input, path)
+    }
+
+    pub(crate) fn toml_stringify(&self, value: Value) -> mlua::Result<String> {
+        crate::toml::stringify(&self.engine, value)
     }
 
     pub(crate) fn template_render(

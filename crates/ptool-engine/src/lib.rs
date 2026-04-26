@@ -11,6 +11,7 @@ mod platform;
 mod script_args;
 mod semver;
 mod ssh;
+mod toml;
 
 pub use ansi::{Color, StyleOptions};
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
@@ -36,6 +37,7 @@ pub use ssh::{
 use std::path::Path;
 use std::sync::Arc;
 use tokio::runtime::{Builder, Runtime};
+pub use toml::{TomlPathSegment, TomlValue};
 
 #[derive(Clone, Debug)]
 pub struct PtoolEngine {
@@ -206,6 +208,31 @@ impl PtoolEngine {
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {
         db::connect(Arc::clone(&self.runtime), url, current_dir)
+    }
+
+    pub fn toml_parse(&self, input: &str) -> Result<TomlValue> {
+        toml::parse(input)
+    }
+
+    pub fn toml_get(&self, input: &str, path: &[TomlPathSegment]) -> Result<Option<TomlValue>> {
+        toml::get(input, path)
+    }
+
+    pub fn toml_set(
+        &self,
+        input: &str,
+        path: &[TomlPathSegment],
+        value: &TomlValue,
+    ) -> Result<String> {
+        toml::set(input, path, value)
+    }
+
+    pub fn toml_remove(&self, input: &str, path: &[TomlPathSegment]) -> Result<String> {
+        toml::remove(input, path)
+    }
+
+    pub fn toml_stringify(&self, value: &TomlValue) -> Result<String> {
+        toml::stringify(value)
     }
 
     pub fn run_command(&self, options: &RunOptions, current_dir: &Path) -> Result<RunResult> {

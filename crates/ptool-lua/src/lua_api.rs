@@ -299,13 +299,18 @@ fn create_ptool_toml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
     let set_fn = lua.create_function(move |_, (input, path, value): (Value, Value, Value)| {
         set_state.borrow().toml_set(input, path, value)
     })?;
+    let remove_state = Rc::clone(&world);
     let remove_fn = lua.create_function(move |_, (input, path): (Value, Value)| {
-        world.borrow().toml_remove(input, path)
+        remove_state.borrow().toml_remove(input, path)
     })?;
+    let stringify_state = Rc::clone(&world);
+    let stringify_fn =
+        lua.create_function(move |_, value: Value| stringify_state.borrow().toml_stringify(value))?;
     toml_module.set("parse", parse_fn)?;
     toml_module.set("get", get_fn)?;
     toml_module.set("set", set_fn)?;
     toml_module.set("remove", remove_fn)?;
+    toml_module.set("stringify", stringify_fn)?;
     Ok(toml_module)
 }
 

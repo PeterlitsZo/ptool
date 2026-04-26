@@ -30,7 +30,7 @@
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 - [x] Support JSON API.
-- [ ] Support more TOML API.
+- [x] Support more TOML API.
 
 # v0.3.0
 

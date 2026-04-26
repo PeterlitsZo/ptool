@@ -27,7 +27,7 @@
   archivos.
 - [API de rutas](./path.md): Manipula rutas de forma léxica sin tocar el
   sistema de archivos.
-- [API TOML](./toml.md): Analiza, lee, actualiza y elimina valores TOML.
+- [API TOML](./toml.md): Analiza, serializa, lee, actualiza y elimina valores TOML.
 - [API de regex](./re.md): Compila regex y busca, captura, reemplaza o divide
   texto.
 - [API de cadenas](./str.md): Recorta, divide, une, reemplaza y formatea

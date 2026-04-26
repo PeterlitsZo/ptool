@@ -305,6 +305,7 @@ fn engine_kind_name(kind: EngineErrorKind) -> &'static str {
         | EngineErrorKind::InvalidHttpHeader
         | EngineErrorKind::InvalidHttpTimeout
         | EngineErrorKind::InvalidHttpOptions
+        | EngineErrorKind::InvalidToml
         | EngineErrorKind::InvalidSemver
         | EngineErrorKind::InvalidSemverOperation
         | EngineErrorKind::MissingPort

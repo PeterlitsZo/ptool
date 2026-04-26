@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Expanded the TOML Lua API with engine-backed `ptool.toml.stringify(...)`,
+  composite table/array writes in `ptool.toml.set(...)`, array indexing in TOML
+  paths, and synchronized TOML docs across all supported locales.
 - Fixed `ptool repl` so top-level `local` bindings now remain available across
   later REPL inputs within the same session.
 - Added `ptool.try(...)` for structured Lua-side error handling, and changed
