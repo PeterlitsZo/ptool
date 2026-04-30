@@ -212,6 +212,30 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.script_path
+
+> `v0.4.0` - Introduced.
+
+`ptool.script_path()` は現在のエントリスクリプトの絶対パスを返します。
+
+- 戻り値: `string|nil`。
+
+挙動:
+
+- `ptool run <file>` で実行した場合、エントリスクリプトのパスを絶対かつ
+  正規化されたパスとして返します。
+- 返されるパスはランタイム開始時に固定され、その後 `ptool.cd(...)` を
+  呼んでも変化しません。
+- `ptool repl` では `nil` を返します。
+
+例:
+
+```lua
+local script_path = ptool.script_path()
+local script_dir = ptool.path.dirname(script_path)
+local project_root = ptool.path.dirname(script_dir)
+```
+
 ## ptool.try
 
 > `v0.4.0` - Introduced.

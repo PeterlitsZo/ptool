@@ -219,6 +219,30 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.script_path
+
+> `v0.4.0` - Introduced.
+
+`ptool.script_path()` devuelve la ruta absoluta del script de entrada actual.
+
+- Devuelve: `string|nil`.
+
+Comportamiento:
+
+- Al ejecutar con `ptool run <file>`, devuelve la ruta del script de entrada
+  como una ruta absoluta y normalizada.
+- La ruta devuelta queda fijada cuando se inicia el runtime y no cambia después
+  de `ptool.cd(...)`.
+- En `ptool repl`, devuelve `nil`.
+
+Ejemplo:
+
+```lua
+local script_path = ptool.script_path()
+local script_dir = ptool.path.dirname(script_path)
+local project_root = ptool.path.dirname(script_dir)
+```
+
 ## ptool.try
 
 > `v0.4.0` - Introduced.

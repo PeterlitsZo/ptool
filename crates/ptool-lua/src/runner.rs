@@ -269,7 +269,8 @@ fn create_lua_runtime(
     script_args: &[String],
 ) -> Result<LuaRuntime, Box<dyn std::error::Error>> {
     let lua = Lua::new_with(lua_stdlibs(), LuaOptions::default())?;
-    let world = Rc::new(RefCell::new(crate::LuaWorld::new()?));
+    let runtime_script_name = (script_name != REPL_SCRIPT_NAME).then_some(script_name);
+    let world = Rc::new(RefCell::new(crate::LuaWorld::new(runtime_script_name)?));
     crate::lua_api::install_ptool_module(&lua, Rc::clone(&world), script_name, script_args)?;
     Ok((lua, world))
 }

@@ -194,6 +194,28 @@ local res = ptool.run({ cmd = "pwd", stdout = "capture" })
 print(res.stdout)
 ```
 
+## ptool.script_path
+
+> `v0.4.0` - 引入。
+
+`ptool.script_path()` 返回当前入口脚本的绝对路径。
+
+- 返回：`string|nil`。
+
+行为说明：
+
+- 通过 `ptool run <file>` 运行时，它会返回入口脚本的绝对规范化路径。
+- 返回值会在 runtime 启动时固定下来，之后不会随着 `ptool.cd(...)` 改变。
+- 在 `ptool repl` 中，它会返回 `nil`。
+
+示例：
+
+```lua
+local script_path = ptool.script_path()
+local script_dir = ptool.path.dirname(script_path)
+local project_root = ptool.path.dirname(script_dir)
+```
+
 ## ptool.try
 
 > `v0.4.0` - 引入。

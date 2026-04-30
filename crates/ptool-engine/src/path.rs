@@ -39,6 +39,19 @@ pub fn abspath(path: &str, base: Option<&str>, current_dir: &Path) -> Result<Str
     Ok(path_to_string(&absolute))
 }
 
+pub fn runtime_abspath(path: &str) -> Result<String> {
+    ensure_non_empty_path(path)?;
+    let current_dir = std::env::current_dir().map_err(|err| {
+        Error::new(
+            ErrorKind::Io,
+            format!("failed to determine current directory: {err}"),
+        )
+        .with_op("ptool.script_path")
+        .with_path(path.to_string())
+    })?;
+    abspath(path, None, &current_dir)
+}
+
 pub fn relpath(path: &str, base: Option<&str>, current_dir: &Path) -> Result<String> {
     ensure_non_empty_path(path)?;
     let base_dir = resolve_base_dir(base, current_dir)?;

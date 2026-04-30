@@ -1,5 +1,7 @@
 # v0.6.0
 
+- [ ] Support `p.git` module.
+- [ ] Support a TUI toolkit.
 - [ ] Support `p.tbl` module for better Lua table functions.
   - `p.tbl.map`.
   - `p.tbl.filter`.
@@ -17,15 +19,13 @@
 # v0.5.0
 
 - [x] Remove non-essential built-in Lua modules.
-- [ ] Add a function to get script itself's path.
+- [x] Add a function to get script itself's path.
 - [ ] Support just `#!/usr/bin/env ptool`.
 - [ ] Support `p.os.getenv` etc.
-- [ ] Support a TUI toolkit.
 - [ ] Make the `p.ask` more powerful.
 - [ ] Make the document website better.
 - [ ] Let the `glob` function support working_dir optioon.
 - [ ] Support `p.log` module.
-- [ ] Support `p.git` module.
 - [ ] Support `p.ask.select`, like:
   - `p.ask.select("Select bump type", { "patch", "minor", "major", "skip" })`
 

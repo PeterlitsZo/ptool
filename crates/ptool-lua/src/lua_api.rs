@@ -48,6 +48,9 @@ fn create_ptool_module(
     let ask_fn = lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
         ask_state.borrow().ask(prompt, options)
     })?;
+    let script_path_state = Rc::clone(&world);
+    let script_path_fn =
+        lua.create_function(move |_, ()| Ok(script_path_state.borrow().script_path_value()))?;
     let try_state = Rc::clone(&world);
     let try_fn = lua.create_function(move |lua, callback: mlua::Function| {
         try_state.borrow().try_call(lua, callback)
@@ -77,6 +80,7 @@ fn create_ptool_module(
     module.set("unindent", unindent_fn)?;
     module.set("inspect", inspect_fn)?;
     module.set("ask", ask_fn)?;
+    module.set("script_path", script_path_fn)?;
     module.set("try", try_fn)?;
     module.set("ansi", ansi_module)?;
     module.set("args", args_module)?;

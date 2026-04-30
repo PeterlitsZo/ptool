@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added `ptool.script_path()`, which returns the absolute path of the current
+  entry script for locating project files relative to the script itself.
 - Restricted the default embedded Lua standard libraries to `table`, `string`,
   `math`, and `utf8`, removing unnecessary built-in host-facing modules such as
   `io`, `os`, and `package`.

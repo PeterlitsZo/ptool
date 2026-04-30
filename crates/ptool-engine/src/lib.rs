@@ -128,6 +128,10 @@ impl PtoolEngine {
         path::isabs(path)
     }
 
+    pub fn path_runtime_abspath(&self, path: &str) -> Result<String> {
+        path::runtime_abspath(path)
+    }
+
     pub fn path_dirname(&self, path: &str) -> Result<String> {
         path::dirname(path)
     }

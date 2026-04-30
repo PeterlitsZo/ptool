@@ -29,21 +29,32 @@ pub struct LuaWorldConfig {
 #[derive(Debug)]
 pub struct LuaWorld {
     current_dir: PathBuf,
+    script_path: Option<String>,
     config: LuaWorldConfig,
     engine: PtoolEngine,
 }
 
 impl LuaWorld {
-    pub fn new() -> std::io::Result<Self> {
+    pub fn new(script_name: Option<&str>) -> Result<Self, Box<dyn std::error::Error>> {
+        let engine = PtoolEngine::new();
+        let script_path = script_name
+            .map(|path| engine.path_runtime_abspath(path))
+            .transpose()?;
+
         Ok(Self {
             current_dir: std::env::current_dir()?,
+            script_path,
             config: LuaWorldConfig::default(),
-            engine: PtoolEngine::new(),
+            engine,
         })
     }
 
     pub fn current_dir(&self) -> &Path {
         &self.current_dir
+    }
+
+    pub fn script_path(&self) -> Option<&str> {
+        self.script_path.as_deref()
     }
 
     pub fn config(&self) -> &LuaWorldConfig {
@@ -149,6 +160,10 @@ impl LuaWorld {
 
     pub(crate) fn ask(&self, prompt: String, options: Option<Table>) -> mlua::Result<String> {
         crate::prompt::ask(prompt, options)
+    }
+
+    pub(crate) fn script_path_value(&self) -> Option<String> {
+        self.script_path.clone()
     }
 
     pub(crate) fn try_call(
