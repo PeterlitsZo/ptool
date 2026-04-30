@@ -26,7 +26,7 @@
 - [x] Fix the local variable not working in REPL.
 - [x] Make REPL support readline-like features.
 - [x] Support `split_lines` function.
-- [ ] Change the avatar icon of the document website.
+- [x] Change the avatar icon of the document website.
 - [ ] Remove non-essential built-in Lua modules.
 - [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
 - [x] Support JSON API.

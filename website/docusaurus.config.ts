@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'ptool',
   tagline: 'Lua-powered scripting for shell and automation workflows.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/ptool-avatar.svg',
 
   future: {
     v4: true,
@@ -58,12 +58,16 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/favicon.ico',
+    image: 'img/ptool-avatar.svg',
     colorMode: {
       respectPrefersColorScheme: true,
     },
     navbar: {
       title: 'ptool',
+      logo: {
+        alt: 'ptool avatar',
+        src: 'img/ptool-avatar.svg',
+      },
       items: [
         {
           type: 'docSidebar',
