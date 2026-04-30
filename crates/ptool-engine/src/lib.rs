@@ -6,6 +6,7 @@ mod fs;
 mod hash;
 mod http;
 mod json;
+mod log;
 mod net;
 mod path;
 mod platform;
@@ -28,6 +29,7 @@ pub use exec::{
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use json::{JsonStringifyOptions, JsonValue};
+pub use log::LogLevel;
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS, UserHost};
 pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
@@ -76,6 +78,10 @@ impl PtoolEngine {
 
     pub fn ansi_style(&self, text: String, options: StyleOptions) -> String {
         ansi::style(text, options)
+    }
+
+    pub fn log(&self, level: LogLevel, message: &str) -> Result<()> {
+        log::write_line(level, message)
     }
 
     pub fn current_os(&self) -> OS {

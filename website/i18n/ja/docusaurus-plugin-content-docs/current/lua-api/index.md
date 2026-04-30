@@ -19,6 +19,7 @@
   target triple を検出する。
 - [ANSI API](./ansi.md): ANSI エスケープシーケンスで装飾された端末出力を
   組み立てる。
+- [Log API](./log.md): レベルごとのタイムスタンプ付き端末ログを書き出す。
 - [HTTP API](./http.md): HTTP リクエストを送り、レスポンス本文を扱う。
 - [JSON API](./json.md): JSON テキストを解析し、Lua 値を JSON として
   文字列化する。

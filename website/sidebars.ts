@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
         'lua-api/net',
         'lua-api/platform',
         'lua-api/ansi',
+        'lua-api/log',
         'lua-api/http',
         'lua-api/json',
         'lua-api/db',

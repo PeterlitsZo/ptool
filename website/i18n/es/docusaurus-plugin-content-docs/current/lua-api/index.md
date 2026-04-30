@@ -21,6 +21,7 @@
   target triple actuales.
 - [API ANSI](./ansi.md): Construye salida de terminal con estilo mediante
   secuencias ANSI.
+- [API de log](./log.md): Escribe logs de terminal con marcas de tiempo y nivel.
 - [API HTTP](./http.md): Envía solicitudes HTTP y consume cuerpos de respuesta.
 - [API JSON](./json.md): Analiza texto JSON y serializa valores Lua como JSON.
 - [API de base de datos](./db.md): Abre conexiones de base de datos y ejecuta

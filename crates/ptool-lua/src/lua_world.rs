@@ -196,6 +196,19 @@ impl LuaWorld {
         Ok(self.engine.ansi_style(text, options))
     }
 
+    pub(crate) fn log_write(
+        &self,
+        lua: &Lua,
+        level: ptool_engine::LogLevel,
+        op: &str,
+        args: Variadic<Value>,
+    ) -> mlua::Result<()> {
+        let message = render_log_message(lua, args)?;
+        self.engine
+            .log(level, &message)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, op))
+    }
+
     pub(crate) fn platform_os(&self) -> String {
         match self.engine.current_os() {
             ptool_engine::OS::Linux => "linux".to_string(),
@@ -596,4 +609,25 @@ fn pack_try_success_values(lua: &Lua, values: MultiValue) -> mlua::Result<Value>
         1 => Ok(values.into_iter().next().unwrap_or(Value::Nil)),
         _ => lua.create_sequence_from(values).map(Value::Table),
     }
+}
+
+fn render_log_message(lua: &Lua, values: Variadic<Value>) -> mlua::Result<String> {
+    let mut rendered = Vec::with_capacity(values.len());
+    for value in values {
+        rendered.push(render_log_value(lua, value)?);
+    }
+    Ok(rendered.join(" "))
+}
+
+fn render_log_value(lua: &Lua, value: Value) -> mlua::Result<String> {
+    match value {
+        Value::String(text) => Ok(String::from_utf8_lossy(text.as_bytes().as_ref()).into_owned()),
+        other => crate::inspect::render(other, Some(log_inspect_options(lua)?)),
+    }
+}
+
+fn log_inspect_options(lua: &Lua) -> mlua::Result<Table> {
+    let options = lua.create_table()?;
+    options.set("multiline", false)?;
+    Ok(options)
 }

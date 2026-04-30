@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added the `ptool.log` module with `trace`, `debug`, `info`, `warn`, and
+  `error` helpers for timestamped terminal logging, including colored level
+  labels and `stderr` routing for error output.
 - Added the `ptool.os` module with environment-variable helpers such as
   `getenv`, `env`, `setenv`, and `unsetenv`, plus host/runtime queries like
   `homedir`, `tmpdir`, `hostname`, `username`, `pid`, and `exepath`.

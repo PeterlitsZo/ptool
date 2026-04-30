@@ -65,6 +65,7 @@ fn create_ptool_module(
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
+    let log_module = create_ptool_log_module(lua, Rc::clone(&world))?;
     let os_module = create_ptool_os_module(lua, Rc::clone(&world))?;
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
     let platform_module = create_ptool_platform_module(lua, Rc::clone(&world))?;
@@ -93,6 +94,7 @@ fn create_ptool_module(
     module.set("db", db_module)?;
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
+    module.set("log", log_module)?;
     module.set("os", os_module)?;
     module.set("path", path_module)?;
     module.set("platform", platform_module)?;
@@ -274,6 +276,26 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     fs_module.set("glob", glob_fn)?;
     fs_module.set("copy", copy_fn)?;
     Ok(fs_module)
+}
+
+fn create_ptool_log_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let log_module = lua.create_table()?;
+
+    for (name, level, op) in [
+        ("trace", ptool_engine::LogLevel::Trace, "ptool.log.trace"),
+        ("debug", ptool_engine::LogLevel::Debug, "ptool.log.debug"),
+        ("info", ptool_engine::LogLevel::Info, "ptool.log.info"),
+        ("warn", ptool_engine::LogLevel::Warn, "ptool.log.warn"),
+        ("error", ptool_engine::LogLevel::Error, "ptool.log.error"),
+    ] {
+        let log_state = Rc::clone(&world);
+        let log_fn = lua.create_function(move |lua, args: Variadic<Value>| {
+            log_state.borrow().log_write(lua, level, op, args)
+        })?;
+        log_module.set(name, log_fn)?;
+    }
+
+    Ok(log_module)
 }
 
 fn create_ptool_os_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

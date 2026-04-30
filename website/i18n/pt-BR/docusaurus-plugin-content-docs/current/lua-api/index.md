@@ -21,6 +21,7 @@
   triple atuais.
 - [API ANSI](./ansi.md): Monta saída de terminal com estilo usando sequências
   ANSI.
+- [API de log](./log.md): Escreve logs de terminal com timestamp e nível.
 - [API HTTP](./http.md): Envia requisições HTTP e consome corpos de resposta.
 - [API JSON](./json.md): Faz parse de texto JSON e serializa valores Lua como
   JSON.

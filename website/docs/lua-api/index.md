@@ -19,6 +19,7 @@
   triple.
 - [ANSI API](./ansi.md): Build styled terminal output with ANSI escape
   sequences.
+- [Log API](./log.md): Write timestamped terminal logs with level-based output.
 - [HTTP API](./http.md): Send HTTP requests and consume response bodies.
 - [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
 - [Database API](./db.md): Open database connections and run SQL queries.
