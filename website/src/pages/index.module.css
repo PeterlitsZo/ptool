@@ -138,6 +138,63 @@
   margin: 0;
 }
 
+.aiSection {
+  padding-top: 0;
+}
+
+.aiIntro {
+  color: var(--ptool-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.aiGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aiCard {
+  background: linear-gradient(180deg, rgba(239, 232, 219, 0.92), rgba(250, 248, 243, 0.98));
+  border: 1px solid rgba(18, 34, 36, 0.1);
+  border-radius: 1.25rem;
+  min-height: 100%;
+  padding: 1.4rem;
+}
+
+.aiCard h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+
+.aiCard p {
+  color: var(--ptool-muted);
+  margin-bottom: 0.9rem;
+}
+
+.aiExamples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.inlineLink {
+  color: var(--ptool-ink);
+  font-family: "SFMono-Regular", "Menlo", monospace;
+  overflow-wrap: anywhere;
+}
+
+.aiPrompt {
+  background: #122224;
+  border-radius: 1rem;
+  color: #eef4ec;
+  font-size: 0.92rem;
+  margin: 0;
+  overflow-x: auto;
+  padding: 0.9rem 1rem;
+  white-space: pre-wrap;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 3rem 0;
@@ -152,6 +209,10 @@
   }
 
   .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aiGrid {
     grid-template-columns: 1fr;
   }
 }

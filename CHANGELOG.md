@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Published raw Markdown exports and a machine-readable docs manifest on the
+  Docusaurus site, and added page-level and homepage guidance for feeding the
+  docs to AI assistants directly.
 - Expanded the TOML Lua API with engine-backed `ptool.toml.stringify(...)`,
   composite table/array writes in `ptool.toml.set(...)`, array indexing in TOML
   paths, and synchronized TOML docs across all supported locales.

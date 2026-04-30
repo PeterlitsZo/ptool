@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Translate, {translate} from '@docusaurus/Translate';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
@@ -138,6 +139,89 @@ function HomepageFeatures(): ReactNode {
   );
 }
 
+function HomepageAiAccess(): ReactNode {
+  const manifestHref = useBaseUrl('/raw/manifest.json');
+  const introRawHref = useBaseUrl('/raw/docs/intro.md');
+  const zhIntroRawHref = useBaseUrl('/raw/i18n/zh-Hans/docs/intro.md');
+
+  return (
+    <section className={clsx(styles.section, styles.aiSection)}>
+      <div className="container">
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>
+            <Translate id="homepage.ai.kicker">For AI</Translate>
+          </p>
+          <Heading as="h2">
+            <Translate id="homepage.ai.title">
+              Give assistants raw Markdown instead of rendered HTML
+            </Translate>
+          </Heading>
+          <p className={styles.aiIntro}>
+            <Translate id="homepage.ai.intro">
+              ptool publishes the source docs as static files so agents can read
+              the original Markdown directly.
+            </Translate>
+          </p>
+        </div>
+        <div className={styles.aiGrid}>
+          <article className={styles.aiCard}>
+            <Heading as="h3">
+              <Translate id="homepage.ai.manifest.title">1. Start here</Translate>
+            </Heading>
+            <p>
+              <Translate id="homepage.ai.manifest.body">
+                Tell your assistant to fetch the manifest first. It lists every
+                document title, locale, permalink, and raw Markdown URL.
+              </Translate>
+            </p>
+            <a className={styles.inlineLink} href={manifestHref}>
+              /raw/manifest.json
+            </a>
+          </article>
+          <article className={styles.aiCard}>
+            <Heading as="h3">
+              <Translate id="homepage.ai.raw.title">2. Open one page</Translate>
+            </Heading>
+            <p>
+              <Translate id="homepage.ai.raw.body">
+                Each document also has a stable raw Markdown URL. Use the
+                manifest, or point to a page directly.
+              </Translate>
+            </p>
+            <div className={styles.aiExamples}>
+              <a className={styles.inlineLink} href={introRawHref}>
+                /raw/docs/intro.md
+              </a>
+              <a className={styles.inlineLink} href={zhIntroRawHref}>
+                /raw/i18n/zh-Hans/docs/intro.md
+              </a>
+            </div>
+          </article>
+          <article className={styles.aiCard}>
+            <Heading as="h3">
+              <Translate id="homepage.ai.prompt.title">
+                3. Tell the model what to do
+              </Translate>
+            </Heading>
+            <p>
+              <Translate id="homepage.ai.prompt.body">
+                Example: read the manifest, select the matching locale and
+                page, then load the raw Markdown instead of scraping the
+                rendered site.
+              </Translate>
+            </p>
+            <pre className={styles.aiPrompt}>
+              <code>
+                {`Fetch /raw/manifest.json, find the page for "/docs/intro", then read its rawUrl.`}
+              </code>
+            </pre>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
 
@@ -152,6 +236,7 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <HomepageAiAccess />
       </main>
     </Layout>
   );

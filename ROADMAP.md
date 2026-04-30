@@ -6,6 +6,10 @@
   - `p.tbl.join`.
   - etc.
 - [ ] Let document use better i18n solution.
+- [ ] Add `p.fs.is_file` and `p.fs.is_dir`.
+- [ ] How about let `run_capture` have a `trim` option?
+- [ ] Let `p.run` support `stdin`?
+- [ ] Add a helper for SSH connection to send HTTP request?
 
 # v0.5.0
 

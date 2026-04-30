@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prepare-raw": "node ./scripts/generate-raw-docs.mjs",
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "npm run prepare-raw && docusaurus start",
+    "build": "npm run prepare-raw && docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "npm run prepare-raw && docusaurus deploy",
     "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
+    "serve": "npm run prepare-raw && docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc"
