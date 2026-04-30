@@ -140,7 +140,7 @@ impl LuaWorld {
     }
 
     pub(crate) fn unindent(&self, input: String) -> String {
-        crate::text::unindent_text(&input)
+        self.engine.text_unindent(&input)
     }
 
     pub(crate) fn inspect(&self, value: Value, options: Option<Table>) -> mlua::Result<String> {
@@ -223,12 +223,10 @@ impl LuaWorld {
     }
 
     pub(crate) fn shell_split(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
-        let Some(parts) = shlex::split(&input) else {
-            return Err(crate::lua_error::invalid_argument(
-                "ptool.sh.split",
-                "failed to parse input",
-            ));
-        };
+        let parts = self
+            .engine
+            .shell_split(&input)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.sh.split"))?;
         lua.create_sequence_from(parts)
     }
 
@@ -241,7 +239,7 @@ impl LuaWorld {
     }
 
     pub(crate) fn json_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Value> {
-        crate::json::parse(lua, input)
+        crate::json::parse(lua, &self.engine, input)
     }
 
     pub(crate) fn json_stringify(
@@ -250,7 +248,7 @@ impl LuaWorld {
         value: Value,
         options: Option<Table>,
     ) -> mlua::Result<String> {
-        crate::json::stringify(lua, value, options)
+        crate::json::stringify(lua, &self.engine, value, options)
     }
 
     pub(crate) fn net_parse_url(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
@@ -335,7 +333,7 @@ impl LuaWorld {
         template: String,
         context: Value,
     ) -> mlua::Result<String> {
-        crate::template::render(lua, template, context)
+        crate::template::render(lua, &self.engine, template, context)
     }
 
     pub(crate) fn path_join(&self, segments: Variadic<String>) -> mlua::Result<String> {
@@ -371,31 +369,31 @@ impl LuaWorld {
     }
 
     pub(crate) fn str_trim(&self, input: String) -> String {
-        crate::strings::trim(input)
+        crate::strings::trim(&self.engine, input)
     }
 
     pub(crate) fn str_trim_start(&self, input: String) -> String {
-        crate::strings::trim_start(input)
+        crate::strings::trim_start(&self.engine, input)
     }
 
     pub(crate) fn str_trim_end(&self, input: String) -> String {
-        crate::strings::trim_end(input)
+        crate::strings::trim_end(&self.engine, input)
     }
 
     pub(crate) fn str_is_blank(&self, input: String) -> bool {
-        crate::strings::is_blank(input)
+        crate::strings::is_blank(&self.engine, input)
     }
 
     pub(crate) fn str_starts_with(&self, input: String, prefix: String) -> bool {
-        crate::strings::starts_with(input, prefix)
+        crate::strings::starts_with(&self.engine, input, prefix)
     }
 
     pub(crate) fn str_ends_with(&self, input: String, suffix: String) -> bool {
-        crate::strings::ends_with(input, suffix)
+        crate::strings::ends_with(&self.engine, input, suffix)
     }
 
     pub(crate) fn str_contains(&self, input: String, needle: String) -> bool {
-        crate::strings::contains(input, needle)
+        crate::strings::contains(&self.engine, input, needle)
     }
 
     pub(crate) fn str_split(
@@ -405,7 +403,7 @@ impl LuaWorld {
         separator: String,
         options: Option<Table>,
     ) -> mlua::Result<Table> {
-        crate::strings::split(lua, input, separator, options)
+        crate::strings::split(lua, &self.engine, input, separator, options)
     }
 
     pub(crate) fn str_split_lines(
@@ -414,27 +412,27 @@ impl LuaWorld {
         input: String,
         options: Option<Table>,
     ) -> mlua::Result<Table> {
-        crate::strings::split_lines(lua, input, options)
+        crate::strings::split_lines(lua, &self.engine, input, options)
     }
 
     pub(crate) fn str_join(&self, parts: Table, separator: String) -> mlua::Result<String> {
-        crate::strings::join(parts, separator)
+        crate::strings::join(&self.engine, parts, separator)
     }
 
     pub(crate) fn str_replace(&self, args: Variadic<Value>) -> mlua::Result<String> {
-        crate::strings::replace(args)
+        crate::strings::replace(&self.engine, args)
     }
 
     pub(crate) fn str_repeat(&self, input: String, count: i64) -> mlua::Result<String> {
-        crate::strings::repeat(input, count)
+        crate::strings::repeat(&self.engine, input, count)
     }
 
     pub(crate) fn str_cut_prefix(&self, input: String, prefix: String) -> String {
-        crate::strings::cut_prefix(input, prefix)
+        crate::strings::cut_prefix(&self.engine, input, prefix)
     }
 
     pub(crate) fn str_cut_suffix(&self, input: String, suffix: String) -> String {
-        crate::strings::cut_suffix(input, suffix)
+        crate::strings::cut_suffix(&self.engine, input, suffix)
     }
 
     pub(crate) fn str_indent(
@@ -443,15 +441,15 @@ impl LuaWorld {
         prefix: String,
         options: Option<Table>,
     ) -> mlua::Result<String> {
-        crate::strings::indent(input, prefix, options)
+        crate::strings::indent(&self.engine, input, prefix, options)
     }
 
     pub(crate) fn re_compile(&self, args: Variadic<Value>) -> mlua::Result<crate::re::LuaRegex> {
-        crate::re::compile(args)
+        crate::re::compile(&self.engine, args)
     }
 
     pub(crate) fn re_escape(&self, text: String) -> String {
-        crate::re::escape(&text)
+        crate::re::escape(&self.engine, &text)
     }
 
     pub(crate) fn semver_parse(&self, version: Value) -> mlua::Result<crate::semver::LuaSemVer> {

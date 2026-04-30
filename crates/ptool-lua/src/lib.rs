@@ -19,7 +19,6 @@ mod semver;
 mod ssh;
 mod strings;
 mod template;
-mod text;
 mod toml;
 mod version;
 

@@ -5,12 +5,17 @@ mod exec;
 mod fs;
 mod hash;
 mod http;
+mod json;
 mod net;
 mod path;
 mod platform;
+mod re;
 mod script_args;
 mod semver;
 mod ssh;
+mod strings;
+mod template;
+mod text;
 mod toml;
 
 pub use ansi::{Color, StyleOptions};
@@ -22,8 +27,10 @@ pub use exec::{
 };
 pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
 pub use http::{HttpRequestOptions, HttpResponse};
+pub use json::{JsonStringifyOptions, JsonValue};
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS, UserHost};
+pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
 pub use script_args::{
     ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
     ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,
@@ -36,6 +43,7 @@ pub use ssh::{
 };
 use std::path::Path;
 use std::sync::Arc;
+pub use strings::{IndentOptions, SplitLinesOptions, SplitOptions};
 use tokio::runtime::{Builder, Runtime};
 pub use toml::{TomlPathSegment, TomlValue};
 
@@ -76,6 +84,14 @@ impl PtoolEngine {
 
     pub fn current_user_host(&self) -> UserHost {
         platform::detect_current_user_host()
+    }
+
+    pub fn shell_split(&self, input: &str) -> Result<Vec<String>> {
+        shlex::split(input).ok_or_else(|| {
+            Error::new(ErrorKind::InvalidArgs, "failed to parse shell words")
+                .with_op("ptool.sh.split")
+                .with_input(input.to_string())
+        })
     }
 
     pub fn path_join<I, S>(&self, segments: I) -> Result<String>
@@ -181,6 +197,18 @@ impl PtoolEngine {
         http::request(options)
     }
 
+    pub fn json_parse(&self, input: &str) -> Result<JsonValue> {
+        json::parse(input)
+    }
+
+    pub fn json_stringify(
+        &self,
+        value: &JsonValue,
+        options: JsonStringifyOptions,
+    ) -> Result<String> {
+        json::stringify(value, options)
+    }
+
     pub fn semver_parse(&self, input: &str) -> Result<SemverVersion> {
         semver::parse(input)
     }
@@ -195,6 +223,12 @@ impl PtoolEngine {
 
     pub fn semver_strip_prerelease(&self, version: SemverVersion) -> SemverVersion {
         semver::strip_prerelease(version)
+    }
+
+    pub fn semver_is_min_version(&self, current: &str, required: &str) -> Result<bool> {
+        let current = semver::strip_prerelease(semver::parse(current)?);
+        let required = semver::parse(required)?;
+        Ok(required <= current)
     }
 
     pub fn semver_bump(
@@ -233,6 +267,93 @@ impl PtoolEngine {
 
     pub fn toml_stringify(&self, value: &TomlValue) -> Result<String> {
         toml::stringify(value)
+    }
+
+    pub fn template_render(&self, template: &str, context: &JsonValue) -> Result<String> {
+        template::render(template, context)
+    }
+
+    pub fn text_unindent(&self, input: &str) -> String {
+        text::unindent(input)
+    }
+
+    pub fn str_trim(&self, input: &str) -> String {
+        strings::trim(input)
+    }
+
+    pub fn str_trim_start(&self, input: &str) -> String {
+        strings::trim_start(input)
+    }
+
+    pub fn str_trim_end(&self, input: &str) -> String {
+        strings::trim_end(input)
+    }
+
+    pub fn str_is_blank(&self, input: &str) -> bool {
+        strings::is_blank(input)
+    }
+
+    pub fn str_starts_with(&self, input: &str, prefix: &str) -> bool {
+        strings::starts_with(input, prefix)
+    }
+
+    pub fn str_ends_with(&self, input: &str, suffix: &str) -> bool {
+        strings::ends_with(input, suffix)
+    }
+
+    pub fn str_contains(&self, input: &str, needle: &str) -> bool {
+        strings::contains(input, needle)
+    }
+
+    pub fn str_split(
+        &self,
+        input: &str,
+        separator: &str,
+        options: SplitOptions,
+    ) -> Result<Vec<String>> {
+        strings::split(input, separator, options)
+    }
+
+    pub fn str_split_lines(&self, input: &str, options: SplitLinesOptions) -> Vec<String> {
+        strings::split_lines(input, options)
+    }
+
+    pub fn str_join(&self, parts: &[String], separator: &str) -> String {
+        strings::join(parts, separator)
+    }
+
+    pub fn str_replace(
+        &self,
+        input: &str,
+        from: &str,
+        to: &str,
+        limit: Option<usize>,
+    ) -> Result<String> {
+        strings::replace(input, from, to, limit)
+    }
+
+    pub fn str_repeat(&self, input: &str, count: i64) -> Result<String> {
+        strings::repeat(input, count)
+    }
+
+    pub fn str_cut_prefix(&self, input: &str, prefix: &str) -> String {
+        strings::cut_prefix(input, prefix)
+    }
+
+    pub fn str_cut_suffix(&self, input: &str, suffix: &str) -> String {
+        strings::cut_suffix(input, suffix)
+    }
+
+    pub fn str_indent(&self, input: &str, prefix: &str, options: IndentOptions) -> String {
+        strings::indent(input, prefix, options)
+    }
+
+    pub fn re_compile(&self, pattern: &str, options: RegexOptions) -> Result<RegexPattern> {
+        re::compile(pattern, options)
+    }
+
+    pub fn re_escape(&self, text: &str) -> String {
+        re::escape(text)
     }
 
     pub fn run_command(&self, options: &RunOptions, current_dir: &Path) -> Result<RunResult> {

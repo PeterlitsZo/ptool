@@ -6,15 +6,19 @@ pub(crate) fn ensure_min_ptool_version(
     engine: &PtoolEngine,
     required_raw: &str,
 ) -> mlua::Result<()> {
-    let required = engine
-        .semver_parse(required_raw)
+    let is_ok = engine
+        .semver_is_min_version(CURRENT_PTOOL_VERSION, required_raw)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
-    let current_with_prerelease = engine
-        .semver_parse(CURRENT_PTOOL_VERSION)
-        .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
-    let current = engine.semver_strip_prerelease(current_with_prerelease);
 
-    if required > current {
+    if !is_ok {
+        let required = engine
+            .semver_parse(required_raw)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
+        let current = engine.semver_strip_prerelease(
+            engine
+                .semver_parse(CURRENT_PTOOL_VERSION)
+                .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?,
+        );
         return Err(crate::lua_error::to_mlua_error(
             crate::lua_error::LuaError::new(
                 "version_too_old",

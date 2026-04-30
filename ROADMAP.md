@@ -1,5 +1,15 @@
+# v0.6.0
+
+- [ ] Support `p.tbl` module for better Lua table functions.
+  - `p.tbl.map`.
+  - `p.tbl.filter`.
+  - `p.tbl.join`.
+  - etc.
+- [ ] Let document use better i18n solution.
+
 # v0.5.0
 
+- [ ] Remove non-essential built-in Lua modules.
 - [ ] Support just `#!/usr/bin/env ptool`.
 - [ ] Support a TUI toolkit.
 - [ ] Make the `p.ask` more powerful.
@@ -9,12 +19,6 @@
 - [ ] Support `p.git` module.
 - [ ] Support `p.ask.select`, like:
   - `p.ask.select("Select bump type", { "patch", "minor", "major", "skip" })`
-- [ ] Support `p.tbl` module for better Lua table functions.
-  - `p.tbl.map`.
-  - `p.tbl.filter`.
-  - `p.tbl.join`.
-  - etc.
-- [ ] Let document use better i18n solution.
 
 # v0.4.0
 
@@ -27,8 +31,7 @@
 - [x] Make REPL support readline-like features.
 - [x] Support `split_lines` function.
 - [x] Change the avatar icon of the document website.
-- [ ] Remove non-essential built-in Lua modules.
-- [ ] Move all core logic from `ptool-lua` into `ptool-engine`.
+- [x] Move all core logic from `ptool-lua` into `ptool-engine`.
 - [x] Support JSON API.
 - [x] Support more TOML API.
 

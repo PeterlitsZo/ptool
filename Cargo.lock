@@ -1597,7 +1597,9 @@ dependencies = [
  "clap",
  "glob",
  "md5",
+ "minijinja",
  "owo-colors",
+ "regex",
  "reqwest",
  "semver",
  "serde_json",
@@ -1616,15 +1618,11 @@ dependencies = [
 name = "ptool-lua"
 version = "0.3.0"
 dependencies = [
- "clap_lex",
- "indoc",
  "inquire",
  "jiff",
- "minijinja",
  "mlua",
  "owo-colors",
  "ptool-engine",
- "regex",
  "rustyline",
  "serde_json",
  "shlex",

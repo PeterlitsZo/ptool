@@ -1,26 +1,28 @@
 use mlua::{Lua, LuaSerdeExt, Table, Value};
-use serde_json::Value as JsonValue;
+use ptool_engine::{JsonStringifyOptions, JsonValue, PtoolEngine};
 
 const PARSE_SIGNATURE: &str = "ptool.json.parse(input)";
 const STRINGIFY_SIGNATURE: &str = "ptool.json.stringify(value[, options])";
 
-pub(crate) fn parse(lua: &Lua, input: Value) -> mlua::Result<Value> {
+pub(crate) fn parse(lua: &Lua, engine: &PtoolEngine, input: Value) -> mlua::Result<Value> {
     let input = parse_input_string(input, PARSE_SIGNATURE)?;
-    let parsed: JsonValue = serde_json::from_str(&input)
-        .map_err(|err| mlua::Error::runtime(format!("ptool.json.parse failed: {err}")))?;
+    let parsed = engine
+        .json_parse(&input)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, PARSE_SIGNATURE))?;
     json_value_to_lua(lua, &parsed, "ptool.json.parse failed: unsupported number")
 }
 
-pub(crate) fn stringify(lua: &Lua, value: Value, options: Option<Table>) -> mlua::Result<String> {
+pub(crate) fn stringify(
+    lua: &Lua,
+    engine: &PtoolEngine,
+    value: Value,
+    options: Option<Table>,
+) -> mlua::Result<String> {
     let options = parse_stringify_options(options)?;
     let value = lua_value_to_json(lua, value, &format!("{STRINGIFY_SIGNATURE} invalid value"))?;
-
-    let result = if options.pretty {
-        serde_json::to_string_pretty(&value)
-    } else {
-        serde_json::to_string(&value)
-    };
-    result.map_err(|err| mlua::Error::runtime(format!("ptool.json.stringify failed: {err}")))
+    engine
+        .json_stringify(&value, options)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, STRINGIFY_SIGNATURE))
 }
 
 pub(crate) fn lua_value_to_json(
@@ -74,7 +76,7 @@ fn parse_input_string(input: Value, signature: &str) -> mlua::Result<String> {
     }
 }
 
-fn parse_stringify_options(options: Option<Table>) -> mlua::Result<StringifyOptions> {
+fn parse_stringify_options(options: Option<Table>) -> mlua::Result<JsonStringifyOptions> {
     let mut parsed = StringifyOptions::default();
     let Some(options) = options else {
         return Ok(parsed);
@@ -130,7 +132,4 @@ fn json_number_to_lua(
     Err(mlua::Error::runtime(unsupported_number_message))
 }
 
-#[derive(Default)]
-struct StringifyOptions {
-    pretty: bool,
-}
+type StringifyOptions = JsonStringifyOptions;

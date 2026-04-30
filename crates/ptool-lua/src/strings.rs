@@ -1,4 +1,5 @@
 use mlua::{Lua, Table, Value, Variadic};
+use ptool_engine::PtoolEngine;
 
 const SPLIT_SIGNATURE: &str = "ptool.str.split(s, sep[, options])";
 const SPLIT_LINES_SIGNATURE: &str = "ptool.str.split_lines(s[, options])";
@@ -7,61 +8,73 @@ const REPLACE_SIGNATURE: &str = "ptool.str.replace(s, from, to[, n])";
 const REPEAT_SIGNATURE: &str = "ptool.str.repeat(s, n)";
 const INDENT_SIGNATURE: &str = "ptool.str.indent(s, prefix[, options])";
 
-pub(crate) fn trim(input: String) -> String {
-    input.trim().to_string()
+pub(crate) fn trim(engine: &PtoolEngine, input: String) -> String {
+    engine.str_trim(&input)
 }
 
-pub(crate) fn trim_start(input: String) -> String {
-    input.trim_start().to_string()
+pub(crate) fn trim_start(engine: &PtoolEngine, input: String) -> String {
+    engine.str_trim_start(&input)
 }
 
-pub(crate) fn trim_end(input: String) -> String {
-    input.trim_end().to_string()
+pub(crate) fn trim_end(engine: &PtoolEngine, input: String) -> String {
+    engine.str_trim_end(&input)
 }
 
-pub(crate) fn is_blank(input: String) -> bool {
-    input.trim().is_empty()
+pub(crate) fn is_blank(engine: &PtoolEngine, input: String) -> bool {
+    engine.str_is_blank(&input)
 }
 
-pub(crate) fn starts_with(input: String, prefix: String) -> bool {
-    input.starts_with(&prefix)
+pub(crate) fn starts_with(engine: &PtoolEngine, input: String, prefix: String) -> bool {
+    engine.str_starts_with(&input, &prefix)
 }
 
-pub(crate) fn ends_with(input: String, suffix: String) -> bool {
-    input.ends_with(&suffix)
+pub(crate) fn ends_with(engine: &PtoolEngine, input: String, suffix: String) -> bool {
+    engine.str_ends_with(&input, &suffix)
 }
 
-pub(crate) fn contains(input: String, needle: String) -> bool {
-    input.contains(&needle)
+pub(crate) fn contains(engine: &PtoolEngine, input: String, needle: String) -> bool {
+    engine.str_contains(&input, &needle)
 }
 
 pub(crate) fn split(
     lua: &Lua,
+    engine: &PtoolEngine,
     input: String,
     separator: String,
     options: Option<Table>,
 ) -> mlua::Result<Table> {
-    ensure_non_empty(&separator, SPLIT_SIGNATURE, "sep")?;
-    let options = SplitOptions::parse(options)?;
-
-    let parts: Vec<String> = input
-        .split(&separator)
-        .filter_map(|part| normalize_split_part(part, options.trim, options.skip_empty))
-        .collect();
+    let options = LuaSplitOptions::parse(options)?;
+    let parts = engine
+        .str_split(
+            &input,
+            &separator,
+            ptool_engine::SplitOptions {
+                trim: options.trim,
+                skip_empty: options.skip_empty,
+            },
+        )
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, SPLIT_SIGNATURE))?;
     lua.create_sequence_from(parts)
 }
 
-pub(crate) fn split_lines(lua: &Lua, input: String, options: Option<Table>) -> mlua::Result<Table> {
-    let options = SplitLinesOptions::parse(options)?;
-
-    let lines: Vec<String> = collect_lines(&input, options.keep_ending)
-        .into_iter()
-        .filter(|line| !options.skip_empty || !line_without_line_ending(line).is_empty())
-        .collect();
+pub(crate) fn split_lines(
+    lua: &Lua,
+    engine: &PtoolEngine,
+    input: String,
+    options: Option<Table>,
+) -> mlua::Result<Table> {
+    let options = LuaSplitLinesOptions::parse(options)?;
+    let lines = engine.str_split_lines(
+        &input,
+        ptool_engine::SplitLinesOptions {
+            keep_ending: options.keep_ending,
+            skip_empty: options.skip_empty,
+        },
+    );
     lua.create_sequence_from(lines)
 }
 
-pub(crate) fn join(parts: Table, separator: String) -> mlua::Result<String> {
+pub(crate) fn join(engine: &PtoolEngine, parts: Table, separator: String) -> mlua::Result<String> {
     let len = parts.raw_len();
     let mut values = Vec::with_capacity(len);
     for index in 1..=len {
@@ -74,10 +87,10 @@ pub(crate) fn join(parts: Table, separator: String) -> mlua::Result<String> {
             }
         }
     }
-    Ok(values.join(&separator))
+    Ok(engine.str_join(&values, &separator))
 }
 
-pub(crate) fn replace(args: Variadic<Value>) -> mlua::Result<String> {
+pub(crate) fn replace(engine: &PtoolEngine, args: Variadic<Value>) -> mlua::Result<String> {
     if args.len() < 3 {
         return Err(mlua::Error::runtime(format!(
             "{REPLACE_SIGNATURE} requires `s`, `from`, and `to`"
@@ -92,7 +105,6 @@ pub(crate) fn replace(args: Variadic<Value>) -> mlua::Result<String> {
     let input = parse_string_arg(&args[0], REPLACE_SIGNATURE, "s")?;
     let from = parse_string_arg(&args[1], REPLACE_SIGNATURE, "from")?;
     let to = parse_string_arg(&args[2], REPLACE_SIGNATURE, "to")?;
-    ensure_non_empty(&from, REPLACE_SIGNATURE, "from")?;
 
     let limit = match args.get(3) {
         None | Some(Value::Nil) => None,
@@ -109,64 +121,48 @@ pub(crate) fn replace(args: Variadic<Value>) -> mlua::Result<String> {
         }
     };
 
-    Ok(match limit {
-        Some(limit) => input.replacen(&from, &to, limit),
-        None => input.replace(&from, &to),
-    })
+    engine
+        .str_replace(&input, &from, &to, limit)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, REPLACE_SIGNATURE))
 }
 
-pub(crate) fn repeat(input: String, count: i64) -> mlua::Result<String> {
-    if count < 0 {
-        return Err(mlua::Error::runtime(format!(
-            "{REPEAT_SIGNATURE} `n` must be >= 0"
-        )));
-    }
-    let count = usize::try_from(count)
-        .map_err(|_| mlua::Error::runtime(format!("{REPEAT_SIGNATURE} `n` is too large")))?;
-    Ok(input.repeat(count))
+pub(crate) fn repeat(engine: &PtoolEngine, input: String, count: i64) -> mlua::Result<String> {
+    engine
+        .str_repeat(&input, count)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, REPEAT_SIGNATURE))
 }
 
-pub(crate) fn cut_prefix(input: String, prefix: String) -> String {
-    match input.strip_prefix(&prefix) {
-        Some(stripped) => stripped.to_string(),
-        None => input,
-    }
+pub(crate) fn cut_prefix(engine: &PtoolEngine, input: String, prefix: String) -> String {
+    engine.str_cut_prefix(&input, &prefix)
 }
 
-pub(crate) fn cut_suffix(input: String, suffix: String) -> String {
-    match input.strip_suffix(&suffix) {
-        Some(stripped) => stripped.to_string(),
-        None => input,
-    }
+pub(crate) fn cut_suffix(engine: &PtoolEngine, input: String, suffix: String) -> String {
+    engine.str_cut_suffix(&input, &suffix)
 }
 
 pub(crate) fn indent(
+    engine: &PtoolEngine,
     input: String,
     prefix: String,
     options: Option<Table>,
 ) -> mlua::Result<String> {
-    let options = IndentOptions::parse(options)?;
-    if input.is_empty() {
-        return Ok(input);
-    }
-
-    let mut rendered = String::with_capacity(input.len() + prefix.len());
-    for (index, line) in collect_lines(&input, true).into_iter().enumerate() {
-        if !(index == 0 && options.skip_first) {
-            rendered.push_str(&prefix);
-        }
-        rendered.push_str(&line);
-    }
-    Ok(rendered)
+    let options = LuaIndentOptions::parse(options)?;
+    Ok(engine.str_indent(
+        &input,
+        &prefix,
+        ptool_engine::IndentOptions {
+            skip_first: options.skip_first,
+        },
+    ))
 }
 
 #[derive(Clone, Copy, Debug, Default)]
-struct SplitOptions {
+struct LuaSplitOptions {
     trim: bool,
     skip_empty: bool,
 }
 
-impl SplitOptions {
+impl LuaSplitOptions {
     fn parse(options: Option<Table>) -> mlua::Result<Self> {
         let mut parsed = Self::default();
         let Some(options) = options else {
@@ -194,12 +190,12 @@ impl SplitOptions {
 }
 
 #[derive(Clone, Copy, Debug, Default)]
-struct SplitLinesOptions {
+struct LuaSplitLinesOptions {
     keep_ending: bool,
     skip_empty: bool,
 }
 
-impl SplitLinesOptions {
+impl LuaSplitLinesOptions {
     fn parse(options: Option<Table>) -> mlua::Result<Self> {
         let mut parsed = Self::default();
         let Some(options) = options else {
@@ -231,11 +227,11 @@ impl SplitLinesOptions {
 }
 
 #[derive(Clone, Copy, Debug, Default)]
-struct IndentOptions {
+struct LuaIndentOptions {
     skip_first: bool,
 }
 
-impl IndentOptions {
+impl LuaIndentOptions {
     fn parse(options: Option<Table>) -> mlua::Result<Self> {
         let mut parsed = Self::default();
         let Some(options) = options else {
@@ -286,72 +282,4 @@ fn parse_bool_option(value: Value, context: &str, key: &str) -> mlua::Result<boo
             "{context} `{key}` must be a boolean"
         ))),
     }
-}
-
-fn ensure_non_empty(input: &str, context: &str, arg_name: &str) -> mlua::Result<()> {
-    if input.is_empty() {
-        return Err(mlua::Error::runtime(format!(
-            "{context} `{arg_name}` does not accept empty string"
-        )));
-    }
-    Ok(())
-}
-
-fn normalize_split_part(part: &str, trim: bool, skip_empty: bool) -> Option<String> {
-    let normalized = if trim { part.trim() } else { part };
-    if skip_empty && normalized.is_empty() {
-        return None;
-    }
-    Some(normalized.to_string())
-}
-
-fn collect_lines(input: &str, keep_ending: bool) -> Vec<String> {
-    let mut lines = Vec::new();
-    let bytes = input.as_bytes();
-    let mut start = 0usize;
-    let mut index = 0usize;
-
-    while index < bytes.len() {
-        match bytes[index] {
-            b'\n' => {
-                let end = if keep_ending {
-                    index + 1
-                } else if index > start && bytes[index - 1] == b'\r' {
-                    index - 1
-                } else {
-                    index
-                };
-                let slice_start = start.min(end);
-                lines.push(input[slice_start..end].to_string());
-                start = index + 1;
-            }
-            b'\r' if bytes.get(index + 1) != Some(&b'\n') => {
-                let end = if keep_ending { index + 1 } else { index };
-                let slice_start = start.min(end);
-                lines.push(input[slice_start..end].to_string());
-                start = index + 1;
-            }
-            _ => {}
-        }
-        index += 1;
-    }
-
-    if start < input.len() {
-        lines.push(input[start..].to_string());
-    }
-
-    lines
-}
-
-fn line_without_line_ending(line: &str) -> &str {
-    if let Some(line) = line.strip_suffix("\r\n") {
-        return line;
-    }
-    if let Some(line) = line.strip_suffix('\n') {
-        return line;
-    }
-    if let Some(line) = line.strip_suffix('\r') {
-        return line;
-    }
-    line
 }

@@ -1,9 +1,9 @@
 use mlua::{Lua, Table, UserData, UserDataMethods, Value, Variadic};
-use regex::{Regex, RegexBuilder};
+use ptool_engine::{PtoolEngine, RegexOptions, RegexPattern};
 
 const COMPILE_SIGNATURE: &str = "ptool.re.compile(pattern, opts?)";
 
-pub(crate) fn compile(args: Variadic<Value>) -> mlua::Result<LuaRegex> {
+pub(crate) fn compile(engine: &PtoolEngine, args: Variadic<Value>) -> mlua::Result<LuaRegex> {
     let args_count = args.len();
     if args_count == 0 {
         return Err(mlua::Error::runtime(format!(
@@ -19,17 +19,19 @@ pub(crate) fn compile(args: Variadic<Value>) -> mlua::Result<LuaRegex> {
     let pattern = parse_pattern_arg(args[0].clone())?;
     let options = parse_compile_options_arg(args.get(1).cloned())?;
 
-    let regex = build_regex(&pattern, &options)?;
+    let regex = engine
+        .re_compile(&pattern, options)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, COMPILE_SIGNATURE))?;
     Ok(LuaRegex { regex })
 }
 
-pub(crate) fn escape(text: &str) -> String {
-    regex::escape(text)
+pub(crate) fn escape(engine: &PtoolEngine, text: &str) -> String {
+    engine.re_escape(text)
 }
 
 #[derive(Clone)]
 pub(crate) struct LuaRegex {
-    regex: Regex,
+    regex: RegexPattern,
 }
 
 impl UserData for LuaRegex {
@@ -45,8 +47,9 @@ impl UserData for LuaRegex {
         methods.add_method("find_all", |lua, this, input: String| {
             let values: Vec<Table> = this
                 .regex
-                .find_iter(&input)
-                .map(|matched| matched_to_lua(lua, &input, matched))
+                .find_all(&input)
+                .into_iter()
+                .map(|matched| matched_to_lua(lua, matched))
                 .collect::<mlua::Result<Vec<_>>>()?;
             lua.create_sequence_from(values)
         });
@@ -55,19 +58,15 @@ impl UserData for LuaRegex {
             let Some(captures) = this.regex.captures(&input) else {
                 return Ok(Value::Nil);
             };
-            Ok(Value::Table(captures_to_lua(
-                lua,
-                &this.regex,
-                &input,
-                captures,
-            )?))
+            Ok(Value::Table(captures_to_lua(lua, captures)?))
         });
 
         methods.add_method("captures_all", |lua, this, input: String| {
             let values: Vec<Table> = this
                 .regex
-                .captures_iter(&input)
-                .map(|captures| captures_to_lua(lua, &this.regex, &input, captures))
+                .captures_all(&input)
+                .into_iter()
+                .map(|captures| captures_to_lua(lua, captures))
                 .collect::<mlua::Result<Vec<_>>>()?;
             lua.create_sequence_from(values)
         });
@@ -75,20 +74,14 @@ impl UserData for LuaRegex {
         methods.add_method(
             "replace",
             |_, this, (input, replacement): (String, String)| {
-                Ok(this
-                    .regex
-                    .replacen(&input, 1, replacement.as_str())
-                    .into_owned())
+                Ok(this.regex.replace(&input, replacement.as_str()))
             },
         );
 
         methods.add_method(
             "replace_all",
             |_, this, (input, replacement): (String, String)| {
-                Ok(this
-                    .regex
-                    .replace_all(&input, replacement.as_str())
-                    .into_owned())
+                Ok(this.regex.replace_all(&input, replacement.as_str()))
             },
         );
 
@@ -96,17 +89,10 @@ impl UserData for LuaRegex {
             "split",
             |lua, this, (input, limit): (String, Option<i64>)| {
                 let values: Vec<String> = match limit {
-                    None => this
-                        .regex
-                        .split(&input)
-                        .map(std::string::ToString::to_string)
-                        .collect(),
+                    None => this.regex.split(&input, None),
                     Some(limit) => {
                         let limit = parse_split_limit(limit)?;
-                        this.regex
-                            .splitn(&input, limit)
-                            .map(std::string::ToString::to_string)
-                            .collect()
+                        this.regex.split(&input, Some(limit))
                     }
                 };
                 lua.create_sequence_from(values)
@@ -124,21 +110,16 @@ fn parse_pattern_arg(value: Value) -> mlua::Result<String> {
     }
 }
 
-#[derive(Default)]
-struct CompileOptions {
-    case_insensitive: bool,
-}
-
-fn parse_compile_options_arg(value: Option<Value>) -> mlua::Result<CompileOptions> {
+fn parse_compile_options_arg(value: Option<Value>) -> mlua::Result<RegexOptions> {
     let Some(value) = value else {
-        return Ok(CompileOptions::default());
+        return Ok(RegexOptions::default());
     };
 
     match value {
-        Value::Nil => Ok(CompileOptions::default()),
+        Value::Nil => Ok(RegexOptions::default()),
         Value::Table(options) => {
             let case_insensitive = options.get::<Option<bool>>("case_insensitive")?;
-            Ok(CompileOptions {
+            Ok(RegexOptions {
                 case_insensitive: case_insensitive.unwrap_or(false),
             })
         }
@@ -148,19 +129,16 @@ fn parse_compile_options_arg(value: Option<Value>) -> mlua::Result<CompileOption
     }
 }
 
-fn build_regex(pattern: &str, options: &CompileOptions) -> mlua::Result<Regex> {
-    RegexBuilder::new(pattern)
-        .case_insensitive(options.case_insensitive)
-        .build()
-        .map_err(|err| mlua::Error::runtime(format!("ptool.re.compile failed: {err}")))
-}
-
 fn find(lua: &Lua, regex: &LuaRegex, input: &str, init: Option<i64>) -> mlua::Result<Value> {
     let start = parse_find_start_offset(input, init)?;
-    let Some(matched) = regex.regex.find_at(input, start) else {
+    let Some(matched) = regex
+        .regex
+        .find(input, start)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.re.Regex:find"))?
+    else {
         return Ok(Value::Nil);
     };
-    Ok(Value::Table(matched_to_lua(lua, input, matched)?))
+    Ok(Value::Table(matched_to_lua(lua, matched)?))
 }
 
 fn parse_find_start_offset(input: &str, init: Option<i64>) -> mlua::Result<usize> {
@@ -195,45 +173,30 @@ fn parse_split_limit(limit: i64) -> mlua::Result<usize> {
     })
 }
 
-fn matched_to_lua(lua: &Lua, input: &str, matched: regex::Match<'_>) -> mlua::Result<Table> {
+fn matched_to_lua(lua: &Lua, matched: ptool_engine::RegexMatch) -> mlua::Result<Table> {
     let table = lua.create_table()?;
-    table.raw_set("start", to_lua_index_start(matched.start())?)?;
-    table.raw_set("finish", to_lua_index_end(matched.end())?)?;
-    table.raw_set("text", &input[matched.start()..matched.end()])?;
+    table.raw_set("start", to_lua_index_start(matched.start)?)?;
+    table.raw_set("finish", to_lua_index_end(matched.end)?)?;
+    table.raw_set("text", matched.text)?;
     Ok(table)
 }
 
-fn captures_to_lua(
-    lua: &Lua,
-    regex: &Regex,
-    input: &str,
-    captures: regex::Captures<'_>,
-) -> mlua::Result<Table> {
+fn captures_to_lua(lua: &Lua, captures: ptool_engine::RegexCaptures) -> mlua::Result<Table> {
     let table = lua.create_table()?;
-    let Some(full) = captures.get(0) else {
-        return Err(mlua::Error::runtime(
-            "ptool.re internal error: captures missing group 0",
-        ));
-    };
-    table.raw_set("full", &input[full.start()..full.end()])?;
+    table.raw_set("full", captures.full)?;
 
     let groups = lua.create_table()?;
-    for group_index in 1..captures.len() {
-        match captures.get(group_index) {
-            Some(group) => groups.raw_set(group_index, &input[group.start()..group.end()])?,
-            None => groups.raw_set(group_index, Value::Nil)?,
-        }
+    for (group_index, group) in captures.groups.into_iter().enumerate() {
+        match group {
+            Some(group) => groups.raw_set(group_index + 1, group)?,
+            None => groups.raw_set(group_index + 1, Value::Nil)?,
+        };
     }
     table.raw_set("groups", groups)?;
 
     let named = lua.create_table()?;
-    for (group_index, name) in regex.capture_names().enumerate().skip(1) {
-        let Some(name) = name else {
-            continue;
-        };
-        if let Some(group) = captures.get(group_index) {
-            named.raw_set(name, &input[group.start()..group.end()])?;
-        }
+    for (name, value) in captures.named {
+        named.raw_set(name, value)?;
     }
     table.raw_set("named", named)?;
 
