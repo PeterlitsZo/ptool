@@ -6,6 +6,18 @@ y `p`.
 `ptool run <lua_file>` ejecuta un script Lua e inyecta la variable global
 `ptool` (o su alias `p`; por ejemplo, `p.run` es equivalente a `ptool.run`).
 
+El runtime Lua embebido conserva los globales básicos de Lua y, por defecto,
+solo expone estas bibliotecas estándar:
+
+- `table`
+- `string`
+- `math`
+- `utf8`
+
+Los módulos integrados orientados al host, como `io`, `os` y `package`, no
+están disponibles intencionadamente. Usa las APIs de `ptool` para operaciones
+de sistema de archivos, procesos, red y demás tareas de runtime.
+
 Si quieres pasar argumentos a un script Lua, puedes hacerlo así:
 
 ```sh

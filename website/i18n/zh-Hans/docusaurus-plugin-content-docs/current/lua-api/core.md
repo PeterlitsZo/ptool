@@ -5,6 +5,16 @@
 `ptool run <lua_file>` 会运行 Lua 脚本，并注入全局变量 `ptool`
 （以及它的别名 `p`；例如 `p.run` 与 `ptool.run` 等价）。
 
+内嵌的 Lua 运行时会保留基础 Lua 全局能力，并默认只暴露这些标准库：
+
+- `table`
+- `string`
+- `math`
+- `utf8`
+
+像 `io`、`os`、`package` 这类面向宿主环境的内建模块会被有意禁用。
+文件系统、进程、网络等运行时操作应改用 `ptool` 提供的 API。
+
 如果你想向 Lua 脚本传参，可以这样做：
 
 ```sh

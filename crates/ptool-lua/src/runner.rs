@@ -3,7 +3,7 @@ use std::io::{self, IsTerminal, Write};
 use std::ops::Range;
 use std::rc::Rc;
 
-use mlua::{Error as LuaError, Lua, MultiValue, Table};
+use mlua::{Error as LuaError, Lua, LuaOptions, MultiValue, StdLib, Table};
 use rustyline::DefaultEditor;
 use rustyline::error::ReadlineError;
 
@@ -13,6 +13,10 @@ const REPL_CONTINUATION_PROMPT: &str = "... ";
 
 type SharedLuaWorld = Rc<RefCell<crate::LuaWorld>>;
 type LuaRuntime = (Lua, SharedLuaWorld);
+
+fn lua_stdlibs() -> StdLib {
+    StdLib::TABLE | StdLib::STRING | StdLib::MATH | StdLib::UTF8
+}
 
 pub fn run_script(
     filename: &str,
@@ -264,7 +268,7 @@ fn create_lua_runtime(
     script_name: &str,
     script_args: &[String],
 ) -> Result<LuaRuntime, Box<dyn std::error::Error>> {
-    let lua = Lua::new();
+    let lua = Lua::new_with(lua_stdlibs(), LuaOptions::default())?;
     let world = Rc::new(RefCell::new(crate::LuaWorld::new()?));
     crate::lua_api::install_ptool_module(&lua, Rc::clone(&world), script_name, script_args)?;
     Ok((lua, world))

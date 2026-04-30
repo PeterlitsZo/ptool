@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Restricted the default embedded Lua standard libraries to `table`, `string`,
+  `math`, and `utf8`, removing unnecessary built-in host-facing modules such as
+  `io`, `os`, and `package`.
 - Published raw Markdown exports and a machine-readable docs manifest on the
   Docusaurus site, and added page-level and homepage guidance for feeding the
   docs to AI assistants directly.

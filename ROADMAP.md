@@ -10,11 +10,16 @@
 - [ ] How about let `run_capture` have a `trim` option?
 - [ ] Let `p.run` support `stdin`?
 - [ ] Add a helper for SSH connection to send HTTP request?
+- [ ] Add `p.datetime` module?
+- [ ] Bugfix: "response read failed: error decoding response body" when download
+      with p.http.request.
 
 # v0.5.0
 
-- [ ] Remove non-essential built-in Lua modules.
+- [x] Remove non-essential built-in Lua modules.
+- [ ] Add a function to get script itself's path.
 - [ ] Support just `#!/usr/bin/env ptool`.
+- [ ] Support `p.os.getenv` etc.
 - [ ] Support a TUI toolkit.
 - [ ] Make the `p.ask` more powerful.
 - [ ] Make the document website better.

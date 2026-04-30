@@ -5,6 +5,18 @@
 `ptool run <lua_file>` runs a Lua script and injects the global variable `ptool`
 (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`).
 
+The embedded Lua runtime keeps the base Lua globals and exposes only these
+standard libraries by default:
+
+- `table`
+- `string`
+- `math`
+- `utf8`
+
+Host-facing built-in modules such as `io`, `os`, and `package` are intentionally
+not available. Use `ptool` APIs for filesystem, process, network, and other
+runtime operations instead.
+
 If you want to pass arguments to a Lua script, you can do it like this:
 
 ```sh
