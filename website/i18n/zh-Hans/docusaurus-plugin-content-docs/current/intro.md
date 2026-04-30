@@ -8,6 +8,12 @@
 ptool run <file>
 ```
 
+对于 `.lua` 文件，也可以使用快捷形式：
+
+```sh
+ptool <file.lua>
+```
+
 如果你想交互式试用 Lua 表达式或 `ptool` API，也可以使用：
 
 ```sh
@@ -49,6 +55,7 @@ ptool.run("echo", {"hello", "world"})
 
 ```sh
 ptool run script.lua
+ptool script.lua
 ```
 
 ## 传递参数
@@ -57,16 +64,17 @@ ptool run script.lua
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
+ptool script.lua --name alice -v a.txt b.txt
 ```
 
 然后在脚本内部使用 `ptool.args.parse(...)` 解析这些参数。
 
 ## Shebang 脚本
 
-`ptool` 支持 shebang 文件，因此脚本可以这样开头：
+`ptool` 支持 shebang 文件。配合 `.lua` 快捷形式，脚本可以这样开头：
 
 ```text
-#!/usr/bin/env ptool run
+#!/usr/bin/env ptool
 ```
 
 这样一来，只要脚本设置了可执行位，就可以直接执行。

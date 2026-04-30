@@ -127,6 +127,7 @@ fn parse_cli(
         "run" => parse_run(raw, cursor, bin),
         "repl" => parse_repl(raw, cursor, bin),
         "version" => parse_version(raw, cursor, bin),
+        value if value.ends_with(".lua") => parse_run_with_filename(raw, cursor, value.to_string()),
         value if value.starts_with('-') => Err(ParseError::top(format!(
             "unexpected argument `{value}` found"
         ))),
@@ -134,6 +135,31 @@ fn parse_cli(
             "unrecognized subcommand `{value}`"
         ))),
     }
+}
+
+fn parse_run_with_filename(
+    raw: &RawArgs,
+    cursor: &mut clap_lex::ArgCursor,
+    filename: String,
+) -> Result<ParsedCli, ParseError> {
+    let mut script_args = Vec::new();
+    if let Some(next) = raw.next(cursor) {
+        if next.is_escape() {
+            for arg in raw.remaining(cursor) {
+                script_args.push(parsed_arg_to_string(arg, "script argument")?);
+            }
+        } else {
+            script_args.push(parsed_arg_to_string(next.to_value_os(), "script argument")?);
+            for arg in raw.remaining(cursor) {
+                script_args.push(parsed_arg_to_string(arg, "script argument")?);
+            }
+        }
+    }
+
+    Ok(ParsedCli::Run {
+        filename,
+        script_args,
+    })
 }
 
 fn parse_run(
@@ -159,25 +185,7 @@ fn parse_run(
     }
 
     let filename = parsed_arg_to_string(next.to_value_os(), "filename")?;
-
-    let mut script_args = Vec::new();
-    if let Some(next) = raw.next(cursor) {
-        if next.is_escape() {
-            for arg in raw.remaining(cursor) {
-                script_args.push(parsed_arg_to_string(arg, "script argument")?);
-            }
-        } else {
-            script_args.push(parsed_arg_to_string(next.to_value_os(), "script argument")?);
-            for arg in raw.remaining(cursor) {
-                script_args.push(parsed_arg_to_string(arg, "script argument")?);
-            }
-        }
-    }
-
-    Ok(ParsedCli::Run {
-        filename,
-        script_args,
-    })
+    parse_run_with_filename(raw, cursor, filename)
 }
 
 fn parse_repl(
@@ -238,6 +246,7 @@ fn top_usage(bin: &OsStr) -> String {
         {APP_ABOUT}
 
         Usage: {bin} <COMMAND>
+               {bin} <FILE.lua> [--] [<script_args>...]
 
         Commands:
           run      Run ptool script

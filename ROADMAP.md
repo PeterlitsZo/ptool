@@ -20,7 +20,7 @@
 
 - [x] Remove non-essential built-in Lua modules.
 - [x] Add a function to get script itself's path.
-- [ ] Support just `#!/usr/bin/env ptool`.
+- [x] Support just `#!/usr/bin/env ptool`.
 - [ ] Support `p.os.getenv` etc.
 - [ ] Make the `p.ask` more powerful.
 - [ ] Make the document website better.

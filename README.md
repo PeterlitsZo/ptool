@@ -26,6 +26,12 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/
 ptool run <file>
 ```
 
+For `.lua` files, you can also omit `run`:
+
+```bash
+ptool <file.lua>
+```
+
 Minimal script:
 
 ```lua

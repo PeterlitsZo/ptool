@@ -5,6 +5,8 @@ y `p`.
 
 `ptool run <lua_file>` ejecuta un script Lua e inyecta la variable global
 `ptool` (o su alias `p`; por ejemplo, `p.run` es equivalente a `ptool.run`).
+Para archivos que terminan en `.lua`, `ptool <lua_file>` es un atajo de CLI
+con el mismo comportamiento.
 
 El runtime Lua embebido conserva los globales básicos de Lua y, por defecto,
 solo expone estas bibliotecas estándar:
@@ -22,6 +24,7 @@ Si quieres pasar argumentos a un script Lua, puedes hacerlo así:
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
+ptool script.lua --name alice -v a.txt b.txt
 ```
 
 Luego los argumentos pueden analizarse con `ptool.args.parse(...)`.
@@ -37,7 +40,7 @@ ptool.run("echo", {"hello", "world"})
 Se admite shebang, así que puedes añadir esto al comienzo del archivo:
 
 ```
-#!/usr/bin/env ptool run
+#!/usr/bin/env ptool
 ```
 
 ## ptool.use

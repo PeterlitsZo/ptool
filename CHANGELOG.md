@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added a `.lua` CLI shortcut so `ptool script.lua ...` now behaves the same
+  as `ptool run script.lua ...`, making shebang-style entrypoints shorter.
 - Added `ptool.script_path()`, which returns the absolute path of the current
   entry script for locating project files relative to the script itself.
 - Restricted the default embedded Lua standard libraries to `table`, `string`,

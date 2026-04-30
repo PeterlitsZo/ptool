@@ -9,6 +9,12 @@ The main entrypoint today is:
 ptool run <file>
 ```
 
+For `.lua` files, you can also use the shortcut form:
+
+```sh
+ptool <file.lua>
+```
+
 For interactive exploration, `ptool` also provides:
 
 ```sh
@@ -57,6 +63,7 @@ Run it with:
 
 ```sh
 ptool run script.lua
+ptool script.lua
 ```
 
 ## Passing arguments
@@ -65,16 +72,18 @@ You can pass extra CLI arguments after the script path:
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
+ptool script.lua --name alice -v a.txt b.txt
 ```
 
 Parse them inside the script with `ptool.args.parse(...)`.
 
 ## Shebang scripts
 
-`ptool` supports shebang files, so a script can start with:
+`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can
+start with:
 
 ```text
-#!/usr/bin/env ptool run
+#!/usr/bin/env ptool
 ```
 
 This lets you execute the script directly once it has the executable bit.

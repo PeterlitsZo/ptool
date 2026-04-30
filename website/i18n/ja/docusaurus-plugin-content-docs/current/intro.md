@@ -9,6 +9,12 @@
 ptool run <file>
 ```
 
+`.lua` ファイルでは、短縮形も使えます。
+
+```sh
+ptool <file.lua>
+```
+
 対話的に試したい場合、`ptool` には次のコマンドもあります。
 
 ```sh
@@ -61,6 +67,7 @@ ptool.run("echo", {"hello", "world"})
 
 ```sh
 ptool run script.lua
+ptool script.lua
 ```
 
 ## 引数の受け渡し
@@ -69,17 +76,18 @@ ptool run script.lua
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
+ptool script.lua --name alice -v a.txt b.txt
 ```
 
 これらはスクリプト内で `ptool.args.parse(...)` を使って解析できます。
 
 ## Shebang スクリプト
 
-`ptool` は shebang ファイルをサポートしているため、スクリプトは次の
-ように始められます。
+`ptool` は shebang ファイルをサポートしています。`.lua` 向けの短縮形を
+使うと、スクリプトは次のように始められます。
 
 ```text
-#!/usr/bin/env ptool run
+#!/usr/bin/env ptool
 ```
 
 これにより、実行権限ビットを付けたあとでスクリプトを直接実行できます。

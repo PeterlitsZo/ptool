@@ -3,7 +3,8 @@
 `ptool` 会直接在 `ptool` 和 `p` 下暴露这些核心运行时辅助能力。
 
 `ptool run <lua_file>` 会运行 Lua 脚本，并注入全局变量 `ptool`
-（以及它的别名 `p`；例如 `p.run` 与 `ptool.run` 等价）。
+（以及它的别名 `p`；例如 `p.run` 与 `ptool.run` 等价）。对于以 `.lua`
+结尾的文件，`ptool <lua_file>` 也是一个行为相同的 CLI 快捷写法。
 
 内嵌的 Lua 运行时会保留基础 Lua 全局能力，并默认只暴露这些标准库：
 
@@ -19,6 +20,7 @@
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
+ptool script.lua --name alice -v a.txt b.txt
 ```
 
 随后可以用 `ptool.args.parse(...)` 来解析这些参数。
@@ -34,7 +36,7 @@ ptool.run("echo", {"hello", "world"})
 也支持 shebang，因此你可以把下面这行放到文件开头：
 
 ```
-#!/usr/bin/env ptool run
+#!/usr/bin/env ptool
 ```
 
 ## ptool.use
