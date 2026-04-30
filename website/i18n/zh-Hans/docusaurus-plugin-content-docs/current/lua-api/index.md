@@ -12,6 +12,7 @@
 - [SemVer API](./semver.md)：解析、比较并提升语义化版本。
 - [Hash API](./hash.md)：计算 SHA-256、SHA-1 和 MD5 摘要。
 - [Network API](./net.md)：解析 URL、IP 地址以及 host-port 组合。
+- [OS API](./os.md)：读取运行时环境变量，并查看宿主进程信息。
 - [Platform API](./platform.md)：检测当前操作系统、CPU 架构和目标三元组。
 - [ANSI API](./ansi.md)：用 ANSI 转义序列构造带样式的终端输出。
 - [HTTP API](./http.md)：发送 HTTP 请求并读取响应体。

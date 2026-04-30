@@ -16,6 +16,7 @@ pub struct RunOptions {
     pub args: Vec<String>,
     pub cwd: Option<String>,
     pub env: Vec<(String, String)>,
+    pub env_remove: Vec<String>,
     pub stdout: RunStreamMode,
     pub stderr: RunStreamMode,
 }
@@ -34,6 +35,10 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
     let mut command = ProcessCommand::new(&options.cmd);
     command.args(&options.args);
     command.current_dir(&resolved_cwd);
+
+    for key in &options.env_remove {
+        command.env_remove(key);
+    }
 
     for (key, value) in &options.env {
         command.env(key, value);

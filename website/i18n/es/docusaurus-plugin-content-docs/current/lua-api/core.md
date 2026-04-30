@@ -17,8 +17,9 @@ solo expone estas bibliotecas estándar:
 - `utf8`
 
 Los módulos integrados orientados al host, como `io`, `os` y `package`, no
-están disponibles intencionadamente. Usa las APIs de `ptool` para operaciones
-de sistema de archivos, procesos, red y demás tareas de runtime.
+están disponibles intencionadamente. Usa APIs de `ptool` como `ptool.fs`,
+`ptool.os`, `ptool.path` y `ptool.run` para operaciones de sistema de
+archivos, entorno, procesos, red y demás tareas de runtime.
 
 Si quieres pasar argumentos a un script Lua, puedes hacerlo así:
 

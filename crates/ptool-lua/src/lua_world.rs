@@ -218,6 +218,56 @@ impl LuaWorld {
         format!("{}-{}", self.platform_os(), self.platform_arch())
     }
 
+    pub(crate) fn os_getenv(&self, name: String) -> mlua::Result<Option<String>> {
+        self.engine
+            .env_get(&name)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.os.getenv"))
+    }
+
+    pub(crate) fn os_env(&self, lua: &Lua) -> mlua::Result<Table> {
+        let table = lua.create_table()?;
+        for (key, value) in self.engine.env_vars() {
+            table.set(key, value)?;
+        }
+        Ok(table)
+    }
+
+    pub(crate) fn os_homedir(&self) -> Option<String> {
+        self.engine.home_dir()
+    }
+
+    pub(crate) fn os_tmpdir(&self) -> String {
+        self.engine.temp_dir()
+    }
+
+    pub(crate) fn os_hostname(&self) -> Option<String> {
+        self.engine.current_hostname()
+    }
+
+    pub(crate) fn os_username(&self) -> Option<String> {
+        self.engine.current_username()
+    }
+
+    pub(crate) fn os_pid(&self) -> i64 {
+        i64::from(self.engine.current_pid())
+    }
+
+    pub(crate) fn os_exepath(&self) -> Option<String> {
+        self.engine.current_exe()
+    }
+
+    pub(crate) fn os_setenv(&mut self, name: String, value: String) -> mlua::Result<()> {
+        self.engine
+            .env_set(&name, &value)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.os.setenv"))
+    }
+
+    pub(crate) fn os_unsetenv(&mut self, name: String) -> mlua::Result<()> {
+        self.engine
+            .env_unset(&name)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.os.unsetenv"))
+    }
+
     pub(crate) fn create_script_arg_builder(
         &self,
         id: String,

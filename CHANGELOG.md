@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added the `ptool.os` module with environment-variable helpers such as
+  `getenv`, `env`, `setenv`, and `unsetenv`, plus host/runtime queries like
+  `homedir`, `tmpdir`, `hostname`, `username`, `pid`, and `exepath`.
 - Added a `.lua` CLI shortcut so `ptool script.lua ...` now behaves the same
   as `ptool run script.lua ...`, making shebang-style entrypoints shorter.
 - Added `ptool.script_path()`, which returns the absolute path of the current

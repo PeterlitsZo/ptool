@@ -13,6 +13,8 @@
 - [SemVer API](./semver.md): Parse, compare, and bump semantic versions.
 - [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
 - [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.
+- [OS API](./os.md): Read runtime environment variables and inspect host
+  process details.
 - [Platform API](./platform.md): Detect the current OS, architecture, and target
   triple.
 - [ANSI API](./ansi.md): Build styled terminal output with ANSI escape

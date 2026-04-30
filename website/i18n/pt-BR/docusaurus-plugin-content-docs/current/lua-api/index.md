@@ -15,6 +15,8 @@
   semânticas.
 - [API de hash](./hash.md): Calcula digests SHA-256, SHA-1 e MD5.
 - [API de rede](./net.md): Faz parse de URLs, endereços IP e pares host-porta.
+- [API de sistema operacional](./os.md): Lê variáveis de ambiente do runtime e
+  inspeciona detalhes do processo hospedeiro.
 - [API de plataforma](./platform.md): Detecta o SO, a arquitetura e o target
   triple atuais.
 - [API ANSI](./ansi.md): Monta saída de terminal com estilo usando sequências

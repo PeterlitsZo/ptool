@@ -16,8 +16,9 @@ apenas estas bibliotecas padrão:
 - `utf8`
 
 Módulos embutidos voltados ao host, como `io`, `os` e `package`, ficam
-intencionalmente indisponíveis. Use as APIs do `ptool` para operações de sistema
-de arquivos, processos, rede e demais tarefas de runtime.
+intencionalmente indisponíveis. Use APIs do `ptool` como `ptool.fs`,
+`ptool.os`, `ptool.path` e `ptool.run` para operações de sistema de arquivos,
+ambiente, processos, rede e demais tarefas de runtime.
 
 Se você quiser passar argumentos para um script Lua, pode fazer assim:
 

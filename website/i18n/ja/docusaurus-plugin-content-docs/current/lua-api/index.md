@@ -13,6 +13,8 @@
 - [SemVer API](./semver.md): セマンティックバージョンの解析、比較、更新。
 - [ハッシュ API](./hash.md): SHA-256、SHA-1、MD5 ダイジェストを計算する。
 - [ネットワーク API](./net.md): URL、IP アドレス、host-port ペアを解析する。
+- [OS API](./os.md): ランタイムの環境変数を読み取り、ホストプロセス情報を
+  確認する。
 - [プラットフォーム API](./platform.md): 現在の OS、アーキテクチャ、
   target triple を検出する。
 - [ANSI API](./ansi.md): ANSI エスケープシーケンスで装飾された端末出力を

@@ -41,8 +41,10 @@ pub use ssh::{
     SshAuthRequest, SshConnectRequest, SshConnection, SshConnectionInfo, SshExecOptions,
     SshExecResult, SshHostKeyRequest, SshStreamMode, SshTransferOptions, SshTransferResult,
 };
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 use std::sync::Arc;
+use std::sync::Mutex;
 pub use strings::{IndentOptions, SplitLinesOptions, SplitOptions};
 use tokio::runtime::{Builder, Runtime};
 pub use toml::{TomlPathSegment, TomlValue};
@@ -50,6 +52,7 @@ pub use toml::{TomlPathSegment, TomlValue};
 #[derive(Clone, Debug)]
 pub struct PtoolEngine {
     runtime: Arc<Runtime>,
+    env_overrides: Arc<Mutex<BTreeMap<String, Option<String>>>>,
 }
 
 impl Default for PtoolEngine {
@@ -67,6 +70,7 @@ impl PtoolEngine {
 
         Self {
             runtime: Arc::new(runtime),
+            env_overrides: Arc::new(Mutex::new(BTreeMap::new())),
         }
     }
 
@@ -84,6 +88,83 @@ impl PtoolEngine {
 
     pub fn current_user_host(&self) -> UserHost {
         platform::detect_current_user_host()
+    }
+
+    pub fn env_get(&self, name: &str) -> Result<Option<String>> {
+        validate_env_name(name, "ptool.os.getenv")?;
+        if let Some(value) = self
+            .env_overrides
+            .lock()
+            .expect("ptool-engine env_overrides lock poisoned")
+            .get(name)
+            .cloned()
+        {
+            return Ok(value);
+        }
+        Ok(platform::getenv(name))
+    }
+
+    pub fn env_vars(&self) -> Vec<(String, String)> {
+        let mut vars: BTreeMap<String, String> = platform::env_vars().into_iter().collect();
+        let overrides = self
+            .env_overrides
+            .lock()
+            .expect("ptool-engine env_overrides lock poisoned")
+            .clone();
+        for (key, value) in overrides {
+            match value {
+                Some(value) => {
+                    vars.insert(key, value);
+                }
+                None => {
+                    vars.remove(&key);
+                }
+            }
+        }
+        vars.into_iter().collect()
+    }
+
+    pub fn env_set(&self, name: &str, value: &str) -> Result<()> {
+        validate_env_name(name, "ptool.os.setenv")?;
+        validate_env_value(value, "ptool.os.setenv")?;
+        self.env_overrides
+            .lock()
+            .expect("ptool-engine env_overrides lock poisoned")
+            .insert(name.to_string(), Some(value.to_string()));
+        Ok(())
+    }
+
+    pub fn env_unset(&self, name: &str) -> Result<()> {
+        validate_env_name(name, "ptool.os.unsetenv")?;
+        self.env_overrides
+            .lock()
+            .expect("ptool-engine env_overrides lock poisoned")
+            .insert(name.to_string(), None);
+        Ok(())
+    }
+
+    pub fn home_dir(&self) -> Option<String> {
+        platform::home_dir()
+    }
+
+    pub fn temp_dir(&self) -> String {
+        platform::temp_dir()
+    }
+
+    pub fn current_username(&self) -> Option<String> {
+        platform::detect_current_username()
+    }
+
+    pub fn current_hostname(&self) -> Option<String> {
+        platform::detect_current_hostname()
+    }
+
+    pub fn current_pid(&self) -> u32 {
+        platform::current_pid()
+    }
+
+    pub fn current_exe(&self) -> Option<String> {
+        platform::current_exe()
     }
 
     pub fn shell_split(&self, input: &str) -> Result<Vec<String>> {
@@ -361,7 +442,8 @@ impl PtoolEngine {
     }
 
     pub fn run_command(&self, options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
-        exec::run_command(options, current_dir)
+        let options = self.apply_env_overrides_to_run_options(options);
+        exec::run_command(&options, current_dir)
     }
 
     pub fn ssh_connect(
@@ -371,4 +453,81 @@ impl PtoolEngine {
     ) -> Result<SshConnection> {
         ssh::connect(Arc::clone(&self.runtime), request, current_dir)
     }
+}
+
+impl PtoolEngine {
+    fn apply_env_overrides_to_run_options(&self, options: &RunOptions) -> RunOptions {
+        let mut next = options.clone();
+        let mut env_map = BTreeMap::new();
+        let mut env_remove = BTreeSet::new();
+
+        let overrides = self
+            .env_overrides
+            .lock()
+            .expect("ptool-engine env_overrides lock poisoned")
+            .clone();
+        for (key, value) in overrides {
+            match value {
+                Some(value) => {
+                    env_map.insert(key, value);
+                }
+                None => {
+                    env_remove.insert(key);
+                }
+            }
+        }
+
+        for key in &next.env_remove {
+            env_map.remove(key);
+            env_remove.insert(key.clone());
+        }
+
+        for (key, value) in &next.env {
+            env_map.insert(key.clone(), value.clone());
+            env_remove.remove(key);
+        }
+
+        next.env = env_map.into_iter().collect();
+        next.env_remove = env_remove.into_iter().collect();
+        next
+    }
+}
+
+fn validate_env_name(name: &str, op: &str) -> Result<()> {
+    if name.is_empty() {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!("{op} requires a non-empty name"),
+        )
+        .with_op(op));
+    }
+    if name.contains('=') {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!("{op} name must not contain `=`"),
+        )
+        .with_op(op)
+        .with_input(name.to_string()));
+    }
+    if name.contains('\0') {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!("{op} name must not contain NUL"),
+        )
+        .with_op(op)
+        .with_input(name.to_string()));
+    }
+    Ok(())
+}
+
+fn validate_env_value(value: &str, op: &str) -> Result<()> {
+    if value.contains('\0') {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!("{op} value must not contain NUL"),
+        )
+        .with_op(op)
+        .with_input(value.to_string()));
+    }
+    Ok(())
 }

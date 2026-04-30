@@ -15,13 +15,14 @@
 - [ ] Add `p.datetime` module?
 - [ ] Bugfix: "response read failed: error decoding response body" when download
       with p.http.request.
+- [ ] Get the ptool's version.
 
 # v0.5.0
 
 - [x] Remove non-essential built-in Lua modules.
 - [x] Add a function to get script itself's path.
 - [x] Support just `#!/usr/bin/env ptool`.
-- [ ] Support `p.os.getenv` etc.
+- [x] Support `p.os.getenv` etc.
 - [ ] Make the `p.ask` more powerful.
 - [ ] Make the document website better.
 - [ ] Let the `glob` function support working_dir optioon.

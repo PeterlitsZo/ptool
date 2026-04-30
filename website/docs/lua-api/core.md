@@ -16,7 +16,8 @@ standard libraries by default:
 - `utf8`
 
 Host-facing built-in modules such as `io`, `os`, and `package` are intentionally
-not available. Use `ptool` APIs for filesystem, process, network, and other
+not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`, `ptool.path`,
+and `ptool.run` for filesystem, environment, process, network, and other
 runtime operations instead.
 
 If you want to pass arguments to a Lua script, you can do it like this:

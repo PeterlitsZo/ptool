@@ -14,7 +14,8 @@
 - `utf8`
 
 像 `io`、`os`、`package` 这类面向宿主环境的内建模块会被有意禁用。
-文件系统、进程、网络等运行时操作应改用 `ptool` 提供的 API。
+文件系统、环境变量、进程、网络等运行时操作应改用 `ptool.fs`、
+`ptool.os`、`ptool.path`、`ptool.run` 等 API。
 
 如果你想向 Lua 脚本传参，可以这样做：
 

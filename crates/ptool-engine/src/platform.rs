@@ -1,4 +1,5 @@
 use std::env;
+use std::path::Path;
 use std::process::Command as ProcessCommand;
 use std::sync::OnceLock;
 
@@ -40,6 +41,48 @@ pub(crate) fn detect_current_user_host() -> UserHost {
     CURRENT_USER_HOST
         .get_or_init(detect_current_user_host_uncached)
         .clone()
+}
+
+pub(crate) fn detect_current_username() -> Option<String> {
+    first_non_empty_env_var(&["USER", "USERNAME"])
+}
+
+pub(crate) fn detect_current_hostname() -> Option<String> {
+    detect_current_host()
+}
+
+pub(crate) fn getenv(name: &str) -> Option<String> {
+    env::var(name).ok()
+}
+
+pub(crate) fn env_vars() -> Vec<(String, String)> {
+    let mut vars: Vec<(String, String)> = env::vars_os()
+        .filter_map(|(key, value)| Some((key.into_string().ok()?, value.into_string().ok()?)))
+        .collect();
+    vars.sort_by(|a, b| a.0.cmp(&b.0));
+    vars
+}
+
+pub(crate) fn home_dir() -> Option<String> {
+    first_non_empty_env_var(&["HOME", "USERPROFILE"]).or_else(|| {
+        let drive = env::var("HOMEDRIVE").ok()?;
+        let path = env::var("HOMEPATH").ok()?;
+        let home = format!("{drive}{path}");
+        (!home.is_empty()).then_some(home)
+    })
+}
+
+pub(crate) fn temp_dir() -> String {
+    path_to_string(&env::temp_dir())
+}
+
+pub(crate) fn current_pid() -> u32 {
+    std::process::id()
+}
+
+pub(crate) fn current_exe() -> Option<String> {
+    let path = env::current_exe().ok()?;
+    Some(path_to_string(&path))
 }
 
 fn normalize_os(os: &'static str) -> Result<OS, &'static str> {
@@ -87,4 +130,8 @@ fn detect_host_via_hostname_command() -> Option<String> {
 
     let host = String::from_utf8_lossy(&output.stdout).trim().to_string();
     (!host.is_empty()).then_some(host)
+}
+
+fn path_to_string(path: &Path) -> String {
+    path.to_string_lossy().into_owned()
 }

@@ -44,6 +44,9 @@ ptool.run("echo", {"hello", "world"})
 so the script fails early on older runtimes instead of running with a missing
 API.
 
+Useful runtime helpers include `p.os.getenv(...)`, `p.os.setenv(...)`,
+`p.os.unsetenv(...)`, `p.os.homedir()`, and `p.os.tmpdir()`.
+
 See [Getting Started][1] and [Lua API Overview][2] for the full documentation.
 
 [1]: https://ptool.peterlits.net/docs/intro

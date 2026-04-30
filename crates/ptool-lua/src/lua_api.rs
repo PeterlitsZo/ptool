@@ -65,6 +65,7 @@ fn create_ptool_module(
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
+    let os_module = create_ptool_os_module(lua, Rc::clone(&world))?;
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
     let platform_module = create_ptool_platform_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
@@ -92,6 +93,7 @@ fn create_ptool_module(
     module.set("db", db_module)?;
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
+    module.set("os", os_module)?;
     module.set("path", path_module)?;
     module.set("platform", platform_module)?;
     module.set("re", re_module)?;
@@ -272,6 +274,46 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     fs_module.set("glob", glob_fn)?;
     fs_module.set("copy", copy_fn)?;
     Ok(fs_module)
+}
+
+fn create_ptool_os_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let os_module = lua.create_table()?;
+    let getenv_state = Rc::clone(&world);
+    let getenv_fn =
+        lua.create_function(move |_, name: String| getenv_state.borrow().os_getenv(name))?;
+    let env_state = Rc::clone(&world);
+    let env_fn = lua.create_function(move |lua, ()| env_state.borrow().os_env(lua))?;
+    let homedir_state = Rc::clone(&world);
+    let homedir_fn = lua.create_function(move |_, ()| Ok(homedir_state.borrow().os_homedir()))?;
+    let tmpdir_state = Rc::clone(&world);
+    let tmpdir_fn = lua.create_function(move |_, ()| Ok(tmpdir_state.borrow().os_tmpdir()))?;
+    let hostname_state = Rc::clone(&world);
+    let hostname_fn =
+        lua.create_function(move |_, ()| Ok(hostname_state.borrow().os_hostname()))?;
+    let username_state = Rc::clone(&world);
+    let username_fn =
+        lua.create_function(move |_, ()| Ok(username_state.borrow().os_username()))?;
+    let pid_state = Rc::clone(&world);
+    let pid_fn = lua.create_function(move |_, ()| Ok(pid_state.borrow().os_pid()))?;
+    let exepath_state = Rc::clone(&world);
+    let exepath_fn = lua.create_function(move |_, ()| Ok(exepath_state.borrow().os_exepath()))?;
+    let setenv_state = Rc::clone(&world);
+    let setenv_fn = lua.create_function(move |_, (name, value): (String, String)| {
+        setenv_state.borrow_mut().os_setenv(name, value)
+    })?;
+    let unsetenv_fn =
+        lua.create_function(move |_, name: String| world.borrow_mut().os_unsetenv(name))?;
+    os_module.set("getenv", getenv_fn)?;
+    os_module.set("env", env_fn)?;
+    os_module.set("homedir", homedir_fn)?;
+    os_module.set("tmpdir", tmpdir_fn)?;
+    os_module.set("hostname", hostname_fn)?;
+    os_module.set("username", username_fn)?;
+    os_module.set("pid", pid_fn)?;
+    os_module.set("exepath", exepath_fn)?;
+    os_module.set("setenv", setenv_fn)?;
+    os_module.set("unsetenv", unsetenv_fn)?;
+    Ok(os_module)
 }
 
 fn create_ptool_platform_module(
