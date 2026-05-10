@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.5.0 (2026-05-10)
 
 - Fixed `ptool.ask(...)` so its callable-table form correctly accepts the
   prompt argument again after the Lua metatable binding regressed.
@@ -29,6 +29,9 @@
 - Published raw Markdown exports and a machine-readable docs manifest on the
   Docusaurus site, and added page-level and homepage guidance for feeding the
   docs to AI assistants directly.
+
+## v0.4.0 (2026-04-30)
+
 - Expanded the TOML Lua API with engine-backed `ptool.toml.stringify(...)`,
   composite table/array writes in `ptool.toml.set(...)`, array indexing in TOML
   paths, and synchronized TOML docs across all supported locales.
