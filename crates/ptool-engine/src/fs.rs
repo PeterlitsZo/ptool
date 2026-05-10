@@ -8,6 +8,11 @@ pub struct FsMkdirOptions {
     pub exist_ok: bool,
 }
 
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct FsGlobOptions {
+    pub working_dir: Option<String>,
+}
+
 impl Default for FsMkdirOptions {
     fn default() -> Self {
         Self { exist_ok: true }
@@ -66,11 +71,12 @@ pub fn exists(path: &str) -> bool {
     Path::new(path).exists()
 }
 
-pub fn glob(pattern: &str, base_dir: &Path) -> Result<Vec<String>> {
+pub fn glob(pattern: &str, current_dir: &Path, options: FsGlobOptions) -> Result<Vec<String>> {
     ensure_non_empty_path(pattern)?;
 
+    let base_dir = resolve_glob_base_dir(current_dir, options.working_dir.as_deref());
     let original_pattern = pattern;
-    let pattern = resolve_glob_pattern(pattern, base_dir);
+    let pattern = resolve_glob_pattern(pattern, &base_dir);
     let entries = glob::glob_with(
         &pattern,
         MatchOptions {
@@ -92,7 +98,7 @@ pub fn glob(pattern: &str, base_dir: &Path) -> Result<Vec<String>> {
                 .with_op("ptool.fs.glob")
                 .with_input(original_pattern)
         })?;
-        if allows_hidden_match(original_pattern, base_dir, &path)? {
+        if allows_hidden_match(original_pattern, &base_dir, &path)? {
             matches.push(path_to_string(path));
         }
     }
@@ -191,6 +197,19 @@ fn resolve_glob_pattern(pattern: &str, base_dir: &Path) -> String {
         pattern.to_string()
     } else {
         path_to_string(base_dir.join(pattern_path))
+    }
+}
+
+fn resolve_glob_base_dir(current_dir: &Path, working_dir: Option<&str>) -> PathBuf {
+    let Some(working_dir) = working_dir else {
+        return current_dir.to_path_buf();
+    };
+
+    let working_dir = Path::new(working_dir);
+    if working_dir.is_absolute() {
+        working_dir.to_path_buf()
+    } else {
+        current_dir.join(working_dir)
     }
 }
 

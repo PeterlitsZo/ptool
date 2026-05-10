@@ -1,11 +1,12 @@
 use mlua::{Lua, String as LuaString, Table, Value, Variadic};
 use ptool_engine::{
-    Error as EngineError, ErrorKind as EngineErrorKind, FsCopyOptions, FsMkdirOptions, PtoolEngine,
+    Error as EngineError, ErrorKind as EngineErrorKind, FsCopyOptions, FsGlobOptions,
+    FsMkdirOptions, PtoolEngine,
 };
 use std::path::Path;
 
 const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
-const GLOB_SIGNATURE: &str = "ptool.fs.glob(pattern)";
+const GLOB_SIGNATURE: &str = "ptool.fs.glob(pattern[, options])";
 const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
 
 pub(crate) fn read(lua: &Lua, engine: &PtoolEngine, path: String) -> mlua::Result<LuaString> {
@@ -38,12 +39,14 @@ pub(crate) fn exists(engine: &PtoolEngine, path: String) -> bool {
 
 pub(crate) fn glob(
     engine: &PtoolEngine,
-    base_dir: &Path,
+    current_dir: &Path,
     lua: &Lua,
     pattern: String,
+    options: Option<Table>,
 ) -> mlua::Result<Table> {
+    let options = parse_glob_options(options)?;
     let matches = engine
-        .fs_glob(&pattern, base_dir)
+        .fs_glob(&pattern, current_dir, options)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, GLOB_SIGNATURE))?;
     lua.create_sequence_from(matches)
 }
@@ -160,6 +163,55 @@ fn parse_mkdir_options(options: Option<Table>) -> mlua::Result<FsMkdirOptions> {
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     MKDIR_SIGNATURE,
+                    format!("unknown option `{key}`"),
+                ));
+            }
+        }
+    }
+
+    Ok(parsed)
+}
+
+fn parse_glob_options(options: Option<Table>) -> mlua::Result<FsGlobOptions> {
+    let mut parsed = FsGlobOptions::default();
+    let Some(options) = options else {
+        return Ok(parsed);
+    };
+
+    for pair in options.pairs::<Value, Value>() {
+        let (key, value) = pair?;
+        let key = match key {
+            Value::String(key) => key.to_str()?.to_string(),
+            _ => {
+                return Err(crate::lua_error::invalid_option(
+                    GLOB_SIGNATURE,
+                    "option keys must be strings",
+                ));
+            }
+        };
+
+        match key.as_str() {
+            "working_dir" => match value {
+                Value::String(value) => {
+                    let value = value.to_str()?.to_string();
+                    if value.is_empty() {
+                        return Err(crate::lua_error::invalid_option(
+                            GLOB_SIGNATURE,
+                            "`working_dir` must not be empty",
+                        ));
+                    }
+                    parsed.working_dir = Some(value);
+                }
+                _ => {
+                    return Err(crate::lua_error::invalid_option(
+                        GLOB_SIGNATURE,
+                        "`working_dir` must be a string",
+                    ));
+                }
+            },
+            _ => {
+                return Err(crate::lua_error::invalid_option(
+                    GLOB_SIGNATURE,
                     format!("unknown option `{key}`"),
                 ));
             }

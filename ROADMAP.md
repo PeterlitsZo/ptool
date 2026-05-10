@@ -1,6 +1,13 @@
-# v0.6.0
+# v0.7.0
 
 - [ ] Support `p.git` module.
+- [ ] Add `p.datetime` module?
+- [ ] Let `p.run` support `stdin`?
+- [ ] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
+
+# v0.6.0
+
+- [ ] Make `ptool -V` render more infomations.
 - [ ] Support a TUI toolkit.
 - [ ] Support `p.tbl` module for better Lua table functions.
   - `p.tbl.map`.
@@ -10,9 +17,7 @@
 - [ ] Let document use better i18n solution.
 - [ ] Add `p.fs.is_file` and `p.fs.is_dir`.
 - [ ] How about let `run_capture` have a `trim` option?
-- [ ] Let `p.run` support `stdin`?
 - [ ] Add a helper for SSH connection to send HTTP request?
-- [ ] Add `p.datetime` module?
 - [ ] Bugfix: "response read failed: error decoding response body" when download
       with p.http.request.
 - [ ] Get the ptool's version.
@@ -25,11 +30,11 @@
 - [x] Support `p.os.getenv` etc.
 - [x] Make the `p.ask` more powerful.
 - [ ] Make the document website better.
-- [ ] Let the `glob` function support working_dir optioon.
-- [ ] Support `p.log` module.
+- [x] Let the `glob` function support working_dir optioon.
+- [x] Support `p.log` module.
 - [x] Support `p.ask.select`, like:
   - `p.ask.select("Select bump type", { "patch", "minor", "major", "skip" })`
-- [ ] Make `ptool -V` render more infomations.
+- [ ] Support YAML.
 
 # v0.4.0
 

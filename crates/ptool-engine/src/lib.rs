@@ -27,7 +27,7 @@ pub use exec::{
     RunOptions, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
     resolve_run_cwd, run_command,
 };
-pub use fs::{FsCopyOptions, FsCopyResult, FsMkdirOptions};
+pub use fs::{FsCopyOptions, FsCopyResult, FsGlobOptions, FsMkdirOptions};
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use json::{JsonStringifyOptions, JsonValue};
 pub use log::LogLevel;
@@ -265,8 +265,13 @@ impl PtoolEngine {
         fs::exists(path)
     }
 
-    pub fn fs_glob(&self, pattern: &str, base_dir: &Path) -> Result<Vec<String>> {
-        fs::glob(pattern, base_dir)
+    pub fn fs_glob(
+        &self,
+        pattern: &str,
+        current_dir: &Path,
+        options: FsGlobOptions,
+    ) -> Result<Vec<String>> {
+        fs::glob(pattern, current_dir, options)
     }
 
     pub fn fs_copy_local(

@@ -84,13 +84,18 @@ end
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.
+> `v0.5.0` - `working_dir` オプションを追加。
 
-`ptool.fs.glob(pattern)` は Unix 風 glob 構文でファイルシステムパスを
+`ptool.fs.glob(pattern[, options])` は Unix 風 glob 構文でファイルシステムパスを
 照合し、辞書順に並んだ一致パスの文字列配列を返します。
 
 - `pattern` (string, 必須): glob パターン。相対パターンは現在の
   `ptool` ランタイムディレクトリから解決されるため、
   `ptool.cd(...)` に従います。
+- `options` (table, 任意): glob オプション。サポートされるフィールド:
+  - `working_dir` (string, 任意): 相対パターンの解決に使う基準
+    ディレクトリを上書きします。相対 `working_dir` は現在の
+    `ptool` ランタイムディレクトリから解決されます。
 - 戻り値: `string[]`。
 - 隠しファイルや隠しディレクトリは、対応するパターン要素が明示的に
   `.` で始まる場合にだけ一致します。
@@ -102,4 +107,7 @@ ptool.cd("src")
 
 local rust_files = ptool.fs.glob("**/*.rs")
 local hidden = ptool.fs.glob("**/.secret/*.txt")
+local lua_scripts = ptool.fs.glob("**/*.lua", {
+  working_dir = "../scripts",
+})
 ```

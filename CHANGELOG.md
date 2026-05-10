@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a `working_dir` option to `ptool.fs.glob(...)`, so Lua scripts can
+  resolve glob patterns relative to an explicit base directory, and updated the
+  filesystem API docs across all supported locales.
 - Expanded `ptool.ask` into a unified interactive prompt API with text
   validation, `confirm`, `select`, `multiselect`, and `secret` prompts, and
   updated the Lua API docs across all supported locales.

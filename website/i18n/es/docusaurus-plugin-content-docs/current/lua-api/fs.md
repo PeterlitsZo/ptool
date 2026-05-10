@@ -86,14 +86,19 @@ end
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.
+> `v0.5.0` - Added the `working_dir` option.
 
-`ptool.fs.glob(pattern)` encuentra rutas del sistema de archivos usando sintaxis
-glob de estilo Unix y devuelve un arreglo de cadenas ordenado
+`ptool.fs.glob(pattern[, options])` encuentra rutas del sistema de archivos
+usando sintaxis glob de estilo Unix y devuelve un arreglo de cadenas ordenado
 lexicográficamente con las rutas coincidentes.
 
 - `pattern` (string, obligatorio): Un patrón glob. Los patrones relativos se
   resuelven desde el directorio de ejecución actual de `ptool`, por lo que
   siguen a `ptool.cd(...)`.
+- `options` (table, opcional): Opciones de glob. Campos admitidos:
+  - `working_dir` (string, opcional): Sobrescribe el directorio base usado
+    para resolver patrones relativos. Los valores relativos de `working_dir`
+    se resuelven desde el directorio de ejecución actual de `ptool`.
 - Devuelve: `string[]`.
 - Los archivos y directorios ocultos solo coinciden cuando el componente del
   patrón correspondiente empieza explícitamente por `.`.
@@ -105,4 +110,7 @@ ptool.cd("src")
 
 local rust_files = ptool.fs.glob("**/*.rs")
 local hidden = ptool.fs.glob("**/.secret/*.txt")
+local lua_scripts = ptool.fs.glob("**/*.lua", {
+  working_dir = "../scripts",
+})
 ```

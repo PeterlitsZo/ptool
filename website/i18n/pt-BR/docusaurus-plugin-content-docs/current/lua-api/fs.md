@@ -84,14 +84,19 @@ end
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.
+> `v0.5.0` - Added the `working_dir` option.
 
-`ptool.fs.glob(pattern)` corresponde caminhos do sistema de arquivos usando
-sintaxe glob no estilo Unix e retorna um array de strings com os caminhos
-correspondentes, ordenados lexicograficamente.
+`ptool.fs.glob(pattern[, options])` corresponde caminhos do sistema de arquivos
+usando sintaxe glob no estilo Unix e retorna um array de strings com os
+caminhos correspondentes, ordenados lexicograficamente.
 
 - `pattern` (string, obrigatório): Um padrão glob. Padrões relativos são
   resolvidos a partir do diretório de runtime atual do `ptool`, portanto seguem
   `ptool.cd(...)`.
+- `options` (table, opcional): Opções de glob. Campos suportados:
+  - `working_dir` (string, opcional): Sobrescreve o diretório base usado para
+    resolver padrões relativos. Valores relativos de `working_dir` são
+    resolvidos a partir do diretório de runtime atual do `ptool`.
 - Retorna: `string[]`.
 - Arquivos e diretórios ocultos só correspondem quando o componente de padrão
   correspondente começa explicitamente com `.`.
@@ -103,4 +108,7 @@ ptool.cd("src")
 
 local rust_files = ptool.fs.glob("**/*.rs")
 local hidden = ptool.fs.glob("**/.secret/*.txt")
+local lua_scripts = ptool.fs.glob("**/*.lua", {
+  working_dir = "../scripts",
+})
 ```
