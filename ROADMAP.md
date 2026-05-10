@@ -23,12 +23,13 @@
 - [x] Add a function to get script itself's path.
 - [x] Support just `#!/usr/bin/env ptool`.
 - [x] Support `p.os.getenv` etc.
-- [ ] Make the `p.ask` more powerful.
+- [x] Make the `p.ask` more powerful.
 - [ ] Make the document website better.
 - [ ] Let the `glob` function support working_dir optioon.
 - [ ] Support `p.log` module.
-- [ ] Support `p.ask.select`, like:
+- [x] Support `p.ask.select`, like:
   - `p.ask.select("Select bump type", { "patch", "minor", "major", "skip" })`
+- [ ] Make `ptool -V` render more infomations.
 
 # v0.4.0
 
