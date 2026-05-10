@@ -10,6 +10,7 @@ mod log;
 mod net;
 mod path;
 mod platform;
+mod prompt;
 mod re;
 mod script_args;
 mod semver;
@@ -32,6 +33,11 @@ pub use json::{JsonStringifyOptions, JsonValue};
 pub use log::LogLevel;
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS, UserHost};
+pub use prompt::{
+    PromptConfirmOptions, PromptItem, PromptMultiSelectOptions, PromptSecretOptions,
+    PromptSelectOptions, PromptTextOptions, prompt_confirm, prompt_multiselect, prompt_secret,
+    prompt_select, prompt_text,
+};
 pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
 pub use script_args::{
     ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
@@ -366,6 +372,53 @@ impl PtoolEngine {
 
     pub fn text_unindent(&self, input: &str) -> String {
         text::unindent(input)
+    }
+
+    pub fn prompt_text(
+        &self,
+        op: &str,
+        prompt: &str,
+        options: PromptTextOptions,
+    ) -> Result<String> {
+        prompt::prompt_text(op, prompt, options)
+    }
+
+    pub fn prompt_confirm(
+        &self,
+        op: &str,
+        prompt: &str,
+        options: PromptConfirmOptions,
+    ) -> Result<bool> {
+        prompt::prompt_confirm(op, prompt, options)
+    }
+
+    pub fn prompt_select(
+        &self,
+        op: &str,
+        prompt: &str,
+        items: Vec<PromptItem>,
+        options: PromptSelectOptions,
+    ) -> Result<String> {
+        prompt::prompt_select(op, prompt, items, options)
+    }
+
+    pub fn prompt_multiselect(
+        &self,
+        op: &str,
+        prompt: &str,
+        items: Vec<PromptItem>,
+        options: PromptMultiSelectOptions,
+    ) -> Result<Vec<String>> {
+        prompt::prompt_multiselect(op, prompt, items, options)
+    }
+
+    pub fn prompt_secret(
+        &self,
+        op: &str,
+        prompt: &str,
+        options: PromptSecretOptions,
+    ) -> Result<String> {
+        prompt::prompt_secret(op, prompt, options)
     }
 
     pub fn str_trim(&self, input: &str) -> String {

@@ -44,10 +44,7 @@ fn create_ptool_module(
     let inspect_fn = lua.create_function(move |_, (value, options): (Value, Option<Table>)| {
         inspect_state.borrow().inspect(value, options)
     })?;
-    let ask_state = Rc::clone(&world);
-    let ask_fn = lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
-        ask_state.borrow().ask(prompt, options)
-    })?;
+    let ask_module = create_ptool_ask_module(lua, Rc::clone(&world))?;
     let script_path_state = Rc::clone(&world);
     let script_path_fn =
         lua.create_function(move |_, ()| Ok(script_path_state.borrow().script_path_value()))?;
@@ -81,7 +78,7 @@ fn create_ptool_module(
     module.set("cd", cd_fn)?;
     module.set("unindent", unindent_fn)?;
     module.set("inspect", inspect_fn)?;
-    module.set("ask", ask_fn)?;
+    module.set("ask", ask_module)?;
     module.set("script_path", script_path_fn)?;
     module.set("try", try_fn)?;
     module.set("ansi", ansi_module)?;
@@ -132,6 +129,51 @@ fn create_ptool_args_module(
     args_module.set("arg", arg_fn)?;
     args_module.set("parse", parse_fn)?;
     Ok(args_module)
+}
+
+fn create_ptool_ask_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let ask_module = lua.create_table()?;
+    let mt = lua.create_table()?;
+
+    let ask_state = Rc::clone(&world);
+    let ask_fn = lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
+        ask_state.borrow().ask(prompt, options)
+    })?;
+    mt.set("__call", ask_fn)?;
+    ask_module.set_metatable(Some(mt))?;
+
+    let confirm_state = Rc::clone(&world);
+    let confirm_fn =
+        lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
+            confirm_state.borrow().ask_confirm(prompt, options)
+        })?;
+
+    let select_state = Rc::clone(&world);
+    let select_fn = lua.create_function(
+        move |_, (prompt, items, options): (String, Table, Option<Table>)| {
+            select_state.borrow().ask_select(prompt, items, options)
+        },
+    )?;
+
+    let multiselect_state = Rc::clone(&world);
+    let multiselect_fn = lua.create_function(
+        move |lua, (prompt, items, options): (String, Table, Option<Table>)| {
+            multiselect_state
+                .borrow()
+                .ask_multiselect(lua, prompt, items, options)
+        },
+    )?;
+
+    let secret_state = world;
+    let secret_fn = lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
+        secret_state.borrow().ask_secret(prompt, options)
+    })?;
+
+    ask_module.set("confirm", confirm_fn)?;
+    ask_module.set("select", select_fn)?;
+    ask_module.set("multiselect", multiselect_fn)?;
+    ask_module.set("secret", secret_fn)?;
+    Ok(ask_module)
 }
 
 fn create_ptool_shell_module(

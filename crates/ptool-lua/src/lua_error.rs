@@ -88,13 +88,6 @@ impl LuaError {
             .with_detail(detail)
     }
 
-    pub(crate) fn not_interactive(op: &str, detail: impl Into<String>) -> Self {
-        let detail = detail.into();
-        Self::new("not_interactive", format!("{op} {detail}"))
-            .with_op(op)
-            .with_detail(detail)
-    }
-
     pub(crate) fn prompt_failed(op: &str, detail: impl Into<String>) -> Self {
         let detail = detail.into();
         Self::new("prompt_failed", format!("{op} {detail}"))
@@ -243,14 +236,6 @@ pub(crate) fn invalid_option(op: &str, detail: impl Into<String>) -> mlua::Error
     to_mlua_error(LuaError::invalid_option(op, detail))
 }
 
-pub(crate) fn cancelled(op: &str, detail: impl Into<String>) -> mlua::Error {
-    to_mlua_error(LuaError::cancelled(op, detail))
-}
-
-pub(crate) fn not_interactive(op: &str, detail: impl Into<String>) -> mlua::Error {
-    to_mlua_error(LuaError::not_interactive(op, detail))
-}
-
 pub(crate) fn prompt_failed(op: &str, detail: impl Into<String>) -> mlua::Error {
     to_mlua_error(LuaError::prompt_failed(op, detail))
 }
@@ -305,6 +290,7 @@ fn engine_kind_name(kind: EngineErrorKind) -> &'static str {
         | EngineErrorKind::InvalidHttpHeader
         | EngineErrorKind::InvalidHttpTimeout
         | EngineErrorKind::InvalidHttpOptions
+        | EngineErrorKind::InvalidPromptOptions
         | EngineErrorKind::InvalidToml
         | EngineErrorKind::InvalidSemver
         | EngineErrorKind::InvalidSemverOperation
@@ -315,6 +301,9 @@ fn engine_kind_name(kind: EngineErrorKind) -> &'static str {
         | EngineErrorKind::InvalidFsOption => "invalid_argument",
         EngineErrorKind::AlreadyExists => "already_exists",
         EngineErrorKind::NotAFile => "not_a_file",
+        EngineErrorKind::NotInteractive => "not_interactive",
+        EngineErrorKind::Cancelled => "cancelled",
+        EngineErrorKind::Prompt => "prompt_failed",
         EngineErrorKind::Http => "http_error",
         EngineErrorKind::Io => "io_error",
         EngineErrorKind::Db => "db_error",

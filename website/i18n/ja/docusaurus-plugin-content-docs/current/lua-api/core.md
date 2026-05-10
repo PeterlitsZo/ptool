@@ -124,6 +124,20 @@ print(ptool.inspect(value, { multiline = false }))
 ## ptool.ask
 
 > `v0.1.0` - Introduced.
+> `v0.5.0` - バリデーションオプションと prompt サブコマンドを追加。
+
+`ptool.ask` は対話型プロンプトを提供します。直接呼び出してテキスト入力を
+受け取ることもでき、確認、単一選択、複数選択、シークレット入力用の
+サブプロンプトも使えます。
+
+共通の挙動:
+
+- すべての `ptool.ask` プロンプトは対話型 TTY を必要とします。
+  非対話環境で実行するとエラーになります。
+- ユーザーがプロンプトをキャンセルすると、スクリプトはエラーになります。
+- 未知のオプション名や不正な値型はエラーになります。
+
+### ptool.ask
 
 `ptool.ask(prompt[, options])` はユーザーに 1 行のテキスト入力を求め、
 その回答を返します。
@@ -136,27 +150,143 @@ print(ptool.inspect(value, { multiline = false }))
   - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
   - `placeholder` (string, 任意): ユーザーが入力を始める前に表示する
     プレースホルダー。
+  - `required` (boolean, 任意): 回答を空にできないようにするかどうか。
+  - `allow_empty` (boolean, 任意): 空の回答を許可するかどうか。
+    デフォルトは `true`。
+  - `trim` (boolean, 任意): 返す前に前後の空白を削除するかどうか。
+  - `min_length` (integer, 任意): 許可される最小文字数。
+  - `max_length` (integer, 任意): 許可される最大文字数。
+  - `pattern` (string, 任意): 回答が一致しなければならない正規表現。
 - 戻り値: `string`。
-
-挙動:
-
-- 対話型 TTY が必要です。非対話環境で実行するとエラーになります。
-- ユーザーがプロンプトをキャンセルすると、スクリプトはエラーになります。
-- 未知のオプション名や不正な値型はエラーになります。
 
 例:
 
 ```lua
-local name = ptool.ask("Your name?", {
-  placeholder = "Alice",
-  help = "Press Enter to confirm",
+local project = ptool.ask("Project name?", {
+  placeholder = "my-tool",
+  help = "Lowercase letters, digits, and dashes only",
+  required = true,
+  trim = true,
+  pattern = "^[a-z0-9-]+$",
 })
+```
 
-local city = ptool.ask("City?", {
-  default = "Shanghai",
+### ptool.ask.confirm
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.confirm(prompt[, options])` は yes/no の回答を求めます。
+
+- `prompt` (string, 必須): ユーザーに表示するプロンプト。
+- `options` (table, 任意): プロンプトオプション。サポートされる
+  フィールド:
+  - `default` (boolean, 任意): ユーザーが Enter を押したときに使う
+    デフォルト回答。
+  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
+- 戻り値: `boolean`。
+
+例:
+
+```lua
+local confirmed = ptool.ask.confirm("Continue?", {
+  default = true,
 })
+```
 
-print(string.format("Hello, %s from %s!", name, city))
+### ptool.ask.select
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.select(prompt, items[, options])` は一覧から 1 つ選ばせます。
+
+- `prompt` (string, 必須): ユーザーに表示するプロンプト。
+- `items` (table, 必須): 候補項目。各要素は次のいずれかです:
+  - string: 表示ラベルと戻り値の両方に使われます。
+  - `{ label = "Patch", value = "patch" }` のような table。
+- `options` (table, 任意): プロンプトオプション。サポートされる
+  フィールド:
+  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
+  - `page_size` (integer, 任意): 一度に表示する最大行数。
+  - `default_index` (integer, 任意): 初期選択位置の 1-based インデックス。
+- 戻り値: `string`。
+
+例:
+
+```lua
+local bump = ptool.ask.select("Select bump type", {
+  { label = "Patch", value = "patch" },
+  { label = "Minor", value = "minor" },
+  { label = "Major", value = "major" },
+}, {
+  default_index = 2,
+})
+```
+
+### ptool.ask.multiselect
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.multiselect(prompt, items[, options])` は一覧から 0 個以上の項目を
+選ばせます。
+
+- `prompt` (string, 必須): ユーザーに表示するプロンプト。
+- `items` (table, 必須): 候補項目。形式は `ptool.ask.select` と同じです。
+- `options` (table, 任意): プロンプトオプション。サポートされる
+  フィールド:
+  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
+  - `page_size` (integer, 任意): 一度に表示する最大行数。
+  - `default_indexes` (table, 任意): デフォルトで選択される 1-based
+    インデックス配列。
+  - `min_selected` (integer, 任意): 必須の最小選択数。
+  - `max_selected` (integer, 任意): 許可される最大選択数。
+- 戻り値: `table`。
+
+例:
+
+```lua
+local targets = ptool.ask.multiselect("Select targets", {
+  "linux",
+  "macos",
+  "windows",
+}, {
+  default_indexes = { 1, 2 },
+  min_selected = 1,
+})
+```
+
+### ptool.ask.secret
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.secret(prompt[, options])` はトークンやパスワードのような
+シークレット入力を求めます。
+
+- `prompt` (string, 必須): ユーザーに表示するプロンプト。
+- `options` (table, 任意): プロンプトオプション。サポートされる
+  フィールド:
+  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
+  - `required` (boolean, 任意): 回答を空にできないようにするかどうか。
+  - `allow_empty` (boolean, 任意): 空の回答を許可するかどうか。
+    デフォルトは `false`。
+  - `confirm` (boolean, 任意): 2 回入力して確認させるかどうか。
+    デフォルトは `false`。
+  - `confirm_prompt` (string, 任意): 確認ステップ用のカスタムプロンプト。
+  - `mismatch_message` (string, 任意): 2 回の入力が一致しないときの
+    カスタムエラーメッセージ。
+  - `display_toggle` (boolean, 任意): 入力した値を一時的に表示できるように
+    するかどうか。
+  - `min_length` (integer, 任意): 許可される最小文字数。
+  - `max_length` (integer, 任意): 許可される最大文字数。
+  - `pattern` (string, 任意): 回答が一致しなければならない正規表現。
+- 戻り値: `string`。
+
+例:
+
+```lua
+local token = ptool.ask.secret("API token?", {
+  confirm = true,
+  min_length = 20,
+})
 ```
 
 ## ptool.config

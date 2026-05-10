@@ -159,7 +159,38 @@ impl LuaWorld {
     }
 
     pub(crate) fn ask(&self, prompt: String, options: Option<Table>) -> mlua::Result<String> {
-        crate::prompt::ask(prompt, options)
+        crate::prompt::ask(&self.engine, prompt, options)
+    }
+
+    pub(crate) fn ask_confirm(&self, prompt: String, options: Option<Table>) -> mlua::Result<bool> {
+        crate::prompt::ask_confirm(&self.engine, prompt, options)
+    }
+
+    pub(crate) fn ask_select(
+        &self,
+        prompt: String,
+        items: Table,
+        options: Option<Table>,
+    ) -> mlua::Result<String> {
+        crate::prompt::ask_select(&self.engine, prompt, items, options)
+    }
+
+    pub(crate) fn ask_multiselect(
+        &self,
+        lua: &Lua,
+        prompt: String,
+        items: Table,
+        options: Option<Table>,
+    ) -> mlua::Result<Table> {
+        crate::prompt::ask_multiselect(lua, &self.engine, prompt, items, options)
+    }
+
+    pub(crate) fn ask_secret(
+        &self,
+        prompt: String,
+        options: Option<Table>,
+    ) -> mlua::Result<String> {
+        crate::prompt::ask_secret(&self.engine, prompt, options)
     }
 
     pub(crate) fn script_path_value(&self) -> Option<String> {

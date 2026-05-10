@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Expanded `ptool.ask` into a unified interactive prompt API with text
+  validation, `confirm`, `select`, `multiselect`, and `secret` prompts, and
+  updated the Lua API docs across all supported locales.
 - Added the `ptool.log` module with `trace`, `debug`, `info`, `warn`, and
   `error` helpers for timestamped terminal logging, including colored level
   labels and `stderr` routing for error output.

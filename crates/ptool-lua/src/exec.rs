@@ -1,10 +1,10 @@
 use crate::command_echo::print_local_command_echo;
 use crate::lua_error::{self, LuaError};
 use crate::lua_world::RunConfig;
-use inquire::{Confirm, InquireError};
 use mlua::{Lua, Table, Value, Variadic};
 use ptool_engine::{
-    PtoolEngine, RunResult, RunStreamMode, format_command_for_display, resolve_run_cwd,
+    PromptConfirmOptions, PtoolEngine, RunResult, RunStreamMode, format_command_for_display,
+    resolve_run_cwd,
 };
 use std::path::Path;
 
@@ -569,49 +569,27 @@ fn build_run_failed_error(
 fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::Result<()> {
     let prompt = format!("Run command -- {}?", command);
     let help_msg = format!("The cwd is {}", cwd.display());
-    match Confirm::new(&prompt)
-        .with_default(true)
-        .with_help_message(&help_msg)
-        .prompt()
-    {
+    let engine = PtoolEngine::new();
+    match engine.prompt_confirm(
+        "ptool.run",
+        &prompt,
+        PromptConfirmOptions {
+            default: Some(true),
+            help: Some(help_msg),
+        },
+    ) {
         Ok(true) => Ok(()),
-        Ok(false) => Err(
-            LuaError::cancelled("ptool.run", format!("command `{cmd_for_error}` cancelled by user"))
-                .with_cmd(cmd_for_error)
-                .with_cwd(cwd.display().to_string())
-                .into_mlua_error(),
-        ),
-        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(
-            LuaError::not_interactive(
-                "ptool.run",
-                format!(
-                    "command `{cmd_for_error}` requires confirmation, but no interactive TTY is available"
-                ),
-            )
+        Ok(false) => Err(LuaError::cancelled(
+            "ptool.run",
+            format!("command `{cmd_for_error}` cancelled by user"),
+        )
+        .with_cmd(cmd_for_error)
+        .with_cwd(cwd.display().to_string())
+        .into_mlua_error()),
+        Err(err) => Err(crate::lua_error::LuaError::from_engine(err, "ptool.run")
             .with_cmd(cmd_for_error)
             .with_cwd(cwd.display().to_string())
-            .into_mlua_error(),
-        ),
-        Err(InquireError::OperationCanceled | InquireError::OperationInterrupted) => {
-            Err(
-                LuaError::cancelled(
-                    "ptool.run",
-                    format!("command `{cmd_for_error}` cancelled by user"),
-                )
-                .with_cmd(cmd_for_error)
-                .with_cwd(cwd.display().to_string())
-                .into_mlua_error(),
-            )
-        }
-        Err(err) => Err(
-            LuaError::prompt_failed(
-                "ptool.run",
-                format!("command `{cmd_for_error}` confirmation failed: {err}"),
-            )
-            .with_cmd(cmd_for_error)
-            .with_cwd(cwd.display().to_string())
-            .into_mlua_error(),
-        ),
+            .into_mlua_error()),
     }
 }
 
@@ -627,36 +605,22 @@ fn prompt_retry_after_failure(
         .unwrap_or_else(|| "terminated by signal".to_string());
     let prompt = format!("Command failed with status {code}. Retry -- {command}?");
     let help_msg = build_retry_help_message(cwd, stderr);
-    match Confirm::new(&prompt)
-        .with_default(true)
-        .with_help_message(&help_msg)
-        .prompt()
-    {
-        Ok(answer) => Ok(answer),
-        Err(InquireError::NotTTY | InquireError::IO(_)) => Err(LuaError::not_interactive(
+    let engine = PtoolEngine::new();
+    engine
+        .prompt_confirm(
             "ptool.run",
-            format!("command `{cmd_for_error}` failed and retry requires an interactive TTY"),
+            &prompt,
+            PromptConfirmOptions {
+                default: Some(true),
+                help: Some(help_msg),
+            },
         )
-        .with_cmd(cmd_for_error)
-        .with_cwd(cwd.display().to_string())
-        .into_mlua_error()),
-        Err(InquireError::OperationCanceled | InquireError::OperationInterrupted) => {
-            Err(LuaError::cancelled(
-                "ptool.run",
-                format!("retry for command `{cmd_for_error}` cancelled by user"),
-            )
-            .with_cmd(cmd_for_error)
-            .with_cwd(cwd.display().to_string())
-            .into_mlua_error())
-        }
-        Err(err) => Err(LuaError::prompt_failed(
-            "ptool.run",
-            format!("retry prompt for command `{cmd_for_error}` failed: {err}"),
-        )
-        .with_cmd(cmd_for_error)
-        .with_cwd(cwd.display().to_string())
-        .into_mlua_error()),
-    }
+        .map_err(|err| {
+            crate::lua_error::LuaError::from_engine(err, "ptool.run")
+                .with_cmd(cmd_for_error)
+                .with_cwd(cwd.display().to_string())
+                .into_mlua_error()
+        })
 }
 
 fn build_retry_help_message(cwd: &Path, stderr: Option<&str>) -> String {

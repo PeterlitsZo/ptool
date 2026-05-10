@@ -115,6 +115,18 @@ print(ptool.inspect(value, { multiline = false }))
 ## ptool.ask
 
 > `v0.1.0` - 引入。
+> `v0.5.0` - 新增输入校验选项和 prompt 子命令。
+
+`ptool.ask` 提供交互式提示能力。你既可以直接调用它来读取文本输入，也可以
+使用它的子 prompt 来做确认、单选、多选和密文输入。
+
+通用行为：
+
+- 所有 `ptool.ask` prompt 都需要交互式 TTY。在非交互环境中运行会抛出错误。
+- 如果用户取消 prompt，脚本会抛出错误。
+- 未知选项名或非法选项值类型都会抛出错误。
+
+### ptool.ask
 
 `ptool.ask(prompt[, options])` 向用户询问一行文本，并返回用户输入。
 
@@ -123,27 +135,132 @@ print(ptool.inspect(value, { multiline = false }))
   - `default`（string，可选）：用户提交空输入时采用的默认值。
   - `help`（string，可选）：显示在提示下方的额外帮助文本。
   - `placeholder`（string，可选）：用户开始输入前显示的占位文本。
+  - `required`（boolean，可选）：是否要求答案非空。
+  - `allow_empty`（boolean，可选）：是否允许空答案。默认值为 `true`。
+  - `trim`（boolean，可选）：返回前是否裁剪答案首尾空白。
+  - `min_length`（integer，可选）：允许的最小字符长度。
+  - `max_length`（integer，可选）：允许的最大字符长度。
+  - `pattern`（string，可选）：答案必须匹配的正则表达式。
 - 返回：`string`。
-
-行为说明：
-
-- 需要交互式 TTY。在非交互环境中运行会抛出错误。
-- 如果用户取消输入，脚本会抛出错误。
-- 未知选项名或非法选项值类型都会抛出错误。
 
 示例：
 
 ```lua
-local name = ptool.ask("Your name?", {
-  placeholder = "Alice",
-  help = "Press Enter to confirm",
+local project = ptool.ask("Project name?", {
+  placeholder = "my-tool",
+  help = "Lowercase letters, digits, and dashes only",
+  required = true,
+  trim = true,
+  pattern = "^[a-z0-9-]+$",
 })
+```
 
-local city = ptool.ask("City?", {
-  default = "Shanghai",
+### ptool.ask.confirm
+
+> `v0.5.0` - 引入。
+
+`ptool.ask.confirm(prompt[, options])` 向用户询问一个是/否答案。
+
+- `prompt`（string，必填）：展示给用户的提示语。
+- `options`（table，可选）：提示选项。支持：
+  - `default`（boolean，可选）：用户直接按 Enter 时采用的默认答案。
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+- 返回：`boolean`。
+
+示例：
+
+```lua
+local confirmed = ptool.ask.confirm("Continue?", {
+  default = true,
 })
+```
 
-print(string.format("Hello, %s from %s!", name, city))
+### ptool.ask.select
+
+> `v0.5.0` - 引入。
+
+`ptool.ask.select(prompt, items[, options])` 让用户从列表中选择一个条目。
+
+- `prompt`（string，必填）：展示给用户的提示语。
+- `items`（table，必填）：候选条目。每一项可以是：
+  - string，会同时作为显示标签和返回值。
+  - 形如 `{ label = "Patch", value = "patch" }` 的 table。
+- `options`（table，可选）：提示选项。支持：
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `page_size`（integer，可选）：一次最多显示多少行。
+  - `default_index`（integer，可选）：初始选中项的 1-based 下标。
+- 返回：`string`。
+
+示例：
+
+```lua
+local bump = ptool.ask.select("Select bump type", {
+  { label = "Patch", value = "patch" },
+  { label = "Minor", value = "minor" },
+  { label = "Major", value = "major" },
+}, {
+  default_index = 2,
+})
+```
+
+### ptool.ask.multiselect
+
+> `v0.5.0` - 引入。
+
+`ptool.ask.multiselect(prompt, items[, options])` 让用户从列表中选择零个
+或多个条目。
+
+- `prompt`（string，必填）：展示给用户的提示语。
+- `items`（table，必填）：候选条目，格式与 `ptool.ask.select` 相同。
+- `options`（table，可选）：提示选项。支持：
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `page_size`（integer，可选）：一次最多显示多少行。
+  - `default_indexes`（table，可选）：默认选中的 1-based 下标数组。
+  - `min_selected`（integer，可选）：最少必须选中的条目数。
+  - `max_selected`（integer，可选）：最多允许选中的条目数。
+- 返回：`table`。
+
+示例：
+
+```lua
+local targets = ptool.ask.multiselect("Select targets", {
+  "linux",
+  "macos",
+  "windows",
+}, {
+  default_indexes = { 1, 2 },
+  min_selected = 1,
+})
+```
+
+### ptool.ask.secret
+
+> `v0.5.0` - 引入。
+
+`ptool.ask.secret(prompt[, options])` 用来读取 token、密码等密文输入。
+
+- `prompt`（string，必填）：展示给用户的提示语。
+- `options`（table，可选）：提示选项。支持：
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `required`（boolean，可选）：是否要求答案非空。
+  - `allow_empty`（boolean，可选）：是否允许空答案。默认值为 `false`。
+  - `confirm`（boolean，可选）：是否要求用户重复输入一次进行确认。
+    默认值为 `false`。
+  - `confirm_prompt`（string，可选）：确认步骤使用的自定义提示语。
+  - `mismatch_message`（string，可选）：两次输入不一致时显示的自定义错误消息。
+  - `display_toggle`（boolean，可选）：是否允许临时显示已输入的密文。
+  - `min_length`（integer，可选）：允许的最小字符长度。
+  - `max_length`（integer，可选）：允许的最大字符长度。
+  - `pattern`（string，可选）：答案必须匹配的正则表达式。
+- 返回：`string`。
+
+示例：
+
+```lua
+local token = ptool.ask.secret("API token?", {
+  confirm = true,
+  min_length = 20,
+})
 ```
 
 ## ptool.config

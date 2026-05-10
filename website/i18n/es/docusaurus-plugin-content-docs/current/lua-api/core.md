@@ -127,6 +127,21 @@ print(ptool.inspect(value, { multiline = false }))
 ## ptool.ask
 
 > `v0.1.0` - Introduced.
+> `v0.5.0` - Added validation options and prompt subcommands.
+
+`ptool.ask` ofrece prompts interactivos. Puedes llamarlo directamente para
+pedir texto, o usar sus subprompts para confirmación, selección simple,
+selección múltiple y entrada secreta.
+
+Comportamiento común:
+
+- Todos los prompts de `ptool.ask` requieren un TTY interactivo. Ejecutarlos
+  en un entorno no interactivo produce un error.
+- Si el usuario cancela un prompt, el script produce un error.
+- Los nombres de opción desconocidos o los tipos de valor no válidos producen
+  un error.
+
+### ptool.ask
 
 `ptool.ask(prompt[, options])` pide al usuario una línea de texto y devuelve la
 respuesta.
@@ -139,29 +154,152 @@ respuesta.
     prompt.
   - `placeholder` (string, opcional): Texto placeholder mostrado antes de que
     el usuario empiece a escribir.
+  - `required` (boolean, opcional): Si la respuesta debe ser no vacía.
+  - `allow_empty` (boolean, opcional): Si se acepta una respuesta vacía.
+    El valor por defecto es `true`.
+  - `trim` (boolean, opcional): Si se deben recortar los espacios al inicio y
+    al final antes de devolver la respuesta.
+  - `min_length` (integer, opcional): Longitud mínima aceptada.
+  - `max_length` (integer, opcional): Longitud máxima aceptada.
+  - `pattern` (string, opcional): Expresión regular que la respuesta debe
+    cumplir.
 - Devuelve: `string`.
-
-Comportamiento:
-
-- Requiere un TTY interactivo. Ejecutarlo en un entorno no interactivo produce
-  un error.
-- Si el usuario cancela el prompt, el script produce un error.
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un
-  error.
 
 Ejemplo:
 
 ```lua
-local name = ptool.ask("Your name?", {
-  placeholder = "Alice",
-  help = "Press Enter to confirm",
+local project = ptool.ask("Project name?", {
+  placeholder = "my-tool",
+  help = "Lowercase letters, digits, and dashes only",
+  required = true,
+  trim = true,
+  pattern = "^[a-z0-9-]+$",
 })
+```
 
-local city = ptool.ask("City?", {
-  default = "Shanghai",
+### ptool.ask.confirm
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.confirm(prompt[, options])` pide al usuario una respuesta de sí/no.
+
+- `prompt` (string, obligatorio): El prompt que se muestra al usuario.
+- `options` (table, opcional): Opciones del prompt. Campos admitidos:
+  - `default` (boolean, opcional): Respuesta por defecto cuando el usuario
+    pulsa Enter sin escribir.
+  - `help` (string, opcional): Texto de ayuda adicional mostrado bajo el
+    prompt.
+- Devuelve: `boolean`.
+
+Ejemplo:
+
+```lua
+local confirmed = ptool.ask.confirm("Continue?", {
+  default = true,
 })
+```
 
-print(string.format("Hello, %s from %s!", name, city))
+### ptool.ask.select
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.select(prompt, items[, options])` pide al usuario elegir un elemento
+de una lista.
+
+- `prompt` (string, obligatorio): El prompt que se muestra al usuario.
+- `items` (table, obligatorio): Elementos candidatos. Cada entrada puede ser:
+  - Un string, usado como etiqueta mostrada y como valor devuelto.
+  - Un table como `{ label = "Patch", value = "patch" }`.
+- `options` (table, opcional): Opciones del prompt. Campos admitidos:
+  - `help` (string, opcional): Texto de ayuda adicional mostrado bajo el
+    prompt.
+  - `page_size` (integer, opcional): Número máximo de filas mostradas a la vez.
+  - `default_index` (integer, opcional): Índice 1-based del elemento
+    inicialmente seleccionado.
+- Devuelve: `string`.
+
+Ejemplo:
+
+```lua
+local bump = ptool.ask.select("Select bump type", {
+  { label = "Patch", value = "patch" },
+  { label = "Minor", value = "minor" },
+  { label = "Major", value = "major" },
+}, {
+  default_index = 2,
+})
+```
+
+### ptool.ask.multiselect
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.multiselect(prompt, items[, options])` pide al usuario elegir cero o
+más elementos de una lista.
+
+- `prompt` (string, obligatorio): El prompt que se muestra al usuario.
+- `items` (table, obligatorio): Elementos candidatos. El formato es el mismo
+  que `ptool.ask.select`.
+- `options` (table, opcional): Opciones del prompt. Campos admitidos:
+  - `help` (string, opcional): Texto de ayuda adicional mostrado bajo el
+    prompt.
+  - `page_size` (integer, opcional): Número máximo de filas mostradas a la vez.
+  - `default_indexes` (table, opcional): Índices 1-based seleccionados por
+    defecto.
+  - `min_selected` (integer, opcional): Cantidad mínima de elementos que deben
+    seleccionarse.
+  - `max_selected` (integer, opcional): Cantidad máxima de elementos que pueden
+    seleccionarse.
+- Devuelve: `table`.
+
+Ejemplo:
+
+```lua
+local targets = ptool.ask.multiselect("Select targets", {
+  "linux",
+  "macos",
+  "windows",
+}, {
+  default_indexes = { 1, 2 },
+  min_selected = 1,
+})
+```
+
+### ptool.ask.secret
+
+> `v0.5.0` - Introduced.
+
+`ptool.ask.secret(prompt[, options])` pide al usuario una entrada secreta, como
+un token o una contraseña.
+
+- `prompt` (string, obligatorio): El prompt que se muestra al usuario.
+- `options` (table, opcional): Opciones del prompt. Campos admitidos:
+  - `help` (string, opcional): Texto de ayuda adicional mostrado bajo el
+    prompt.
+  - `required` (boolean, opcional): Si la respuesta debe ser no vacía.
+  - `allow_empty` (boolean, opcional): Si se acepta una respuesta vacía.
+    El valor por defecto es `false`.
+  - `confirm` (boolean, opcional): Si se debe pedir al usuario que escriba el
+    secreto dos veces. El valor por defecto es `false`.
+  - `confirm_prompt` (string, opcional): Prompt personalizado para el paso de
+    confirmación.
+  - `mismatch_message` (string, opcional): Mensaje de error personalizado
+    cuando las dos respuestas no coinciden.
+  - `display_toggle` (boolean, opcional): Si se permite mostrar temporalmente
+    el secreto escrito.
+  - `min_length` (integer, opcional): Longitud mínima aceptada.
+  - `max_length` (integer, opcional): Longitud máxima aceptada.
+  - `pattern` (string, opcional): Expresión regular que la respuesta debe
+    cumplir.
+- Devuelve: `string`.
+
+Ejemplo:
+
+```lua
+local token = ptool.ask.secret("API token?", {
+  confirm = true,
+  min_length = 20,
+})
 ```
 
 ## ptool.config

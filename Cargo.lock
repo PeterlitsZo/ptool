@@ -1596,6 +1596,7 @@ version = "0.4.0"
 dependencies = [
  "clap",
  "glob",
+ "inquire",
  "jiff",
  "md5",
  "minijinja",
@@ -1619,7 +1620,6 @@ dependencies = [
 name = "ptool-lua"
 version = "0.4.0"
 dependencies = [
- "inquire",
  "jiff",
  "mlua",
  "owo-colors",
