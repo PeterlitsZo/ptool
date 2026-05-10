@@ -360,6 +360,18 @@ impl LuaWorld {
         crate::json::stringify(lua, &self.engine, value, options)
     }
 
+    pub(crate) fn yaml_parse(&self, lua: &Lua, input: Value) -> mlua::Result<Value> {
+        crate::yaml::parse(lua, &self.engine, input)
+    }
+
+    pub(crate) fn yaml_get(&self, lua: &Lua, input: Value, path: Value) -> mlua::Result<Value> {
+        crate::yaml::get(lua, &self.engine, input, path)
+    }
+
+    pub(crate) fn yaml_stringify(&self, lua: &Lua, value: Value) -> mlua::Result<String> {
+        crate::yaml::stringify(lua, &self.engine, value)
+    }
+
     pub(crate) fn net_parse_url(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
         crate::net::parse_url(lua, &self.engine, input)
     }

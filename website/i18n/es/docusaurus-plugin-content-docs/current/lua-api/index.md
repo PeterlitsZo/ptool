@@ -24,6 +24,8 @@
 - [API de log](./log.md): Escribe logs de terminal con marcas de tiempo y nivel.
 - [API HTTP](./http.md): Envía solicitudes HTTP y consume cuerpos de respuesta.
 - [API JSON](./json.md): Analiza texto JSON y serializa valores Lua como JSON.
+- [API YAML](./yaml.md): Analiza texto YAML, lee valores anidados y serializa
+  valores Lua como YAML.
 - [API de base de datos](./db.md): Abre conexiones de base de datos y ejecuta
   consultas SQL.
 - [API SSH](./ssh.md): Conéctate a hosts remotos, ejecuta comandos y transfiere

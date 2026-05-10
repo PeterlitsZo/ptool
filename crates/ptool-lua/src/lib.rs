@@ -21,6 +21,7 @@ mod strings;
 mod template;
 mod toml;
 mod version;
+mod yaml;
 
 pub use lua_world::{LuaWorld, LuaWorldConfig, RunConfig};
 pub use runner::{run_repl, run_script};

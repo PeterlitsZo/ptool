@@ -23,6 +23,8 @@
 - [HTTP API](./http.md): HTTP リクエストを送り、レスポンス本文を扱う。
 - [JSON API](./json.md): JSON テキストを解析し、Lua 値を JSON として
   文字列化する。
+- [YAML API](./yaml.md): YAML テキストを解析し、ネストした値を読み取り、
+  Lua 値を YAML として文字列化する。
 - [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
 - [SSH API](./ssh.md): リモートホストへ接続し、コマンドを実行し、
   ファイルを転送する。

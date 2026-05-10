@@ -22,6 +22,8 @@
 - [Log API](./log.md): Write timestamped terminal logs with level-based output.
 - [HTTP API](./http.md): Send HTTP requests and consume response bodies.
 - [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
+- [YAML API](./yaml.md): Parse YAML text, read nested values, and stringify Lua
+  values as YAML.
 - [Database API](./db.md): Open database connections and run SQL queries.
 - [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer
   files.

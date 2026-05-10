@@ -18,6 +18,7 @@
 - [Log API](./log.md)：按 level 输出带时间戳的终端日志。
 - [HTTP API](./http.md)：发送 HTTP 请求并读取响应体。
 - [JSON API](./json.md)：解析 JSON 文本，并把 Lua 值序列化为 JSON。
+- [YAML API](./yaml.md)：解析 YAML 文本、读取嵌套值，并把 Lua 值序列化为 YAML。
 - [Database API](./db.md)：打开数据库连接并执行 SQL 查询。
 - [SSH API](./ssh.md)：连接远程主机、执行命令并传输文件。
 - [Path API](./path.md)：以纯词法方式处理路径，不触碰真实文件系统。

@@ -19,6 +19,7 @@ mod strings;
 mod template;
 mod text;
 mod toml;
+mod yaml;
 
 pub use ansi::{Color, StyleOptions};
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
@@ -56,6 +57,7 @@ use std::sync::Mutex;
 pub use strings::{IndentOptions, SplitLinesOptions, SplitOptions};
 use tokio::runtime::{Builder, Runtime};
 pub use toml::{TomlPathSegment, TomlValue};
+pub use yaml::{YamlPathSegment, YamlValue};
 
 #[derive(Clone, Debug)]
 pub struct PtoolEngine {
@@ -369,6 +371,18 @@ impl PtoolEngine {
 
     pub fn toml_stringify(&self, value: &TomlValue) -> Result<String> {
         toml::stringify(value)
+    }
+
+    pub fn yaml_parse(&self, input: &str) -> Result<YamlValue> {
+        yaml::parse(input)
+    }
+
+    pub fn yaml_get(&self, input: &str, path: &[YamlPathSegment]) -> Result<Option<YamlValue>> {
+        yaml::get(input, path)
+    }
+
+    pub fn yaml_stringify(&self, value: &YamlValue) -> Result<String> {
+        yaml::stringify(value)
     }
 
     pub fn template_render(&self, template: &str, context: &JsonValue) -> Result<String> {

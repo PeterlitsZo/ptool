@@ -25,6 +25,8 @@
 - [API HTTP](./http.md): Envia requisições HTTP e consome corpos de resposta.
 - [API JSON](./json.md): Faz parse de texto JSON e serializa valores Lua como
   JSON.
+- [API YAML](./yaml.md): Faz parse de texto YAML, lê valores aninhados e
+  serializa valores Lua como YAML.
 - [API de banco de dados](./db.md): Abre conexões de banco de dados e executa
   consultas SQL.
 - [API SSH](./ssh.md): Conecta-se a hosts remotos, executa comandos e transfere

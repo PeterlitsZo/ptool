@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added the `ptool.yaml` module with `parse`, `get`, and `stringify` helpers
+  for YAML parsing and serialization in Lua scripts, and documented it across
+  all supported locales.
 - Added a `working_dir` option to `ptool.fs.glob(...)`, so Lua scripts can
   resolve glob patterns relative to an explicit base directory, and updated the
   filesystem API docs across all supported locales.

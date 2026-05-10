@@ -70,7 +70,8 @@ fn create_ptool_module(
     let str_module = create_ptool_str_module(lua, Rc::clone(&world))?;
     let semver_module = create_ptool_semver_module(lua, Rc::clone(&world))?;
     let template_module = create_ptool_template_module(lua, Rc::clone(&world))?;
-    let toml_module = create_ptool_toml_module(lua, world)?;
+    let toml_module = create_ptool_toml_module(lua, Rc::clone(&world))?;
+    let yaml_module = create_ptool_yaml_module(lua, Rc::clone(&world))?;
     module.set("run", run_fn)?;
     module.set("run_capture", run_capture_fn)?;
     module.set("config", config_fn)?;
@@ -100,6 +101,7 @@ fn create_ptool_module(
     module.set("semver", semver_module)?;
     module.set("template", template_module)?;
     module.set("toml", toml_module)?;
+    module.set("yaml", yaml_module)?;
     Ok(module)
 }
 
@@ -424,6 +426,25 @@ fn create_ptool_toml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
     toml_module.set("remove", remove_fn)?;
     toml_module.set("stringify", stringify_fn)?;
     Ok(toml_module)
+}
+
+fn create_ptool_yaml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let yaml_module = lua.create_table()?;
+    let parse_state = Rc::clone(&world);
+    let parse_fn =
+        lua.create_function(move |lua, input: Value| parse_state.borrow().yaml_parse(lua, input))?;
+    let get_state = Rc::clone(&world);
+    let get_fn = lua.create_function(move |lua, (input, path): (Value, Value)| {
+        get_state.borrow().yaml_get(lua, input, path)
+    })?;
+    let stringify_state = Rc::clone(&world);
+    let stringify_fn = lua.create_function(move |lua, value: Value| {
+        stringify_state.borrow().yaml_stringify(lua, value)
+    })?;
+    yaml_module.set("parse", parse_fn)?;
+    yaml_module.set("get", get_fn)?;
+    yaml_module.set("stringify", stringify_fn)?;
+    Ok(yaml_module)
 }
 
 fn create_ptool_path_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
