@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed `ptool.ask(...)` so its callable-table form correctly accepts the
+  prompt argument again after the Lua metatable binding regressed.
 - Added the `ptool.yaml` module with `parse`, `get`, and `stringify` helpers
   for YAML parsing and serialization in Lua scripts, and documented it across
   all supported locales.

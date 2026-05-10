@@ -138,9 +138,11 @@ fn create_ptool_ask_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
     let mt = lua.create_table()?;
 
     let ask_state = Rc::clone(&world);
-    let ask_fn = lua.create_function(move |_, (prompt, options): (String, Option<Table>)| {
-        ask_state.borrow().ask(prompt, options)
-    })?;
+    let ask_fn = lua.create_function(
+        move |_, (_self, prompt, options): (Table, String, Option<Table>)| {
+            ask_state.borrow().ask(prompt, options)
+        },
+    )?;
     mt.set("__call", ask_fn)?;
     ask_module.set_metatable(Some(mt))?;
 
