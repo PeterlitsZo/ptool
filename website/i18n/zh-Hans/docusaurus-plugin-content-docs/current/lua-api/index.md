@@ -25,6 +25,7 @@
 - [TOML API](./toml.md)：解析、序列化、读取、更新并删除 TOML 值。
 - [Regex API](./re.md)：编译正则，并对文本进行搜索、捕获、替换或切分。
 - [String API](./str.md)：裁剪、拆分、拼接、替换和格式化字符串。
+- [Table API](./tbl.md)：对致密顺序表执行映射、过滤和拼接。
 - [Filesystem API](./fs.md)：读取、写入、创建和 glob 文件系统路径。
 - [Shell API](./sh.md)：把 shell 风格命令行拆分成参数数组。
 - [Template API](./template.md)：基于 Lua 数据渲染文本模板。

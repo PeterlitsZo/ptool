@@ -38,6 +38,7 @@
   texto.
 - [API de strings](./str.md): Remove espaços, divide, junta, substitui e
   formata strings.
+- [API de tabelas](./tbl.md): Mapeia, filtra e concatena tabelas de lista densas.
 - [API de sistema de arquivos](./fs.md): Lê, grava, cria e faz glob em caminhos
   do sistema de arquivos.
 - [API de shell](./sh.md): Divide linhas de comando em estilo shell em arrays

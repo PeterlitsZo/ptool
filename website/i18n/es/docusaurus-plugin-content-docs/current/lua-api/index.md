@@ -37,6 +37,7 @@
   texto.
 - [API de cadenas](./str.md): Recorta, divide, une, reemplaza y formatea
   cadenas.
+- [API de tablas](./tbl.md): Mapea, filtra y concatena tablas tipo lista densas.
 - [API de sistema de archivos](./fs.md): Lee, escribe, crea y hace glob sobre
   rutas del sistema de archivos.
 - [API de shell](./sh.md): Divide líneas de comandos con sintaxis tipo shell en

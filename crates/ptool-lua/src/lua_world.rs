@@ -570,6 +570,32 @@ impl LuaWorld {
         crate::strings::indent(&self.engine, input, prefix, options)
     }
 
+    pub(crate) fn tbl_map(
+        &self,
+        lua: &Lua,
+        list: Table,
+        callback: Function,
+    ) -> mlua::Result<Table> {
+        crate::tbl::map(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_filter(
+        &self,
+        lua: &Lua,
+        list: Table,
+        callback: Function,
+    ) -> mlua::Result<Table> {
+        crate::tbl::filter(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_concat(&self, lua: &Lua, lists: Variadic<Value>) -> mlua::Result<Table> {
+        crate::tbl::concat(lua, lists)
+    }
+
+    pub(crate) fn tbl_join(&self, lua: &Lua, lists: Variadic<Value>) -> mlua::Result<Table> {
+        crate::tbl::join(lua, lists)
+    }
+
     pub(crate) fn re_compile(&self, args: Variadic<Value>) -> mlua::Result<crate::re::LuaRegex> {
         crate::re::compile(&self.engine, args)
     }

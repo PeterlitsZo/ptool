@@ -2,6 +2,9 @@
 
 ## v0.5.0 (2026-05-10)
 
+- Added the `ptool.tbl` module with `map`, `filter`, `concat`, and `join`
+  helpers for transforming and combining dense Lua list tables, and documented
+  it across all supported locales.
 - Fixed `ptool.ask(...)` so its callable-table form correctly accepts the
   prompt argument again after the Lua metatable binding regressed.
 - Added the `ptool.yaml` module with `parse`, `get`, and `stringify` helpers

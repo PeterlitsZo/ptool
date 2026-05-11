@@ -7,21 +7,24 @@
 - [ ] Add a helper for SSH connection to send HTTP request?
 - [ ] Get the ptool's version.
 - [ ] Let `ptool --help` print the website's URL.
-- [ ] Enhance `p.log` and `p.run` to have better style?
+- [ ] Enhance `p.log` and `p.run`, `p.ask` to have better style?
+  - The custom `prompt_prefix`? The background color?
+- [ ] How about let `run_capture` have a `trim` option?
+- [ ] Let the `ssh:upload`'s `remote_path` can be a directory.
 
 # v0.6.0
 
+- [ ] Update CI (to avoid "Node.js 20 actions are deprecated." warnings.)
 - [ ] Make the document website better.
 - [ ] Make `ptool -V` render more infomations.
 - [ ] Support a TUI toolkit.
-- [ ] Support `p.tbl` module for better Lua table functions.
+- [x] Support `p.tbl` module for better Lua table functions.
   - `p.tbl.map`.
   - `p.tbl.filter`.
   - `p.tbl.join`.
   - etc.
 - [ ] Let document use better i18n solution.
 - [ ] Add `p.fs.is_file` and `p.fs.is_dir`.
-- [ ] How about let `run_capture` have a `trim` option?
 - [ ] Bugfix: "response read failed: error decoding response body" when download
       with p.http.request.
 

@@ -33,6 +33,7 @@
 - [Regex API](./re.md): Compile regexes and search, capture, replace, or split
   text.
 - [String API](./str.md): Trim, split, join, replace, and format strings.
+- [Table API](./tbl.md): Map, filter, and concatenate dense list tables.
 - [Filesystem API](./fs.md): Read, write, create, and glob filesystem paths.
 - [Shell API](./sh.md): Split shell-like command lines into argument arrays.
 - [Template API](./template.md): Render text templates from Lua data.

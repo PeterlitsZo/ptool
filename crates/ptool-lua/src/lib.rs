@@ -18,6 +18,7 @@ mod script_args;
 mod semver;
 mod ssh;
 mod strings;
+mod tbl;
 mod template;
 mod toml;
 mod version;

@@ -68,6 +68,7 @@ fn create_ptool_module(
     let platform_module = create_ptool_platform_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
     let str_module = create_ptool_str_module(lua, Rc::clone(&world))?;
+    let tbl_module = create_ptool_tbl_module(lua, Rc::clone(&world))?;
     let semver_module = create_ptool_semver_module(lua, Rc::clone(&world))?;
     let template_module = create_ptool_template_module(lua, Rc::clone(&world))?;
     let toml_module = create_ptool_toml_module(lua, Rc::clone(&world))?;
@@ -98,6 +99,7 @@ fn create_ptool_module(
     module.set("platform", platform_module)?;
     module.set("re", re_module)?;
     module.set("str", str_module)?;
+    module.set("tbl", tbl_module)?;
     module.set("semver", semver_module)?;
     module.set("template", template_module)?;
     module.set("toml", toml_module)?;
@@ -585,6 +587,32 @@ fn create_ptool_str_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
     str_module.set("cut_suffix", cut_suffix_fn)?;
     str_module.set("indent", indent_fn)?;
     Ok(str_module)
+}
+
+fn create_ptool_tbl_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let tbl_module = lua.create_table()?;
+
+    let map_state = Rc::clone(&world);
+    let map_fn = lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+        map_state.borrow().tbl_map(lua, list, callback)
+    })?;
+    let filter_state = Rc::clone(&world);
+    let filter_fn =
+        lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+            filter_state.borrow().tbl_filter(lua, list, callback)
+        })?;
+    let concat_state = Rc::clone(&world);
+    let concat_fn = lua.create_function(move |lua, lists: Variadic<Value>| {
+        concat_state.borrow().tbl_concat(lua, lists)
+    })?;
+    let join_fn = lua
+        .create_function(move |lua, lists: Variadic<Value>| world.borrow().tbl_join(lua, lists))?;
+
+    tbl_module.set("map", map_fn)?;
+    tbl_module.set("filter", filter_fn)?;
+    tbl_module.set("concat", concat_fn)?;
+    tbl_module.set("join", join_fn)?;
+    Ok(tbl_module)
 }
 
 fn create_ptool_semver_module(
