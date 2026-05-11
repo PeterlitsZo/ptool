@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "v0.5.0",
+    "description": "The label for version 0.5.0"
+  },
+  "sidebar.docsSidebar.category.Guide": {
+    "message": "ガイド",
+    "description": "The label for category 'Guide' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Lua API": {
+    "message": "Lua API",
+    "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
+  }
+}

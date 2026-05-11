@@ -6,23 +6,39 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const websiteDir = path.resolve(__dirname, '..');
 const docsDir = path.join(websiteDir, 'docs');
+const versionedDocsDir = path.join(websiteDir, 'versioned_docs');
 const i18nDir = path.join(websiteDir, 'i18n');
 const outputDir = path.join(websiteDir, 'static', 'raw');
 
 const locales = ['en', 'zh-Hans', 'es', 'pt-BR', 'ja'];
+const currentVersionName = 'current';
+const currentVersionPath = 'unreleased';
+const lastVersionName = '0.5.0';
 
 async function main() {
   await rm(outputDir, {recursive: true, force: true});
   await mkdir(outputDir, {recursive: true});
 
   const manifest = [];
+  const stableVersions = await readVersionNames();
 
   await exportTree({
     locale: 'en',
     sourceDir: docsDir,
     outputSubdir: path.join('docs'),
     manifest,
+    versionName: currentVersionName,
   });
+
+  for (const versionName of stableVersions) {
+    await exportTree({
+      locale: 'en',
+      sourceDir: path.join(versionedDocsDir, `version-${versionName}`),
+      outputSubdir: path.join('versioned_docs', `version-${versionName}`),
+      manifest,
+      versionName,
+    });
+  }
 
   for (const locale of locales) {
     if (locale === 'en') {
@@ -39,7 +55,28 @@ async function main() {
       ),
       outputSubdir: path.join('i18n', locale, 'docs'),
       manifest,
+      versionName: currentVersionName,
     });
+
+    for (const versionName of stableVersions) {
+      await exportTree({
+        locale,
+        sourceDir: path.join(
+          i18nDir,
+          locale,
+          'docusaurus-plugin-content-docs',
+          `version-${versionName}`,
+        ),
+        outputSubdir: path.join(
+          'i18n',
+          locale,
+          'versioned_docs',
+          `version-${versionName}`,
+        ),
+        manifest,
+        versionName,
+      });
+    }
   }
 
   manifest.sort((a, b) => a.permalink.localeCompare(b.permalink));
@@ -50,7 +87,7 @@ async function main() {
   );
 }
 
-async function exportTree({locale, sourceDir, outputSubdir, manifest}) {
+async function exportTree({locale, sourceDir, outputSubdir, manifest, versionName}) {
   const files = await collectMarkdownFiles(sourceDir);
 
   for (const file of files) {
@@ -59,7 +96,28 @@ async function exportTree({locale, sourceDir, outputSubdir, manifest}) {
     await mkdir(path.dirname(outputPath), {recursive: true});
     await cp(file, outputPath);
 
-    manifest.push(await createManifestEntry({locale, sourceDir, outputSubdir, file}));
+    manifest.push(
+      await createManifestEntry({
+        locale,
+        sourceDir,
+        outputSubdir,
+        file,
+        versionName,
+      }),
+    );
+  }
+}
+
+async function readVersionNames() {
+  try {
+    const content = await readFile(path.join(websiteDir, 'versions.json'), 'utf8');
+    const parsed = JSON.parse(content);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
+      return [];
+    }
+    throw error;
   }
 }
 
@@ -81,7 +139,7 @@ async function collectMarkdownFiles(dir) {
   return files.flat().sort((a, b) => a.localeCompare(b));
 }
 
-async function createManifestEntry({locale, sourceDir, outputSubdir, file}) {
+async function createManifestEntry({locale, sourceDir, outputSubdir, file, versionName}) {
   const relativePath = path.relative(sourceDir, file);
   const rawUrl = `/${toPosixPath(path.join('raw', outputSubdir, relativePath))}`;
   const sourcePath = toPosixPath(path.relative(websiteDir, file));
@@ -92,7 +150,8 @@ async function createManifestEntry({locale, sourceDir, outputSubdir, file}) {
     locale,
     sourcePath,
     rawUrl,
-    permalink: toPermalink(locale, docPath),
+    version: versionName,
+    permalink: toPermalink({locale, docPath, versionName}),
   };
 }
 
@@ -108,13 +167,21 @@ function normalizeDocPath(relativePath) {
   return normalized;
 }
 
-function toPermalink(locale, docPath) {
+function toPermalink({locale, docPath, versionName}) {
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
   const docPrefix = '/docs';
-  if (!docPath) {
-    return `${localePrefix}${docPrefix}`;
+
+  let basePath = `${localePrefix}${docPrefix}`;
+  if (versionName === currentVersionName) {
+    basePath = `${basePath}/${currentVersionPath}`;
+  } else if (versionName !== lastVersionName) {
+    basePath = `${basePath}/${versionName}`;
   }
-  return `${localePrefix}${docPrefix}/${docPath}`;
+
+  if (!docPath) {
+    return basePath;
+  }
+  return `${basePath}/${docPath}`;
 }
 
 async function extractTitle(file) {

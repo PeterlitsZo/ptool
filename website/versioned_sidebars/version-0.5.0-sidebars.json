@@ -1,0 +1,38 @@
+{
+  "docsSidebar": [
+    {
+      "type": "category",
+      "label": "Guide",
+      "items": [
+        "intro",
+        "repl"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Lua API",
+      "items": [
+        "lua-api/index",
+        "lua-api/core",
+        "lua-api/semver",
+        "lua-api/hash",
+        "lua-api/net",
+        "lua-api/platform",
+        "lua-api/ansi",
+        "lua-api/log",
+        "lua-api/http",
+        "lua-api/json",
+        "lua-api/db",
+        "lua-api/ssh",
+        "lua-api/path",
+        "lua-api/toml",
+        "lua-api/re",
+        "lua-api/str",
+        "lua-api/fs",
+        "lua-api/sh",
+        "lua-api/template",
+        "lua-api/args"
+      ]
+    }
+  ]
+}

@@ -67,6 +67,16 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/PeterlitsZo/ptool/tree/main/website/',
+          lastVersion: '0.5.0',
+          versions: {
+            current: {
+              label: 'Unreleased',
+              path: 'unreleased',
+            },
+            '0.5.0': {
+              label: 'v0.5.0',
+            },
+          },
         },
         blog: false,
       } satisfies Preset.Options,
@@ -95,6 +105,10 @@ const config: Config = {
         },
         {
           type: 'localeDropdown',
+          position: 'left',
+        },
+        {
+          type: 'docsVersionDropdown',
           position: 'left',
         },
         {
