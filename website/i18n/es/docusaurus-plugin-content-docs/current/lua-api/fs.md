@@ -83,6 +83,69 @@ if ptool.fs.exists("tmp/hello.txt") then
 end
 ```
 
+## ptool.fs.is_file
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.is_file(path)` comprueba si una ruta existe y es un archivo normal.
+
+- `path` (string, obligatorio): La ruta que se va a comprobar.
+- Devuelve: `boolean`.
+
+Ejemplo:
+
+```lua
+if ptool.fs.is_file("tmp/hello.txt") then
+  print("file")
+end
+```
+
+## ptool.fs.is_dir
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.is_dir(path)` comprueba si una ruta existe y es un directorio.
+
+- `path` (string, obligatorio): La ruta que se va a comprobar.
+- Devuelve: `boolean`.
+
+Ejemplo:
+
+```lua
+if ptool.fs.is_dir("tmp") then
+  print("dir")
+end
+```
+
+## ptool.fs.remove
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.remove(path[, options])` elimina un archivo, enlace simbólico o
+directorio.
+
+- `path` (string, obligatorio): La ruta que se va a eliminar.
+- `options` (table, opcional): Opciones de eliminación. Campos admitidos:
+  - `recursive` (boolean, opcional): Indica si los directorios deben
+    eliminarse recursivamente. Valor predeterminado: `false`.
+  - `missing_ok` (boolean, opcional): Indica si deben ignorarse las rutas
+    ausentes. Valor predeterminado: `false`.
+
+Comportamiento:
+
+- Los archivos y enlaces simbólicos pueden eliminarse sin `recursive`.
+- Los directorios necesitan `recursive = true` cuando no están vacíos.
+- Los nombres de opción desconocidos o los tipos de valor inválidos producen
+  un error.
+
+Ejemplo:
+
+```lua
+ptool.fs.remove("tmp/hello.txt")
+ptool.fs.remove("tmp/cache", { recursive = true })
+ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.

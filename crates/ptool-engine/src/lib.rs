@@ -28,7 +28,7 @@ pub use exec::{
     RunOptions, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
     resolve_run_cwd, run_command,
 };
-pub use fs::{FsCopyOptions, FsCopyResult, FsGlobOptions, FsMkdirOptions};
+pub use fs::{FsCopyOptions, FsCopyResult, FsGlobOptions, FsMkdirOptions, FsRemoveOptions};
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use json::{JsonStringifyOptions, JsonValue};
 pub use log::LogLevel;
@@ -265,6 +265,18 @@ impl PtoolEngine {
 
     pub fn fs_exists(&self, path: &str) -> bool {
         fs::exists(path)
+    }
+
+    pub fn fs_is_file(&self, path: &str) -> bool {
+        fs::is_file(path)
+    }
+
+    pub fn fs_is_dir(&self, path: &str) -> bool {
+        fs::is_dir(path)
+    }
+
+    pub fn fs_remove(&self, path: &str, options: FsRemoveOptions) -> Result<()> {
+        fs::remove(path, options)
     }
 
     pub fn fs_glob(

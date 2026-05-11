@@ -1,13 +1,14 @@
 use mlua::{Lua, String as LuaString, Table, Value, Variadic};
 use ptool_engine::{
     Error as EngineError, ErrorKind as EngineErrorKind, FsCopyOptions, FsGlobOptions,
-    FsMkdirOptions, PtoolEngine,
+    FsMkdirOptions, FsRemoveOptions, PtoolEngine,
 };
 use std::path::Path;
 
 const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
 const GLOB_SIGNATURE: &str = "ptool.fs.glob(pattern[, options])";
 const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
+const REMOVE_SIGNATURE: &str = "ptool.fs.remove(path[, options])";
 
 pub(crate) fn read(lua: &Lua, engine: &PtoolEngine, path: String) -> mlua::Result<LuaString> {
     let content = engine
@@ -35,6 +36,25 @@ pub(crate) fn mkdir(
 
 pub(crate) fn exists(engine: &PtoolEngine, path: String) -> bool {
     engine.fs_exists(&path)
+}
+
+pub(crate) fn is_file(engine: &PtoolEngine, path: String) -> bool {
+    engine.fs_is_file(&path)
+}
+
+pub(crate) fn is_dir(engine: &PtoolEngine, path: String) -> bool {
+    engine.fs_is_dir(&path)
+}
+
+pub(crate) fn remove(
+    engine: &PtoolEngine,
+    path: String,
+    options: Option<Table>,
+) -> mlua::Result<()> {
+    let options = parse_remove_options(options)?;
+    engine
+        .fs_remove(&path, options)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, REMOVE_SIGNATURE))
 }
 
 pub(crate) fn glob(
@@ -212,6 +232,55 @@ fn parse_glob_options(options: Option<Table>) -> mlua::Result<FsGlobOptions> {
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     GLOB_SIGNATURE,
+                    format!("unknown option `{key}`"),
+                ));
+            }
+        }
+    }
+
+    Ok(parsed)
+}
+
+fn parse_remove_options(options: Option<Table>) -> mlua::Result<FsRemoveOptions> {
+    let mut parsed = FsRemoveOptions::default();
+    let Some(options) = options else {
+        return Ok(parsed);
+    };
+
+    for pair in options.pairs::<Value, Value>() {
+        let (key, value) = pair?;
+        let key = match key {
+            Value::String(key) => key.to_str()?.to_string(),
+            _ => {
+                return Err(crate::lua_error::invalid_option(
+                    REMOVE_SIGNATURE,
+                    "option keys must be strings",
+                ));
+            }
+        };
+
+        match key.as_str() {
+            "recursive" => match value {
+                Value::Boolean(value) => parsed.recursive = value,
+                _ => {
+                    return Err(crate::lua_error::invalid_option(
+                        REMOVE_SIGNATURE,
+                        "`recursive` must be a boolean",
+                    ));
+                }
+            },
+            "missing_ok" => match value {
+                Value::Boolean(value) => parsed.missing_ok = value,
+                _ => {
+                    return Err(crate::lua_error::invalid_option(
+                        REMOVE_SIGNATURE,
+                        "`missing_ok` must be a boolean",
+                    ));
+                }
+            },
+            _ => {
+                return Err(crate::lua_error::invalid_option(
+                    REMOVE_SIGNATURE,
                     format!("unknown option `{key}`"),
                 ));
             }

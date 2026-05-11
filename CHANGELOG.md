@@ -2,6 +2,9 @@
 
 ## v0.5.0 (2026-05-10)
 
+- Added `ptool.fs.is_file(...)`, `ptool.fs.is_dir(...)`, and
+  `ptool.fs.remove(...)` for local path inspection and removal, and updated the
+  filesystem API docs across all supported locales.
 - Added the `ptool.tbl` module with `map`, `filter`, `concat`, and `join`
   helpers for transforming and combining dense Lua list tables, and documented
   it across all supported locales.

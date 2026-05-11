@@ -420,6 +420,18 @@ impl LuaWorld {
         crate::fs::exists(&self.engine, path)
     }
 
+    pub(crate) fn fs_is_file(&self, path: String) -> bool {
+        crate::fs::is_file(&self.engine, path)
+    }
+
+    pub(crate) fn fs_is_dir(&self, path: String) -> bool {
+        crate::fs::is_dir(&self.engine, path)
+    }
+
+    pub(crate) fn fs_remove(&self, path: String, options: Option<Table>) -> mlua::Result<()> {
+        crate::fs::remove(&self.engine, path, options)
+    }
+
     pub(crate) fn fs_glob(
         &self,
         lua: &Lua,

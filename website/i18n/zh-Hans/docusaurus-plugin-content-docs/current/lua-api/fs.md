@@ -78,6 +78,65 @@ if ptool.fs.exists("tmp/hello.txt") then
 end
 ```
 
+## ptool.fs.is_file
+
+> `Unreleased` - 引入。
+
+`ptool.fs.is_file(path)` 检查路径是否存在且是否为普通文件。
+
+- `path`（string，必填）：要检查的路径。
+- 返回：`boolean`。
+
+示例：
+
+```lua
+if ptool.fs.is_file("tmp/hello.txt") then
+  print("file")
+end
+```
+
+## ptool.fs.is_dir
+
+> `Unreleased` - 引入。
+
+`ptool.fs.is_dir(path)` 检查路径是否存在且是否为目录。
+
+- `path`（string，必填）：要检查的路径。
+- 返回：`boolean`。
+
+示例：
+
+```lua
+if ptool.fs.is_dir("tmp") then
+  print("dir")
+end
+```
+
+## ptool.fs.remove
+
+> `Unreleased` - 引入。
+
+`ptool.fs.remove(path[, options])` 删除文件、符号链接或目录。
+
+- `path`（string，必填）：要删除的路径。
+- `options`（table，可选）：删除选项。支持：
+  - `recursive`（boolean，可选）：是否递归删除目录。默认值为 `false`。
+  - `missing_ok`（boolean，可选）：路径不存在时是否忽略。默认值为 `false`。
+
+行为说明：
+
+- 文件和符号链接无需 `recursive` 即可删除。
+- 目录在非空时需要设置 `recursive = true`。
+- 未知选项名或非法选项值类型都会抛出错误。
+
+示例：
+
+```lua
+ptool.fs.remove("tmp/hello.txt")
+ptool.fs.remove("tmp/cache", { recursive = true })
+ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - 引入。

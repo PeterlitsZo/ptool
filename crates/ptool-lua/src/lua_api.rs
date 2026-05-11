@@ -312,6 +312,16 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     let exists_state = Rc::clone(&world);
     let exists_fn =
         lua.create_function(move |_, path: String| Ok(exists_state.borrow().fs_exists(path)))?;
+    let is_file_state = Rc::clone(&world);
+    let is_file_fn =
+        lua.create_function(move |_, path: String| Ok(is_file_state.borrow().fs_is_file(path)))?;
+    let is_dir_state = Rc::clone(&world);
+    let is_dir_fn =
+        lua.create_function(move |_, path: String| Ok(is_dir_state.borrow().fs_is_dir(path)))?;
+    let remove_state = Rc::clone(&world);
+    let remove_fn = lua.create_function(move |_, (path, options): (String, Option<Table>)| {
+        remove_state.borrow().fs_remove(path, options)
+    })?;
     let glob_state = Rc::clone(&world);
     let glob_fn =
         lua.create_function(move |lua, (pattern, options): (String, Option<Table>)| {
@@ -323,6 +333,9 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     fs_module.set("write", write_fn)?;
     fs_module.set("mkdir", mkdir_fn)?;
     fs_module.set("exists", exists_fn)?;
+    fs_module.set("is_file", is_file_fn)?;
+    fs_module.set("is_dir", is_dir_fn)?;
+    fs_module.set("remove", remove_fn)?;
     fs_module.set("glob", glob_fn)?;
     fs_module.set("copy", copy_fn)?;
     Ok(fs_module)

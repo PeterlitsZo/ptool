@@ -81,6 +81,68 @@ if ptool.fs.exists("tmp/hello.txt") then
 end
 ```
 
+## ptool.fs.is_file
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.is_file(path)` は、パスが存在し通常ファイルかどうかを確認します。
+
+- `path` (string, 必須): 確認するパス。
+- 戻り値: `boolean`。
+
+例:
+
+```lua
+if ptool.fs.is_file("tmp/hello.txt") then
+  print("file")
+end
+```
+
+## ptool.fs.is_dir
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.is_dir(path)` は、パスが存在しディレクトリかどうかを確認します。
+
+- `path` (string, 必須): 確認するパス。
+- 戻り値: `boolean`。
+
+例:
+
+```lua
+if ptool.fs.is_dir("tmp") then
+  print("dir")
+end
+```
+
+## ptool.fs.remove
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.remove(path[, options])` は、ファイル、シンボリックリンク、
+ディレクトリを削除します。
+
+- `path` (string, 必須): 削除するパス。
+- `options` (table, 任意): 削除オプション。サポートされるフィールド:
+  - `recursive` (boolean, 任意): ディレクトリを再帰的に削除するかどうか。
+    デフォルトは `false`。
+  - `missing_ok` (boolean, 任意): パスが存在しない場合に無視するかどうか。
+    デフォルトは `false`。
+
+動作:
+
+- ファイルとシンボリックリンクは `recursive` なしで削除できます。
+- 空でないディレクトリは `recursive = true` が必要です。
+- 不明なオプション名や不正な値型はエラーになります。
+
+例:
+
+```lua
+ptool.fs.remove("tmp/hello.txt")
+ptool.fs.remove("tmp/cache", { recursive = true })
+ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.

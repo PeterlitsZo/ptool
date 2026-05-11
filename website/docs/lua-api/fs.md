@@ -80,6 +80,67 @@ if ptool.fs.exists("tmp/hello.txt") then
 end
 ```
 
+## ptool.fs.is_file
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.is_file(path)` checks whether a path exists and is a regular file.
+
+- `path` (string, required): The path to check.
+- Returns: `boolean`.
+
+Example:
+
+```lua
+if ptool.fs.is_file("tmp/hello.txt") then
+  print("file")
+end
+```
+
+## ptool.fs.is_dir
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.is_dir(path)` checks whether a path exists and is a directory.
+
+- `path` (string, required): The path to check.
+- Returns: `boolean`.
+
+Example:
+
+```lua
+if ptool.fs.is_dir("tmp") then
+  print("dir")
+end
+```
+
+## ptool.fs.remove
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.remove(path[, options])` removes a file, symlink, or directory.
+
+- `path` (string, required): The path to remove.
+- `options` (table, optional): Remove options. Supported fields:
+  - `recursive` (boolean, optional): Whether to remove directories
+    recursively. Defaults to `false`.
+  - `missing_ok` (boolean, optional): Whether to ignore missing paths.
+    Defaults to `false`.
+
+Behavior:
+
+- Files and symlinks can be removed without `recursive`.
+- Directories require `recursive = true` when they are not empty.
+- Unknown option names or invalid option value types raise an error.
+
+Example:
+
+```lua
+ptool.fs.remove("tmp/hello.txt")
+ptool.fs.remove("tmp/cache", { recursive = true })
+ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.

@@ -8,6 +8,12 @@ pub struct FsMkdirOptions {
     pub exist_ok: bool,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct FsRemoveOptions {
+    pub recursive: bool,
+    pub missing_ok: bool,
+}
+
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct FsGlobOptions {
     pub working_dir: Option<String>,
@@ -69,6 +75,43 @@ pub fn mkdir(path: &str, options: FsMkdirOptions) -> Result<()> {
 
 pub fn exists(path: &str) -> bool {
     Path::new(path).exists()
+}
+
+pub fn is_file(path: &str) -> bool {
+    Path::new(path).is_file()
+}
+
+pub fn is_dir(path: &str) -> bool {
+    Path::new(path).is_dir()
+}
+
+pub fn remove(path: &str, options: FsRemoveOptions) -> Result<()> {
+    ensure_non_empty_path(path)?;
+
+    let metadata = match fs::symlink_metadata(path) {
+        Ok(metadata) => metadata,
+        Err(err) if err.kind() == std::io::ErrorKind::NotFound && options.missing_ok => {
+            return Ok(());
+        }
+        Err(err) => {
+            return Err(io_error(err).with_op("ptool.fs.remove").with_path(path));
+        }
+    };
+
+    let file_type = metadata.file_type();
+    let result = if file_type.is_symlink() || file_type.is_file() {
+        fs::remove_file(path)
+    } else if file_type.is_dir() {
+        if options.recursive {
+            fs::remove_dir_all(path)
+        } else {
+            fs::remove_dir(path)
+        }
+    } else {
+        fs::remove_file(path)
+    };
+
+    result.map_err(|err| io_error(err).with_op("ptool.fs.remove").with_path(path))
 }
 
 pub fn glob(pattern: &str, current_dir: &Path, options: FsGlobOptions) -> Result<Vec<String>> {
