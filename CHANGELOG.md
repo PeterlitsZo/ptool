@@ -2,6 +2,9 @@
 
 ## v0.5.0 (2026-05-10)
 
+- Enhanced `ptool -V` / `ptool version` to print richer build metadata,
+  including Git revision state, build timestamps, target triple, toolchain
+  versions, and embedded Lua runtime details.
 - Added `ptool.fs.is_file(...)`, `ptool.fs.is_dir(...)`, and
   `ptool.fs.remove(...)` for local path inspection and removal, and updated the
   filesystem API docs across all supported locales.

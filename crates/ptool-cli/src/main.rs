@@ -1,11 +1,15 @@
 use clap_lex::RawArgs;
 use indoc::formatdoc;
+use shadow_rs::shadow;
 use std::ffi::OsStr;
 use std::process;
+
+shadow!(build);
 
 const APP_NAME: &str = "ptool";
 const APP_VERSION: &str = env!("CARGO_PKG_VERSION");
 const APP_ABOUT: &str = "The PTOOL CLI";
+const LUA_RUNTIME: &str = "Lua 5.4 (embedded, vendored via mlua)";
 
 #[derive(Debug)]
 enum ParsedCli {
@@ -230,7 +234,80 @@ fn parse_version(
 }
 
 fn print_version() {
-    println!("{} {}", APP_NAME, APP_VERSION);
+    let mut lines = vec![
+        ("name", APP_NAME.to_string()),
+        ("version", APP_VERSION.to_string()),
+    ];
+
+    if let Some(tag) = non_empty(build::TAG) {
+        lines.push(("tag", tag.to_string()));
+    }
+
+    lines.extend([
+        ("branch", git_branch()),
+        ("commit", git_commit()),
+        ("status", git_status().to_string()),
+        ("commit-at", commit_at().to_string()),
+        ("build", build_at().to_string()),
+        ("target", build::BUILD_TARGET.to_string()),
+        ("profile", build_profile().to_string()),
+        ("rustc", build::RUST_VERSION.to_string()),
+        ("cargo", build::CARGO_VERSION.to_string()),
+        ("lua", LUA_RUNTIME.to_string()),
+    ]);
+
+    let width = lines
+        .iter()
+        .map(|(label, _)| label.len())
+        .max()
+        .unwrap_or(0);
+    for (label, value) in lines {
+        println!("{label:>width$}  {value}");
+    }
+}
+
+fn build_profile() -> &'static str {
+    if cfg!(debug_assertions) {
+        "debug"
+    } else {
+        "release"
+    }
+}
+
+fn git_branch() -> String {
+    non_empty(build::BRANCH).unwrap_or("<unknown>").to_string()
+}
+
+fn git_commit() -> String {
+    non_empty(build::SHORT_COMMIT)
+        .or_else(|| non_empty(build::COMMIT_HASH))
+        .unwrap_or("<unknown>")
+        .to_string()
+}
+
+fn git_status() -> &'static str {
+    if build::GIT_CLEAN { "clean" } else { "dirty" }
+}
+
+fn commit_at() -> &'static str {
+    non_empty(build::COMMIT_DATE_3339)
+        .or_else(|| non_empty(build::COMMIT_DATE))
+        .unwrap_or("unknown")
+}
+
+fn build_at() -> &'static str {
+    non_empty(build::BUILD_TIME_3339)
+        .or_else(|| non_empty(build::BUILD_TIME))
+        .unwrap_or("unknown")
+}
+
+fn non_empty(value: &str) -> Option<&str> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() || trimmed == "unknown" {
+        None
+    } else {
+        Some(trimmed)
+    }
 }
 
 fn parsed_arg_to_string(value: &OsStr, field: &str) -> Result<String, ParseError> {
