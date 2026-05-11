@@ -1,6 +1,22 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type {PluginOptions as LocalSearchOptions} from '@easyops-cn/docusaurus-search-local';
+
+const localSearchOptions = {
+  hashed: true,
+  indexBlog: false,
+  indexPages: true,
+  language: ['en', 'zh', 'es', 'pt', 'ja'],
+  searchBarPosition: 'right',
+  highlightSearchTermsOnTargetPage: true,
+  explicitSearchResultPath: true,
+} satisfies LocalSearchOptions;
+
+const localSearchTheme: NonNullable<Config['themes']>[number] = [
+  '@easyops-cn/docusaurus-search-local',
+  localSearchOptions,
+];
 
 const config: Config = {
   title: 'ptool',
@@ -56,6 +72,8 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+
+  themes: [localSearchTheme],
 
   themeConfig: {
     image: 'img/ptool-avatar.svg',
