@@ -1,0 +1,196 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:1
+msgid "YAML API"
+msgstr "YAML API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:3
+msgid "YAML parsing and serialization helpers are available under `ptool.yaml` and `p.yaml`."
+msgstr "YAML 解析与序列化辅助能力位于 `ptool.yaml` 和 `p.yaml` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:6
+msgid "ptool.yaml.parse"
+msgstr "ptool.yaml.parse"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:8
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:8"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:10
+msgid "`ptool.yaml.parse(input)` parses a YAML string into a Lua value."
+msgstr "`ptool.yaml.parse(input)` 将 YAML 字符串解析为 Lua 值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:12"
+msgid "`input` (string, required): The YAML text."
+msgstr "`input`（string，必填）：YAML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:13
+msgid "Returns: The parsed Lua value. The root can be any supported YAML type."
+msgstr "返回：解析后的 Lua 值。根节点可以是任意受支持的 YAML 类型。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:15
+msgid "Type mapping:"
+msgstr "类型映射："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:17
+msgid "YAML mapping -> Lua table"
+msgstr "YAML mapping -> Lua table"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:18
+msgid "YAML sequence -> Lua sequence table (1-based)"
+msgstr "YAML sequence -> Lua 序列表（从 1 开始）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:19
+msgid "YAML string -> Lua string"
+msgstr "YAML string -> Lua string"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:20
+msgid "YAML integer that fits in `i64` -> Lua integer"
+msgstr "可放入 `i64` 的 YAML integer -> Lua integer"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:21
+msgid "Other YAML number -> Lua number"
+msgstr "其他 YAML number -> Lua number"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:22
+msgid "YAML boolean -> Lua boolean"
+msgstr "YAML boolean -> Lua boolean"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:23
+msgid "YAML null -> Lua `nil`"
+msgstr "YAML null -> Lua `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:25
+msgid "Error behavior:"
+msgstr "错误行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:27
+msgid "An error is raised if `input` is not a string."
+msgstr "如果 `input` 不是字符串，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:28
+msgid "A YAML syntax error raises an error whose message includes parser detail."
+msgstr "如果 YAML 语法有误，会抛出错误，错误信息中包含解析器细节。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:29
+msgid "An error is raised if the YAML value cannot be represented as a Lua value in `ptool`, such as a mapping with non-string keys or an explicit YAML tag."
+msgstr "如果 YAML 值无法表示为 `ptool` 支持的 Lua 值，也会抛出错误，例如 非字符串 key 的 mapping，或带显式 YAML tag 的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:32
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:32"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:48
+msgid "ptool.yaml.get"
+msgstr "ptool.yaml.get"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:50
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:50"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:52
+msgid "`ptool.yaml.get(input, path)` reads the value at a specified path from YAML text."
+msgstr "`ptool.yaml.get(input, path)` 从 YAML 文本中读取指定路径上的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:55
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:55"
+msgid "`input` (string, required): The YAML text."
+msgstr "`input`（string，必填）：YAML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:56
+msgid "`path` ((string|integer)[], required): A non-empty path array, such as `{\"spec\", \"template\", \"metadata\", \"name\"}` or `{\"items\", 1, \"name\"}`."
+msgstr "`path`（(string|integer)[]，必填）：非空路径数组，例如 `{\"spec\", \"template\", \"metadata\", \"name\"}` 或 `{\"items\", 1, \"name\"}`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:58
+msgid "Returns: The corresponding Lua value, or `nil` if the path does not exist."
+msgstr "返回：对应的 Lua 值；如果路径不存在，则返回 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:60
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:60"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:62
+msgid "String path segments select mapping keys."
+msgstr "字符串路径段用于选择 mapping key。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:63
+msgid "Integer path segments select sequence elements using Lua's 1-based indexing."
+msgstr "整数路径段用于选择 sequence 元素，使用 Lua 的 1-based 索引。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:65
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:65"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:78
+msgid "ptool.yaml.stringify"
+msgstr "ptool.yaml.stringify"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:82
+msgid "`ptool.yaml.stringify(value)` converts a Lua value to YAML text."
+msgstr "`ptool.yaml.stringify(value)` 将 Lua 值编码为 YAML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:84
+msgid "`value` (YAML-compatible Lua value, required): The value to encode."
+msgstr "`value`（兼容 YAML 的 Lua 值，必填）：要编码的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:85
+msgid "Returns: The encoded YAML string."
+msgstr "返回：编码后的 YAML 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:89
+msgid "Values must be YAML-compatible through the same Lua value mapping used by `ptool.json.stringify`."
+msgstr "值必须能通过与 `ptool.json.stringify` 相同的 Lua 值映射表示为 YAML。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:91
+msgid "Lua sequence tables are encoded as YAML sequences."
+msgstr "Lua 序列表会编码为 YAML sequence。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:92
+msgid "Lua string-keyed tables are encoded as YAML mappings."
+msgstr "仅包含字符串 key 的 Lua table 会编码为 YAML mapping。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:106
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:108
+msgid "Only single-document YAML is supported."
+msgstr "目前只支持单文档 YAML。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:109
+msgid "YAML mappings must use string keys."
+msgstr "YAML mapping 的 key 必须是字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:110
+msgid "Explicit YAML tags are not supported."
+msgstr "不支持显式 YAML tag。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:111
+msgid "The `path` argument for `ptool.yaml.get` must be a non-empty array of strings and/or positive integers."
+msgstr "`ptool.yaml.get` 的 `path` 参数必须是由字符串和/或正整数构成的非空数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:113
+msgid "Integer path segments are 1-based so they match Lua array indexing."
+msgstr "整数路径段为 1-based，以与 Lua 数组索引保持一致。"

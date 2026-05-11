@@ -1,0 +1,54 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:1
+msgid "Template API"
+msgstr "テンプレート API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:3
+msgid "Template rendering helpers are available under `ptool.template` and `p.template`."
+msgstr "テンプレートレンダリングヘルパーは `ptool.template` と `p.template` に あります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:5
+msgid "ptool.template.render"
+msgstr "ptool.template.render"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:7
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:9
+msgid "`ptool.template.render(template, context)` renders a Jinja-style template string and returns the rendered result."
+msgstr "`ptool.template.render(template, context)` は Jinja 風テンプレート文字列を レンダリングし、結果の文字列を返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:12
+msgid "`template` (string, required): The template source text."
+msgstr "`template` (string, 必須): テンプレートのソーステキスト。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:13
+msgid "`context` (any serializable Lua value, required): The template context."
+msgstr "`context` (任意のシリアライズ可能な Lua 値, 必須): テンプレート コンテキスト。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:14
+msgid "Returns: The rendered string."
+msgstr "戻り値: レンダリング結果の文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:16
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:38
+msgid "Notes:"
+msgstr "注意:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:40
+msgid "The context must be serializable to data values."
+msgstr "コンテキストはデータ値としてシリアライズ可能である必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:41
+msgid "Lua values such as `function`, `thread`, and unsupported `userdata` are not accepted as template context values."
+msgstr "`function`, `thread`, 未対応の `userdata` などの Lua 値はテンプレート コンテキスト値として使えません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/template.md:43
+msgid "Missing values use chainable undefined semantics. This means nested lookups such as `foo.bar.baz` can be passed to filters like `default(...)` without raising an error. When rendered directly without a fallback, undefined values become an empty string."
+msgstr "欠けている値は chainable undefined semantics を使います。つまり `foo.bar.baz` のようなネストした参照を `default(...)` のような フィルターへ渡してもエラーになりません。フォールバックなしで直接 レンダリングした場合、undefined 値は空文字列になります。"

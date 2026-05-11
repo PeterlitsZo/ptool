@@ -1,7 +1,6 @@
 # API JSON
 
-As utilidades de parse e serialização JSON estão disponíveis em `ptool.json` e
-`p.json`.
+As utilidades de parse e serialização JSON estão disponíveis em `ptool.json` e `p.json`.
 
 ## ptool.json.parse
 
@@ -25,8 +24,7 @@ Mapeamento de tipos:
 Comportamento de erro:
 
 - Um erro é gerado se `input` não for uma string.
-- Um erro de sintaxe JSON gera uma mensagem que inclui o detalhe do parser de
-  `serde_json`.
+- Um erro de sintaxe JSON gera uma mensagem que inclui o detalhe do parser de `serde_json`.
 
 Exemplo:
 
@@ -42,22 +40,18 @@ print(data.stars)
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.stringify(value[, options])` converte um valor Lua em uma string
-JSON.
+`ptool.json.stringify(value[, options])` converte um valor Lua em uma string JSON.
 
-- `value` (valor Lua compatível com JSON, obrigatório): O valor a ser
-  codificado.
+- `value` (valor Lua compatível com JSON, obrigatório): O valor a ser codificado.
 - `options` (table, opcional): Opções de serialização.
-- `options.pretty` (boolean, opcional): Quando `true`, produz JSON formatado.
-  O padrão é `false`.
+- `options.pretty` (boolean, opcional): Quando `true`, produz JSON formatado. O padrão é `false`.
 - Retorna: A string JSON codificada.
 
 Comportamento:
 
 - A saída padrão é JSON compacto, sem espaços extras.
 - A saída pretty usa JSON indentado em múltiplas linhas.
-- Os valores precisam ser compatíveis com JSON. Funções, threads, userdata e
-  outros valores Lua não serializáveis geram erro.
+- Os valores precisam ser compatíveis com JSON. Funções, threads, userdata e outros valores Lua não serializáveis geram erro.
 
 Exemplo:
 
@@ -73,7 +67,5 @@ print(text)
 
 Notas:
 
-- Valores `nil` dentro de tabelas Lua seguem o comportamento de conversão
-  serde de `mlua` e não são preservados como campos de objetos JSON.
-- A detecção de array/objeto em tabelas Lua segue as regras de conversão serde
-  de `mlua`.
+- Valores `nil` dentro de tabelas Lua seguem o comportamento de conversão serde de `mlua` e não são preservados como campos de objetos JSON.
+- A detecção de array/objeto em tabelas Lua segue as regras de conversão serde de `mlua`.

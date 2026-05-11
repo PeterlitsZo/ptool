@@ -1,0 +1,261 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: es\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:1
+msgid "Path API"
+msgstr "API de rutas"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:3
+msgid "Lexical path helpers are available under `ptool.path` and `p.path`."
+msgstr "Las utilidades léxicas de rutas están disponibles bajo `ptool.path` y `p.path`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:5
+msgid "ptool.path.join"
+msgstr "ptool.path.join"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:9
+msgid "`ptool.path.join(...segments)` joins multiple path segments and returns the normalized path."
+msgstr "`ptool.path.join(...segments)` une varios segmentos de ruta y devuelve la ruta normalizada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:12
+msgid "`segments` (string, at least one): Path segments."
+msgstr "`segments` (string, al menos uno): Segmentos de ruta."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:13
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:13"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:15
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:15"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:21
+msgid "ptool.path.normalize"
+msgstr "ptool.path.normalize"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:23
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:23"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:25
+msgid "`ptool.path.normalize(path)` performs lexical path normalization (processing `.` and `..`)."
+msgstr "`ptool.path.normalize(path)` realiza normalización léxica de rutas (procesamiento de `.` y `..`)."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:28
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:28"
+msgid "`path` (string, required): The input path."
+msgstr "`path` (string, obligatorio): La ruta de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:29
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:29"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:31"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:37
+msgid "ptool.path.abspath"
+msgstr "ptool.path.abspath"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:39
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:39"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:41
+msgid "`ptool.path.abspath(path[, base])` computes an absolute path."
+msgstr "`ptool.path.abspath(path[, base])` calcula una ruta absoluta."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:43"
+msgid "`path` (string, required): The input path."
+msgstr "`path` (string, obligatorio): La ruta de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:44
+msgid "`base` (string, optional): The base directory. If omitted, the current process working directory is used."
+msgstr "`base` (string, opcional): El directorio base. Si se omite, se usa el directorio de trabajo del proceso actual."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:46"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:47
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:47"
+msgid "Accepts only 1 or 2 string arguments."
+msgstr "Solo acepta 1 o 2 argumentos de tipo string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:49
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:49"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:56
+msgid "ptool.path.relpath"
+msgstr "ptool.path.relpath"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:58
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:58"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:60
+msgid "`ptool.path.relpath(path[, base])` computes a relative path from `base` to `path`."
+msgstr "`ptool.path.relpath(path[, base])` calcula una ruta relativa desde `base` hasta `path`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:63
+msgid "`path` (string, required): The target path."
+msgstr "`path` (string, obligatorio): La ruta objetivo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:64
+msgid "`base` (string, optional): The starting directory. If omitted, the current process working directory is used."
+msgstr "`base` (string, opcional): El directorio inicial. Si se omite, se usa el directorio de trabajo del proceso actual."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:66
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:66"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:67
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:67"
+msgid "Accepts only 1 or 2 string arguments."
+msgstr "Solo acepta 1 o 2 argumentos de tipo string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:69
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:69"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:75
+msgid "ptool.path.isabs"
+msgstr "ptool.path.isabs"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:77
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:77"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:79
+msgid "`ptool.path.isabs(path)` checks whether a path is absolute."
+msgstr "`ptool.path.isabs(path)` comprueba si una ruta es absoluta."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:81
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:81"
+msgid "`path` (string, required): The input path."
+msgstr "`path` (string, obligatorio): La ruta de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:82
+msgid "Returns: `boolean`."
+msgstr "Devuelve: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:84
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:84"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:90
+msgid "ptool.path.dirname"
+msgstr "ptool.path.dirname"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:92
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:92"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:94
+msgid "`ptool.path.dirname(path)` returns the directory-name portion."
+msgstr "`ptool.path.dirname(path)` devuelve la parte de nombre de directorio."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:96
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:96"
+msgid "`path` (string, required): The input path."
+msgstr "`path` (string, obligatorio): La ruta de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:97
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:97"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:99
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:99"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:105
+msgid "ptool.path.basename"
+msgstr "ptool.path.basename"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:107
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:107"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:109
+msgid "`ptool.path.basename(path)` returns the last path segment (the filename portion)."
+msgstr "`ptool.path.basename(path)` devuelve el último segmento de la ruta (la parte del nombre de archivo)."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:112"
+msgid "`path` (string, required): The input path."
+msgstr "`path` (string, obligatorio): La ruta de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:113
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:113"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:115
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:115"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:121
+msgid "ptool.path.extname"
+msgstr "ptool.path.extname"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:123
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:123"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:125
+msgid "`ptool.path.extname(path)` returns the extension (including `.`). If there is no extension, it returns an empty string."
+msgstr "`ptool.path.extname(path)` devuelve la extensión, incluido el `.`. Si no hay extensión, devuelve una cadena vacía."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:128
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:128"
+msgid "`path` (string, required): The input path."
+msgstr "`path` (string, obligatorio): La ruta de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:129
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:129"
+msgid "Returns: `string`."
+msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:131"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:137
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:139
+msgid "Path handling in `ptool.path` is purely lexical. It does not check whether paths exist and does not resolve symlinks."
+msgstr "El manejo de rutas en `ptool.path` es puramente léxico. No comprueba si las rutas existen ni resuelve enlaces simbólicos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:141
+msgid "None of the interfaces accept empty string arguments. Passing one raises an error."
+msgstr "Ninguna de las interfaces acepta argumentos de cadena vacía. Pasar uno produce un error."

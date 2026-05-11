@@ -2,26 +2,22 @@
 
 Las utilidades de tablas están disponibles en `ptool.tbl` y `p.tbl`.
 
-Estas APIs están diseñadas para tablas tipo lista densas, con claves enteras
-contiguas que comienzan en `1`.
+Estas APIs están diseñadas para tablas tipo lista densas, con claves enteras contiguas que comienzan en `1`.
 
 ## ptool.tbl.map
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.map(list, fn)` transforma cada elemento de una tabla tipo lista y
-devuelve una lista nueva.
+`ptool.tbl.map(list, fn)` transforma cada elemento de una tabla tipo lista y devuelve una lista nueva.
 
 - `list` (table, obligatorio): Una tabla tipo lista densa.
-- `fn` (function, obligatorio): Un callback que recibe `(value, index)` y debe
-  devolver un valor distinto de `nil`.
+- `fn` (function, obligatorio): Un callback que recibe `(value, index)` y debe devolver un valor distinto de `nil`.
 - Devuelve: `table`.
 
 Comportamiento:
 
 - `fn` se llama una vez por cada elemento, en orden.
-- Si `fn` devuelve `nil`, la llamada falla en lugar de crear huecos en el
-  resultado.
+- Si `fn` devuelve `nil`, la llamada falla en lugar de crear huecos en el resultado.
 - La tabla de entrada no se modifica.
 
 ```lua
@@ -36,8 +32,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.filter(list, fn)` conserva los elementos cuyo resultado del callback
-sea truthy y los devuelve en una lista densa nueva.
+`ptool.tbl.filter(list, fn)` conserva los elementos cuyo resultado del callback sea truthy y los devuelve en una lista densa nueva.
 
 - `list` (table, obligatorio): Una tabla tipo lista densa.
 - `fn` (function, obligatorio): Un callback que recibe `(value, index)`.
@@ -61,8 +56,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.concat(...)` concatena una o más tablas tipo lista densas en una
-lista nueva.
+`ptool.tbl.concat(...)` concatena una o más tablas tipo lista densas en una lista nueva.
 
 - `...` (table, obligatorio): Una o más tablas tipo lista densas.
 - Devuelve: `table`.

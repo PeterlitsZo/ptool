@@ -11,8 +11,7 @@
 `ptool.tbl.map(list, fn)` 对顺序表中的每一项做映射，并返回一个新的顺序表。
 
 - `list`（table，必填）：一个致密的顺序表。
-- `fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回非 `nil`
-  的值。
+- `fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回非 `nil` 的值。
 - 返回：`table`。
 
 行为说明：

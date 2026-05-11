@@ -113,8 +113,7 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 行为说明：
 
 - 未知选项名或非法选项值类型都会抛出错误。
-- `skip_empty = true` 会在 `trim` 之后生效，因此当两者都启用时，只包含空白字符的
-  片段也会被移除。
+- `skip_empty = true` 会在 `trim` 之后生效，因此当两者都启用时，只包含空白字符的 片段也会被移除。
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -133,8 +132,7 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 
 - `s`（string，必填）：输入字符串。
 - `options`（table，可选）：按行拆分选项。支持：
-  - `keep_ending`（boolean，可选）：是否保留行结束符（`\n`、`\r\n` 或 `\r`）。
-    默认值为 `false`。
+  - `keep_ending`（boolean，可选）：是否保留行结束符（`\n`、`\r\n` 或 `\r`）。 默认值为 `false`。
   - `skip_empty`（boolean，可选）：是否移除空行。默认值为 `false`。
 - 返回：`string[]`。
 

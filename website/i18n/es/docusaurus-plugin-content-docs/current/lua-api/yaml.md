@@ -1,18 +1,15 @@
 # API YAML
 
-Las utilidades para analizar y serializar YAML están disponibles bajo
-`ptool.yaml` y `p.yaml`.
+Las utilidades para analizar y serializar YAML están disponibles bajo `ptool.yaml` y `p.yaml`.
 
 ## ptool.yaml.parse
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.parse(input)` analiza una cadena YAML y la convierte en un valor
-Lua.
+`ptool.yaml.parse(input)` analiza una cadena YAML y la convierte en un valor Lua.
 
 - `input` (string, obligatorio): El texto YAML.
-- Devuelve: El valor Lua analizado. La raíz puede ser cualquier tipo YAML
-  compatible.
+- Devuelve: El valor Lua analizado. La raíz puede ser cualquier tipo YAML compatible.
 
 Asignación de tipos:
 
@@ -27,11 +24,8 @@ Asignación de tipos:
 Comportamiento ante errores:
 
 - Se produce un error si `input` no es una cadena.
-- Un error de sintaxis YAML produce un error cuyo mensaje incluye el detalle
-  del analizador.
-- También se produce un error si el valor YAML no puede representarse como un
-  valor Lua de `ptool`, como un mapping con claves no string o un valor con un
-  tag YAML explícito.
+- Un error de sintaxis YAML produce un error cuyo mensaje incluye el detalle del analizador.
+- También se produce un error si el valor YAML no puede representarse como un valor Lua de `ptool`, como un mapping con claves no string o un valor con un tag YAML explícito.
 
 Ejemplo:
 
@@ -53,19 +47,16 @@ print(data.stars)
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.get(input, path)` lee el valor en una ruta específica dentro de un
-texto YAML.
+`ptool.yaml.get(input, path)` lee el valor en una ruta específica dentro de un texto YAML.
 
 - `input` (string, obligatorio): El texto YAML.
-- `path` ((string|integer)[], obligatorio): Un arreglo de ruta no vacío, como
-  `{"spec", "template", "metadata", "name"}` o `{"items", 1, "name"}`.
+- `path` ((string|integer)[], obligatorio): Un arreglo de ruta no vacío, como `{"spec", "template", "metadata", "name"}` o `{"items", 1, "name"}`.
 - Devuelve: El valor Lua correspondiente, o `nil` si la ruta no existe.
 
 Comportamiento:
 
 - Los segmentos de ruta string seleccionan claves de mappings.
-- Los segmentos de ruta integer seleccionan elementos de secuencias usando
-  índices Lua base 1.
+- Los segmentos de ruta integer seleccionan elementos de secuencias usando índices Lua base 1.
 
 Ejemplo:
 
@@ -86,14 +77,12 @@ print(first_name)
 
 `ptool.yaml.stringify(value)` convierte un valor Lua en texto YAML.
 
-- `value` (valor Lua compatible con YAML, obligatorio): El valor que se va a
-  codificar.
+- `value` (valor Lua compatible con YAML, obligatorio): El valor que se va a codificar.
 - Devuelve: La cadena YAML codificada.
 
 Comportamiento:
 
-- Los valores deben ser compatibles con YAML mediante el mismo mapeo de valores
-  Lua usado por `ptool.json.stringify`.
+- Los valores deben ser compatibles con YAML mediante el mismo mapeo de valores Lua usado por `ptool.json.stringify`.
 - Las tablas secuenciales Lua se codifican como secuencias YAML.
 - Las tablas Lua con claves string se codifican como mappings YAML.
 
@@ -114,7 +103,5 @@ Notas:
 - Solo se admite YAML de un único documento.
 - Los mappings YAML deben usar claves string.
 - Los tags YAML explícitos no están soportados.
-- El argumento `path` de `ptool.yaml.get` debe ser un arreglo no vacío de
-  strings y/o enteros positivos.
-- Los segmentos integer son base 1 para coincidir con la indexación de arrays
-  de Lua.
+- El argumento `path` de `ptool.yaml.get` debe ser un arreglo no vacío de strings y/o enteros positivos.
+- Los segmentos integer son base 1 para coincidir con la indexación de arrays de Lua.

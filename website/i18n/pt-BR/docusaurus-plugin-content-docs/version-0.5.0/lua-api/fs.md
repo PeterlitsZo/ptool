@@ -14,8 +14,7 @@ As utilidades de sistema de arquivos estão disponíveis em `ptool.fs` e `p.fs`.
 Notas:
 
 - A string Lua retornada contém exatamente os bytes armazenados em disco.
-- Arquivos de texto continuam funcionando como antes, e agora arquivos binários
-  também são suportados.
+- Arquivos de texto continuam funcionando como antes, e agora arquivos binários também são suportados.
 
 Exemplo:
 
@@ -31,8 +30,7 @@ print(#png)
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` grava uma string Lua em um arquivo como bytes
-brutos, sobrescrevendo o conteúdo existente.
+`ptool.fs.write(path, content)` grava uma string Lua em um arquivo como bytes brutos, sobrescrevendo o conteúdo existente.
 
 - `path` (string, obrigatório): O caminho do arquivo.
 - `content` (string, obrigatório): O conteúdo a gravar.
@@ -53,8 +51,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.mkdir(path)` cria um diretório. Se diretórios pais não existirem,
-eles são criados recursivamente.
+`ptool.fs.mkdir(path)` cria um diretório. Se diretórios pais não existirem, eles são criados recursivamente.
 
 - `path` (string, obrigatório): O caminho do diretório.
 
@@ -83,23 +80,15 @@ end
 
 ## ptool.fs.glob
 
-> `v0.2.0` - Introduced.
-> `v0.5.0` - Added the `working_dir` option.
+> `v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option.
 
-`ptool.fs.glob(pattern[, options])` corresponde caminhos do sistema de arquivos
-usando sintaxe glob no estilo Unix e retorna um array de strings com os
-caminhos correspondentes, ordenados lexicograficamente.
+`ptool.fs.glob(pattern[, options])` corresponde caminhos do sistema de arquivos usando sintaxe glob no estilo Unix e retorna um array de strings com os caminhos correspondentes, ordenados lexicograficamente.
 
-- `pattern` (string, obrigatório): Um padrão glob. Padrões relativos são
-  resolvidos a partir do diretório de runtime atual do `ptool`, portanto seguem
-  `ptool.cd(...)`.
+- `pattern` (string, obrigatório): Um padrão glob. Padrões relativos são resolvidos a partir do diretório de runtime atual do `ptool`, portanto seguem `ptool.cd(...)`.
 - `options` (table, opcional): Opções de glob. Campos suportados:
-  - `working_dir` (string, opcional): Sobrescreve o diretório base usado para
-    resolver padrões relativos. Valores relativos de `working_dir` são
-    resolvidos a partir do diretório de runtime atual do `ptool`.
+  - `working_dir` (string, opcional): Sobrescreve o diretório base usado para resolver padrões relativos. Valores relativos de `working_dir` são resolvidos a partir do diretório de runtime atual do `ptool`.
 - Retorna: `string[]`.
-- Arquivos e diretórios ocultos só correspondem quando o componente de padrão
-  correspondente começa explicitamente com `.`.
+- Arquivos e diretórios ocultos só correspondem quando o componente de padrão correspondente começa explicitamente com `.`.
 
 Exemplo:
 

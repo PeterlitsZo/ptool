@@ -6,8 +6,7 @@
 
 > `v0.1.0` - Introduced.
 
-`ptool.sh.split(command)` はシェル風ルールでコマンド文字列を解析し、
-引数配列を返します。
+`ptool.sh.split(command)` はシェル風ルールでコマンド文字列を解析し、 引数配列を返します。
 
 - `command` (string, 必須): 分割するコマンド文字列。
 - 戻り値: `string[]`。

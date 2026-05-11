@@ -1,0 +1,38 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:1
+msgid "Shell API"
+msgstr "Shell API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:3
+msgid "Shell parsing helpers are available under `ptool.sh` and `p.sh`."
+msgstr "Shell 解析辅助能力位于 `ptool.sh` 和 `p.sh` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:5
+msgid "ptool.sh.split"
+msgstr "ptool.sh.split"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:7
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:9
+msgid "`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array."
+msgstr "`ptool.sh.split(command)` 使用 shell 风格规则解析命令字符串，并返回参数数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:12
+msgid "`command` (string, required): The command string to split."
+msgstr "`command`（string，必填）：要拆分的命令字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:13
+msgid "Returns: `string[]`."
+msgstr "返回：`string[]`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:15
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:21
+msgid "The `args` above is equivalent to:"
+msgstr "上面的 `args` 等价于："

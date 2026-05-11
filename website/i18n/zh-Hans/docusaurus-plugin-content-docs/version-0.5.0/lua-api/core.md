@@ -2,9 +2,7 @@
 
 `ptool` 会直接在 `ptool` 和 `p` 下暴露这些核心运行时辅助能力。
 
-`ptool run <lua_file>` 会运行 Lua 脚本，并注入全局变量 `ptool`
-（以及它的别名 `p`；例如 `p.run` 与 `ptool.run` 等价）。对于以 `.lua`
-结尾的文件，`ptool <lua_file>` 也是一个行为相同的 CLI 快捷写法。
+`ptool run <lua_file>` 会运行 Lua 脚本，并注入全局变量 `ptool` （以及它的别名 `p`；例如 `p.run` 与 `ptool.run` 等价）。对于以 `.lua` 结尾的文件，`ptool <lua_file>` 也是一个行为相同的 CLI 快捷写法。
 
 内嵌的 Lua 运行时会保留基础 Lua 全局能力，并默认只暴露这些标准库：
 
@@ -13,9 +11,7 @@
 - `math`
 - `utf8`
 
-像 `io`、`os`、`package` 这类面向宿主环境的内建模块会被有意禁用。
-文件系统、环境变量、进程、网络等运行时操作应改用 `ptool.fs`、
-`ptool.os`、`ptool.path`、`ptool.run` 等 API。
+像 `io`、`os`、`package` 这类面向宿主环境的内建模块会被有意禁用。 文件系统、环境变量、进程、网络等运行时操作应改用 `ptool.fs`、 `ptool.os`、`ptool.path`、`ptool.run` 等 API。
 
 如果你想向 Lua 脚本传参，可以这样做：
 
@@ -50,17 +46,14 @@ ptool.run("echo", {"hello", "world"})
 ptool.use("v0.1.0")
 ```
 
-- 参数是一个语义化版本字符串（SemVer），可选带 `v` 前缀，例如 `v0.1.0` 或
-  `0.1.0`。
-- 如果要求的版本高于当前 `ptool` 版本，脚本会立即退出，并报错说明当前
-  `ptool` 版本过旧。
+- 参数是一个语义化版本字符串（SemVer），可选带 `v` 前缀，例如 `v0.1.0` 或 `0.1.0`。
+- 如果要求的版本高于当前 `ptool` 版本，脚本会立即退出，并报错说明当前 `ptool` 版本过旧。
 
 ## ptool.unindent
 
 > `v0.1.0` - 引入。
 
-`ptool.unindent` 处理多行字符串时，会在每行前导缩进之后移除 `| ` 前缀，并裁掉
-首尾空白行。
+`ptool.unindent` 处理多行字符串时，会在每行前导缩进之后移除 `| ` 前缀，并裁掉 首尾空白行。
 
 ```lua
 local str = ptool.unindent([[
@@ -80,15 +73,13 @@ line 2]]
 
 > `v0.1.0` - 引入。
 
-`ptool.inspect(value[, options])` 会把 Lua 值渲染成可读的 Lua 风格字符串，
-主要用于调试和展示 table 内容。
+`ptool.inspect(value[, options])` 会把 Lua 值渲染成可读的 Lua 风格字符串， 主要用于调试和展示 table 内容。
 
 - `value`（任意类型，必填）：要查看的 Lua 值。
 - `options`（table，可选）：渲染选项。支持：
   - `indent`（string，可选）：每层嵌套使用的缩进。默认是两个空格。
   - `multiline`（boolean，可选）：table 是否跨多行渲染。默认值为 `true`。
-  - `max_depth`（integer，可选）：最大渲染深度。更深的值会被替换为
-    `<max-depth>`。
+  - `max_depth`（integer，可选）：最大渲染深度。更深的值会被替换为 `<max-depth>`。
 - 返回：`string`。
 
 行为说明：
@@ -114,11 +105,9 @@ print(ptool.inspect(value, { multiline = false }))
 
 ## ptool.ask
 
-> `v0.1.0` - 引入。
-> `v0.5.0` - 新增输入校验选项和 prompt 子命令。
+> `v0.1.0` - 引入。 `v0.5.0` - 新增输入校验选项和 prompt 子命令。
 
-`ptool.ask` 提供交互式提示能力。你既可以直接调用它来读取文本输入，也可以
-使用它的子 prompt 来做确认、单选、多选和密文输入。
+`ptool.ask` 提供交互式提示能力。你既可以直接调用它来读取文本输入，也可以 使用它的子 prompt 来做确认、单选、多选和密文输入。
 
 通用行为：
 
@@ -207,8 +196,7 @@ local bump = ptool.ask.select("Select bump type", {
 
 > `v0.5.0` - 引入。
 
-`ptool.ask.multiselect(prompt, items[, options])` 让用户从列表中选择零个
-或多个条目。
+`ptool.ask.multiselect(prompt, items[, options])` 让用户从列表中选择零个 或多个条目。
 
 - `prompt`（string，必填）：展示给用户的提示语。
 - `items`（table，必填）：候选条目，格式与 `ptool.ask.select` 相同。
@@ -244,8 +232,7 @@ local targets = ptool.ask.multiselect("Select targets", {
   - `help`（string，可选）：显示在提示下方的额外帮助文本。
   - `required`（boolean，可选）：是否要求答案非空。
   - `allow_empty`（boolean，可选）：是否允许空答案。默认值为 `false`。
-  - `confirm`（boolean，可选）：是否要求用户重复输入一次进行确认。
-    默认值为 `false`。
+  - `confirm`（boolean，可选）：是否要求用户重复输入一次进行确认。 默认值为 `false`。
   - `confirm_prompt`（string，可选）：确认步骤使用的自定义提示语。
   - `mismatch_message`（string，可选）：两次输入不一致时显示的自定义错误消息。
   - `display_toggle`（boolean，可选）：是否允许临时显示已输入的密文。
@@ -275,8 +262,7 @@ local token = ptool.ask.secret("API token?", {
   - `echo`（boolean，可选）：默认是否回显。默认值为 `true`。
   - `check`（boolean，可选）：默认在失败时是否抛错。默认值为 `false`。
   - `confirm`（boolean，可选）：默认执行前是否要求确认。默认值为 `false`。
-  - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。
-    默认值为 `false`。
+  - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 默认值为 `false`。
 
 示例：
 
@@ -303,8 +289,7 @@ ptool.config({
 
 - 相对路径会从当前 `ptool` 运行时目录解析。
 - 目标必须存在，而且必须是目录。
-- 这会更新 `ptool` 的运行时状态，并影响依赖运行时 cwd 的 API
-  （例如 `ptool.run`、`ptool.path.abspath` 和 `ptool.path.relpath`）。
+- 这会更新 `ptool` 的运行时状态，并影响依赖运行时 cwd 的 API （例如 `ptool.run`、`ptool.path.abspath` 和 `ptool.path.relpath`）。
 
 示例：
 
@@ -355,8 +340,7 @@ local project_root = ptool.path.dirname(script_dir)
 
 结构化错误字段：
 
-- `kind`（string）：稳定的错误类别，例如 `io_error`、`command_failed`、
-  `invalid_argument`、`http_error` 或 `lua_error`。
+- `kind`（string）：稳定的错误类别，例如 `io_error`、`command_failed`、 `invalid_argument`、`http_error` 或 `lua_error`。
 - `message`（string）：便于阅读的错误消息。
 - `op`（string，可选）：发生错误的 API 或操作名，例如 `ptool.fs.read`。
 - `detail`（string，可选）：额外的失败细节。
@@ -372,12 +356,9 @@ local project_root = ptool.path.dirname(script_dir)
 
 行为说明：
 
-- `ptool` 自带 API 抛出的都是结构化错误。`ptool.try` 会把它们转换成上面的
-  `err` table，方便调用方根据 `err.kind` 和其他字段做分支处理。
-- 普通 Lua 错误也会被捕获。这种情况下，`err.kind` 为 `lua_error`，并且只保证
-  `message` 一定存在。
-- 对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`
-  和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。
+- `ptool` 自带 API 抛出的都是结构化错误。`ptool.try` 会把它们转换成上面的 `err` table，方便调用方根据 `err.kind` 和其他字段做分支处理。
+- 普通 Lua 错误也会被捕获。这种情况下，`err.kind` 为 `lua_error`，并且只保证 `message` 一定存在。
+- 对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })` 和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。
 
 示例：
 
@@ -424,17 +405,13 @@ ptool.run({ cmd = "echo", args = {"hello"}, stdout = "capture" })
 
 参数规则：
 
-- `ptool.run(cmdline)`：`cmdline` 会按 shell 风格（`shlex`）规则拆分。第一项
-  作为命令，其余项作为参数。
-- `ptool.run(cmd, argsline)`：`cmd` 直接作为命令，`argsline` 会按 shell 风格
-  （`shlex`）规则拆分成参数列表。
+- `ptool.run(cmdline)`：`cmdline` 会按 shell 风格（`shlex`）规则拆分。第一项 作为命令，其余项作为参数。
+- `ptool.run(cmd, argsline)`：`cmd` 直接作为命令，`argsline` 会按 shell 风格 （`shlex`）规则拆分成参数列表。
 - `ptool.run(cmd, args)`：`cmd` 是字符串，`args` 是字符串数组。
 - `ptool.run(cmdline, options)`：`options` 会覆盖本次调用的配置，例如 `echo`。
-- `ptool.run(cmd, args, options)`：`args` 可以是字符串，也可以是字符串数组；
-  `options` 会覆盖本次调用的配置，例如 `echo`。
+- `ptool.run(cmd, args, options)`：`args` 可以是字符串，也可以是字符串数组； `options` 会覆盖本次调用的配置，例如 `echo`。
 - `ptool.run(options)`：`options` 是一个 table。
-- 当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`；
-  否则视为 `options`。
+- 当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； 否则视为 `options`。
 
 返回值规则：
 
@@ -445,16 +422,10 @@ ptool.run({ cmd = "echo", args = {"hello"}, stdout = "capture" })
   - `cwd`（string）：本次执行实际使用的工作目录。
   - `stdout`（string，可选）：当 `stdout = "capture"` 时提供。
   - `stderr`（string，可选）：当 `stderr = "capture"` 时提供。
-  - `assert_ok(self)`（function）：当 `ok = false` 时抛出结构化错误。错误类别
-    为 `command_failed`，并且可能包含 `cmd`、`status`、`stderr` 和 `cwd`。
-- `check` 的默认值来自 `ptool.config({ run = { check = ... } })`。如果未配置，
-  默认是 `false`。当 `check = false` 时，调用方可以自行检查 `ok`，或者调用
-  `res:assert_ok()`。
-- 当同时设置 `check = true` 和 `retry = true` 时，`ptool.run` 会在最终抛错前，
-  询问是否要重试失败的命令。
-- 当 `check = true` 时，`ptool.run` 抛出的也是与 `res:assert_ok()` 相同的
-  `command_failed` 结构化错误。如果你想在 Lua 里捕获并检查它，使用
-  `ptool.try(...)`。
+  - `assert_ok(self)`（function）：当 `ok = false` 时抛出结构化错误。错误类别 为 `command_failed`，并且可能包含 `cmd`、`status`、`stderr` 和 `cwd`。
+- `check` 的默认值来自 `ptool.config({ run = { check = ... } })`。如果未配置， 默认是 `false`。当 `check = false` 时，调用方可以自行检查 `ok`，或者调用 `res:assert_ok()`。
+- 当同时设置 `check = true` 和 `retry = true` 时，`ptool.run` 会在最终抛错前， 询问是否要重试失败的命令。
+- 当 `check = true` 时，`ptool.run` 抛出的也是与 `res:assert_ok()` 相同的 `command_failed` 结构化错误。如果你想在 Lua 里捕获并检查它，使用 `ptool.try(...)`。
 
 示例：
 
@@ -483,15 +454,10 @@ res:assert_ok()
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
-- `echo`（boolean，可选）：本次执行是否回显命令信息。如果省略，则使用
-  `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
-- `check`（boolean，可选）：退出码不为 `0` 时是否立即抛错。如果省略，则使用
-  `ptool.config({ run = { check = ... } })` 中的值；若仍未设置，则默认是 `false`。
-- `confirm`（boolean，可选）：执行前是否询问用户确认。如果省略，则使用
-  `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
-- `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。
-  如果省略，则使用 `ptool.config({ run = { retry = ... } })` 中的值；若仍未设置，
-  则默认是 `false`。
+- `echo`（boolean，可选）：本次执行是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
+- `check`（boolean，可选）：退出码不为 `0` 时是否立即抛错。如果省略，则使用 `ptool.config({ run = { check = ... } })` 中的值；若仍未设置，则默认是 `false`。
+- `confirm`（boolean，可选）：执行前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
+- `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 如果省略，则使用 `ptool.config({ run = { retry = ... } })` 中的值；若仍未设置， 则默认是 `false`。
 - `stdout`（string，可选）：stdout 处理策略。支持：
   - `"inherit"`：继承到当前终端（默认）。
   - `"capture"`：捕获到 `res.stdout`。

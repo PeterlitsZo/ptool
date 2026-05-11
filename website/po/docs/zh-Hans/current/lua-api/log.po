@@ -1,0 +1,111 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:1
+msgid "Log API"
+msgstr "Log API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:3
+msgid "`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`."
+msgstr "`ptool.log` 在 `ptool.log` 和 `p.log` 下提供按 level 分类的终端日志辅助能力。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:6
+msgid "Every log call renders a line in this format:"
+msgstr "每次日志调用都会输出一行如下格式的文本："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:12
+msgid "Behavior:"
+msgstr "行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:14
+msgid "The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format."
+msgstr "时间戳使用本地时间，格式为 `YYYY-MM-DD HH:MM:SS`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:15
+msgid "The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and `ERROR`."
+msgstr "level 标签使用完整名称：`TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:17
+msgid "Colored output is enabled automatically when `ptool` is writing to a terminal."
+msgstr "当 `ptool` 正在向终端写入时，会自动启用彩色输出。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:19
+msgid "`ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`."
+msgstr "`ptool.log.error(...)` 写入 `stderr`，其余 level 写入 `stdout`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:20
+msgid "Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form."
+msgstr "多个参数会用空格连接；非字符串值会以单行 inspect 形式渲染。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:23
+msgid "ptool.log.trace"
+msgstr "ptool.log.trace"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:25
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:25"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:31
+msgid "Writes a trace-level log line."
+msgstr "输出一条 trace 级别日志。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:33
+msgid "ptool.log.debug"
+msgstr "ptool.log.debug"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:35
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:35"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:41
+msgid "Writes a debug-level log line."
+msgstr "输出一条 debug 级别日志。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:43
+msgid "ptool.log.info"
+msgstr "ptool.log.info"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:45
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:45"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:51
+msgid "Writes an info-level log line."
+msgstr "输出一条 info 级别日志。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:53
+msgid "ptool.log.warn"
+msgstr "ptool.log.warn"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:55
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:55"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:61
+msgid "Writes a warning-level log line."
+msgstr "输出一条 warn 级别日志。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:63
+msgid "ptool.log.error"
+msgstr "ptool.log.error"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:65
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:65"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:71
+msgid "Writes an error-level log line to `stderr`."
+msgstr "向 `stderr` 输出一条 error 级别日志。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:73
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:81
+msgid "Example output:"
+msgstr "示例输出："

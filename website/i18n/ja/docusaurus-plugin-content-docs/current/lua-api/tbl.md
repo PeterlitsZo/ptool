@@ -2,19 +2,16 @@
 
 テーブル向けヘルパーは `ptool.tbl` と `p.tbl` で利用できます。
 
-これらの API は、`1` から始まる連続した整数キーを持つ密なリストテーブルを
-対象にしています。
+これらの API は、`1` から始まる連続した整数キーを持つ密なリストテーブルを 対象にしています。
 
 ## ptool.tbl.map
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.map(list, fn)` はリストテーブルの各要素を変換し、新しいリストを
-返します。
+`ptool.tbl.map(list, fn)` はリストテーブルの各要素を変換し、新しいリストを 返します。
 
 - `list` (table, 必須): 密なリストテーブル。
-- `fn` (function, 必須): `(value, index)` を受け取り、`nil` 以外を返す
-  コールバック。
+- `fn` (function, 必須): `(value, index)` を受け取り、`nil` 以外を返す コールバック。
 - 戻り値: `table`。
 
 動作:
@@ -35,8 +32,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.filter(list, fn)` はコールバック結果が truthy の要素だけを残し、
-新しい密なリストとして返します。
+`ptool.tbl.filter(list, fn)` はコールバック結果が truthy の要素だけを残し、 新しい密なリストとして返します。
 
 - `list` (table, 必須): 密なリストテーブル。
 - `fn` (function, 必須): `(value, index)` を受け取るコールバック。
@@ -60,8 +56,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.concat(...)` は 1 個以上の密なリストテーブルを結合して新しい
-リストを返します。
+`ptool.tbl.concat(...)` は 1 個以上の密なリストテーブルを結合して新しい リストを返します。
 
 - `...` (table, 必須): 1 個以上の密なリストテーブル。
 - 戻り値: `table`。

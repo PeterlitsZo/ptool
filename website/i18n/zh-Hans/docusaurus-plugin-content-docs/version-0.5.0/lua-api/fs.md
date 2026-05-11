@@ -80,17 +80,13 @@ end
 
 ## ptool.fs.glob
 
-> `v0.2.0` - 引入。
-> `v0.5.0` - 新增 `working_dir` 选项。
+> `v0.2.0` - 引入。 `v0.5.0` - 新增 `working_dir` 选项。
 
-`ptool.fs.glob(pattern[, options])` 使用 Unix 风格 glob 语法匹配文件系统
-路径，并按字典序返回命中的路径字符串数组。
+`ptool.fs.glob(pattern[, options])` 使用 Unix 风格 glob 语法匹配文件系统 路径，并按字典序返回命中的路径字符串数组。
 
-- `pattern`（string，必填）：glob 模式。相对模式会从当前 `ptool` 运行时目录
-  解析，因此会受到 `ptool.cd(...)` 的影响。
+- `pattern`（string，必填）：glob 模式。相对模式会从当前 `ptool` 运行时目录 解析，因此会受到 `ptool.cd(...)` 的影响。
 - `options`（table，可选）：glob 选项。支持：
-  - `working_dir`（string，可选）：覆盖相对模式解析时使用的基准目录。
-    相对 `working_dir` 会从当前 `ptool` 运行时目录解析。
+  - `working_dir`（string，可选）：覆盖相对模式解析时使用的基准目录。 相对 `working_dir` 会从当前 `ptool` 运行时目录解析。
 - 返回：`string[]`。
 - 隐藏文件和目录只有在对应模式片段显式以 `.` 开头时才会被匹配。
 

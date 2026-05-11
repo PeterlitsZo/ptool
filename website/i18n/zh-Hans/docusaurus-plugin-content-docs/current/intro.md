@@ -30,13 +30,18 @@ ptool repl
 curl -fsSL https://peterlits.net/ptool/install.sh | bash
 ```
 
-安装脚本会下载当前平台最新的预编译发布包，将 `ptool` 安装到
-`~/.local/bin/ptool`，并在需要时打印 PATH 提示。
+安装脚本会下载当前平台最新的预编译发布包，将 `ptool` 安装到 `~/.local/bin/ptool`，并在需要时打印 PATH 提示。
 
 如果你想安装某个指定的发布标签，而不是最新稳定版：
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
+```
+
+To install into a custom binary directory instead of `~/.local/bin`:
+
+```sh
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
 ```
 
 ## 最小脚本
@@ -47,9 +52,7 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` 用来声明脚本要求的最低 `ptool` 版本。
-这样可以明确脚本依赖的 API 版本，并在运行时版本过旧时尽早失败。
-详见 [Core Lua API](./lua-api/core.md)。
+`ptool.use(...)` 用来声明脚本要求的最低 `ptool` 版本。 这样可以明确脚本依赖的 API 版本，并在运行时版本过旧时尽早失败。 详见 [Core Lua API](./lua-api/core.md)。
 
 运行方式：
 
@@ -83,15 +86,12 @@ ptool script.lua --name alice -v a.txt b.txt
 
 - 一个支持 shebang 文件的脚本运行器。
 - 一个可交互使用的 REPL，方便直接试验 Lua 表达式和 `ptool` API。
-- 一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、
-  HTTP、SSH、数据库和模板。
+- 一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、 HTTP、SSH、数据库和模板。
 - 一组面向命令行场景的辅助能力，用于执行命令、解析参数和进行交互式输入。
 
 ## 下一步
 
 - 查看 [REPL](./repl.md) 了解交互式使用方式、多行输入和键盘行为。
 - 使用 [Lua API 概览](./lua-api/index.md) 浏览核心 API 和可用模块。
-- 从 [Core Lua API](./lua-api/core.md) 开始了解版本门禁、进程执行、配置和脚本
-  生命周期辅助能力。
-- 当你需要某个具体能力的详细参考时，可以直接打开对应模块页面，例如
-  [Args API](./lua-api/args.md)。
+- 从 [Core Lua API](./lua-api/core.md) 开始了解版本门禁、进程执行、配置和脚本 生命周期辅助能力。
+- 当你需要某个具体能力的详细参考时，可以直接打开对应模块页面，例如 [Args API](./lua-api/args.md)。

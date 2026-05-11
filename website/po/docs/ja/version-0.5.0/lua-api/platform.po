@@ -1,0 +1,116 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:1
+msgid "Platform API"
+msgstr "プラットフォーム API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:3
+msgid "Platform detection helpers are available under `ptool.platform` and `p.platform`."
+msgstr "プラットフォーム検出ヘルパーは `ptool.platform` と `p.platform` に あります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:5
+msgid "ptool.platform.os"
+msgstr "ptool.platform.os"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:9
+msgid "`ptool.platform.os()` returns the operating system of the current machine."
+msgstr "`ptool.platform.os()` は現在のマシンのオペレーティングシステムを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:11
+msgid "Returns: `linux | macos | windows`."
+msgstr "戻り値: `linux | macos | windows`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:17
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:17"
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:19
+msgid "This reports the local machine running `ptool run`."
+msgstr "これは `ptool run` を実行しているローカルマシンを報告します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:20
+msgid "`ptool` currently exposes `linux`, `macos`, and `windows`."
+msgstr "`ptool` は現在 `linux`, `macos`, `windows` を公開しています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:22
+msgid "ptool.platform.arch"
+msgstr "ptool.platform.arch"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:24
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:24"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:26
+msgid "`ptool.platform.arch()` returns the CPU architecture of the current machine."
+msgstr "`ptool.platform.arch()` は現在のマシンの CPU アーキテクチャを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:28
+msgid "Returns: `amd64 | arm64 | x86 | arm | riscv64`."
+msgstr "戻り値: `amd64 | arm64 | x86 | arm | riscv64`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:34
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:34"
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:36
+msgid "`x86_64` is exposed as `amd64`."
+msgstr "`x86_64` は `amd64` として公開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:37
+msgid "`aarch64` is exposed as `arm64`."
+msgstr "`aarch64` は `arm64` として公開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:38
+msgid "32-bit x86 variants such as `x86` and `i686` are exposed as `x86`."
+msgstr "`x86` や `i686` などの 32 ビット x86 系は `x86` として公開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:39
+msgid "32-bit ARM variants such as `armv7l` are exposed as `arm`."
+msgstr "`armv7l` などの 32 ビット ARM 系は `arm` として公開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:40
+msgid "`riscv64` is exposed as `riscv64`."
+msgstr "`riscv64` は `riscv64` として公開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:42
+msgid "ptool.platform.target"
+msgstr "ptool.platform.target"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:44
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:44"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:46
+msgid "`ptool.platform.target()` returns a normalized platform target string for the current machine."
+msgstr "`ptool.platform.target()` は現在のマシン向けの正規化されたプラットフォーム target 文字列を返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:49
+msgid "Returns: `string`."
+msgstr "戻り値: `string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:56
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:56"
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:58
+msgid "The result is always `ptool.platform.os() .. \"-\" .. ptool.platform.arch()`."
+msgstr "結果は常に `ptool.platform.os() .. \"-\" .. ptool.platform.arch()` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:59
+msgid "This is intended for platform-based branching such as selecting download artifacts."
+msgstr "これはダウンロード用アーティファクトの選択など、プラットフォームに 基づく分岐のために使うことを想定しています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:61
+msgid "Common values include `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, and `windows-amd64`."
+msgstr "よくある値には `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, `windows-amd64` が 含まれます。"

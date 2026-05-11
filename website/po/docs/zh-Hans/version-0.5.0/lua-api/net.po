@@ -1,0 +1,182 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:1
+msgid "Network API"
+msgstr "Network API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:3
+msgid "URL, IP, and host/port parsing helpers are available under `ptool.net` and `p.net`."
+msgstr "URL、IP 和 host/port 解析辅助能力位于 `ptool.net` 和 `p.net` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:5
+msgid "ptool.net.parse_url"
+msgstr "ptool.net.parse_url"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:7"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:9
+msgid "`ptool.net.parse_url(input)` parses a URL string and returns a normalized parts table."
+msgstr "`ptool.net.parse_url(input)` 解析 URL 字符串，并返回一个规范化的组成部分表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:12"
+msgid "Arguments:"
+msgstr "参数："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:14
+msgid "`input` (string, required): The URL to parse."
+msgstr "`input`（string，必填）：要解析的 URL。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:16
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:16"
+msgid "Returns: A table with the following fields:"
+msgstr "返回：包含以下字段的表："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:18
+msgid "`kind` (string): Always `\"url\"`."
+msgstr "`kind`（string）：固定为 `\"url\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:19
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:19"
+msgid "`input` (string): The original input string."
+msgstr "`input`（string）：原始输入字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:20
+msgid "`normalized` (string): The normalized URL string."
+msgstr "`normalized`（string）：规范化后的 URL 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:21
+msgid "`scheme` (string): The URL scheme."
+msgstr "`scheme`（string）：URL 方案。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:22
+msgid "`username` (string, optional): The decoded username, if present."
+msgstr "`username`（string，可选）：解码后的用户名（如果存在）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:23
+msgid "`password` (string, optional): The decoded password, if present."
+msgstr "`password`（string，可选）：解码后的密码（如果存在）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:24
+msgid "`host` (string, optional): The hostname or IP literal, if present."
+msgstr "`host`（string，可选）：主机名或 IP 字面量（如果存在）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:25
+msgid "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, optional): The host classification, if a host is present."
+msgstr "`host_kind`（`\"domain\"|\"ipv4\"|\"ipv6\"`，可选）：主机分类，仅当存在主机时提供。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:27
+msgid "`port` (integer, optional): The explicit port, if present."
+msgstr "`port`（integer，可选）：显式端口（如果存在）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:28
+msgid "`path` (string): The URL path."
+msgstr "`path`（string）：URL 路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:29
+msgid "`query` (string, optional): The query string without the leading `?`."
+msgstr "`query`（string，可选）：不带前导 `?` 的查询字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:30
+msgid "`fragment` (string, optional): The fragment without the leading `#`."
+msgstr "`fragment`（string，可选）：不带前导 `#` 的片段。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:43
+msgid "ptool.net.parse_ip"
+msgstr "ptool.net.parse_ip"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:45
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:45"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:47
+msgid "`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a normalized parts table."
+msgstr "`ptool.net.parse_ip(input)` 解析 IPv4 或 IPv6 地址，并返回一个规范化的组成部分表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:50
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:50"
+msgid "Arguments:"
+msgstr "参数："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:52
+msgid "`input` (string, required): The IP address to parse."
+msgstr "`input`（string，必填）：要解析的 IP 地址。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:54
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:54"
+msgid "Returns: A table with the following fields:"
+msgstr "返回：包含以下字段的表："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:56
+msgid "`kind` (string): Always `\"ip\"`."
+msgstr "`kind`（string）：固定为 `\"ip\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:57
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:57"
+msgid "`input` (string): The original input string."
+msgstr "`input`（string）：原始输入字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:58
+msgid "`normalized` (string): The normalized IP address."
+msgstr "`normalized`（string）：规范化后的 IP 地址。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:59
+msgid "`version` (integer): `4` for IPv4 or `6` for IPv6."
+msgstr "`version`（integer）：IPv4 返回 `4`，IPv6 返回 `6`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:68
+msgid "ptool.net.parse_host_port"
+msgstr "ptool.net.parse_host_port"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:70
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:70"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:72
+msgid "`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a normalized parts table."
+msgstr "`ptool.net.parse_host_port(input)` 解析 `host:port` 字符串，并返回一个规范化的 组成部分表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:75
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:75"
+msgid "Arguments:"
+msgstr "参数："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:77
+msgid "`input` (string, required): The host and port string. IPv6 addresses must use bracket notation such as `[2001:db8::1]:443`."
+msgstr "`input`（string，必填）：主机和端口字符串。IPv6 地址必须使用方括号形式， 例如 `[2001:db8::1]:443`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:80
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:80"
+msgid "Returns: A table with the following fields:"
+msgstr "返回：包含以下字段的表："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:82
+msgid "`kind` (string): Always `\"host_port\"`."
+msgstr "`kind`（string）：固定为 `\"host_port\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:83
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:83"
+msgid "`input` (string): The original input string."
+msgstr "`input`（string）：原始输入字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:84
+msgid "`normalized` (string): The normalized `host:port` string."
+msgstr "`normalized`（string）：规范化后的 `host:port` 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:85
+msgid "`host` (string): The normalized host value."
+msgstr "`host`（string）：规范化后的主机值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:86
+msgid "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`): The host classification."
+msgstr "`host_kind`（`\"domain\"|\"ipv4\"|\"ipv6\"`）：主机分类。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:87
+msgid "`port` (integer): The parsed port."
+msgstr "`port`（integer）：解析后的端口。"

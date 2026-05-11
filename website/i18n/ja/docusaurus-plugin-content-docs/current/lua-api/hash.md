@@ -8,8 +8,7 @@
 
 `ptool.hash.sha256(input)` は Lua 文字列の SHA-256 ダイジェストを返します。
 
-- `input` (string, 必須): 入力となる Lua 文字列。ダイジェストは文字列の
-  生バイト列から計算されます。
+- `input` (string, 必須): 入力となる Lua 文字列。ダイジェストは文字列の 生バイト列から計算されます。
 - 戻り値: `string` (小文字の 16 進ダイジェスト)。
 
 ```lua
@@ -23,8 +22,7 @@ print(ptool.hash.sha256("hello"))
 
 `ptool.hash.sha1(input)` は Lua 文字列の SHA-1 ダイジェストを返します。
 
-- `input` (string, 必須): 入力となる Lua 文字列。ダイジェストは文字列の
-  生バイト列から計算されます。
+- `input` (string, 必須): 入力となる Lua 文字列。ダイジェストは文字列の 生バイト列から計算されます。
 - 戻り値: `string` (小文字の 16 進ダイジェスト)。
 
 ```lua
@@ -38,8 +36,7 @@ print(ptool.hash.sha1("hello"))
 
 `ptool.hash.md5(input)` は Lua 文字列の MD5 ダイジェストを返します。
 
-- `input` (string, 必須): 入力となる Lua 文字列。ダイジェストは文字列の
-  生バイト列から計算されます。
+- `input` (string, 必須): 入力となる Lua 文字列。ダイジェストは文字列の 生バイト列から計算されます。
 - 戻り値: `string` (小文字の 16 進ダイジェスト)。
 
 ```lua

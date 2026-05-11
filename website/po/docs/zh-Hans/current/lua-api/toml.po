@@ -1,0 +1,315 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:1
+msgid "TOML API"
+msgstr "TOML API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:3
+msgid "TOML parsing and editing helpers are available under `ptool.toml` and `p.toml`."
+msgstr "TOML 解析与编辑辅助能力位于 `ptool.toml` 和 `p.toml` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:5
+msgid "ptool.toml.parse"
+msgstr "ptool.toml.parse"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:9
+msgid "`ptool.toml.parse(input)` parses a TOML string into a Lua table."
+msgstr "`ptool.toml.parse(input)` 将 TOML 字符串解析为 Lua 表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:11
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:11"
+msgid "`input` (string, required): The TOML text."
+msgstr "`input`（string，必填）：TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:12
+msgid "Returns: A Lua table (the root node is always a table)."
+msgstr "返回：Lua 表（根节点始终是 table）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:14
+msgid "Type mapping:"
+msgstr "类型映射："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:16
+msgid "TOML table / inline table -> Lua table"
+msgstr "TOML table / inline table -> Lua table"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:17
+msgid "TOML array -> Lua sequence table (1-based)"
+msgstr "TOML array -> Lua 序列表（从 1 开始）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:18
+msgid "TOML string -> Lua string"
+msgstr "TOML string -> Lua string"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:19
+msgid "TOML integer -> Lua integer"
+msgstr "TOML integer -> Lua integer"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:20
+msgid "TOML float -> Lua number"
+msgstr "TOML float -> Lua number"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:21
+msgid "TOML boolean -> Lua boolean"
+msgstr "TOML boolean -> Lua boolean"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:22
+msgid "TOML datetime/date/time -> Lua string"
+msgstr "TOML datetime/date/time -> Lua string"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:24
+msgid "Error behavior:"
+msgstr "错误行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:26
+msgid "An error is raised if `input` is not a string."
+msgstr "如果 `input` 不是字符串，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:27
+msgid "A TOML syntax error raises an error whose message includes line and column information."
+msgstr "如果 TOML 语法有误，会抛出错误，错误信息中包含行号和列号。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:30
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:30"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:41
+msgid "ptool.toml.get"
+msgstr "ptool.toml.get"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:43"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:43"
+msgid "`v0.4.0` - Added numeric path segments for array indexing."
+msgstr "`v0.4.0` - 新增数组索引用的数字路径段。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:47
+msgid "`ptool.toml.get(input, path)` reads the value at a specified path from TOML text."
+msgstr "`ptool.toml.get(input, path)` 从 TOML 文本中读取指定路径上的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:50
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:50"
+msgid "`input` (string, required): The TOML text."
+msgstr "`input`（string，必填）：TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:51
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:51"
+msgid "`path` ((string|integer)[], required): A non-empty path array, such as `{\"package\", \"version\"}` or `{\"bin\", 1, \"name\"}`."
+msgstr "`path`（(string|integer)[]，必填）：非空路径数组，例如 `{\"package\", \"version\"}` 或 `{\"bin\", 1, \"name\"}`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:53
+msgid "Returns: The corresponding Lua value, or `nil` if the path does not exist."
+msgstr "返回：对应的 Lua 值；如果路径不存在，则返回 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:55
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:55"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:57
+msgid "String path segments select table keys."
+msgstr "字符串路径段用于选择 table 键。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:58
+msgid "Integer path segments select array elements using Lua's 1-based indexing."
+msgstr "整数路径段用于选择数组元素，采用 Lua 的 1-based 索引。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:60
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:60"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:71
+msgid "ptool.toml.set"
+msgstr "ptool.toml.set"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:73
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:73"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:73
+msgid "`v0.4.0` - Added composite value writes and numeric path segments."
+msgstr "`v0.4.0` - 新增复合值写入和数字路径段。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:77
+msgid "`ptool.toml.set(input, path, value)` sets the value at a specified path and returns the updated TOML text."
+msgstr "`ptool.toml.set(input, path, value)` 设置指定路径上的值，并返回更新后的 TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:80
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:80"
+msgid "`input` (string, required): The TOML text."
+msgstr "`input`（string，必填）：TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:81
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:81"
+msgid "`path` ((string|integer)[], required): A non-empty path array, such as `{\"package\", \"version\"}` or `{\"bin\", 1, \"name\"}`."
+msgstr "`path`（(string|integer)[]，必填）：非空路径数组，例如 `{\"package\", \"version\"}` 或 `{\"bin\", 1, \"name\"}`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:83
+msgid "`value` (string|integer|number|boolean|table, required): The value to write."
+msgstr "`value`（string|integer|number|boolean|table，必填）：要写入的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:84
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:84"
+msgid "Returns: The updated TOML string."
+msgstr "返回：更新后的 TOML 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:86
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:86"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:88
+msgid "Missing intermediate paths are created automatically as tables."
+msgstr "缺失的中间路径会自动创建为 table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:89
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:89"
+msgid "If an intermediate path exists but is not a table, an error is raised."
+msgstr "如果某个中间路径已存在但不是 table，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:90
+msgid "Lua tables with only string keys are written as TOML tables."
+msgstr "仅包含字符串键的 Lua table 会写成 TOML table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:91
+msgid "Lua sequence tables are written as TOML arrays."
+msgstr "Lua 序列表会写成 TOML array。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:92
+msgid "A Lua sequence of string-keyed tables is written as a TOML array of tables."
+msgstr "由“仅包含字符串键的 Lua table”组成的序列表会写成 TOML array of tables。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:93
+msgid "Empty Lua tables are currently written as TOML tables."
+msgstr "空 Lua table 目前会按 TOML table 写入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:94
+msgid "Parsing and writing back are based on `toml_edit`, which preserves original comments and formatting as much as possible."
+msgstr "解析和回写基于 `toml_edit`，会尽可能保留原始注释和格式。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:97
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:97"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:111
+msgid "ptool.toml.remove"
+msgstr "ptool.toml.remove"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:113
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:113"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:113
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:113"
+msgid "`v0.4.0` - Added numeric path segments for array indexing."
+msgstr "`v0.4.0` - 新增数组索引用的数字路径段。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:117
+msgid "`ptool.toml.remove(input, path)` removes the specified path and returns the updated TOML text."
+msgstr "`ptool.toml.remove(input, path)` 删除指定路径，并返回更新后的 TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:120
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:120"
+msgid "`input` (string, required): The TOML text."
+msgstr "`input`（string，必填）：TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:121
+msgid "`path` ((string|integer)[], required): A non-empty path array, such as `{\"package\", \"name\"}` or `{\"bin\", 1}`."
+msgstr "`path`（(string|integer)[]，必填）：非空路径数组，例如 `{\"package\", \"name\"}` 或 `{\"bin\", 1}`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:123
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:123"
+msgid "Returns: The updated TOML string."
+msgstr "返回：更新后的 TOML 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:125
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:125"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:127
+msgid "If the path does not exist, no error is raised and the original text (or an equivalent form) is returned."
+msgstr "如果路径不存在，不会报错，而是返回原始文本或其等价形式。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:129
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:129"
+msgid "If an intermediate path exists but is not a table, an error is raised."
+msgstr "如果某个中间路径已存在但不是 table，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:131"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:139
+msgid "ptool.toml.stringify"
+msgstr "ptool.toml.stringify"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:141
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:143
+msgid "`ptool.toml.stringify(value)` converts a Lua value to TOML text."
+msgstr "`ptool.toml.stringify(value)` 将 Lua 值编码为 TOML 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:145
+msgid "`value` (table, required): The root TOML table to encode."
+msgstr "`value`（table，必填）：要编码的根 TOML table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:146
+msgid "Returns: The encoded TOML string."
+msgstr "返回：编码后的 TOML 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:148
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:148"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:150
+msgid "The root value must be a Lua table representing a TOML table."
+msgstr "根值必须是表示 TOML table 的 Lua table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:151
+msgid "Nested Lua tables follow the same table/array rules as `ptool.toml.set`."
+msgstr "嵌套 Lua table 与 `ptool.toml.set` 使用相同的 table/array 判定规则。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:152
+msgid "Empty Lua tables are currently encoded as TOML tables."
+msgstr "空 Lua table 目前会编码为 TOML table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:154
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:154"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:168
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:170
+msgid "The `path` argument for `ptool.toml.get/set/remove` must be a non-empty array of strings and/or positive integers."
+msgstr "`ptool.toml.get/set/remove` 的 `path` 参数必须是由字符串和/或正整数构成的非空数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:172
+msgid "Integer path segments are 1-based so they match Lua array indexing."
+msgstr "整数路径段是 1-based 的，与 Lua 数组索引保持一致。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/toml.md:173
+msgid "TOML datetime/date/time values are still read back as Lua strings."
+msgstr "TOML datetime/date/time 值目前仍会读取为 Lua string。"

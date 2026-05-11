@@ -1,14 +1,12 @@
 # API de base de datos
 
-Las utilidades de conexión y consulta de bases de datos están disponibles bajo
-`ptool.db` y `p.db`.
+Las utilidades de conexión y consulta de bases de datos están disponibles bajo `ptool.db` y `p.db`.
 
 ## ptool.db.connect
 
 > `v0.1.0` - Introduced.
 
-`ptool.db.connect(url_or_options)` abre una conexión de base de datos y
-devuelve un objeto `Connection`.
+`ptool.db.connect(url_or_options)` abre una conexión de base de datos y devuelve un objeto `Connection`.
 
 Bases de datos admitidas:
 
@@ -34,11 +32,8 @@ local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 Notas sobre SQLite:
 
 - Se admiten `sqlite:test.db` y `sqlite://test.db`.
-- Las rutas SQLite relativas se resuelven desde el directorio de ejecución
-  actual de `ptool`, por lo que siguen a `ptool.cd(...)`.
-- Si no se proporciona el parámetro de consulta `mode=`, las conexiones SQLite
-  usan por defecto `mode=rwc`, lo que permite crear el archivo de base de datos
-  automáticamente.
+- Las rutas SQLite relativas se resuelven desde el directorio de ejecución actual de `ptool`, por lo que siguen a `ptool.cd(...)`.
+- Si no se proporciona el parámetro de consulta `mode=`, las conexiones SQLite usan por defecto `mode=rwc`, lo que permite crear el archivo de base de datos automáticamente.
 
 Ejemplo:
 
@@ -53,8 +48,7 @@ local db = ptool.db.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` representa una conexión de base de datos abierta devuelta por
-`ptool.db.connect()`.
+`Connection` representa una conexión de base de datos abierta devuelta por `ptool.db.connect()`.
 
 Está implementada como userdata de Lua.
 
@@ -70,12 +64,9 @@ Métodos:
 Enlace de parámetros:
 
 - `params` es opcional.
-- Cuando `params` es una tabla tipo arreglo, se trata como parámetros
-  posicionales y los placeholders SQL deben usar `?`.
-- Cuando `params` es una tabla clave-valor, se trata como parámetros con nombre
-  y los placeholders SQL deben usar `:name`.
-- No se pueden mezclar parámetros posicionales y con nombre en la misma
-  llamada.
+- Cuando `params` es una tabla tipo arreglo, se trata como parámetros posicionales y los placeholders SQL deben usar `?`.
+- Cuando `params` es una tabla clave-valor, se trata como parámetros con nombre y los placeholders SQL deben usar `:name`.
+- No se pueden mezclar parámetros posicionales y con nombre en la misma llamada.
 - Los tipos de valor de parámetro admitidos son:
   - `boolean`
   - `integer`
@@ -93,8 +84,7 @@ Reglas de valores devueltos:
   - `nil` (para SQL `NULL`)
 - Las columnas de texto se devuelven como cadenas Lua.
 - Las columnas binarias/blob también se devuelven como cadenas Lua.
-- Si un resultado de consulta contiene nombres de columna duplicados, se
-  produce un error. Usa alias SQL como `AS` para desambiguarlos.
+- Si un resultado de consulta contiene nombres de columna duplicados, se produce un error. Usa alias SQL como `AS` para desambiguarlos.
 
 ### query
 
@@ -130,8 +120,7 @@ print(res.rows[2].name)
 
 Canonical API name: `ptool.db.Connection:query_one`.
 
-`db:query_one(sql, params?)` devuelve la primera fila como tabla, o `nil` si la
-consulta no devuelve filas.
+`db:query_one(sql, params?)` devuelve la primera fila como tabla, o `nil` si la consulta no devuelve filas.
 
 Ejemplo:
 
@@ -148,8 +137,7 @@ end
 
 Canonical API name: `ptool.db.Connection:scalar`.
 
-`db:scalar(sql, params?)` devuelve la primera columna de la primera fila, o
-`nil` si la consulta no devuelve filas.
+`db:scalar(sql, params?)` devuelve la primera columna de la primera fila, o `nil` si la consulta no devuelve filas.
 
 Ejemplo:
 
@@ -181,17 +169,14 @@ print(res.rows_affected)
 
 Canonical API name: `ptool.db.Connection:transaction`.
 
-`db:transaction(fn)` ejecuta `fn(tx)` dentro de una transacción de base de
-datos.
+`db:transaction(fn)` ejecuta `fn(tx)` dentro de una transacción de base de datos.
 
 Comportamiento:
 
 - Si `fn(tx)` devuelve normalmente, la transacción se confirma.
-- Si `fn(tx)` produce un error, la transacción se revierte y el error se vuelve
-  a lanzar.
+- Si `fn(tx)` produce un error, la transacción se revierte y el error se vuelve a lanzar.
 - No se admiten transacciones anidadas.
-- Mientras la devolución de llamada está activa, no debe usarse el objeto de
-  conexión exterior; usa en su lugar el objeto `tx` proporcionado.
+- Mientras la devolución de llamada está activa, no debe usarse el objeto de conexión exterior; usa en su lugar el objeto `tx` proporcionado.
 
 El objeto `tx` admite los mismos métodos de consulta que `Connection`:
 
@@ -229,8 +214,7 @@ Canonical API name: `ptool.db.Connection:close`.
 Comportamiento:
 
 - Después de cerrar, la conexión ya no puede usarse.
-- Cerrar durante una devolución de llamada de transacción activa produce un
-  error.
+- Cerrar durante una devolución de llamada de transacción activa produce un error.
 
 Ejemplo:
 

@@ -40,15 +40,13 @@ print(conf.release_date) -- datetime/date/time values are strings
 ## ptool.toml.get
 
 > `v0.1.0` - Introduced.
->
+> 
 > `v0.4.0` - Added numeric path segments for array indexing.
 
-`ptool.toml.get(input, path)` は TOML テキスト内の指定パスにある値を
-読み取ります。
+`ptool.toml.get(input, path)` は TOML テキスト内の指定パスにある値を 読み取ります。
 
 - `input` (string, 必須): TOML テキスト。
-- `path` ((string|integer)[], 必須): `{"package", "version"}` や
-  `{"bin", 1, "name"}` のような空でないパス配列。
+- `path` ((string|integer)[], 必須): `{"package", "version"}` や `{"bin", 1, "name"}` のような空でないパス配列。
 - 戻り値: 対応する Lua 値。パスが存在しない場合は `nil`。
 
 挙動:
@@ -70,15 +68,13 @@ print(first_bin_name)
 ## ptool.toml.set
 
 > `v0.1.0` - Introduced.
->
+> 
 > `v0.4.0` - Added composite value writes and numeric path segments.
 
-`ptool.toml.set(input, path, value)` は指定パスに値を設定し、更新後の
-TOML テキストを返します。
+`ptool.toml.set(input, path, value)` は指定パスに値を設定し、更新後の TOML テキストを返します。
 
 - `input` (string, 必須): TOML テキスト。
-- `path` ((string|integer)[], 必須): `{"package", "version"}` や
-  `{"bin", 1, "name"}` のような空でないパス配列。
+- `path` ((string|integer)[], 必須): `{"package", "version"}` や `{"bin", 1, "name"}` のような空でないパス配列。
 - `value` (string|integer|number|boolean|table, 必須): 書き込む値。
 - 戻り値: 更新後の TOML 文字列。
 
@@ -90,8 +86,7 @@ TOML テキストを返します。
 - Lua のシーケンステーブルは TOML 配列として書き込まれます。
 - 文字列キーだけを持つ Lua テーブルのシーケンスは TOML の配列テーブルとして書き込まれます。
 - 空の Lua テーブルは現在 TOML テーブルとして書き込まれます。
-- 解析と書き戻しは `toml_edit` に基づいており、元のコメントや書式を
-  可能な限り保持します。
+- 解析と書き戻しは `toml_edit` に基づいており、元のコメントや書式を 可能な限り保持します。
 
 例:
 
@@ -110,21 +105,18 @@ local text3 = ptool.toml.set(text2, {"package", "metadata"}, {
 ## ptool.toml.remove
 
 > `v0.1.0` - Introduced.
->
+> 
 > `v0.4.0` - Added numeric path segments for array indexing.
 
-`ptool.toml.remove(input, path)` は指定パスを削除し、更新後の TOML
-テキストを返します。
+`ptool.toml.remove(input, path)` は指定パスを削除し、更新後の TOML テキストを返します。
 
 - `input` (string, 必須): TOML テキスト。
-- `path` ((string|integer)[], 必須): `{"package", "name"}` や
-  `{"bin", 1}` のような空でないパス配列。
+- `path` ((string|integer)[], 必須): `{"package", "name"}` や `{"bin", 1}` のような空でないパス配列。
 - 戻り値: 更新後の TOML 文字列。
 
 挙動:
 
-- パスが存在しない場合でもエラーにはならず、元のテキストまたは等価な
-  形式が返ります。
+- パスが存在しない場合でもエラーにはならず、元のテキストまたは等価な 形式が返ります。
 - 中間パスが存在していてもテーブルでない場合はエラーになります。
 
 例:

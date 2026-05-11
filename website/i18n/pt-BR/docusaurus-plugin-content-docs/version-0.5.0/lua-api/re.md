@@ -6,13 +6,11 @@ As utilidades de expressão regular estão disponíveis em `ptool.re` e `p.re`.
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.compile(pattern[, opts])` compila uma expressão regular e retorna um
-objeto `Regex`.
+`ptool.re.compile(pattern[, opts])` compila uma expressão regular e retorna um objeto `Regex`.
 
 - `pattern` (string, obrigatório): O padrão regex.
 - `opts` (table, opcional): Opções de compilação. Atualmente, há suporte a:
-  - `case_insensitive` (boolean, opcional): Se a correspondência é case
-    insensitive. O padrão é `false`.
+  - `case_insensitive` (boolean, opcional): Se a correspondência é case insensitive. O padrão é `false`.
 
 Exemplo:
 
@@ -42,8 +40,7 @@ print(re:is_match("a+b?")) -- true
 
 > `v0.1.0` - Introduced.
 
-`Regex` representa uma expressão regular compilada retornada por
-`ptool.re.compile(...)`.
+`Regex` representa uma expressão regular compilada retornada por `ptool.re.compile(...)`.
 
 Ela é implementada como userdata Lua.
 
@@ -71,8 +68,7 @@ Canonical API name: `ptool.re.Regex:is_match`.
 
 Canonical API name: `ptool.re.Regex:find`.
 
-`re:find(input[, init])` retorna a primeira correspondência em `input`, ou
-`nil`.
+`re:find(input[, init])` retorna a primeira correspondência em `input`, ou `nil`.
 
 - `input` (string, obrigatório): O texto de entrada.
 
@@ -89,45 +85,38 @@ Estruturas de retorno:
   - `text` (string): O texto correspondente.
 - `Captures`:
   - `full` (string): O texto completo correspondente.
-  - `groups` (table): Um array dos grupos capturados na ordem de captura.
-    Grupos não correspondidos são `nil`.
-  - `named` (table): Um mapeamento de grupos capturados nomeados, indexado pelo
-    nome do grupo.
+  - `groups` (table): Um array dos grupos capturados na ordem de captura. Grupos não correspondidos são `nil`.
+  - `named` (table): Um mapeamento de grupos capturados nomeados, indexado pelo nome do grupo.
 
 ### find_all
 
 Canonical API name: `ptool.re.Regex:find_all`.
 
-`re:find_all(input)` retorna todas as correspondências em `input` como
-`Match[]`.
+`re:find_all(input)` retorna todas as correspondências em `input` como `Match[]`.
 
 ### captures
 
 Canonical API name: `ptool.re.Regex:captures`.
 
-`re:captures(input)` retorna o primeiro conjunto de capturas em `input`, ou
-`nil`.
+`re:captures(input)` retorna o primeiro conjunto de capturas em `input`, ou `nil`.
 
 ### captures_all
 
 Canonical API name: `ptool.re.Regex:captures_all`.
 
-`re:captures_all(input)` retorna todos os conjuntos de capturas em `input` como
-`Captures[]`.
+`re:captures_all(input)` retorna todos os conjuntos de capturas em `input` como `Captures[]`.
 
 ### replace
 
 Canonical API name: `ptool.re.Regex:replace`.
 
-`re:replace(input, replacement)` substitui a primeira correspondência em
-`input`.
+`re:replace(input, replacement)` substitui a primeira correspondência em `input`.
 
 ### replace_all
 
 Canonical API name: `ptool.re.Regex:replace_all`.
 
-`re:replace_all(input, replacement)` substitui todas as correspondências em
-`input`.
+`re:replace_all(input, replacement)` substitui todas as correspondências em `input`.
 
 ### split
 

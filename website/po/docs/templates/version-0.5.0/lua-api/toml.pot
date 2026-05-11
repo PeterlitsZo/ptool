@@ -1,0 +1,353 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-11 20:21+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:1
+msgid "TOML API"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:3
+msgid ""
+"TOML parsing and editing helpers are available under `ptool.toml` and "
+"`p.toml`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:5
+msgid "ptool.toml.parse"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:9
+msgid "`ptool.toml.parse(input)` parses a TOML string into a Lua table."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:11
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:11"
+msgid "`input` (string, required): The TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:12
+msgid "Returns: A Lua table (the root node is always a table)."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:14
+msgid "Type mapping:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:16
+msgid "TOML table / inline table -> Lua table"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:17
+msgid "TOML array -> Lua sequence table (1-based)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:18
+msgid "TOML string -> Lua string"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:19
+msgid "TOML integer -> Lua integer"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:20
+msgid "TOML float -> Lua number"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:21
+msgid "TOML boolean -> Lua boolean"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:22
+msgid "TOML datetime/date/time -> Lua string"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:24
+msgid "Error behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:26
+msgid "An error is raised if `input` is not a string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:27
+msgid ""
+"A TOML syntax error raises an error whose message includes line and column "
+"information."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:30
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:30"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:41
+msgid "ptool.toml.get"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:43"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:43"
+msgid "`v0.4.0` - Added numeric path segments for array indexing."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:47
+msgid ""
+"`ptool.toml.get(input, path)` reads the value at a specified path from TOML "
+"text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:50
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:50"
+msgid "`input` (string, required): The TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:51
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:51"
+msgid ""
+"`path` ((string|integer)[], required): A non-empty path array, such as `{"
+"\"package\", \"version\"}` or `{\"bin\", 1, \"name\"}`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:53
+msgid ""
+"Returns: The corresponding Lua value, or `nil` if the path does not exist."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:55
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:55"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:57
+msgid "String path segments select table keys."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:58
+msgid ""
+"Integer path segments select array elements using Lua's 1-based indexing."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:60
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:60"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:71
+msgid "ptool.toml.set"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:73
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:73"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:73
+msgid "`v0.4.0` - Added composite value writes and numeric path segments."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:77
+msgid ""
+"`ptool.toml.set(input, path, value)` sets the value at a specified path and "
+"returns the updated TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:80
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:80"
+msgid "`input` (string, required): The TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:81
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:81"
+msgid ""
+"`path` ((string|integer)[], required): A non-empty path array, such as `{"
+"\"package\", \"version\"}` or `{\"bin\", 1, \"name\"}`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:83
+msgid ""
+"`value` (string|integer|number|boolean|table, required): The value to write."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:84
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:84"
+msgid "Returns: The updated TOML string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:86
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:86"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:88
+msgid "Missing intermediate paths are created automatically as tables."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:89
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:89"
+msgid "If an intermediate path exists but is not a table, an error is raised."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:90
+msgid "Lua tables with only string keys are written as TOML tables."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:91
+msgid "Lua sequence tables are written as TOML arrays."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:92
+msgid ""
+"A Lua sequence of string-keyed tables is written as a TOML array of tables."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:93
+msgid "Empty Lua tables are currently written as TOML tables."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:94
+msgid ""
+"Parsing and writing back are based on `toml_edit`, which preserves original "
+"comments and formatting as much as possible."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:97
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:97"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:111
+msgid "ptool.toml.remove"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:113
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:113"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:113
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:113"
+msgid "`v0.4.0` - Added numeric path segments for array indexing."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:117
+msgid ""
+"`ptool.toml.remove(input, path)` removes the specified path and returns the "
+"updated TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:120
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:120"
+msgid "`input` (string, required): The TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:121
+msgid ""
+"`path` ((string|integer)[], required): A non-empty path array, such as `{"
+"\"package\", \"name\"}` or `{\"bin\", 1}`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:123
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:123"
+msgid "Returns: The updated TOML string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:125
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:125"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:127
+msgid ""
+"If the path does not exist, no error is raised and the original text "
+"(or an equivalent form) is returned."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:129
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:129"
+msgid "If an intermediate path exists but is not a table, an error is raised."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:131"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:139
+msgid "ptool.toml.stringify"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:141
+msgid "`v0.4.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:143
+msgid "`ptool.toml.stringify(value)` converts a Lua value to TOML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:145
+msgid "`value` (table, required): The root TOML table to encode."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:146
+msgid "Returns: The encoded TOML string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:148
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:148"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:150
+msgid "The root value must be a Lua table representing a TOML table."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:151
+msgid ""
+"Nested Lua tables follow the same table/array rules as `ptool.toml.set`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:152
+msgid "Empty Lua tables are currently encoded as TOML tables."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:154
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:154"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:168
+msgid "Notes:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:170
+msgid ""
+"The `path` argument for `ptool.toml.get/set/remove` must be a non-empty "
+"array of strings and/or positive integers."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:172
+msgid "Integer path segments are 1-based so they match Lua array indexing."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/toml.md:173
+msgid "TOML datetime/date/time values are still read back as Lua strings."
+msgstr ""

@@ -2,19 +2,16 @@
 
 Os utilitários de tabelas estão disponíveis em `ptool.tbl` e `p.tbl`.
 
-Essas APIs foram projetadas para tabelas de lista densas, com chaves inteiras
-contíguas começando em `1`.
+Essas APIs foram projetadas para tabelas de lista densas, com chaves inteiras contíguas começando em `1`.
 
 ## ptool.tbl.map
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e retorna
-uma nova lista.
+`ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e retorna uma nova lista.
 
 - `list` (table, obrigatório): Uma tabela de lista densa.
-- `fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve
-  retornar um valor diferente de `nil`.
+- `fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve retornar um valor diferente de `nil`.
 - Retorna: `table`.
 
 Comportamento:
@@ -35,8 +32,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja
-truthy e os retorna em uma nova lista densa.
+`ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja truthy e os retorna em uma nova lista densa.
 
 - `list` (table, obrigatório): Uma tabela de lista densa.
 - `fn` (function, obrigatório): Um callback que recebe `(value, index)`.
@@ -60,8 +56,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma
-nova lista.
+`ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma nova lista.
 
 - `...` (table, obrigatório): Uma ou mais tabelas de lista densas.
 - Retorna: `table`.

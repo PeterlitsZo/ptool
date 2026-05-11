@@ -1,7 +1,6 @@
 # API TOML
 
-As utilidades de parse e edição de TOML estão disponíveis em `ptool.toml` e
-`p.toml`.
+As utilidades de parse e edição de TOML estão disponíveis em `ptool.toml` e `p.toml`.
 
 ## ptool.toml.parse
 
@@ -25,8 +24,7 @@ Mapeamento de tipos:
 Comportamento de erro:
 
 - Um erro é gerado se `input` não for uma string.
-- Um erro de sintaxe TOML gera uma mensagem que inclui informações de linha e
-  coluna.
+- Um erro de sintaxe TOML gera uma mensagem que inclui informações de linha e coluna.
 
 Exemplo:
 
@@ -42,22 +40,19 @@ print(conf.release_date) -- datetime/date/time values are strings
 ## ptool.toml.get
 
 > `v0.1.0` - Introduced.
->
+> 
 > `v0.4.0` - Added numeric path segments for array indexing.
 
-`ptool.toml.get(input, path)` lê o valor em um caminho especificado dentro de
-um texto TOML.
+`ptool.toml.get(input, path)` lê o valor em um caminho especificado dentro de um texto TOML.
 
 - `input` (string, obrigatório): O texto TOML.
-- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como
-  `{"package", "version"}` ou `{"bin", 1, "name"}`.
+- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como `{"package", "version"}` ou `{"bin", 1, "name"}`.
 - Retorna: O valor Lua correspondente, ou `nil` se o caminho não existir.
 
 Comportamento:
 
 - Segmentos de caminho do tipo string selecionam chaves de tabela.
-- Segmentos de caminho do tipo integer selecionam elementos de array usando o
-  índice base 1 do Lua.
+- Segmentos de caminho do tipo integer selecionam elementos de array usando o índice base 1 do Lua.
 
 Exemplo:
 
@@ -73,17 +68,14 @@ print(first_bin_name)
 ## ptool.toml.set
 
 > `v0.1.0` - Introduced.
->
+> 
 > `v0.4.0` - Added composite value writes and numeric path segments.
 
-`ptool.toml.set(input, path, value)` define o valor em um caminho especificado
-e retorna o texto TOML atualizado.
+`ptool.toml.set(input, path, value)` define o valor em um caminho especificado e retorna o texto TOML atualizado.
 
 - `input` (string, obrigatório): O texto TOML.
-- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como
-  `{"package", "version"}` ou `{"bin", 1, "name"}`.
-- `value` (string|integer|number|boolean|table, obrigatório): O valor a ser
-  escrito.
+- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como `{"package", "version"}` ou `{"bin", 1, "name"}`.
+- `value` (string|integer|number|boolean|table, obrigatório): O valor a ser escrito.
 - Retorna: A string TOML atualizada.
 
 Comportamento:
@@ -92,11 +84,9 @@ Comportamento:
 - Se um caminho intermediário existir mas não for uma tabela, um erro é gerado.
 - Tabelas Lua com apenas chaves string são gravadas como tabelas TOML.
 - Tabelas sequenciais de Lua são gravadas como arrays TOML.
-- Uma sequência Lua de tabelas com chaves string é gravada como array of
-  tables TOML.
+- Uma sequência Lua de tabelas com chaves string é gravada como array of tables TOML.
 - Tabelas Lua vazias são gravadas atualmente como tabelas TOML.
-- O parse e a regravação se baseiam em `toml_edit`, que preserva comentários e
-  formatação originais tanto quanto possível.
+- O parse e a regravação se baseiam em `toml_edit`, que preserva comentários e formatação originais tanto quanto possível.
 
 Exemplo:
 
@@ -115,21 +105,18 @@ local text3 = ptool.toml.set(text2, {"package", "metadata"}, {
 ## ptool.toml.remove
 
 > `v0.1.0` - Introduced.
->
+> 
 > `v0.4.0` - Added numeric path segments for array indexing.
 
-`ptool.toml.remove(input, path)` remove o caminho especificado e retorna o
-texto TOML atualizado.
+`ptool.toml.remove(input, path)` remove o caminho especificado e retorna o texto TOML atualizado.
 
 - `input` (string, obrigatório): O texto TOML.
-- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como
-  `{"package", "name"}` ou `{"bin", 1}`.
+- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como `{"package", "name"}` ou `{"bin", 1}`.
 - Retorna: A string TOML atualizada.
 
 Comportamento:
 
-- Se o caminho não existir, nenhum erro é gerado e o texto original ou uma
-  forma equivalente é retornado.
+- Se o caminho não existir, nenhum erro é gerado e o texto original ou uma forma equivalente é retornado.
 - Se um caminho intermediário existir mas não for uma tabela, um erro é gerado.
 
 Exemplo:
@@ -152,8 +139,7 @@ ptool.fs.write("Cargo.toml", updated)
 Comportamento:
 
 - O valor raiz deve ser uma tabela Lua que represente uma tabela TOML.
-- Tabelas Lua aninhadas seguem as mesmas regras de table/array de
-  `ptool.toml.set`.
+- Tabelas Lua aninhadas seguem as mesmas regras de table/array de `ptool.toml.set`.
 - Tabelas Lua vazias são codificadas atualmente como tabelas TOML.
 
 Exemplo:
@@ -172,8 +158,6 @@ print(text)
 
 Notas:
 
-- O argumento `path` de `ptool.toml.get/set/remove` deve ser um array não vazio
-  de strings e/ou inteiros positivos.
-- Segmentos de caminho inteiros usam base 1 para combinar com o indexamento de
-  arrays do Lua.
+- O argumento `path` de `ptool.toml.get/set/remove` deve ser um array não vazio de strings e/ou inteiros positivos.
+- Segmentos de caminho inteiros usam base 1 para combinar com o indexamento de arrays do Lua.
 - Valores TOML datetime/date/time ainda são lidos como strings Lua.

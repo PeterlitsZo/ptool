@@ -1,0 +1,459 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-11 20:21+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:1
+msgid "Database API"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:3
+msgid ""
+"Database connection and query helpers are available under `ptool.db` and "
+"`p.db`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:5
+msgid "ptool.db.connect"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:9
+msgid ""
+"`ptool.db.connect(url_or_options)` opens a database connection and returns a "
+"`Connection` object."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:12
+msgid "Supported databases:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:14
+msgid "SQLite"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:15
+msgid "PostgreSQL"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:16
+msgid "MySQL"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:18
+msgid "Arguments:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:20
+msgid "`url_or_options` (string|table, required):"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:20
+msgid "When a string is provided, it is treated as the database URL."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:20
+msgid "When a table is provided, it currently supports:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:20
+msgid "`url` (string, required): The database URL."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:25
+msgid "Supported URL examples:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:33
+msgid "SQLite notes:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:35
+msgid "`sqlite:test.db` and `sqlite://test.db` are supported."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:36
+msgid ""
+"Relative SQLite paths are resolved from the current `ptool` runtime "
+"directory, so they follow `ptool.cd(...)`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:38
+msgid ""
+"If no `mode=` query parameter is provided, SQLite connections default to "
+"`mode=rwc`, which allows creating the database file automatically."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:41
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:41"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:50
+msgid "Connection"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:52
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:52"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:54
+msgid ""
+"`Connection` represents an open database connection returned by "
+"`ptool.db.connect()`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:57
+msgid "It is implemented as a Lua userdata."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:59
+msgid "Methods:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:61
+msgid "`db:query(sql, params?)` -> `table`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:62
+msgid "`db:query_one(sql, params?)` -> `table|nil`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:63
+msgid "`db:scalar(sql, params?)` -> `boolean|integer|number|string|nil`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:64
+msgid "`db:execute(sql, params?)` -> `table`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:65
+msgid "`db:transaction(fn)` -> `any`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:66
+msgid "`db:close()` -> `nil`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:68
+msgid "Parameter binding:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:70
+msgid "`params` is optional."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:71
+msgid ""
+"When `params` is an array table, it is treated as positional parameters and "
+"SQL placeholders should use `?`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:73
+msgid ""
+"When `params` is a key-value table, it is treated as named parameters and "
+"SQL placeholders should use `:name`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:75
+msgid "Positional and named parameters cannot be mixed in the same call."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76
+msgid "Supported parameter value types are:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76"
+msgid "`boolean`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76"
+msgid "`integer`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76"
+msgid "`number`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76"
+msgid "`string`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:81
+msgid "`nil` is not supported as a bound parameter in `v0.1.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:83
+msgid "Result value rules:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85
+msgid "Query results only guarantee these Lua value types:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85"
+msgid "`boolean`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85"
+msgid "`integer`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85"
+msgid "`number`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85"
+msgid "`string`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:85
+msgid "`nil` (for SQL `NULL`)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:91
+msgid "Text columns are returned as Lua strings."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:92
+msgid "Binary/blob columns are also returned as Lua strings."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:93
+msgid ""
+"If a query result contains duplicate column names, an error is raised. Use "
+"SQL aliases such as `AS` to disambiguate them."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:96
+msgid "query"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:98
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:98"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:100
+msgid "Canonical API name: `ptool.db.Connection:query`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:102
+msgid "`db:query(sql, params?)` executes a query and returns a table with:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:104
+msgid "`rows` (table): An array of row tables."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:105
+msgid "`columns` (table): An array of column names."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:106
+msgid "`row_count` (integer): The number of rows returned."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:108
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:108"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:124
+msgid "query_one"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:126
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:126"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:128
+msgid "Canonical API name: `ptool.db.Connection:query_one`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:130
+msgid ""
+"`db:query_one(sql, params?)` returns the first row as a table, or `nil` if "
+"the query returns no rows."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:133
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:133"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:142
+msgid "scalar"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:144
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:144"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:146
+msgid "Canonical API name: `ptool.db.Connection:scalar`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:148
+msgid ""
+"`db:scalar(sql, params?)` returns the first column of the first row, or `nil`"
+" if the query returns no rows."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:151
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:151"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:158
+msgid "execute"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:160
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:160"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:162
+msgid "Canonical API name: `ptool.db.Connection:execute`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:164
+msgid ""
+"`db:execute(sql, params?)` executes a statement and returns a table with:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:166
+msgid "`rows_affected` (integer): The number of affected rows."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:168
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:168"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:175
+msgid "transaction"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:177
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:177"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:179
+msgid "Canonical API name: `ptool.db.Connection:transaction`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:181
+msgid "`db:transaction(fn)` runs `fn(tx)` inside a database transaction."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:183
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:183"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:185
+msgid "If `fn(tx)` returns normally, the transaction is committed."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:186
+msgid ""
+"If `fn(tx)` raises an error, the transaction is rolled back and the error is "
+"re-raised."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:188
+msgid "Nested transactions are not supported."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:189
+msgid ""
+"While the callback is active, the outer connection object must not be used; "
+"use the provided `tx` object instead."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:192
+msgid "The `tx` object supports the same query methods as `Connection`:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:194
+msgid "`tx:query(sql, params?)`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:195
+msgid "`tx:query_one(sql, params?)`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:196
+msgid "`tx:scalar(sql, params?)`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:197
+msgid "`tx:execute(sql, params?)`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:199
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:199"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:217
+msgid "close"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:219
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:219"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:221
+msgid "Canonical API name: `ptool.db.Connection:close`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:223
+msgid "`db:close()` closes the connection."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:225
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:225"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:227
+msgid "After closing, the connection can no longer be used."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:228
+msgid "Closing during an active transaction callback raises an error."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:230
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:230"
+msgid "Example:"
+msgstr ""

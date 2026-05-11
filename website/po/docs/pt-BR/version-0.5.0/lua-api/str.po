@@ -1,0 +1,502 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:1
+msgid "String API"
+msgstr "API de strings"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:3
+msgid "String helpers are available under `ptool.str` and `p.str`."
+msgstr "As utilidades de string estão disponíveis em `ptool.str` e `p.str`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:5
+msgid "ptool.str.trim"
+msgstr "ptool.str.trim"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:9
+msgid "`ptool.str.trim(s)` removes leading and trailing whitespace."
+msgstr "`ptool.str.trim(s)` remove espaços em branco no início e no fim."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:11
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:11"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:12"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:18
+msgid "ptool.str.trim_start"
+msgstr "ptool.str.trim_start"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:20
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:20"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:22
+msgid "`ptool.str.trim_start(s)` removes leading whitespace."
+msgstr "`ptool.str.trim_start(s)` remove espaços em branco no início."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:24
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:24"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:25
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:25"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:31
+msgid "ptool.str.trim_end"
+msgstr "ptool.str.trim_end"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:33
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:33"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:35
+msgid "`ptool.str.trim_end(s)` removes trailing whitespace."
+msgstr "`ptool.str.trim_end(s)` remove espaços em branco no fim."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:37
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:37"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:38"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:44
+msgid "ptool.str.is_blank"
+msgstr "ptool.str.is_blank"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:46"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:48
+msgid "`ptool.str.is_blank(s)` checks whether a string is empty or contains only whitespace."
+msgstr "`ptool.str.is_blank(s)` verifica se uma string está vazia ou contém apenas espaços em branco."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:51
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:51"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:52
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:52"
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:59
+msgid "ptool.str.starts_with"
+msgstr "ptool.str.starts_with"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:61
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:61"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:63
+msgid "`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`."
+msgstr "`ptool.str.starts_with(s, prefix)` verifica se `s` começa com `prefix`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:65
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:65"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:66
+msgid "`prefix` (string, required): The prefix to test."
+msgstr "`prefix` (string, obrigatório): O prefixo a testar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:67
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:67"
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:73
+msgid "ptool.str.ends_with"
+msgstr "ptool.str.ends_with"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:75
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:75"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:77
+msgid "`ptool.str.ends_with(s, suffix)` checks whether `s` ends with `suffix`."
+msgstr "`ptool.str.ends_with(s, suffix)` verifica se `s` termina com `suffix`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:79"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:80
+msgid "`suffix` (string, required): The suffix to test."
+msgstr "`suffix` (string, obrigatório): O sufixo a testar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:81
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:81"
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:87
+msgid "ptool.str.contains"
+msgstr "ptool.str.contains"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:89
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:89"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:91
+msgid "`ptool.str.contains(s, needle)` checks whether `needle` appears in `s`."
+msgstr "`ptool.str.contains(s, needle)` verifica se `needle` aparece em `s`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:93
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:93"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:94
+msgid "`needle` (string, required): The substring to search for."
+msgstr "`needle` (string, obrigatório): A substring a procurar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:95
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:95"
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:101
+msgid "ptool.str.split"
+msgstr "ptool.str.split"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:103
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:103"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:105
+msgid "`ptool.str.split(s, sep[, options])` splits a string by a non-empty separator."
+msgstr "`ptool.str.split(s, sep[, options])` divide uma string por um separador não vazio."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:107
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:107"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:108
+msgid "`sep` (string, required): The separator. Empty strings are not allowed."
+msgstr "`sep` (string, obrigatório): O separador. Strings vazias não são permitidas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
+msgid "`options` (table, optional): Split options. Supported fields:"
+msgstr "`options` (table, opcional): Opções de divisão. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
+msgid "`trim` (boolean, optional): Whether to trim each piece before returning it. Defaults to `false`."
+msgstr "`trim` (boolean, opcional): Se cada parte deve ser aparada antes de ser retornada. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
+msgid "`skip_empty` (boolean, optional): Whether to remove empty pieces after optional trimming. Defaults to `false`."
+msgstr "`skip_empty` (boolean, opcional): Se partes vazias devem ser removidas após a eventual remoção de espaços. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:114
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:114"
+msgid "Returns: `string[]`."
+msgstr "Retorna: `string[]`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:116
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:116"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:118
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:118"
+msgid "Unknown option names or invalid option value types raise an error."
+msgstr "Nomes de opção desconhecidos ou tipos de valor inválidos geram erro."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:119
+msgid "`skip_empty = true` is applied after `trim`, so whitespace-only pieces can be removed when both are enabled."
+msgstr "`skip_empty = true` é aplicado depois de `trim`, então partes compostas só por espaços podem ser removidas quando ambas as opções estão habilitadas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:131
+msgid "ptool.str.split_lines"
+msgstr "ptool.str.split_lines"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:133
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:133"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:135
+msgid "`ptool.str.split_lines(s[, options])` splits a string into lines."
+msgstr "`ptool.str.split_lines(s[, options])` divide uma string em linhas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:137
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:137"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
+msgid "`options` (table, optional): Line-splitting options. Supported fields:"
+msgstr "`options` (table, opcional): Opções de divisão de linhas. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
+msgid "`keep_ending` (boolean, optional): Whether to keep line endings (`\\n`, `\\r\\n`, or `\\r`) in returned items. Defaults to `false`."
+msgstr "`keep_ending` (boolean, opcional): Se os finais de linha (`\\n`, `\\r\\n` ou `\\r`) devem ser mantidos nos itens retornados. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
+msgid "`skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to `false`."
+msgstr "`skip_empty` (boolean, opcional): Se linhas vazias devem ser removidas. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:143
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:143"
+msgid "Returns: `string[]`."
+msgstr "Retorna: `string[]`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:145
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:145"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:147
+msgid "Supports Unix (`\\n`) and Windows (`\\r\\n`) line endings, and also lone `\\r`."
+msgstr "Suporta finais de linha Unix (`\\n`), Windows (`\\r\\n`) e também `\\r` isolado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:148
+msgid "When `skip_empty = true`, a line containing only a line ending is treated as empty and is removed."
+msgstr "Quando `skip_empty = true`, uma linha que contém apenas um final de linha é tratada como vazia e removida."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:150
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:150"
+msgid "Unknown option names or invalid option value types raise an error."
+msgstr "Nomes de opção desconhecidos ou tipos de valor inválidos geram erro."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:160
+msgid "ptool.str.join"
+msgstr "ptool.str.join"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:162
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:162"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:164
+msgid "`ptool.str.join(parts, sep)` joins a string array with a separator."
+msgstr "`ptool.str.join(parts, sep)` junta um array de strings com um separador."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:166
+msgid "`parts` (string[], required): The string parts to join."
+msgstr "`parts` (string[], obrigatório): As partes de string a unir."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:167
+msgid "`sep` (string, required): The separator string."
+msgstr "`sep` (string, obrigatório): A string separadora."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:168
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:168"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:174
+msgid "ptool.str.replace"
+msgstr "ptool.str.replace"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:176
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:176"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:178
+msgid "`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with `to`."
+msgstr "`ptool.str.replace(s, from, to[, n])` substitui ocorrências de `from` por `to`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:180
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:180"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:181
+msgid "`from` (string, required): The substring to replace. Empty strings are not allowed."
+msgstr "`from` (string, obrigatório): A substring a ser substituída. Strings vazias não são permitidas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:183
+msgid "`to` (string, required): The replacement string."
+msgstr "`to` (string, obrigatório): A string de substituição."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:184
+msgid "`n` (integer, optional): Maximum replacement count. Must be greater than or equal to `0`. If omitted, all matches are replaced."
+msgstr "`n` (integer, opcional): Número máximo de substituições. Deve ser maior ou igual a `0`. Se omitido, todas as correspondências são substituídas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:186
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:186"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:193
+msgid "ptool.str.repeat"
+msgstr "ptool.str.repeat"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:195
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:195"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:197
+msgid "`ptool.str.repeat(s, n)` repeats a string `n` times."
+msgstr "`ptool.str.repeat(s, n)` repete uma string `n` vezes."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:199
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:199"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:200
+msgid "`n` (integer, required): Repeat count. Must be greater than or equal to `0`."
+msgstr "`n` (integer, obrigatório): A contagem de repetição. Deve ser maior ou igual a `0`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:201
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:201"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:207
+msgid "ptool.str.cut_prefix"
+msgstr "ptool.str.cut_prefix"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:209
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:209"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:211
+msgid "`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` when it is present."
+msgstr "`ptool.str.cut_prefix(s, prefix)` remove `prefix` do começo de `s` quando ele está presente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:214
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:214"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:215
+msgid "`prefix` (string, required): The prefix to remove."
+msgstr "`prefix` (string, obrigatório): O prefixo a remover."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:216
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:216"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:218
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:218"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:220
+msgid "If `s` does not start with `prefix`, the original string is returned unchanged."
+msgstr "Se `s` não começar com `prefix`, a string original é retornada sem alteração."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:227
+msgid "ptool.str.cut_suffix"
+msgstr "ptool.str.cut_suffix"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:229
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:229"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:231
+msgid "`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when it is present."
+msgstr "`ptool.str.cut_suffix(s, suffix)` remove `suffix` do fim de `s` quando ele está presente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:234
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:234"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:235
+msgid "`suffix` (string, required): The suffix to remove."
+msgstr "`suffix` (string, obrigatório): O sufixo a remover."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:236
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:236"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:238
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:238"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:240
+msgid "If `s` does not end with `suffix`, the original string is returned unchanged."
+msgstr "Se `s` não terminar com `suffix`, a string original é retornada sem alteração."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:246
+msgid "ptool.str.indent"
+msgstr "ptool.str.indent"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:248
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:248"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:250
+msgid "`ptool.str.indent(s, prefix[, options])` adds `prefix` to each line."
+msgstr "`ptool.str.indent(s, prefix[, options])` adiciona `prefix` a cada linha."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:252
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:252"
+msgid "`s` (string, required): The input string."
+msgstr "`s` (string, obrigatório): A string de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:253
+msgid "`prefix` (string, required): The text inserted before each line."
+msgstr "`prefix` (string, obrigatório): O texto inserido antes de cada linha."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:254
+msgid "`options` (table, optional): Indent options. Supported fields:"
+msgstr "`options` (table, opcional): Opções de indentação. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:254
+msgid "`skip_first` (boolean, optional): Whether to leave the first line unchanged. Defaults to `false`."
+msgstr "`skip_first` (boolean, opcional): Se a primeira linha deve permanecer inalterada. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:257
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:257"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:259
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:259"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:261
+msgid "Existing line endings are preserved."
+msgstr "Os finais de linha existentes são preservados."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:262
+msgid "Empty input is returned unchanged."
+msgstr "Uma entrada vazia é retornada sem alterações."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:263
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:263"
+msgid "Unknown option names or invalid option value types raise an error."
+msgstr "Nomes de opção desconhecidos ou tipos de valor inválidos geram erro."

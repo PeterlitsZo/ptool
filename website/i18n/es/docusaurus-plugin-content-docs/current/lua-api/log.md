@@ -1,7 +1,6 @@
 # API de log
 
-`ptool.log` expone utilidades de logging por nivel de salida tanto en
-`ptool.log` como en `p.log`.
+`ptool.log` expone utilidades de logging por nivel de salida tanto en `ptool.log` como en `p.log`.
 
 Cada llamada de log genera una línea con este formato:
 
@@ -12,14 +11,10 @@ Cada llamada de log genera una línea con este formato:
 Comportamiento:
 
 - La marca de tiempo usa la hora local con el formato `YYYY-MM-DD HH:MM:SS`.
-- La etiqueta de nivel usa los nombres completos `TRACE`, `DEBUG`, `INFO`,
-  `WARN` y `ERROR`.
-- La salida coloreada se habilita automáticamente cuando `ptool` escribe en una
-  terminal.
-- `ptool.log.error(...)` escribe en `stderr`. Los demás niveles escriben en
-  `stdout`.
-- Varios argumentos se unen con espacios. Los valores no string se renderizan
-  en una forma inspect de una sola línea.
+- La etiqueta de nivel usa los nombres completos `TRACE`, `DEBUG`, `INFO`, `WARN` y `ERROR`.
+- La salida coloreada se habilita automáticamente cuando `ptool` escribe en una terminal.
+- `ptool.log.error(...)` escribe en `stderr`. Los demás niveles escriben en `stdout`.
+- Varios argumentos se unen con espacios. Los valores no string se renderizan en una forma inspect de una sola línea.
 
 ## ptool.log.trace
 

@@ -1,14 +1,12 @@
 # API de sistema de archivos
 
-Las utilidades de sistema de archivos están disponibles bajo `ptool.fs` y
-`p.fs`.
+Las utilidades de sistema de archivos están disponibles bajo `ptool.fs` y `p.fs`.
 
 ## ptool.fs.read
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.read(path)` lee un archivo como bytes sin procesar y devuelve una
-cadena Lua.
+`ptool.fs.read(path)` lee un archivo como bytes sin procesar y devuelve una cadena Lua.
 
 - `path` (string, obligatorio): La ruta del archivo.
 - Devuelve: `string`.
@@ -16,8 +14,7 @@ cadena Lua.
 Notas:
 
 - La cadena Lua devuelta contiene exactamente los bytes almacenados en disco.
-- Los archivos de texto siguen funcionando como antes, y ahora también se
-  admiten archivos binarios.
+- Los archivos de texto siguen funcionando como antes, y ahora también se admiten archivos binarios.
 
 Ejemplo:
 
@@ -33,8 +30,7 @@ print(#png)
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` escribe una cadena Lua en un archivo como bytes
-sin procesar, sobrescribiendo el contenido existente.
+`ptool.fs.write(path, content)` escribe una cadena Lua en un archivo como bytes sin procesar, sobrescribiendo el contenido existente.
 
 - `path` (string, obligatorio): La ruta del archivo.
 - `content` (string, obligatorio): El contenido que se va a escribir.
@@ -55,8 +51,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.mkdir(path)` crea un directorio. Si los directorios padre no existen,
-se crean recursivamente.
+`ptool.fs.mkdir(path)` crea un directorio. Si los directorios padre no existen, se crean recursivamente.
 
 - `path` (string, obligatorio): La ruta del directorio.
 
@@ -121,22 +116,18 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.remove(path[, options])` elimina un archivo, enlace simbólico o
-directorio.
+`ptool.fs.remove(path[, options])` elimina un archivo, enlace simbólico o directorio.
 
 - `path` (string, obligatorio): La ruta que se va a eliminar.
 - `options` (table, opcional): Opciones de eliminación. Campos admitidos:
-  - `recursive` (boolean, opcional): Indica si los directorios deben
-    eliminarse recursivamente. Valor predeterminado: `false`.
-  - `missing_ok` (boolean, opcional): Indica si deben ignorarse las rutas
-    ausentes. Valor predeterminado: `false`.
+  - `recursive` (boolean, opcional): Indica si los directorios deben eliminarse recursivamente. Valor predeterminado: `false`.
+  - `missing_ok` (boolean, opcional): Indica si deben ignorarse las rutas ausentes. Valor predeterminado: `false`.
 
 Comportamiento:
 
 - Los archivos y enlaces simbólicos pueden eliminarse sin `recursive`.
 - Los directorios necesitan `recursive = true` cuando no están vacíos.
-- Los nombres de opción desconocidos o los tipos de valor inválidos producen
-  un error.
+- Los nombres de opción desconocidos o los tipos de valor inválidos producen un error.
 
 Ejemplo:
 
@@ -148,23 +139,15 @@ ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 
 ## ptool.fs.glob
 
-> `v0.2.0` - Introduced.
-> `v0.5.0` - Added the `working_dir` option.
+> `v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option.
 
-`ptool.fs.glob(pattern[, options])` encuentra rutas del sistema de archivos
-usando sintaxis glob de estilo Unix y devuelve un arreglo de cadenas ordenado
-lexicográficamente con las rutas coincidentes.
+`ptool.fs.glob(pattern[, options])` encuentra rutas del sistema de archivos usando sintaxis glob de estilo Unix y devuelve un arreglo de cadenas ordenado lexicográficamente con las rutas coincidentes.
 
-- `pattern` (string, obligatorio): Un patrón glob. Los patrones relativos se
-  resuelven desde el directorio de ejecución actual de `ptool`, por lo que
-  siguen a `ptool.cd(...)`.
+- `pattern` (string, obligatorio): Un patrón glob. Los patrones relativos se resuelven desde el directorio de ejecución actual de `ptool`, por lo que siguen a `ptool.cd(...)`.
 - `options` (table, opcional): Opciones de glob. Campos admitidos:
-  - `working_dir` (string, opcional): Sobrescribe el directorio base usado
-    para resolver patrones relativos. Los valores relativos de `working_dir`
-    se resuelven desde el directorio de ejecución actual de `ptool`.
+  - `working_dir` (string, opcional): Sobrescribe el directorio base usado para resolver patrones relativos. Los valores relativos de `working_dir` se resuelven desde el directorio de ejecución actual de `ptool`.
 - Devuelve: `string[]`.
-- Los archivos y directorios ocultos solo coinciden cuando el componente del
-  patrón correspondiente empieza explícitamente por `.`.
+- Los archivos y directorios ocultos solo coinciden cuando el componente del patrón correspondiente empieza explícitamente por `.`.
 
 Ejemplo:
 

@@ -6,8 +6,7 @@ Las utilidades léxicas de rutas están disponibles bajo `ptool.path` y `p.path`
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.join(...segments)` une varios segmentos de ruta y devuelve la ruta
-normalizada.
+`ptool.path.join(...segments)` une varios segmentos de ruta y devuelve la ruta normalizada.
 
 - `segments` (string, al menos uno): Segmentos de ruta.
 - Devuelve: `string`.
@@ -22,8 +21,7 @@ print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.normalize(path)` realiza normalización léxica de rutas
-(procesamiento de `.` y `..`).
+`ptool.path.normalize(path)` realiza normalización léxica de rutas (procesamiento de `.` y `..`).
 
 - `path` (string, obligatorio): La ruta de entrada.
 - Devuelve: `string`.
@@ -41,8 +39,7 @@ print(ptool.path.normalize("./a/../b")) -- b
 `ptool.path.abspath(path[, base])` calcula una ruta absoluta.
 
 - `path` (string, obligatorio): La ruta de entrada.
-- `base` (string, opcional): El directorio base. Si se omite, se usa el
-  directorio de trabajo del proceso actual.
+- `base` (string, opcional): El directorio base. Si se omite, se usa el directorio de trabajo del proceso actual.
 - Devuelve: `string`.
 - Solo acepta 1 o 2 argumentos de tipo string.
 
@@ -57,12 +54,10 @@ print(ptool.path.abspath("lib", "/tmp/demo"))
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.relpath(path[, base])` calcula una ruta relativa desde `base` hasta
-`path`.
+`ptool.path.relpath(path[, base])` calcula una ruta relativa desde `base` hasta `path`.
 
 - `path` (string, obligatorio): La ruta objetivo.
-- `base` (string, opcional): El directorio inicial. Si se omite, se usa el
-  directorio de trabajo del proceso actual.
+- `base` (string, opcional): El directorio inicial. Si se omite, se usa el directorio de trabajo del proceso actual.
 - Devuelve: `string`.
 - Solo acepta 1 o 2 argumentos de tipo string.
 
@@ -106,8 +101,7 @@ print(ptool.path.dirname("a/b/c.txt")) -- a/b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.basename(path)` devuelve el último segmento de la ruta
-(la parte del nombre de archivo).
+`ptool.path.basename(path)` devuelve el último segmento de la ruta (la parte del nombre de archivo).
 
 - `path` (string, obligatorio): La ruta de entrada.
 - Devuelve: `string`.
@@ -122,8 +116,7 @@ print(ptool.path.basename("a/b/c.txt")) -- c.txt
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.extname(path)` devuelve la extensión, incluido el `.`. Si no hay
-extensión, devuelve una cadena vacía.
+`ptool.path.extname(path)` devuelve la extensión, incluido el `.`. Si no hay extensión, devuelve una cadena vacía.
 
 - `path` (string, obligatorio): La ruta de entrada.
 - Devuelve: `string`.
@@ -136,7 +129,5 @@ print(ptool.path.extname("a/b/c.txt")) -- .txt
 
 Notas:
 
-- El manejo de rutas en `ptool.path` es puramente léxico. No comprueba si las
-  rutas existen ni resuelve enlaces simbólicos.
-- Ninguna de las interfaces acepta argumentos de cadena vacía. Pasar uno
-  produce un error.
+- El manejo de rutas en `ptool.path` es puramente léxico. No comprueba si las rutas existen ni resuelve enlaces simbólicos.
+- Ninguna de las interfaces acepta argumentos de cadena vacía. Pasar uno produce un error.

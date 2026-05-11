@@ -1,0 +1,979 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:1
+msgid "SSH API"
+msgstr "SSH API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:3
+msgid "SSH connection, remote execution, and file transfer helpers are available under `ptool.ssh` and `p.ssh`."
+msgstr "SSH 接続、リモート実行、ファイル転送のヘルパーは `ptool.ssh` と `p.ssh` で利用できます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:5
+msgid "ptool.ssh.connect"
+msgstr "ptool.ssh.connect"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:9
+msgid "`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle backed by the system `ssh` command and returns a `Connection` object."
+msgstr "`ptool.ssh.connect(target_or_options)` は、システムの `ssh` コマンドを 利用する SSH 接続ハンドルを準備し、`Connection` オブジェクトを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:12
+msgid "`ssh` must be available on `PATH`."
+msgstr "`ssh` は `PATH` 上で利用可能である必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:14
+msgid "Arguments:"
+msgstr "引数:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`target_or_options` (string|table, required):"
+msgstr "`target_or_options` (string|table, 必須):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "When a string is provided, it is treated as an SSH target."
+msgstr "文字列を指定した場合は SSH ターゲットとして扱われます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "When a table is provided, it currently supports:"
+msgstr "テーブルを指定した場合、現在サポートされるフィールドは次の通りです:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`target` (string, optional): SSH target string such as `\"deploy@example.com\"` or `\"deploy@example.com:2222\"`."
+msgstr "`target` (string, 任意): `\"deploy@example.com\"` や `\"deploy@example.com:2222\"` のような SSH ターゲット文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`host` (string, optional): Hostname or IP address."
+msgstr "`host` (string, 任意): ホスト名または IP アドレス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`user` (string, optional): SSH username. Defaults to `$USER`, or `\"root\"` if `$USER` is unavailable."
+msgstr "`user` (string, 任意): SSH ユーザー名。デフォルトは `$USER`、`$USER` が利用できない場合は `\"root\"` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`port` (integer, optional): SSH port. Defaults to `22`."
+msgstr "`port` (integer, 任意): SSH ポート。デフォルトは `22` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`auth` (table, optional): Authentication settings."
+msgstr "`auth` (table, 任意): 認証設定。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`host_key` (table, optional): Host key verification settings."
+msgstr "`host_key` (table, 任意): ホストキー検証設定。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `10000`."
+msgstr "`connect_timeout_ms` (integer, 任意): ミリ秒単位のタイムアウト。 デフォルトは `10000` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`keepalive_interval_ms` (integer, optional): Keepalive interval in milliseconds."
+msgstr "`keepalive_interval_ms` (integer, 任意): ミリ秒単位の keepalive 間隔。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:32
+msgid "Supported target string examples:"
+msgstr "サポートされるターゲット文字列の例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:40
+msgid "`auth` fields:"
+msgstr "`auth` のフィールド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:42
+msgid "`private_key_file` (string, optional): Path to a private key file."
+msgstr "`private_key_file` (string, 任意): 秘密鍵ファイルへのパス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:43
+msgid "`private_key_passphrase` (string, optional): Passphrase for the private key. This is currently not supported."
+msgstr "`private_key_passphrase` (string, 任意): 秘密鍵のパスフレーズ。 現時点では未サポートです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:45
+msgid "`password` (string, optional): Password-based authentication. This is currently not supported."
+msgstr "`password` (string, 任意): パスワードベース認証。現時点では未サポート です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:48
+msgid "Authentication behavior:"
+msgstr "認証の挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:50
+msgid "If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key via `-i` and also sets `IdentitiesOnly=yes`."
+msgstr "`auth.private_key_file` を指定すると、`ptool` は `-i` でその鍵を渡して `ssh` を呼び出し、さらに `IdentitiesOnly=yes` も設定します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:52
+msgid "If `auth.private_key_passphrase` or `auth.password` is provided, `ptool.ssh.connect(...)` fails because this API does not pass those secrets to the system `ssh` command."
+msgstr "`auth.private_key_passphrase` または `auth.password` を指定すると、 この API はそれらの秘密情報をシステムの `ssh` コマンドへ渡さないため `ptool.ssh.connect(...)` は失敗します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:55
+msgid "Otherwise, authentication is delegated to the local OpenSSH setup, including settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent`, and certificates."
+msgstr "それ以外の場合、認証はローカルの OpenSSH 設定に委譲されます。 これには `IdentityFile`、`ProxyJump`、`ProxyCommand`、`ssh-agent`、 証明書などの設定や仕組みが含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:58
+msgid "Relative key paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
+msgstr "相対鍵パスは現在の `ptool` ランタイムディレクトリから解決されるため、 `ptool.cd(...)` に従います。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:60
+msgid "`~` and `~/...` are expanded in key paths."
+msgstr "鍵パス内の `~` と `~/...` は展開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:62
+msgid "`host_key` fields:"
+msgstr "`host_key` のフィールド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
+msgid "`verify` (string, optional): Host key verification mode. Supported values:"
+msgstr "`verify` (string, 任意): ホストキー検証モード。サポートされる値:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
+msgid "`\"known_hosts\"`: Verify against a known_hosts file (default)."
+msgstr "`\"known_hosts\"`: `known_hosts` ファイルに対して検証します (デフォルト)。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
+msgid "`\"ignore\"`: Skip host key verification."
+msgstr "`\"ignore\"`: ホストキー検証をスキップします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:67
+msgid "`known_hosts_file` (string, optional): Path to a known_hosts file. Used only when `verify = \"known_hosts\"`."
+msgstr "`known_hosts_file` (string, 任意): `known_hosts` ファイルへのパス。 `verify = \"known_hosts\"` のときだけ使用されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:70
+msgid "Host key behavior:"
+msgstr "ホストキーの挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:72
+msgid "If `verify = \"ignore\"`, `ptool` invokes `ssh` with `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`."
+msgstr "`verify = \"ignore\"` の場合、`ptool` は `StrictHostKeyChecking=no` と `UserKnownHostsFile=/dev/null` を付けて `ssh` を呼び出します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:74
+msgid "If `verify = \"known_hosts\"` and `known_hosts_file` is provided, `ptool` invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`."
+msgstr "`verify = \"known_hosts\"` で `known_hosts_file` も指定されている場合、 `ptool` は `StrictHostKeyChecking=yes` とその `UserKnownHostsFile` を 付けて `ssh` を呼び出します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:77
+msgid "If `verify = \"known_hosts\"` and `known_hosts_file` is omitted, or when `host_key` is omitted entirely, host key handling is delegated to the local OpenSSH configuration and defaults."
+msgstr "`verify = \"known_hosts\"` で `known_hosts_file` を省略した場合、または `host_key` 自体を省略した場合、ホストキー処理はローカル OpenSSH の 設定とデフォルト値へ委譲されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:80
+msgid "Relative `known_hosts_file` paths are resolved from the current `ptool` runtime directory."
+msgstr "相対 `known_hosts_file` パスは現在の `ptool` ランタイムディレクトリ から解決されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:82
+msgid "`~` and `~/...` are expanded in `known_hosts_file`."
+msgstr "`known_hosts_file` 内の `~` と `~/...` は展開されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:83
+msgid "When `known_hosts_file` is provided explicitly, it overrides the default `UserKnownHostsFile` used by the local `ssh` command for this connection."
+msgstr "`known_hosts_file` を明示的に指定した場合、この接続に対してローカルの `ssh` コマンドが使うデフォルトの `UserKnownHostsFile` を上書きします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:86
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:86"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:102
+msgid "Connection"
+msgstr "Connection"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:104
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:104"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:106
+msgid "`Connection` represents an OpenSSH-backed connection handle returned by `ptool.ssh.connect()`."
+msgstr "`Connection` は `ptool.ssh.connect()` が返す、OpenSSH ベースの接続 ハンドルを表します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:109
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:109"
+msgid "It is implemented as a Lua userdata."
+msgstr "これは Lua userdata として実装されています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:111
+msgid "Fields and methods:"
+msgstr "フィールドとメソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "Fields:"
+msgstr "フィールド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.host` (string)"
+msgstr "`conn.host` (string)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.user` (string)"
+msgstr "`conn.user` (string)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.port` (integer)"
+msgstr "`conn.port` (integer)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.target` (string)"
+msgstr "`conn.target` (string)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118"
+msgid "Methods:"
+msgstr "メソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:run(...)` -> `table`"
+msgstr "`conn:run(...)` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:run_capture(...)` -> `table`"
+msgstr "`conn:run_capture(...)` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:path(path)` -> `RemotePath`"
+msgstr "`conn:path(path)` -> `RemotePath`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:exists(path)` -> `boolean`"
+msgstr "`conn:exists(path)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:is_file(path)` -> `boolean`"
+msgstr "`conn:is_file(path)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:is_dir(path)` -> `boolean`"
+msgstr "`conn:is_dir(path)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:upload(local_path, remote_path[, options])` -> `table`"
+msgstr "`conn:upload(local_path, remote_path[, options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:download(remote_path, local_path[, options])` -> `table`"
+msgstr "`conn:download(remote_path, local_path[, options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:close()` -> `nil`"
+msgstr "`conn:close()` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:129
+msgid "run"
+msgstr "run"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:131"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:133
+msgid "Canonical API name: `ptool.ssh.Connection:run`."
+msgstr "Canonical API name: `ptool.ssh.Connection:run`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:135
+msgid "`conn:run(...)` executes a remote command through the current SSH connection."
+msgstr "`conn:run(...)` は現在の SSH 接続を通してリモートコマンドを実行します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:137
+msgid "The following call forms are supported:"
+msgstr "次の呼び出し形式をサポートします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:148
+msgid "Argument rules:"
+msgstr "引数ルール:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:150
+msgid "`conn:run(cmdline)`: `cmdline` is sent as the remote command string."
+msgstr "`conn:run(cmdline)`: `cmdline` はリモートコマンド文字列として送られます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:151
+msgid "`conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` is split using shell-style (`shlex`) rules."
+msgstr "`conn:run(cmd, argsline)`: `cmd` はコマンドとして扱われ、`argsline` は シェル風 (`shlex`) ルールで分割されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:153
+msgid "`conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. Arguments are shell-quoted before remote execution."
+msgstr "`conn:run(cmd, args)`: `cmd` は文字列で、`args` は文字列配列です。 引数はリモート実行前にシェルクォートされます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:155
+msgid "`conn:run(cmdline, options)`: `options` overrides this invocation."
+msgstr "`conn:run(cmdline, options)`: `options` がこの呼び出しを上書きします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:156
+msgid "`conn:run(cmd, args, options)`: `options` overrides this invocation."
+msgstr "`conn:run(cmd, args, options)`: `options` がこの呼び出しを上書きします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:157
+msgid "`conn:run(options)`: `options` is a table."
+msgstr "`conn:run(options)`: `options` はテーブルです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:158
+msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
+msgstr "第 2 引数がテーブルの場合: 配列 (連続する整数キー `1..n`) なら `args`、 それ以外なら `options` として扱われます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:161
+msgid "When `conn:run(options)` is used, `options` currently supports:"
+msgstr "`conn:run(options)` を使う場合、`options` は現在次をサポートします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:163
+msgid "`cmd` (string, required): The command name or executable path."
+msgstr "`cmd` (string, 必須): コマンド名または実行ファイルパス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:164
+msgid "`args` (string[], optional): The argument list."
+msgstr "`args` (string[], 任意): 引数リスト。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:165
+msgid "`cwd` (string, optional): Remote working directory. This is applied by prepending `cd ... &&` to the generated remote shell command."
+msgstr "`cwd` (string, 任意): リモート作業ディレクトリ。生成されるリモート シェルコマンドの先頭に `cd ... &&` を付けて適用します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:167
+msgid "`env` (table, optional): Remote environment variables, where keys and values are strings. This is applied by prepending `export ... &&` to the generated remote shell command."
+msgstr "`env` (table, 任意): リモート環境変数。キーと値は文字列です。生成される リモートシェルコマンドの先頭に `export ... &&` を付けて適用します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:170
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:170"
+msgid "`stdin` (string, optional): String sent to the remote process stdin."
+msgstr "`stdin` (string, 任意): リモートプロセスの stdin に送る文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:171
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:171"
+msgid "`echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`."
+msgstr "`echo` (boolean, 任意): 実行前にリモートコマンドを表示するかどうか。 デフォルトは `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:173"
+msgid "`check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`."
+msgstr "`check` (boolean, 任意): 終了ステータスが `0` 以外のとき直ちにエラーを 発生させるかどうか。デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
+msgid "`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr "`stdout` (string, 任意): stdout の処理戦略。サポートされる値:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`: 現在の端末へ継承します (デフォルト)。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
+msgid "`\"capture\"`: Capture into `res.stdout`."
+msgstr "`\"capture\"`: `res.stdout` にキャプチャします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`: 出力を破棄します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr "`stderr` (string, 任意): stderr の処理戦略。サポートされる値:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`: 現在の端末へ継承します (デフォルト)。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`\"capture\"`: Capture into `res.stderr`."
+msgstr "`\"capture\"`: `res.stderr` にキャプチャします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`: 出力を破棄します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:184
+msgid "When the shortcut forms are used, the `options` table supports only:"
+msgstr "ショートカット形式を使う場合、`options` テーブルがサポートするのは次だけ です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:186
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:186"
+msgid "`stdin` (string, optional): String sent to the remote process stdin."
+msgstr "`stdin` (string, 任意): リモートプロセスの stdin に送る文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:187
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:187"
+msgid "`echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`."
+msgstr "`echo` (boolean, 任意): 実行前にリモートコマンドを表示するかどうか。 デフォルトは `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189"
+msgid "`check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`."
+msgstr "`check` (boolean, 任意): 終了ステータスが `0` 以外のとき直ちにエラーを 発生させるかどうか。デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+msgid "`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr "`stdout` (string, 任意): stdout の処理戦略。サポートされる値:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`: 現在の端末へ継承します (デフォルト)。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+msgid "`\"capture\"`: Capture into `res.stdout`."
+msgstr "`\"capture\"`: `res.stdout` にキャプチャします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`: 出力を破棄します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+msgid "`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr "`stderr` (string, 任意): stderr の処理戦略。サポートされる値:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`: 現在の端末へ継承します (デフォルト)。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+msgid "`\"capture\"`: Capture into `res.stderr`."
+msgstr "`\"capture\"`: `res.stderr` にキャプチャします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`: 出力を破棄します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:200
+msgid "Return value rules:"
+msgstr "戻り値ルール:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "A table is always returned with the following fields:"
+msgstr "常に次のフィールドを持つテーブルが返ります:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "`ok` (boolean): Whether the remote exit status is `0`."
+msgstr "`ok` (boolean): リモート終了ステータスが `0` かどうか。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "`code` (integer|nil): The remote exit status. If the remote process exits by signal, this is `nil`."
+msgstr "`code` (integer|nil): リモート終了ステータス。リモートプロセスが シグナルで終了した場合は `nil` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "`target` (string): The SSH target string in the form `user@host:port`."
+msgstr "`target` (string): `user@host:port` 形式の SSH ターゲット文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "`stdout` (string, optional): Present when `stdout = \"capture\"`."
+msgstr "`stdout` (string, 任意): `stdout = \"capture\"` のとき存在します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "`stderr` (string, optional): Present when `stderr = \"capture\"`."
+msgstr "`stderr` (string, 任意): `stderr = \"capture\"` のとき存在します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgid "`assert_ok(self)` (function): Raises an error when `ok = false`."
+msgstr "`assert_ok(self)` (function): `ok = false` のときエラーを発生させます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:211
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:211"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:233
+msgid "run_capture"
+msgstr "run_capture"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:235
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:237
+msgid "Canonical API name: `ptool.ssh.Connection:run_capture`."
+msgstr "Canonical API name: `ptool.ssh.Connection:run_capture`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:239
+msgid "`conn:run_capture(...)` executes a remote command through the current SSH connection."
+msgstr "`conn:run_capture(...)` は現在の SSH 接続を通してリモートコマンドを実行 します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:242
+msgid "It accepts the same call forms, argument rules, return value rules, and options as `conn:run(...)`."
+msgstr "呼び出し形式、引数ルール、戻り値ルール、オプションは `conn:run(...)` と 同じです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:245
+msgid "The difference is only the default stream handling:"
+msgstr "違いはデフォルトのストリーム処理だけです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:247
+msgid "`stdout` defaults to `\"capture\"`."
+msgstr "`stdout` のデフォルトは `\"capture\"` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:248
+msgid "`stderr` defaults to `\"capture\"`."
+msgstr "`stderr` のデフォルトは `\"capture\"` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:250
+msgid "You can still override either field explicitly in `options`."
+msgstr "どちらのフィールドも `options` で明示的に上書きできます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:252
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:252"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:274
+msgid "path"
+msgstr "path"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:276
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:276"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:278
+msgid "Canonical API name: `ptool.ssh.Connection:path`."
+msgstr "Canonical API name: `ptool.ssh.Connection:path`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:280
+msgid "`conn:path(path)` creates a reusable `RemotePath` object bound to the current SSH connection."
+msgstr "`conn:path(path)` は現在の SSH 接続に紐づいた再利用可能な `RemotePath` オブジェクトを作成します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:283
+msgid "`path` (string, required): The remote path."
+msgstr "`path` (string, 必須): リモートパス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:284
+msgid "Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`."
+msgstr "戻り値: `conn:upload(...)`、`conn:download(...)`、`ptool.fs.copy(...)` に渡せる `RemotePath` オブジェクト。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:296
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:296"
+msgid "exists"
+msgstr "exists"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:298
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:298"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:300
+msgid "Canonical API name: `ptool.ssh.Connection:exists`."
+msgstr "Canonical API name: `ptool.ssh.Connection:exists`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:302
+msgid "`conn:exists(path)` checks whether a remote path exists."
+msgstr "`conn:exists(path)` はリモートパスが存在するかどうかを確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304"
+msgid "`path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`."
+msgstr "`path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306"
+msgid "Returns: `true` when the remote path exists, otherwise `false`."
+msgstr "戻り値: リモートパスが存在する場合は `true`、それ以外は `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:317
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:317"
+msgid "is_file"
+msgstr "is_file"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:319
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:319"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:321
+msgid "Canonical API name: `ptool.ssh.Connection:is_file`."
+msgstr "Canonical API name: `ptool.ssh.Connection:is_file`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:323
+msgid "`conn:is_file(path)` checks whether a remote path exists and is a regular file."
+msgstr "`conn:is_file(path)` はリモートパスが存在し、通常ファイルであるかどうかを 確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325"
+msgid "`path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`."
+msgstr "`path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327"
+msgid "Returns: `true` when the remote path is a file, otherwise `false`."
+msgstr "戻り値: リモートパスがファイルなら `true`、それ以外は `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:329
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:329"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:340
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:340"
+msgid "is_dir"
+msgstr "is_dir"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:342
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:342"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:344
+msgid "Canonical API name: `ptool.ssh.Connection:is_dir`."
+msgstr "Canonical API name: `ptool.ssh.Connection:is_dir`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:346
+msgid "`conn:is_dir(path)` checks whether a remote path exists and is a directory."
+msgstr "`conn:is_dir(path)` はリモートパスが存在し、ディレクトリであるかどうかを 確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348"
+msgid "`path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`."
+msgstr "`path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350"
+msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
+msgstr "戻り値: リモートパスがディレクトリなら `true`、それ以外は `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:352
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:352"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:363
+msgid "upload"
+msgstr "upload"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:365
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:365"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:367
+msgid "Canonical API name: `ptool.ssh.Connection:upload`."
+msgstr "Canonical API name: `ptool.ssh.Connection:upload`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:369
+msgid "`conn:upload(local_path, remote_path[, options])` uploads a local file or directory to the remote host."
+msgstr "`conn:upload(local_path, remote_path[, options])` はローカルのファイルまたは ディレクトリをリモートホストへアップロードします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:372
+msgid "`local_path` (string, required): The local file or directory to upload."
+msgstr "`local_path` (string, 必須): アップロードするローカルファイルまたは ディレクトリ。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:373
+msgid "`remote_path` (string|remote path, required): The destination path on the remote host. It can be a string or a value created by `conn:path(...)`."
+msgstr "`remote_path` (string|remote path, 必須): リモートホスト上の宛先パス。 文字列でも `conn:path(...)` が作成した値でも構いません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:375
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:375"
+msgid "`options` (table, optional): Transfer options."
+msgstr "`options` (table, 任意): 転送オプション。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376"
+msgid "Returns: A table with the following fields:"
+msgstr "戻り値: 次のフィールドを持つテーブル:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
+msgid "`bytes` (integer): The number of regular-file bytes uploaded. When a directory is uploaded, this is the sum of the uploaded file sizes."
+msgstr "`bytes` (integer): アップロードされた通常ファイルのバイト数。 ディレクトリをアップロードした場合は、アップロードされた各ファイル サイズの合計です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
+msgid "`from` (string): The local source path."
+msgstr "`from` (string): ローカルの送信元パス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
+msgid "`to` (string): The remote destination path."
+msgstr "`to` (string): リモートの宛先パス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:382
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:382"
+msgid "Supported transfer options:"
+msgstr "サポートされる転送オプション:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:384
+msgid "`parents` (boolean, optional): Create the parent directory of `remote_path` before uploading. Defaults to `false`."
+msgstr "`parents` (boolean, 任意): アップロード前に `remote_path` の親 ディレクトリを作成します。デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:386
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:386"
+msgid "`overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`."
+msgstr "`overwrite` (boolean, 任意): 既存の宛先ファイルを置き換えてよいか どうか。デフォルトは `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:388
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:388"
+msgid "`echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`."
+msgstr "`echo` (boolean, 任意): 実行前に転送内容を表示するかどうか。 デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:391
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:391"
+msgid "Directory behavior:"
+msgstr "ディレクトリの挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:393
+msgid "When `local_path` is a file, the behavior is unchanged."
+msgstr "`local_path` がファイルの場合、挙動は変わりません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:394
+msgid "When `local_path` is a directory and `remote_path` does not exist, `remote_path` becomes the destination directory root."
+msgstr "`local_path` がディレクトリで `remote_path` が存在しない場合、 `remote_path` が宛先ディレクトリのルートになります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:396
+msgid "When `local_path` is a directory and `remote_path` already exists as a directory, the source directory is created under it using the source directory basename."
+msgstr "`local_path` がディレクトリで `remote_path` がすでにディレクトリとして 存在する場合、送信元ディレクトリはその配下に送信元 basename を使って 作成されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399"
+msgid "`overwrite = false` rejects an already-existing destination directory for the final directory root."
+msgstr "`overwrite = false` の場合、最終ディレクトリルートに対して既存の宛先 ディレクトリがあると拒否されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:401
+msgid "Directory uploads require `tar` to be available on the remote host."
+msgstr "ディレクトリアップロードには、リモートホストで `tar` が利用できる必要 があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:403
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:403"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:419
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:419"
+msgid "Directory example:"
+msgstr "ディレクトリ例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:434
+msgid "download"
+msgstr "download"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:436
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:436"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:438
+msgid "Canonical API name: `ptool.ssh.Connection:download`."
+msgstr "Canonical API name: `ptool.ssh.Connection:download`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:440
+msgid "`conn:download(remote_path, local_path[, options])` downloads a remote file or directory to a local path."
+msgstr "`conn:download(remote_path, local_path[, options])` はリモートのファイルまたは ディレクトリをローカルパスへダウンロードします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:443
+msgid "`remote_path` (string|remote path, required): The source path on the remote host. It can be a string or a value created by `conn:path(...)`."
+msgstr "`remote_path` (string|remote path, 必須): リモートホスト上の送信元パス。 文字列でも `conn:path(...)` が作成した値でも構いません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:445
+msgid "`local_path` (string, required): The local destination path."
+msgstr "`local_path` (string, 必須): ローカルの宛先パス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:446
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:446"
+msgid "`options` (table, optional): Transfer options."
+msgstr "`options` (table, 任意): 転送オプション。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447"
+msgid "Returns: A table with the following fields:"
+msgstr "戻り値: 次のフィールドを持つテーブル:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447
+msgid "`bytes` (integer): The number of regular-file bytes downloaded. When a directory is downloaded, this is the sum of the downloaded file sizes."
+msgstr "`bytes` (integer): ダウンロードされた通常ファイルのバイト数。 ディレクトリをダウンロードした場合は、ダウンロードされた各ファイル サイズの合計です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447
+msgid "`from` (string): The remote source path."
+msgstr "`from` (string): リモートの送信元パス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447
+msgid "`to` (string): The local destination path."
+msgstr "`to` (string): ローカルの宛先パス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:453
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:453"
+msgid "Supported transfer options:"
+msgstr "サポートされる転送オプション:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:455
+msgid "`parents` (boolean, optional): Create the parent directory of `local_path` before downloading. Defaults to `false`."
+msgstr "`parents` (boolean, 任意): ダウンロード前に `local_path` の親 ディレクトリを作成します。デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:457
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:457"
+msgid "`overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`."
+msgstr "`overwrite` (boolean, 任意): 既存の宛先ファイルを置き換えてよいか どうか。デフォルトは `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:459
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:459"
+msgid "`echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`."
+msgstr "`echo` (boolean, 任意): 実行前に転送内容を表示するかどうか。 デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:462
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:462"
+msgid "Directory behavior:"
+msgstr "ディレクトリの挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:464
+msgid "When `remote_path` is a file, the behavior is unchanged."
+msgstr "`remote_path` がファイルの場合、挙動は変わりません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:465
+msgid "When `remote_path` is a directory and `local_path` does not exist, `local_path` becomes the destination directory root."
+msgstr "`remote_path` がディレクトリで `local_path` が存在しない場合、 `local_path` が宛先ディレクトリのルートになります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:467
+msgid "When `remote_path` is a directory and `local_path` already exists as a directory, the remote source directory is created under it using the remote directory basename."
+msgstr "`remote_path` がディレクトリで `local_path` がすでにディレクトリとして 存在する場合、リモート送信元ディレクトリはその配下にリモート ディレクトリ basename を使って作成されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470"
+msgid "`overwrite = false` rejects an already-existing destination directory for the final directory root."
+msgstr "`overwrite = false` の場合、最終ディレクトリルートに対して既存の宛先 ディレクトリがあると拒否されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:472
+msgid "Directory downloads require `tar` to be available on the remote host."
+msgstr "ディレクトリダウンロードには、リモートホストで `tar` が利用できる必要 があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:474
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:474"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:489
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:489"
+msgid "Directory example:"
+msgstr "ディレクトリ例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:504
+msgid "close"
+msgstr "close"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:506
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:506"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:508
+msgid "Canonical API name: `ptool.ssh.Connection:close`."
+msgstr "Canonical API name: `ptool.ssh.Connection:close`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:510
+msgid "`conn:close()` closes the SSH connection handle."
+msgstr "`conn:close()` は SSH 接続ハンドルを閉じます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:512
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:514
+msgid "After closing, the connection can no longer be used."
+msgstr "閉じたあとは、その接続をもう使えません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:515
+msgid "Closing an already-closed connection is allowed and has no effect."
+msgstr "すでに閉じられた接続を再度閉じても問題なく、効果はありません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:517
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:517"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:524
+msgid "RemotePath"
+msgstr "RemotePath"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:526
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:526"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:528
+msgid "`RemotePath` represents a remote path bound to a `Connection` and returned by `conn:path(path)`."
+msgstr "`RemotePath` は `Connection` に紐づくリモートパスを表し、 `conn:path(path)` から返されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531"
+msgid "It is implemented as a Lua userdata."
+msgstr "これは Lua userdata として実装されています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:533
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:533"
+msgid "Methods:"
+msgstr "メソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:535
+msgid "`remote:exists()` -> `boolean`"
+msgstr "`remote:exists()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:536
+msgid "`remote:is_file()` -> `boolean`"
+msgstr "`remote:is_file()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:537
+msgid "`remote:is_dir()` -> `boolean`"
+msgstr "`remote:is_dir()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:539
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:539"
+msgid "exists"
+msgstr "exists"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:541
+msgid "`remote:exists()` checks whether the remote path exists."
+msgstr "`remote:exists()` はリモートパスが存在するかどうかを確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:543
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:543"
+msgid "Returns: `true` when the remote path exists, otherwise `false`."
+msgstr "戻り値: リモートパスが存在する場合は `true`、それ以外は `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:545
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:545"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:554
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:554"
+msgid "is_file"
+msgstr "is_file"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:556
+msgid "`remote:is_file()` checks whether the remote path exists and is a regular file."
+msgstr "`remote:is_file()` はリモートパスが存在し、通常ファイルであるかどうかを 確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:558
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:558"
+msgid "Returns: `true` when the remote path is a file, otherwise `false`."
+msgstr "戻り値: リモートパスがファイルなら `true`、それ以外は `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:560
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:560"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:571
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:571"
+msgid "is_dir"
+msgstr "is_dir"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:573
+msgid "`remote:is_dir()` checks whether the remote path exists and is a directory."
+msgstr "`remote:is_dir()` はリモートパスが存在し、ディレクトリであるかどうかを 確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:575
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:575"
+msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
+msgstr "戻り値: リモートパスがディレクトリなら `true`、それ以外は `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:577
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:577"
+msgid "Example:"
+msgstr "例:"

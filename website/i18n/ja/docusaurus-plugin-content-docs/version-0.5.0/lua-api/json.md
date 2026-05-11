@@ -1,7 +1,6 @@
 # JSON API
 
-JSON の解析とシリアライズのヘルパーは `ptool.json` と `p.json` に
-あります。
+JSON の解析とシリアライズのヘルパーは `ptool.json` と `p.json` に あります。
 
 ## ptool.json.parse
 
@@ -25,8 +24,7 @@ JSON の解析とシリアライズのヘルパーは `ptool.json` と `p.json` 
 エラー時の挙動:
 
 - `input` が文字列でない場合はエラーになります。
-- JSON 構文エラーでは、`serde_json` のパーサー詳細を含むメッセージで
-  エラーになります。
+- JSON 構文エラーでは、`serde_json` のパーサー詳細を含むメッセージで エラーになります。
 
 例:
 
@@ -46,16 +44,14 @@ print(data.stars)
 
 - `value` (JSON 互換 Lua 値, 必須): エンコードする値。
 - `options` (table, 任意): シリアライズオプション。
-- `options.pretty` (boolean, 任意): `true` のとき見やすく整形された JSON
-  を出力します。デフォルトは `false`。
+- `options.pretty` (boolean, 任意): `true` のとき見やすく整形された JSON を出力します。デフォルトは `false`。
 - 戻り値: エンコードされた JSON 文字列。
 
 挙動:
 
 - デフォルト出力は余分な空白のないコンパクト JSON です。
 - pretty 出力ではインデント付きの複数行 JSON を使います。
-- 値は JSON 互換である必要があります。`function`, `thread`, `userdata`
-  などのシリアライズできない Lua 値はエラーになります。
+- 値は JSON 互換である必要があります。`function`, `thread`, `userdata` などのシリアライズできない Lua 値はエラーになります。
 
 例:
 
@@ -71,7 +67,5 @@ print(text)
 
 注意:
 
-- Lua テーブル内の `nil` 値は `mlua` の serde 変換挙動に従うため、
-  JSON オブジェクトのフィールドとして保持されません。
-- Lua テーブルが配列かオブジェクトかの判定は `mlua` の serde 変換ルールに
-  従います。
+- Lua テーブル内の `nil` 値は `mlua` の serde 変換挙動に従うため、 JSON オブジェクトのフィールドとして保持されません。
+- Lua テーブルが配列かオブジェクトかの判定は `mlua` の serde 変換ルールに 従います。

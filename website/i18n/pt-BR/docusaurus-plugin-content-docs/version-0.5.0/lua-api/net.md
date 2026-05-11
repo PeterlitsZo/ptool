@@ -1,14 +1,12 @@
 # API de rede
 
-As utilidades de parse de URL, IP e host/porta estão disponíveis em
-`ptool.net` e `p.net`.
+As utilidades de parse de URL, IP e host/porta estão disponíveis em `ptool.net` e `p.net`.
 
 ## ptool.net.parse_url
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_url(input)` faz o parse de uma string de URL e retorna uma
-tabela de partes normalizadas.
+`ptool.net.parse_url(input)` faz o parse de uma string de URL e retorna uma tabela de partes normalizadas.
 
 Argumentos:
 
@@ -23,8 +21,7 @@ Retorna: uma tabela com os seguintes campos:
 - `username` (string, opcional): O nome de usuário decodificado, se presente.
 - `password` (string, opcional): A senha decodificada, se presente.
 - `host` (string, opcional): O hostname ou literal de IP, se presente.
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`, opcional): A classificação do host,
-  se houver host.
+- `host_kind` (`"domain"|"ipv4"|"ipv6"`, opcional): A classificação do host, se houver host.
 - `port` (integer, opcional): A porta explícita, se presente.
 - `path` (string): O caminho da URL.
 - `query` (string, opcional): A query string sem o `?` inicial.
@@ -45,8 +42,7 @@ print(parts.fragment)    -- frag
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_ip(input)` faz o parse de um endereço IPv4 ou IPv6 e retorna
-uma tabela de partes normalizadas.
+`ptool.net.parse_ip(input)` faz o parse de um endereço IPv4 ou IPv6 e retorna uma tabela de partes normalizadas.
 
 Argumentos:
 
@@ -70,13 +66,11 @@ print(parts.version)    -- 6
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_host_port(input)` faz o parse de uma string `host:port` e
-retorna uma tabela de partes normalizadas.
+`ptool.net.parse_host_port(input)` faz o parse de uma string `host:port` e retorna uma tabela de partes normalizadas.
 
 Argumentos:
 
-- `input` (string, obrigatório): A string com host e porta. Endereços IPv6
-  devem usar notação com colchetes, como `[2001:db8::1]:443`.
+- `input` (string, obrigatório): A string com host e porta. Endereços IPv6 devem usar notação com colchetes, como `[2001:db8::1]:443`.
 
 Retorna: uma tabela com os seguintes campos:
 

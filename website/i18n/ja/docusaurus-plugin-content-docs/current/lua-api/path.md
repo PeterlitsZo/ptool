@@ -6,8 +6,7 @@
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.join(...segments)` は複数のパスセグメントを連結し、
-正規化されたパスを返します。
+`ptool.path.join(...segments)` は複数のパスセグメントを連結し、 正規化されたパスを返します。
 
 - `segments` (string, 1 つ以上): パスセグメント。
 - 戻り値: `string`。
@@ -22,8 +21,7 @@ print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.normalize(path)` は字句的なパス正規化 (`.` と `..` の処理) を
-行います。
+`ptool.path.normalize(path)` は字句的なパス正規化 (`.` と `..` の処理) を 行います。
 
 - `path` (string, 必須): 入力パス。
 - 戻り値: `string`。
@@ -41,8 +39,7 @@ print(ptool.path.normalize("./a/../b")) -- b
 `ptool.path.abspath(path[, base])` は絶対パスを計算します。
 
 - `path` (string, 必須): 入力パス。
-- `base` (string, 任意): ベースディレクトリ。省略時は現在のプロセスの
-  作業ディレクトリが使われます。
+- `base` (string, 任意): ベースディレクトリ。省略時は現在のプロセスの 作業ディレクトリが使われます。
 - 戻り値: `string`。
 - 受け付ける文字列引数は 1 個または 2 個のみです。
 
@@ -57,12 +54,10 @@ print(ptool.path.abspath("lib", "/tmp/demo"))
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.relpath(path[, base])` は `base` から `path` への相対パスを
-計算します。
+`ptool.path.relpath(path[, base])` は `base` から `path` への相対パスを 計算します。
 
 - `path` (string, 必須): 対象パス。
-- `base` (string, 任意): 開始ディレクトリ。省略時は現在のプロセスの
-  作業ディレクトリが使われます。
+- `base` (string, 任意): 開始ディレクトリ。省略時は現在のプロセスの 作業ディレクトリが使われます。
 - 戻り値: `string`。
 - 受け付ける文字列引数は 1 個または 2 個のみです。
 
@@ -106,8 +101,7 @@ print(ptool.path.dirname("a/b/c.txt")) -- a/b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.basename(path)` は最後のパスセグメント
-(ファイル名部分) を返します。
+`ptool.path.basename(path)` は最後のパスセグメント (ファイル名部分) を返します。
 
 - `path` (string, 必須): 入力パス。
 - 戻り値: `string`。
@@ -122,8 +116,7 @@ print(ptool.path.basename("a/b/c.txt")) -- c.txt
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.extname(path)` は拡張子 (`.` を含む) を返します。拡張子がない
-場合は空文字列を返します。
+`ptool.path.extname(path)` は拡張子 (`.` を含む) を返します。拡張子がない 場合は空文字列を返します。
 
 - `path` (string, 必須): 入力パス。
 - 戻り値: `string`。
@@ -136,7 +129,5 @@ print(ptool.path.extname("a/b/c.txt")) -- .txt
 
 注意:
 
-- `ptool.path` のパス処理は完全に字句的です。パスの存在確認や
-  シンボリックリンクの解決は行いません。
-- どのインターフェースも空文字列引数を受け付けません。渡すとエラーに
-  なります。
+- `ptool.path` のパス処理は完全に字句的です。パスの存在確認や シンボリックリンクの解決は行いません。
+- どのインターフェースも空文字列引数を受け付けません。渡すとエラーに なります。

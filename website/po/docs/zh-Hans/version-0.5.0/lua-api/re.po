@@ -1,0 +1,282 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:1
+msgid "Regex API"
+msgstr "Regex API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:3
+msgid "Regular expression helpers are available under `ptool.re` and `p.re`."
+msgstr "正则表达式辅助能力位于 `ptool.re` 和 `p.re` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:5
+msgid "ptool.re.compile"
+msgstr "ptool.re.compile"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:9
+msgid "`ptool.re.compile(pattern[, opts])` compiles a regular expression and returns a `Regex` object."
+msgstr "`ptool.re.compile(pattern[, opts])` 编译正则表达式，并返回一个 `Regex` 对象。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:12
+msgid "`pattern` (string, required): The regex pattern."
+msgstr "`pattern`（string，必填）：正则模式。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:13
+msgid "`opts` (table, optional): Compile options. Currently supported:"
+msgstr "`opts`（table，可选）：编译选项。目前支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:13
+msgid "`case_insensitive` (boolean, optional): Whether matching is case-insensitive. Defaults to `false`."
+msgstr "`case_insensitive`（boolean，可选）：是否大小写不敏感。默认值是 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:17
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:17"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:24
+msgid "ptool.re.escape"
+msgstr "ptool.re.escape"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:26
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:26"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:28
+msgid "`ptool.re.escape(text)` escapes plain text into a regex literal string."
+msgstr "`ptool.re.escape(text)` 把普通文本转义成正则字面量字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:30
+msgid "`text` (string, required): The text to escape."
+msgstr "`text`（string，必填）：要转义的文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:31
+msgid "Returns: The escaped string."
+msgstr "返回：转义后的字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:33
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:33"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:41
+msgid "Regex"
+msgstr "Regex"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:43"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:45
+msgid "`Regex` represents a compiled regular expression returned by `ptool.re.compile(...)`."
+msgstr "`Regex` 表示由 `ptool.re.compile(...)` 返回的已编译正则表达式。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:48
+msgid "It is implemented as a Lua userdata."
+msgstr "它实现为 Lua userdata。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:50
+msgid "Methods:"
+msgstr "方法："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:52
+msgid "`re:is_match(input)` -> `boolean`"
+msgstr "`re:is_match(input)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:53
+msgid "`re:find(input[, init])` -> `Match|nil`"
+msgstr "`re:find(input[, init])` -> `Match|nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:54
+msgid "`re:find_all(input)` -> `Match[]`"
+msgstr "`re:find_all(input)` -> `Match[]`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:55
+msgid "`re:captures(input)` -> `Captures|nil`"
+msgstr "`re:captures(input)` -> `Captures|nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:56
+msgid "`re:captures_all(input)` -> `Captures[]`"
+msgstr "`re:captures_all(input)` -> `Captures[]`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:57
+msgid "`re:replace(input, replacement)` -> `string`"
+msgstr "`re:replace(input, replacement)` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:58
+msgid "`re:replace_all(input, replacement)` -> `string`"
+msgstr "`re:replace_all(input, replacement)` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:59
+msgid "`re:split(input[, limit])` -> `string[]`"
+msgstr "`re:split(input[, limit])` -> `string[]`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:61
+msgid "is_match"
+msgstr "is_match"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:63
+msgid "Canonical API name: `ptool.re.Regex:is_match`."
+msgstr "规范 API 名称：`ptool.re.Regex:is_match`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:65
+msgid "`re:is_match(input)` checks whether the regex matches `input`."
+msgstr "`re:is_match(input)` 检查正则是否能匹配 `input`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:67
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:67"
+msgid "`input` (string, required): The input text."
+msgstr "`input`（string，必填）：输入文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:68
+msgid "Returns: `boolean`."
+msgstr "返回：`boolean`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:70
+msgid "find"
+msgstr "find"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:72
+msgid "Canonical API name: `ptool.re.Regex:find`."
+msgstr "规范 API 名称：`ptool.re.Regex:find`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:74
+msgid "`re:find(input[, init])` returns the first match in `input`, or `nil`."
+msgstr "`re:find(input[, init])` 返回 `input` 中第一个匹配项；如果没有匹配，则返回 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:76"
+msgid "`input` (string, required): The input text."
+msgstr "`input`（string，必填）：输入文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:78
+msgid "Parameter notes:"
+msgstr "参数说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:80
+msgid "`init` is a 1-based start position and defaults to `1`."
+msgstr "`init` 是从 `1` 开始的起始位置，默认值为 `1`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:81
+msgid "`limit` must be greater than `0`."
+msgstr "`limit` 必须大于 `0`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:83
+msgid "Return structures:"
+msgstr "返回结构："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:85
+msgid "`Match`:"
+msgstr "`Match`："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:85
+msgid "`start` (integer): The 1-based start index."
+msgstr "`start`（integer）：从 `1` 开始的起始索引。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:85
+msgid "`finish` (integer): The end index, directly usable with `string.sub`."
+msgstr "`finish`（integer）：结束索引，可直接用于 `string.sub`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:85
+msgid "`text` (string): The matched text."
+msgstr "`text`（string）：匹配到的文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:89
+msgid "`Captures`:"
+msgstr "`Captures`："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:89
+msgid "`full` (string): The full matched text."
+msgstr "`full`（string）：完整匹配文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:89
+msgid "`groups` (table): An array of capture groups in capture order. Unmatched groups are `nil`."
+msgstr "`groups`（table）：按捕获顺序排列的捕获组数组。未命中的组为 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:89
+msgid "`named` (table): A mapping of named capture groups, keyed by group name."
+msgstr "`named`（table）：命名捕获组映射，键为组名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:95
+msgid "find_all"
+msgstr "find_all"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:97
+msgid "Canonical API name: `ptool.re.Regex:find_all`."
+msgstr "规范 API 名称：`ptool.re.Regex:find_all`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:99
+msgid "`re:find_all(input)` returns all matches in `input` as a `Match[]`."
+msgstr "`re:find_all(input)` 以 `Match[]` 形式返回 `input` 中的全部匹配项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:101
+msgid "captures"
+msgstr "captures"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:103
+msgid "Canonical API name: `ptool.re.Regex:captures`."
+msgstr "规范 API 名称：`ptool.re.Regex:captures`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:105
+msgid "`re:captures(input)` returns the first capture set in `input`, or `nil`."
+msgstr "`re:captures(input)` 返回 `input` 中第一组捕获结果；如果没有匹配，则返回 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:107
+msgid "captures_all"
+msgstr "captures_all"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:109
+msgid "Canonical API name: `ptool.re.Regex:captures_all`."
+msgstr "规范 API 名称：`ptool.re.Regex:captures_all`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:111
+msgid "`re:captures_all(input)` returns all capture sets in `input` as a `Captures[]`."
+msgstr "`re:captures_all(input)` 以 `Captures[]` 形式返回 `input` 中全部捕获结果。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:113
+msgid "replace"
+msgstr "replace"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:115
+msgid "Canonical API name: `ptool.re.Regex:replace`."
+msgstr "规范 API 名称：`ptool.re.Regex:replace`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:117
+msgid "`re:replace(input, replacement)` replaces the first match in `input`."
+msgstr "`re:replace(input, replacement)` 替换 `input` 中第一个匹配项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:119
+msgid "replace_all"
+msgstr "replace_all"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:121
+msgid "Canonical API name: `ptool.re.Regex:replace_all`."
+msgstr "规范 API 名称：`ptool.re.Regex:replace_all`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:123
+msgid "`re:replace_all(input, replacement)` replaces all matches in `input`."
+msgstr "`re:replace_all(input, replacement)` 替换 `input` 中全部匹配项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:125
+msgid "split"
+msgstr "split"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:127
+msgid "Canonical API name: `ptool.re.Regex:split`."
+msgstr "规范 API 名称：`ptool.re.Regex:split`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:129
+msgid "`re:split(input[, limit])` splits `input` using the regex as the separator."
+msgstr "`re:split(input[, limit])` 使用正则作为分隔符拆分 `input`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/re.md:131"
+msgid "Example:"
+msgstr "示例："

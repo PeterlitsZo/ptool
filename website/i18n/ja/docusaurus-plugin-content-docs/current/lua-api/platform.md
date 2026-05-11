@@ -1,7 +1,6 @@
 # プラットフォーム API
 
-プラットフォーム検出ヘルパーは `ptool.platform` と `p.platform` に
-あります。
+プラットフォーム検出ヘルパーは `ptool.platform` と `p.platform` に あります。
 
 ## ptool.platform.os
 
@@ -44,8 +43,7 @@ print(ptool.platform.arch()) -- arm64
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.target()` は現在のマシン向けの正規化されたプラットフォーム
-target 文字列を返します。
+`ptool.platform.target()` は現在のマシン向けの正規化されたプラットフォーム target 文字列を返します。
 
 - 戻り値: `string`。
 
@@ -57,8 +55,5 @@ print(target) -- linux-riscv64
 挙動:
 
 - 結果は常に `ptool.platform.os() .. "-" .. ptool.platform.arch()` です。
-- これはダウンロード用アーティファクトの選択など、プラットフォームに
-  基づく分岐のために使うことを想定しています。
-- よくある値には `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`,
-  `linux-riscv64`, `macos-amd64`, `macos-arm64`, `windows-amd64` が
-  含まれます。
+- これはダウンロード用アーティファクトの選択など、プラットフォームに 基づく分岐のために使うことを想定しています。
+- よくある値には `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, `windows-amd64` が 含まれます。

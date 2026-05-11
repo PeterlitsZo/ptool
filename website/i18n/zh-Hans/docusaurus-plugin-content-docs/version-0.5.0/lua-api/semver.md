@@ -53,10 +53,8 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 `ptool.semver.bump(v, op[, channel])` 应用版本提升操作，并返回新的版本对象。
 
 - `v`（string|Version，必填）：原始版本。
-- `op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、
-  `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。
-- `channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。
-  必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。
+- `op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。
+- `channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。
 - 返回：`Version`。
 
 ```lua
@@ -74,8 +72,7 @@ print(tostring(stable)) -- 1.2.4
 
 > `v0.1.0` - 引入。
 
-`Version` 表示由 `ptool.semver.parse(...)` 或 `ptool.semver.bump(...)` 返回的
-已解析语义化版本。
+`Version` 表示由 `ptool.semver.parse(...)` 或 `ptool.semver.bump(...)` 返回的 已解析语义化版本。
 
 它实现为 Lua userdata。
 
@@ -110,10 +107,8 @@ print(tostring(stable)) -- 1.2.4
 
 `v:bump(op[, channel])` 应用版本提升操作，并返回新的 `Version` 对象。
 
-- `op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、
-  `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。
-- `channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。
-  必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。
+- `op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。
+- `channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。
 - 返回：`Version`。
 
 ### to_string
@@ -126,13 +121,8 @@ print(tostring(stable)) -- 1.2.4
 
 预发布提升规则：
 
-- 将稳定版本提升到 `alpha`、`beta` 或 `rc` 时，会先递增 patch 版本，再进入目标
-  通道并从 `.1` 开始。
-- `prepatch`、`preminor` 和 `premajor` 会分别从下一个 patch、minor 或 major
-  版本开始全新的预发布，例如使用 `preminor` + `rc` 时，
-  `1.2.3 -> 1.3.0-rc.1`。
+- 将稳定版本提升到 `alpha`、`beta` 或 `rc` 时，会先递增 patch 版本，再进入目标 通道并从 `.1` 开始。
+- `prepatch`、`preminor` 和 `premajor` 会分别从下一个 patch、minor 或 major 版本开始全新的预发布，例如使用 `preminor` + `rc` 时， `1.2.3 -> 1.3.0-rc.1`。
 - 在同一通道内继续提升时，会递增序号，例如 `alpha.1 -> alpha.2`。
-- `release` 会移除预发布和 build 元数据，同时保持 `major.minor.patch` 不变，
-  例如 `1.2.3-rc.2 -> 1.2.3`。
-- 允许通道升级（`alpha -> beta -> rc`），但不允许通道降级
-  （例如 `rc -> beta` 会抛出错误）。
+- `release` 会移除预发布和 build 元数据，同时保持 `major.minor.patch` 不变， 例如 `1.2.3-rc.2 -> 1.2.3`。
+- 允许通道升级（`alpha -> beta -> rc`），但不允许通道降级 （例如 `rc -> beta` 会抛出错误）。

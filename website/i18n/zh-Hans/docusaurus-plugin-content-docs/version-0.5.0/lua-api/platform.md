@@ -56,5 +56,4 @@ print(target) -- linux-riscv64
 
 - 结果始终等于 `ptool.platform.os() .. "-" .. ptool.platform.arch()`。
 - 这个值适合做基于平台的分支判断，例如选择下载产物。
-- 常见值包括 `linux-amd64`、`linux-arm64`、`linux-x86`、`linux-arm`、
-  `linux-riscv64`、`macos-amd64`、`macos-arm64` 和 `windows-amd64`。
+- 常见值包括 `linux-amd64`、`linux-arm64`、`linux-x86`、`linux-arm`、 `linux-riscv64`、`macos-amd64`、`macos-arm64` 和 `windows-amd64`。

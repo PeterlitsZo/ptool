@@ -1,7 +1,6 @@
 # Log API
 
-`ptool.log` は `ptool.log` と `p.log` の両方で、レベル別の端末ログ
-ヘルパーを公開します。
+`ptool.log` は `ptool.log` と `p.log` の両方で、レベル別の端末ログ ヘルパーを公開します。
 
 各ログ呼び出しは次の形式で 1 行を出力します。
 
@@ -12,13 +11,10 @@
 動作:
 
 - タイムスタンプはローカル時刻の `YYYY-MM-DD HH:MM:SS` 形式です。
-- レベル名は `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR` の完全表記を
-  使います。
+- レベル名は `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR` の完全表記を 使います。
 - `ptool` が端末へ書き込んでいる場合は、自動的に色付き出力になります。
-- `ptool.log.error(...)` は `stderr` に書き込み、それ以外のレベルは
-  `stdout` に書き込みます。
-- 複数引数は空白で連結されます。文字列以外の値は単一行の inspect 形式で
-  レンダリングされます。
+- `ptool.log.error(...)` は `stderr` に書き込み、それ以外のレベルは `stdout` に書き込みます。
+- 複数引数は空白で連結されます。文字列以外の値は単一行の inspect 形式で レンダリングされます。
 
 ## ptool.log.trace
 

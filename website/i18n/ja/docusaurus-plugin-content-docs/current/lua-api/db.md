@@ -6,8 +6,7 @@
 
 > `v0.1.0` - Introduced.
 
-`ptool.db.connect(url_or_options)` はデータベース接続を開き、
-`Connection` オブジェクトを返します。
+`ptool.db.connect(url_or_options)` はデータベース接続を開き、 `Connection` オブジェクトを返します。
 
 サポートされるデータベース:
 
@@ -33,10 +32,8 @@ local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 SQLite に関する注意:
 
 - `sqlite:test.db` と `sqlite://test.db` がサポートされます。
-- 相対 SQLite パスは現在の `ptool` ランタイムディレクトリから解決される
-  ため、`ptool.cd(...)` に従います。
-- `mode=` クエリパラメータが指定されていない場合、SQLite 接続のデフォルト
-  は `mode=rwc` で、データベースファイルの自動作成が可能です。
+- 相対 SQLite パスは現在の `ptool` ランタイムディレクトリから解決される ため、`ptool.cd(...)` に従います。
+- `mode=` クエリパラメータが指定されていない場合、SQLite 接続のデフォルト は `mode=rwc` で、データベースファイルの自動作成が可能です。
 
 例:
 
@@ -51,8 +48,7 @@ local db = ptool.db.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` は `ptool.db.connect()` が返す開かれたデータベース接続を
-表します。
+`Connection` は `ptool.db.connect()` が返す開かれたデータベース接続を 表します。
 
 これは Lua userdata として実装されています。
 
@@ -68,10 +64,8 @@ local db = ptool.db.connect({
 パラメータバインディング:
 
 - `params` は任意です。
-- `params` が配列テーブルの場合は位置パラメータとして扱われ、
-  SQL プレースホルダーには `?` を使います。
-- `params` がキーと値のテーブルの場合は名前付きパラメータとして扱われ、
-  SQL プレースホルダーには `:name` を使います。
+- `params` が配列テーブルの場合は位置パラメータとして扱われ、 SQL プレースホルダーには `?` を使います。
+- `params` がキーと値のテーブルの場合は名前付きパラメータとして扱われ、 SQL プレースホルダーには `:name` を使います。
 - 位置パラメータと名前付きパラメータは同じ呼び出し内で混在できません。
 - サポートされるパラメータ値の型:
   - `boolean`
@@ -90,8 +84,7 @@ local db = ptool.db.connect({
   - `nil` (SQL `NULL` 用)
 - テキスト列は Lua 文字列として返されます。
 - バイナリ/blob 列も Lua 文字列として返されます。
-- クエリ結果に重複した列名が含まれる場合はエラーになります。`AS` などの
-  SQL エイリアスで区別してください。
+- クエリ結果に重複した列名が含まれる場合はエラーになります。`AS` などの SQL エイリアスで区別してください。
 
 ### query
 
@@ -127,8 +120,7 @@ print(res.rows[2].name)
 
 Canonical API name: `ptool.db.Connection:query_one`.
 
-`db:query_one(sql, params?)` は最初の 1 行をテーブルとして返します。
-クエリ結果が 0 行なら `nil` を返します。
+`db:query_one(sql, params?)` は最初の 1 行をテーブルとして返します。 クエリ結果が 0 行なら `nil` を返します。
 
 例:
 
@@ -145,8 +137,7 @@ end
 
 Canonical API name: `ptool.db.Connection:scalar`.
 
-`db:scalar(sql, params?)` は最初の行の最初の列を返します。クエリ結果が
-0 行なら `nil` を返します。
+`db:scalar(sql, params?)` は最初の行の最初の列を返します。クエリ結果が 0 行なら `nil` を返します。
 
 例:
 
@@ -178,17 +169,14 @@ print(res.rows_affected)
 
 Canonical API name: `ptool.db.Connection:transaction`.
 
-`db:transaction(fn)` はデータベーストランザクション内で `fn(tx)` を
-実行します。
+`db:transaction(fn)` はデータベーストランザクション内で `fn(tx)` を 実行します。
 
 挙動:
 
 - `fn(tx)` が正常に返れば、トランザクションはコミットされます。
-- `fn(tx)` がエラーを投げると、トランザクションはロールバックされ、
-  そのエラーが再送出されます。
+- `fn(tx)` がエラーを投げると、トランザクションはロールバックされ、 そのエラーが再送出されます。
 - ネストしたトランザクションはサポートされません。
-- コールバックが有効な間は外側の接続オブジェクトを使ってはいけません。
-  代わりに渡された `tx` オブジェクトを使ってください。
+- コールバックが有効な間は外側の接続オブジェクトを使ってはいけません。 代わりに渡された `tx` オブジェクトを使ってください。
 
 `tx` オブジェクトは `Connection` と同じクエリメソッドをサポートします:
 
@@ -226,8 +214,7 @@ Canonical API name: `ptool.db.Connection:close`.
 挙動:
 
 - 閉じた後、その接続はもう使えません。
-- アクティブなトランザクションコールバックの最中に閉じるとエラーに
-  なります。
+- アクティブなトランザクションコールバックの最中に閉じるとエラーに なります。
 
 例:
 

@@ -8,8 +8,7 @@ As utilidades de hash estão disponíveis em `ptool.hash` e `p.hash`.
 
 `ptool.hash.sha256(input)` retorna o digest SHA-256 de uma string Lua.
 
-- `input` (string, obrigatório): A string Lua de entrada. O digest é calculado
-  a partir dos bytes brutos da string.
+- `input` (string, obrigatório): A string Lua de entrada. O digest é calculado a partir dos bytes brutos da string.
 - Retorna: `string` (digest hexadecimal em minúsculas).
 
 ```lua
@@ -23,8 +22,7 @@ print(ptool.hash.sha256("hello"))
 
 `ptool.hash.sha1(input)` retorna o digest SHA-1 de uma string Lua.
 
-- `input` (string, obrigatório): A string Lua de entrada. O digest é calculado
-  a partir dos bytes brutos da string.
+- `input` (string, obrigatório): A string Lua de entrada. O digest é calculado a partir dos bytes brutos da string.
 - Retorna: `string` (digest hexadecimal em minúsculas).
 
 ```lua
@@ -38,8 +36,7 @@ print(ptool.hash.sha1("hello"))
 
 `ptool.hash.md5(input)` retorna o digest MD5 de uma string Lua.
 
-- `input` (string, obrigatório): A string Lua de entrada. O digest é calculado
-  a partir dos bytes brutos da string.
+- `input` (string, obrigatório): A string Lua de entrada. O digest é calculado a partir dos bytes brutos da string.
 - Retorna: `string` (digest hexadecimal em minúsculas).
 
 ```lua

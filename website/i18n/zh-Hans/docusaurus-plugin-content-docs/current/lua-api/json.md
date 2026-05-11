@@ -44,8 +44,7 @@ print(data.stars)
 
 - `value`（兼容 JSON 的 Lua 值，必填）：要编码的值。
 - `options`（table，可选）：序列化选项。
-- `options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。
-  默认为 `false`。
+- `options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。 默认为 `false`。
 - 返回：编码后的 JSON 字符串。
 
 行为说明：

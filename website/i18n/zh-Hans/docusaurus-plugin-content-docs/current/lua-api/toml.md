@@ -40,14 +40,13 @@ print(conf.release_date) -- datetime/date/time values are strings
 ## ptool.toml.get
 
 > `v0.1.0` - 引入。
->
+> 
 > `v0.4.0` - 新增数组索引用的数字路径段。
 
 `ptool.toml.get(input, path)` 从 TOML 文本中读取指定路径上的值。
 
 - `input`（string，必填）：TOML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如
-  `{"package", "version"}` 或 `{"bin", 1, "name"}`。
+- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"package", "version"}` 或 `{"bin", 1, "name"}`。
 - 返回：对应的 Lua 值；如果路径不存在，则返回 `nil`。
 
 行为说明：
@@ -69,15 +68,13 @@ print(first_bin_name)
 ## ptool.toml.set
 
 > `v0.1.0` - 引入。
->
+> 
 > `v0.4.0` - 新增复合值写入和数字路径段。
 
-`ptool.toml.set(input, path, value)` 设置指定路径上的值，并返回更新后的 TOML
-文本。
+`ptool.toml.set(input, path, value)` 设置指定路径上的值，并返回更新后的 TOML 文本。
 
 - `input`（string，必填）：TOML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如
-  `{"package", "version"}` 或 `{"bin", 1, "name"}`。
+- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"package", "version"}` 或 `{"bin", 1, "name"}`。
 - `value`（string|integer|number|boolean|table，必填）：要写入的值。
 - 返回：更新后的 TOML 字符串。
 
@@ -108,14 +105,13 @@ local text3 = ptool.toml.set(text2, {"package", "metadata"}, {
 ## ptool.toml.remove
 
 > `v0.1.0` - 引入。
->
+> 
 > `v0.4.0` - 新增数组索引用的数字路径段。
 
 `ptool.toml.remove(input, path)` 删除指定路径，并返回更新后的 TOML 文本。
 
 - `input`（string，必填）：TOML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如
-  `{"package", "name"}` 或 `{"bin", 1}`。
+- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"package", "name"}` 或 `{"bin", 1}`。
 - 返回：更新后的 TOML 字符串。
 
 行为说明：

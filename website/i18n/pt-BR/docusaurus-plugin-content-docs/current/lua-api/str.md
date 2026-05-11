@@ -45,8 +45,7 @@ print(ptool.str.trim_end("  hello  ")) --   hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.is_blank(s)` verifica se uma string está vazia ou contém apenas
-espaços em branco.
+`ptool.str.is_blank(s)` verifica se uma string está vazia ou contém apenas espaços em branco.
 
 - `s` (string, obrigatório): A string de entrada.
 - Retorna: `boolean`.
@@ -102,23 +101,19 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split(s, sep[, options])` divide uma string por um separador não
-vazio.
+`ptool.str.split(s, sep[, options])` divide uma string por um separador não vazio.
 
 - `s` (string, obrigatório): A string de entrada.
 - `sep` (string, obrigatório): O separador. Strings vazias não são permitidas.
 - `options` (table, opcional): Opções de divisão. Campos suportados:
-  - `trim` (boolean, opcional): Se cada parte deve ser aparada antes de ser
-    retornada. O padrão é `false`.
-  - `skip_empty` (boolean, opcional): Se partes vazias devem ser removidas
-    após a eventual remoção de espaços. O padrão é `false`.
+  - `trim` (boolean, opcional): Se cada parte deve ser aparada antes de ser retornada. O padrão é `false`.
+  - `skip_empty` (boolean, opcional): Se partes vazias devem ser removidas após a eventual remoção de espaços. O padrão é `false`.
 - Retorna: `string[]`.
 
 Comportamento:
 
 - Nomes de opção desconhecidos ou tipos de valor inválidos geram erro.
-- `skip_empty = true` é aplicado depois de `trim`, então partes compostas só
-  por espaços podem ser removidas quando ambas as opções estão habilitadas.
+- `skip_empty = true` é aplicado depois de `trim`, então partes compostas só por espaços podem ser removidas quando ambas as opções estão habilitadas.
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -137,18 +132,14 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 
 - `s` (string, obrigatório): A string de entrada.
 - `options` (table, opcional): Opções de divisão de linhas. Campos suportados:
-  - `keep_ending` (boolean, opcional): Se os finais de linha (`\n`, `\r\n`
-    ou `\r`) devem ser mantidos nos itens retornados. O padrão é `false`.
-  - `skip_empty` (boolean, opcional): Se linhas vazias devem ser removidas.
-    O padrão é `false`.
+  - `keep_ending` (boolean, opcional): Se os finais de linha (`\n`, `\r\n` ou `\r`) devem ser mantidos nos itens retornados. O padrão é `false`.
+  - `skip_empty` (boolean, opcional): Se linhas vazias devem ser removidas. O padrão é `false`.
 - Retorna: `string[]`.
 
 Comportamento:
 
-- Suporta finais de linha Unix (`\n`), Windows (`\r\n`) e também `\r`
-  isolado.
-- Quando `skip_empty = true`, uma linha que contém apenas um final de linha é
-  tratada como vazia e removida.
+- Suporta finais de linha Unix (`\n`), Windows (`\r\n`) e também `\r` isolado.
+- Quando `skip_empty = true`, uma linha que contém apenas um final de linha é tratada como vazia e removida.
 - Nomes de opção desconhecidos ou tipos de valor inválidos geram erro.
 
 ```lua
@@ -180,11 +171,9 @@ print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
 `ptool.str.replace(s, from, to[, n])` substitui ocorrências de `from` por `to`.
 
 - `s` (string, obrigatório): A string de entrada.
-- `from` (string, obrigatório): A substring a ser substituída. Strings vazias
-  não são permitidas.
+- `from` (string, obrigatório): A substring a ser substituída. Strings vazias não são permitidas.
 - `to` (string, obrigatório): A string de substituição.
-- `n` (integer, opcional): Número máximo de substituições. Deve ser maior ou
-  igual a `0`. Se omitido, todas as correspondências são substituídas.
+- `n` (integer, opcional): Número máximo de substituições. Deve ser maior ou igual a `0`. Se omitido, todas as correspondências são substituídas.
 - Retorna: `string`.
 
 ```lua
@@ -199,8 +188,7 @@ print(ptool.str.replace("a-b-c", "-", "/", 1)) -- a/b-c
 `ptool.str.repeat(s, n)` repete uma string `n` vezes.
 
 - `s` (string, obrigatório): A string de entrada.
-- `n` (integer, obrigatório): A contagem de repetição. Deve ser maior ou igual
-  a `0`.
+- `n` (integer, obrigatório): A contagem de repetição. Deve ser maior ou igual a `0`.
 - Retorna: `string`.
 
 ```lua
@@ -211,8 +199,7 @@ print(ptool.str.repeat("ab", 3)) -- ababab
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_prefix(s, prefix)` remove `prefix` do começo de `s` quando ele
-está presente.
+`ptool.str.cut_prefix(s, prefix)` remove `prefix` do começo de `s` quando ele está presente.
 
 - `s` (string, obrigatório): A string de entrada.
 - `prefix` (string, obrigatório): O prefixo a remover.
@@ -230,8 +217,7 @@ print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_suffix(s, suffix)` remove `suffix` do fim de `s` quando ele está
-presente.
+`ptool.str.cut_suffix(s, suffix)` remove `suffix` do fim de `s` quando ele está presente.
 
 - `s` (string, obrigatório): A string de entrada.
 - `suffix` (string, obrigatório): O sufixo a remover.
@@ -254,8 +240,7 @@ print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
 - `s` (string, obrigatório): A string de entrada.
 - `prefix` (string, obrigatório): O texto inserido antes de cada linha.
 - `options` (table, opcional): Opções de indentação. Campos suportados:
-  - `skip_first` (boolean, opcional): Se a primeira linha deve permanecer
-    inalterada. O padrão é `false`.
+  - `skip_first` (boolean, opcional): Se a primeira linha deve permanecer inalterada. O padrão é `false`.
 - Retorna: `string`.
 
 Comportamento:

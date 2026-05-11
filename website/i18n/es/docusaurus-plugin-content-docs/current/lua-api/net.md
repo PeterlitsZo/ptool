@@ -1,14 +1,12 @@
 # API de red
 
-Las utilidades para analizar URL, IP y host/puerto están disponibles bajo
-`ptool.net` y `p.net`.
+Las utilidades para analizar URL, IP y host/puerto están disponibles bajo `ptool.net` y `p.net`.
 
 ## ptool.net.parse_url
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_url(input)` analiza una cadena URL y devuelve una tabla de
-partes normalizadas.
+`ptool.net.parse_url(input)` analiza una cadena URL y devuelve una tabla de partes normalizadas.
 
 Argumentos:
 
@@ -23,8 +21,7 @@ Devuelve: una tabla con los siguientes campos:
 - `username` (string, opcional): El nombre de usuario decodificado, si existe.
 - `password` (string, opcional): La contraseña decodificada, si existe.
 - `host` (string, opcional): El hostname o literal IP, si existe.
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`, opcional): La clasificación del host
-  si hay host.
+- `host_kind` (`"domain"|"ipv4"|"ipv6"`, opcional): La clasificación del host si hay host.
 - `port` (integer, opcional): El puerto explícito, si existe.
 - `path` (string): La ruta de la URL.
 - `query` (string, opcional): La cadena de consulta sin el `?` inicial.
@@ -45,8 +42,7 @@ print(parts.fragment)    -- frag
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_ip(input)` analiza una dirección IPv4 o IPv6 y devuelve una
-tabla de partes normalizadas.
+`ptool.net.parse_ip(input)` analiza una dirección IPv4 o IPv6 y devuelve una tabla de partes normalizadas.
 
 Argumentos:
 
@@ -70,13 +66,11 @@ print(parts.version)    -- 6
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_host_port(input)` analiza una cadena `host:port` y devuelve
-una tabla de partes normalizadas.
+`ptool.net.parse_host_port(input)` analiza una cadena `host:port` y devuelve una tabla de partes normalizadas.
 
 Argumentos:
 
-- `input` (string, obligatorio): La cadena host y puerto. Las direcciones IPv6
-  deben usar notación con corchetes como `[2001:db8::1]:443`.
+- `input` (string, obligatorio): La cadena host y puerto. Las direcciones IPv6 deben usar notación con corchetes como `[2001:db8::1]:443`.
 
 Devuelve: una tabla con los siguientes campos:
 

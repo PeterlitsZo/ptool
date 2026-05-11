@@ -66,13 +66,11 @@ print(parts.version)    -- 6
 
 > `v0.2.0` - 引入。
 
-`ptool.net.parse_host_port(input)` 解析 `host:port` 字符串，并返回一个规范化的
-组成部分表。
+`ptool.net.parse_host_port(input)` 解析 `host:port` 字符串，并返回一个规范化的 组成部分表。
 
 参数：
 
-- `input`（string，必填）：主机和端口字符串。IPv6 地址必须使用方括号形式，
-  例如 `[2001:db8::1]:443`。
+- `input`（string，必填）：主机和端口字符串。IPv6 地址必须使用方括号形式， 例如 `[2001:db8::1]:443`。
 
 返回：包含以下字段的表：
 

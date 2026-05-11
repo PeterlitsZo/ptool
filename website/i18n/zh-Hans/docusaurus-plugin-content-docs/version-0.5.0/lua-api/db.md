@@ -6,8 +6,7 @@
 
 > `v0.1.0` - 引入。
 
-`ptool.db.connect(url_or_options)` 打开数据库连接，并返回一个 `Connection`
-对象。
+`ptool.db.connect(url_or_options)` 打开数据库连接，并返回一个 `Connection` 对象。
 
 支持的数据库：
 
@@ -33,10 +32,8 @@ local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 SQLite 说明：
 
 - 支持 `sqlite:test.db` 和 `sqlite://test.db`。
-- 相对 SQLite 路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)`
-  的影响。
-- 如果没有提供 `mode=` 查询参数，SQLite 连接默认使用 `mode=rwc`，从而允许自动
-  创建数据库文件。
+- 相对 SQLite 路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` 的影响。
+- 如果没有提供 `mode=` 查询参数，SQLite 连接默认使用 `mode=rwc`，从而允许自动 创建数据库文件。
 
 示例：
 
@@ -123,8 +120,7 @@ print(res.rows[2].name)
 
 规范 API 名称：`ptool.db.Connection:query_one`。
 
-`db:query_one(sql, params?)` 返回第一行记录（table），如果查询没有结果则返回
-`nil`。
+`db:query_one(sql, params?)` 返回第一行记录（table），如果查询没有结果则返回 `nil`。
 
 示例：
 

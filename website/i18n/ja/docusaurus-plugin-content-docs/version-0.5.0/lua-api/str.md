@@ -45,8 +45,7 @@ print(ptool.str.trim_end("  hello  ")) --   hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.is_blank(s)` は、文字列が空か空白だけで構成されているかを
-確認します。
+`ptool.str.is_blank(s)` は、文字列が空か空白だけで構成されているかを 確認します。
 
 - `s` (string, 必須): 入力文字列。
 - 戻り値: `boolean`。
@@ -102,23 +101,19 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split(s, sep[, options])` は、空でない区切り文字で文字列を
-分割します。
+`ptool.str.split(s, sep[, options])` は、空でない区切り文字で文字列を 分割します。
 
 - `s` (string, 必須): 入力文字列。
 - `sep` (string, 必須): 区切り文字。空文字列は使えません。
 - `options` (table, 任意): 分割オプション。サポートされるフィールド:
-  - `trim` (boolean, 任意): 返す前に各要素をトリムするかどうか。
-    デフォルトは `false`。
-  - `skip_empty` (boolean, 任意): トリム後に空要素を取り除くかどうか。
-    デフォルトは `false`。
+  - `trim` (boolean, 任意): 返す前に各要素をトリムするかどうか。 デフォルトは `false`。
+  - `skip_empty` (boolean, 任意): トリム後に空要素を取り除くかどうか。 デフォルトは `false`。
 - 戻り値: `string[]`。
 
 挙動:
 
 - 未知のオプション名や不正な値型はエラーになります。
-- `skip_empty = true` は `trim` の後に適用されるため、両方を有効にすると
-  空白だけの要素も除去できます。
+- `skip_empty = true` は `trim` の後に適用されるため、両方を有効にすると 空白だけの要素も除去できます。
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -137,18 +132,14 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 
 - `s` (string, 必須): 入力文字列。
 - `options` (table, 任意): 行分割オプション。サポートされるフィールド:
-  - `keep_ending` (boolean, 任意): 行末 (`\n`, `\r\n`, `\r`) を返す要素に
-    残すかどうか。デフォルトは `false`。
-  - `skip_empty` (boolean, 任意): 空行を取り除くかどうか。デフォルトは
-    `false`。
+  - `keep_ending` (boolean, 任意): 行末 (`\n`, `\r\n`, `\r`) を返す要素に 残すかどうか。デフォルトは `false`。
+  - `skip_empty` (boolean, 任意): 空行を取り除くかどうか。デフォルトは `false`。
 - 戻り値: `string[]`。
 
 挙動:
 
-- Unix (`\n`) と Windows (`\r\n`) の行末、および単独の `\r` を
-  サポートします。
-- `skip_empty = true` のとき、行末だけを含む行は空行として扱われて
-  取り除かれます。
+- Unix (`\n`) と Windows (`\r\n`) の行末、および単独の `\r` を サポートします。
+- `skip_empty = true` のとき、行末だけを含む行は空行として扱われて 取り除かれます。
 - 未知のオプション名や不正な値型はエラーになります。
 
 ```lua
@@ -182,8 +173,7 @@ print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
 - `s` (string, 必須): 入力文字列。
 - `from` (string, 必須): 置換対象の部分文字列。空文字列は使えません。
 - `to` (string, 必須): 置換文字列。
-- `n` (integer, 任意): 最大置換回数。`0` 以上でなければなりません。
-  省略時はすべての一致を置換します。
+- `n` (integer, 任意): 最大置換回数。`0` 以上でなければなりません。 省略時はすべての一致を置換します。
 - 戻り値: `string`。
 
 ```lua
@@ -209,8 +199,7 @@ print(ptool.str.repeat("ab", 3)) -- ababab
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_prefix(s, prefix)` は `prefix` が存在する場合に、`s` の
-先頭からそれを取り除きます。
+`ptool.str.cut_prefix(s, prefix)` は `prefix` が存在する場合に、`s` の 先頭からそれを取り除きます。
 
 - `s` (string, 必須): 入力文字列。
 - `prefix` (string, 必須): 取り除くプレフィックス。
@@ -228,8 +217,7 @@ print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_suffix(s, suffix)` は `suffix` が存在する場合に、`s` の末尾
-からそれを取り除きます。
+`ptool.str.cut_suffix(s, suffix)` は `suffix` が存在する場合に、`s` の末尾 からそれを取り除きます。
 
 - `s` (string, 必須): 入力文字列。
 - `suffix` (string, 必須): 取り除くサフィックス。
@@ -247,15 +235,12 @@ print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.indent(s, prefix[, options])` は各行の先頭に `prefix` を
-追加します。
+`ptool.str.indent(s, prefix[, options])` は各行の先頭に `prefix` を 追加します。
 
 - `s` (string, 必須): 入力文字列。
 - `prefix` (string, 必須): 各行の前に挿入するテキスト。
-- `options` (table, 任意): インデントオプション。サポートされる
-  フィールド:
-  - `skip_first` (boolean, 任意): 1 行目を変更しないかどうか。デフォルトは
-    `false`。
+- `options` (table, 任意): インデントオプション。サポートされる フィールド:
+  - `skip_first` (boolean, 任意): 1 行目を変更しないかどうか。デフォルトは `false`。
 - 戻り値: `string`。
 
 挙動:

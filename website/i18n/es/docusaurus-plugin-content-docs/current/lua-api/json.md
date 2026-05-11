@@ -1,14 +1,12 @@
 # API JSON
 
-Las utilidades para analizar y serializar JSON están disponibles bajo
-`ptool.json` y `p.json`.
+Las utilidades para analizar y serializar JSON están disponibles bajo `ptool.json` y `p.json`.
 
 ## ptool.json.parse
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.parse(input)` analiza una cadena JSON y la convierte en un valor
-Lua.
+`ptool.json.parse(input)` analiza una cadena JSON y la convierte en un valor Lua.
 
 - `input` (string, obligatorio): El texto JSON.
 - Devuelve: El valor Lua analizado. La raíz puede ser cualquier tipo JSON.
@@ -26,8 +24,7 @@ Asignación de tipos:
 Comportamiento ante errores:
 
 - Se produce un error si `input` no es una cadena.
-- Un error de sintaxis JSON produce un error cuyo mensaje incluye el detalle
-  del analizador de `serde_json`.
+- Un error de sintaxis JSON produce un error cuyo mensaje incluye el detalle del analizador de `serde_json`.
 
 Ejemplo:
 
@@ -43,22 +40,18 @@ print(data.stars)
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.stringify(value[, options])` convierte un valor Lua en una cadena
-JSON.
+`ptool.json.stringify(value[, options])` convierte un valor Lua en una cadena JSON.
 
-- `value` (valor Lua compatible con JSON, obligatorio): El valor que se va a
-  codificar.
+- `value` (valor Lua compatible con JSON, obligatorio): El valor que se va a codificar.
 - `options` (table, opcional): Opciones de serialización.
-- `options.pretty` (boolean, opcional): Cuando es `true`, genera JSON con
-  formato legible. Por defecto es `false`.
+- `options.pretty` (boolean, opcional): Cuando es `true`, genera JSON con formato legible. Por defecto es `false`.
 - Devuelve: La cadena JSON codificada.
 
 Comportamiento:
 
 - La salida por defecto es JSON compacto, sin espacios adicionales.
 - La salida pretty usa JSON multilínea con indentación.
-- Los valores deben ser compatibles con JSON. Funciones, threads, userdata y
-  otros valores Lua no serializables producen un error.
+- Los valores deben ser compatibles con JSON. Funciones, threads, userdata y otros valores Lua no serializables producen un error.
 
 Ejemplo:
 
@@ -74,7 +67,5 @@ print(text)
 
 Notas:
 
-- Los valores `nil` dentro de tablas Lua siguen el comportamiento de
-  conversión serde de `mlua` y no se conservan como campos de objetos JSON.
-- La detección de array/objeto para tablas Lua sigue las reglas de conversión
-  serde de `mlua`.
+- Los valores `nil` dentro de tablas Lua siguen el comportamiento de conversión serde de `mlua` y no se conservan como campos de objetos JSON.
+- La detección de array/objeto para tablas Lua sigue las reglas de conversión serde de `mlua`.

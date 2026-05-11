@@ -1,7 +1,6 @@
 # YAML API
 
-YAML の解析とシリアライズのヘルパーは `ptool.yaml` と `p.yaml` に
-あります。
+YAML の解析とシリアライズのヘルパーは `ptool.yaml` と `p.yaml` に あります。
 
 ## ptool.yaml.parse
 
@@ -26,8 +25,7 @@ YAML の解析とシリアライズのヘルパーは `ptool.yaml` と `p.yaml` 
 
 - `input` が文字列でない場合はエラーになります。
 - YAML 構文エラーでは、パーサー詳細を含むメッセージでエラーになります。
-- 非文字列キーを持つ mapping や明示的な YAML tag など、`ptool` の Lua 値へ
-  変換できない YAML 値でもエラーになります。
+- 非文字列キーを持つ mapping や明示的な YAML tag など、`ptool` の Lua 値へ 変換できない YAML 値でもエラーになります。
 
 例:
 
@@ -52,8 +50,7 @@ print(data.stars)
 `ptool.yaml.get(input, path)` は YAML テキストから指定パスの値を読み出します。
 
 - `input` (string, 必須): YAML テキスト。
-- `path` ((string|integer)[], 必須): `{"spec", "template", "metadata", "name"}`
-  や `{"items", 1, "name"}` のような空でないパス配列。
+- `path` ((string|integer)[], 必須): `{"spec", "template", "metadata", "name"}` や `{"items", 1, "name"}` のような空でないパス配列。
 - 戻り値: 対応する Lua 値。パスが存在しない場合は `nil`。
 
 挙動:
@@ -85,8 +82,7 @@ print(first_name)
 
 挙動:
 
-- 値は `ptool.json.stringify` と同じ Lua 値マッピングで YAML に変換可能である
-  必要があります。
+- 値は `ptool.json.stringify` と同じ Lua 値マッピングで YAML に変換可能である 必要があります。
 - Lua sequence table は YAML sequence としてエンコードされます。
 - 文字列キーを持つ Lua table は YAML mapping としてエンコードされます。
 
@@ -107,6 +103,5 @@ print(text)
 - 現在は単一ドキュメントの YAML のみ対応しています。
 - YAML mapping のキーは文字列である必要があります。
 - 明示的な YAML tag は対応していません。
-- `ptool.yaml.get` の `path` 引数は、文字列および正の整数から成る空でない配列で
-  ある必要があります。
+- `ptool.yaml.get` の `path` 引数は、文字列および正の整数から成る空でない配列で ある必要があります。
 - 整数のパス要素は Lua の配列添字に合わせて 1-based です。

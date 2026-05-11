@@ -1,19 +1,16 @@
 # API de regex
 
-Las utilidades de expresiones regulares están disponibles bajo `ptool.re` y
-`p.re`.
+Las utilidades de expresiones regulares están disponibles bajo `ptool.re` y `p.re`.
 
 ## ptool.re.compile
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.compile(pattern[, opts])` compila una expresión regular y devuelve un
-objeto `Regex`.
+`ptool.re.compile(pattern[, opts])` compila una expresión regular y devuelve un objeto `Regex`.
 
 - `pattern` (string, obligatorio): El patrón regex.
 - `opts` (table, opcional): Opciones de compilación. Actualmente se admite:
-  - `case_insensitive` (boolean, opcional): Si la coincidencia distingue entre
-    mayúsculas y minúsculas. Por defecto es `false`.
+  - `case_insensitive` (boolean, opcional): Si la coincidencia distingue entre mayúsculas y minúsculas. Por defecto es `false`.
 
 Ejemplo:
 
@@ -26,8 +23,7 @@ print(re:is_match("Alice")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.escape(text)` escapa texto plano para convertirlo en una cadena
-literal de regex.
+`ptool.re.escape(text)` escapa texto plano para convertirlo en una cadena literal de regex.
 
 - `text` (string, obligatorio): El texto que se va a escapar.
 - Devuelve: La cadena escapada.
@@ -44,8 +40,7 @@ print(re:is_match("a+b?")) -- true
 
 > `v0.1.0` - Introduced.
 
-`Regex` representa una expresión regular compilada devuelta por
-`ptool.re.compile(...)`.
+`Regex` representa una expresión regular compilada devuelta por `ptool.re.compile(...)`.
 
 Está implementada como userdata de Lua.
 
@@ -90,31 +85,26 @@ Estructuras devueltas:
   - `text` (string): El texto coincidente.
 - `Captures`:
   - `full` (string): El texto completo coincidente.
-  - `groups` (table): Un arreglo de grupos capturados en orden de captura.
-    Los grupos no coincidentes son `nil`.
-  - `named` (table): Un mapa de grupos capturados con nombre, indexado por
-    nombre de grupo.
+  - `groups` (table): Un arreglo de grupos capturados en orden de captura. Los grupos no coincidentes son `nil`.
+  - `named` (table): Un mapa de grupos capturados con nombre, indexado por nombre de grupo.
 
 ### find_all
 
 Canonical API name: `ptool.re.Regex:find_all`.
 
-`re:find_all(input)` devuelve todas las coincidencias en `input` como
-`Match[]`.
+`re:find_all(input)` devuelve todas las coincidencias en `input` como `Match[]`.
 
 ### captures
 
 Canonical API name: `ptool.re.Regex:captures`.
 
-`re:captures(input)` devuelve el primer conjunto de capturas en `input`, o
-`nil`.
+`re:captures(input)` devuelve el primer conjunto de capturas en `input`, o `nil`.
 
 ### captures_all
 
 Canonical API name: `ptool.re.Regex:captures_all`.
 
-`re:captures_all(input)` devuelve todos los conjuntos de capturas en `input`
-como `Captures[]`.
+`re:captures_all(input)` devuelve todos los conjuntos de capturas en `input` como `Captures[]`.
 
 ### replace
 
@@ -126,8 +116,7 @@ Canonical API name: `ptool.re.Regex:replace`.
 
 Canonical API name: `ptool.re.Regex:replace_all`.
 
-`re:replace_all(input, replacement)` reemplaza todas las coincidencias en
-`input`.
+`re:replace_all(input, replacement)` reemplaza todas las coincidencias en `input`.
 
 ### split
 

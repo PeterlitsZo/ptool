@@ -45,8 +45,7 @@ print(ptool.str.trim_end("  hello  ")) --   hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.is_blank(s)` comprueba si una cadena está vacía o contiene solo
-espacios en blanco.
+`ptool.str.is_blank(s)` comprueba si una cadena está vacía o contiene solo espacios en blanco.
 
 - `s` (string, obligatorio): La cadena de entrada.
 - Devuelve: `boolean`.
@@ -102,25 +101,19 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split(s, sep[, options])` divide una cadena usando un separador no
-vacío.
+`ptool.str.split(s, sep[, options])` divide una cadena usando un separador no vacío.
 
 - `s` (string, obligatorio): La cadena de entrada.
 - `sep` (string, obligatorio): El separador. No se permiten cadenas vacías.
 - `options` (table, opcional): Opciones de división. Campos admitidos:
-  - `trim` (boolean, opcional): Si se recorta cada fragmento antes de
-    devolverlo. Por defecto es `false`.
-  - `skip_empty` (boolean, opcional): Si se eliminan los fragmentos vacíos
-    después del posible recorte. Por defecto es `false`.
+  - `trim` (boolean, opcional): Si se recorta cada fragmento antes de devolverlo. Por defecto es `false`.
+  - `skip_empty` (boolean, opcional): Si se eliminan los fragmentos vacíos después del posible recorte. Por defecto es `false`.
 - Devuelve: `string[]`.
 
 Comportamiento:
 
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un
-  error.
-- `skip_empty = true` se aplica después de `trim`, por lo que los fragmentos
-  compuestos solo por espacios pueden eliminarse cuando ambas opciones están
-  activadas.
+- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
+- `skip_empty = true` se aplica después de `trim`, por lo que los fragmentos compuestos solo por espacios pueden eliminarse cuando ambas opciones están activadas.
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -138,22 +131,16 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 `ptool.str.split_lines(s[, options])` divide una cadena en líneas.
 
 - `s` (string, obligatorio): La cadena de entrada.
-- `options` (table, opcional): Opciones de división por líneas. Campos
-  admitidos:
-  - `keep_ending` (boolean, opcional): Si se conservan los finales de línea
-    (`\n`, `\r\n` o `\r`) en los elementos devueltos. Por defecto es `false`.
-  - `skip_empty` (boolean, opcional): Si se eliminan las líneas vacías. Por
-    defecto es `false`.
+- `options` (table, opcional): Opciones de división por líneas. Campos admitidos:
+  - `keep_ending` (boolean, opcional): Si se conservan los finales de línea (`\n`, `\r\n` o `\r`) en los elementos devueltos. Por defecto es `false`.
+  - `skip_empty` (boolean, opcional): Si se eliminan las líneas vacías. Por defecto es `false`.
 - Devuelve: `string[]`.
 
 Comportamiento:
 
-- Admite finales de línea Unix (`\n`) y Windows (`\r\n`), y también `\r`
-  aislado.
-- Cuando `skip_empty = true`, una línea que solo contiene un final de línea se
-  considera vacía y se elimina.
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un
-  error.
+- Admite finales de línea Unix (`\n`) y Windows (`\r\n`), y también `\r` aislado.
+- Cuando `skip_empty = true`, una línea que solo contiene un final de línea se considera vacía y se elimina.
+- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
 
 ```lua
 local lines = ptool.str.split_lines("a\n\n b\r\n", {
@@ -184,11 +171,9 @@ print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
 `ptool.str.replace(s, from, to[, n])` reemplaza ocurrencias de `from` por `to`.
 
 - `s` (string, obligatorio): La cadena de entrada.
-- `from` (string, obligatorio): La subcadena que se va a reemplazar. No se
-  permiten cadenas vacías.
+- `from` (string, obligatorio): La subcadena que se va a reemplazar. No se permiten cadenas vacías.
 - `to` (string, obligatorio): La cadena de reemplazo.
-- `n` (integer, opcional): Número máximo de reemplazos. Debe ser mayor o igual
-  que `0`. Si se omite, se reemplazan todas las coincidencias.
+- `n` (integer, opcional): Número máximo de reemplazos. Debe ser mayor o igual que `0`. Si se omite, se reemplazan todas las coincidencias.
 - Devuelve: `string`.
 
 ```lua
@@ -203,8 +188,7 @@ print(ptool.str.replace("a-b-c", "-", "/", 1)) -- a/b-c
 `ptool.str.repeat(s, n)` repite una cadena `n` veces.
 
 - `s` (string, obligatorio): La cadena de entrada.
-- `n` (integer, obligatorio): Número de repeticiones. Debe ser mayor o igual
-  que `0`.
+- `n` (integer, obligatorio): Número de repeticiones. Debe ser mayor o igual que `0`.
 - Devuelve: `string`.
 
 ```lua
@@ -215,8 +199,7 @@ print(ptool.str.repeat("ab", 3)) -- ababab
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_prefix(s, prefix)` elimina `prefix` del inicio de `s` cuando
-está presente.
+`ptool.str.cut_prefix(s, prefix)` elimina `prefix` del inicio de `s` cuando está presente.
 
 - `s` (string, obligatorio): La cadena de entrada.
 - `prefix` (string, obligatorio): El prefijo que se va a eliminar.
@@ -234,8 +217,7 @@ print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_suffix(s, suffix)` elimina `suffix` del final de `s` cuando
-está presente.
+`ptool.str.cut_suffix(s, suffix)` elimina `suffix` del final de `s` cuando está presente.
 
 - `s` (string, obligatorio): La cadena de entrada.
 - `suffix` (string, obligatorio): El sufijo que se va a eliminar.
@@ -258,16 +240,14 @@ print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
 - `s` (string, obligatorio): La cadena de entrada.
 - `prefix` (string, obligatorio): El texto insertado antes de cada línea.
 - `options` (table, opcional): Opciones de indentación. Campos admitidos:
-  - `skip_first` (boolean, opcional): Si la primera línea se deja sin cambios.
-    Por defecto es `false`.
+  - `skip_first` (boolean, opcional): Si la primera línea se deja sin cambios. Por defecto es `false`.
 - Devuelve: `string`.
 
 Comportamiento:
 
 - Se conservan los finales de línea existentes.
 - Una entrada vacía se devuelve sin cambios.
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un
-  error.
+- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
 
 ```lua
 local text = "first\nsecond\n"

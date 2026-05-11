@@ -1,14 +1,12 @@
 # API de banco de dados
 
-As utilidades de conexão e consulta a banco de dados estão disponíveis em
-`ptool.db` e `p.db`.
+As utilidades de conexão e consulta a banco de dados estão disponíveis em `ptool.db` e `p.db`.
 
 ## ptool.db.connect
 
 > `v0.1.0` - Introduced.
 
-`ptool.db.connect(url_or_options)` abre uma conexão de banco de dados e retorna
-um objeto `Connection`.
+`ptool.db.connect(url_or_options)` abre uma conexão de banco de dados e retorna um objeto `Connection`.
 
 Bancos de dados suportados:
 
@@ -34,11 +32,8 @@ local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 Notas sobre SQLite:
 
 - `sqlite:test.db` e `sqlite://test.db` são suportadas.
-- Caminhos SQLite relativos são resolvidos a partir do diretório de runtime
-  atual do `ptool`, então seguem `ptool.cd(...)`.
-- Se nenhum parâmetro de query `mode=` for fornecido, conexões SQLite usam
-  `mode=rwc` por padrão, o que permite criar o arquivo do banco
-  automaticamente.
+- Caminhos SQLite relativos são resolvidos a partir do diretório de runtime atual do `ptool`, então seguem `ptool.cd(...)`.
+- Se nenhum parâmetro de query `mode=` for fornecido, conexões SQLite usam `mode=rwc` por padrão, o que permite criar o arquivo do banco automaticamente.
 
 Exemplo:
 
@@ -53,8 +48,7 @@ local db = ptool.db.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` representa uma conexão de banco de dados aberta retornada por
-`ptool.db.connect()`.
+`Connection` representa uma conexão de banco de dados aberta retornada por `ptool.db.connect()`.
 
 Ela é implementada como userdata Lua.
 
@@ -70,10 +64,8 @@ Métodos:
 Binding de parâmetros:
 
 - `params` é opcional.
-- Quando `params` é uma tabela array, ela é tratada como parâmetros
-  posicionais e placeholders SQL devem usar `?`.
-- Quando `params` é uma tabela chave-valor, ela é tratada como parâmetros
-  nomeados e placeholders SQL devem usar `:name`.
+- Quando `params` é uma tabela array, ela é tratada como parâmetros posicionais e placeholders SQL devem usar `?`.
+- Quando `params` é uma tabela chave-valor, ela é tratada como parâmetros nomeados e placeholders SQL devem usar `:name`.
 - Parâmetros posicionais e nomeados não podem ser misturados na mesma chamada.
 - Os tipos de valor de parâmetro suportados são:
   - `boolean`
@@ -92,8 +84,7 @@ Regras de valor de resultado:
   - `nil` (para SQL `NULL`)
 - Colunas de texto são retornadas como strings Lua.
 - Colunas binárias/blob também são retornadas como strings Lua.
-- Se um resultado de consulta contiver nomes de coluna duplicados, um erro é
-  gerado. Use aliases SQL como `AS` para desambiguá-los.
+- Se um resultado de consulta contiver nomes de coluna duplicados, um erro é gerado. Use aliases SQL como `AS` para desambiguá-los.
 
 ### query
 
@@ -129,8 +120,7 @@ print(res.rows[2].name)
 
 Canonical API name: `ptool.db.Connection:query_one`.
 
-`db:query_one(sql, params?)` retorna a primeira linha como tabela, ou `nil` se
-a consulta não retornar linhas.
+`db:query_one(sql, params?)` retorna a primeira linha como tabela, ou `nil` se a consulta não retornar linhas.
 
 Exemplo:
 
@@ -147,8 +137,7 @@ end
 
 Canonical API name: `ptool.db.Connection:scalar`.
 
-`db:scalar(sql, params?)` retorna a primeira coluna da primeira linha, ou
-`nil` se a consulta não retornar linhas.
+`db:scalar(sql, params?)` retorna a primeira coluna da primeira linha, ou `nil` se a consulta não retornar linhas.
 
 Exemplo:
 
@@ -180,16 +169,14 @@ print(res.rows_affected)
 
 Canonical API name: `ptool.db.Connection:transaction`.
 
-`db:transaction(fn)` executa `fn(tx)` dentro de uma transação de banco de
-dados.
+`db:transaction(fn)` executa `fn(tx)` dentro de uma transação de banco de dados.
 
 Comportamento:
 
 - Se `fn(tx)` retornar normalmente, a transação é confirmada.
 - Se `fn(tx)` gerar um erro, a transação é revertida e o erro é relançado.
 - Transações aninhadas não são suportadas.
-- Enquanto o callback estiver ativo, o objeto de conexão externo não deve ser
-  usado; use o objeto `tx` fornecido em vez disso.
+- Enquanto o callback estiver ativo, o objeto de conexão externo não deve ser usado; use o objeto `tx` fornecido em vez disso.
 
 O objeto `tx` suporta os mesmos métodos de consulta que `Connection`:
 

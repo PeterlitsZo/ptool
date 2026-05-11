@@ -1,7 +1,6 @@
 # API de plataforma
 
-Las utilidades de detección de plataforma están disponibles bajo
-`ptool.platform` y `p.platform`.
+Las utilidades de detección de plataforma están disponibles bajo `ptool.platform` y `p.platform`.
 
 ## ptool.platform.os
 
@@ -44,8 +43,7 @@ Comportamiento:
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.target()` devuelve una cadena de destino de plataforma
-normalizada para la máquina actual.
+`ptool.platform.target()` devuelve una cadena de destino de plataforma normalizada para la máquina actual.
 
 - Devuelve: `string`.
 
@@ -57,8 +55,5 @@ print(target) -- linux-riscv64
 Comportamiento:
 
 - El resultado siempre es `ptool.platform.os() .. "-" .. ptool.platform.arch()`.
-- Esto está pensado para bifurcaciones basadas en plataforma, como seleccionar
-  artefactos de descarga.
-- Los valores comunes incluyen `linux-amd64`, `linux-arm64`, `linux-x86`,
-  `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64` y
-  `windows-amd64`.
+- Esto está pensado para bifurcaciones basadas en plataforma, como seleccionar artefactos de descarga.
+- Los valores comunes incluyen `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64` y `windows-amd64`.

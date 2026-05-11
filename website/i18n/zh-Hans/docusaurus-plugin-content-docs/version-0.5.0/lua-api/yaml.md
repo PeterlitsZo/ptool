@@ -25,8 +25,7 @@ YAML 解析与序列化辅助能力位于 `ptool.yaml` 和 `p.yaml` 下。
 
 - 如果 `input` 不是字符串，会抛出错误。
 - 如果 YAML 语法有误，会抛出错误，错误信息中包含解析器细节。
-- 如果 YAML 值无法表示为 `ptool` 支持的 Lua 值，也会抛出错误，例如
-  非字符串 key 的 mapping，或带显式 YAML tag 的值。
+- 如果 YAML 值无法表示为 `ptool` 支持的 Lua 值，也会抛出错误，例如 非字符串 key 的 mapping，或带显式 YAML tag 的值。
 
 示例：
 
@@ -51,8 +50,7 @@ print(data.stars)
 `ptool.yaml.get(input, path)` 从 YAML 文本中读取指定路径上的值。
 
 - `input`（string，必填）：YAML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如
-  `{"spec", "template", "metadata", "name"}` 或 `{"items", 1, "name"}`。
+- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"spec", "template", "metadata", "name"}` 或 `{"items", 1, "name"}`。
 - 返回：对应的 Lua 值；如果路径不存在，则返回 `nil`。
 
 行为说明：

@@ -1,0 +1,278 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:1
+msgid "HTTP API"
+msgstr "HTTP API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:3
+msgid "HTTP client helpers are available under `ptool.http` and `p.http`."
+msgstr "HTTP クライアントヘルパーは `ptool.http` と `p.http` にあります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:5
+msgid "ptool.http.request"
+msgstr "ptool.http.request"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:9
+msgid "`ptool.http.request(options)` sends an HTTP request and returns a `Response` object."
+msgstr "`ptool.http.request(options)` は HTTP リクエストを送り、`Response` オブジェクトを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:12
+msgid "`options` fields:"
+msgstr "`options` フィールド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:14
+msgid "`url` (string, required): The request URL."
+msgstr "`url` (string, 必須): リクエスト URL。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:15
+msgid "`method` (string, optional): The HTTP method. Defaults to `\"GET\"`."
+msgstr "`method` (string, 任意): HTTP メソッド。デフォルトは `\"GET\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:16
+msgid "`headers` (table, optional): Request headers, where both keys and values are strings."
+msgstr "`headers` (table, 任意): リクエストヘッダー。キーと値はいずれも文字列です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:18
+msgid "`query` (table, optional): Query parameters appended to the request URL. Keys must be strings. Values may be strings, numbers, or booleans."
+msgstr "`query` (table, 任意): リクエスト URL に追加するクエリパラメータ。キーは 文字列でなければならず、値には文字列、数値、真偽値を指定できます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:20
+msgid "`body` (string, optional): The request body."
+msgstr "`body` (string, 任意): リクエスト本文。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:21
+msgid "`json` (Lua value, optional): A Lua value encoded as JSON and used as the request body. When `content-type` is not already set, it defaults to `application/json`."
+msgstr "`json` (Lua 値, 任意): JSON にエンコードされてリクエスト本文として使われ ます。`content-type` を明示していない場合は `application/json` が設定されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:24
+msgid "`form` (table, optional): Form fields encoded as `application/x-www-form-urlencoded` and used as the request body. Keys must be strings. Values may be strings, numbers, or booleans."
+msgstr "`form` (table, 任意): `application/x-www-form-urlencoded` として エンコードされ、リクエスト本文として使われます。キーは文字列でなければ ならず、値には文字列、数値、真偽値を指定できます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:27
+msgid "`timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `30000`."
+msgstr "`timeout_ms` (integer, 任意): ミリ秒単位のタイムアウト。デフォルトは `30000`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:29
+msgid "`connect_timeout_ms` (integer, optional): Connection timeout in milliseconds."
+msgstr "`connect_timeout_ms` (integer, 任意): 接続タイムアウト（ミリ秒）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:30
+msgid "`follow_redirects` (boolean, optional): Whether redirects should be followed."
+msgstr "`follow_redirects` (boolean, 任意): リダイレクトを追跡するかどうか。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:31
+msgid "`max_redirects` (integer, optional): Maximum number of redirects to follow."
+msgstr "`max_redirects` (integer, 任意): 追跡する最大リダイレクト数。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:32
+msgid "`user_agent` (string, optional): Sets the `user-agent` request header."
+msgstr "`user_agent` (string, 任意): `user-agent` リクエストヘッダーを設定します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:33
+msgid "`basic_auth` (table, optional): HTTP basic auth credentials with string fields `username` and `password`."
+msgstr "`basic_auth` (table, 任意): 文字列フィールド `username` と `password` を 持つ HTTP Basic 認証情報です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:35
+msgid "`bearer_token` (string, optional): Bearer token used for the `authorization` header."
+msgstr "`bearer_token` (string, 任意): `authorization` ヘッダーに使う Bearer トークンです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:37
+msgid "`fail_on_http_error` (boolean, optional): When `true`, raise an error for 4xx and 5xx HTTP responses. Defaults to `false`."
+msgstr "`fail_on_http_error` (boolean, 任意): `true` の場合、4xx と 5xx の HTTP レスポンスでエラーを送出します。デフォルトは `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:40
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:40"
+msgid "Notes:"
+msgstr "注意:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:42
+msgid "`body`, `json`, and `form` are mutually exclusive."
+msgstr "`body`、`json`、`form` は相互排他的です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:43
+msgid "`basic_auth` and `bearer_token` are mutually exclusive."
+msgstr "`basic_auth` と `bearer_token` は相互排他的です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:45
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:69
+msgid "Response"
+msgstr "Response"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:71
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:71"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:73
+msgid "`Response` represents an HTTP response returned by `ptool.http.request(...)`."
+msgstr "`Response` は `ptool.http.request(...)` が返す HTTP レスポンスを表します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:75
+msgid "Fields:"
+msgstr "フィールド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:77
+msgid "`status` (integer): The HTTP status code."
+msgstr "`status` (integer): HTTP ステータスコード。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:78
+msgid "`ok` (boolean): Whether the status code is in the 2xx range."
+msgstr "`ok` (boolean): ステータスコードが 2xx 範囲かどうか。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:79
+msgid "`url` (string): The final URL after redirects."
+msgstr "`url` (string): リダイレクト後の最終 URL。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:80
+msgid "`headers` (table): A flattened convenience view of response headers (`table<string, string>`). Repeated headers are merged with `, `."
+msgstr "`headers` (table): レスポンスヘッダーの簡易ビュー (`table<string, string>`)。重複ヘッダーは `, ` で結合されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:83
+msgid "Methods:"
+msgstr "メソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:85
+msgid "`resp:text()`: Reads and returns the response body as text."
+msgstr "`resp:text()`: レスポンス本文をテキストとして読み取って返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:86
+msgid "`resp:json()`: Reads the response body, parses it as JSON, and returns a Lua value."
+msgstr "`resp:json()`: レスポンス本文を読み取り、JSON として解析し、Lua 値を 返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:88
+msgid "`resp:bytes()`: Reads and returns the raw bytes (as a Lua string)."
+msgstr "`resp:bytes()`: 生バイト列を Lua 文字列として読み取って返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:89
+msgid "`resp:header(name)`: Returns the first matching response header value, or `nil`."
+msgstr "`resp:header(name)`: 最初に一致したレスポンスヘッダー値を返します。 見つからない場合は `nil` を返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:91
+msgid "`resp:header_values(name)`: Returns all matching response header values as an array."
+msgstr "`resp:header_values(name)`: 一致したレスポンスヘッダー値をすべて配列で 返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:93
+msgid "`resp:raise_for_status()`: Raises an error for 4xx and 5xx HTTP responses."
+msgstr "`resp:raise_for_status()`: 4xx または 5xx の HTTP レスポンスでエラーを 送出します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:95
+msgid "text"
+msgstr "text"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:97
+msgid "Canonical API name: `ptool.http.Response:text`."
+msgstr "Canonical API name: `ptool.http.Response:text`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:99
+msgid "`resp:text()` reads and returns the response body as text."
+msgstr "`resp:text()` はレスポンス本文をテキストとして読み取り、返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:101
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:101"
+msgid "Returns: `string`."
+msgstr "戻り値: `string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:103
+msgid "json"
+msgstr "json"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:105
+msgid "Canonical API name: `ptool.http.Response:json`."
+msgstr "Canonical API name: `ptool.http.Response:json`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:107
+msgid "`resp:json()` reads the response body, parses it as JSON, and returns a Lua value."
+msgstr "`resp:json()` はレスポンス本文を読み取り、JSON として解析し、Lua 値を 返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:110
+msgid "bytes"
+msgstr "bytes"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:112
+msgid "Canonical API name: `ptool.http.Response:bytes`."
+msgstr "Canonical API name: `ptool.http.Response:bytes`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:114
+msgid "`resp:bytes()` reads and returns the response body as raw bytes."
+msgstr "`resp:bytes()` はレスポンス本文を生バイト列として読み取り、返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:116
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:116"
+msgid "Returns: `string`."
+msgstr "戻り値: `string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:118
+msgid "header"
+msgstr "header"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:120
+msgid "Canonical API name: `ptool.http.Response:header`."
+msgstr "Canonical API name: `ptool.http.Response:header`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:122
+msgid "`resp:header(name)` returns the first response header value matching `name`."
+msgstr "`resp:header(name)` は `name` に一致する最初のレスポンスヘッダー値を返し ます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:124
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:124"
+msgid "`name` (string, required): The header name to look up."
+msgstr "`name` (string, 必須): 取得したいヘッダー名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:125
+msgid "Returns: `string | nil`."
+msgstr "戻り値: `string | nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:127
+msgid "header_values"
+msgstr "header_values"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:129
+msgid "Canonical API name: `ptool.http.Response:header_values`."
+msgstr "Canonical API name: `ptool.http.Response:header_values`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:131
+msgid "`resp:header_values(name)` returns all response header values matching `name`."
+msgstr "`resp:header_values(name)` は `name` に一致するレスポンスヘッダー値をすべて 返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:133
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:133"
+msgid "`name` (string, required): The header name to look up."
+msgstr "`name` (string, 必須): 取得したいヘッダー名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:134
+msgid "Returns: `string[]`."
+msgstr "戻り値: `string[]`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:136
+msgid "raise_for_status"
+msgstr "raise_for_status"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:138
+msgid "Canonical API name: `ptool.http.Response:raise_for_status`."
+msgstr "Canonical API name: `ptool.http.Response:raise_for_status`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:140
+msgid "`resp:raise_for_status()` raises an error when the response status code is in the 4xx or 5xx range."
+msgstr "`resp:raise_for_status()` はレスポンスステータスコードが 4xx または 5xx の 場合にエラーを送出します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:143
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:143"
+msgid "Notes:"
+msgstr "注意:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:145
+msgid "Non-2xx HTTP statuses do not raise errors by default. Callers can check `resp.ok`, set `fail_on_http_error = true`, or call `resp:raise_for_status()`."
+msgstr "デフォルトでは 2xx 以外の HTTP ステータスはエラーになりません。 呼び出し側は `resp.ok` を確認するか、 `fail_on_http_error = true` を設定するか、 `resp:raise_for_status()` を呼び出してください。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:147
+msgid "The response body is cached after the first read. Calling `text`, `json`, and `bytes` multiple times is allowed."
+msgstr "レスポンス本文は最初の読み取り後にキャッシュされるため、`text`、`json`、 `bytes` は複数回呼び出せます。"

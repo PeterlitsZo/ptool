@@ -1,0 +1,182 @@
+msgid ""
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:1
+msgid "Network API"
+msgstr "API de rede"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:3
+msgid "URL, IP, and host/port parsing helpers are available under `ptool.net` and `p.net`."
+msgstr "As utilidades de parse de URL, IP e host/porta estão disponíveis em `ptool.net` e `p.net`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:5
+msgid "ptool.net.parse_url"
+msgstr "ptool.net.parse_url"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:7"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:9
+msgid "`ptool.net.parse_url(input)` parses a URL string and returns a normalized parts table."
+msgstr "`ptool.net.parse_url(input)` faz o parse de uma string de URL e retorna uma tabela de partes normalizadas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:12"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:14
+msgid "`input` (string, required): The URL to parse."
+msgstr "`input` (string, obrigatório): A URL a ser analisada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:16
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:16"
+msgid "Returns: A table with the following fields:"
+msgstr "Retorna: uma tabela com os seguintes campos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:18
+msgid "`kind` (string): Always `\"url\"`."
+msgstr "`kind` (string): Sempre `\"url\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:19
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:19"
+msgid "`input` (string): The original input string."
+msgstr "`input` (string): A string de entrada original."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:20
+msgid "`normalized` (string): The normalized URL string."
+msgstr "`normalized` (string): A string de URL normalizada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:21
+msgid "`scheme` (string): The URL scheme."
+msgstr "`scheme` (string): O esquema da URL."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:22
+msgid "`username` (string, optional): The decoded username, if present."
+msgstr "`username` (string, opcional): O nome de usuário decodificado, se presente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:23
+msgid "`password` (string, optional): The decoded password, if present."
+msgstr "`password` (string, opcional): A senha decodificada, se presente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:24
+msgid "`host` (string, optional): The hostname or IP literal, if present."
+msgstr "`host` (string, opcional): O hostname ou literal de IP, se presente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:25
+msgid "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, optional): The host classification, if a host is present."
+msgstr "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, opcional): A classificação do host, se houver host."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:27
+msgid "`port` (integer, optional): The explicit port, if present."
+msgstr "`port` (integer, opcional): A porta explícita, se presente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:28
+msgid "`path` (string): The URL path."
+msgstr "`path` (string): O caminho da URL."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:29
+msgid "`query` (string, optional): The query string without the leading `?`."
+msgstr "`query` (string, opcional): A query string sem o `?` inicial."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:30
+msgid "`fragment` (string, optional): The fragment without the leading `#`."
+msgstr "`fragment` (string, opcional): O fragmento sem o `#` inicial."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:43
+msgid "ptool.net.parse_ip"
+msgstr "ptool.net.parse_ip"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:45
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:45"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:47
+msgid "`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a normalized parts table."
+msgstr "`ptool.net.parse_ip(input)` faz o parse de um endereço IPv4 ou IPv6 e retorna uma tabela de partes normalizadas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:50
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:50"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:52
+msgid "`input` (string, required): The IP address to parse."
+msgstr "`input` (string, obrigatório): O endereço IP a ser analisado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:54
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:54"
+msgid "Returns: A table with the following fields:"
+msgstr "Retorna: uma tabela com os seguintes campos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:56
+msgid "`kind` (string): Always `\"ip\"`."
+msgstr "`kind` (string): Sempre `\"ip\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:57
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:57"
+msgid "`input` (string): The original input string."
+msgstr "`input` (string): A string de entrada original."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:58
+msgid "`normalized` (string): The normalized IP address."
+msgstr "`normalized` (string): O endereço IP normalizado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:59
+msgid "`version` (integer): `4` for IPv4 or `6` for IPv6."
+msgstr "`version` (integer): `4` para IPv4 ou `6` para IPv6."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:68
+msgid "ptool.net.parse_host_port"
+msgstr "ptool.net.parse_host_port"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:70
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:70"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:72
+msgid "`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a normalized parts table."
+msgstr "`ptool.net.parse_host_port(input)` faz o parse de uma string `host:port` e retorna uma tabela de partes normalizadas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:75
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:75"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:77
+msgid "`input` (string, required): The host and port string. IPv6 addresses must use bracket notation such as `[2001:db8::1]:443`."
+msgstr "`input` (string, obrigatório): A string com host e porta. Endereços IPv6 devem usar notação com colchetes, como `[2001:db8::1]:443`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:80
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:80"
+msgid "Returns: A table with the following fields:"
+msgstr "Retorna: uma tabela com os seguintes campos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:82
+msgid "`kind` (string): Always `\"host_port\"`."
+msgstr "`kind` (string): Sempre `\"host_port\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:83
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:83"
+msgid "`input` (string): The original input string."
+msgstr "`input` (string): A string de entrada original."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:84
+msgid "`normalized` (string): The normalized `host:port` string."
+msgstr "`normalized` (string): A string `host:port` normalizada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:85
+msgid "`host` (string): The normalized host value."
+msgstr "`host` (string): O valor normalizado do host."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:86
+msgid "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`): The host classification."
+msgstr "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`): A classificação do host."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/net.md:87
+msgid "`port` (integer): The parsed port."
+msgstr "`port` (integer): A porta analisada."
