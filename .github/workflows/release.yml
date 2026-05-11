@@ -73,7 +73,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Select stable Rust toolchain
         run: |
@@ -119,7 +119,7 @@ jobs:
           echo "archive_name=${archive_name}" >> "$GITHUB_OUTPUT"
 
       - name: Upload packaged artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: package-${{ matrix.asset_name }}
           path: dist/${{ steps.package.outputs.archive_name }}
@@ -139,10 +139,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download packaged artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: package-*
           path: dist

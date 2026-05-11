@@ -14,9 +14,9 @@
 
 # v0.6.0
 
-- [ ] Update CI (to avoid "Node.js 20 actions are deprecated." warnings.)
+- [x] Update CI (to avoid "Node.js 20 actions are deprecated." warnings.)
 - [ ] Make the document website better.
-- [ ] Make `ptool -V` render more infomations.
+- [x] Make `ptool -V` render more infomations.
 - [ ] Support a TUI toolkit.
 - [x] Support `p.tbl` module for better Lua table functions.
   - `p.tbl.map`.
@@ -24,7 +24,7 @@
   - `p.tbl.join`.
   - etc.
 - [ ] Let document use better i18n solution.
-- [ ] Add `p.fs.is_file` and `p.fs.is_dir`.
+- [x] Add `p.fs.is_file` and `p.fs.is_dir`, etc.
 - [ ] Bugfix: "response read failed: error decoding response body" when download
       with p.http.request.
 

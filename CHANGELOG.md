@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.5.0 (2026-05-10)
+## Unreleased
 
 - Enhanced `ptool -V` / `ptool version` to print richer build metadata,
   including Git revision state, build timestamps, target triple, toolchain
@@ -11,6 +11,9 @@
 - Added the `ptool.tbl` module with `map`, `filter`, `concat`, and `join`
   helpers for transforming and combining dense Lua list tables, and documented
   it across all supported locales.
+
+## v0.5.0 (2026-05-10)
+
 - Fixed `ptool.ask(...)` so its callable-table form correctly accepts the
   prompt argument again after the Lua metatable binding regressed.
 - Added the `ptool.yaml` module with `parse`, `get`, and `stringify` helpers
