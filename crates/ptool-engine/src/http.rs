@@ -6,6 +6,7 @@ use reqwest::header::{
 use reqwest::redirect::Policy;
 use reqwest::{Method, StatusCode};
 use serde_json::Value as JsonValue;
+use std::error::Error as StdError;
 use std::time::Duration;
 use url::{Url, form_urlencoded};
 
@@ -175,7 +176,7 @@ impl HttpResponse {
                 BodyState::Unread(response) => response
                     .bytes()
                     .map(|body| body.to_vec())
-                    .map_err(|err| http_error(format!("response read failed: {err}")))?,
+                    .map_err(map_response_read_error)?,
                 BodyState::Cached(bytes) => bytes,
             };
             self.body = BodyState::Cached(bytes);
@@ -378,4 +379,30 @@ fn invalid_http_options(msg: impl Into<String>) -> Error {
 
 fn http_error(msg: impl Into<String>) -> Error {
     Error::new(ErrorKind::Http, msg).with_op("ptool.http.request")
+}
+
+fn map_response_read_error(err: reqwest::Error) -> Error {
+    let message = if err.is_timeout() {
+        "response read timed out; increase `timeout_ms` for slow downloads".to_string()
+    } else if let Some(detail) = error_source_message(&err) {
+        format!("response read failed: {detail}")
+    } else {
+        format!("response read failed: {err}")
+    };
+
+    http_error(message)
+}
+
+fn error_source_message(err: &reqwest::Error) -> Option<String> {
+    let mut source = err.source();
+    let mut message = None;
+    while let Some(err) = source {
+        let text = err.to_string();
+        if !text.is_empty() {
+            message = Some(text);
+        }
+        source = err.source();
+    }
+
+    message.filter(|detail| detail != &err.to_string())
 }

@@ -1,7 +1,6 @@
 # v0.7.0
 
 - [ ] Support `p.git` module.
-- [ ] Add `p.datetime` module?
 - [ ] Let `p.run` support `stdin`?
 - [ ] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
 - [ ] Add a helper for SSH connection to send HTTP request?
@@ -15,7 +14,7 @@
 # v0.6.0
 
 - [x] Update CI (to avoid "Node.js 20 actions are deprecated." warnings.)
-- [ ] Make the document website better.
+- [x] Make the document website better.
 - [x] Make `ptool -V` render more infomations.
 - [ ] Support a TUI toolkit.
 - [x] Support `p.tbl` module for better Lua table functions.
@@ -23,10 +22,11 @@
   - `p.tbl.filter`.
   - `p.tbl.join`.
   - etc.
-- [ ] Let document use better i18n solution.
+- [x] Let document use better i18n solution.
 - [x] Add `p.fs.is_file` and `p.fs.is_dir`, etc.
-- [ ] Bugfix: "response read failed: error decoding response body" when download
+- [x] Bugfix: "response read failed: error decoding response body" when download
       with p.http.request.
+- [ ] Add `p.datetime` module?
 
 # v0.5.0
 

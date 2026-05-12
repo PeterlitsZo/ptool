@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed `ptool.http.request(...)` to report response body read timeouts more
+  clearly during downloads, instead of surfacing a misleading decode error.
 - Added offline on-site search to the Docusaurus docs site, with local search
   indexes for all supported locales.
 - Enhanced `ptool -V` / `ptool version` to print richer build metadata,
