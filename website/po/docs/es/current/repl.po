@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: es\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:1
 msgid "REPL"
 msgstr "REPL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:3
-msgid "`ptool repl` starts an interactive Lua session with the standard `ptool` API already loaded."
-msgstr "`ptool repl` inicia una sesión interactiva de Lua con la API estándar de `ptool` ya cargada."
+msgid ""
+"`ptool repl` starts an interactive Lua session with the standard `ptool` API "
+"already loaded."
+msgstr ""
+"`ptool repl` inicia una sesión interactiva de Lua con la API estándar de "
+"`ptool` ya cargada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:6
 msgid "Start the REPL"
@@ -15,7 +30,8 @@ msgstr "Iniciar el REPL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:12
 msgid "When the REPL starts, `ptool` shows a banner and waits for Lua input."
-msgstr "Cuando el REPL se inicia, `ptool` muestra un banner y espera entrada de Lua."
+msgstr ""
+"Cuando el REPL se inicia, `ptool` muestra un banner y espera entrada de Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:14
 msgid "What it provides"
@@ -27,15 +43,20 @@ msgstr "La tabla global `ptool` y el alias corto `p`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:17
 msgid "The same bundled helpers you can use from `ptool run <file>`."
-msgstr "Las mismas utilidades integradas que puedes usar desde `ptool run <file>`."
+msgstr ""
+"Las mismas utilidades integradas que puedes usar desde `ptool run <file>`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:18
 msgid "Interactive evaluation of Lua expressions and statements."
 msgstr "Evaluación interactiva de expresiones y sentencias Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:19
-msgid "Readline-style editing, including arrow-key cursor movement and in-session history navigation."
-msgstr "Edición de estilo readline, incluido movimiento del cursor con las flechas e historial dentro de la sesión."
+msgid ""
+"Readline-style editing, including arrow-key cursor movement and in-session "
+"history navigation."
+msgstr ""
+"Edición de estilo readline, incluido movimiento del cursor con las flechas e "
+"historial dentro de la sesión."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:22
 msgid "Basic usage"
@@ -46,8 +67,12 @@ msgid "Enter an expression to evaluate it immediately:"
 msgstr "Introduce una expresión para evaluarla de inmediato:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:30
-msgid "The REPL prints returned values using the same inspector used elsewhere in `ptool`."
-msgstr "El REPL imprime los valores devueltos usando el mismo inspector que se usa en otras partes de `ptool`."
+msgid ""
+"The REPL prints returned values using the same inspector used elsewhere in "
+"`ptool`."
+msgstr ""
+"El REPL imprime los valores devueltos usando el mismo inspector que se usa "
+"en otras partes de `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:33
 msgid "You can also call `ptool` APIs directly:"
@@ -58,8 +83,14 @@ msgid "Multi-line input"
 msgstr "Entrada multilínea"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:41
-msgid "If the current input is incomplete, the prompt changes from `>>> ` to `... `. This lets you continue entering a block such as a function or control flow statement:"
-msgstr "Si la entrada actual está incompleta, el prompt cambia de `>>> ` a `... `. Esto te permite seguir escribiendo un bloque como una función o una sentencia de control de flujo:"
+msgid ""
+"If the current input is incomplete, the prompt changes from `>>> ` to `... `"
+". This lets you continue entering a block such as a function or control flow "
+"statement:"
+msgstr ""
+"Si la entrada actual está incompleta, el prompt cambia de `>>> ` a `... `. "
+"Esto te permite seguir escribiendo un bloque como una función o una "
+"sentencia de control de flujo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:51
 msgid "Once the input is complete, `ptool` evaluates the whole chunk."
@@ -70,16 +101,23 @@ msgid "Keyboard behavior"
 msgstr "Comportamiento del teclado"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:55
-msgid "`Up` and `Down` browse commands entered earlier in the same REPL session."
-msgstr "`Up` y `Down` recorren los comandos introducidos antes en la misma sesión del REPL."
+msgid ""
+"`Up` and `Down` browse commands entered earlier in the same REPL session."
+msgstr ""
+"`Up` y `Down` recorren los comandos introducidos antes en la misma sesión "
+"del REPL."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:56
 msgid "`Left` and `Right` move the cursor within the current input line."
 msgstr "`Left` y `Right` mueven el cursor dentro de la línea de entrada actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:57
-msgid "`Ctrl-C` clears the current input. If you are in the middle of a multi-line chunk, it discards the buffered chunk and returns to the primary prompt."
-msgstr "`Ctrl-C` limpia la entrada actual. Si estás en medio de un bloque multilínea, descarta el bloque en búfer y vuelve al prompt principal."
+msgid ""
+"`Ctrl-C` clears the current input. If you are in the middle of a multi-line "
+"chunk, it discards the buffered chunk and returns to the primary prompt."
+msgstr ""
+"`Ctrl-C` limpia la entrada actual. Si estás en medio de un bloque "
+"multilínea, descarta el bloque en búfer y vuelve al prompt principal."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:59
 msgid "`Ctrl-D` exits the REPL."
@@ -94,5 +132,9 @@ msgid "`ptool repl` requires an interactive TTY."
 msgstr "`ptool repl` requiere un TTY interactivo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/repl.md:64
-msgid "REPL history currently lives only for the current session and is not written to a history file."
-msgstr "El historial del REPL por ahora solo vive durante la sesión actual y no se escribe en un archivo de historial."
+msgid ""
+"REPL history currently lives only for the current session and is not written "
+"to a history file."
+msgstr ""
+"El historial del REPL por ahora solo vive durante la sesión actual y no se "
+"escribe en un archivo de historial."

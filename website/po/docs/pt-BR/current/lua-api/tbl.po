@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:1
 msgid "Table API"
@@ -10,8 +21,12 @@ msgid "Table helpers are available under `ptool.tbl` and `p.tbl`."
 msgstr "Os utilitários de tabelas estão disponíveis em `ptool.tbl` e `p.tbl`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:5
-msgid "These APIs are designed for dense list tables with contiguous integer keys starting at `1`."
-msgstr "Essas APIs foram projetadas para tabelas de lista densas, com chaves inteiras contíguas começando em `1`."
+msgid ""
+"These APIs are designed for dense list tables with contiguous integer keys "
+"starting at `1`."
+msgstr ""
+"Essas APIs foram projetadas para tabelas de lista densas, com chaves "
+"inteiras contíguas começando em `1`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:8
 msgid "ptool.tbl.map"
@@ -23,8 +38,12 @@ msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:12
-msgid "`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a new list."
-msgstr "`ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e retorna uma nova lista."
+msgid ""
+"`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a "
+"new list."
+msgstr ""
+"`ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e "
+"retorna uma nova lista."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15"
@@ -32,8 +51,12 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list` (table, obrigatório): Uma tabela de lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:16
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a non-`nil` value."
-msgstr "`fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve retornar um valor diferente de `nil`."
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a non-`nil` value."
+msgstr ""
+"`fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve "
+"retornar um valor diferente de `nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18"
@@ -50,8 +73,11 @@ msgid "`fn` is called once for each item in order."
 msgstr "`fn` é chamado uma vez para cada item, em ordem."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:23
-msgid "If `fn` returns `nil`, the call raises an error instead of creating holes in the result."
-msgstr "Se `fn` retornar `nil`, a chamada falha em vez de criar buracos no resultado."
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of creating holes in "
+"the result."
+msgstr ""
+"Se `fn` retornar `nil`, a chamada falha em vez de criar buracos no resultado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:25
 msgid "The input table is not modified."
@@ -67,8 +93,12 @@ msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:39
-msgid "`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and returns them in a new dense list."
-msgstr "`ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja truthy e os retorna em uma nova lista densa."
+msgid ""
+"`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and "
+"returns them in a new dense list."
+msgstr ""
+"`ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja "
+"truthy e os retorna em uma nova lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42"
@@ -111,8 +141,12 @@ msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:64
-msgid "`ptool.tbl.concat(...)` concatenates one or more dense list tables into a new list."
-msgstr "`ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma nova lista."
+msgid ""
+"`ptool.tbl.concat(...)` concatenates one or more dense list tables into a "
+"new list."
+msgstr ""
+"`ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma "
+"nova lista."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67"

@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:1
 msgid "Platform API"
 msgstr "API de plataforma"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:3
-msgid "Platform detection helpers are available under `ptool.platform` and `p.platform`."
-msgstr "As utilidades de detecção de plataforma estão disponíveis em `ptool.platform` e `p.platform`."
+msgid ""
+"Platform detection helpers are available under `ptool.platform` and "
+"`p.platform`."
+msgstr ""
+"As utilidades de detecção de plataforma estão disponíveis em `ptool.platform`"
+" e `p.platform`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:5
 msgid "ptool.platform.os"
@@ -19,7 +34,8 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:9
-msgid "`ptool.platform.os()` returns the operating system of the current machine."
+msgid ""
+"`ptool.platform.os()` returns the operating system of the current machine."
 msgstr "`ptool.platform.os()` retorna o sistema operacional da máquina atual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:11
@@ -49,7 +65,8 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:26
-msgid "`ptool.platform.arch()` returns the CPU architecture of the current machine."
+msgid ""
+"`ptool.platform.arch()` returns the CPU architecture of the current machine."
 msgstr "`ptool.platform.arch()` retorna a arquitetura de CPU da máquina atual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:28
@@ -91,8 +108,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:46
-msgid "`ptool.platform.target()` returns a normalized platform target string for the current machine."
-msgstr "`ptool.platform.target()` retorna uma string de target de plataforma normalizada para a máquina atual."
+msgid ""
+"`ptool.platform.target()` returns a normalized platform target string for "
+"the current machine."
+msgstr ""
+"`ptool.platform.target()` retorna uma string de target de plataforma "
+"normalizada para a máquina atual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:49
 msgid "Returns: `string`."
@@ -104,13 +125,23 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:58
-msgid "The result is always `ptool.platform.os() .. \"-\" .. ptool.platform.arch()`."
-msgstr "O resultado é sempre `ptool.platform.os() .. \"-\" .. ptool.platform.arch()`."
+msgid ""
+"The result is always `ptool.platform.os() .. \"-\" .. ptool.platform.arch()`."
+msgstr ""
+"O resultado é sempre `ptool.platform.os() .. \"-\" .. ptool.platform.arch()`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:59
-msgid "This is intended for platform-based branching such as selecting download artifacts."
-msgstr "Isso se destina a desvios baseados em plataforma, como selecionar artefatos de download."
+msgid ""
+"This is intended for platform-based branching such as selecting download "
+"artifacts."
+msgstr ""
+"Isso se destina a desvios baseados em plataforma, como selecionar artefatos "
+"de download."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/platform.md:61
-msgid "Common values include `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, and `windows-amd64`."
-msgstr "Valores comuns incluem `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64` e `windows-amd64`."
+msgid ""
+"Common values include `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`"
+", `linux-riscv64`, `macos-amd64`, `macos-arm64`, and `windows-amd64`."
+msgstr ""
+"Valores comuns incluem `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`"
+", `linux-riscv64`, `macos-amd64`, `macos-arm64` e `windows-amd64`."

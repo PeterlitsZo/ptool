@@ -59,6 +59,7 @@ fn create_ptool_module(
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
     let json_module = create_ptool_json_module(lua, Rc::clone(&world))?;
     let net_module = create_ptool_net_module(lua, Rc::clone(&world))?;
+    let datetime_module = create_ptool_datetime_module(lua, Rc::clone(&world))?;
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
@@ -91,6 +92,7 @@ fn create_ptool_module(
     module.set("http", http_module)?;
     module.set("json", json_module)?;
     module.set("net", net_module)?;
+    module.set("datetime", datetime_module)?;
     module.set("db", db_module)?;
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
@@ -264,6 +266,39 @@ fn create_ptool_net_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
     net_module.set("parse_ip", parse_ip_fn)?;
     net_module.set("parse_host_port", parse_host_port_fn)?;
     Ok(net_module)
+}
+
+fn create_ptool_datetime_module(
+    lua: &Lua,
+    world: Rc<RefCell<crate::LuaWorld>>,
+) -> mlua::Result<Table> {
+    let datetime_module = lua.create_table()?;
+    let now_state = Rc::clone(&world);
+    let now_fn = lua.create_function(move |_, timezone: Option<String>| {
+        now_state.borrow().datetime_now(timezone)
+    })?;
+    let parse_state = Rc::clone(&world);
+    let parse_fn = lua.create_function(move |_, (input, options): (String, Option<Table>)| {
+        parse_state.borrow().datetime_parse(input, options)
+    })?;
+    let from_unix_state = Rc::clone(&world);
+    let from_unix_fn = lua.create_function(move |_, (value, options): (i64, Option<Table>)| {
+        from_unix_state.borrow().datetime_from_unix(value, options)
+    })?;
+    let compare_state = Rc::clone(&world);
+    let compare_fn = lua.create_function(move |_, (a, b): (Value, Value)| {
+        compare_state.borrow().datetime_compare(a, b)
+    })?;
+    let is_valid_fn =
+        lua.create_function(move |_, (input, options): (String, Option<Table>)| {
+            world.borrow().datetime_is_valid(input, options)
+        })?;
+    datetime_module.set("now", now_fn)?;
+    datetime_module.set("parse", parse_fn)?;
+    datetime_module.set("from_unix", from_unix_fn)?;
+    datetime_module.set("compare", compare_fn)?;
+    datetime_module.set("is_valid", is_valid_fn)?;
+    Ok(datetime_module)
 }
 
 fn create_ptool_hash_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

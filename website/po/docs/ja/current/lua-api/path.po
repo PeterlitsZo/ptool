@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:1
 msgid "Path API"
@@ -19,8 +30,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:9
-msgid "`ptool.path.join(...segments)` joins multiple path segments and returns the normalized path."
-msgstr "`ptool.path.join(...segments)` は複数のパスセグメントを連結し、 正規化されたパスを返します。"
+msgid ""
+"`ptool.path.join(...segments)` joins multiple path segments and returns the "
+"normalized path."
+msgstr "`ptool.path.join(...segments)` は複数のパスセグメントを連結し、 正規化された"
+"パスを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:12
 msgid "`segments` (string, at least one): Path segments."
@@ -46,8 +60,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:25
-msgid "`ptool.path.normalize(path)` performs lexical path normalization (processing `.` and `..`)."
-msgstr "`ptool.path.normalize(path)` は字句的なパス正規化 (`.` と `..` の処理) を 行います。"
+msgid ""
+"`ptool.path.normalize(path)` performs lexical path normalization "
+"(processing `.` and `..`)."
+msgstr "`ptool.path.normalize(path)` は字句的なパス正規化 (`.` と `..` の処理) を 行"
+"います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:28
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:28"
@@ -83,8 +100,11 @@ msgid "`path` (string, required): The input path."
 msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:44
-msgid "`base` (string, optional): The base directory. If omitted, the current process working directory is used."
-msgstr "`base` (string, 任意): ベースディレクトリ。省略時は現在のプロセスの 作業ディレクトリが使われます。"
+msgid ""
+"`base` (string, optional): The base directory. If omitted, the current "
+"process working directory is used."
+msgstr "`base` (string, 任意): ベースディレクトリ。省略時は現在のプロセスの 作業ディ"
+"レクトリが使われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:46
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:46"
@@ -111,16 +131,22 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:60
-msgid "`ptool.path.relpath(path[, base])` computes a relative path from `base` to `path`."
-msgstr "`ptool.path.relpath(path[, base])` は `base` から `path` への相対パスを 計算します。"
+msgid ""
+"`ptool.path.relpath(path[, base])` computes a relative path from `base` to "
+"`path`."
+msgstr "`ptool.path.relpath(path[, base])` は `base` から `path` への相対パスを 計算"
+"します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:63
 msgid "`path` (string, required): The target path."
 msgstr "`path` (string, 必須): 対象パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:64
-msgid "`base` (string, optional): The starting directory. If omitted, the current process working directory is used."
-msgstr "`base` (string, 任意): 開始ディレクトリ。省略時は現在のプロセスの 作業ディレクトリが使われます。"
+msgid ""
+"`base` (string, optional): The starting directory. If omitted, the current "
+"process working directory is used."
+msgstr "`base` (string, 任意): 開始ディレクトリ。省略時は現在のプロセスの 作業ディレ"
+"クトリが使われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:66
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:66"
@@ -202,8 +228,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:109
-msgid "`ptool.path.basename(path)` returns the last path segment (the filename portion)."
-msgstr "`ptool.path.basename(path)` は最後のパスセグメント (ファイル名部分) を返します。"
+msgid ""
+"`ptool.path.basename(path)` returns the last path segment "
+"(the filename portion)."
+msgstr "`ptool.path.basename(path)` は最後のパスセグメント (ファイル名部分) を返しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:112
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:112"
@@ -230,8 +259,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:125
-msgid "`ptool.path.extname(path)` returns the extension (including `.`). If there is no extension, it returns an empty string."
-msgstr "`ptool.path.extname(path)` は拡張子 (`.` を含む) を返します。拡張子がない 場合は空文字列を返します。"
+msgid ""
+"`ptool.path.extname(path)` returns the extension (including `.`). If there "
+"is no extension, it returns an empty string."
+msgstr "`ptool.path.extname(path)` は拡張子 (`.` を含む) を返します。拡張子がない 場"
+"合は空文字列を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:128
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:128"
@@ -253,9 +285,14 @@ msgid "Notes:"
 msgstr "注意:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:139
-msgid "Path handling in `ptool.path` is purely lexical. It does not check whether paths exist and does not resolve symlinks."
-msgstr "`ptool.path` のパス処理は完全に字句的です。パスの存在確認や シンボリックリンクの解決は行いません。"
+msgid ""
+"Path handling in `ptool.path` is purely lexical. It does not check whether "
+"paths exist and does not resolve symlinks."
+msgstr "`ptool.path` のパス処理は完全に字句的です。パスの存在確認や シンボリックリン"
+"クの解決は行いません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:141
-msgid "None of the interfaces accept empty string arguments. Passing one raises an error."
+msgid ""
+"None of the interfaces accept empty string arguments. Passing one raises an "
+"error."
 msgstr "どのインターフェースも空文字列引数を受け付けません。渡すとエラーに なります。"

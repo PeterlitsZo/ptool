@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-12 11:29+0800\n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,18 +44,24 @@ msgstr ""
 "comandos para scripts Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:13
+msgid ""
+"[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
+"with timezone support."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:15
 msgid "[SemVer API]{1}: Parse, compare, and bump semantic versions."
 msgstr "[API de SemVer]{1}: Analiza, compara y actualiza versiones semánticas."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:14
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:16
 msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
 msgstr "[API de hash]{1}: Calcula resúmenes SHA-256, SHA-1 y MD5."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:15
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:17
 msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
 msgstr "[API de red]{1}: Analiza URL, direcciones IP y pares host-puerto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:16
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:18
 msgid ""
 "[OS API]{1}: Read runtime environment variables and inspect host process "
 "details."
@@ -63,40 +69,40 @@ msgstr ""
 "[API de sistema operativo]{1}: Lee variables de entorno del runtime e "
 "inspecciona detalles del proceso anfitrión."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:18
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:20
 msgid ""
 "[Platform API]{1}: Detect the current OS, architecture, and target triple."
 msgstr ""
 "[API de plataforma]{1}: Detecta el SO, la arquitectura y el target triple "
 "actuales."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:20
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:22
 msgid "[ANSI API]{1}: Build styled terminal output with ANSI escape sequences."
 msgstr ""
 "[API ANSI]{1}: Construye salida de terminal con estilo mediante secuencias "
 "ANSI."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:22
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
 msgid ""
 "[TUI API]{1}: Build simple terminal user interfaces with a structured view "
 "tree and event loop."
 msgstr ""
-"[API TUI]{1}: Construye interfaces de terminal simples con un árbol "
-"de vistas estructurado y un bucle de eventos."
+"[API TUI]{1}: Construye interfaces de terminal simples con un árbol de "
+"vistas estructurado y un bucle de eventos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:26
 msgid "[Log API]{1}: Write timestamped terminal logs with level-based output."
 msgstr "[API de log]{1}: Escribe logs de terminal con marcas de tiempo y nivel."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:25
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:27
 msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
 msgstr "[API HTTP]{1}: Envía solicitudes HTTP y consume cuerpos de respuesta."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:26
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:28
 msgid "[JSON API]{1}: Parse JSON text and stringify Lua values as JSON."
 msgstr "[API JSON]{1}: Analiza texto JSON y serializa valores Lua como JSON."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:27
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:29
 msgid ""
 "[YAML API]{1}: Parse YAML text, read nested values, and stringify Lua values "
 "as YAML."
@@ -104,64 +110,64 @@ msgstr ""
 "[API YAML]{1}: Analiza texto YAML, lee valores anidados y serializa valores "
 "Lua como YAML."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:29
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:31
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr ""
 "[API de base de datos]{1}: Abre conexiones de base de datos y ejecuta "
 "consultas SQL."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:30
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:32
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
 msgstr ""
 "[API SSH]{1}: Conéctate a hosts remotos, ejecuta comandos y transfiere "
 "archivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:32
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:34
 msgid ""
 "[Path API]{1}: Manipulate paths lexically without touching the filesystem."
 msgstr ""
 "[API de rutas]{1}: Manipula rutas de forma léxica sin tocar el sistema de "
 "archivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:34
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
 msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
 msgstr ""
 "[API TOML]{1}: Analiza, serializa, lee, actualiza y elimina valores TOML."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:35
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:37
 msgid ""
 "[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
 msgstr ""
 "[API de regex]{1}: Compila regex y busca, captura, reemplaza o divide texto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:37
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
 msgid "[String API]{1}: Trim, split, join, replace, and format strings."
 msgstr ""
 "[API de cadenas]{1}: Recorta, divide, une, reemplaza y formatea cadenas."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:38
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:40
 msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
 msgstr "[API de tablas]{1}: Mapea, filtra y concatena tablas tipo lista densas."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
 msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
 msgstr ""
 "[API de sistema de archivos]{1}: Lee, escribe, crea y hace glob sobre rutas "
 "del sistema de archivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:40
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:42
 msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
 msgstr ""
 "[API de shell]{1}: Divide líneas de comandos con sintaxis tipo shell en "
 "arreglos de argumentos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
 msgid "[Template API]{1}: Render text templates from Lua data."
 msgstr ""
 "[API de plantillas]{1}: Renderiza plantillas de texto a partir de datos Lua."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:45
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

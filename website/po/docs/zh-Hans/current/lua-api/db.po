@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:1
 msgid "Database API"
 msgstr "Database API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:3
-msgid "Database connection and query helpers are available under `ptool.db` and `p.db`."
+msgid ""
+"Database connection and query helpers are available under `ptool.db` and "
+"`p.db`."
 msgstr "数据库连接与查询辅助能力位于 `ptool.db` 和 `p.db` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:5
@@ -19,8 +32,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:9
-msgid "`ptool.db.connect(url_or_options)` opens a database connection and returns a `Connection` object."
-msgstr "`ptool.db.connect(url_or_options)` 打开数据库连接，并返回一个 `Connection` 对象。"
+msgid ""
+"`ptool.db.connect(url_or_options)` opens a database connection and returns a "
+"`Connection` object."
+msgstr "`ptool.db.connect(url_or_options)` 打开数据库连接，并返回一个 `Connection` 对"
+"象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:12
 msgid "Supported databases:"
@@ -71,12 +87,18 @@ msgid "`sqlite:test.db` and `sqlite://test.db` are supported."
 msgstr "支持 `sqlite:test.db` 和 `sqlite://test.db`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:36
-msgid "Relative SQLite paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "相对 SQLite 路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` 的影响。"
+msgid ""
+"Relative SQLite paths are resolved from the current `ptool` runtime "
+"directory, so they follow `ptool.cd(...)`."
+msgstr "相对 SQLite 路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` "
+"的影响。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:38
-msgid "If no `mode=` query parameter is provided, SQLite connections default to `mode=rwc`, which allows creating the database file automatically."
-msgstr "如果没有提供 `mode=` 查询参数，SQLite 连接默认使用 `mode=rwc`，从而允许自动 创建数据库文件。"
+msgid ""
+"If no `mode=` query parameter is provided, SQLite connections default to "
+"`mode=rwc`, which allows creating the database file automatically."
+msgstr "如果没有提供 `mode=` 查询参数，SQLite 连接默认使用 `mode=rwc`，从而允许自动 "
+"创建数据库文件。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:41"
@@ -93,7 +115,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:54
-msgid "`Connection` represents an open database connection returned by `ptool.db.connect()`."
+msgid ""
+"`Connection` represents an open database connection returned by "
+"`ptool.db.connect()`."
 msgstr "`Connection` 表示由 `ptool.db.connect()` 返回的已打开数据库连接。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:57
@@ -137,11 +161,15 @@ msgid "`params` is optional."
 msgstr "`params` 可选。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:71
-msgid "When `params` is an array table, it is treated as positional parameters and SQL placeholders should use `?`."
+msgid ""
+"When `params` is an array table, it is treated as positional parameters and "
+"SQL placeholders should use `?`."
 msgstr "当 `params` 是数组表时，会视为位置参数，SQL 占位符应使用 `?`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:73
-msgid "When `params` is a key-value table, it is treated as named parameters and SQL placeholders should use `:name`."
+msgid ""
+"When `params` is a key-value table, it is treated as named parameters and "
+"SQL placeholders should use `:name`."
 msgstr "当 `params` 是键值表时，会视为命名参数，SQL 占位符应使用 `:name`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:75
@@ -217,7 +245,9 @@ msgid "Binary/blob columns are also returned as Lua strings."
 msgstr "二进制 / blob 列也会作为 Lua 字符串返回。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:93
-msgid "If a query result contains duplicate column names, an error is raised. Use SQL aliases such as `AS` to disambiguate them."
+msgid ""
+"If a query result contains duplicate column names, an error is raised. Use "
+"SQL aliases such as `AS` to disambiguate them."
 msgstr "如果查询结果中出现重复列名，会抛出错误。请使用 `AS` 等 SQL 别名消除歧义。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:96
@@ -268,8 +298,11 @@ msgid "Canonical API name: `ptool.db.Connection:query_one`."
 msgstr "规范 API 名称：`ptool.db.Connection:query_one`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:130
-msgid "`db:query_one(sql, params?)` returns the first row as a table, or `nil` if the query returns no rows."
-msgstr "`db:query_one(sql, params?)` 返回第一行记录（table），如果查询没有结果则返回 `nil`。"
+msgid ""
+"`db:query_one(sql, params?)` returns the first row as a table, or `nil` if "
+"the query returns no rows."
+msgstr "`db:query_one(sql, params?)` 返回第一行记录（table），如果查询没有结果则返回 "
+"`nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:133"
@@ -290,8 +323,11 @@ msgid "Canonical API name: `ptool.db.Connection:scalar`."
 msgstr "规范 API 名称：`ptool.db.Connection:scalar`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:148
-msgid "`db:scalar(sql, params?)` returns the first column of the first row, or `nil` if the query returns no rows."
-msgstr "`db:scalar(sql, params?)` 返回第一行第一列的值，如果查询没有结果则返回 `nil`。"
+msgid ""
+"`db:scalar(sql, params?)` returns the first column of the first row, or `nil`"
+" if the query returns no rows."
+msgstr "`db:scalar(sql, params?)` 返回第一行第一列的值，如果查询没有结果则返回 `nil`"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:151"
@@ -312,7 +348,8 @@ msgid "Canonical API name: `ptool.db.Connection:execute`."
 msgstr "规范 API 名称：`ptool.db.Connection:execute`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:164
-msgid "`db:execute(sql, params?)` executes a statement and returns a table with:"
+msgid ""
+"`db:execute(sql, params?)` executes a statement and returns a table with:"
 msgstr "`db:execute(sql, params?)` 执行语句，并返回一个包含以下字段的表："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:166
@@ -351,7 +388,9 @@ msgid "If `fn(tx)` returns normally, the transaction is committed."
 msgstr "如果 `fn(tx)` 正常返回，则提交事务。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:186
-msgid "If `fn(tx)` raises an error, the transaction is rolled back and the error is re-raised."
+msgid ""
+"If `fn(tx)` raises an error, the transaction is rolled back and the error is "
+"re-raised."
 msgstr "如果 `fn(tx)` 抛错，则回滚事务并重新抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:188
@@ -359,7 +398,9 @@ msgid "Nested transactions are not supported."
 msgstr "不支持嵌套事务。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:189
-msgid "While the callback is active, the outer connection object must not be used; use the provided `tx` object instead."
+msgid ""
+"While the callback is active, the outer connection object must not be used; "
+"use the provided `tx` object instead."
 msgstr "在回调执行期间，不得使用外层连接对象；应改用传入的 `tx` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:192

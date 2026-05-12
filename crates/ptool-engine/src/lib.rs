@@ -1,4 +1,5 @@
 mod ansi;
+mod datetime;
 mod db;
 mod error;
 mod exec;
@@ -23,6 +24,9 @@ mod tui;
 mod yaml;
 
 pub use ansi::{Color, StyleOptions};
+pub use datetime::{
+    DateTimeFromUnixOptions, DateTimeParseOptions, DateTimeUnixUnit, DateTimeValue,
+};
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
 pub use exec::{
@@ -304,6 +308,30 @@ impl PtoolEngine {
 
     pub fn parse_url(&self, input: &str) -> Result<UrlParts> {
         net::parse_url(input)
+    }
+
+    pub fn datetime_now(&self, timezone: Option<&str>) -> Result<DateTimeValue> {
+        datetime::now(timezone)
+    }
+
+    pub fn datetime_parse(
+        &self,
+        input: &str,
+        options: DateTimeParseOptions,
+    ) -> Result<DateTimeValue> {
+        datetime::parse(input, options)
+    }
+
+    pub fn datetime_from_unix(
+        &self,
+        value: i64,
+        options: DateTimeFromUnixOptions,
+    ) -> Result<DateTimeValue> {
+        datetime::from_unix(value, options)
+    }
+
+    pub fn datetime_compare(&self, a: &DateTimeValue, b: &DateTimeValue) -> std::cmp::Ordering {
+        datetime::compare(a, b)
     }
 
     pub fn parse_ip(&self, input: &str) -> Result<IpParts> {

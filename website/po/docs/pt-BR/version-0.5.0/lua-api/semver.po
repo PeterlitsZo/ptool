@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:1
 msgid "SemVer API"
 msgstr "API de SemVer"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:3
-msgid "Version parsing, validation, comparison, and bumping helpers live under `ptool.semver` and `p.semver`."
-msgstr "As utilidades para parse, validação, comparação e incremento de versão ficam em `ptool.semver` e `p.semver`."
+msgid ""
+"Version parsing, validation, comparison, and bumping helpers live under "
+"`ptool.semver` and `p.semver`."
+msgstr ""
+"As utilidades para parse, validação, comparação e incremento de versão ficam "
+"em `ptool.semver` e `p.semver`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:5
 msgid "ptool.semver.parse"
@@ -19,12 +34,20 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:9
-msgid "`ptool.semver.parse(version)` parses a version string and returns a `Version` object."
-msgstr "`ptool.semver.parse(version)` faz o parse de uma string de versão e retorna um objeto `Version`."
+msgid ""
+"`ptool.semver.parse(version)` parses a version string and returns a `Version`"
+" object."
+msgstr ""
+"`ptool.semver.parse(version)` faz o parse de uma string de versão e retorna "
+"um objeto `Version`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:12
-msgid "`version` (string, required): A semantic version string, optionally prefixed with `v`."
-msgstr "`version` (string, obrigatório): Uma string de versão semântica, com prefixo `v` opcional."
+msgid ""
+"`version` (string, required): A semantic version string, optionally prefixed "
+"with `v`."
+msgstr ""
+"`version` (string, obrigatório): Uma string de versão semântica, com prefixo "
+"`v` opcional."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:15
 msgid "Example:"
@@ -40,8 +63,10 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:28
-msgid "`ptool.semver.is_valid(version)` checks whether a version string is valid."
-msgstr "`ptool.semver.is_valid(version)` verifica se uma string de versão é válida."
+msgid ""
+"`ptool.semver.is_valid(version)` checks whether a version string is valid."
+msgstr ""
+"`ptool.semver.is_valid(version)` verifica se uma string de versão é válida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:30
 msgid "`version` (string, required): A semantic version string."
@@ -65,8 +90,11 @@ msgid "`ptool.semver.compare(a, b)` compares two versions."
 msgstr "`ptool.semver.compare(a, b)` compara duas versões."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:44
-msgid "`a` / `b` (string|Version, required): A version string or a `Version` object."
-msgstr "`a` / `b` (string|Version, obrigatório): Uma string de versão ou um objeto `Version`."
+msgid ""
+"`a` / `b` (string|Version, required): A version string or a `Version` object."
+msgstr ""
+"`a` / `b` (string|Version, obrigatório): Uma string de versão ou um objeto "
+"`Version`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:45
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:45"
@@ -83,8 +111,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:55
-msgid "`ptool.semver.bump(v, op[, channel])` returns a new version object after applying the bump."
-msgstr "`ptool.semver.bump(v, op[, channel])` retorna um novo objeto de versão depois de aplicar o incremento."
+msgid ""
+"`ptool.semver.bump(v, op[, channel])` returns a new version object after "
+"applying the bump."
+msgstr ""
+"`ptool.semver.bump(v, op[, channel])` retorna um novo objeto de versão "
+"depois de aplicar o incremento."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:58
 msgid "`v` (string|Version, required): The original version."
@@ -92,13 +124,21 @@ msgstr "`v` (string|Version, obrigatório): A versão original."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:59
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:59"
-msgid "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
-msgstr "`op` (string, obrigatório): Um entre `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor` ou `premajor`."
+msgid ""
+"`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
+", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
+msgstr ""
+"`op` (string, obrigatório): Um entre `major`, `minor`, `patch`, `release`, "
+"`alpha`, `beta`, `rc`, `prepatch`, `preminor` ou `premajor`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:61
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:61"
-msgid "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
-msgstr "`channel` (string, opcional): Suportado apenas para `prepatch`, `preminor` e `premajor`. Deve ser um entre `alpha`, `beta` ou `rc`. O padrão é `alpha`."
+msgid ""
+"`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
+"`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
+msgstr ""
+"`channel` (string, opcional): Suportado apenas para `prepatch`, `preminor` e "
+"`premajor`. Deve ser um entre `alpha`, `beta` ou `rc`. O padrão é `alpha`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:63
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:63"
@@ -115,8 +155,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:80
-msgid "`Version` represents a parsed semantic version returned by `ptool.semver.parse(...)` or `ptool.semver.bump(...)`."
-msgstr "`Version` representa uma versão semântica analisada retornada por `ptool.semver.parse(...)` ou `ptool.semver.bump(...)`."
+msgid ""
+"`Version` represents a parsed semantic version returned by "
+"`ptool.semver.parse(...)` or `ptool.semver.bump(...)`."
+msgstr ""
+"`Version` representa uma versão semântica analisada retornada por "
+"`ptool.semver.parse(...)` ou `ptool.semver.bump(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:83
 msgid "It is implemented as a Lua userdata."
@@ -191,8 +235,12 @@ msgid "`v:compare(other)` compares the current version with `other`."
 msgstr "`v:compare(other)` compara a versão atual com `other`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:107
-msgid "`other` (string|Version, required): A version string or another `Version` object."
-msgstr "`other` (string|Version, obrigatório): Uma string de versão ou outro objeto `Version`."
+msgid ""
+"`other` (string|Version, required): A version string or another `Version` "
+"object."
+msgstr ""
+"`other` (string|Version, obrigatório): Uma string de versão ou outro objeto "
+"`Version`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:109
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:109"
@@ -208,18 +256,30 @@ msgid "Canonical API name: `ptool.semver.Version:bump`."
 msgstr "Nome canônico da API: `ptool.semver.Version:bump`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:115
-msgid "`v:bump(op[, channel])` returns a new `Version` object after applying the bump."
-msgstr "`v:bump(op[, channel])` retorna um novo objeto `Version` depois de aplicar o incremento."
+msgid ""
+"`v:bump(op[, channel])` returns a new `Version` object after applying the "
+"bump."
+msgstr ""
+"`v:bump(op[, channel])` retorna um novo objeto `Version` depois de aplicar o "
+"incremento."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:117
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:117"
-msgid "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
-msgstr "`op` (string, obrigatório): Um entre `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor` ou `premajor`."
+msgid ""
+"`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
+", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
+msgstr ""
+"`op` (string, obrigatório): Um entre `major`, `minor`, `patch`, `release`, "
+"`alpha`, `beta`, `rc`, `prepatch`, `preminor` ou `premajor`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:119
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:119"
-msgid "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
-msgstr "`channel` (string, opcional): Suportado apenas para `prepatch`, `preminor` e `premajor`. Deve ser um entre `alpha`, `beta` ou `rc`. O padrão é `alpha`."
+msgid ""
+"`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
+"`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
+msgstr ""
+"`channel` (string, opcional): Suportado apenas para `prepatch`, `preminor` e "
+"`premajor`. Deve ser um entre `alpha`, `beta` ou `rc`. O padrão é `alpha`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:121
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:121"
@@ -247,21 +307,43 @@ msgid "Prerelease bump rules:"
 msgstr "Regras de incremento de prerelease:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:133
-msgid "Bumping a stable version to `alpha`, `beta`, or `rc` first increments the patch version, then enters the target channel starting from `.1`."
-msgstr "Ao incrementar uma versão estável para `alpha`, `beta` ou `rc`, primeiro a versão patch é incrementada e depois o canal alvo começa em `.1`."
+msgid ""
+"Bumping a stable version to `alpha`, `beta`, or `rc` first increments the "
+"patch version, then enters the target channel starting from `.1`."
+msgstr ""
+"Ao incrementar uma versão estável para `alpha`, `beta` ou `rc`, primeiro a "
+"versão patch é incrementada e depois o canal alvo começa em `.1`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:135
-msgid "`prepatch`, `preminor`, and `premajor` start a fresh prerelease from the next patch, minor, or major version respectively, such as `1.2.3 -> 1.3.0-rc.1` with `preminor` + `rc`."
-msgstr "`prepatch`, `preminor` e `premajor` iniciam uma nova prerelease a partir da próxima versão patch, minor ou major, respectivamente, por exemplo `1.2.3 -> 1.3.0-rc.1` com `preminor` + `rc`."
+msgid ""
+"`prepatch`, `preminor`, and `premajor` start a fresh prerelease from the "
+"next patch, minor, or major version respectively, such as `1.2.3 -> "
+"1.3.0-rc.1` with `preminor` + `rc`."
+msgstr ""
+"`prepatch`, `preminor` e `premajor` iniciam uma nova prerelease a partir da "
+"próxima versão patch, minor ou major, respectivamente, por exemplo `1.2.3 -> "
+"1.3.0-rc.1` com `preminor` + `rc`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:138
-msgid "Bumping within the same channel increments the sequence number, such as `alpha.1 -> alpha.2`."
-msgstr "Incrementar dentro do mesmo canal aumenta o número de sequência, como em `alpha.1 -> alpha.2`."
+msgid ""
+"Bumping within the same channel increments the sequence number, such as `"
+"alpha.1 -> alpha.2`."
+msgstr ""
+"Incrementar dentro do mesmo canal aumenta o número de sequência, como em `"
+"alpha.1 -> alpha.2`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:140
-msgid "`release` removes prerelease and build metadata while keeping the same `major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`."
-msgstr "`release` remove metadados de prerelease e build, mantendo o mesmo `major.minor.patch`, por exemplo `1.2.3-rc.2 -> 1.2.3`."
+msgid ""
+"`release` removes prerelease and build metadata while keeping the same "
+"`major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`."
+msgstr ""
+"`release` remove metadados de prerelease e build, mantendo o mesmo "
+"`major.minor.patch`, por exemplo `1.2.3-rc.2 -> 1.2.3`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/semver.md:142
-msgid "Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade is not (for example, `rc -> beta` raises an error)."
-msgstr "Promoção de canal é permitida (`alpha -> beta -> rc`), mas rebaixamento não é permitido, por exemplo `rc -> beta` gera erro."
+msgid ""
+"Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade "
+"is not (for example, `rc -> beta` raises an error)."
+msgstr ""
+"Promoção de canal é permitida (`alpha -> beta -> rc`), mas rebaixamento não "
+"é permitido, por exemplo `rc -> beta` gera erro."

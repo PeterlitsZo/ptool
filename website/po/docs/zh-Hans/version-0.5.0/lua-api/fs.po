@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:1
 msgid "Filesystem API"
@@ -19,7 +30,8 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:9
-msgid "`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
+msgid ""
+"`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
 msgstr "`ptool.fs.read(path)` 按原始字节读取文件，并返回一个 Lua 字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:11
@@ -37,11 +49,13 @@ msgid "Notes:"
 msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:16
-msgid "The returned Lua string contains the file bytes exactly as stored on disk."
+msgid ""
+"The returned Lua string contains the file bytes exactly as stored on disk."
 msgstr "返回的 Lua 字符串会精确包含磁盘上的文件字节。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:17
-msgid "Text files continue to work as before, but binary files are also supported."
+msgid ""
+"Text files continue to work as before, but binary files are also supported."
 msgstr "文本文件依然可以像以前一样读取，同时也支持二进制文件。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:19
@@ -59,8 +73,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:33
-msgid "`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, overwriting existing contents."
-msgstr "`ptool.fs.write(path, content)` 将 Lua 字符串按原始字节写入文件，并覆盖已有内容。"
+msgid ""
+"`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, "
+"overwriting existing contents."
+msgstr "`ptool.fs.write(path, content)` 将 Lua 字符串按原始字节写入文件，并覆盖已有内"
+"容。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:36
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:36"
@@ -99,7 +116,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:55
-msgid "`ptool.fs.mkdir(path)` creates a directory. If parent directories do not exist, they are created recursively."
+msgid ""
+"`ptool.fs.mkdir(path)` creates a directory. If parent directories do not "
+"exist, they are created recursively."
 msgstr "`ptool.fs.mkdir(path)` 创建目录。如果父目录不存在，会递归创建。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:58
@@ -146,27 +165,43 @@ msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr "`v0.2.0` - 引入。 `v0.5.0` - 新增 `working_dir` 选项。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:88
-msgid "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically."
-msgstr "`ptool.fs.glob(pattern[, options])` 使用 Unix 风格 glob 语法匹配文件系统 路径，并按字典序返回命中的路径字符串数组。"
+msgid ""
+"`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-"
+"style glob syntax and returns a string array of matched paths sorted "
+"lexicographically."
+msgstr ""
+"`ptool.fs.glob(pattern[, options])` 使用 Unix 风格 glob 语法匹配文件系统 路径"
+"，并按字典序返回命中的路径字符串数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:92
-msgid "`pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "`pattern`（string，必填）：glob 模式。相对模式会从当前 `ptool` 运行时目录 解析，因此会受到 `ptool.cd(...)` 的影响。"
+msgid ""
+"`pattern` (string, required): A glob pattern. Relative patterns are resolved "
+"from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
+msgstr ""
+"`pattern`（string，必填）：glob 模式。相对模式会从当前 `ptool` 运行时目录 解"
+"析，因此会受到 `ptool.cd(...)` 的影响。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:94
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr "`options`（table，可选）：glob 选项。支持："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:94
-msgid "`working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory."
-msgstr "`working_dir`（string，可选）：覆盖相对模式解析时使用的基准目录。 相对 `working_dir` 会从当前 `ptool` 运行时目录解析。"
+msgid ""
+"`working_dir` (string, optional): Override the base directory used to "
+"resolve relative patterns. Relative `working_dir` values are resolved from "
+"the current `ptool` runtime directory."
+msgstr ""
+"`working_dir`（string，可选）：覆盖相对模式解析时使用的基准目录。 相对 "
+"`working_dir` 会从当前 `ptool` 运行时目录解析。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:98
 msgid "Returns: `string[]`."
 msgstr "返回：`string[]`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:99
-msgid "Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`."
+msgid ""
+"Hidden files and directories are matched only when the corresponding pattern "
+"component explicitly starts with `.`."
 msgstr "隐藏文件和目录只有在对应模式片段显式以 `.` 开头时才会被匹配。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:102

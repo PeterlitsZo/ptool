@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:1
 msgid "Log API"
 msgstr "API de log"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:3
-msgid "`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`."
-msgstr "`ptool.log` expõe utilitários de logging por nível tanto em `ptool.log` quanto em `p.log`."
+msgid ""
+"`ptool.log` exposes level-based terminal logging helpers under both "
+"`ptool.log` and `p.log`."
+msgstr ""
+"`ptool.log` expõe utilitários de logging por nível tanto em `ptool.log` "
+"quanto em `p.log`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:6
 msgid "Every log call renders a line in this format:"
@@ -22,20 +37,35 @@ msgid "The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format."
 msgstr "O timestamp usa a hora local no formato `YYYY-MM-DD HH:MM:SS`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:15
-msgid "The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and `ERROR`."
-msgstr "O rótulo de nível usa os nomes completos `TRACE`, `DEBUG`, `INFO`, `WARN` e `ERROR`."
+msgid ""
+"The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and "
+"`ERROR`."
+msgstr ""
+"O rótulo de nível usa os nomes completos `TRACE`, `DEBUG`, `INFO`, `WARN` e "
+"`ERROR`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:17
-msgid "Colored output is enabled automatically when `ptool` is writing to a terminal."
-msgstr "A saída colorida é habilitada automaticamente quando o `ptool` está escrevendo em um terminal."
+msgid ""
+"Colored output is enabled automatically when `ptool` is writing to a "
+"terminal."
+msgstr ""
+"A saída colorida é habilitada automaticamente quando o `ptool` está "
+"escrevendo em um terminal."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:19
-msgid "`ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`."
-msgstr "`ptool.log.error(...)` escreve em `stderr`. Os demais níveis escrevem em `stdout`."
+msgid ""
+"`ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`."
+msgstr ""
+"`ptool.log.error(...)` escreve em `stderr`. Os demais níveis escrevem em "
+"`stdout`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:20
-msgid "Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form."
-msgstr "Vários argumentos são unidos com espaços. Valores que não são string são renderizados em uma forma inspect de linha única."
+msgid ""
+"Multiple arguments are joined with spaces. Non-string values are rendered in "
+"a single-line inspected form."
+msgstr ""
+"Vários argumentos são unidos com espaços. Valores que não são string são "
+"renderizados em uma forma inspect de linha única."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:23
 msgid "ptool.log.trace"

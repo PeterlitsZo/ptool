@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:1
 msgid "Args API"
 msgstr "Args API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:3
-msgid "CLI argument schema and parsing helpers are available under `ptool.args` and `p.args`."
+msgid ""
+"CLI argument schema and parsing helpers are available under `ptool.args` and "
+"`p.args`."
 msgstr "CLI 参数模式定义与解析辅助能力位于 `ptool.args` 和 `p.args` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:5
@@ -19,12 +32,18 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:9
-msgid "`ptool.args.arg(id, kind, options)` creates an argument builder for use in `ptool.args.parse(...).schema.args`."
-msgstr "`ptool.args.arg(id, kind, options)` 创建一个参数构造器，用于 `ptool.args.parse(...).schema.args`。"
+msgid ""
+"`ptool.args.arg(id, kind, options)` creates an argument builder for use in "
+"`ptool.args.parse(...).schema.args`."
+msgstr ""
+"`ptool.args.arg(id, kind, options)` 创建一个参数构造器，用于 "
+"`ptool.args.parse(...).schema.args`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:12
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:12"
-msgid "`id` (string, required): The argument identifier. It is also the key in the returned table."
+msgid ""
+"`id` (string, required): The argument identifier. It is also the key in the "
+"returned table."
 msgstr "`id`（string，必填）：参数标识符。它也会作为返回表中的键。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:14
@@ -53,19 +72,28 @@ msgid "`\"positional\"`: A positional argument."
 msgstr "`\"positional\"`：位置参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:19
-msgid "`options` (table, optional): The same optional fields supported by argument tables in `ptool.args.parse`, such as `long`, `short`, `help`, `required`, `multiple`, and `default`."
-msgstr "`options`（table，可选）：与 `ptool.args.parse` 中参数表支持的可选字段相同， 例如 `long`、`short`、`help`、`required`、`multiple` 和 `default`。"
+msgid ""
+"`options` (table, optional): The same optional fields supported by argument "
+"tables in `ptool.args.parse`, such as `long`, `short`, `help`, `required`, "
+"`multiple`, and `default`."
+msgstr ""
+"`options`（table，可选）：与 `ptool.args.parse` 中参数表支持的可选字段相同， "
+"例如 `long`、`short`、`help`、`required`、`multiple` 和 `default`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:23
 msgid "The builder supports chainable methods, all of which return itself:"
 msgstr "构造器支持链式方法，且每个方法都会返回自身："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:25
-msgid "`arg:long(value)` sets the long option name. Supported only for non-`positional` arguments."
+msgid ""
+"`arg:long(value)` sets the long option name. Supported only for "
+"non-`positional` arguments."
 msgstr "`arg:long(value)`：设置长选项名。仅适用于非 `positional` 参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:27
-msgid "`arg:short(value)` sets the short option name. Supported only for non-`positional` arguments."
+msgid ""
+"`arg:short(value)` sets the short option name. Supported only for "
+"non-`positional` arguments."
 msgstr "`arg:short(value)`：设置短选项名。仅适用于非 `positional` 参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:29
@@ -73,15 +101,21 @@ msgid "`arg:help(value)` sets the help text."
 msgstr "`arg:help(value)`：设置帮助文本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:30
-msgid "`arg:required(value)` sets whether the argument is required. If `value` is omitted, it defaults to `true`."
+msgid ""
+"`arg:required(value)` sets whether the argument is required. If `value` is "
+"omitted, it defaults to `true`."
 msgstr "`arg:required(value)`：设置参数是否必填。如果省略 `value`，默认是 `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:32
-msgid "`arg:multiple(value)` sets whether the argument can be repeated. If `value` is omitted, it defaults to `true`."
+msgid ""
+"`arg:multiple(value)` sets whether the argument can be repeated. If `value` "
+"is omitted, it defaults to `true`."
 msgstr "`arg:multiple(value)`：设置参数是否可重复。如果省略 `value`，默认是 `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:34
-msgid "`arg:default(value)` sets the default value. If `value = nil`, the default is cleared."
+msgid ""
+"`arg:default(value)` sets the default value. If `value = nil`, the default "
+"is cleared."
 msgstr "`arg:default(value)`：设置默认值。如果 `value = nil`，则清除默认值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:37
@@ -102,11 +136,16 @@ msgid "`v0.3.0` - Added `subcommands` support."
 msgstr "`v0.3.0` - 添加 `subcommands` 支持。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:55
-msgid "`ptool.args.parse(schema)` parses script arguments with `clap` and returns a table indexed by `id`."
-msgstr "`ptool.args.parse(schema)` 使用 `clap` 解析脚本参数，并返回一个以 `id` 为键的表。"
+msgid ""
+"`ptool.args.parse(schema)` parses script arguments with `clap` and returns a "
+"table indexed by `id`."
+msgstr "`ptool.args.parse(schema)` 使用 `clap` 解析脚本参数，并返回一个以 `id` 为键的"
+"表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:58
-msgid "Script arguments come from the part after `--` in `ptool run <lua_file> -- ...`."
+msgid ""
+"Script arguments come from the part after `--` in `ptool run <lua_file> -- "
+"...`."
 msgstr "脚本参数来自 `ptool run <lua_file> -- ...` 中 `--` 之后的部分。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:60
@@ -119,7 +158,9 @@ msgid "Schema Structure"
 msgstr "Schema 结构"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:78
-msgid "`name` (string, optional): The command name, used in help output. Defaults to the script file name."
+msgid ""
+"`name` (string, optional): The command name, used in help output. Defaults "
+"to the script file name."
 msgstr "`name`（string，可选）：命令名称，用于帮助输出。默认是脚本文件名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:80
@@ -127,7 +168,9 @@ msgid "`about` (string, optional): Help description."
 msgstr "`about`（string，可选）：帮助描述。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:81
-msgid "`args` (table, optional): An array of argument definitions. Each item supports two forms:"
+msgid ""
+"`args` (table, optional): An array of argument definitions. Each item "
+"supports two forms:"
 msgstr "`args`（table，可选）：参数定义数组。每个元素支持两种形式："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:81
@@ -139,8 +182,13 @@ msgid "A builder object returned by `ptool.args.arg(...)`."
 msgstr "`ptool.args.arg(...)` 返回的构造器对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:85
-msgid "`subcommands` (table, optional): A map of subcommand name to subcommand schema. Each subcommand schema supports `about`, `args`, and `subcommands` recursively."
-msgstr "`subcommands`（table，可选）：子命令名到子命令 schema 的映射。每个子命令 schema 都支持递归定义 `about`、`args` 和 `subcommands`。"
+msgid ""
+"`subcommands` (table, optional): A map of subcommand name to subcommand "
+"schema. Each subcommand schema supports `about`, `args`, and `subcommands` "
+"recursively."
+msgstr ""
+"`subcommands`（table，可选）：子命令名到子命令 schema 的映射。每个子命令 "
+"schema 都支持递归定义 `about`、`args` 和 `subcommands`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:89
 msgid "At least one of `args` or `subcommands` must be provided."
@@ -152,7 +200,9 @@ msgstr "参数表字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:93
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:93"
-msgid "`id` (string, required): The argument identifier. It is also the key in the returned table."
+msgid ""
+"`id` (string, required): The argument identifier. It is also the key in the "
+"returned table."
 msgstr "`id`（string，必填）：参数标识符。它也会作为返回表中的键。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:95
@@ -181,11 +231,18 @@ msgid "`\"positional\"`: A positional argument."
 msgstr "`\"positional\"`：位置参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:100
-msgid "`long` (string, optional): The long option name, such as `\"name\"` for `--name`. For non-`positional` arguments, the default can be derived from `id`."
-msgstr "`long`（string，可选）：长选项名，例如 `\"name\"` 对应 `--name`。对于非 `positional` 参数，默认可以从 `id` 推导。"
+msgid ""
+"`long` (string, optional): The long option name, such as `\"name\"` for "
+"`--name`. For non-`positional` arguments, the default can be derived from "
+"`id`."
+msgstr ""
+"`long`（string，可选）：长选项名，例如 `\"name\"` 对应 `--name`。对于非 "
+"`positional` 参数，默认可以从 `id` 推导。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:103
-msgid "`short` (string, optional): The short option name, a single character such as `\"v\"` for `-v`."
+msgid ""
+"`short` (string, optional): The short option name, a single character such "
+"as `\"v\"` for `-v`."
 msgstr "`short`（string，可选）：短选项名，单个字符，例如 `\"v\"` 对应 `-v`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:105
@@ -193,11 +250,15 @@ msgid "`help` (string, optional): Help text for the argument."
 msgstr "`help`（string，可选）：参数帮助文本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:106
-msgid "`required` (boolean, optional): Whether the argument is required. Defaults to `false`."
+msgid ""
+"`required` (boolean, optional): Whether the argument is required. Defaults "
+"to `false`."
 msgstr "`required`（boolean，可选）：参数是否必填。默认是 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:108
-msgid "`multiple` (boolean, optional): Whether the argument can be repeated. Defaults to `false`."
+msgid ""
+"`multiple` (boolean, optional): Whether the argument can be repeated. "
+"Defaults to `false`."
 msgstr "`multiple`（boolean，可选）：参数是否允许重复出现。默认是 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:110
@@ -205,8 +266,12 @@ msgid "`default` (string/integer, optional): The default value."
 msgstr "`default`（string/integer，可选）：默认值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:112
-msgid "When `subcommands` is present, the current command's `args` act as shared options for that command tree, and are accepted before or after the selected subcommand."
-msgstr "当存在 `subcommands` 时，当前命令层级里的 `args` 会作为该命令树的共享选项， 可以写在所选子命令之前，也可以写在之后。"
+msgid ""
+"When `subcommands` is present, the current command's `args` act as shared "
+"options for that command tree, and are accepted before or after the selected "
+"subcommand."
+msgstr "当存在 `subcommands` 时，当前命令层级里的 `args` 会作为该命令树的共享选项， "
+"可以写在所选子命令之前，也可以写在之后。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:116
 msgid "Example with subcommands:"
@@ -217,19 +282,24 @@ msgid "Constraints"
 msgstr "约束"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:149
-msgid "The following constraints apply to both argument tables and builder syntax."
+msgid ""
+"The following constraints apply to both argument tables and builder syntax."
 msgstr "下列约束同时适用于参数表形式和构造器语法。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:150
-msgid "Non-`positional` arguments may omit `long` and `short`. If `long` is omitted, `id` is used automatically."
-msgstr "非 `positional` 参数可以省略 `long` 和 `short`。如果省略 `long`，会自动使用 `id`。"
+msgid ""
+"Non-`positional` arguments may omit `long` and `short`. If `long` is "
+"omitted, `id` is used automatically."
+msgstr "非 `positional` 参数可以省略 `long` 和 `short`。如果省略 `long`，会自动使用 "
+"`id`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:152
 msgid "`positional` arguments cannot set `long`, `short`, or `default`."
 msgstr "`positional` 参数不能设置 `long`、`short` 或 `default`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:153
-msgid "When `positional.multiple = true`, it must be the last argument in `args`."
+msgid ""
+"When `positional.multiple = true`, it must be the last argument in `args`."
 msgstr "当 `positional.multiple = true` 时，它必须是 `args` 中最后一个参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:154
@@ -237,27 +307,38 @@ msgid "`multiple = true` is supported only for `string` and `positional`."
 msgstr "`multiple = true` 只支持 `string` 和 `positional`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:155
-msgid "`default` is supported only for `string` and `int`, and cannot be used together with `multiple = true`."
+msgid ""
+"`default` is supported only for `string` and `int`, and cannot be used "
+"together with `multiple = true`."
 msgstr "`default` 只支持 `string` 和 `int`，且不能与 `multiple = true` 同时使用。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:157
-msgid "When `subcommands` is present, `positional` arguments are not allowed in that same schema."
+msgid ""
+"When `subcommands` is present, `positional` arguments are not allowed in "
+"that same schema."
 msgstr "当存在 `subcommands` 时，同一层 schema 中不能定义 `positional` 参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:159
-msgid "When `subcommands` is present at the top level, argument ids `command_path` and `args` are reserved."
+msgid ""
+"When `subcommands` is present at the top level, argument ids `command_path` "
+"and `args` are reserved."
 msgstr "当顶层存在 `subcommands` 时，参数 id `command_path` 和 `args` 为保留名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:161
-msgid "Along one selected subcommand path, ancestor and descendant subcommands cannot reuse the same argument `id`, because their values are merged into one `args` table."
-msgstr "在一条实际命中的子命令路径上，祖先和后代子命令不能复用同一个参数 `id`， 因为它们会被合并到同一个 `args` 表里。"
+msgid ""
+"Along one selected subcommand path, ancestor and descendant subcommands "
+"cannot reuse the same argument `id`, because their values are merged into "
+"one `args` table."
+msgstr "在一条实际命中的子命令路径上，祖先和后代子命令不能复用同一个参数 `id`， 因为"
+"它们会被合并到同一个 `args` 表里。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:165
 msgid "Return Value"
 msgstr "返回值"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:167
-msgid "A Lua table is returned where keys are `id` and value types are as follows:"
+msgid ""
+"A Lua table is returned where keys are `id` and value types are as follows:"
 msgstr "返回一个 Lua 表，其中键为 `id`，值类型如下："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:169
@@ -277,7 +358,8 @@ msgid "`positional` -> `string` (or `string[]` when `multiple = true`)"
 msgstr "`positional` -> `string`（当 `multiple = true` 时为 `string[]`）"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:174
-msgid "When `subcommands` is not present, the return value stays flat as above."
+msgid ""
+"When `subcommands` is not present, the return value stays flat as above."
 msgstr "当不存在 `subcommands` 时，返回结构保持上述扁平形式不变。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:176
@@ -289,11 +371,15 @@ msgid "Top-level `args` values are returned directly on the top-level table."
 msgstr "顶层 `args` 的值直接放在顶层表上。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:179
-msgid "`command_path` -> `string[]`: The matched subcommand path, for example `{\"build\", \"web\"}`."
+msgid ""
+"`command_path` -> `string[]`: The matched subcommand path, for example `{"
+"\"build\", \"web\"}`."
 msgstr "`command_path` -> `string[]`：命中的子命令路径，例如 `{\"build\", \"web\"}`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:181
-msgid "`args` -> `table`: The merged argument values from the matched subcommand path."
+msgid ""
+"`args` -> `table`: The merged argument values from the matched subcommand "
+"path."
 msgstr "`args` -> `table`：命中的子命令路径上所有参数合并后的结果表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:183

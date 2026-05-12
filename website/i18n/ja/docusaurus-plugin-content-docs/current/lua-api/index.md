@@ -9,6 +9,7 @@
 ## モジュール
 
 - [引数 API](./args.md): Lua スクリプト向けのコマンドライン引数スキーマ解析。
+- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
 - [SemVer API](./semver.md): セマンティックバージョンの解析、比較、更新。
 - [ハッシュ API](./hash.md): SHA-256、SHA-1、MD5 ダイジェストを計算する。
 - [ネットワーク API](./net.md): URL、IP アドレス、host-port ペアを解析する。

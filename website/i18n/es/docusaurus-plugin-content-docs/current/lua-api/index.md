@@ -9,6 +9,7 @@
 ## Módulos
 
 - [API de argumentos](./args.md): Análisis de esquemas de argumentos de línea de comandos para scripts Lua.
+- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
 - [API de SemVer](./semver.md): Analiza, compara y actualiza versiones semánticas.
 - [API de hash](./hash.md): Calcula resúmenes SHA-256, SHA-1 y MD5.
 - [API de red](./net.md): Analiza URL, direcciones IP y pares host-puerto.

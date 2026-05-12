@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: es\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:1
 msgid "Database API"
 msgstr "API de base de datos"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:3
-msgid "Database connection and query helpers are available under `ptool.db` and `p.db`."
-msgstr "Las utilidades de conexión y consulta de bases de datos están disponibles bajo `ptool.db` y `p.db`."
+msgid ""
+"Database connection and query helpers are available under `ptool.db` and "
+"`p.db`."
+msgstr ""
+"Las utilidades de conexión y consulta de bases de datos están disponibles "
+"bajo `ptool.db` y `p.db`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:5
 msgid "ptool.db.connect"
@@ -19,8 +34,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:9
-msgid "`ptool.db.connect(url_or_options)` opens a database connection and returns a `Connection` object."
-msgstr "`ptool.db.connect(url_or_options)` abre una conexión de base de datos y devuelve un objeto `Connection`."
+msgid ""
+"`ptool.db.connect(url_or_options)` opens a database connection and returns a "
+"`Connection` object."
+msgstr ""
+"`ptool.db.connect(url_or_options)` abre una conexión de base de datos y "
+"devuelve un objeto `Connection`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:12
 msgid "Supported databases:"
@@ -48,7 +67,8 @@ msgstr "`url_or_options` (string|table, obligatorio):"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:20
 msgid "When a string is provided, it is treated as the database URL."
-msgstr "Cuando se proporciona una cadena, se trata como la URL de base de datos."
+msgstr ""
+"Cuando se proporciona una cadena, se trata como la URL de base de datos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:20
 msgid "When a table is provided, it currently supports:"
@@ -71,12 +91,21 @@ msgid "`sqlite:test.db` and `sqlite://test.db` are supported."
 msgstr "Se admiten `sqlite:test.db` y `sqlite://test.db`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:36
-msgid "Relative SQLite paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "Las rutas SQLite relativas se resuelven desde el directorio de ejecución actual de `ptool`, por lo que siguen a `ptool.cd(...)`."
+msgid ""
+"Relative SQLite paths are resolved from the current `ptool` runtime "
+"directory, so they follow `ptool.cd(...)`."
+msgstr ""
+"Las rutas SQLite relativas se resuelven desde el directorio de ejecución "
+"actual de `ptool`, por lo que siguen a `ptool.cd(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:38
-msgid "If no `mode=` query parameter is provided, SQLite connections default to `mode=rwc`, which allows creating the database file automatically."
-msgstr "Si no se proporciona el parámetro de consulta `mode=`, las conexiones SQLite usan por defecto `mode=rwc`, lo que permite crear el archivo de base de datos automáticamente."
+msgid ""
+"If no `mode=` query parameter is provided, SQLite connections default to "
+"`mode=rwc`, which allows creating the database file automatically."
+msgstr ""
+"Si no se proporciona el parámetro de consulta `mode=`, las conexiones SQLite "
+"usan por defecto `mode=rwc`, lo que permite crear el archivo de base de "
+"datos automáticamente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:41"
@@ -93,8 +122,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:54
-msgid "`Connection` represents an open database connection returned by `ptool.db.connect()`."
-msgstr "`Connection` representa una conexión de base de datos abierta devuelta por `ptool.db.connect()`."
+msgid ""
+"`Connection` represents an open database connection returned by "
+"`ptool.db.connect()`."
+msgstr ""
+"`Connection` representa una conexión de base de datos abierta devuelta por "
+"`ptool.db.connect()`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:57
 msgid "It is implemented as a Lua userdata."
@@ -137,16 +170,26 @@ msgid "`params` is optional."
 msgstr "`params` es opcional."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:71
-msgid "When `params` is an array table, it is treated as positional parameters and SQL placeholders should use `?`."
-msgstr "Cuando `params` es una tabla tipo arreglo, se trata como parámetros posicionales y los placeholders SQL deben usar `?`."
+msgid ""
+"When `params` is an array table, it is treated as positional parameters and "
+"SQL placeholders should use `?`."
+msgstr ""
+"Cuando `params` es una tabla tipo arreglo, se trata como parámetros "
+"posicionales y los placeholders SQL deben usar `?`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:73
-msgid "When `params` is a key-value table, it is treated as named parameters and SQL placeholders should use `:name`."
-msgstr "Cuando `params` es una tabla clave-valor, se trata como parámetros con nombre y los placeholders SQL deben usar `:name`."
+msgid ""
+"When `params` is a key-value table, it is treated as named parameters and "
+"SQL placeholders should use `:name`."
+msgstr ""
+"Cuando `params` es una tabla clave-valor, se trata como parámetros con "
+"nombre y los placeholders SQL deben usar `:name`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:75
 msgid "Positional and named parameters cannot be mixed in the same call."
-msgstr "No se pueden mezclar parámetros posicionales y con nombre en la misma llamada."
+msgstr ""
+"No se pueden mezclar parámetros posicionales y con nombre en la misma "
+"llamada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:76
 msgid "Supported parameter value types are:"
@@ -217,8 +260,12 @@ msgid "Binary/blob columns are also returned as Lua strings."
 msgstr "Las columnas binarias/blob también se devuelven como cadenas Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:93
-msgid "If a query result contains duplicate column names, an error is raised. Use SQL aliases such as `AS` to disambiguate them."
-msgstr "Si un resultado de consulta contiene nombres de columna duplicados, se produce un error. Usa alias SQL como `AS` para desambiguarlos."
+msgid ""
+"If a query result contains duplicate column names, an error is raised. Use "
+"SQL aliases such as `AS` to disambiguate them."
+msgstr ""
+"Si un resultado de consulta contiene nombres de columna duplicados, se "
+"produce un error. Usa alias SQL como `AS` para desambiguarlos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:96
 msgid "query"
@@ -268,8 +315,12 @@ msgid "Canonical API name: `ptool.db.Connection:query_one`."
 msgstr "Canonical API name: `ptool.db.Connection:query_one`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:130
-msgid "`db:query_one(sql, params?)` returns the first row as a table, or `nil` if the query returns no rows."
-msgstr "`db:query_one(sql, params?)` devuelve la primera fila como tabla, o `nil` si la consulta no devuelve filas."
+msgid ""
+"`db:query_one(sql, params?)` returns the first row as a table, or `nil` if "
+"the query returns no rows."
+msgstr ""
+"`db:query_one(sql, params?)` devuelve la primera fila como tabla, o `nil` si "
+"la consulta no devuelve filas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:133"
@@ -290,8 +341,12 @@ msgid "Canonical API name: `ptool.db.Connection:scalar`."
 msgstr "Canonical API name: `ptool.db.Connection:scalar`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:148
-msgid "`db:scalar(sql, params?)` returns the first column of the first row, or `nil` if the query returns no rows."
-msgstr "`db:scalar(sql, params?)` devuelve la primera columna de la primera fila, o `nil` si la consulta no devuelve filas."
+msgid ""
+"`db:scalar(sql, params?)` returns the first column of the first row, or `nil`"
+" if the query returns no rows."
+msgstr ""
+"`db:scalar(sql, params?)` devuelve la primera columna de la primera fila, o "
+"`nil` si la consulta no devuelve filas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:151"
@@ -312,8 +367,10 @@ msgid "Canonical API name: `ptool.db.Connection:execute`."
 msgstr "Canonical API name: `ptool.db.Connection:execute`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:164
-msgid "`db:execute(sql, params?)` executes a statement and returns a table with:"
-msgstr "`db:execute(sql, params?)` ejecuta una sentencia y devuelve una tabla con:"
+msgid ""
+"`db:execute(sql, params?)` executes a statement and returns a table with:"
+msgstr ""
+"`db:execute(sql, params?)` ejecuta una sentencia y devuelve una tabla con:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:166
 msgid "`rows_affected` (integer): The number of affected rows."
@@ -339,7 +396,9 @@ msgstr "Canonical API name: `ptool.db.Connection:transaction`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:181
 msgid "`db:transaction(fn)` runs `fn(tx)` inside a database transaction."
-msgstr "`db:transaction(fn)` ejecuta `fn(tx)` dentro de una transacción de base de datos."
+msgstr ""
+"`db:transaction(fn)` ejecuta `fn(tx)` dentro de una transacción de base de "
+"datos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:183
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:183"
@@ -351,16 +410,24 @@ msgid "If `fn(tx)` returns normally, the transaction is committed."
 msgstr "Si `fn(tx)` devuelve normalmente, la transacción se confirma."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:186
-msgid "If `fn(tx)` raises an error, the transaction is rolled back and the error is re-raised."
-msgstr "Si `fn(tx)` produce un error, la transacción se revierte y el error se vuelve a lanzar."
+msgid ""
+"If `fn(tx)` raises an error, the transaction is rolled back and the error is "
+"re-raised."
+msgstr ""
+"Si `fn(tx)` produce un error, la transacción se revierte y el error se "
+"vuelve a lanzar."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:188
 msgid "Nested transactions are not supported."
 msgstr "No se admiten transacciones anidadas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:189
-msgid "While the callback is active, the outer connection object must not be used; use the provided `tx` object instead."
-msgstr "Mientras la devolución de llamada está activa, no debe usarse el objeto de conexión exterior; usa en su lugar el objeto `tx` proporcionado."
+msgid ""
+"While the callback is active, the outer connection object must not be used; "
+"use the provided `tx` object instead."
+msgstr ""
+"Mientras la devolución de llamada está activa, no debe usarse el objeto de "
+"conexión exterior; usa en su lugar el objeto `tx` proporcionado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:192
 msgid "The `tx` object supports the same query methods as `Connection`:"
@@ -415,7 +482,9 @@ msgstr "Después de cerrar, la conexión ya no puede usarse."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:228
 msgid "Closing during an active transaction callback raises an error."
-msgstr "Cerrar durante una devolución de llamada de transacción activa produce un error."
+msgstr ""
+"Cerrar durante una devolución de llamada de transacción activa produce un "
+"error."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:230
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/db.md:230"

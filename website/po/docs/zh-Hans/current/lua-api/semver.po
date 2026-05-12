@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:1
 msgid "SemVer API"
 msgstr "SemVer API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:3
-msgid "Version parsing, validation, comparison, and bumping helpers live under `ptool.semver` and `p.semver`."
+msgid ""
+"Version parsing, validation, comparison, and bumping helpers live under "
+"`ptool.semver` and `p.semver`."
 msgstr "版本解析、校验、比较和提升辅助能力位于 `ptool.semver` 和 `p.semver` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:5
@@ -19,11 +32,15 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:9
-msgid "`ptool.semver.parse(version)` parses a version string and returns a `Version` object."
+msgid ""
+"`ptool.semver.parse(version)` parses a version string and returns a `Version`"
+" object."
 msgstr "`ptool.semver.parse(version)` 解析版本字符串，并返回 `Version` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:12
-msgid "`version` (string, required): A semantic version string, optionally prefixed with `v`."
+msgid ""
+"`version` (string, required): A semantic version string, optionally prefixed "
+"with `v`."
 msgstr "`version`（string，必填）：语义化版本字符串，可选带 `v` 前缀。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:15
@@ -40,7 +57,8 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:28
-msgid "`ptool.semver.is_valid(version)` checks whether a version string is valid."
+msgid ""
+"`ptool.semver.is_valid(version)` checks whether a version string is valid."
 msgstr "`ptool.semver.is_valid(version)` 检查版本字符串是否合法。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:30
@@ -65,7 +83,8 @@ msgid "`ptool.semver.compare(a, b)` compares two versions."
 msgstr "`ptool.semver.compare(a, b)` 比较两个版本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:44
-msgid "`a` / `b` (string|Version, required): A version string or a `Version` object."
+msgid ""
+"`a` / `b` (string|Version, required): A version string or a `Version` object."
 msgstr "`a` / `b`（string|Version，必填）：版本字符串或 `Version` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:45
@@ -83,7 +102,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:55
-msgid "`ptool.semver.bump(v, op[, channel])` returns a new version object after applying the bump."
+msgid ""
+"`ptool.semver.bump(v, op[, channel])` returns a new version object after "
+"applying the bump."
 msgstr "`ptool.semver.bump(v, op[, channel])` 应用版本提升操作，并返回新的版本对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:58
@@ -92,13 +113,21 @@ msgstr "`v`（string|Version，必填）：原始版本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:59
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:59"
-msgid "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
-msgstr "`op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。"
+msgid ""
+"`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
+", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
+msgstr ""
+"`op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 "
+"`alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:61
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:61"
-msgid "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
-msgstr "`channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。"
+msgid ""
+"`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
+"`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
+msgstr ""
+"`channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 "
+"必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:63
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:63"
@@ -115,8 +144,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:80
-msgid "`Version` represents a parsed semantic version returned by `ptool.semver.parse(...)` or `ptool.semver.bump(...)`."
-msgstr "`Version` 表示由 `ptool.semver.parse(...)` 或 `ptool.semver.bump(...)` 返回的 已解析语义化版本。"
+msgid ""
+"`Version` represents a parsed semantic version returned by "
+"`ptool.semver.parse(...)` or `ptool.semver.bump(...)`."
+msgstr ""
+"`Version` 表示由 `ptool.semver.parse(...)` 或 `ptool.semver.bump(...)` 返回的"
+" 已解析语义化版本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:83
 msgid "It is implemented as a Lua userdata."
@@ -191,7 +224,9 @@ msgid "`v:compare(other)` compares the current version with `other`."
 msgstr "`v:compare(other)` 比较当前版本和 `other`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:107
-msgid "`other` (string|Version, required): A version string or another `Version` object."
+msgid ""
+"`other` (string|Version, required): A version string or another `Version` "
+"object."
 msgstr "`other`（string|Version，必填）：版本字符串或另一个 `Version` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:109
@@ -208,18 +243,28 @@ msgid "Canonical API name: `ptool.semver.Version:bump`."
 msgstr "规范 API 名称：`ptool.semver.Version:bump`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:115
-msgid "`v:bump(op[, channel])` returns a new `Version` object after applying the bump."
+msgid ""
+"`v:bump(op[, channel])` returns a new `Version` object after applying the "
+"bump."
 msgstr "`v:bump(op[, channel])` 应用版本提升操作，并返回新的 `Version` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:117
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:117"
-msgid "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
-msgstr "`op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。"
+msgid ""
+"`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
+", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
+msgstr ""
+"`op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 "
+"`alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:119
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:119"
-msgid "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
-msgstr "`channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。"
+msgid ""
+"`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
+"`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
+msgstr ""
+"`channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 "
+"必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:121
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:121"
@@ -247,21 +292,38 @@ msgid "Prerelease bump rules:"
 msgstr "预发布提升规则："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:133
-msgid "Bumping a stable version to `alpha`, `beta`, or `rc` first increments the patch version, then enters the target channel starting from `.1`."
-msgstr "将稳定版本提升到 `alpha`、`beta` 或 `rc` 时，会先递增 patch 版本，再进入目标 通道并从 `.1` 开始。"
+msgid ""
+"Bumping a stable version to `alpha`, `beta`, or `rc` first increments the "
+"patch version, then enters the target channel starting from `.1`."
+msgstr "将稳定版本提升到 `alpha`、`beta` 或 `rc` 时，会先递增 patch 版本，再进入目标 "
+"通道并从 `.1` 开始。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:135
-msgid "`prepatch`, `preminor`, and `premajor` start a fresh prerelease from the next patch, minor, or major version respectively, such as `1.2.3 -> 1.3.0-rc.1` with `preminor` + `rc`."
-msgstr "`prepatch`、`preminor` 和 `premajor` 会分别从下一个 patch、minor 或 major 版本开始全新的预发布，例如使用 `preminor` + `rc` 时， `1.2.3 -> 1.3.0-rc.1`。"
+msgid ""
+"`prepatch`, `preminor`, and `premajor` start a fresh prerelease from the "
+"next patch, minor, or major version respectively, such as `1.2.3 -> "
+"1.3.0-rc.1` with `preminor` + `rc`."
+msgstr ""
+"`prepatch`、`preminor` 和 `premajor` 会分别从下一个 patch、minor 或 major 版"
+"本开始全新的预发布，例如使用 `preminor` + `rc` 时， `1.2.3 -> 1.3.0-rc.1`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:138
-msgid "Bumping within the same channel increments the sequence number, such as `alpha.1 -> alpha.2`."
+msgid ""
+"Bumping within the same channel increments the sequence number, such as `"
+"alpha.1 -> alpha.2`."
 msgstr "在同一通道内继续提升时，会递增序号，例如 `alpha.1 -> alpha.2`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:140
-msgid "`release` removes prerelease and build metadata while keeping the same `major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`."
-msgstr "`release` 会移除预发布和 build 元数据，同时保持 `major.minor.patch` 不变， 例如 `1.2.3-rc.2 -> 1.2.3`。"
+msgid ""
+"`release` removes prerelease and build metadata while keeping the same "
+"`major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`."
+msgstr ""
+"`release` 会移除预发布和 build 元数据，同时保持 `major.minor.patch` 不变， 例"
+"如 `1.2.3-rc.2 -> 1.2.3`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:142
-msgid "Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade is not (for example, `rc -> beta` raises an error)."
-msgstr "允许通道升级（`alpha -> beta -> rc`），但不允许通道降级 （例如 `rc -> beta` 会抛出错误）。"
+msgid ""
+"Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade "
+"is not (for example, `rc -> beta` raises an error)."
+msgstr "允许通道升级（`alpha -> beta -> rc`），但不允许通道降级 （例如 `rc -> beta` "
+"会抛出错误）。"

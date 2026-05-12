@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:1
 msgid "Filesystem API"
@@ -7,7 +18,9 @@ msgstr "API de sistema de arquivos"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:3
 msgid "Filesystem helpers are available under `ptool.fs` and `p.fs`."
-msgstr "As utilidades de sistema de arquivos estão disponíveis em `ptool.fs` e `p.fs`."
+msgstr ""
+"As utilidades de sistema de arquivos estão disponíveis em `ptool.fs` e "
+"`p.fs`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:5
 msgid "ptool.fs.read"
@@ -19,8 +32,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:9
-msgid "`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
-msgstr "`ptool.fs.read(path)` lê um arquivo como bytes brutos e retorna uma string Lua."
+msgid ""
+"`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
+msgstr ""
+"`ptool.fs.read(path)` lê um arquivo como bytes brutos e retorna uma string "
+"Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:11
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:11"
@@ -37,12 +53,16 @@ msgid "Notes:"
 msgstr "Notas:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:16
-msgid "The returned Lua string contains the file bytes exactly as stored on disk."
+msgid ""
+"The returned Lua string contains the file bytes exactly as stored on disk."
 msgstr "A string Lua retornada contém exatamente os bytes armazenados em disco."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:17
-msgid "Text files continue to work as before, but binary files are also supported."
-msgstr "Arquivos de texto continuam funcionando como antes, e agora arquivos binários também são suportados."
+msgid ""
+"Text files continue to work as before, but binary files are also supported."
+msgstr ""
+"Arquivos de texto continuam funcionando como antes, e agora arquivos "
+"binários também são suportados."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:19
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:19"
@@ -59,8 +79,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:33
-msgid "`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, overwriting existing contents."
-msgstr "`ptool.fs.write(path, content)` grava uma string Lua em um arquivo como bytes brutos, sobrescrevendo o conteúdo existente."
+msgid ""
+"`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, "
+"overwriting existing contents."
+msgstr ""
+"`ptool.fs.write(path, content)` grava uma string Lua em um arquivo como "
+"bytes brutos, sobrescrevendo o conteúdo existente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36"
@@ -99,8 +123,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:55
-msgid "`ptool.fs.mkdir(path)` creates a directory. If parent directories do not exist, they are created recursively."
-msgstr "`ptool.fs.mkdir(path)` cria um diretório. Se diretórios pais não existirem, eles são criados recursivamente."
+msgid ""
+"`ptool.fs.mkdir(path)` creates a directory. If parent directories do not "
+"exist, they are created recursively."
+msgstr ""
+"`ptool.fs.mkdir(path)` cria um diretório. Se diretórios pais não existirem, "
+"eles são criados recursivamente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:58
 msgid "`path` (string, required): The directory path."
@@ -148,8 +176,11 @@ msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:87
-msgid "`ptool.fs.is_file(path)` checks whether a path exists and is a regular file."
-msgstr "`ptool.fs.is_file(path)` verifica se um caminho existe e é um arquivo regular."
+msgid ""
+"`ptool.fs.is_file(path)` checks whether a path exists and is a regular file."
+msgstr ""
+"`ptool.fs.is_file(path)` verifica se um caminho existe e é um arquivo "
+"regular."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:89
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:89"
@@ -176,7 +207,8 @@ msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:104
-msgid "`ptool.fs.is_dir(path)` checks whether a path exists and is a directory."
+msgid ""
+"`ptool.fs.is_dir(path)` checks whether a path exists and is a directory."
 msgstr "`ptool.fs.is_dir(path)` verifica se um caminho existe e é um diretório."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:106
@@ -204,8 +236,11 @@ msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:121
-msgid "`ptool.fs.remove(path[, options])` removes a file, symlink, or directory."
-msgstr "`ptool.fs.remove(path[, options])` remove um arquivo, link simbólico ou diretório."
+msgid ""
+"`ptool.fs.remove(path[, options])` removes a file, symlink, or directory."
+msgstr ""
+"`ptool.fs.remove(path[, options])` remove um arquivo, link simbólico ou "
+"diretório."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:123
 msgid "`path` (string, required): The path to remove."
@@ -216,12 +251,20 @@ msgid "`options` (table, optional): Remove options. Supported fields:"
 msgstr "`options` (table, opcional): Opções de remoção. Campos suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
-msgid "`recursive` (boolean, optional): Whether to remove directories recursively. Defaults to `false`."
-msgstr "`recursive` (boolean, opcional): Se diretórios devem ser removidos recursivamente. O padrão é `false`."
+msgid ""
+"`recursive` (boolean, optional): Whether to remove directories recursively. "
+"Defaults to `false`."
+msgstr ""
+"`recursive` (boolean, opcional): Se diretórios devem ser removidos "
+"recursivamente. O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
-msgid "`missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults to `false`."
-msgstr "`missing_ok` (boolean, opcional): Se caminhos ausentes devem ser ignorados. O padrão é `false`."
+msgid ""
+"`missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults "
+"to `false`."
+msgstr ""
+"`missing_ok` (boolean, opcional): Se caminhos ausentes devem ser ignorados. "
+"O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:130
 msgid "Behavior:"
@@ -253,28 +296,49 @@ msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:149
-msgid "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically."
-msgstr "`ptool.fs.glob(pattern[, options])` corresponde caminhos do sistema de arquivos usando sintaxe glob no estilo Unix e retorna um array de strings com os caminhos correspondentes, ordenados lexicograficamente."
+msgid ""
+"`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-"
+"style glob syntax and returns a string array of matched paths sorted "
+"lexicographically."
+msgstr ""
+"`ptool.fs.glob(pattern[, options])` corresponde caminhos do sistema de "
+"arquivos usando sintaxe glob no estilo Unix e retorna um array de strings "
+"com os caminhos correspondentes, ordenados lexicograficamente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:153
-msgid "`pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "`pattern` (string, obrigatório): Um padrão glob. Padrões relativos são resolvidos a partir do diretório de runtime atual do `ptool`, portanto seguem `ptool.cd(...)`."
+msgid ""
+"`pattern` (string, required): A glob pattern. Relative patterns are resolved "
+"from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
+msgstr ""
+"`pattern` (string, obrigatório): Um padrão glob. Padrões relativos são "
+"resolvidos a partir do diretório de runtime atual do `ptool`, portanto "
+"seguem `ptool.cd(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:155
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr "`options` (table, opcional): Opções de glob. Campos suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:155
-msgid "`working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory."
-msgstr "`working_dir` (string, opcional): Sobrescreve o diretório base usado para resolver padrões relativos. Valores relativos de `working_dir` são resolvidos a partir do diretório de runtime atual do `ptool`."
+msgid ""
+"`working_dir` (string, optional): Override the base directory used to "
+"resolve relative patterns. Relative `working_dir` values are resolved from "
+"the current `ptool` runtime directory."
+msgstr ""
+"`working_dir` (string, opcional): Sobrescreve o diretório base usado para "
+"resolver padrões relativos. Valores relativos de `working_dir` são "
+"resolvidos a partir do diretório de runtime atual do `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:159
 msgid "Returns: `string[]`."
 msgstr "Retorna: `string[]`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:160
-msgid "Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`."
-msgstr "Arquivos e diretórios ocultos só correspondem quando o componente de padrão correspondente começa explicitamente com `.`."
+msgid ""
+"Hidden files and directories are matched only when the corresponding pattern "
+"component explicitly starts with `.`."
+msgstr ""
+"Arquivos e diretórios ocultos só correspondem quando o componente de padrão "
+"correspondente começa explicitamente com `.`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163"

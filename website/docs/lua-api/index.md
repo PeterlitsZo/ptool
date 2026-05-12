@@ -10,6 +10,8 @@
 ## Modules
 
 - [Args API](./args.md): Command-line argument schema parsing for Lua scripts.
+- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete
+  datetimes with timezone support.
 - [SemVer API](./semver.md): Parse, compare, and bump semantic versions.
 - [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
 - [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.

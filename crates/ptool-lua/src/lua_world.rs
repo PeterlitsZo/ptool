@@ -400,6 +400,41 @@ impl LuaWorld {
         crate::db::connect(value, self.current_dir(), &self.engine)
     }
 
+    pub(crate) fn datetime_now(
+        &self,
+        timezone: Option<String>,
+    ) -> mlua::Result<crate::datetime::LuaDateTime> {
+        crate::datetime::now(&self.engine, timezone)
+    }
+
+    pub(crate) fn datetime_parse(
+        &self,
+        input: String,
+        options: Option<Table>,
+    ) -> mlua::Result<crate::datetime::LuaDateTime> {
+        crate::datetime::parse(&self.engine, input, options)
+    }
+
+    pub(crate) fn datetime_from_unix(
+        &self,
+        value: i64,
+        options: Option<Table>,
+    ) -> mlua::Result<crate::datetime::LuaDateTime> {
+        crate::datetime::from_unix(&self.engine, value, options)
+    }
+
+    pub(crate) fn datetime_compare(&self, a: Value, b: Value) -> mlua::Result<i64> {
+        crate::datetime::compare(&self.engine, a, b)
+    }
+
+    pub(crate) fn datetime_is_valid(
+        &self,
+        input: String,
+        options: Option<Table>,
+    ) -> mlua::Result<bool> {
+        crate::datetime::is_valid(&self.engine, input, options)
+    }
+
     pub(crate) fn ssh_connect(&self, value: Value) -> mlua::Result<crate::ssh::LuaSshConnection> {
         crate::ssh::connect(value, self.current_dir(), &self.engine)
     }

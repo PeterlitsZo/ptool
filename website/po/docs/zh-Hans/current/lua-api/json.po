@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:1
 msgid "JSON API"
 msgstr "JSON API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:3
-msgid "JSON parsing and serialization helpers are available under `ptool.json` and `p.json`."
+msgid ""
+"JSON parsing and serialization helpers are available under `ptool.json` and "
+"`p.json`."
 msgstr "JSON 解析与序列化辅助能力位于 `ptool.json` 和 `p.json` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:6
@@ -71,7 +84,9 @@ msgid "An error is raised if `input` is not a string."
 msgstr "如果 `input` 不是字符串，会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:28
-msgid "A JSON syntax error raises an error whose message includes the parser detail from `serde_json`."
+msgid ""
+"A JSON syntax error raises an error whose message includes the parser detail "
+"from `serde_json`."
 msgstr "如果 JSON 语法有误，会抛出错误，错误信息中包含 `serde_json` 返回的解析细节。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:31
@@ -89,7 +104,9 @@ msgid "`v0.3.0` - Introduced."
 msgstr "`v0.3.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:45
-msgid "`ptool.json.stringify(value[, options])` converts a Lua value to a JSON string."
+msgid ""
+"`ptool.json.stringify(value[, options])` converts a Lua value to a JSON "
+"string."
 msgstr "`ptool.json.stringify(value[, options])` 将 Lua 值编码为 JSON 字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:47
@@ -101,8 +118,11 @@ msgid "`options` (table, optional): Serialization options."
 msgstr "`options`（table，可选）：序列化选项。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:49
-msgid "`options.pretty` (boolean, optional): When `true`, output pretty-printed JSON. Defaults to `false`."
-msgstr "`options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。 默认为 `false`。"
+msgid ""
+"`options.pretty` (boolean, optional): When `true`, output pretty-printed "
+"JSON. Defaults to `false`."
+msgstr "`options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。 默认"
+"为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:51
 msgid "Returns: The encoded JSON string."
@@ -121,8 +141,11 @@ msgid "Pretty output uses indented multi-line JSON."
 msgstr "pretty 输出为带缩进的多行 JSON。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:57
-msgid "Values must be JSON-compatible. Functions, threads, userdata, and other non-serializable Lua values raise an error."
-msgstr "值必须与 JSON 兼容。函数、thread、userdata 以及其他不可序列化的 Lua 值会报错。"
+msgid ""
+"Values must be JSON-compatible. Functions, threads, userdata, and other non-"
+"serializable Lua values raise an error."
+msgstr "值必须与 JSON 兼容。函数、thread、userdata 以及其他不可序列化的 Lua 值会报错"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60"
@@ -134,9 +157,14 @@ msgid "Notes:"
 msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
-msgid "`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and are not preserved as JSON object fields."
-msgstr "Lua table 中的 `nil` 值遵循 `mlua` 的 serde 转换行为，不会以 JSON 对象字段的形式保留下来。"
+msgid ""
+"`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and "
+"are not preserved as JSON object fields."
+msgstr "Lua table 中的 `nil` 值遵循 `mlua` 的 serde 转换行为，不会以 JSON 对象字段的"
+"形式保留下来。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
-msgid "Array/object detection for Lua tables follows `mlua`'s serde conversion rules."
+msgid ""
+"Array/object detection for Lua tables follows `mlua`'s serde conversion "
+"rules."
 msgstr "Lua table 该被视为数组还是对象，遵循 `mlua` 的 serde 转换规则。"

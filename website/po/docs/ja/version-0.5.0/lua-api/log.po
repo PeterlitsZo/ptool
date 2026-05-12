@@ -1,13 +1,27 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:1
 msgid "Log API"
 msgstr "Log API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:3
-msgid "`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`."
-msgstr "`ptool.log` は `ptool.log` と `p.log` の両方で、レベル別の端末ログ ヘルパーを公開します。"
+msgid ""
+"`ptool.log` exposes level-based terminal logging helpers under both "
+"`ptool.log` and `p.log`."
+msgstr "`ptool.log` は `ptool.log` と `p.log` の両方で、レベル別の端末ログ ヘルパーを"
+"公開します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:6
 msgid "Every log call renders a line in this format:"
@@ -22,20 +36,29 @@ msgid "The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format."
 msgstr "タイムスタンプはローカル時刻の `YYYY-MM-DD HH:MM:SS` 形式です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:15
-msgid "The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and `ERROR`."
+msgid ""
+"The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and "
+"`ERROR`."
 msgstr "レベル名は `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR` の完全表記を 使います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:17
-msgid "Colored output is enabled automatically when `ptool` is writing to a terminal."
+msgid ""
+"Colored output is enabled automatically when `ptool` is writing to a "
+"terminal."
 msgstr "`ptool` が端末へ書き込んでいる場合は、自動的に色付き出力になります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:19
-msgid "`ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`."
-msgstr "`ptool.log.error(...)` は `stderr` に書き込み、それ以外のレベルは `stdout` に書き込みます。"
+msgid ""
+"`ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`."
+msgstr "`ptool.log.error(...)` は `stderr` に書き込み、それ以外のレベルは `stdout` に"
+"書き込みます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:20
-msgid "Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form."
-msgstr "複数引数は空白で連結されます。文字列以外の値は単一行の inspect 形式で レンダリングされます。"
+msgid ""
+"Multiple arguments are joined with spaces. Non-string values are rendered in "
+"a single-line inspected form."
+msgstr "複数引数は空白で連結されます。文字列以外の値は単一行の inspect 形式で レンダ"
+"リングされます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/log.md:23
 msgid "ptool.log.trace"

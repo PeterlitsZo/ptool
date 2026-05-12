@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:1
 msgid "Hash API"
@@ -24,7 +35,9 @@ msgstr "`ptool.hash.sha256(input)` 返回 Lua 字符串的 SHA-256 摘要。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:11
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:11"
-msgid "`input` (string, required): The input Lua string. The digest is computed from the string's raw bytes."
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
 msgstr "`input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:13
@@ -47,7 +60,9 @@ msgstr "`ptool.hash.sha1(input)` 返回 Lua 字符串的 SHA-1 摘要。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:26
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:26"
-msgid "`input` (string, required): The input Lua string. The digest is computed from the string's raw bytes."
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
 msgstr "`input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:28
@@ -70,7 +85,9 @@ msgstr "`ptool.hash.md5(input)` 返回 Lua 字符串的 MD5 摘要。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:41"
-msgid "`input` (string, required): The input Lua string. The digest is computed from the string's raw bytes."
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
 msgstr "`input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:43

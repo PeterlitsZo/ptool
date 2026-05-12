@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:1
 msgid "Filesystem API"
@@ -19,8 +30,10 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:9
-msgid "`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
-msgstr "`ptool.fs.read(path)` はファイルを生のバイト列として読み取り、Lua 文字列を 返します。"
+msgid ""
+"`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
+msgstr "`ptool.fs.read(path)` はファイルを生のバイト列として読み取り、Lua 文字列を 返"
+"します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:11
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:11"
@@ -37,11 +50,13 @@ msgid "Notes:"
 msgstr "注意:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:16
-msgid "The returned Lua string contains the file bytes exactly as stored on disk."
+msgid ""
+"The returned Lua string contains the file bytes exactly as stored on disk."
 msgstr "返される Lua 文字列には、ディスク上のファイルバイトがそのまま入ります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:17
-msgid "Text files continue to work as before, but binary files are also supported."
+msgid ""
+"Text files continue to work as before, but binary files are also supported."
 msgstr "テキストファイルは従来どおり扱えますが、バイナリファイルも読み取れます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:19
@@ -59,8 +74,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:33
-msgid "`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, overwriting existing contents."
-msgstr "`ptool.fs.write(path, content)` は Lua 文字列を生のバイト列としてファイルへ 書き込み、既存の内容を上書きします。"
+msgid ""
+"`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, "
+"overwriting existing contents."
+msgstr ""
+"`ptool.fs.write(path, content)` は Lua 文字列を生のバイト列としてファイルへ "
+"書き込み、既存の内容を上書きします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:36
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:36"
@@ -99,8 +118,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:55
-msgid "`ptool.fs.mkdir(path)` creates a directory. If parent directories do not exist, they are created recursively."
-msgstr "`ptool.fs.mkdir(path)` はディレクトリを作成します。親ディレクトリが存在 しない場合は再帰的に作成されます。"
+msgid ""
+"`ptool.fs.mkdir(path)` creates a directory. If parent directories do not "
+"exist, they are created recursively."
+msgstr "`ptool.fs.mkdir(path)` はディレクトリを作成します。親ディレクトリが存在 しな"
+"い場合は再帰的に作成されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:58
 msgid "`path` (string, required): The directory path."
@@ -146,28 +168,46 @@ msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr "`v0.2.0` - Introduced. `v0.5.0` - `working_dir` オプションを追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:88
-msgid "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically."
-msgstr "`ptool.fs.glob(pattern[, options])` は Unix 風 glob 構文でファイルシステムパスを 照合し、辞書順に並んだ一致パスの文字列配列を返します。"
+msgid ""
+"`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-"
+"style glob syntax and returns a string array of matched paths sorted "
+"lexicographically."
+msgstr ""
+"`ptool.fs.glob(pattern[, options])` は Unix 風 glob 構文でファイルシステムパ"
+"スを 照合し、辞書順に並んだ一致パスの文字列配列を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:92
-msgid "`pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "`pattern` (string, 必須): glob パターン。相対パターンは現在の `ptool` ランタイムディレクトリから解決されるため、 `ptool.cd(...)` に従います。"
+msgid ""
+"`pattern` (string, required): A glob pattern. Relative patterns are resolved "
+"from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
+msgstr ""
+"`pattern` (string, 必須): glob パターン。相対パターンは現在の `ptool` ランタ"
+"イムディレクトリから解決されるため、 `ptool.cd(...)` に従います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:94
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr "`options` (table, 任意): glob オプション。サポートされるフィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:94
-msgid "`working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory."
-msgstr "`working_dir` (string, 任意): 相対パターンの解決に使う基準 ディレクトリを上書きします。相対 `working_dir` は現在の `ptool` ランタイムディレクトリから解決されます。"
+msgid ""
+"`working_dir` (string, optional): Override the base directory used to "
+"resolve relative patterns. Relative `working_dir` values are resolved from "
+"the current `ptool` runtime directory."
+msgstr ""
+"`working_dir` (string, 任意): 相対パターンの解決に使う基準 ディレクトリを上書"
+"きします。相対 `working_dir` は現在の `ptool` ランタイムディレクトリから解決"
+"されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:98
 msgid "Returns: `string[]`."
 msgstr "戻り値: `string[]`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:99
-msgid "Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`."
-msgstr "隠しファイルや隠しディレクトリは、対応するパターン要素が明示的に `.` で始まる場合にだけ一致します。"
+msgid ""
+"Hidden files and directories are matched only when the corresponding pattern "
+"component explicitly starts with `.`."
+msgstr "隠しファイルや隠しディレクトリは、対応するパターン要素が明示的に `.` で始まる"
+"場合にだけ一致します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:102
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/fs.md:102"

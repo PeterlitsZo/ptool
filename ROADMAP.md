@@ -29,7 +29,7 @@
 - [x] Add `p.fs.is_file` and `p.fs.is_dir`, etc.
 - [x] Bugfix: "response read failed: error decoding response body" when download
       with p.http.request.
-- [ ] Add `p.datetime` module?
+- [x] Add `p.datetime` module?
 
 # v0.5.0
 

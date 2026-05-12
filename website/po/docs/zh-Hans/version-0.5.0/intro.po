@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:1
 msgid "Getting Started"
 msgstr "快速开始"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:3
-msgid "`ptool` runs Lua scripts and injects a standard library for practical automation."
+msgid ""
+"`ptool` runs Lua scripts and injects a standard library for practical "
+"automation."
 msgstr "`ptool` 用来运行 Lua 脚本，并注入一套面向实用自动化场景的标准库。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:6
@@ -22,7 +35,9 @@ msgid "For interactive exploration, `ptool` also provides:"
 msgstr "如果你想交互式试用 Lua 表达式或 `ptool` API，也可以使用："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:24
-msgid "When a script runs, `ptool` exposes its API through the global `ptool` table and the shorter alias `p`."
+msgid ""
+"When a script runs, `ptool` exposes its API through the global `ptool` table "
+"and the shorter alias `p`."
 msgstr "脚本运行时，`ptool` 会通过全局表 `ptool` 以及更短的别名 `p` 暴露 API。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:27
@@ -34,8 +49,13 @@ msgid "On Linux and macOS, install `ptool` with the release installer:"
 msgstr "在 Linux 和 macOS 上，可以使用发布安装脚本安装 `ptool`："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:35
-msgid "The installer downloads the latest prebuilt release for the current platform, installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed."
-msgstr "安装脚本会下载当前平台最新的预编译发布包，将 `ptool` 安装到 `~/.local/bin/ptool`，并在需要时打印 PATH 提示。"
+msgid ""
+"The installer downloads the latest prebuilt release for the current "
+"platform, installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint "
+"if needed."
+msgstr ""
+"安装脚本会下载当前平台最新的预编译发布包，将 `ptool` 安装到 `~/.local/bin/"
+"ptool`，并在需要时打印 PATH 提示。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:38
 msgid "To install a specific release tag instead of the latest stable release:"
@@ -50,8 +70,13 @@ msgid "Minimal script"
 msgstr "最小脚本"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:58
-msgid "`ptool.use(...)` declares the minimum required `ptool` version for the script. This keeps scripts explicit about the API version they expect and fails early on older runtimes. See [Core Lua API]{1} for details."
-msgstr "`ptool.use(...)` 用来声明脚本要求的最低 `ptool` 版本。 这样可以明确脚本依赖的 API 版本，并在运行时版本过旧时尽早失败。 详见 [Core Lua API]{1}。"
+msgid ""
+"`ptool.use(...)` declares the minimum required `ptool` version for the "
+"script. This keeps scripts explicit about the API version they expect and "
+"fails early on older runtimes. See [Core Lua API]{1} for details."
+msgstr ""
+"`ptool.use(...)` 用来声明脚本要求的最低 `ptool` 版本。 这样可以明确脚本依赖的"
+" API 版本，并在运行时版本过旧时尽早失败。 详见 [Core Lua API]{1}。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:62
 msgid "Run it with:"
@@ -74,11 +99,14 @@ msgid "Shebang scripts"
 msgstr "Shebang 脚本"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:82
-msgid "`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can start with:"
+msgid ""
+"`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can "
+"start with:"
 msgstr "`ptool` 支持 shebang 文件。配合 `.lua` 快捷形式，脚本可以这样开头："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:89
-msgid "This lets you execute the script directly once it has the executable bit."
+msgid ""
+"This lets you execute the script directly once it has the executable bit."
 msgstr "这样一来，只要脚本设置了可执行位，就可以直接执行。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:91
@@ -90,15 +118,21 @@ msgid "A script runner that understands shebang files."
 msgstr "一个支持 shebang 文件的脚本运行器。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:94
-msgid "An interactive REPL for trying Lua expressions and `ptool` APIs directly."
+msgid ""
+"An interactive REPL for trying Lua expressions and `ptool` APIs directly."
 msgstr "一个可交互使用的 REPL，方便直接试验 Lua 表达式和 `ptool` API。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:95
-msgid "Lua helpers for semver, paths, files, TOML, regexes, strings, HTTP, SSH, databases, and templates."
-msgstr "一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、 HTTP、SSH、数据库和模板。"
+msgid ""
+"Lua helpers for semver, paths, files, TOML, regexes, strings, HTTP, SSH, "
+"databases, and templates."
+msgstr "一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、 HTTP、"
+"SSH、数据库和模板。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:97
-msgid "CLI-oriented helpers for running commands, parsing arguments, and asking for interactive input."
+msgid ""
+"CLI-oriented helpers for running commands, parsing arguments, and asking for "
+"interactive input."
 msgstr "一组面向命令行场景的辅助能力，用于执行命令、解析参数和进行交互式输入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:100
@@ -106,17 +140,26 @@ msgid "Next steps"
 msgstr "下一步"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:102
-msgid "Open [REPL]{1} for interactive usage, multi-line input, and keyboard behavior."
+msgid ""
+"Open [REPL]{1} for interactive usage, multi-line input, and keyboard "
+"behavior."
 msgstr "查看 [REPL]{1} 了解交互式使用方式、多行输入和键盘行为。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:104
-msgid "Use [Lua API Overview]{1} to browse the core APIs and available modules."
+msgid ""
+"Use [Lua API Overview]{1} to browse the core APIs and available modules."
 msgstr "使用 [Lua API 概览]{1} 浏览核心 API 和可用模块。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:106
-msgid "Start with [Core Lua API]{1} for version gating, process execution, config, and script lifecycle helpers."
-msgstr "从 [Core Lua API]{1} 开始了解版本门禁、进程执行、配置和脚本 生命周期辅助能力。"
+msgid ""
+"Start with [Core Lua API]{1} for version gating, process execution, config, "
+"and script lifecycle helpers."
+msgstr "从 [Core Lua API]{1} 开始了解版本门禁、进程执行、配置和脚本 生命周期辅助能力"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:108
-msgid "Open a module page such as [Args API]{1} when you need the detailed reference for a specific feature set."
-msgstr "当你需要某个具体能力的详细参考时，可以直接打开对应模块页面，例如 [Args API]{1}。"
+msgid ""
+"Open a module page such as [Args API]{1} when you need the detailed "
+"reference for a specific feature set."
+msgstr "当你需要某个具体能力的详细参考时，可以直接打开对应模块页面，例如 [Args API]"
+"{1}。"

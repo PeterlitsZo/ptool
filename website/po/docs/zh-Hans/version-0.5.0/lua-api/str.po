@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:1
 msgid "String API"
@@ -88,7 +99,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:48
-msgid "`ptool.str.is_blank(s)` checks whether a string is empty or contains only whitespace."
+msgid ""
+"`ptool.str.is_blank(s)` checks whether a string is empty or contains only "
+"whitespace."
 msgstr "`ptool.str.is_blank(s)` 检查字符串是否为空，或是否只包含空白字符。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:51
@@ -111,7 +124,8 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:63
-msgid "`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`."
+msgid ""
+"`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`."
 msgstr "`ptool.str.starts_with(s, prefix)` 检查 `s` 是否以 `prefix` 开头。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:65
@@ -192,7 +206,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:105
-msgid "`ptool.str.split(s, sep[, options])` splits a string by a non-empty separator."
+msgid ""
+"`ptool.str.split(s, sep[, options])` splits a string by a non-empty "
+"separator."
 msgstr "`ptool.str.split(s, sep[, options])` 使用非空分隔符拆分字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:107
@@ -209,11 +225,15 @@ msgid "`options` (table, optional): Split options. Supported fields:"
 msgstr "`options`（table，可选）：拆分选项。支持："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
-msgid "`trim` (boolean, optional): Whether to trim each piece before returning it. Defaults to `false`."
+msgid ""
+"`trim` (boolean, optional): Whether to trim each piece before returning it. "
+"Defaults to `false`."
 msgstr "`trim`（boolean，可选）：是否在返回前裁剪每个片段。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
-msgid "`skip_empty` (boolean, optional): Whether to remove empty pieces after optional trimming. Defaults to `false`."
+msgid ""
+"`skip_empty` (boolean, optional): Whether to remove empty pieces after "
+"optional trimming. Defaults to `false`."
 msgstr "`skip_empty`（boolean，可选）：是否在可选裁剪后移除空片段。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:114
@@ -232,8 +252,11 @@ msgid "Unknown option names or invalid option value types raise an error."
 msgstr "未知选项名或非法选项值类型都会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:119
-msgid "`skip_empty = true` is applied after `trim`, so whitespace-only pieces can be removed when both are enabled."
-msgstr "`skip_empty = true` 会在 `trim` 之后生效，因此当两者都启用时，只包含空白字符的 片段也会被移除。"
+msgid ""
+"`skip_empty = true` is applied after `trim`, so whitespace-only pieces can "
+"be removed when both are enabled."
+msgstr "`skip_empty = true` 会在 `trim` 之后生效，因此当两者都启用时，只包含空白字符"
+"的 片段也会被移除。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:131
 msgid "ptool.str.split_lines"
@@ -258,11 +281,19 @@ msgid "`options` (table, optional): Line-splitting options. Supported fields:"
 msgstr "`options`（table，可选）：按行拆分选项。支持："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
-msgid "`keep_ending` (boolean, optional): Whether to keep line endings (`\\n`, `\\r\\n`, or `\\r`) in returned items. Defaults to `false`."
-msgstr "`keep_ending`（boolean，可选）：是否保留行结束符（`\\n`、`\\r\\n` 或 `\\r`）。 默认值为 `false`。"
+msgid ""
+"`keep_ending` (boolean, optional): Whether to keep line endings (`\\n"
+"`, `\\r\\n"
+"`, or `\\r`) in returned items. Defaults to `false`."
+msgstr ""
+"`keep_ending`（boolean，可选）：是否保留行结束符（`\\n"
+"`、`\\r\\n"
+"` 或 `\\r`）。 默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
-msgid "`skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to `false`."
+msgid ""
+"`skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to "
+"`false`."
 msgstr "`skip_empty`（boolean，可选）：是否移除空行。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:143
@@ -276,11 +307,19 @@ msgid "Behavior:"
 msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:147
-msgid "Supports Unix (`\\n`) and Windows (`\\r\\n`) line endings, and also lone `\\r`."
-msgstr "支持 Unix（`\\n`）和 Windows（`\\r\\n`）换行，也支持单独的 `\\r`。"
+msgid ""
+"Supports Unix (`\\n"
+"`) and Windows (`\\r\\n"
+"`) line endings, and also lone `\\r`."
+msgstr ""
+"支持 Unix（`\\n"
+"`）和 Windows（`\\r\\n"
+"`）换行，也支持单独的 `\\r`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:148
-msgid "When `skip_empty = true`, a line containing only a line ending is treated as empty and is removed."
+msgid ""
+"When `skip_empty = true`, a line containing only a line ending is treated as "
+"empty and is removed."
 msgstr "当 `skip_empty = true` 时，仅包含行结束符的行会被视为空行并移除。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:150
@@ -324,7 +363,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:178
-msgid "`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with `to`."
+msgid ""
+"`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with "
+"`to`."
 msgstr "`ptool.str.replace(s, from, to[, n])` 将 `from` 替换为 `to`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:180
@@ -333,7 +374,9 @@ msgid "`s` (string, required): The input string."
 msgstr "`s`（string，必填）：输入字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:181
-msgid "`from` (string, required): The substring to replace. Empty strings are not allowed."
+msgid ""
+"`from` (string, required): The substring to replace. Empty strings are not "
+"allowed."
 msgstr "`from`（string，必填）：要替换的子串。不允许空字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:183
@@ -341,8 +384,11 @@ msgid "`to` (string, required): The replacement string."
 msgstr "`to`（string，必填）：替换字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:184
-msgid "`n` (integer, optional): Maximum replacement count. Must be greater than or equal to `0`. If omitted, all matches are replaced."
-msgstr "`n`（integer，可选）：最大替换次数。必须大于等于 `0`。如果省略，则替换全部匹配。"
+msgid ""
+"`n` (integer, optional): Maximum replacement count. Must be greater than or "
+"equal to `0`. If omitted, all matches are replaced."
+msgstr "`n`（integer，可选）：最大替换次数。必须大于等于 `0`。如果省略，则替换全部匹"
+"配。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:186
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:186"
@@ -368,7 +414,8 @@ msgid "`s` (string, required): The input string."
 msgstr "`s`（string，必填）：输入字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:200
-msgid "`n` (integer, required): Repeat count. Must be greater than or equal to `0`."
+msgid ""
+"`n` (integer, required): Repeat count. Must be greater than or equal to `0`."
 msgstr "`n`（integer，必填）：重复次数。必须大于等于 `0`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:201
@@ -386,7 +433,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:211
-msgid "`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` when it is present."
+msgid ""
+"`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` "
+"when it is present."
 msgstr "`ptool.str.cut_prefix(s, prefix)` 当 `s` 以 `prefix` 开头时，将其从开头移除。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:214
@@ -409,7 +458,9 @@ msgid "Behavior:"
 msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:220
-msgid "If `s` does not start with `prefix`, the original string is returned unchanged."
+msgid ""
+"If `s` does not start with `prefix`, the original string is returned "
+"unchanged."
 msgstr "如果 `s` 不以 `prefix` 开头，则原样返回原始字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:227
@@ -422,7 +473,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:231
-msgid "`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when it is present."
+msgid ""
+"`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when "
+"it is present."
 msgstr "`ptool.str.cut_suffix(s, suffix)` 当 `s` 以 `suffix` 结尾时，将其从末尾移除。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:234
@@ -445,7 +498,8 @@ msgid "Behavior:"
 msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:240
-msgid "If `s` does not end with `suffix`, the original string is returned unchanged."
+msgid ""
+"If `s` does not end with `suffix`, the original string is returned unchanged."
 msgstr "如果 `s` 不以 `suffix` 结尾，则原样返回原始字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:246
@@ -475,7 +529,9 @@ msgid "`options` (table, optional): Indent options. Supported fields:"
 msgstr "`options`（table，可选）：缩进选项。支持："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:254
-msgid "`skip_first` (boolean, optional): Whether to leave the first line unchanged. Defaults to `false`."
+msgid ""
+"`skip_first` (boolean, optional): Whether to leave the first line unchanged. "
+"Defaults to `false`."
 msgstr "`skip_first`（boolean，可选）：是否保持第一行不变。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:257

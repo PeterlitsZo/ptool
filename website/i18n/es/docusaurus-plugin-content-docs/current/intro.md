@@ -86,7 +86,7 @@ Esto te permite ejecutar el script directamente una vez que tenga el bit ejecuta
 
 - Un ejecutor de scripts que entiende archivos con shebang.
 - Un REPL interactivo para probar expresiones de Lua y APIs de `ptool` directamente.
-- Utilidades de Lua para semver, rutas, archivos, TOML, expresiones regulares, cadenas, HTTP, SSH, bases de datos y plantillas.
+- Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, HTTP, SSH, databases, and templates.
 - Utilidades orientadas a CLI para ejecutar comandos, analizar argumentos y pedir entrada interactiva.
 
 ## Siguientes pasos

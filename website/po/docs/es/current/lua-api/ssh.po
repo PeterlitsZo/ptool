@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: es\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:1
 msgid "SSH API"
 msgstr "API de SSH"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:3
-msgid "SSH connection, remote execution, and file transfer helpers are available under `ptool.ssh` and `p.ssh`."
-msgstr "Los helpers para conexión SSH, ejecución remota y transferencia de archivos están disponibles bajo `ptool.ssh` y `p.ssh`."
+msgid ""
+"SSH connection, remote execution, and file transfer helpers are available "
+"under `ptool.ssh` and `p.ssh`."
+msgstr ""
+"Los helpers para conexión SSH, ejecución remota y transferencia de archivos "
+"están disponibles bajo `ptool.ssh` y `p.ssh`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:5
 msgid "ptool.ssh.connect"
@@ -19,8 +34,13 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:9
-msgid "`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle backed by the system `ssh` command and returns a `Connection` object."
-msgstr "`ptool.ssh.connect(target_or_options)` prepara un manejador de conexión SSH respaldado por el comando `ssh` del sistema y devuelve un objeto `Connection`."
+msgid ""
+"`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle "
+"backed by the system `ssh` command and returns a `Connection` object."
+msgstr ""
+"`ptool.ssh.connect(target_or_options)` prepara un manejador de conexión SSH "
+"respaldado por el comando `ssh` del sistema y devuelve un objeto "
+"`Connection`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:12
 msgid "`ssh` must be available on `PATH`."
@@ -43,16 +63,24 @@ msgid "When a table is provided, it currently supports:"
 msgstr "Cuando se proporciona una tabla, actualmente admite:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
-msgid "`target` (string, optional): SSH target string such as `\"deploy@example.com\"` or `\"deploy@example.com:2222\"`."
-msgstr "`target` (string, opcional): Cadena de destino SSH, como `\"deploy@example.com\"` o `\"deploy@example.com:2222\"`."
+msgid ""
+"`target` (string, optional): SSH target string such as `"
+"\"deploy@example.com\"` or `\"deploy@example.com:2222\"`."
+msgstr ""
+"`target` (string, opcional): Cadena de destino SSH, como `"
+"\"deploy@example.com\"` o `\"deploy@example.com:2222\"`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
 msgid "`host` (string, optional): Hostname or IP address."
 msgstr "`host` (string, opcional): Nombre de host o dirección IP."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
-msgid "`user` (string, optional): SSH username. Defaults to `$USER`, or `\"root\"` if `$USER` is unavailable."
-msgstr "`user` (string, opcional): Nombre de usuario SSH. Por defecto usa `$USER`, o `\"root\"` si `$USER` no está disponible."
+msgid ""
+"`user` (string, optional): SSH username. Defaults to `$USER`, or `\"root\"` "
+"if `$USER` is unavailable."
+msgstr ""
+"`user` (string, opcional): Nombre de usuario SSH. Por defecto usa `$USER`, o "
+"`\"root\"` si `$USER` no está disponible."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
 msgid "`port` (integer, optional): SSH port. Defaults to `22`."
@@ -64,15 +92,24 @@ msgstr "`auth` (table, opcional): Configuración de autenticación."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
 msgid "`host_key` (table, optional): Host key verification settings."
-msgstr "`host_key` (table, opcional): Configuración de verificación de clave de host."
+msgstr ""
+"`host_key` (table, opcional): Configuración de verificación de clave de host."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
-msgid "`connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `10000`."
-msgstr "`connect_timeout_ms` (integer, opcional): Timeout en milisegundos. Por defecto es `10000`."
+msgid ""
+"`connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults "
+"to `10000`."
+msgstr ""
+"`connect_timeout_ms` (integer, opcional): Timeout en milisegundos. Por "
+"defecto es `10000`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
-msgid "`keepalive_interval_ms` (integer, optional): Keepalive interval in milliseconds."
-msgstr "`keepalive_interval_ms` (integer, opcional): Intervalo de keepalive en milisegundos."
+msgid ""
+"`keepalive_interval_ms` (integer, optional): Keepalive interval in "
+"milliseconds."
+msgstr ""
+"`keepalive_interval_ms` (integer, opcional): Intervalo de keepalive en "
+"milisegundos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:32
 msgid "Supported target string examples:"
@@ -84,35 +121,64 @@ msgstr "Campos de `auth`:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:42
 msgid "`private_key_file` (string, optional): Path to a private key file."
-msgstr "`private_key_file` (string, opcional): Ruta a un archivo de clave privada."
+msgstr ""
+"`private_key_file` (string, opcional): Ruta a un archivo de clave privada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:43
-msgid "`private_key_passphrase` (string, optional): Passphrase for the private key. This is currently not supported."
-msgstr "`private_key_passphrase` (string, opcional): Frase de contraseña de la clave privada. Actualmente no es compatible."
+msgid ""
+"`private_key_passphrase` (string, optional): Passphrase for the private key. "
+"This is currently not supported."
+msgstr ""
+"`private_key_passphrase` (string, opcional): Frase de contraseña de la clave "
+"privada. Actualmente no es compatible."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:45
-msgid "`password` (string, optional): Password-based authentication. This is currently not supported."
-msgstr "`password` (string, opcional): Autenticación basada en contraseña. Actualmente no es compatible."
+msgid ""
+"`password` (string, optional): Password-based authentication. This is "
+"currently not supported."
+msgstr ""
+"`password` (string, opcional): Autenticación basada en contraseña. "
+"Actualmente no es compatible."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:48
 msgid "Authentication behavior:"
 msgstr "Comportamiento de autenticación:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:50
-msgid "If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key via `-i` and also sets `IdentitiesOnly=yes`."
-msgstr "Si se proporciona `auth.private_key_file`, `ptool` invoca `ssh` con esa clave mediante `-i` y también establece `IdentitiesOnly=yes`."
+msgid ""
+"If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key "
+"via `-i` and also sets `IdentitiesOnly=yes`."
+msgstr ""
+"Si se proporciona `auth.private_key_file`, `ptool` invoca `ssh` con esa "
+"clave mediante `-i` y también establece `IdentitiesOnly=yes`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:52
-msgid "If `auth.private_key_passphrase` or `auth.password` is provided, `ptool.ssh.connect(...)` fails because this API does not pass those secrets to the system `ssh` command."
-msgstr "Si se proporciona `auth.private_key_passphrase` o `auth.password`, `ptool.ssh.connect(...)` falla porque esta API no pasa esos secretos al comando `ssh` del sistema."
+msgid ""
+"If `auth.private_key_passphrase` or `auth.password` is provided, "
+"`ptool.ssh.connect(...)` fails because this API does not pass those secrets "
+"to the system `ssh` command."
+msgstr ""
+"Si se proporciona `auth.private_key_passphrase` o `auth.password`, "
+"`ptool.ssh.connect(...)` falla porque esta API no pasa esos secretos al "
+"comando `ssh` del sistema."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:55
-msgid "Otherwise, authentication is delegated to the local OpenSSH setup, including settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent`, and certificates."
-msgstr "En caso contrario, la autenticación se delega a la configuración local de OpenSSH, incluidas opciones y mecanismos como `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent` y certificados."
+msgid ""
+"Otherwise, authentication is delegated to the local OpenSSH setup, including "
+"settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, "
+"`ssh-agent`, and certificates."
+msgstr ""
+"En caso contrario, la autenticación se delega a la configuración local de "
+"OpenSSH, incluidas opciones y mecanismos como `IdentityFile`, `ProxyJump`, "
+"`ProxyCommand`, `ssh-agent` y certificados."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:58
-msgid "Relative key paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "Las rutas de clave relativas se resuelven desde el directorio de runtime actual de `ptool`, por lo que siguen `ptool.cd(...)`."
+msgid ""
+"Relative key paths are resolved from the current `ptool` runtime directory, "
+"so they follow `ptool.cd(...)`."
+msgstr ""
+"Las rutas de clave relativas se resuelven desde el directorio de runtime "
+"actual de `ptool`, por lo que siguen `ptool.cd(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:60
 msgid "`~` and `~/...` are expanded in key paths."
@@ -123,48 +189,79 @@ msgid "`host_key` fields:"
 msgstr "Campos de `host_key`:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
-msgid "`verify` (string, optional): Host key verification mode. Supported values:"
-msgstr "`verify` (string, opcional): Modo de verificación de la clave de host. Valores admitidos:"
+msgid ""
+"`verify` (string, optional): Host key verification mode. Supported values:"
+msgstr ""
+"`verify` (string, opcional): Modo de verificación de la clave de host. "
+"Valores admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
 msgid "`\"known_hosts\"`: Verify against a known_hosts file (default)."
-msgstr "`\"known_hosts\"`: Verifica contra un archivo `known_hosts` (predeterminado)."
+msgstr ""
+"`\"known_hosts\"`: Verifica contra un archivo `known_hosts` (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
 msgid "`\"ignore\"`: Skip host key verification."
 msgstr "`\"ignore\"`: Omite la verificación de la clave de host."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:67
-msgid "`known_hosts_file` (string, optional): Path to a known_hosts file. Used only when `verify = \"known_hosts\"`."
-msgstr "`known_hosts_file` (string, opcional): Ruta a un archivo `known_hosts`. Solo se usa cuando `verify = \"known_hosts\"`."
+msgid ""
+"`known_hosts_file` (string, optional): Path to a known_hosts file. Used only "
+"when `verify = \"known_hosts\"`."
+msgstr ""
+"`known_hosts_file` (string, opcional): Ruta a un archivo `known_hosts`. Solo "
+"se usa cuando `verify = \"known_hosts\"`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:70
 msgid "Host key behavior:"
 msgstr "Comportamiento de clave de host:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:72
-msgid "If `verify = \"ignore\"`, `ptool` invokes `ssh` with `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`."
-msgstr "Si `verify = \"ignore\"`, `ptool` invoca `ssh` con `StrictHostKeyChecking=no` y `UserKnownHostsFile=/dev/null`."
+msgid ""
+"If `verify = \"ignore\"`, `ptool` invokes `ssh` with "
+"`StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`."
+msgstr ""
+"Si `verify = \"ignore\"`, `ptool` invoca `ssh` con `StrictHostKeyChecking=no`"
+" y `UserKnownHostsFile=/dev/null`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:74
-msgid "If `verify = \"known_hosts\"` and `known_hosts_file` is provided, `ptool` invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`."
-msgstr "Si `verify = \"known_hosts\"` y se proporciona `known_hosts_file`, `ptool` invoca `ssh` con `StrictHostKeyChecking=yes` y ese `UserKnownHostsFile`."
+msgid ""
+"If `verify = \"known_hosts\"` and `known_hosts_file` is provided, `ptool` "
+"invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`."
+msgstr ""
+"Si `verify = \"known_hosts\"` y se proporciona `known_hosts_file`, `ptool` "
+"invoca `ssh` con `StrictHostKeyChecking=yes` y ese `UserKnownHostsFile`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:77
-msgid "If `verify = \"known_hosts\"` and `known_hosts_file` is omitted, or when `host_key` is omitted entirely, host key handling is delegated to the local OpenSSH configuration and defaults."
-msgstr "Si `verify = \"known_hosts\"` y se omite `known_hosts_file`, o si `host_key` se omite por completo, el manejo de la clave de host se delega a la configuración local de OpenSSH y a sus valores predeterminados."
+msgid ""
+"If `verify = \"known_hosts\"` and `known_hosts_file` is omitted, or when "
+"`host_key` is omitted entirely, host key handling is delegated to the local "
+"OpenSSH configuration and defaults."
+msgstr ""
+"Si `verify = \"known_hosts\"` y se omite `known_hosts_file`, o si `host_key` "
+"se omite por completo, el manejo de la clave de host se delega a la "
+"configuración local de OpenSSH y a sus valores predeterminados."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:80
-msgid "Relative `known_hosts_file` paths are resolved from the current `ptool` runtime directory."
-msgstr "Las rutas relativas de `known_hosts_file` se resuelven desde el directorio de runtime actual de `ptool`."
+msgid ""
+"Relative `known_hosts_file` paths are resolved from the current `ptool` "
+"runtime directory."
+msgstr ""
+"Las rutas relativas de `known_hosts_file` se resuelven desde el directorio "
+"de runtime actual de `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:82
 msgid "`~` and `~/...` are expanded in `known_hosts_file`."
 msgstr "`~` y `~/...` se expanden en `known_hosts_file`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:83
-msgid "When `known_hosts_file` is provided explicitly, it overrides the default `UserKnownHostsFile` used by the local `ssh` command for this connection."
-msgstr "Cuando `known_hosts_file` se proporciona explícitamente, reemplaza el valor predeterminado de `UserKnownHostsFile` que usa el comando `ssh` local para esta conexión."
+msgid ""
+"When `known_hosts_file` is provided explicitly, it overrides the default "
+"`UserKnownHostsFile` used by the local `ssh` command for this connection."
+msgstr ""
+"Cuando `known_hosts_file` se proporciona explícitamente, reemplaza el valor "
+"predeterminado de `UserKnownHostsFile` que usa el comando `ssh` local para "
+"esta conexión."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:86
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:86"
@@ -181,8 +278,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:106
-msgid "`Connection` represents an OpenSSH-backed connection handle returned by `ptool.ssh.connect()`."
-msgstr "`Connection` representa un manejador de conexión respaldado por OpenSSH devuelto por `ptool.ssh.connect()`."
+msgid ""
+"`Connection` represents an OpenSSH-backed connection handle returned by "
+"`ptool.ssh.connect()`."
+msgstr ""
+"`Connection` representa un manejador de conexión respaldado por OpenSSH "
+"devuelto por `ptool.ssh.connect()`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:109
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:109"
@@ -268,8 +369,10 @@ msgid "Canonical API name: `ptool.ssh.Connection:run`."
 msgstr "Canonical API name: `ptool.ssh.Connection:run`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:135
-msgid "`conn:run(...)` executes a remote command through the current SSH connection."
-msgstr "`conn:run(...)` ejecuta un comando remoto a través de la conexión SSH actual."
+msgid ""
+"`conn:run(...)` executes a remote command through the current SSH connection."
+msgstr ""
+"`conn:run(...)` ejecuta un comando remoto a través de la conexión SSH actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:137
 msgid "The following call forms are supported:"
@@ -281,15 +384,24 @@ msgstr "Reglas de argumentos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:150
 msgid "`conn:run(cmdline)`: `cmdline` is sent as the remote command string."
-msgstr "`conn:run(cmdline)`: `cmdline` se envía como la cadena de comando remoto."
+msgstr ""
+"`conn:run(cmdline)`: `cmdline` se envía como la cadena de comando remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:151
-msgid "`conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` is split using shell-style (`shlex`) rules."
-msgstr "`conn:run(cmd, argsline)`: `cmd` se trata como el comando, y `argsline` se divide usando reglas de estilo shell (`shlex`)."
+msgid ""
+"`conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` "
+"is split using shell-style (`shlex`) rules."
+msgstr ""
+"`conn:run(cmd, argsline)`: `cmd` se trata como el comando, y `argsline` se "
+"divide usando reglas de estilo shell (`shlex`)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:153
-msgid "`conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. Arguments are shell-quoted before remote execution."
-msgstr "`conn:run(cmd, args)`: `cmd` es una cadena y `args` es un arreglo de cadenas. Los argumentos se escapan para shell antes de la ejecución remota."
+msgid ""
+"`conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. "
+"Arguments are shell-quoted before remote execution."
+msgstr ""
+"`conn:run(cmd, args)`: `cmd` es una cadena y `args` es un arreglo de "
+"cadenas. Los argumentos se escapan para shell antes de la ejecución remota."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:155
 msgid "`conn:run(cmdline, options)`: `options` overrides this invocation."
@@ -304,8 +416,14 @@ msgid "`conn:run(options)`: `options` is a table."
 msgstr "`conn:run(options)`: `options` es una tabla."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:158
-msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
-msgstr "Cuando el segundo argumento es una tabla: si es un arreglo (claves enteras consecutivas `1..n`), se trata como `args`; en caso contrario se trata como `options`."
+msgid ""
+"When the second argument is a table: if it is an array "
+"(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
+"treated as `options`."
+msgstr ""
+"Cuando el segundo argumento es una tabla: si es un arreglo "
+"(claves enteras consecutivas `1..n`), se trata como `args`; en caso "
+"contrario se trata como `options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:161
 msgid "When `conn:run(options)` is used, `options` currently supports:"
@@ -320,12 +438,22 @@ msgid "`args` (string[], optional): The argument list."
 msgstr "`args` (string[], opcional): Lista de argumentos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:165
-msgid "`cwd` (string, optional): Remote working directory. This is applied by prepending `cd ... &&` to the generated remote shell command."
-msgstr "`cwd` (string, opcional): Directorio de trabajo remoto. Se aplica anteponiendo `cd ... &&` al comando shell remoto generado."
+msgid ""
+"`cwd` (string, optional): Remote working directory. This is applied by "
+"prepending `cd ... &&` to the generated remote shell command."
+msgstr ""
+"`cwd` (string, opcional): Directorio de trabajo remoto. Se aplica "
+"anteponiendo `cd ... &&` al comando shell remoto generado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:167
-msgid "`env` (table, optional): Remote environment variables, where keys and values are strings. This is applied by prepending `export ... &&` to the generated remote shell command."
-msgstr "`env` (table, opcional): Variables de entorno remotas, donde claves y valores son cadenas. Se aplica anteponiendo `export ... &&` al comando shell remoto generado."
+msgid ""
+"`env` (table, optional): Remote environment variables, where keys and values "
+"are strings. This is applied by prepending `export ... &&` to the generated "
+"remote shell command."
+msgstr ""
+"`env` (table, opcional): Variables de entorno remotas, donde claves y "
+"valores son cadenas. Se aplica anteponiendo `export ... &&` al comando shell "
+"remoto generado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:170
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:170"
@@ -334,18 +462,29 @@ msgstr "`stdin` (string, opcional): Cadena enviada al stdin del proceso remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:171
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:171"
-msgid "`echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`."
-msgstr "`echo` (boolean, opcional): Si debe imprimir el comando remoto antes de ejecutarlo. Por defecto es `true`."
+msgid ""
+"`echo` (boolean, optional): Whether to echo the remote command before "
+"execution. Defaults to `true`."
+msgstr ""
+"`echo` (boolean, opcional): Si debe imprimir el comando remoto antes de "
+"ejecutarlo. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:173
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:173"
-msgid "`check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`."
-msgstr "`check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando el código de salida no sea `0`. Por defecto es `false`."
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"exit status is not `0`. Defaults to `false`."
+msgstr ""
+"`check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando "
+"el código de salida no sea `0`. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
-msgid "`stdout` (string, optional): Stdout handling strategy. Supported values:"
-msgstr "`stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:"
+msgid ""
+"`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr ""
+"`stdout` (string, opcional): Estrategia de manejo de stdout. Valores "
+"admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
@@ -364,8 +503,11 @@ msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
-msgid "`stderr` (string, optional): Stderr handling strategy. Supported values:"
-msgstr "`stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:"
+msgid ""
+"`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr ""
+"`stderr` (string, opcional): Estrategia de manejo de stderr. Valores "
+"admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
@@ -393,18 +535,29 @@ msgstr "`stdin` (string, opcional): Cadena enviada al stdin del proceso remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:187
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:187"
-msgid "`echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`."
-msgstr "`echo` (boolean, opcional): Si debe imprimir el comando remoto antes de ejecutarlo. Por defecto es `true`."
+msgid ""
+"`echo` (boolean, optional): Whether to echo the remote command before "
+"execution. Defaults to `true`."
+msgstr ""
+"`echo` (boolean, opcional): Si debe imprimir el comando remoto antes de "
+"ejecutarlo. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189"
-msgid "`check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`."
-msgstr "`check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando el código de salida no sea `0`. Por defecto es `false`."
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"exit status is not `0`. Defaults to `false`."
+msgstr ""
+"`check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando "
+"el código de salida no sea `0`. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
-msgid "`stdout` (string, optional): Stdout handling strategy. Supported values:"
-msgstr "`stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:"
+msgid ""
+"`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr ""
+"`stdout` (string, opcional): Estrategia de manejo de stdout. Valores "
+"admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
@@ -423,8 +576,11 @@ msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
-msgid "`stderr` (string, optional): Stderr handling strategy. Supported values:"
-msgstr "`stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:"
+msgid ""
+"`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr ""
+"`stderr` (string, opcional): Estrategia de manejo de stderr. Valores "
+"admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
@@ -454,12 +610,17 @@ msgid "`ok` (boolean): Whether the remote exit status is `0`."
 msgstr "`ok` (boolean): Si el código de salida remoto es `0`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
-msgid "`code` (integer|nil): The remote exit status. If the remote process exits by signal, this is `nil`."
-msgstr "`code` (integer|nil): Código de salida remoto. Si el proceso remoto termina por señal, este valor es `nil`."
+msgid ""
+"`code` (integer|nil): The remote exit status. If the remote process exits by "
+"signal, this is `nil`."
+msgstr ""
+"`code` (integer|nil): Código de salida remoto. Si el proceso remoto termina "
+"por señal, este valor es `nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
 msgid "`target` (string): The SSH target string in the form `user@host:port`."
-msgstr "`target` (string): Cadena de destino SSH con el formato `user@host:port`."
+msgstr ""
+"`target` (string): Cadena de destino SSH con el formato `user@host:port`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
 msgid "`stdout` (string, optional): Present when `stdout = \"capture\"`."
@@ -491,12 +652,20 @@ msgid "Canonical API name: `ptool.ssh.Connection:run_capture`."
 msgstr "Canonical API name: `ptool.ssh.Connection:run_capture`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:239
-msgid "`conn:run_capture(...)` executes a remote command through the current SSH connection."
-msgstr "`conn:run_capture(...)` ejecuta un comando remoto a través de la conexión SSH actual."
+msgid ""
+"`conn:run_capture(...)` executes a remote command through the current SSH "
+"connection."
+msgstr ""
+"`conn:run_capture(...)` ejecuta un comando remoto a través de la conexión "
+"SSH actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:242
-msgid "It accepts the same call forms, argument rules, return value rules, and options as `conn:run(...)`."
-msgstr "Acepta las mismas formas de llamada, reglas de argumentos, reglas del valor de retorno y opciones que `conn:run(...)`."
+msgid ""
+"It accepts the same call forms, argument rules, return value rules, and "
+"options as `conn:run(...)`."
+msgstr ""
+"Acepta las mismas formas de llamada, reglas de argumentos, reglas del valor "
+"de retorno y opciones que `conn:run(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:245
 msgid "The difference is only the default stream handling:"
@@ -512,7 +681,9 @@ msgstr "`stderr` usa `\"capture\"` por defecto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:250
 msgid "You can still override either field explicitly in `options`."
-msgstr "Todavía puedes sobrescribir cualquiera de esos campos explícitamente en `options`."
+msgstr ""
+"Todavía puedes sobrescribir cualquiera de esos campos explícitamente en "
+"`options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:252
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:252"
@@ -533,16 +704,24 @@ msgid "Canonical API name: `ptool.ssh.Connection:path`."
 msgstr "Canonical API name: `ptool.ssh.Connection:path`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:280
-msgid "`conn:path(path)` creates a reusable `RemotePath` object bound to the current SSH connection."
-msgstr "`conn:path(path)` crea un objeto `RemotePath` reutilizable vinculado a la conexión SSH actual."
+msgid ""
+"`conn:path(path)` creates a reusable `RemotePath` object bound to the "
+"current SSH connection."
+msgstr ""
+"`conn:path(path)` crea un objeto `RemotePath` reutilizable vinculado a la "
+"conexión SSH actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:283
 msgid "`path` (string, required): The remote path."
 msgstr "`path` (string, obligatorio): La ruta remota."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:284
-msgid "Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`."
-msgstr "Devuelve: Un objeto `RemotePath` que puede pasarse a `conn:upload(...)`, `conn:download(...)` y `ptool.fs.copy(...)`."
+msgid ""
+"Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, "
+"`conn:download(...)`, and `ptool.fs.copy(...)`."
+msgstr ""
+"Devuelve: Un objeto `RemotePath` que puede pasarse a `conn:upload(...)`, "
+"`conn:download(...)` y `ptool.fs.copy(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287"
@@ -569,13 +748,18 @@ msgstr "`conn:exists(path)` comprueba si existe una ruta remota."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304"
-msgid "`path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`."
-msgstr "`path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
+msgid ""
+"`path` (string|remote path, required): The remote path to check. It can be a "
+"string or a value created by `conn:path(...)`."
+msgstr ""
+"`path` (string|remote path, obligatorio): La ruta remota que se debe "
+"comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306"
 msgid "Returns: `true` when the remote path exists, otherwise `false`."
-msgstr "Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`."
+msgstr ""
+"Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308"
@@ -597,18 +781,28 @@ msgid "Canonical API name: `ptool.ssh.Connection:is_file`."
 msgstr "Canonical API name: `ptool.ssh.Connection:is_file`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:323
-msgid "`conn:is_file(path)` checks whether a remote path exists and is a regular file."
-msgstr "`conn:is_file(path)` comprueba si una ruta remota existe y es un archivo regular."
+msgid ""
+"`conn:is_file(path)` checks whether a remote path exists and is a regular "
+"file."
+msgstr ""
+"`conn:is_file(path)` comprueba si una ruta remota existe y es un archivo "
+"regular."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325"
-msgid "`path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`."
-msgstr "`path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
+msgid ""
+"`path` (string|remote path, required): The remote path to check. It can be a "
+"string or a value created by `conn:path(...)`."
+msgstr ""
+"`path` (string|remote path, obligatorio): La ruta remota que se debe "
+"comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327"
 msgid "Returns: `true` when the remote path is a file, otherwise `false`."
-msgstr "Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, `false`."
+msgstr ""
+"Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, "
+"`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:329
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:329"
@@ -630,18 +824,26 @@ msgid "Canonical API name: `ptool.ssh.Connection:is_dir`."
 msgstr "Canonical API name: `ptool.ssh.Connection:is_dir`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:346
-msgid "`conn:is_dir(path)` checks whether a remote path exists and is a directory."
-msgstr "`conn:is_dir(path)` comprueba si una ruta remota existe y es un directorio."
+msgid ""
+"`conn:is_dir(path)` checks whether a remote path exists and is a directory."
+msgstr ""
+"`conn:is_dir(path)` comprueba si una ruta remota existe y es un directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348"
-msgid "`path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`."
-msgstr "`path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
+msgid ""
+"`path` (string|remote path, required): The remote path to check. It can be a "
+"string or a value created by `conn:path(...)`."
+msgstr ""
+"`path` (string|remote path, obligatorio): La ruta remota que se debe "
+"comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350"
 msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
-msgstr "Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, `false`."
+msgstr ""
+"Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, "
+"`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:352
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:352"
@@ -662,16 +864,26 @@ msgid "Canonical API name: `ptool.ssh.Connection:upload`."
 msgstr "Canonical API name: `ptool.ssh.Connection:upload`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:369
-msgid "`conn:upload(local_path, remote_path[, options])` uploads a local file or directory to the remote host."
-msgstr "`conn:upload(local_path, remote_path[, options])` sube un archivo o directorio local al host remoto."
+msgid ""
+"`conn:upload(local_path, remote_path[, options])` uploads a local file or "
+"directory to the remote host."
+msgstr ""
+"`conn:upload(local_path, remote_path[, options])` sube un archivo o "
+"directorio local al host remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:372
 msgid "`local_path` (string, required): The local file or directory to upload."
-msgstr "`local_path` (string, obligatorio): El archivo o directorio local que se va a subir."
+msgstr ""
+"`local_path` (string, obligatorio): El archivo o directorio local que se va "
+"a subir."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:373
-msgid "`remote_path` (string|remote path, required): The destination path on the remote host. It can be a string or a value created by `conn:path(...)`."
-msgstr "`remote_path` (string|remote path, obligatorio): La ruta de destino en el host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`."
+msgid ""
+"`remote_path` (string|remote path, required): The destination path on the "
+"remote host. It can be a string or a value created by `conn:path(...)`."
+msgstr ""
+"`remote_path` (string|remote path, obligatorio): La ruta de destino en el "
+"host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:375
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:375"
@@ -684,8 +896,12 @@ msgid "Returns: A table with the following fields:"
 msgstr "Devuelve: Una tabla con los siguientes campos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
-msgid "`bytes` (integer): The number of regular-file bytes uploaded. When a directory is uploaded, this is the sum of the uploaded file sizes."
-msgstr "`bytes` (integer): El número de bytes de archivos regulares subidos. Cuando se sube un directorio, es la suma de los tamaños de los archivos subidos."
+msgid ""
+"`bytes` (integer): The number of regular-file bytes uploaded. When a "
+"directory is uploaded, this is the sum of the uploaded file sizes."
+msgstr ""
+"`bytes` (integer): El número de bytes de archivos regulares subidos. Cuando "
+"se sube un directorio, es la suma de los tamaños de los archivos subidos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
 msgid "`from` (string): The local source path."
@@ -701,18 +917,30 @@ msgid "Supported transfer options:"
 msgstr "Opciones de transferencia admitidas:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:384
-msgid "`parents` (boolean, optional): Create the parent directory of `remote_path` before uploading. Defaults to `false`."
-msgstr "`parents` (boolean, opcional): Crea el directorio padre de `remote_path` antes de subir. Por defecto es `false`."
+msgid ""
+"`parents` (boolean, optional): Create the parent directory of `remote_path` "
+"before uploading. Defaults to `false`."
+msgstr ""
+"`parents` (boolean, opcional): Crea el directorio padre de `remote_path` "
+"antes de subir. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:386
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:386"
-msgid "`overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`."
-msgstr "`overwrite` (boolean, opcional): Si se puede reemplazar un archivo de destino existente. Por defecto es `true`."
+msgid ""
+"`overwrite` (boolean, optional): Whether an existing destination file may be "
+"replaced. Defaults to `true`."
+msgstr ""
+"`overwrite` (boolean, opcional): Si se puede reemplazar un archivo de "
+"destino existente. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:388
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:388"
-msgid "`echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`."
-msgstr "`echo` (boolean, opcional): Si debe imprimir la transferencia antes de ejecutarla. Por defecto es `false`."
+msgid ""
+"`echo` (boolean, optional): Whether to print the transfer before executing "
+"it. Defaults to `false`."
+msgstr ""
+"`echo` (boolean, opcional): Si debe imprimir la transferencia antes de "
+"ejecutarla. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:391
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:391"
@@ -724,21 +952,37 @@ msgid "When `local_path` is a file, the behavior is unchanged."
 msgstr "Cuando `local_path` es un archivo, el comportamiento no cambia."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:394
-msgid "When `local_path` is a directory and `remote_path` does not exist, `remote_path` becomes the destination directory root."
-msgstr "Cuando `local_path` es un directorio y `remote_path` no existe, `remote_path` se convierte en la raíz del directorio de destino."
+msgid ""
+"When `local_path` is a directory and `remote_path` does not exist, "
+"`remote_path` becomes the destination directory root."
+msgstr ""
+"Cuando `local_path` es un directorio y `remote_path` no existe, `remote_path`"
+" se convierte en la raíz del directorio de destino."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:396
-msgid "When `local_path` is a directory and `remote_path` already exists as a directory, the source directory is created under it using the source directory basename."
-msgstr "Cuando `local_path` es un directorio y `remote_path` ya existe como directorio, el directorio de origen se crea dentro de él usando el basename del directorio de origen."
+msgid ""
+"When `local_path` is a directory and `remote_path` already exists as a "
+"directory, the source directory is created under it using the source "
+"directory basename."
+msgstr ""
+"Cuando `local_path` es un directorio y `remote_path` ya existe como "
+"directorio, el directorio de origen se crea dentro de él usando el basename "
+"del directorio de origen."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399"
-msgid "`overwrite = false` rejects an already-existing destination directory for the final directory root."
-msgstr "`overwrite = false` rechaza un directorio de destino ya existente para la raíz final del directorio."
+msgid ""
+"`overwrite = false` rejects an already-existing destination directory for "
+"the final directory root."
+msgstr ""
+"`overwrite = false` rechaza un directorio de destino ya existente para la "
+"raíz final del directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:401
 msgid "Directory uploads require `tar` to be available on the remote host."
-msgstr "Las subidas de directorios requieren que `tar` esté disponible en el host remoto."
+msgstr ""
+"Las subidas de directorios requieren que `tar` esté disponible en el host "
+"remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:403
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:403"
@@ -764,12 +1008,20 @@ msgid "Canonical API name: `ptool.ssh.Connection:download`."
 msgstr "Canonical API name: `ptool.ssh.Connection:download`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:440
-msgid "`conn:download(remote_path, local_path[, options])` downloads a remote file or directory to a local path."
-msgstr "`conn:download(remote_path, local_path[, options])` descarga un archivo o directorio remoto a una ruta local."
+msgid ""
+"`conn:download(remote_path, local_path[, options])` downloads a remote file "
+"or directory to a local path."
+msgstr ""
+"`conn:download(remote_path, local_path[, options])` descarga un archivo o "
+"directorio remoto a una ruta local."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:443
-msgid "`remote_path` (string|remote path, required): The source path on the remote host. It can be a string or a value created by `conn:path(...)`."
-msgstr "`remote_path` (string|remote path, obligatorio): La ruta de origen en el host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`."
+msgid ""
+"`remote_path` (string|remote path, required): The source path on the remote "
+"host. It can be a string or a value created by `conn:path(...)`."
+msgstr ""
+"`remote_path` (string|remote path, obligatorio): La ruta de origen en el "
+"host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:445
 msgid "`local_path` (string, required): The local destination path."
@@ -786,8 +1038,13 @@ msgid "Returns: A table with the following fields:"
 msgstr "Devuelve: Una tabla con los siguientes campos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447
-msgid "`bytes` (integer): The number of regular-file bytes downloaded. When a directory is downloaded, this is the sum of the downloaded file sizes."
-msgstr "`bytes` (integer): El número de bytes de archivos regulares descargados. Cuando se descarga un directorio, es la suma de los tamaños de los archivos descargados."
+msgid ""
+"`bytes` (integer): The number of regular-file bytes downloaded. When a "
+"directory is downloaded, this is the sum of the downloaded file sizes."
+msgstr ""
+"`bytes` (integer): El número de bytes de archivos regulares descargados. "
+"Cuando se descarga un directorio, es la suma de los tamaños de los archivos "
+"descargados."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447
 msgid "`from` (string): The remote source path."
@@ -803,18 +1060,30 @@ msgid "Supported transfer options:"
 msgstr "Opciones de transferencia admitidas:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:455
-msgid "`parents` (boolean, optional): Create the parent directory of `local_path` before downloading. Defaults to `false`."
-msgstr "`parents` (boolean, opcional): Crea el directorio padre de `local_path` antes de descargar. Por defecto es `false`."
+msgid ""
+"`parents` (boolean, optional): Create the parent directory of `local_path` "
+"before downloading. Defaults to `false`."
+msgstr ""
+"`parents` (boolean, opcional): Crea el directorio padre de `local_path` "
+"antes de descargar. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:457
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:457"
-msgid "`overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`."
-msgstr "`overwrite` (boolean, opcional): Si se puede reemplazar un archivo de destino existente. Por defecto es `true`."
+msgid ""
+"`overwrite` (boolean, optional): Whether an existing destination file may be "
+"replaced. Defaults to `true`."
+msgstr ""
+"`overwrite` (boolean, opcional): Si se puede reemplazar un archivo de "
+"destino existente. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:459
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:459"
-msgid "`echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`."
-msgstr "`echo` (boolean, opcional): Si debe imprimir la transferencia antes de ejecutarla. Por defecto es `false`."
+msgid ""
+"`echo` (boolean, optional): Whether to print the transfer before executing "
+"it. Defaults to `false`."
+msgstr ""
+"`echo` (boolean, opcional): Si debe imprimir la transferencia antes de "
+"ejecutarla. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:462
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:462"
@@ -826,21 +1095,37 @@ msgid "When `remote_path` is a file, the behavior is unchanged."
 msgstr "Cuando `remote_path` es un archivo, el comportamiento no cambia."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:465
-msgid "When `remote_path` is a directory and `local_path` does not exist, `local_path` becomes the destination directory root."
-msgstr "Cuando `remote_path` es un directorio y `local_path` no existe, `local_path` se convierte en la raíz del directorio de destino."
+msgid ""
+"When `remote_path` is a directory and `local_path` does not exist, "
+"`local_path` becomes the destination directory root."
+msgstr ""
+"Cuando `remote_path` es un directorio y `local_path` no existe, `local_path` "
+"se convierte en la raíz del directorio de destino."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:467
-msgid "When `remote_path` is a directory and `local_path` already exists as a directory, the remote source directory is created under it using the remote directory basename."
-msgstr "Cuando `remote_path` es un directorio y `local_path` ya existe como directorio, el directorio remoto de origen se crea dentro de él usando el basename del directorio remoto."
+msgid ""
+"When `remote_path` is a directory and `local_path` already exists as a "
+"directory, the remote source directory is created under it using the remote "
+"directory basename."
+msgstr ""
+"Cuando `remote_path` es un directorio y `local_path` ya existe como "
+"directorio, el directorio remoto de origen se crea dentro de él usando el "
+"basename del directorio remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470"
-msgid "`overwrite = false` rejects an already-existing destination directory for the final directory root."
-msgstr "`overwrite = false` rechaza un directorio de destino ya existente para la raíz final del directorio."
+msgid ""
+"`overwrite = false` rejects an already-existing destination directory for "
+"the final directory root."
+msgstr ""
+"`overwrite = false` rechaza un directorio de destino ya existente para la "
+"raíz final del directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:472
 msgid "Directory downloads require `tar` to be available on the remote host."
-msgstr "Las descargas de directorios requieren que `tar` esté disponible en el host remoto."
+msgstr ""
+"Las descargas de directorios requieren que `tar` esté disponible en el host "
+"remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:474
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:474"
@@ -879,7 +1164,8 @@ msgstr "Después de cerrarla, la conexión ya no puede usarse."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:515
 msgid "Closing an already-closed connection is allowed and has no effect."
-msgstr "Cerrar una conexión que ya está cerrada está permitido y no tiene efecto."
+msgstr ""
+"Cerrar una conexión que ya está cerrada está permitido y no tiene efecto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:517
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:517"
@@ -896,8 +1182,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:528
-msgid "`RemotePath` represents a remote path bound to a `Connection` and returned by `conn:path(path)`."
-msgstr "`RemotePath` representa una ruta remota vinculada a un `Connection` y devuelta por `conn:path(path)`."
+msgid ""
+"`RemotePath` represents a remote path bound to a `Connection` and returned "
+"by `conn:path(path)`."
+msgstr ""
+"`RemotePath` representa una ruta remota vinculada a un `Connection` y "
+"devuelta por `conn:path(path)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531"
@@ -933,7 +1223,8 @@ msgstr "`remote:exists()` comprueba si existe la ruta remota."
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:543
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:543"
 msgid "Returns: `true` when the remote path exists, otherwise `false`."
-msgstr "Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`."
+msgstr ""
+"Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:545
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:545"
@@ -946,13 +1237,19 @@ msgid "is_file"
 msgstr "is_file"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:556
-msgid "`remote:is_file()` checks whether the remote path exists and is a regular file."
-msgstr "`remote:is_file()` comprueba si la ruta remota existe y es un archivo regular."
+msgid ""
+"`remote:is_file()` checks whether the remote path exists and is a regular "
+"file."
+msgstr ""
+"`remote:is_file()` comprueba si la ruta remota existe y es un archivo "
+"regular."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:558
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:558"
 msgid "Returns: `true` when the remote path is a file, otherwise `false`."
-msgstr "Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, `false`."
+msgstr ""
+"Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, "
+"`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:560
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:560"
@@ -965,13 +1262,17 @@ msgid "is_dir"
 msgstr "is_dir"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:573
-msgid "`remote:is_dir()` checks whether the remote path exists and is a directory."
-msgstr "`remote:is_dir()` comprueba si la ruta remota existe y es un directorio."
+msgid ""
+"`remote:is_dir()` checks whether the remote path exists and is a directory."
+msgstr ""
+"`remote:is_dir()` comprueba si la ruta remota existe y es un directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:575
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:575"
 msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
-msgstr "Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, `false`."
+msgstr ""
+"Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, "
+"`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:577
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:577"

@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: es\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:1
 msgid "Network API"
 msgstr "API de red"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:3
-msgid "URL, IP, and host/port parsing helpers are available under `ptool.net` and `p.net`."
-msgstr "Las utilidades para analizar URL, IP y host/puerto están disponibles bajo `ptool.net` y `p.net`."
+msgid ""
+"URL, IP, and host/port parsing helpers are available under `ptool.net` and "
+"`p.net`."
+msgstr ""
+"Las utilidades para analizar URL, IP y host/puerto están disponibles bajo "
+"`ptool.net` y `p.net`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:5
 msgid "ptool.net.parse_url"
@@ -19,8 +34,12 @@ msgid "`v0.2.0` - Introduced."
 msgstr "`v0.2.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:9
-msgid "`ptool.net.parse_url(input)` parses a URL string and returns a normalized parts table."
-msgstr "`ptool.net.parse_url(input)` analiza una cadena URL y devuelve una tabla de partes normalizadas."
+msgid ""
+"`ptool.net.parse_url(input)` parses a URL string and returns a normalized "
+"parts table."
+msgstr ""
+"`ptool.net.parse_url(input)` analiza una cadena URL y devuelve una tabla de "
+"partes normalizadas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:12
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:12"
@@ -55,7 +74,8 @@ msgstr "`scheme` (string): El esquema de la URL."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:22
 msgid "`username` (string, optional): The decoded username, if present."
-msgstr "`username` (string, opcional): El nombre de usuario decodificado, si existe."
+msgstr ""
+"`username` (string, opcional): El nombre de usuario decodificado, si existe."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:23
 msgid "`password` (string, optional): The decoded password, if present."
@@ -66,8 +86,12 @@ msgid "`host` (string, optional): The hostname or IP literal, if present."
 msgstr "`host` (string, opcional): El hostname o literal IP, si existe."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:25
-msgid "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, optional): The host classification, if a host is present."
-msgstr "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, opcional): La clasificación del host si hay host."
+msgid ""
+"`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, optional): The host "
+"classification, if a host is present."
+msgstr ""
+"`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`, opcional): La clasificación del "
+"host si hay host."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:27
 msgid "`port` (integer, optional): The explicit port, if present."
@@ -95,8 +119,12 @@ msgid "`v0.2.0` - Introduced."
 msgstr "`v0.2.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:47
-msgid "`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a normalized parts table."
-msgstr "`ptool.net.parse_ip(input)` analiza una dirección IPv4 o IPv6 y devuelve una tabla de partes normalizadas."
+msgid ""
+"`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a "
+"normalized parts table."
+msgstr ""
+"`ptool.net.parse_ip(input)` analiza una dirección IPv4 o IPv6 y devuelve una "
+"tabla de partes normalizadas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:50
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:50"
@@ -139,8 +167,12 @@ msgid "`v0.2.0` - Introduced."
 msgstr "`v0.2.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:72
-msgid "`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a normalized parts table."
-msgstr "`ptool.net.parse_host_port(input)` analiza una cadena `host:port` y devuelve una tabla de partes normalizadas."
+msgid ""
+"`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a "
+"normalized parts table."
+msgstr ""
+"`ptool.net.parse_host_port(input)` analiza una cadena `host:port` y devuelve "
+"una tabla de partes normalizadas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:75
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:75"
@@ -148,8 +180,12 @@ msgid "Arguments:"
 msgstr "Argumentos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:77
-msgid "`input` (string, required): The host and port string. IPv6 addresses must use bracket notation such as `[2001:db8::1]:443`."
-msgstr "`input` (string, obligatorio): La cadena host y puerto. Las direcciones IPv6 deben usar notación con corchetes como `[2001:db8::1]:443`."
+msgid ""
+"`input` (string, required): The host and port string. IPv6 addresses must "
+"use bracket notation such as `[2001:db8::1]:443`."
+msgstr ""
+"`input` (string, obligatorio): La cadena host y puerto. Las direcciones IPv6 "
+"deben usar notación con corchetes como `[2001:db8::1]:443`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:80
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:80"
@@ -175,7 +211,8 @@ msgstr "`host` (string): El valor de host normalizado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:86
 msgid "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`): The host classification."
-msgstr "`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`): La clasificación del host."
+msgstr ""
+"`host_kind` (`\"domain\"|\"ipv4\"|\"ipv6\"`): La clasificación del host."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/net.md:87
 msgid "`port` (integer): The parsed port."

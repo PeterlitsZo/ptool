@@ -11,6 +11,9 @@
 
 - Added offline on-site search to the Docusaurus docs site, with local search
   indexes for all supported locales.
+- Added the `ptool.datetime` / `p.datetime` module for timezone-aware datetime
+  parsing, formatting, conversion, and comparison, and documented it across
+  all supported locales.
 - Added the `ptool.tui` / `p.tui` module with a minimal event-loop-driven TUI
   API (`run`, `text`, `list`, `row`, and `column`), and documented it across
   all supported locales.

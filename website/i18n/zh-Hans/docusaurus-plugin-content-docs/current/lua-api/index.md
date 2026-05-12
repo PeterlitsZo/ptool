@@ -9,6 +9,7 @@
 ## 模块
 
 - [Args API](./args.md)：为 Lua 脚本提供命令行参数模式定义与解析。
+- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
 - [SemVer API](./semver.md)：解析、比较并提升语义化版本。
 - [Hash API](./hash.md)：计算 SHA-256、SHA-1 和 MD5 摘要。
 - [Network API](./net.md)：解析 URL、IP 地址以及 host-port 组合。

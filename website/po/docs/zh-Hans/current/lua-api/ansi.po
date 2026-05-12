@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: zh-Hans\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:1
 msgid "ANSI API"
@@ -19,8 +30,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:9
-msgid "`ptool.ansi.style(text[, options])` returns `text` wrapped in ANSI style escape sequences."
-msgstr "`ptool.ansi.style(text[, options])` 返回一个用 ANSI 样式转义序列包裹后的 `text`。"
+msgid ""
+"`ptool.ansi.style(text[, options])` returns `text` wrapped in ANSI style "
+"escape sequences."
+msgstr "`ptool.ansi.style(text[, options])` 返回一个用 ANSI 样式转义序列包裹后的 "
+"`text`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:12
 msgid "`text` (string, required): The text to style."
@@ -31,12 +45,24 @@ msgid "`options` (table, optional): Style options. Supported fields:"
 msgstr "`options`（table，可选）：样式选项。支持以下字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:13
-msgid "`enabled` (boolean, optional): Whether ANSI escapes should be emitted. Defaults to whether `ptool` is writing to a terminal."
-msgstr "`enabled`（boolean，可选）：是否输出 ANSI 转义序列。默认取决于 `ptool` 当前是否写入终端。"
+msgid ""
+"`enabled` (boolean, optional): Whether ANSI escapes should be emitted. "
+"Defaults to whether `ptool` is writing to a terminal."
+msgstr "`enabled`（boolean，可选）：是否输出 ANSI 转义序列。默认取决于 `ptool` 当前是"
+"否写入终端。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:13
-msgid "`fg` (string|nil, optional): The foreground color. Supported values are `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `purple`, `cyan`, `white`, `bright_black`, `bright_red`, `bright_green`, `bright_yellow`, `bright_blue`, `bright_magenta`, `bright_purple`, `bright_cyan`, and `bright_white`."
-msgstr "`fg`（string|nil，可选）：前景色。支持的值包括 `black`、`red`、 `green`、`yellow`、`blue`、`magenta`、`purple`、`cyan`、`white`、 `bright_black`、`bright_red`、`bright_green`、`bright_yellow`、 `bright_blue`、`bright_magenta`、`bright_purple`、`bright_cyan` 和 `bright_white`。"
+msgid ""
+"`fg` (string|nil, optional): The foreground color. Supported values are "
+"`black`, `red`, `green`, `yellow`, `blue`, `magenta`, `purple`, `cyan`, "
+"`white`, `bright_black`, `bright_red`, `bright_green`, `bright_yellow`, "
+"`bright_blue`, `bright_magenta`, `bright_purple`, `bright_cyan`, and "
+"`bright_white`."
+msgstr ""
+"`fg`（string|nil，可选）：前景色。支持的值包括 `black`、`red`、 `green`、"
+"`yellow`、`blue`、`magenta`、`purple`、`cyan`、`white`、 `bright_black`、"
+"`bright_red`、`bright_green`、`bright_yellow`、 `bright_blue`、"
+"`bright_magenta`、`bright_purple`、`bright_cyan` 和 `bright_white`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:13
 msgid "`bold` (boolean, optional): Whether to apply bold text."
@@ -89,12 +115,23 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:46
-msgid "`ptool.ansi.black`, `ptool.ansi.red`, `ptool.ansi.green`, `ptool.ansi.yellow`, `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan`, and `ptool.ansi.white` are convenience helpers with the following signature:"
-msgstr "`ptool.ansi.black`、`ptool.ansi.red`、`ptool.ansi.green`、 `ptool.ansi.yellow`、`ptool.ansi.blue`、`ptool.ansi.magenta`、 `ptool.ansi.cyan` 和 `ptool.ansi.white` 都是便捷辅助函数，签名如下："
+msgid ""
+"`ptool.ansi.black`, `ptool.ansi.red`, `ptool.ansi.green`, `ptool.ansi.yellow`"
+", `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan`, and "
+"`ptool.ansi.white` are convenience helpers with the following signature:"
+msgstr ""
+"`ptool.ansi.black`、`ptool.ansi.red`、`ptool.ansi.green`、 "
+"`ptool.ansi.yellow`、`ptool.ansi.blue`、`ptool.ansi.magenta`、 "
+"`ptool.ansi.cyan` 和 `ptool.ansi.white` 都是便捷辅助函数，签名如下："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:55
-msgid "They accept the same `text` argument and the same `options` table as `ptool.ansi.style`, except the foreground color is fixed by the helper itself. If `options.fg` is also provided, the helper color takes precedence."
-msgstr "它们接受与 `ptool.ansi.style` 相同的 `text` 参数和 `options` 表，只是前景色 由辅助函数自身固定。如果同时提供了 `options.fg`，则以辅助函数自身的颜色为准。"
+msgid ""
+"They accept the same `text` argument and the same `options` table as "
+"`ptool.ansi.style`, except the foreground color is fixed by the helper "
+"itself. If `options.fg` is also provided, the helper color takes precedence."
+msgstr ""
+"它们接受与 `ptool.ansi.style` 相同的 `text` 参数和 `options` 表，只是前景色 "
+"由辅助函数自身固定。如果同时提供了 `options.fg`，则以辅助函数自身的颜色为准。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:59
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:59"

@@ -1,0 +1,451 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:1
+msgid "DateTime API"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:3
+msgid ""
+"Date and time helpers are available under `ptool.datetime` and `p.datetime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:5
+msgid ""
+"`ptool.datetime` works with concrete instants. Every `DateTime` value "
+"carries a timezone or numeric offset."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:8
+msgid "ptool.datetime.now"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:12
+msgid "`ptool.datetime.now([tz])` returns the current time as a `DateTime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:14
+msgid ""
+"`tz` (string, optional): An IANA timezone such as `UTC`, `America/New_York`, "
+"or `Asia/Shanghai`. If omitted, the local system timezone is used."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:17
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:17"
+msgid "Returns: `DateTime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:27
+msgid "ptool.datetime.parse"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:31
+msgid ""
+"`ptool.datetime.parse(input[, options])` parses a datetime string and "
+"returns a `DateTime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:34
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:34"
+msgid "`input` (string, required): A datetime string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:35
+msgid ""
+"`options.timezone` (string, optional): An IANA timezone used only when the "
+"input does not already include a timezone or offset."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:37
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:37"
+msgid "Returns: `DateTime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:39
+msgid "Accepted inputs:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:41
+msgid "Zoned inputs such as `2024-07-15T16:24:59-04:00`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:42
+msgid ""
+"Zoned inputs with bracketed timezone annotations when supported by the "
+"parser."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:44
+msgid ""
+"Naive inputs such as `2024-07-15 16:24:59`, but only when `options.timezone` "
+"is provided."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:47
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:49
+msgid "Empty strings are rejected."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:50
+msgid ""
+"If `input` already includes a timezone or offset, setting `options.timezone` "
+"raises an error."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:52
+msgid "Without `options.timezone`, naive inputs are rejected."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:64
+msgid "ptool.datetime.from_unix"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:68
+msgid ""
+"`ptool.datetime.from_unix(value[, options])` constructs a `DateTime` from a "
+"Unix timestamp."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:71
+msgid "`value` (integer, required): The Unix timestamp."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:72
+msgid ""
+"`options.unit` (string, optional): One of `s`, `ms`, or `ns`. Defaults to "
+"`s`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:74
+msgid ""
+"`options.timezone` (string, optional): An IANA timezone. If omitted, the "
+"timestamp is interpreted in `UTC`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:76"
+msgid "Returns: `DateTime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:89
+msgid "ptool.datetime.compare"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:93
+msgid "`ptool.datetime.compare(a, b)` compares two instants."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:95
+msgid ""
+"`a` / `b` (string|DateTime, required): A datetime string or `DateTime` "
+"object."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:97
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:97"
+msgid "Returns: `-1 | 0 | 1`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:99
+msgid ""
+"String arguments are parsed using the same strict rules as "
+"`ptool.datetime.parse(input)`, so they must already include a timezone or "
+"offset."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:110
+msgid "ptool.datetime.is_valid"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:114
+msgid ""
+"`ptool.datetime.is_valid(input[, options])` checks whether a datetime string "
+"can be parsed."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:117
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:117"
+msgid "`input` (string, required): A datetime string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:118
+msgid ""
+"`options.timezone` (string, optional): An IANA timezone for naive input."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:119
+msgid "Returns: `boolean`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:129
+msgid "DateTime"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:133
+msgid ""
+"`DateTime` represents a concrete instant returned by `ptool.datetime.now(...)"
+"`, `parse(...)`, or `from_unix(...)`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:136
+msgid "It is implemented as a Lua userdata."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:138
+msgid "Fields and methods:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "Fields:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`year` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`month` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`day` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`hour` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`minute` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`second` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`nanosecond` (integer)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`offset` (string)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:140
+msgid "`timezone` (string)"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:150
+msgid "Methods:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:150
+msgid "`dt:format(fmt)` -> `string`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:150
+msgid "`dt:to_string()` -> `string`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:150
+msgid "`dt:unix([unit])` -> `integer`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:150
+msgid "`dt:in_tz(tz)` -> `DateTime`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:150
+msgid "`dt:compare(other)` -> `-1|0|1`"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:156
+msgid "Metamethods:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:156
+msgid "`tostring(dt)` is available."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:156
+msgid "`==`, `<`, and `<=` comparisons are supported."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:160
+msgid "format"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:162
+msgid "Canonical API name: `ptool.datetime.DateTime:format`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:164
+msgid ""
+"`dt:format(fmt)` formats the datetime using `strftime`-style directives."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:166
+msgid ""
+"`fmt` (string, required): A format string such as `%Y-%m-%d %H:%M:%S %Z`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:167
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:167"
+msgid "Returns: `string`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:174
+msgid "to_string"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:176
+msgid "Canonical API name: `ptool.datetime.DateTime:to_string`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:178
+msgid ""
+"`dt:to_string()` returns the canonical string form with a numeric offset."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:180
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:180"
+msgid "Returns: `string`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:187
+msgid "unix"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:189
+msgid "Canonical API name: `ptool.datetime.DateTime:unix`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:191
+msgid "`dt:unix([unit])` returns the Unix timestamp of the instant."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:193
+msgid "`unit` (string, optional): One of `s`, `ms`, or `ns`. Defaults to `s`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:194
+msgid "Returns: `integer`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:196
+msgid "Notes:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:198
+msgid ""
+"`ns` may raise an error if the result does not fit in Lua's integer range."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:206
+msgid "in_tz"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:208
+msgid "Canonical API name: `ptool.datetime.DateTime:in_tz`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:210
+msgid "`dt:in_tz(tz)` converts the same instant into another timezone."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:212
+msgid "`tz` (string, required): An IANA timezone."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:213
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:213"
+msgid "Returns: `DateTime`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:223
+msgid "compare"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:225
+msgid "Canonical API name: `ptool.datetime.DateTime:compare`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:227
+msgid "`dt:compare(other)` compares the current instant with `other`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:229
+msgid ""
+"`other` (string|DateTime, required): A datetime string or another `DateTime` "
+"object."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:231
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:231"
+msgid "Returns: `-1 | 0 | 1`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:241
+msgid "Notes"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:243
+msgid ""
+"`ptool.datetime` does not parse natural-language phrases such as `"
+"\"tomorrow 8am\"`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:245
+msgid ""
+"Timezone names should be IANA identifiers such as `UTC`, `Asia/Tokyo`, or `"
+"America/New_York`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:247
+msgid ""
+"Comparisons operate on the instant, not on the displayed wall-clock fields."
+msgstr ""

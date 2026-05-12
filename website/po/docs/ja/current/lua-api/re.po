@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:1
 msgid "Regex API"
@@ -19,8 +30,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:9
-msgid "`ptool.re.compile(pattern[, opts])` compiles a regular expression and returns a `Regex` object."
-msgstr "`ptool.re.compile(pattern[, opts])` は正規表現をコンパイルし、 `Regex` オブジェクトを返します。"
+msgid ""
+"`ptool.re.compile(pattern[, opts])` compiles a regular expression and "
+"returns a `Regex` object."
+msgstr "`ptool.re.compile(pattern[, opts])` は正規表現をコンパイルし、 `Regex` オブジ"
+"ェクトを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:12
 msgid "`pattern` (string, required): The regex pattern."
@@ -31,8 +45,11 @@ msgid "`opts` (table, optional): Compile options. Currently supported:"
 msgstr "`opts` (table, 任意): コンパイルオプション。現在サポートされるもの:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:13
-msgid "`case_insensitive` (boolean, optional): Whether matching is case-insensitive. Defaults to `false`."
-msgstr "`case_insensitive` (boolean, 任意): 大文字小文字を区別しないかどうか。 デフォルトは `false`。"
+msgid ""
+"`case_insensitive` (boolean, optional): Whether matching is case-"
+"insensitive. Defaults to `false`."
+msgstr "`case_insensitive` (boolean, 任意): 大文字小文字を区別しないかどうか。 デフォ"
+"ルトは `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:17
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:17"
@@ -50,7 +67,8 @@ msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:28
 msgid "`ptool.re.escape(text)` escapes plain text into a regex literal string."
-msgstr "`ptool.re.escape(text)` はプレーンテキストを正規表現リテラル文字列として エスケープします。"
+msgstr "`ptool.re.escape(text)` はプレーンテキストを正規表現リテラル文字列として エス"
+"ケープします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:30
 msgid "`text` (string, required): The text to escape."
@@ -75,7 +93,9 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:45
-msgid "`Regex` represents a compiled regular expression returned by `ptool.re.compile(...)`."
+msgid ""
+"`Regex` represents a compiled regular expression returned by "
+"`ptool.re.compile(...)`."
 msgstr "`Regex` は `ptool.re.compile(...)` が返すコンパイル済み正規表現を 表します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:48
@@ -149,7 +169,8 @@ msgstr "Canonical API name: `ptool.re.Regex:find`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:74
 msgid "`re:find(input[, init])` returns the first match in `input`, or `nil`."
-msgstr "`re:find(input[, init])` は `input` 内の最初の一致を返します。一致しない 場合は `nil` を返します。"
+msgstr "`re:find(input[, init])` は `input` 内の最初の一致を返します。一致しない 場合"
+"は `nil` を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:76
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:76"
@@ -197,11 +218,15 @@ msgid "`full` (string): The full matched text."
 msgstr "`full` (string): 完全一致したテキスト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:89
-msgid "`groups` (table): An array of capture groups in capture order. Unmatched groups are `nil`."
-msgstr "`groups` (table): キャプチャ順のキャプチャグループ配列。一致しない グループは `nil`。"
+msgid ""
+"`groups` (table): An array of capture groups in capture order. Unmatched "
+"groups are `nil`."
+msgstr "`groups` (table): キャプチャ順のキャプチャグループ配列。一致しない グループは"
+" `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:89
-msgid "`named` (table): A mapping of named capture groups, keyed by group name."
+msgid ""
+"`named` (table): A mapping of named capture groups, keyed by group name."
 msgstr "`named` (table): グループ名をキーにした名前付きキャプチャのマップ。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:95
@@ -225,8 +250,11 @@ msgid "Canonical API name: `ptool.re.Regex:captures`."
 msgstr "Canonical API name: `ptool.re.Regex:captures`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:105
-msgid "`re:captures(input)` returns the first capture set in `input`, or `nil`."
-msgstr "`re:captures(input)` は `input` 内の最初のキャプチャセットを返します。 一致しない場合は `nil` を返します。"
+msgid ""
+"`re:captures(input)` returns the first capture set in `input`, or `nil`."
+msgstr ""
+"`re:captures(input)` は `input` 内の最初のキャプチャセットを返します。 一致し"
+"ない場合は `nil` を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:107
 msgid "captures_all"
@@ -237,8 +265,12 @@ msgid "Canonical API name: `ptool.re.Regex:captures_all`."
 msgstr "Canonical API name: `ptool.re.Regex:captures_all`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:111
-msgid "`re:captures_all(input)` returns all capture sets in `input` as a `Captures[]`."
-msgstr "`re:captures_all(input)` は `input` 内のすべてのキャプチャセットを `Captures[]` として返します。"
+msgid ""
+"`re:captures_all(input)` returns all capture sets in `input` as a "
+"`Captures[]`."
+msgstr ""
+"`re:captures_all(input)` は `input` 内のすべてのキャプチャセットを "
+"`Captures[]` として返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:113
 msgid "replace"
@@ -262,7 +294,8 @@ msgstr "Canonical API name: `ptool.re.Regex:replace_all`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:123
 msgid "`re:replace_all(input, replacement)` replaces all matches in `input`."
-msgstr "`re:replace_all(input, replacement)` は `input` 内のすべての一致を 置換します。"
+msgstr "`re:replace_all(input, replacement)` は `input` 内のすべての一致を 置換します"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:125
 msgid "split"
@@ -273,8 +306,10 @@ msgid "Canonical API name: `ptool.re.Regex:split`."
 msgstr "Canonical API name: `ptool.re.Regex:split`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:129
-msgid "`re:split(input[, limit])` splits `input` using the regex as the separator."
-msgstr "`re:split(input[, limit])` は、その正規表現を区切り文字として `input` を 分割します。"
+msgid ""
+"`re:split(input[, limit])` splits `input` using the regex as the separator."
+msgstr "`re:split(input[, limit])` は、その正規表現を区切り文字として `input` を 分割"
+"します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:131
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:131"

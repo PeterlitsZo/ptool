@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:1
 msgid "String API"
@@ -88,8 +99,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:48
-msgid "`ptool.str.is_blank(s)` checks whether a string is empty or contains only whitespace."
-msgstr "`ptool.str.is_blank(s)` verifica se uma string está vazia ou contém apenas espaços em branco."
+msgid ""
+"`ptool.str.is_blank(s)` checks whether a string is empty or contains only "
+"whitespace."
+msgstr ""
+"`ptool.str.is_blank(s)` verifica se uma string está vazia ou contém apenas "
+"espaços em branco."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:51
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:51"
@@ -111,7 +126,8 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:63
-msgid "`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`."
+msgid ""
+"`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`."
 msgstr "`ptool.str.starts_with(s, prefix)` verifica se `s` começa com `prefix`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:65
@@ -192,8 +208,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:105
-msgid "`ptool.str.split(s, sep[, options])` splits a string by a non-empty separator."
-msgstr "`ptool.str.split(s, sep[, options])` divide uma string por um separador não vazio."
+msgid ""
+"`ptool.str.split(s, sep[, options])` splits a string by a non-empty "
+"separator."
+msgstr ""
+"`ptool.str.split(s, sep[, options])` divide uma string por um separador não "
+"vazio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:107
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:107"
@@ -202,19 +222,28 @@ msgstr "`s` (string, obrigatório): A string de entrada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:108
 msgid "`sep` (string, required): The separator. Empty strings are not allowed."
-msgstr "`sep` (string, obrigatório): O separador. Strings vazias não são permitidas."
+msgstr ""
+"`sep` (string, obrigatório): O separador. Strings vazias não são permitidas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
 msgid "`options` (table, optional): Split options. Supported fields:"
 msgstr "`options` (table, opcional): Opções de divisão. Campos suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
-msgid "`trim` (boolean, optional): Whether to trim each piece before returning it. Defaults to `false`."
-msgstr "`trim` (boolean, opcional): Se cada parte deve ser aparada antes de ser retornada. O padrão é `false`."
+msgid ""
+"`trim` (boolean, optional): Whether to trim each piece before returning it. "
+"Defaults to `false`."
+msgstr ""
+"`trim` (boolean, opcional): Se cada parte deve ser aparada antes de ser "
+"retornada. O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:109
-msgid "`skip_empty` (boolean, optional): Whether to remove empty pieces after optional trimming. Defaults to `false`."
-msgstr "`skip_empty` (boolean, opcional): Se partes vazias devem ser removidas após a eventual remoção de espaços. O padrão é `false`."
+msgid ""
+"`skip_empty` (boolean, optional): Whether to remove empty pieces after "
+"optional trimming. Defaults to `false`."
+msgstr ""
+"`skip_empty` (boolean, opcional): Se partes vazias devem ser removidas após "
+"a eventual remoção de espaços. O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:114
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:114"
@@ -232,8 +261,12 @@ msgid "Unknown option names or invalid option value types raise an error."
 msgstr "Nomes de opção desconhecidos ou tipos de valor inválidos geram erro."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:119
-msgid "`skip_empty = true` is applied after `trim`, so whitespace-only pieces can be removed when both are enabled."
-msgstr "`skip_empty = true` é aplicado depois de `trim`, então partes compostas só por espaços podem ser removidas quando ambas as opções estão habilitadas."
+msgid ""
+"`skip_empty = true` is applied after `trim`, so whitespace-only pieces can "
+"be removed when both are enabled."
+msgstr ""
+"`skip_empty = true` é aplicado depois de `trim`, então partes compostas só "
+"por espaços podem ser removidas quando ambas as opções estão habilitadas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:131
 msgid "ptool.str.split_lines"
@@ -255,15 +288,26 @@ msgstr "`s` (string, obrigatório): A string de entrada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
 msgid "`options` (table, optional): Line-splitting options. Supported fields:"
-msgstr "`options` (table, opcional): Opções de divisão de linhas. Campos suportados:"
+msgstr ""
+"`options` (table, opcional): Opções de divisão de linhas. Campos suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
-msgid "`keep_ending` (boolean, optional): Whether to keep line endings (`\\n`, `\\r\\n`, or `\\r`) in returned items. Defaults to `false`."
-msgstr "`keep_ending` (boolean, opcional): Se os finais de linha (`\\n`, `\\r\\n` ou `\\r`) devem ser mantidos nos itens retornados. O padrão é `false`."
+msgid ""
+"`keep_ending` (boolean, optional): Whether to keep line endings (`\\n"
+"`, `\\r\\n"
+"`, or `\\r`) in returned items. Defaults to `false`."
+msgstr ""
+"`keep_ending` (boolean, opcional): Se os finais de linha (`\\n"
+"`, `\\r\\n"
+"` ou `\\r`) devem ser mantidos nos itens retornados. O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:138
-msgid "`skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to `false`."
-msgstr "`skip_empty` (boolean, opcional): Se linhas vazias devem ser removidas. O padrão é `false`."
+msgid ""
+"`skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to "
+"`false`."
+msgstr ""
+"`skip_empty` (boolean, opcional): Se linhas vazias devem ser removidas. O "
+"padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:143
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:143"
@@ -276,12 +320,22 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:147
-msgid "Supports Unix (`\\n`) and Windows (`\\r\\n`) line endings, and also lone `\\r`."
-msgstr "Suporta finais de linha Unix (`\\n`), Windows (`\\r\\n`) e também `\\r` isolado."
+msgid ""
+"Supports Unix (`\\n"
+"`) and Windows (`\\r\\n"
+"`) line endings, and also lone `\\r`."
+msgstr ""
+"Suporta finais de linha Unix (`\\n"
+"`), Windows (`\\r\\n"
+"`) e também `\\r` isolado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:148
-msgid "When `skip_empty = true`, a line containing only a line ending is treated as empty and is removed."
-msgstr "Quando `skip_empty = true`, uma linha que contém apenas um final de linha é tratada como vazia e removida."
+msgid ""
+"When `skip_empty = true`, a line containing only a line ending is treated as "
+"empty and is removed."
+msgstr ""
+"Quando `skip_empty = true`, uma linha que contém apenas um final de linha é "
+"tratada como vazia e removida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:150
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:150"
@@ -299,7 +353,8 @@ msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:164
 msgid "`ptool.str.join(parts, sep)` joins a string array with a separator."
-msgstr "`ptool.str.join(parts, sep)` junta um array de strings com um separador."
+msgstr ""
+"`ptool.str.join(parts, sep)` junta um array de strings com um separador."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:166
 msgid "`parts` (string[], required): The string parts to join."
@@ -324,8 +379,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:178
-msgid "`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with `to`."
-msgstr "`ptool.str.replace(s, from, to[, n])` substitui ocorrências de `from` por `to`."
+msgid ""
+"`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with "
+"`to`."
+msgstr ""
+"`ptool.str.replace(s, from, to[, n])` substitui ocorrências de `from` por "
+"`to`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:180
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:180"
@@ -333,16 +392,24 @@ msgid "`s` (string, required): The input string."
 msgstr "`s` (string, obrigatório): A string de entrada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:181
-msgid "`from` (string, required): The substring to replace. Empty strings are not allowed."
-msgstr "`from` (string, obrigatório): A substring a ser substituída. Strings vazias não são permitidas."
+msgid ""
+"`from` (string, required): The substring to replace. Empty strings are not "
+"allowed."
+msgstr ""
+"`from` (string, obrigatório): A substring a ser substituída. Strings vazias "
+"não são permitidas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:183
 msgid "`to` (string, required): The replacement string."
 msgstr "`to` (string, obrigatório): A string de substituição."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:184
-msgid "`n` (integer, optional): Maximum replacement count. Must be greater than or equal to `0`. If omitted, all matches are replaced."
-msgstr "`n` (integer, opcional): Número máximo de substituições. Deve ser maior ou igual a `0`. Se omitido, todas as correspondências são substituídas."
+msgid ""
+"`n` (integer, optional): Maximum replacement count. Must be greater than or "
+"equal to `0`. If omitted, all matches are replaced."
+msgstr ""
+"`n` (integer, opcional): Número máximo de substituições. Deve ser maior ou "
+"igual a `0`. Se omitido, todas as correspondências são substituídas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:186
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:186"
@@ -368,8 +435,11 @@ msgid "`s` (string, required): The input string."
 msgstr "`s` (string, obrigatório): A string de entrada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:200
-msgid "`n` (integer, required): Repeat count. Must be greater than or equal to `0`."
-msgstr "`n` (integer, obrigatório): A contagem de repetição. Deve ser maior ou igual a `0`."
+msgid ""
+"`n` (integer, required): Repeat count. Must be greater than or equal to `0`."
+msgstr ""
+"`n` (integer, obrigatório): A contagem de repetição. Deve ser maior ou igual "
+"a `0`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:201
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:201"
@@ -386,8 +456,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:211
-msgid "`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` when it is present."
-msgstr "`ptool.str.cut_prefix(s, prefix)` remove `prefix` do começo de `s` quando ele está presente."
+msgid ""
+"`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` "
+"when it is present."
+msgstr ""
+"`ptool.str.cut_prefix(s, prefix)` remove `prefix` do começo de `s` quando "
+"ele está presente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:214
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:214"
@@ -409,8 +483,11 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:220
-msgid "If `s` does not start with `prefix`, the original string is returned unchanged."
-msgstr "Se `s` não começar com `prefix`, a string original é retornada sem alteração."
+msgid ""
+"If `s` does not start with `prefix`, the original string is returned "
+"unchanged."
+msgstr ""
+"Se `s` não começar com `prefix`, a string original é retornada sem alteração."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:227
 msgid "ptool.str.cut_suffix"
@@ -422,8 +499,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:231
-msgid "`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when it is present."
-msgstr "`ptool.str.cut_suffix(s, suffix)` remove `suffix` do fim de `s` quando ele está presente."
+msgid ""
+"`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when "
+"it is present."
+msgstr ""
+"`ptool.str.cut_suffix(s, suffix)` remove `suffix` do fim de `s` quando ele "
+"está presente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:234
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:234"
@@ -445,8 +526,11 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:240
-msgid "If `s` does not end with `suffix`, the original string is returned unchanged."
-msgstr "Se `s` não terminar com `suffix`, a string original é retornada sem alteração."
+msgid ""
+"If `s` does not end with `suffix`, the original string is returned unchanged."
+msgstr ""
+"Se `s` não terminar com `suffix`, a string original é retornada sem "
+"alteração."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:246
 msgid "ptool.str.indent"
@@ -459,7 +543,8 @@ msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:250
 msgid "`ptool.str.indent(s, prefix[, options])` adds `prefix` to each line."
-msgstr "`ptool.str.indent(s, prefix[, options])` adiciona `prefix` a cada linha."
+msgstr ""
+"`ptool.str.indent(s, prefix[, options])` adiciona `prefix` a cada linha."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:252
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:252"
@@ -475,8 +560,12 @@ msgid "`options` (table, optional): Indent options. Supported fields:"
 msgstr "`options` (table, opcional): Opções de indentação. Campos suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:254
-msgid "`skip_first` (boolean, optional): Whether to leave the first line unchanged. Defaults to `false`."
-msgstr "`skip_first` (boolean, opcional): Se a primeira linha deve permanecer inalterada. O padrão é `false`."
+msgid ""
+"`skip_first` (boolean, optional): Whether to leave the first line unchanged. "
+"Defaults to `false`."
+msgstr ""
+"`skip_first` (boolean, opcional): Se a primeira linha deve permanecer "
+"inalterada. O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:257
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/str.md:257"

@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:1
 msgid "Database API"
 msgstr "データベース API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:3
-msgid "Database connection and query helpers are available under `ptool.db` and `p.db`."
+msgid ""
+"Database connection and query helpers are available under `ptool.db` and "
+"`p.db`."
 msgstr "データベース接続とクエリのヘルパーは `ptool.db` と `p.db` にあります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:5
@@ -19,8 +32,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:9
-msgid "`ptool.db.connect(url_or_options)` opens a database connection and returns a `Connection` object."
-msgstr "`ptool.db.connect(url_or_options)` はデータベース接続を開き、 `Connection` オブジェクトを返します。"
+msgid ""
+"`ptool.db.connect(url_or_options)` opens a database connection and returns a "
+"`Connection` object."
+msgstr ""
+"`ptool.db.connect(url_or_options)` はデータベース接続を開き、 `Connection` オ"
+"ブジェクトを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:12
 msgid "Supported databases:"
@@ -71,12 +88,19 @@ msgid "`sqlite:test.db` and `sqlite://test.db` are supported."
 msgstr "`sqlite:test.db` と `sqlite://test.db` がサポートされます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:36
-msgid "Relative SQLite paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "相対 SQLite パスは現在の `ptool` ランタイムディレクトリから解決される ため、`ptool.cd(...)` に従います。"
+msgid ""
+"Relative SQLite paths are resolved from the current `ptool` runtime "
+"directory, so they follow `ptool.cd(...)`."
+msgstr "相対 SQLite パスは現在の `ptool` ランタイムディレクトリから解決される ため、"
+"`ptool.cd(...)` に従います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:38
-msgid "If no `mode=` query parameter is provided, SQLite connections default to `mode=rwc`, which allows creating the database file automatically."
-msgstr "`mode=` クエリパラメータが指定されていない場合、SQLite 接続のデフォルト は `mode=rwc` で、データベースファイルの自動作成が可能です。"
+msgid ""
+"If no `mode=` query parameter is provided, SQLite connections default to "
+"`mode=rwc`, which allows creating the database file automatically."
+msgstr ""
+"`mode=` クエリパラメータが指定されていない場合、SQLite 接続のデフォルト は "
+"`mode=rwc` で、データベースファイルの自動作成が可能です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:41"
@@ -93,8 +117,11 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:54
-msgid "`Connection` represents an open database connection returned by `ptool.db.connect()`."
-msgstr "`Connection` は `ptool.db.connect()` が返す開かれたデータベース接続を 表します。"
+msgid ""
+"`Connection` represents an open database connection returned by "
+"`ptool.db.connect()`."
+msgstr "`Connection` は `ptool.db.connect()` が返す開かれたデータベース接続を 表しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:57
 msgid "It is implemented as a Lua userdata."
@@ -137,12 +164,18 @@ msgid "`params` is optional."
 msgstr "`params` は任意です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:71
-msgid "When `params` is an array table, it is treated as positional parameters and SQL placeholders should use `?`."
-msgstr "`params` が配列テーブルの場合は位置パラメータとして扱われ、 SQL プレースホルダーには `?` を使います。"
+msgid ""
+"When `params` is an array table, it is treated as positional parameters and "
+"SQL placeholders should use `?`."
+msgstr "`params` が配列テーブルの場合は位置パラメータとして扱われ、 SQL プレースホル"
+"ダーには `?` を使います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:73
-msgid "When `params` is a key-value table, it is treated as named parameters and SQL placeholders should use `:name`."
-msgstr "`params` がキーと値のテーブルの場合は名前付きパラメータとして扱われ、 SQL プレースホルダーには `:name` を使います。"
+msgid ""
+"When `params` is a key-value table, it is treated as named parameters and "
+"SQL placeholders should use `:name`."
+msgstr "`params` がキーと値のテーブルの場合は名前付きパラメータとして扱われ、 SQL プ"
+"レースホルダーには `:name` を使います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:75
 msgid "Positional and named parameters cannot be mixed in the same call."
@@ -217,8 +250,11 @@ msgid "Binary/blob columns are also returned as Lua strings."
 msgstr "バイナリ/blob 列も Lua 文字列として返されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:93
-msgid "If a query result contains duplicate column names, an error is raised. Use SQL aliases such as `AS` to disambiguate them."
-msgstr "クエリ結果に重複した列名が含まれる場合はエラーになります。`AS` などの SQL エイリアスで区別してください。"
+msgid ""
+"If a query result contains duplicate column names, an error is raised. Use "
+"SQL aliases such as `AS` to disambiguate them."
+msgstr "クエリ結果に重複した列名が含まれる場合はエラーになります。`AS` などの SQL エ"
+"イリアスで区別してください。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:96
 msgid "query"
@@ -268,8 +304,12 @@ msgid "Canonical API name: `ptool.db.Connection:query_one`."
 msgstr "Canonical API name: `ptool.db.Connection:query_one`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:130
-msgid "`db:query_one(sql, params?)` returns the first row as a table, or `nil` if the query returns no rows."
-msgstr "`db:query_one(sql, params?)` は最初の 1 行をテーブルとして返します。 クエリ結果が 0 行なら `nil` を返します。"
+msgid ""
+"`db:query_one(sql, params?)` returns the first row as a table, or `nil` if "
+"the query returns no rows."
+msgstr ""
+"`db:query_one(sql, params?)` は最初の 1 行をテーブルとして返します。 クエリ結"
+"果が 0 行なら `nil` を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:133"
@@ -290,8 +330,11 @@ msgid "Canonical API name: `ptool.db.Connection:scalar`."
 msgstr "Canonical API name: `ptool.db.Connection:scalar`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:148
-msgid "`db:scalar(sql, params?)` returns the first column of the first row, or `nil` if the query returns no rows."
-msgstr "`db:scalar(sql, params?)` は最初の行の最初の列を返します。クエリ結果が 0 行なら `nil` を返します。"
+msgid ""
+"`db:scalar(sql, params?)` returns the first column of the first row, or `nil`"
+" if the query returns no rows."
+msgstr "`db:scalar(sql, params?)` は最初の行の最初の列を返します。クエリ結果が 0 行な"
+"ら `nil` を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:151"
@@ -312,7 +355,8 @@ msgid "Canonical API name: `ptool.db.Connection:execute`."
 msgstr "Canonical API name: `ptool.db.Connection:execute`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:164
-msgid "`db:execute(sql, params?)` executes a statement and returns a table with:"
+msgid ""
+"`db:execute(sql, params?)` executes a statement and returns a table with:"
 msgstr "`db:execute(sql, params?)` は文を実行し、次を持つテーブルを返します:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:166
@@ -339,7 +383,8 @@ msgstr "Canonical API name: `ptool.db.Connection:transaction`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:181
 msgid "`db:transaction(fn)` runs `fn(tx)` inside a database transaction."
-msgstr "`db:transaction(fn)` はデータベーストランザクション内で `fn(tx)` を 実行します。"
+msgstr "`db:transaction(fn)` はデータベーストランザクション内で `fn(tx)` を 実行しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:183
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:183"
@@ -351,16 +396,22 @@ msgid "If `fn(tx)` returns normally, the transaction is committed."
 msgstr "`fn(tx)` が正常に返れば、トランザクションはコミットされます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:186
-msgid "If `fn(tx)` raises an error, the transaction is rolled back and the error is re-raised."
-msgstr "`fn(tx)` がエラーを投げると、トランザクションはロールバックされ、 そのエラーが再送出されます。"
+msgid ""
+"If `fn(tx)` raises an error, the transaction is rolled back and the error is "
+"re-raised."
+msgstr "`fn(tx)` がエラーを投げると、トランザクションはロールバックされ、 そのエラー"
+"が再送出されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:188
 msgid "Nested transactions are not supported."
 msgstr "ネストしたトランザクションはサポートされません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:189
-msgid "While the callback is active, the outer connection object must not be used; use the provided `tx` object instead."
-msgstr "コールバックが有効な間は外側の接続オブジェクトを使ってはいけません。 代わりに渡された `tx` オブジェクトを使ってください。"
+msgid ""
+"While the callback is active, the outer connection object must not be used; "
+"use the provided `tx` object instead."
+msgstr "コールバックが有効な間は外側の接続オブジェクトを使ってはいけません。 代わりに"
+"渡された `tx` オブジェクトを使ってください。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:192
 msgid "The `tx` object supports the same query methods as `Connection`:"

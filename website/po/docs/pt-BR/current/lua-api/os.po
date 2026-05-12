@@ -1,13 +1,28 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:1
 msgid "OS API"
 msgstr "API de sistema operacional"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:3
-msgid "`ptool.os` exposes helpers for reading the current runtime environment and querying basic host-process details."
-msgstr "`ptool.os` expõe utilitários para ler o ambiente atual do runtime e consultar detalhes básicos do processo hospedeiro."
+msgid ""
+"`ptool.os` exposes helpers for reading the current runtime environment and "
+"querying basic host-process details."
+msgstr ""
+"`ptool.os` expõe utilitários para ler o ambiente atual do runtime e "
+"consultar detalhes básicos do processo hospedeiro."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:6
 msgid "ptool.os.getenv"
@@ -19,8 +34,10 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:10
-msgid "`ptool.os.getenv(name)` returns the current value of an environment variable."
-msgstr "`ptool.os.getenv(name)` retorna o valor atual de uma variável de ambiente."
+msgid ""
+"`ptool.os.getenv(name)` returns the current value of an environment variable."
+msgstr ""
+"`ptool.os.getenv(name)` retorna o valor atual de uma variável de ambiente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:12
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:12"
@@ -28,26 +45,32 @@ msgid "`name` (string, required): Environment variable name."
 msgstr "`name` (string, obrigatório): Nome da variável de ambiente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:13
+#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:13"
 msgid "Returns: `string|nil`."
-msgstr ""
+msgstr "Retorna: `string|nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:15
+#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:15"
 msgid "Behavior:"
-msgstr ""
+msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:17
 msgid "Returns `nil` when the variable is not set."
 msgstr "Retorna: `string|nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:18
-msgid "Reads the current `ptool` runtime environment, including values changed by `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`."
+msgid ""
+"Reads the current `ptool` runtime environment, including values changed by "
+"`ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:20
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:20"
-msgid "Raises an error when `name` is empty or contains invalid characters such as `=`."
+msgid ""
+"Raises an error when `name` is empty or contains invalid characters such as "
+"`=`."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:23
@@ -65,24 +88,29 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:34
-msgid "`ptool.os.env()` returns a snapshot table of the current runtime environment."
-msgstr "`ptool.os.env()` retorna uma tabela instantânea do ambiente atual do runtime."
+msgid ""
+"`ptool.os.env()` returns a snapshot table of the current runtime environment."
+msgstr ""
+"`ptool.os.env()` retorna uma tabela instantânea do ambiente atual do runtime."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:36
 msgid "Returns: `table`."
 msgstr "Retorna: `table`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:38
+#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:38"
 msgid "Behavior:"
-msgstr ""
+msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:40
 msgid "The returned table maps variable names to string values."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:41
-msgid "Values changed through `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)` are reflected in the snapshot."
+msgid ""
+"Values changed through `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)` "
+"are reflected in the snapshot."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:44
@@ -100,8 +128,12 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:55
-msgid "`ptool.os.setenv(name, value)` sets an environment variable in the current `ptool` runtime."
-msgstr "`ptool.os.setenv(name, value)` define uma variável de ambiente no runtime atual do `ptool`."
+msgid ""
+"`ptool.os.setenv(name, value)` sets an environment variable in the current "
+"`ptool` runtime."
+msgstr ""
+"`ptool.os.setenv(name, value)` define uma variável de ambiente no runtime "
+"atual do `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:58
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:58"
@@ -118,16 +150,23 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:63
-msgid "This updates the current `ptool` runtime environment, not the parent shell."
+msgid ""
+"This updates the current `ptool` runtime environment, not the parent shell."
 msgstr "Isso atualiza o ambiente do runtime atual do `ptool`, não o shell pai."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:64
-msgid "Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched later through `ptool.run(...)`."
+msgid ""
+"Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and "
+"child processes launched later through `ptool.run(...)`."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:66
-msgid "Raises an error when `name` is empty, contains `=`, or when `value` contains NUL."
-msgstr "Os valores definidos aqui ficam visíveis para `ptool.os.getenv(...)`, `ptool.os.env()` e processos filhos iniciados depois com `ptool.run(...)`."
+msgid ""
+"Raises an error when `name` is empty, contains `=`, or when `value` contains "
+"NUL."
+msgstr ""
+"Os valores definidos aqui ficam visíveis para `ptool.os.getenv(...)`, "
+"`ptool.os.env()` e processos filhos iniciados depois com `ptool.run(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:69
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:69"
@@ -144,8 +183,12 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:80
-msgid "`ptool.os.unsetenv(name)` removes an environment variable from the current `ptool` runtime."
-msgstr "`ptool.os.unsetenv(name)` remove uma variável de ambiente do runtime atual do `ptool`."
+msgid ""
+"`ptool.os.unsetenv(name)` removes an environment variable from the current "
+"`ptool` runtime."
+msgstr ""
+"`ptool.os.unsetenv(name)` remove uma variável de ambiente do runtime atual "
+"do `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:83
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:83"
@@ -153,17 +196,22 @@ msgid "`name` (string, required): Environment variable name."
 msgstr "`name` (string, obrigatório): Nome da variável."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:85
+#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:85"
 msgid "Behavior:"
-msgstr ""
+msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:87
-msgid "This affects later calls to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched by `ptool.run(...)`."
+msgid ""
+"This affects later calls to `ptool.os.getenv(...)`, `ptool.os.env()`, and "
+"child processes launched by `ptool.run(...)`."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:89
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:89"
-msgid "Raises an error when `name` is empty or contains invalid characters such as `=`."
+msgid ""
+"Raises an error when `name` is empty or contains invalid characters such as "
+"`=`."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:92
@@ -279,8 +327,12 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:155
-msgid "`ptool.os.exepath()` returns the resolved path of the running `ptool` executable."
-msgstr "`ptool.os.exepath()` retorna o caminho resolvido do executável `ptool` em execução."
+msgid ""
+"`ptool.os.exepath()` returns the resolved path of the running `ptool` "
+"executable."
+msgstr ""
+"`ptool.os.exepath()` retorna o caminho resolvido do executável `ptool` em "
+"execução."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:158
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:158"

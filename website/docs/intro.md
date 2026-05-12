@@ -92,8 +92,8 @@ This lets you execute the script directly once it has the executable bit.
 
 - A script runner that understands shebang files.
 - An interactive REPL for trying Lua expressions and `ptool` APIs directly.
-- Lua helpers for semver, paths, files, TOML, regexes, strings, HTTP, SSH,
-  databases, and templates.
+- Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings,
+  HTTP, SSH, databases, and templates.
 - CLI-oriented helpers for running commands, parsing arguments, and asking for
   interactive input.
 

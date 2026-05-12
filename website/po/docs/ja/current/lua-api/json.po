@@ -1,12 +1,25 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:20+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: ja\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:1
 msgid "JSON API"
 msgstr "JSON API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:3
-msgid "JSON parsing and serialization helpers are available under `ptool.json` and `p.json`."
+msgid ""
+"JSON parsing and serialization helpers are available under `ptool.json` and "
+"`p.json`."
 msgstr "JSON の解析とシリアライズのヘルパーは `ptool.json` と `p.json` に あります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:6
@@ -71,8 +84,11 @@ msgid "An error is raised if `input` is not a string."
 msgstr "`input` が文字列でない場合はエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:28
-msgid "A JSON syntax error raises an error whose message includes the parser detail from `serde_json`."
-msgstr "JSON 構文エラーでは、`serde_json` のパーサー詳細を含むメッセージで エラーになります。"
+msgid ""
+"A JSON syntax error raises an error whose message includes the parser detail "
+"from `serde_json`."
+msgstr "JSON 構文エラーでは、`serde_json` のパーサー詳細を含むメッセージで エラーにな"
+"ります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:31
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:31"
@@ -89,8 +105,11 @@ msgid "`v0.3.0` - Introduced."
 msgstr "`v0.3.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:45
-msgid "`ptool.json.stringify(value[, options])` converts a Lua value to a JSON string."
-msgstr "`ptool.json.stringify(value[, options])` は Lua 値を JSON 文字列へ変換します。"
+msgid ""
+"`ptool.json.stringify(value[, options])` converts a Lua value to a JSON "
+"string."
+msgstr "`ptool.json.stringify(value[, options])` は Lua 値を JSON 文字列へ変換します"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:47
 msgid "`value` (JSON-compatible Lua value, required): The value to encode."
@@ -101,8 +120,12 @@ msgid "`options` (table, optional): Serialization options."
 msgstr "`options` (table, 任意): シリアライズオプション。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:49
-msgid "`options.pretty` (boolean, optional): When `true`, output pretty-printed JSON. Defaults to `false`."
-msgstr "`options.pretty` (boolean, 任意): `true` のとき見やすく整形された JSON を出力します。デフォルトは `false`。"
+msgid ""
+"`options.pretty` (boolean, optional): When `true`, output pretty-printed "
+"JSON. Defaults to `false`."
+msgstr ""
+"`options.pretty` (boolean, 任意): `true` のとき見やすく整形された JSON を出力"
+"します。デフォルトは `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:51
 msgid "Returns: The encoded JSON string."
@@ -121,8 +144,12 @@ msgid "Pretty output uses indented multi-line JSON."
 msgstr "pretty 出力ではインデント付きの複数行 JSON を使います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:57
-msgid "Values must be JSON-compatible. Functions, threads, userdata, and other non-serializable Lua values raise an error."
-msgstr "値は JSON 互換である必要があります。`function`, `thread`, `userdata` などのシリアライズできない Lua 値はエラーになります。"
+msgid ""
+"Values must be JSON-compatible. Functions, threads, userdata, and other non-"
+"serializable Lua values raise an error."
+msgstr ""
+"値は JSON 互換である必要があります。`function`, `thread`, `userdata` などのシ"
+"リアライズできない Lua 値はエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60"
@@ -134,9 +161,16 @@ msgid "Notes:"
 msgstr "注意:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
-msgid "`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and are not preserved as JSON object fields."
-msgstr "Lua テーブル内の `nil` 値は `mlua` の serde 変換挙動に従うため、 JSON オブジェクトのフィールドとして保持されません。"
+msgid ""
+"`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and "
+"are not preserved as JSON object fields."
+msgstr ""
+"Lua テーブル内の `nil` 値は `mlua` の serde 変換挙動に従うため、 JSON オブジ"
+"ェクトのフィールドとして保持されません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
-msgid "Array/object detection for Lua tables follows `mlua`'s serde conversion rules."
-msgstr "Lua テーブルが配列かオブジェクトかの判定は `mlua` の serde 変換ルールに 従います。"
+msgid ""
+"Array/object detection for Lua tables follows `mlua`'s serde conversion "
+"rules."
+msgstr "Lua テーブルが配列かオブジェクトかの判定は `mlua` の serde 変換ルールに 従い"
+"ます。"

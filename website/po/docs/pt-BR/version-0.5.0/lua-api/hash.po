@@ -1,5 +1,16 @@
 msgid ""
-msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-05-11 20:21+0800\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: FULL NAME <EMAIL@ADDRESS>\nLanguage-Team: LANGUAGE <LL@li.org>\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: Translate Toolkit 3.16.3\nLanguage: pt-BR\n"
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 17:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:1
 msgid "Hash API"
@@ -24,8 +35,12 @@ msgstr "`ptool.hash.sha256(input)` retorna o digest SHA-256 de uma string Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:11
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:11"
-msgid "`input` (string, required): The input Lua string. The digest is computed from the string's raw bytes."
-msgstr "`input` (string, obrigatório): A string Lua de entrada. O digest é calculado a partir dos bytes brutos da string."
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
+msgstr ""
+"`input` (string, obrigatório): A string Lua de entrada. O digest é calculado "
+"a partir dos bytes brutos da string."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:13
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:13"
@@ -47,8 +62,12 @@ msgstr "`ptool.hash.sha1(input)` retorna o digest SHA-1 de uma string Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:26
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:26"
-msgid "`input` (string, required): The input Lua string. The digest is computed from the string's raw bytes."
-msgstr "`input` (string, obrigatório): A string Lua de entrada. O digest é calculado a partir dos bytes brutos da string."
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
+msgstr ""
+"`input` (string, obrigatório): A string Lua de entrada. O digest é calculado "
+"a partir dos bytes brutos da string."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:28
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:28"
@@ -70,8 +89,12 @@ msgstr "`ptool.hash.md5(input)` retorna o digest MD5 de uma string Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:41"
-msgid "`input` (string, required): The input Lua string. The digest is computed from the string's raw bytes."
-msgstr "`input` (string, obrigatório): A string Lua de entrada. O digest é calculado a partir dos bytes brutos da string."
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
+msgstr ""
+"`input` (string, obrigatório): A string Lua de entrada. O digest é calculado "
+"a partir dos bytes brutos da string."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:43
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/hash.md:43"
