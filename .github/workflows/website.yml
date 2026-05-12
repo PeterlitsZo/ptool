@@ -36,6 +36,17 @@ jobs:
           cache: npm
           cache-dependency-path: website/package-lock.json
 
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+          cache: pip
+          cache-dependency-path: website/requirements-docs-i18n.txt
+
+      - name: Install docs i18n dependencies
+        run: python -m pip install -r requirements-docs-i18n.txt
+        working-directory: website
+
       - name: Install website dependencies
         run: npm ci
         working-directory: website
