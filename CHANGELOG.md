@@ -2,13 +2,15 @@
 
 ## Unreleased
 
+### Fixed
+
 - Fixed `ptool.http.request(...)` to report response body read timeouts more
   clearly during downloads, instead of surfacing a misleading decode error.
+
+### Added
+
 - Added offline on-site search to the Docusaurus docs site, with local search
   indexes for all supported locales.
-- Enhanced `ptool -V` / `ptool version` to print richer build metadata,
-  including Git revision state, build timestamps, target triple, toolchain
-  versions, and embedded Lua runtime details.
 - Added `ptool.fs.is_file(...)`, `ptool.fs.is_dir(...)`, and
   `ptool.fs.remove(...)` for local path inspection and removal, and updated the
   filesystem API docs across all supported locales.
@@ -16,10 +18,16 @@
   helpers for transforming and combining dense Lua list tables, and documented
   it across all supported locales.
 
+### Changed
+
+- Enhanced `ptool -V` / `ptool version` to print richer build metadata,
+  including Git revision state, build timestamps, target triple, toolchain
+  versions, and embedded Lua runtime details.
+
 ## v0.5.0 (2026-05-10)
 
-- Fixed `ptool.ask(...)` so its callable-table form correctly accepts the
-  prompt argument again after the Lua metatable binding regressed.
+### Added
+
 - Added the `ptool.yaml` module with `parse`, `get`, and `stringify` helpers
   for YAML parsing and serialization in Lua scripts, and documented it across
   all supported locales.
@@ -39,6 +47,9 @@
   as `ptool run script.lua ...`, making shebang-style entrypoints shorter.
 - Added `ptool.script_path()`, which returns the absolute path of the current
   entry script for locating project files relative to the script itself.
+
+### Changed
+
 - Restricted the default embedded Lua standard libraries to `table`, `string`,
   `math`, and `utf8`, removing unnecessary built-in host-facing modules such as
   `io`, `os`, and `package`.
@@ -46,24 +57,19 @@
   Docusaurus site, and added page-level and homepage guidance for feeding the
   docs to AI assistants directly.
 
+### Fixed
+
+- Fixed `ptool.ask(...)` so its callable-table form correctly accepts the
+  prompt argument again after the Lua metatable binding regressed.
+
 ## v0.4.0 (2026-04-30)
 
-- Expanded the TOML Lua API with engine-backed `ptool.toml.stringify(...)`,
-  composite table/array writes in `ptool.toml.set(...)`, array indexing in TOML
-  paths, and synchronized TOML docs across all supported locales.
-- Fixed `ptool repl` so top-level `local` bindings now remain available across
-  later REPL inputs within the same session.
+### Added
+
 - Added `ptool.try(...)` for structured Lua-side error handling, and changed
   command and runtime failures across `ptool.run`, `assert_ok()`, REPL, and the
   CLI to carry richer error metadata such as `kind`, `op`, `path`, `cmd`, and
   `status`.
-- Changed `ptool.fs.read(...)` and `ptool.fs.write(...)` to operate on raw byte
-  strings, so Lua scripts can read and write binary files without separate
-  byte-specific APIs, and synchronized the filesystem docs across all supported
-  locales.
-- Enhanced `p.http.request(...)` with query/form/JSON request helpers, redirect
-  and auth options, richer response header APIs, cached response bodies, and
-  synchronized HTTP documentation across all supported locales.
 - Added Spanish, Brazilian Portuguese, and Japanese i18n support for the
   Docusaurus docs site, including localized theme strings, homepage text, and
   translated documentation pages.
@@ -72,8 +78,26 @@
 - Added readline-style line editing to `ptool repl`, including arrow-key cursor
   movement, in-session history navigation, multi-line input reset on `Ctrl-C`,
   and cleaner interactive Lua experimentation.
+
+### Changed
+
+- Expanded the TOML Lua API with engine-backed `ptool.toml.stringify(...)`,
+  composite table/array writes in `ptool.toml.set(...)`, array indexing in TOML
+  paths, and synchronized TOML docs across all supported locales.
+- Changed `ptool.fs.read(...)` and `ptool.fs.write(...)` to operate on raw byte
+  strings, so Lua scripts can read and write binary files without separate
+  byte-specific APIs, and synchronized the filesystem docs across all supported
+  locales.
+- Enhanced `p.http.request(...)` with query/form/JSON request helpers, redirect
+  and auth options, richer response header APIs, cached response bodies, and
+  synchronized HTTP documentation across all supported locales.
 - Changed `ptool.run`, `ptool.run_capture`, and SSH command echo output to show
   the current `user@host` together with the relevant working directory.
+
+### Fixed
+
+- Fixed `ptool repl` so top-level `local` bindings now remain available across
+  later REPL inputs within the same session.
 
 ## v0.3.0 (2026-04-15)
 
@@ -181,14 +205,6 @@
 
 ## v0.1.0-alpha.4 (2026-03-26)
 
-### Changed
-
-- Changed the release workflow to upload packaged `*.tar.gz` artifacts and
-  `SHA256SUMS` to the Cloudflare R2 release bucket for each Git tag.
-- Changed shebang preprocessing so `ptool run` preserves Lua source line
-  numbers by replacing the shebang line with a blank line instead of removing
-  it entirely.
-
 ### Added
 
 - Added file transfer support across `ptool.fs.copy` and `ptool.ssh`, including
@@ -199,6 +215,14 @@
   `ptool.ansi.style(text[, options])`, foreground-color shortcuts such as
   `ptool.ansi.red(...)`, TTY-aware default enablement, and support for bold,
   dimmed, italic, and underline text attributes.
+
+### Changed
+
+- Changed the release workflow to upload packaged `*.tar.gz` artifacts and
+  `SHA256SUMS` to the Cloudflare R2 release bucket for each Git tag.
+- Changed shebang preprocessing so `ptool run` preserves Lua source line
+  numbers by replacing the shebang line with a blank line instead of removing
+  it entirely.
 
 ## v0.1.0-alpha.3 (2026-03-24)
 
