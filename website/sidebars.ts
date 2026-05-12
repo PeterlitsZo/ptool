@@ -16,6 +16,7 @@ const sidebars: SidebarsConfig = {
         'lua-api/semver',
         'lua-api/hash',
         'lua-api/net',
+        'lua-api/os',
         'lua-api/platform',
         'lua-api/ansi',
         'lua-api/log',
