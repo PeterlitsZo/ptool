@@ -72,6 +72,7 @@ fn create_ptool_module(
     let semver_module = create_ptool_semver_module(lua, Rc::clone(&world))?;
     let template_module = create_ptool_template_module(lua, Rc::clone(&world))?;
     let toml_module = create_ptool_toml_module(lua, Rc::clone(&world))?;
+    let tui_module = create_ptool_tui_module(lua, Rc::clone(&world))?;
     let yaml_module = create_ptool_yaml_module(lua, Rc::clone(&world))?;
     module.set("run", run_fn)?;
     module.set("run_capture", run_capture_fn)?;
@@ -103,6 +104,7 @@ fn create_ptool_module(
     module.set("semver", semver_module)?;
     module.set("template", template_module)?;
     module.set("toml", toml_module)?;
+    module.set("tui", tui_module)?;
     module.set("yaml", yaml_module)?;
     Ok(module)
 }
@@ -462,6 +464,34 @@ fn create_ptool_yaml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
     yaml_module.set("get", get_fn)?;
     yaml_module.set("stringify", stringify_fn)?;
     Ok(yaml_module)
+}
+
+fn create_ptool_tui_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let tui_module = lua.create_table()?;
+
+    let run_state = Rc::clone(&world);
+    let run_fn =
+        lua.create_function(move |lua, options: Table| run_state.borrow().tui_run(lua, options))?;
+    tui_module.set("run", run_fn)?;
+
+    let text_fn = lua.create_function(|lua, (text, options): (String, Option<Table>)| {
+        crate::tui::text_node(lua, text, options)
+    })?;
+    tui_module.set("text", text_fn)?;
+
+    let list_fn = lua.create_function(|lua, (items, options): (Table, Option<Table>)| {
+        crate::tui::list_node(lua, items, options)
+    })?;
+    tui_module.set("list", list_fn)?;
+
+    let row_fn = lua.create_function(|lua, options: Table| crate::tui::row_node(lua, options))?;
+    tui_module.set("row", row_fn)?;
+
+    let column_fn =
+        lua.create_function(|lua, options: Table| crate::tui::column_node(lua, options))?;
+    tui_module.set("column", column_fn)?;
+
+    Ok(tui_module)
 }
 
 fn create_ptool_path_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

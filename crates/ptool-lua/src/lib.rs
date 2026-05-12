@@ -21,6 +21,7 @@ mod strings;
 mod tbl;
 mod template;
 mod toml;
+mod tui;
 mod version;
 mod yaml;
 

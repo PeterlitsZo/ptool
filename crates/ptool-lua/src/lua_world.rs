@@ -616,6 +616,10 @@ impl LuaWorld {
         crate::re::escape(&self.engine, &text)
     }
 
+    pub(crate) fn tui_run(&self, lua: &Lua, options: Table) -> mlua::Result<Value> {
+        crate::tui::run(lua, &self.engine, options)
+    }
+
     pub(crate) fn semver_parse(&self, version: Value) -> mlua::Result<crate::semver::LuaSemVer> {
         crate::semver::parse(&self.engine, version)
     }

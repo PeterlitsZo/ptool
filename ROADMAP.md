@@ -1,10 +1,13 @@
+# v0.8.0
+
+- [ ] Support to get the ptool's version.
+
 # v0.7.0
 
 - [ ] Support `p.git` module.
 - [ ] Let `p.run` support `stdin`?
 - [ ] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
 - [ ] Add a helper for SSH connection to send HTTP request?
-- [ ] Get the ptool's version.
 - [ ] Let `ptool --help` print the website's URL.
 - [ ] Enhance `p.log` and `p.run`, `p.ask` to have better style?
   - The custom `prompt_prefix`? The background color?
@@ -16,7 +19,7 @@
 - [x] Update CI (to avoid "Node.js 20 actions are deprecated." warnings.)
 - [x] Make the document website better.
 - [x] Make `ptool -V` render more infomations.
-- [ ] Support a TUI toolkit.
+- [x] Support a TUI toolkit.
 - [x] Support `p.tbl` module for better Lua table functions.
   - `p.tbl.map`.
   - `p.tbl.filter`.

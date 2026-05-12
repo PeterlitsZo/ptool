@@ -15,6 +15,7 @@
 - [OS API](./os.md)：读取运行时环境变量，并查看宿主进程信息。
 - [Platform API](./platform.md)：检测当前操作系统、CPU 架构和目标三元组。
 - [ANSI API](./ansi.md)：用 ANSI 转义序列构造带样式的终端输出。
+- [TUI API](./tui.md)：使用结构化视图树和事件循环构建简单的终端界面。
 - [Log API](./log.md)：按 level 输出带时间戳的终端日志。
 - [HTTP API](./http.md)：发送 HTTP 请求并读取响应体。
 - [JSON API](./json.md)：解析 JSON 文本，并把 Lua 值序列化为 JSON。

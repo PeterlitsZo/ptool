@@ -15,6 +15,7 @@
 - [OS API](./os.md): ランタイムの環境変数を読み取り、ホストプロセス情報を 確認する。
 - [プラットフォーム API](./platform.md): 現在の OS、アーキテクチャ、 target triple を検出する。
 - [ANSI API](./ansi.md): ANSI エスケープシーケンスで装飾された端末出力を 組み立てる。
+- [TUI API](./tui.md): 構造化されたビュー木とイベントループでシンプルな端末 UI を構築する。
 - [Log API](./log.md): レベルごとのタイムスタンプ付き端末ログを書き出す。
 - [HTTP API](./http.md): HTTP リクエストを送り、レスポンス本文を扱う。
 - [JSON API](./json.md): JSON テキストを解析し、Lua 値を JSON として 文字列化する。

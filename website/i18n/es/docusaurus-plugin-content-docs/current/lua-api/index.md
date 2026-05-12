@@ -15,6 +15,7 @@
 - [API de sistema operativo](./os.md): Lee variables de entorno del runtime e inspecciona detalles del proceso anfitrión.
 - [API de plataforma](./platform.md): Detecta el SO, la arquitectura y el target triple actuales.
 - [API ANSI](./ansi.md): Construye salida de terminal con estilo mediante secuencias ANSI.
+- [API TUI](./tui.md): Construye interfaces de terminal simples con un árbol de vistas estructurado y un bucle de eventos.
 - [API de log](./log.md): Escribe logs de terminal con marcas de tiempo y nivel.
 - [API HTTP](./http.md): Envía solicitudes HTTP y consume cuerpos de respuesta.
 - [API JSON](./json.md): Analiza texto JSON y serializa valores Lua como JSON.

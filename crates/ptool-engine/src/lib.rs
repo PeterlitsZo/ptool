@@ -19,6 +19,7 @@ mod strings;
 mod template;
 mod text;
 mod toml;
+mod tui;
 mod yaml;
 
 pub use ansi::{Color, StyleOptions};
@@ -57,6 +58,10 @@ use std::sync::Mutex;
 pub use strings::{IndentOptions, SplitLinesOptions, SplitOptions};
 use tokio::runtime::{Builder, Runtime};
 pub use toml::{TomlPathSegment, TomlValue};
+pub use tui::{
+    TuiColor, TuiContainerDirection, TuiEvent, TuiHighlight, TuiKeyEvent, TuiNode, TuiNodeBlock,
+    TuiNodeKind, TuiSession, TuiSessionOptions, TuiStyle, TuiTextAlign,
+};
 pub use yaml::{YamlPathSegment, YamlValue};
 
 #[derive(Clone, Debug)]
@@ -542,6 +547,10 @@ impl PtoolEngine {
         current_dir: &Path,
     ) -> Result<SshConnection> {
         ssh::connect(Arc::clone(&self.runtime), request, current_dir)
+    }
+
+    pub fn tui_session(&self, options: TuiSessionOptions) -> Result<TuiSession> {
+        tui::TuiSession::new(options)
     }
 }
 

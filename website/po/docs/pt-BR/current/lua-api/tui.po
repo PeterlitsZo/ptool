@@ -1,0 +1,334 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 11:29+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:1
+msgid "TUI API"
+msgstr "API TUI"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:3
+msgid "Terminal UI helpers are available under `ptool.tui` and `p.tui`."
+msgstr "As utilidades de interface de terminal estão disponíveis em `ptool.tui` e `p.tui`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:5
+msgid ""
+"The first version focuses on small interactive terminal screens driven by a "
+"Lua event loop."
+msgstr "A primeira versão se concentra em telas interativas pequenas dirigidas por um loop de eventos em Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:8
+msgid "ptool.tui.run"
+msgstr "ptool.tui.run"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:10
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:10"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:12
+msgid ""
+"`ptool.tui.run(options)` starts a TUI session, runs the Lua lifecycle "
+"callbacks, and returns the value passed to `app:quit(value)`. If `app:quit()`"
+" is called without a value, the function returns `nil`."
+msgstr ""
+"`ptool.tui.run(options)` inicia uma sessão TUI, executa os callbacks do ciclo de vida em Lua e retorna o valor passado para `app:quit(value)`. Se `app:quit()` for chamado sem valor, a função retorna `nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:16
+msgid "`options` fields:"
+msgstr "Campos de `options`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:18
+msgid ""
+"`tick_ms` (integer, optional): Tick interval in milliseconds. Defaults to "
+"`100`."
+msgstr "`tick_ms` (integer, opcional): Intervalo de tick em milissegundos. O padrão é `100`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:20
+msgid ""
+"`init` (function, optional): Called once before the first frame is drawn. "
+"Its return value becomes the initial `state`."
+msgstr "`init` (function, opcional): É chamado uma vez antes de desenhar o primeiro frame. O valor retornado se torna o `state` inicial."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:22
+msgid ""
+"`update` (function, required): Called as `update(state, event, app)` after "
+"each input event or tick. If it returns a non-`nil` value, that value "
+"becomes the next `state`. Returning `nil` keeps the current `state`."
+msgstr ""
+"`update` (function, obrigatório): É chamado como `update(state, event, app)` após cada evento de entrada ou tick. Se retornar um valor diferente de `nil`, esse valor se torna o próximo `state`. Retornar `nil` mantém o `state` atual."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:25
+msgid ""
+"`view` (function, required): Called as `view(state, app)` to build the root "
+"node for the next frame."
+msgstr "`view` (function, obrigatório): É chamado como `view(state, app)` para montar o nó raiz do próximo frame."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:28
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:30
+msgid "Requires an interactive TTY."
+msgstr "Requer um TTY interativo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:31
+msgid "Runs inside the terminal alternate screen with raw mode enabled."
+msgstr "Roda dentro da alternate screen do terminal com raw mode ativado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:32
+msgid "Restores the terminal when the session exits, including error paths."
+msgstr "Restaura o terminal ao sair, inclusive em caminhos de erro."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:34
+msgid "Events:"
+msgstr "Eventos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:36
+msgid "`{ type = \"tick\" }`"
+msgstr "`{ type = \"tick\" }`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:37
+msgid "`{ type = \"resize\", width = <integer>, height = <integer> }`"
+msgstr "`{ type = \"resize\", width = <integer>, height = <integer> }`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:38
+msgid ""
+"`{ type = \"key\", key = <string>, ctrl = <boolean>, alt = <boolean>, shift "
+"= <boolean> }`"
+msgstr "`{ type = \"key\", key = <string>, ctrl = <boolean>, alt = <boolean>, shift = <boolean> }`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:40
+msgid ""
+"Common key names include `up`, `down`, `left`, `right`, `enter`, `esc`, `tab`"
+", `backspace`, `delete`, `home`, `end`, `pageup`, and `pagedown`. Character "
+"keys use the character itself, such as `\"q\"` or `\"j\"`."
+msgstr ""
+"Nomes de tecla comuns incluem `up`, `down`, `left`, `right`, `enter`, `esc`, `tab`, `backspace`, `delete`, `home`, `end`, `pageup` e `pagedown`. Teclas de caractere usam o próprio caractere, como `\"q\"` ou `\"j\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:44
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:89
+msgid "App"
+msgstr "App"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:91
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:91"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:93
+msgid "`app` is passed to `update(...)` and `view(...)`."
+msgstr "`app` é passado para `update(...)` e `view(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:95
+msgid "quit"
+msgstr "quit"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:97
+msgid "Canonical API name: `ptool.tui.App:quit`."
+msgstr "Canonical API name: `ptool.tui.App:quit`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:99
+msgid ""
+"`app:quit(value?)` requests that the TUI session stop after the current "
+"callback completes."
+msgstr "`app:quit(value?)` solicita que a sessão TUI pare depois que o callback atual terminar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:102
+msgid ""
+"`value` (Lua value, optional): The value returned by `ptool.tui.run(...)`."
+msgstr "`value` (valor Lua, opcional): O valor retornado por `ptool.tui.run(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:104
+msgid "Node Constructors"
+msgstr "Construtores de nó"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:106
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:106"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:108
+msgid ""
+"The constructor helpers below return plain node tables. `view(...)` must "
+"return one of these nodes as the root widget tree."
+msgstr "Os construtores abaixo retornam tabelas de nó comuns. `view(...)` deve retornar um desses nós como a árvore de visualização raiz."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:111
+msgid "Common node fields:"
+msgstr "Campos comuns de nó:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:113
+msgid "`title` (string, optional): Draws a block title around the node."
+msgstr "`title` (string, opcional): Desenha um bloco com título ao redor do nó."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:114
+msgid ""
+"`border` (boolean, optional): Draws a border around the node. Defaults to "
+"`false`."
+msgstr "`border` (boolean, opcional): Desenha uma borda ao redor do nó. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:116
+msgid "`padding` (integer, optional): Uniform inner padding. Defaults to `0`."
+msgstr "`padding` (integer, opcional): Espaçamento interno uniforme. O padrão é `0`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:117
+msgid ""
+"`grow` (integer, optional): Relative size when the node is inside a row or "
+"column. Defaults to `1`."
+msgstr "`grow` (integer, opcional): Tamanho relativo quando o nó está dentro de um row ou column. O padrão é `1`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:119
+msgid "`style` (table, optional): Shared style fields:"
+msgstr "`style` (table, opcional): Campos de estilo compartilhados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:119
+msgid ""
+"`fg` / `bg`: One of `black`, `red`, `green`, `yellow`, `blue`, `magenta`, "
+"`cyan`, `white`, `gray`, or `dark_gray`."
+msgstr "`fg` / `bg`: Um de `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray` ou `dark_gray`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:119
+msgid ""
+"`bold`, `dim`, `italic`, `underlined`, `reversed`: Boolean style toggles."
+msgstr "`bold`, `dim`, `italic`, `underlined`, `reversed`: Flags booleanas de estilo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:124
+msgid "ptool.tui.text"
+msgstr "ptool.tui.text"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:126
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:126"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:128
+msgid "`ptool.tui.text(text[, options])` creates a text node."
+msgstr "`ptool.tui.text(text[, options])` cria um nó de texto."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:130
+msgid "`text` (string, required): The text to render."
+msgstr "`text` (string, obrigatório): O texto a renderizar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:131
+msgid ""
+"`options.align` (string, optional): `left`, `center`, or `right`. Defaults "
+"to `left`."
+msgstr "`options.align` (string, opcional): `left`, `center` ou `right`. O padrão é `left`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:134
+msgid "ptool.tui.list"
+msgstr "ptool.tui.list"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:136
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:136"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:138
+msgid "`ptool.tui.list(items[, options])` creates a vertical list node."
+msgstr "`ptool.tui.list(items[, options])` cria um nó de lista vertical."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:140
+msgid ""
+"`items` (table, required): A dense list table. Item values may be strings, "
+"numbers, or booleans."
+msgstr "`items` (table, obrigatório): Uma tabela de lista densa. Os valores dos itens podem ser strings, números ou booleanos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:142
+msgid ""
+"`options.selected` (integer, optional): The selected row using Lua's 1-based "
+"indexing. Values beyond the item count are ignored."
+msgstr "`options.selected` (integer, opcional): A linha selecionada usando a indexação base 1 do Lua. Valores maiores que a quantidade de itens são ignorados."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:144
+msgid ""
+"`options.highlight_style` (table, optional): Style applied to the selected "
+"row. Uses the same keys as `style`."
+msgstr "`options.highlight_style` (table, opcional): Estilo aplicado à linha selecionada. Usa as mesmas chaves de `style`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:147
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:149
+msgid ""
+"Selection is only visually distinct when `highlight_style` changes the "
+"rendered style."
+msgstr "A seleção só fica visualmente distinta quando `highlight_style` muda o estilo renderizado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:152
+msgid "ptool.tui.row"
+msgstr "ptool.tui.row"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:154
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:154"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:156
+msgid "`ptool.tui.row(options)` creates a horizontal container."
+msgstr "`ptool.tui.row(options)` cria um contêiner horizontal."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:158
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:158"
+msgid ""
+"`options.children` (table, required): A dense list table of child nodes."
+msgstr "`options.children` (table, obrigatório): Uma tabela de lista densa com nós filhos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:160
+msgid "ptool.tui.column"
+msgstr "ptool.tui.column"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:162
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:162"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:164
+msgid "`ptool.tui.column(options)` creates a vertical container."
+msgstr "`ptool.tui.column(options)` cria um contêiner vertical."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:166
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:166"
+msgid ""
+"`options.children` (table, required): A dense list table of child nodes."
+msgstr "`options.children` (table, obrigatório): Uma tabela de lista densa com nós filhos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:168
+msgid "Current Limits"
+msgstr "Limites atuais"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:170
+msgid "`ptool.tui` currently supports:"
+msgstr "`ptool.tui` atualmente suporta:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:172
+msgid "`tick`, `resize`, and keyboard events."
+msgstr "Eventos `tick`, `resize` e de teclado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:173
+msgid "Text, list, row, and column nodes."
+msgstr "Nós text, list, row e column."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:174
+msgid "Basic block decoration and style options."
+msgstr "Decoração básica de bloco e opções de estilo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:176
+msgid ""
+"It does not yet provide text inputs, popups, tables, mouse-driven widgets, "
+"or arbitrary ratatui widget bindings."
+msgstr "Ainda não oferece campos de texto, popups, tabelas, widgets dirigidos por mouse nem bindings arbitrários de widgets do ratatui."

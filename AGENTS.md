@@ -23,7 +23,10 @@ interpreter and injects a large set of utility functions (registered under the
 ## Documentation
 
 - `website/docs/` contains the current Docusaurus documentation content.
-- `website/i18n/` contains the localized Docusaurus documentation content.
+- `website/po/docs/templates/` contains generated POT templates for docs i18n.
+- `website/po/docs/<locale>/` contains locale PO catalogs for docs i18n.
+- `website/i18n/` contains localized Docusaurus documentation content generated
+  from the PO catalogs.
 - `website/` contains the Docusaurus site project and frontend assets.
 
 ## Development Tips
@@ -38,8 +41,13 @@ interpreter and injects a large set of utility functions (registered under the
 - If documentation may need to change, you MUST ask the user first. Do not
   modify documentation speculatively.
 - When editing documentation under `website/docs/`, you MUST also update the
-  corresponding files under every locale in `website/i18n/` in the same task so
-  localized docs stay in sync.
+  corresponding POT/PO files under `website/po/docs/` in the same task and then
+  regenerate the localized docs under `website/i18n/` using the docs i18n
+  workflow (`node website/scripts/docs-i18n.mjs sync`, `compile`, or
+  `refresh`) so localized docs stay in sync.
+- You MUST NOT hand-edit generated localized docs under `website/i18n/` when
+  the change should be represented in `website/po/docs/`. Update the source
+  docs and catalogs first, then regenerate the localized Markdown.
 - DO NOT add unit tests unless the user explicitly requests them, to avoid test
   bloat.
 - When editing documentation, especially API version markers such as

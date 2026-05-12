@@ -19,6 +19,8 @@
   triple.
 - [ANSI API](./ansi.md): Build styled terminal output with ANSI escape
   sequences.
+- [TUI API](./tui.md): Build simple terminal user interfaces with a structured
+  view tree and event loop.
 - [Log API](./log.md): Write timestamped terminal logs with level-based output.
 - [HTTP API](./http.md): Send HTTP requests and consume response bodies.
 - [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
