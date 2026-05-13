@@ -4,6 +4,7 @@ mod db;
 mod error;
 mod exec;
 mod fs;
+mod git;
 mod hash;
 mod http;
 mod json;
@@ -34,6 +35,12 @@ pub use exec::{
     resolve_run_cwd, run_command,
 };
 pub use fs::{FsCopyOptions, FsCopyResult, FsGlobOptions, FsMkdirOptions, FsRemoveOptions};
+pub use git::{
+    GitAddOptions, GitCheckoutOptions, GitCloneOptions, GitCommitOptions, GitFetchOptions,
+    GitFetchStats, GitHeadInfo, GitPushOptions, GitRemoteAuth, GitRepository, GitSignature,
+    GitStatusEntry, GitStatusOptions, GitStatusSummary, GitSwitchOptions, clone_repo as git_clone,
+    discover as git_discover, open as git_open,
+};
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use json::{JsonStringifyOptions, JsonValue};
 pub use log::LogLevel;
@@ -391,6 +398,24 @@ impl PtoolEngine {
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {
         db::connect(Arc::clone(&self.runtime), url, current_dir)
+    }
+
+    pub fn git_open(&self, path: Option<&str>, current_dir: &Path) -> Result<GitRepository> {
+        git::open(path, current_dir)
+    }
+
+    pub fn git_discover(&self, path: Option<&str>, current_dir: &Path) -> Result<GitRepository> {
+        git::discover(path, current_dir)
+    }
+
+    pub fn git_clone(
+        &self,
+        url: &str,
+        path: &str,
+        current_dir: &Path,
+        options: GitCloneOptions,
+    ) -> Result<GitRepository> {
+        git::clone_repo(url, path, current_dir, options)
     }
 
     pub fn toml_parse(&self, input: &str) -> Result<TomlValue> {

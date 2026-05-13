@@ -28,6 +28,8 @@
 - [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
 - [YAML API](./yaml.md): Parse YAML text, read nested values, and stringify Lua
   values as YAML.
+- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or
+  push through libgit2-backed handles.
 - [Database API](./db.md): Open database connections and run SQL queries.
 - [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer
   files.

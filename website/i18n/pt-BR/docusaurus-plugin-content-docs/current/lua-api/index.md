@@ -21,6 +21,7 @@
 - [API HTTP](./http.md): Envia requisições HTTP e consome corpos de resposta.
 - [API JSON](./json.md): Faz parse de texto JSON e serializa valores Lua como JSON.
 - [API YAML](./yaml.md): Faz parse de texto YAML, lê valores aninhados e serializa valores Lua como YAML.
+- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or push through libgit2-backed handles.
 - [API de banco de dados](./db.md): Abre conexões de banco de dados e executa consultas SQL.
 - [API SSH](./ssh.md): Conecta-se a hosts remotos, executa comandos e transfere arquivos.
 - [API de caminhos](./path.md): Manipula caminhos lexicalmente sem tocar no sistema de arquivos.

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 16:04+0800\n"
+"POT-Creation-Date: 2026-05-13 18:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,63 +111,69 @@ msgstr ""
 "Lua como YAML."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:31
+msgid ""
+"[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
+"through libgit2-backed handles."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:33
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr ""
 "[API de base de datos]{1}: Abre conexiones de base de datos y ejecuta "
 "consultas SQL."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:32
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:34
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
 msgstr ""
 "[API SSH]{1}: Conéctate a hosts remotos, ejecuta comandos y transfiere "
 "archivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:34
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
 msgid ""
 "[Path API]{1}: Manipulate paths lexically without touching the filesystem."
 msgstr ""
 "[API de rutas]{1}: Manipula rutas de forma léxica sin tocar el sistema de "
 "archivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:38
 msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
 msgstr ""
 "[API TOML]{1}: Analiza, serializa, lee, actualiza y elimina valores TOML."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:37
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
 msgid ""
 "[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
 msgstr ""
 "[API de regex]{1}: Compila regex y busca, captura, reemplaza o divide texto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
 msgid "[String API]{1}: Trim, split, join, replace, and format strings."
 msgstr ""
 "[API de cadenas]{1}: Recorta, divide, une, reemplaza y formatea cadenas."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:40
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:42
 msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
 msgstr "[API de tablas]{1}: Mapea, filtra y concatena tablas tipo lista densas."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
 msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
 msgstr ""
 "[API de sistema de archivos]{1}: Lee, escribe, crea y hace glob sobre rutas "
 "del sistema de archivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:42
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:44
 msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
 msgstr ""
 "[API de shell]{1}: Divide líneas de comandos con sintaxis tipo shell en "
 "arreglos de argumentos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:45
 msgid "[Template API]{1}: Render text templates from Lua data."
 msgstr ""
 "[API de plantillas]{1}: Renderiza plantillas de texto a partir de datos Lua."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:45
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:47
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

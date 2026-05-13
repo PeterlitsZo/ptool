@@ -9,6 +9,10 @@
 
 ### Added
 
+- Added the `ptool.git` / `p.git` module backed by `git2` / `libgit2`, with
+  repository handles for opening, discovering, cloning, inspecting status, and
+  running common operations such as add, commit, checkout, switch, fetch, and
+  push, and documented it across all supported locales.
 - Added offline on-site search to the Docusaurus docs site, with local search
   indexes for all supported locales.
 - Added `stdin` support to `ptool.run(...)` and `ptool.run_capture(...)`, so

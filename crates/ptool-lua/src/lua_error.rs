@@ -307,6 +307,7 @@ fn engine_kind_name(kind: EngineErrorKind) -> &'static str {
         EngineErrorKind::Http => "http_error",
         EngineErrorKind::Io => "io_error",
         EngineErrorKind::Db => "db_error",
+        EngineErrorKind::Git => "git_error",
         EngineErrorKind::SemverOverflow => "overflow",
         EngineErrorKind::Ssh => "ssh_error",
     }

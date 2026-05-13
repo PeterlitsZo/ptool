@@ -61,6 +61,7 @@ fn create_ptool_module(
     let net_module = create_ptool_net_module(lua, Rc::clone(&world))?;
     let datetime_module = create_ptool_datetime_module(lua, Rc::clone(&world))?;
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
+    let git_module = create_ptool_git_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
     let log_module = create_ptool_log_module(lua, Rc::clone(&world))?;
@@ -94,6 +95,7 @@ fn create_ptool_module(
     module.set("net", net_module)?;
     module.set("datetime", datetime_module)?;
     module.set("db", db_module)?;
+    module.set("git", git_module)?;
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
     module.set("log", log_module)?;
@@ -323,6 +325,26 @@ fn create_ptool_db_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
         lua.create_function(move |_, value: Value| world.borrow().db_connect(value))?;
     db_module.set("connect", connect_fn)?;
     Ok(db_module)
+}
+
+fn create_ptool_git_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let git_module = lua.create_table()?;
+    let open_state = Rc::clone(&world);
+    let open_fn =
+        lua.create_function(move |_, path: Option<String>| open_state.borrow().git_open(path))?;
+    let discover_state = Rc::clone(&world);
+    let discover_fn = lua.create_function(move |_, path: Option<String>| {
+        discover_state.borrow().git_discover(path)
+    })?;
+    let clone_fn = lua.create_function(
+        move |_, (url, path, options): (String, String, Option<Table>)| {
+            world.borrow().git_clone(url, path, options)
+        },
+    )?;
+    git_module.set("open", open_fn)?;
+    git_module.set("discover", discover_fn)?;
+    git_module.set("clone", clone_fn)?;
+    Ok(git_module)
 }
 
 fn create_ptool_ssh_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

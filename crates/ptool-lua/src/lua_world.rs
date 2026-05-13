@@ -400,6 +400,26 @@ impl LuaWorld {
         crate::db::connect(value, self.current_dir(), &self.engine)
     }
 
+    pub(crate) fn git_open(&self, path: Option<String>) -> mlua::Result<crate::git::LuaGitRepo> {
+        crate::git::open(path, self.current_dir(), &self.engine)
+    }
+
+    pub(crate) fn git_discover(
+        &self,
+        path: Option<String>,
+    ) -> mlua::Result<crate::git::LuaGitRepo> {
+        crate::git::discover(path, self.current_dir(), &self.engine)
+    }
+
+    pub(crate) fn git_clone(
+        &self,
+        url: String,
+        path: String,
+        options: Option<Table>,
+    ) -> mlua::Result<crate::git::LuaGitRepo> {
+        crate::git::clone_repo(url, path, options, self.current_dir(), &self.engine)
+    }
+
     pub(crate) fn datetime_now(
         &self,
         timezone: Option<String>,

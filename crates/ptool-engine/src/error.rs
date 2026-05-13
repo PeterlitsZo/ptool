@@ -27,6 +27,7 @@ pub enum ErrorKind {
     Http,
     Io,
     Db,
+    Git,
     SemverOverflow,
     Ssh,
 }

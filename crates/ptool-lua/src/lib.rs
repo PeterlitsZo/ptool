@@ -4,6 +4,7 @@ mod datetime;
 mod db;
 mod exec;
 mod fs;
+mod git;
 mod http;
 mod inspect;
 mod json;
