@@ -1,41 +1,41 @@
 # REPL
 
-`ptool repl` 会启动一个交互式 Lua 会话，并预先加载标准 `ptool` API。
+`ptool repl` starts an interactive Lua session with the standard `ptool` API already loaded.
 
-## 启动 REPL
+## Start the REPL
 
 ```sh
 ptool repl
 ```
 
-REPL 启动后，`ptool` 会先打印欢迎信息，然后等待 Lua 输入。
+When the REPL starts, `ptool` shows a banner and waits for Lua input.
 
-## 它提供什么
+## What it provides
 
-- 全局表 `ptool` 以及更短的别名 `p`。
-- 与 `ptool run <file>` 相同的一组内置辅助能力。
-- 对 Lua 表达式和语句的交互式求值。
-- 类似 readline 的行编辑能力，包括方向键移动光标和当前会话内的历史记录浏览。
+- The global `ptool` table and the shorter alias `p`.
+- The same bundled helpers you can use from `ptool run <file>`.
+- Interactive evaluation of Lua expressions and statements.
+- Readline-style editing, including arrow-key cursor movement and in-session history navigation.
 
-## 基本用法
+## Basic usage
 
-输入一个表达式即可立即求值：
+Enter an expression to evaluate it immediately:
 
 ```lua
 1 + 2
 ```
 
-REPL 会使用 `ptool` 现有的 inspect 渲染逻辑打印返回值。
+The REPL prints returned values using the same inspector used elsewhere in `ptool`.
 
-你也可以直接调用 `ptool` API：
+You can also call `ptool` APIs directly:
 
 ```lua
 p.str.trim("  hello  ")
 ```
 
-## 多行输入
+## Multi-line input
 
-如果当前输入还不完整，提示符会从 `>>> ` 变成 `... `。这样你就可以继续输入 函数定义或控制流语句等代码块：
+If the current input is incomplete, the prompt changes from `>>> ` to `... `. This lets you continue entering a block such as a function or control flow statement:
 
 ```lua
 for i = 1, 3 do
@@ -43,16 +43,16 @@ for i = 1, 3 do
 end
 ```
 
-当输入完整后，`ptool` 会对整个代码块求值。
+Once the input is complete, `ptool` evaluates the whole chunk.
 
-## 键盘行为
+## Keyboard behavior
 
-- `Up` 和 `Down` 用于浏览当前 REPL 会话中之前输入过的命令。
-- `Left` 和 `Right` 用于在当前输入行内移动光标。
-- `Ctrl-C` 会清空当前输入；如果你正处于多行输入中，它会丢弃当前缓存的代码块并回到主提示符。
-- `Ctrl-D` 会退出 REPL。
+- `Up` and `Down` browse commands entered earlier in the same REPL session.
+- `Left` and `Right` move the cursor within the current input line.
+- `Ctrl-C` clears the current input. If you are in the middle of a multi-line chunk, it discards the buffered chunk and returns to the primary prompt.
+- `Ctrl-D` exits the REPL.
 
-## 说明
+## Notes
 
-- `ptool repl` 需要交互式 TTY。
-- 当前历史记录只保存在本次会话中，不会写入历史文件。
+- `ptool repl` requires an interactive TTY.
+- REPL history currently lives only for the current session and is not written to a history file.

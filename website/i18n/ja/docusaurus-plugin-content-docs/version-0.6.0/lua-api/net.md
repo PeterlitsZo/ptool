@@ -1,31 +1,31 @@
-# ネットワーク API
+# Network API
 
-URL、IP、host/port 解析ヘルパーは `ptool.net` と `p.net` にあります。
+URL, IP, and host/port parsing helpers are available under `ptool.net` and `p.net`.
 
 ## ptool.net.parse_url
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_url(input)` は URL 文字列を解析し、正規化された各部の テーブルを返します。
+`ptool.net.parse_url(input)` parses a URL string and returns a normalized parts table.
 
-引数:
+Arguments:
 
-- `input` (string, 必須): 解析する URL。
+- `input` (string, required): The URL to parse.
 
-戻り値: 次のフィールドを持つテーブル。
+Returns: A table with the following fields:
 
-- `kind` (string): 常に `"url"`。
-- `input` (string): 元の入力文字列。
-- `normalized` (string): 正規化された URL 文字列。
-- `scheme` (string): URL スキーム。
-- `username` (string, 任意): 存在する場合のデコード済みユーザー名。
-- `password` (string, 任意): 存在する場合のデコード済みパスワード。
-- `host` (string, 任意): 存在する場合のホスト名または IP リテラル。
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`, 任意): ホストが存在する場合の ホスト分類。
-- `port` (integer, 任意): 存在する場合の明示的なポート。
-- `path` (string): URL パス。
-- `query` (string, 任意): 先頭の `?` を含まないクエリ文字列。
-- `fragment` (string, 任意): 先頭の `#` を含まないフラグメント。
+- `kind` (string): Always `"url"`.
+- `input` (string): The original input string.
+- `normalized` (string): The normalized URL string.
+- `scheme` (string): The URL scheme.
+- `username` (string, optional): The decoded username, if present.
+- `password` (string, optional): The decoded password, if present.
+- `host` (string, optional): The hostname or IP literal, if present.
+- `host_kind` (`"domain"|"ipv4"|"ipv6"`, optional): The host classification, if a host is present.
+- `port` (integer, optional): The explicit port, if present.
+- `path` (string): The URL path.
+- `query` (string, optional): The query string without the leading `?`.
+- `fragment` (string, optional): The fragment without the leading `#`.
 
 ```lua
 local parts = ptool.net.parse_url("https://user:pass@example.com:8443/a/b?q=1#frag")
@@ -42,18 +42,18 @@ print(parts.fragment)    -- frag
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_ip(input)` は IPv4 または IPv6 アドレスを解析し、 正規化された各部のテーブルを返します。
+`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a normalized parts table.
 
-引数:
+Arguments:
 
-- `input` (string, 必須): 解析する IP アドレス。
+- `input` (string, required): The IP address to parse.
 
-戻り値: 次のフィールドを持つテーブル。
+Returns: A table with the following fields:
 
-- `kind` (string): 常に `"ip"`。
-- `input` (string): 元の入力文字列。
-- `normalized` (string): 正規化された IP アドレス。
-- `version` (integer): IPv4 の場合は `4`、IPv6 の場合は `6`。
+- `kind` (string): Always `"ip"`.
+- `input` (string): The original input string.
+- `normalized` (string): The normalized IP address.
+- `version` (integer): `4` for IPv4 or `6` for IPv6.
 
 ```lua
 local parts = ptool.net.parse_ip("2001:0db8::1")
@@ -66,20 +66,20 @@ print(parts.version)    -- 6
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_host_port(input)` は `host:port` 文字列を解析し、 正規化された各部のテーブルを返します。
+`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a normalized parts table.
 
-引数:
+Arguments:
 
-- `input` (string, 必須): ホストとポートの文字列。IPv6 アドレスは `[2001:db8::1]:443` のように角括弧表記を使う必要があります。
+- `input` (string, required): The host and port string. IPv6 addresses must use bracket notation such as `[2001:db8::1]:443`.
 
-戻り値: 次のフィールドを持つテーブル。
+Returns: A table with the following fields:
 
-- `kind` (string): 常に `"host_port"`。
-- `input` (string): 元の入力文字列。
-- `normalized` (string): 正規化された `host:port` 文字列。
-- `host` (string): 正規化された host 値。
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`): ホスト分類。
-- `port` (integer): 解析されたポート。
+- `kind` (string): Always `"host_port"`.
+- `input` (string): The original input string.
+- `normalized` (string): The normalized `host:port` string.
+- `host` (string): The normalized host value.
+- `host_kind` (`"domain"|"ipv4"|"ipv6"`): The host classification.
+- `port` (integer): The parsed port.
 
 ```lua
 local parts = ptool.net.parse_host_port("[2001:0db8::1]:443")

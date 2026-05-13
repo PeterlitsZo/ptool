@@ -1,17 +1,17 @@
-# API de caminhos
+# Path API
 
-As utilidades léxicas de caminho estão disponíveis em `ptool.path` e `p.path`.
+Lexical path helpers are available under `ptool.path` and `p.path`.
 
 ## ptool.path.join
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.join(...segments)` junta vários segmentos de caminho e retorna o caminho normalizado.
+`ptool.path.join(...segments)` joins multiple path segments and returns the normalized path.
 
-- `segments` (string, pelo menos um): Segmentos de caminho.
-- Retorna: `string`.
+- `segments` (string, at least one): Path segments.
+- Returns: `string`.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
@@ -21,12 +21,12 @@ print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.normalize(path)` faz a normalização léxica de caminhos (processando `.` e `..`).
+`ptool.path.normalize(path)` performs lexical path normalization (processing `.` and `..`).
 
-- `path` (string, obrigatório): O caminho de entrada.
-- Retorna: `string`.
+- `path` (string, required): The input path.
+- Returns: `string`.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.normalize("./a/../b")) -- b
@@ -36,14 +36,14 @@ print(ptool.path.normalize("./a/../b")) -- b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.abspath(path[, base])` calcula um caminho absoluto.
+`ptool.path.abspath(path[, base])` computes an absolute path.
 
-- `path` (string, obrigatório): O caminho de entrada.
-- `base` (string, opcional): O diretório base. Se omitido, é usado o diretório de trabalho do processo atual.
-- Retorna: `string`.
-- Aceita apenas 1 ou 2 argumentos string.
+- `path` (string, required): The input path.
+- `base` (string, optional): The base directory. If omitted, the current process working directory is used.
+- Returns: `string`.
+- Accepts only 1 or 2 string arguments.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.abspath("src"))
@@ -54,14 +54,14 @@ print(ptool.path.abspath("lib", "/tmp/demo"))
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.relpath(path[, base])` calcula um caminho relativo de `base` até `path`.
+`ptool.path.relpath(path[, base])` computes a relative path from `base` to `path`.
 
-- `path` (string, obrigatório): O caminho de destino.
-- `base` (string, opcional): O diretório inicial. Se omitido, é usado o diretório de trabalho do processo atual.
-- Retorna: `string`.
-- Aceita apenas 1 ou 2 argumentos string.
+- `path` (string, required): The target path.
+- `base` (string, optional): The starting directory. If omitted, the current process working directory is used.
+- Returns: `string`.
+- Accepts only 1 or 2 string arguments.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.relpath("src/main.rs", "/tmp/project"))
@@ -71,12 +71,12 @@ print(ptool.path.relpath("src/main.rs", "/tmp/project"))
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.isabs(path)` verifica se um caminho é absoluto.
+`ptool.path.isabs(path)` checks whether a path is absolute.
 
-- `path` (string, obrigatório): O caminho de entrada.
-- Retorna: `boolean`.
+- `path` (string, required): The input path.
+- Returns: `boolean`.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.isabs("/tmp")) -- true
@@ -86,12 +86,12 @@ print(ptool.path.isabs("/tmp")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.dirname(path)` retorna a parte de nome do diretório.
+`ptool.path.dirname(path)` returns the directory-name portion.
 
-- `path` (string, obrigatório): O caminho de entrada.
-- Retorna: `string`.
+- `path` (string, required): The input path.
+- Returns: `string`.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.dirname("a/b/c.txt")) -- a/b
@@ -101,12 +101,12 @@ print(ptool.path.dirname("a/b/c.txt")) -- a/b
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.basename(path)` retorna o último segmento do caminho (a parte do nome do arquivo).
+`ptool.path.basename(path)` returns the last path segment (the filename portion).
 
-- `path` (string, obrigatório): O caminho de entrada.
-- Retorna: `string`.
+- `path` (string, required): The input path.
+- Returns: `string`.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.basename("a/b/c.txt")) -- c.txt
@@ -116,18 +116,18 @@ print(ptool.path.basename("a/b/c.txt")) -- c.txt
 
 > `v0.1.0` - Introduced.
 
-`ptool.path.extname(path)` retorna a extensão, incluindo o `.`. Se não houver extensão, retorna uma string vazia.
+`ptool.path.extname(path)` returns the extension (including `.`). If there is no extension, it returns an empty string.
 
-- `path` (string, obrigatório): O caminho de entrada.
-- Retorna: `string`.
+- `path` (string, required): The input path.
+- Returns: `string`.
 
-Exemplo:
+Example:
 
 ```lua
 print(ptool.path.extname("a/b/c.txt")) -- .txt
 ```
 
-Notas:
+Notes:
 
-- O tratamento de caminhos em `ptool.path` é puramente léxico. Ele não verifica se os caminhos existem nem resolve links simbólicos.
-- Nenhuma das interfaces aceita argumentos de string vazia. Passar um deles gera erro.
+- Path handling in `ptool.path` is purely lexical. It does not check whether paths exist and does not resolve symlinks.
+- None of the interfaces accept empty string arguments. Passing one raises an error.

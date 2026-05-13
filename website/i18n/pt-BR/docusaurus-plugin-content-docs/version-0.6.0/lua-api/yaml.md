@@ -1,33 +1,33 @@
-# API YAML
+# YAML API
 
-As utilidades de parse e serialização YAML estão disponíveis em `ptool.yaml` e `p.yaml`.
+YAML parsing and serialization helpers are available under `ptool.yaml` and `p.yaml`.
 
 ## ptool.yaml.parse
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.parse(input)` faz o parse de uma string YAML em um valor Lua.
+`ptool.yaml.parse(input)` parses a YAML string into a Lua value.
 
-- `input` (string, obrigatório): O texto YAML.
-- Retorna: O valor Lua analisado. A raiz pode ser qualquer tipo YAML compatível.
+- `input` (string, required): The YAML text.
+- Returns: The parsed Lua value. The root can be any supported YAML type.
 
-Mapeamento de tipos:
+Type mapping:
 
-- YAML mapping -> tabela Lua
-- YAML sequence -> tabela sequencial Lua (base 1)
-- YAML string -> string Lua
-- YAML integer que cabe em `i64` -> inteiro Lua
-- Outro YAML number -> número Lua
-- YAML boolean -> booleano Lua
+- YAML mapping -> Lua table
+- YAML sequence -> Lua sequence table (1-based)
+- YAML string -> Lua string
+- YAML integer that fits in `i64` -> Lua integer
+- Other YAML number -> Lua number
+- YAML boolean -> Lua boolean
 - YAML null -> Lua `nil`
 
-Comportamento de erro:
+Error behavior:
 
-- Um erro é gerado se `input` não for uma string.
-- Um erro de sintaxe YAML gera uma mensagem que inclui o detalhe do parser.
-- Também ocorre erro se o valor YAML não puder ser representado como um valor Lua de `ptool`, como um mapping com chaves não string ou um valor com tag YAML explícita.
+- An error is raised if `input` is not a string.
+- A YAML syntax error raises an error whose message includes parser detail.
+- An error is raised if the YAML value cannot be represented as a Lua value in `ptool`, such as a mapping with non-string keys or an explicit YAML tag.
 
-Exemplo:
+Example:
 
 ```lua
 local data = p.yaml.parse([[
@@ -47,18 +47,18 @@ print(data.stars)
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.get(input, path)` lê o valor em um caminho específico de um texto YAML.
+`ptool.yaml.get(input, path)` reads the value at a specified path from YAML text.
 
-- `input` (string, obrigatório): O texto YAML.
-- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como `{"spec", "template", "metadata", "name"}` ou `{"items", 1, "name"}`.
-- Retorna: O valor Lua correspondente, ou `nil` se o caminho não existir.
+- `input` (string, required): The YAML text.
+- `path` ((string|integer)[], required): A non-empty path array, such as `{"spec", "template", "metadata", "name"}` or `{"items", 1, "name"}`.
+- Returns: The corresponding Lua value, or `nil` if the path does not exist.
 
-Comportamento:
+Behavior:
 
-- Segmentos de caminho string selecionam chaves de mappings.
-- Segmentos de caminho integer selecionam elementos de sequências usando índices Lua base 1.
+- String path segments select mapping keys.
+- Integer path segments select sequence elements using Lua's 1-based indexing.
 
-Exemplo:
+Example:
 
 ```lua
 local text = [[
@@ -75,18 +75,18 @@ print(first_name)
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.stringify(value)` converte um valor Lua em texto YAML.
+`ptool.yaml.stringify(value)` converts a Lua value to YAML text.
 
-- `value` (valor Lua compatível com YAML, obrigatório): O valor a ser codificado.
-- Retorna: A string YAML codificada.
+- `value` (YAML-compatible Lua value, required): The value to encode.
+- Returns: The encoded YAML string.
 
-Comportamento:
+Behavior:
 
-- Os valores precisam ser compatíveis com YAML pelo mesmo mapeamento de valores Lua usado por `ptool.json.stringify`.
-- Tabelas sequenciais Lua são codificadas como sequências YAML.
-- Tabelas Lua com chaves string são codificadas como mappings YAML.
+- Values must be YAML-compatible through the same Lua value mapping used by `ptool.json.stringify`.
+- Lua sequence tables are encoded as YAML sequences.
+- Lua string-keyed tables are encoded as YAML mappings.
 
-Exemplo:
+Example:
 
 ```lua
 local text = p.yaml.stringify({
@@ -98,10 +98,10 @@ local text = p.yaml.stringify({
 print(text)
 ```
 
-Notas:
+Notes:
 
-- Apenas YAML de documento único é suportado.
-- Mappings YAML devem usar chaves string.
-- Tags YAML explícitas não são suportadas.
-- O argumento `path` de `ptool.yaml.get` deve ser um array não vazio de strings e/ou inteiros positivos.
-- Segmentos integer são base 1 para combinar com a indexação de arrays do Lua.
+- Only single-document YAML is supported.
+- YAML mappings must use string keys.
+- Explicit YAML tags are not supported.
+- The `path` argument for `ptool.yaml.get` must be a non-empty array of strings and/or positive integers.
+- Integer path segments are 1-based so they match Lua array indexing.

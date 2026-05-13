@@ -1,23 +1,23 @@
 # Shell API
 
-Shell 解析辅助能力位于 `ptool.sh` 和 `p.sh` 下。
+Shell parsing helpers are available under `ptool.sh` and `p.sh`.
 
 ## ptool.sh.split
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`ptool.sh.split(command)` 使用 shell 风格规则解析命令字符串，并返回参数数组。
+`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array.
 
-- `command`（string，必填）：要拆分的命令字符串。
-- 返回：`string[]`。
+- `command` (string, required): The command string to split.
+- Returns: `string[]`.
 
-示例：
+Example:
 
 ```lua
 local args = ptool.sh.split("clippy --all-targets -- -D warnings")
 ```
 
-上面的 `args` 等价于：
+The `args` above is equivalent to:
 
 ```lua
 {"clippy", "--all-targets", "--", "-D", "warnings"}

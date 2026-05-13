@@ -1,37 +1,37 @@
-# API HTTP
+# HTTP API
 
-As utilidades de cliente HTTP estão disponíveis em `ptool.http` e `p.http`.
+HTTP client helpers are available under `ptool.http` and `p.http`.
 
 ## ptool.http.request
 
 > `v0.1.0` - Introduced.
 
-`ptool.http.request(options)` envia uma requisição HTTP e retorna um objeto `Response`.
+`ptool.http.request(options)` sends an HTTP request and returns a `Response` object.
 
-Campos de `options`:
+`options` fields:
 
-- `url` (string, obrigatório): A URL da requisição.
-- `method` (string, opcional): O método HTTP. O padrão é `"GET"`.
-- `headers` (table, opcional): Cabeçalhos da requisição, em que chaves e valores são strings.
-- `query` (table, opcional): Parâmetros de consulta adicionados à URL da requisição. As chaves devem ser strings. Os valores podem ser strings, números ou booleanos.
-- `body` (string, opcional): O corpo da requisição.
-- `json` (valor Lua, opcional): Um valor Lua codificado como JSON e usado como corpo da requisição. Quando `content-type` não está definido, o padrão passa a ser `application/json`.
-- `form` (table, opcional): Campos codificados como `application/x-www-form-urlencoded` e usados como corpo da requisição. As chaves devem ser strings. Os valores podem ser strings, números ou booleanos.
-- `timeout_ms` (integer, opcional): Tempo limite em milissegundos. O padrão é `30000`.
-- `connect_timeout_ms` (integer, opcional): Tempo limite de conexão em milissegundos.
-- `follow_redirects` (boolean, opcional): Se os redirecionamentos devem ser seguidos.
-- `max_redirects` (integer, opcional): Número máximo de redirecionamentos a seguir.
-- `user_agent` (string, opcional): Define o cabeçalho `user-agent`.
-- `basic_auth` (table, opcional): Credenciais HTTP Basic com os campos string `username` e `password`.
-- `bearer_token` (string, opcional): Token Bearer usado no cabeçalho `authorization`.
-- `fail_on_http_error` (boolean, opcional): Quando `true`, respostas HTTP 4xx e 5xx geram erro. O padrão é `false`.
+- `url` (string, required): The request URL.
+- `method` (string, optional): The HTTP method. Defaults to `"GET"`.
+- `headers` (table, optional): Request headers, where both keys and values are strings.
+- `query` (table, optional): Query parameters appended to the request URL. Keys must be strings. Values may be strings, numbers, or booleans.
+- `body` (string, optional): The request body.
+- `json` (Lua value, optional): A Lua value encoded as JSON and used as the request body. When `content-type` is not already set, it defaults to `application/json`.
+- `form` (table, optional): Form fields encoded as `application/x-www-form-urlencoded` and used as the request body. Keys must be strings. Values may be strings, numbers, or booleans.
+- `timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `30000`.
+- `connect_timeout_ms` (integer, optional): Connection timeout in milliseconds.
+- `follow_redirects` (boolean, optional): Whether redirects should be followed.
+- `max_redirects` (integer, optional): Maximum number of redirects to follow.
+- `user_agent` (string, optional): Sets the `user-agent` request header.
+- `basic_auth` (table, optional): HTTP basic auth credentials with string fields `username` and `password`.
+- `bearer_token` (string, optional): Bearer token used for the `authorization` header.
+- `fail_on_http_error` (boolean, optional): When `true`, raise an error for 4xx and 5xx HTTP responses. Defaults to `false`.
 
-Notas:
+Notes:
 
-- `body`, `json` e `form` são mutuamente exclusivos.
-- `basic_auth` e `bearer_token` são mutuamente exclusivos.
+- `body`, `json`, and `form` are mutually exclusive.
+- `basic_auth` and `bearer_token` are mutually exclusive.
 
-Exemplo:
+Example:
 
 ```lua
 local resp = ptool.http.request({
@@ -59,71 +59,71 @@ print(data.json.name)
 
 > `v0.1.0` - Introduced.
 
-`Response` representa uma resposta HTTP retornada por `ptool.http.request(...)`.
+`Response` represents an HTTP response returned by `ptool.http.request(...)`.
 
-Campos:
+Fields:
 
-- `status` (integer): O código de status HTTP.
-- `ok` (boolean): Se o código de status está na faixa 2xx.
-- `url` (string): A URL final após redirecionamentos.
-- `headers` (table): Visão simplificada dos cabeçalhos da resposta (`table<string, string>`). Cabeçalhos repetidos são unidos com `, `.
+- `status` (integer): The HTTP status code.
+- `ok` (boolean): Whether the status code is in the 2xx range.
+- `url` (string): The final URL after redirects.
+- `headers` (table): A flattened convenience view of response headers (`table<string, string>`). Repeated headers are merged with `, `.
 
-Métodos:
+Methods:
 
-- `resp:text()`: Lê e retorna o corpo da resposta como texto.
-- `resp:json()`: Lê o corpo da resposta, faz parse como JSON e retorna um valor Lua.
-- `resp:bytes()`: Lê e retorna os bytes brutos como uma string Lua.
-- `resp:header(name)`: Retorna o primeiro valor de cabeçalho correspondente, ou `nil`.
-- `resp:header_values(name)`: Retorna todos os valores de cabeçalho correspondentes como um array.
-- `resp:raise_for_status()`: Gera erro para respostas HTTP 4xx e 5xx.
+- `resp:text()`: Reads and returns the response body as text.
+- `resp:json()`: Reads the response body, parses it as JSON, and returns a Lua value.
+- `resp:bytes()`: Reads and returns the raw bytes (as a Lua string).
+- `resp:header(name)`: Returns the first matching response header value, or `nil`.
+- `resp:header_values(name)`: Returns all matching response header values as an array.
+- `resp:raise_for_status()`: Raises an error for 4xx and 5xx HTTP responses.
 
 ### text
 
 Canonical API name: `ptool.http.Response:text`.
 
-`resp:text()` lê e retorna o corpo da resposta como texto.
+`resp:text()` reads and returns the response body as text.
 
-- Retorna: `string`.
+- Returns: `string`.
 
 ### json
 
 Canonical API name: `ptool.http.Response:json`.
 
-`resp:json()` lê o corpo da resposta, faz parse como JSON e retorna um valor Lua.
+`resp:json()` reads the response body, parses it as JSON, and returns a Lua value.
 
 ### bytes
 
 Canonical API name: `ptool.http.Response:bytes`.
 
-`resp:bytes()` lê e retorna o corpo da resposta como bytes brutos.
+`resp:bytes()` reads and returns the response body as raw bytes.
 
-- Retorna: `string`.
+- Returns: `string`.
 
 ### header
 
 Canonical API name: `ptool.http.Response:header`.
 
-`resp:header(name)` retorna o primeiro valor de cabeçalho de resposta que corresponde a `name`.
+`resp:header(name)` returns the first response header value matching `name`.
 
-- `name` (string, obrigatório): O nome do cabeçalho a consultar.
-- Retorna: `string | nil`.
+- `name` (string, required): The header name to look up.
+- Returns: `string | nil`.
 
 ### header_values
 
 Canonical API name: `ptool.http.Response:header_values`.
 
-`resp:header_values(name)` retorna todos os valores de cabeçalho de resposta que correspondem a `name`.
+`resp:header_values(name)` returns all response header values matching `name`.
 
-- `name` (string, obrigatório): O nome do cabeçalho a consultar.
-- Retorna: `string[]`.
+- `name` (string, required): The header name to look up.
+- Returns: `string[]`.
 
 ### raise_for_status
 
 Canonical API name: `ptool.http.Response:raise_for_status`.
 
-`resp:raise_for_status()` gera erro quando o código de status da resposta está na faixa 4xx ou 5xx.
+`resp:raise_for_status()` raises an error when the response status code is in the 4xx or 5xx range.
 
-Notas:
+Notes:
 
-- Por padrão, status HTTP fora de 2xx não geram erro. Quem chama pode verificar `resp.ok`, definir `fail_on_http_error = true` ou chamar `resp:raise_for_status()`.
-- O corpo da resposta é armazenado em cache após a primeira leitura, então `text`, `json` e `bytes` podem ser chamados várias vezes.
+- Non-2xx HTTP statuses do not raise errors by default. Callers can check `resp.ok`, set `fail_on_http_error = true`, or call `resp:raise_for_status()`.
+- The response body is cached after the first read. Calling `text`, `json`, and `bytes` multiple times is allowed.

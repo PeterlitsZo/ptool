@@ -1,59 +1,59 @@
 # Platform API
 
-平台检测辅助能力位于 `ptool.platform` 和 `p.platform` 下。
+Platform detection helpers are available under `ptool.platform` and `p.platform`.
 
 ## ptool.platform.os
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`ptool.platform.os()` 返回当前机器的操作系统。
+`ptool.platform.os()` returns the operating system of the current machine.
 
-- 返回：`linux | macos | windows`。
+- Returns: `linux | macos | windows`.
 
 ```lua
 print(ptool.platform.os()) -- macos
 ```
 
-行为说明：
+Behavior:
 
-- 这里报告的是运行 `ptool run` 的本机环境。
-- `ptool` 当前会暴露 `linux`、`macos` 和 `windows`。
+- This reports the local machine running `ptool run`.
+- `ptool` currently exposes `linux`, `macos`, and `windows`.
 
 ## ptool.platform.arch
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`ptool.platform.arch()` 返回当前机器的 CPU 架构。
+`ptool.platform.arch()` returns the CPU architecture of the current machine.
 
-- 返回：`amd64 | arm64 | x86 | arm | riscv64`。
+- Returns: `amd64 | arm64 | x86 | arm | riscv64`.
 
 ```lua
 print(ptool.platform.arch()) -- arm64
 ```
 
-行为说明：
+Behavior:
 
-- `x86_64` 会暴露为 `amd64`。
-- `aarch64` 会暴露为 `arm64`。
-- `x86`、`i686` 等 32 位 x86 变体会统一暴露为 `x86`。
-- `armv7l` 等 32 位 ARM 变体会统一暴露为 `arm`。
-- `riscv64` 会暴露为 `riscv64`。
+- `x86_64` is exposed as `amd64`.
+- `aarch64` is exposed as `arm64`.
+- 32-bit x86 variants such as `x86` and `i686` are exposed as `x86`.
+- 32-bit ARM variants such as `armv7l` are exposed as `arm`.
+- `riscv64` is exposed as `riscv64`.
 
 ## ptool.platform.target
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`ptool.platform.target()` 返回当前机器的规范化平台目标字符串。
+`ptool.platform.target()` returns a normalized platform target string for the current machine.
 
-- 返回：`string`。
+- Returns: `string`.
 
 ```lua
 local target = ptool.platform.target()
 print(target) -- linux-riscv64
 ```
 
-行为说明：
+Behavior:
 
-- 结果始终等于 `ptool.platform.os() .. "-" .. ptool.platform.arch()`。
-- 这个值适合做基于平台的分支判断，例如选择下载产物。
-- 常见值包括 `linux-amd64`、`linux-arm64`、`linux-x86`、`linux-arm`、 `linux-riscv64`、`macos-amd64`、`macos-arm64` 和 `windows-amd64`。
+- The result is always `ptool.platform.os() .. "-" .. ptool.platform.arch()`.
+- This is intended for platform-based branching such as selecting download artifacts.
+- Common values include `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, and `windows-amd64`.

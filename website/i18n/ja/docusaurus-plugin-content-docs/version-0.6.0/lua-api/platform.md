@@ -1,59 +1,59 @@
-# プラットフォーム API
+# Platform API
 
-プラットフォーム検出ヘルパーは `ptool.platform` と `p.platform` に あります。
+Platform detection helpers are available under `ptool.platform` and `p.platform`.
 
 ## ptool.platform.os
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.os()` は現在のマシンのオペレーティングシステムを返します。
+`ptool.platform.os()` returns the operating system of the current machine.
 
-- 戻り値: `linux | macos | windows`。
+- Returns: `linux | macos | windows`.
 
 ```lua
 print(ptool.platform.os()) -- macos
 ```
 
-挙動:
+Behavior:
 
-- これは `ptool run` を実行しているローカルマシンを報告します。
-- `ptool` は現在 `linux`, `macos`, `windows` を公開しています。
+- This reports the local machine running `ptool run`.
+- `ptool` currently exposes `linux`, `macos`, and `windows`.
 
 ## ptool.platform.arch
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.arch()` は現在のマシンの CPU アーキテクチャを返します。
+`ptool.platform.arch()` returns the CPU architecture of the current machine.
 
-- 戻り値: `amd64 | arm64 | x86 | arm | riscv64`。
+- Returns: `amd64 | arm64 | x86 | arm | riscv64`.
 
 ```lua
 print(ptool.platform.arch()) -- arm64
 ```
 
-挙動:
+Behavior:
 
-- `x86_64` は `amd64` として公開されます。
-- `aarch64` は `arm64` として公開されます。
-- `x86` や `i686` などの 32 ビット x86 系は `x86` として公開されます。
-- `armv7l` などの 32 ビット ARM 系は `arm` として公開されます。
-- `riscv64` は `riscv64` として公開されます。
+- `x86_64` is exposed as `amd64`.
+- `aarch64` is exposed as `arm64`.
+- 32-bit x86 variants such as `x86` and `i686` are exposed as `x86`.
+- 32-bit ARM variants such as `armv7l` are exposed as `arm`.
+- `riscv64` is exposed as `riscv64`.
 
 ## ptool.platform.target
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.target()` は現在のマシン向けの正規化されたプラットフォーム target 文字列を返します。
+`ptool.platform.target()` returns a normalized platform target string for the current machine.
 
-- 戻り値: `string`。
+- Returns: `string`.
 
 ```lua
 local target = ptool.platform.target()
 print(target) -- linux-riscv64
 ```
 
-挙動:
+Behavior:
 
-- 結果は常に `ptool.platform.os() .. "-" .. ptool.platform.arch()` です。
-- これはダウンロード用アーティファクトの選択など、プラットフォームに 基づく分岐のために使うことを想定しています。
-- よくある値には `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, `windows-amd64` が 含まれます。
+- The result is always `ptool.platform.os() .. "-" .. ptool.platform.arch()`.
+- This is intended for platform-based branching such as selecting download artifacts.
+- Common values include `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, and `windows-amd64`.

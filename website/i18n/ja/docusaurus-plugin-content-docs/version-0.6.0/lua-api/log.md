@@ -1,20 +1,20 @@
 # Log API
 
-`ptool.log` は `ptool.log` と `p.log` の両方で、レベル別の端末ログ ヘルパーを公開します。
+`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`.
 
-各ログ呼び出しは次の形式で 1 行を出力します。
+Every log call renders a line in this format:
 
 ```text
 [2026-04-30 14:54:56] INFO message text
 ```
 
-動作:
+Behavior:
 
-- タイムスタンプはローカル時刻の `YYYY-MM-DD HH:MM:SS` 形式です。
-- レベル名は `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR` の完全表記を 使います。
-- `ptool` が端末へ書き込んでいる場合は、自動的に色付き出力になります。
-- `ptool.log.error(...)` は `stderr` に書き込み、それ以外のレベルは `stdout` に書き込みます。
-- 複数引数は空白で連結されます。文字列以外の値は単一行の inspect 形式で レンダリングされます。
+- The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format.
+- The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and `ERROR`.
+- Colored output is enabled automatically when `ptool` is writing to a terminal.
+- `ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`.
+- Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form.
 
 ## ptool.log.trace
 
@@ -24,7 +24,7 @@
 ptool.log.trace(...)
 ```
 
-trace レベルのログ行を書き出します。
+Writes a trace-level log line.
 
 ## ptool.log.debug
 
@@ -34,7 +34,7 @@ trace レベルのログ行を書き出します。
 ptool.log.debug(...)
 ```
 
-debug レベルのログ行を書き出します。
+Writes a debug-level log line.
 
 ## ptool.log.info
 
@@ -44,7 +44,7 @@ debug レベルのログ行を書き出します。
 ptool.log.info(...)
 ```
 
-info レベルのログ行を書き出します。
+Writes an info-level log line.
 
 ## ptool.log.warn
 
@@ -54,7 +54,7 @@ info レベルのログ行を書き出します。
 ptool.log.warn(...)
 ```
 
-warn レベルのログ行を書き出します。
+Writes a warning-level log line.
 
 ## ptool.log.error
 
@@ -64,9 +64,9 @@ warn レベルのログ行を書き出します。
 ptool.log.error(...)
 ```
 
-error レベルのログ行を `stderr` に書き出します。
+Writes an error-level log line to `stderr`.
 
-例:
+Example:
 
 ```lua
 p.log.info("hello", { answer = 42 })
@@ -74,7 +74,7 @@ p.log.warn("careful")
 p.log.error("boom")
 ```
 
-出力例:
+Example output:
 
 ```text
 [2026-04-30 14:54:56] INFO hello { answer = 42 }

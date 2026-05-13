@@ -1,18 +1,18 @@
-# API de regex
+# Regex API
 
-Las utilidades de expresiones regulares están disponibles bajo `ptool.re` y `p.re`.
+Regular expression helpers are available under `ptool.re` and `p.re`.
 
 ## ptool.re.compile
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.compile(pattern[, opts])` compila una expresión regular y devuelve un objeto `Regex`.
+`ptool.re.compile(pattern[, opts])` compiles a regular expression and returns a `Regex` object.
 
-- `pattern` (string, obligatorio): El patrón regex.
-- `opts` (table, opcional): Opciones de compilación. Actualmente se admite:
-  - `case_insensitive` (boolean, opcional): Si la coincidencia distingue entre mayúsculas y minúsculas. Por defecto es `false`.
+- `pattern` (string, required): The regex pattern.
+- `opts` (table, optional): Compile options. Currently supported:
+  - `case_insensitive` (boolean, optional): Whether matching is case-insensitive. Defaults to `false`.
 
-Ejemplo:
+Example:
 
 ```lua
 local re = ptool.re.compile("(?P<name>\\w+)", { case_insensitive = true })
@@ -23,12 +23,12 @@ print(re:is_match("Alice")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.escape(text)` escapa texto plano para convertirlo en una cadena literal de regex.
+`ptool.re.escape(text)` escapes plain text into a regex literal string.
 
-- `text` (string, obligatorio): El texto que se va a escapar.
-- Devuelve: La cadena escapada.
+- `text` (string, required): The text to escape.
+- Returns: The escaped string.
 
-Ejemplo:
+Example:
 
 ```lua
 local keyword = "a+b?"
@@ -40,11 +40,11 @@ print(re:is_match("a+b?")) -- true
 
 > `v0.1.0` - Introduced.
 
-`Regex` representa una expresión regular compilada devuelta por `ptool.re.compile(...)`.
+`Regex` represents a compiled regular expression returned by `ptool.re.compile(...)`.
 
-Está implementada como userdata de Lua.
+It is implemented as a Lua userdata.
 
-Métodos:
+Methods:
 
 - `re:is_match(input)` -> `boolean`
 - `re:find(input[, init])` -> `Match|nil`
@@ -59,72 +59,72 @@ Métodos:
 
 Canonical API name: `ptool.re.Regex:is_match`.
 
-`re:is_match(input)` comprueba si la regex coincide con `input`.
+`re:is_match(input)` checks whether the regex matches `input`.
 
-- `input` (string, obligatorio): El texto de entrada.
-- Devuelve: `boolean`.
+- `input` (string, required): The input text.
+- Returns: `boolean`.
 
 ### find
 
 Canonical API name: `ptool.re.Regex:find`.
 
-`re:find(input[, init])` devuelve la primera coincidencia en `input`, o `nil`.
+`re:find(input[, init])` returns the first match in `input`, or `nil`.
 
-- `input` (string, obligatorio): El texto de entrada.
+- `input` (string, required): The input text.
 
-Notas de parámetros:
+Parameter notes:
 
-- `init` es una posición inicial basada en 1 y por defecto vale `1`.
-- `limit` debe ser mayor que `0`.
+- `init` is a 1-based start position and defaults to `1`.
+- `limit` must be greater than `0`.
 
-Estructuras devueltas:
+Return structures:
 
 - `Match`:
-  - `start` (integer): Índice inicial basado en 1.
-  - `finish` (integer): Índice final, utilizable directamente con `string.sub`.
-  - `text` (string): El texto coincidente.
+  - `start` (integer): The 1-based start index.
+  - `finish` (integer): The end index, directly usable with `string.sub`.
+  - `text` (string): The matched text.
 - `Captures`:
-  - `full` (string): El texto completo coincidente.
-  - `groups` (table): Un arreglo de grupos capturados en orden de captura. Los grupos no coincidentes son `nil`.
-  - `named` (table): Un mapa de grupos capturados con nombre, indexado por nombre de grupo.
+  - `full` (string): The full matched text.
+  - `groups` (table): An array of capture groups in capture order. Unmatched groups are `nil`.
+  - `named` (table): A mapping of named capture groups, keyed by group name.
 
 ### find_all
 
 Canonical API name: `ptool.re.Regex:find_all`.
 
-`re:find_all(input)` devuelve todas las coincidencias en `input` como `Match[]`.
+`re:find_all(input)` returns all matches in `input` as a `Match[]`.
 
 ### captures
 
 Canonical API name: `ptool.re.Regex:captures`.
 
-`re:captures(input)` devuelve el primer conjunto de capturas en `input`, o `nil`.
+`re:captures(input)` returns the first capture set in `input`, or `nil`.
 
 ### captures_all
 
 Canonical API name: `ptool.re.Regex:captures_all`.
 
-`re:captures_all(input)` devuelve todos los conjuntos de capturas en `input` como `Captures[]`.
+`re:captures_all(input)` returns all capture sets in `input` as a `Captures[]`.
 
 ### replace
 
 Canonical API name: `ptool.re.Regex:replace`.
 
-`re:replace(input, replacement)` reemplaza la primera coincidencia en `input`.
+`re:replace(input, replacement)` replaces the first match in `input`.
 
 ### replace_all
 
 Canonical API name: `ptool.re.Regex:replace_all`.
 
-`re:replace_all(input, replacement)` reemplaza todas las coincidencias en `input`.
+`re:replace_all(input, replacement)` replaces all matches in `input`.
 
 ### split
 
 Canonical API name: `ptool.re.Regex:split`.
 
-`re:split(input[, limit])` divide `input` usando la regex como separador.
+`re:split(input[, limit])` splits `input` using the regex as the separator.
 
-Ejemplo:
+Example:
 
 ```lua
 local re = ptool.re.compile("(?P<word>\\w+)")

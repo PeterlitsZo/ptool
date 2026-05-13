@@ -1,35 +1,35 @@
-# Lua API 概要
+# Lua API Overview
 
-`ptool` は `ptool` と `p` を通じて幅広いヘルパーを公開します。
+`ptool` exposes a broad set of helpers through `ptool` and `p`.
 
-## コア API
+## Core APIs
 
-- [コア Lua API](./core.md): スクリプトのライフサイクル、プロセス実行、 設定、端末向けヘルパー。
+- [Core Lua API](./core.md): Script lifecycle, process execution, config, and terminal helpers.
 
-## モジュール
+## Modules
 
-- [引数 API](./args.md): Lua スクリプト向けのコマンドライン引数スキーマ解析。
+- [Args API](./args.md): Command-line argument schema parsing for Lua scripts.
 - [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
-- [SemVer API](./semver.md): セマンティックバージョンの解析、比較、更新。
-- [ハッシュ API](./hash.md): SHA-256、SHA-1、MD5 ダイジェストを計算する。
-- [ネットワーク API](./net.md): URL、IP アドレス、host-port ペアを解析する。
-- [OS API](./os.md): ランタイムの環境変数を読み取り、ホストプロセス情報を 確認する。
-- [プラットフォーム API](./platform.md): 現在の OS、アーキテクチャ、 target triple を検出する。
-- [ANSI API](./ansi.md): ANSI エスケープシーケンスで装飾された端末出力を 組み立てる。
-- [TUI API](./tui.md): 構造化されたビュー木とイベントループでシンプルな端末 UI を構築する。
-- [Log API](./log.md): レベルごとのタイムスタンプ付き端末ログを書き出す。
-- [HTTP API](./http.md): HTTP リクエストを送り、レスポンス本文を扱う。
-- [JSON API](./json.md): JSON テキストを解析し、Lua 値を JSON として 文字列化する。
-- [YAML API](./yaml.md): YAML テキストを解析し、ネストした値を読み取り、 Lua 値を YAML として文字列化する。
-- [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
-- [SSH API](./ssh.md): リモートホストへ接続し、コマンドを実行し、 ファイルを転送する。
-- [パス API](./path.md): ファイルシステムに触れずにパスを字句的に操作する。
-- [TOML API](./toml.md): TOML 値の解析、文字列化、読み取り、更新、削除を行う。
-- [正規表現 API](./re.md): 正規表現をコンパイルし、検索、キャプチャ、 置換、分割を行う。
-- [文字列 API](./str.md): 文字列のトリム、分割、結合、置換、整形を行う。
-- [Table API](./tbl.md): 密なリストテーブルの map、filter、concat を行う。
-- [ファイルシステム API](./fs.md): ファイルシステムパスの読み取り、書き込み、 作成、glob を行う。
-- [シェル API](./sh.md): シェル風のコマンドラインを引数配列へ分割する。
-- [テンプレート API](./template.md): Lua データからテキストテンプレートを レンダリングする。
+- [SemVer API](./semver.md): Parse, compare, and bump semantic versions.
+- [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
+- [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.
+- [OS API](./os.md): Read runtime environment variables and inspect host process details.
+- [Platform API](./platform.md): Detect the current OS, architecture, and target triple.
+- [ANSI API](./ansi.md): Build styled terminal output with ANSI escape sequences.
+- [TUI API](./tui.md): Build simple terminal user interfaces with a structured view tree and event loop.
+- [Log API](./log.md): Write timestamped terminal logs with level-based output.
+- [HTTP API](./http.md): Send HTTP requests and consume response bodies.
+- [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
+- [YAML API](./yaml.md): Parse YAML text, read nested values, and stringify Lua values as YAML.
+- [Database API](./db.md): Open database connections and run SQL queries.
+- [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer files.
+- [Path API](./path.md): Manipulate paths lexically without touching the filesystem.
+- [TOML API](./toml.md): Parse, stringify, read, update, and remove TOML values.
+- [Regex API](./re.md): Compile regexes and search, capture, replace, or split text.
+- [String API](./str.md): Trim, split, join, replace, and format strings.
+- [Table API](./tbl.md): Map, filter, and concatenate dense list tables.
+- [Filesystem API](./fs.md): Read, write, create, and glob filesystem paths.
+- [Shell API](./sh.md): Split shell-like command lines into argument arrays.
+- [Template API](./template.md): Render text templates from Lua data.
 
-このページを入り口として使い、そのあと必要なモジュールページに移動して 完全な関数リファレンスを参照してください。
+Use this page as the entrypoint, then jump to the module page you need for the full function reference.

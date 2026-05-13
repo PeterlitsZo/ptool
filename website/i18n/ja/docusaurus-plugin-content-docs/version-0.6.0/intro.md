@@ -1,50 +1,50 @@
-# はじめに
+# Getting Started
 
-`ptool` は Lua スクリプトを実行し、実用的な自動化のための標準 ライブラリを注入します。
+`ptool` runs Lua scripts and injects a standard library for practical automation.
 
-現在の主なエントリーポイントは次のとおりです。
+The main entrypoint today is:
 
 ```sh
 ptool run <file>
 ```
 
-`.lua` ファイルでは、短縮形も使えます。
+For `.lua` files, you can also use the shortcut form:
 
 ```sh
 ptool <file.lua>
 ```
 
-対話的に試したい場合、`ptool` には次のコマンドもあります。
+For interactive exploration, `ptool` also provides:
 
 ```sh
 ptool repl
 ```
 
-スクリプトの実行時、`ptool` はグローバルテーブル `ptool` と短い別名 `p` を通じて API を公開します。
+When a script runs, `ptool` exposes its API through the global `ptool` table and the shorter alias `p`.
 
-## インストール
+## Install
 
-Linux と macOS では、リリース用インストーラーで `ptool` を インストールできます。
+On Linux and macOS, install `ptool` with the release installer:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash
 ```
 
-このインストーラーは現在のプラットフォーム向けの最新ビルド済み リリースをダウンロードし、`ptool` を `~/.local/bin/ptool` に インストールし、必要に応じて PATH のヒントを表示します。
+The installer downloads the latest prebuilt release for the current platform, installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed.
 
-最新の安定版ではなく特定のリリースタグをインストールするには:
+To install a specific release tag instead of the latest stable release:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
 ```
 
-`~/.local/bin` ではなく独自のバイナリディレクトリにインストールする には:
+To install into a custom binary directory instead of `~/.local/bin`:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
 ```
 
-## 最小スクリプト
+## Minimal script
 
 ```lua
 ptool.use("v0.1.0")
@@ -52,46 +52,46 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` は、そのスクリプトが必要とする最小の `ptool` バージョンを宣言します。これにより期待する API バージョンを明示でき、 古いランタイムでは早い段階で失敗します。詳しくは [コア Lua API](./lua-api/core.md) を参照してください。
+`ptool.use(...)` declares the minimum required `ptool` version for the script. This keeps scripts explicit about the API version they expect and fails early on older runtimes. See [Core Lua API](./lua-api/core.md) for details.
 
-実行方法:
+Run it with:
 
 ```sh
 ptool run script.lua
 ptool script.lua
 ```
 
-## 引数の受け渡し
+## Passing arguments
 
-スクリプトのパスの後ろに追加の CLI 引数を渡せます。
+You can pass extra CLI arguments after the script path:
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
 ptool script.lua --name alice -v a.txt b.txt
 ```
 
-これらはスクリプト内で `ptool.args.parse(...)` を使って解析できます。
+Parse them inside the script with `ptool.args.parse(...)`.
 
-## Shebang スクリプト
+## Shebang scripts
 
-`ptool` は shebang ファイルをサポートしています。`.lua` 向けの短縮形を 使うと、スクリプトは次のように始められます。
+`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can start with:
 
 ```text
 #!/usr/bin/env ptool
 ```
 
-これにより、実行権限ビットを付けたあとでスクリプトを直接実行できます。
+This lets you execute the script directly once it has the executable bit.
 
-## 利用できるもの
+## What you get
 
-- shebang ファイルを理解するスクリプトランナー。
-- Lua 式や `ptool` API をその場で試せる対話型 REPL。
+- A script runner that understands shebang files.
+- An interactive REPL for trying Lua expressions and `ptool` APIs directly.
 - Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, HTTP, SSH, databases, and templates.
-- コマンド実行、引数解析、対話入力のための CLI 向けヘルパー。
+- CLI-oriented helpers for running commands, parsing arguments, and asking for interactive input.
 
-## 次のステップ
+## Next steps
 
-- [REPL](./repl.md) を開いて、対話的な使い方、複数行入力、キーボードの 挙動を確認する。
-- [Lua API 概要](./lua-api/index.md) を使って、コア API と利用可能な モジュールを確認する。
-- [コア Lua API](./lua-api/core.md) から始めて、バージョン制御、 プロセス実行、設定、スクリプトのライフサイクルヘルパーを理解する。
-- 特定の機能セットの詳細なリファレンスが必要な場合は、 [引数 API](./lua-api/args.md) のようなモジュールページを開く。
+- Open [REPL](./repl.md) for interactive usage, multi-line input, and keyboard behavior.
+- Use [Lua API Overview](./lua-api/index.md) to browse the core APIs and available modules.
+- Start with [Core Lua API](./lua-api/core.md) for version gating, process execution, config, and script lifecycle helpers.
+- Open a module page such as [Args API](./lua-api/args.md) when you need the detailed reference for a specific feature set.

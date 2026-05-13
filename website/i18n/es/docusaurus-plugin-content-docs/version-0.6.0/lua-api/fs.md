@@ -1,22 +1,22 @@
-# API de sistema de archivos
+# Filesystem API
 
-Las utilidades de sistema de archivos están disponibles bajo `ptool.fs` y `p.fs`.
+Filesystem helpers are available under `ptool.fs` and `p.fs`.
 
 ## ptool.fs.read
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.read(path)` lee un archivo como bytes sin procesar y devuelve una cadena Lua.
+`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string.
 
-- `path` (string, obligatorio): La ruta del archivo.
-- Devuelve: `string`.
+- `path` (string, required): The file path.
+- Returns: `string`.
 
-Notas:
+Notes:
 
-- La cadena Lua devuelta contiene exactamente los bytes almacenados en disco.
-- Los archivos de texto siguen funcionando como antes, y ahora también se admiten archivos binarios.
+- The returned Lua string contains the file bytes exactly as stored on disk.
+- Text files continue to work as before, but binary files are also supported.
 
-Ejemplo:
+Example:
 
 ```lua
 local content = ptool.fs.read("README.md")
@@ -30,17 +30,17 @@ print(#png)
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` escribe una cadena Lua en un archivo como bytes sin procesar, sobrescribiendo el contenido existente.
+`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, overwriting existing contents.
 
-- `path` (string, obligatorio): La ruta del archivo.
-- `content` (string, obligatorio): El contenido que se va a escribir.
+- `path` (string, required): The file path.
+- `content` (string, required): The content to write.
 
-Notas:
+Notes:
 
-- `content` se escribe byte por byte.
-- Los bytes NUL embebidos y los bytes no UTF-8 se conservan.
+- `content` is written byte-for-byte.
+- Embedded NUL bytes and non-UTF-8 bytes are preserved.
 
-Ejemplo:
+Example:
 
 ```lua
 ptool.fs.write("tmp/hello.txt", "hello\n")
@@ -51,11 +51,11 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.mkdir(path)` crea un directorio. Si los directorios padre no existen, se crean recursivamente.
+`ptool.fs.mkdir(path)` creates a directory. If parent directories do not exist, they are created recursively.
 
-- `path` (string, obligatorio): La ruta del directorio.
+- `path` (string, required): The directory path.
 
-Ejemplo:
+Example:
 
 ```lua
 ptool.fs.mkdir("tmp/a/b")
@@ -65,12 +65,12 @@ ptool.fs.mkdir("tmp/a/b")
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.exists(path)` comprueba si una ruta existe.
+`ptool.fs.exists(path)` checks whether a path exists.
 
-- `path` (string, obligatorio): Una ruta de archivo o directorio.
-- Devuelve: `boolean`.
+- `path` (string, required): A file or directory path.
+- Returns: `boolean`.
 
-Ejemplo:
+Example:
 
 ```lua
 if ptool.fs.exists("tmp/hello.txt") then
@@ -82,12 +82,12 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.is_file(path)` comprueba si una ruta existe y es un archivo normal.
+`ptool.fs.is_file(path)` checks whether a path exists and is a regular file.
 
-- `path` (string, obligatorio): La ruta que se va a comprobar.
-- Devuelve: `boolean`.
+- `path` (string, required): The path to check.
+- Returns: `boolean`.
 
-Ejemplo:
+Example:
 
 ```lua
 if ptool.fs.is_file("tmp/hello.txt") then
@@ -99,12 +99,12 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.is_dir(path)` comprueba si una ruta existe y es un directorio.
+`ptool.fs.is_dir(path)` checks whether a path exists and is a directory.
 
-- `path` (string, obligatorio): La ruta que se va a comprobar.
-- Devuelve: `boolean`.
+- `path` (string, required): The path to check.
+- Returns: `boolean`.
 
-Ejemplo:
+Example:
 
 ```lua
 if ptool.fs.is_dir("tmp") then
@@ -116,20 +116,20 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.remove(path[, options])` elimina un archivo, enlace simbólico o directorio.
+`ptool.fs.remove(path[, options])` removes a file, symlink, or directory.
 
-- `path` (string, obligatorio): La ruta que se va a eliminar.
-- `options` (table, opcional): Opciones de eliminación. Campos admitidos:
-  - `recursive` (boolean, opcional): Indica si los directorios deben eliminarse recursivamente. Valor predeterminado: `false`.
-  - `missing_ok` (boolean, opcional): Indica si deben ignorarse las rutas ausentes. Valor predeterminado: `false`.
+- `path` (string, required): The path to remove.
+- `options` (table, optional): Remove options. Supported fields:
+  - `recursive` (boolean, optional): Whether to remove directories recursively. Defaults to `false`.
+  - `missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults to `false`.
 
-Comportamiento:
+Behavior:
 
-- Los archivos y enlaces simbólicos pueden eliminarse sin `recursive`.
-- Los directorios necesitan `recursive = true` cuando no están vacíos.
-- Los nombres de opción desconocidos o los tipos de valor inválidos producen un error.
+- Files and symlinks can be removed without `recursive`.
+- Directories require `recursive = true` when they are not empty.
+- Unknown option names or invalid option value types raise an error.
 
-Ejemplo:
+Example:
 
 ```lua
 ptool.fs.remove("tmp/hello.txt")
@@ -141,15 +141,15 @@ ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 
 > `v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option.
 
-`ptool.fs.glob(pattern[, options])` encuentra rutas del sistema de archivos usando sintaxis glob de estilo Unix y devuelve un arreglo de cadenas ordenado lexicográficamente con las rutas coincidentes.
+`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically.
 
-- `pattern` (string, obligatorio): Un patrón glob. Los patrones relativos se resuelven desde el directorio de ejecución actual de `ptool`, por lo que siguen a `ptool.cd(...)`.
-- `options` (table, opcional): Opciones de glob. Campos admitidos:
-  - `working_dir` (string, opcional): Sobrescribe el directorio base usado para resolver patrones relativos. Los valores relativos de `working_dir` se resuelven desde el directorio de ejecución actual de `ptool`.
-- Devuelve: `string[]`.
-- Los archivos y directorios ocultos solo coinciden cuando el componente del patrón correspondiente empieza explícitamente por `.`.
+- `pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
+- `options` (table, optional): Glob options. Supported fields:
+  - `working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory.
+- Returns: `string[]`.
+- Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`.
 
-Ejemplo:
+Example:
 
 ```lua
 ptool.cd("src")

@@ -1,15 +1,15 @@
 # Hash API
 
-哈希辅助能力位于 `ptool.hash` 和 `p.hash` 下。
+Hashing helpers are available under `ptool.hash` and `p.hash`.
 
 ## ptool.hash.sha256
 
-> `v0.2.0` - 引入。
+> `v0.2.0` - Introduced.
 
-`ptool.hash.sha256(input)` 返回 Lua 字符串的 SHA-256 摘要。
+`ptool.hash.sha256(input)` returns the SHA-256 digest of a Lua string.
 
-- `input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。
-- 返回：`string`（小写十六进制摘要）。
+- `input` (string, required): The input Lua string. The digest is computed from the string's raw bytes.
+- Returns: `string` (lowercase hexadecimal digest).
 
 ```lua
 print(ptool.hash.sha256("hello"))
@@ -18,12 +18,12 @@ print(ptool.hash.sha256("hello"))
 
 ## ptool.hash.sha1
 
-> `v0.2.0` - 引入。
+> `v0.2.0` - Introduced.
 
-`ptool.hash.sha1(input)` 返回 Lua 字符串的 SHA-1 摘要。
+`ptool.hash.sha1(input)` returns the SHA-1 digest of a Lua string.
 
-- `input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。
-- 返回：`string`（小写十六进制摘要）。
+- `input` (string, required): The input Lua string. The digest is computed from the string's raw bytes.
+- Returns: `string` (lowercase hexadecimal digest).
 
 ```lua
 print(ptool.hash.sha1("hello"))
@@ -32,12 +32,12 @@ print(ptool.hash.sha1("hello"))
 
 ## ptool.hash.md5
 
-> `v0.2.0` - 引入。
+> `v0.2.0` - Introduced.
 
-`ptool.hash.md5(input)` 返回 Lua 字符串的 MD5 摘要。
+`ptool.hash.md5(input)` returns the MD5 digest of a Lua string.
 
-- `input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。
-- 返回：`string`（小写十六进制摘要）。
+- `input` (string, required): The input Lua string. The digest is computed from the string's raw bytes.
+- Returns: `string` (lowercase hexadecimal digest).
 
 ```lua
 print(ptool.hash.md5("hello"))

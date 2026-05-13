@@ -1,37 +1,37 @@
 # TUI API
 
-端末 UI ヘルパーは `ptool.tui` と `p.tui` で利用できます。
+Terminal UI helpers are available under `ptool.tui` and `p.tui`.
 
-最初のバージョンは、Lua のイベントループで駆動する小さな対話型端末画面に焦点を当てています。
+The first version focuses on small interactive terminal screens driven by a Lua event loop.
 
 ## ptool.tui.run
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.run(options)` は TUI セッションを開始し、Lua のライフサイクルコールバックを実行し、`app:quit(value)` に渡した値を返します。`app:quit()` を値なしで呼んだ場合は `nil` を返します。
+`ptool.tui.run(options)` starts a TUI session, runs the Lua lifecycle callbacks, and returns the value passed to `app:quit(value)`. If `app:quit()` is called without a value, the function returns `nil`.
 
-`options` のフィールド:
+`options` fields:
 
-- `tick_ms` (integer, optional): tick 間隔をミリ秒で指定します。既定値は `100` です。
-- `init` (function, optional): 最初のフレームを描画する前に一度だけ呼ばれます。戻り値は初期 `state` になります。
-- `update` (function, required): `update(state, event, app)` として、各入力イベントまたは tick の後に呼ばれます。`nil` 以外の値を返した場合、その値が次の `state` になります。`nil` を返すと現在の `state` を維持します。
-- `view` (function, required): `view(state, app)` として呼ばれ、次のフレームのルートノードを構築します。
+- `tick_ms` (integer, optional): Tick interval in milliseconds. Defaults to `100`.
+- `init` (function, optional): Called once before the first frame is drawn. Its return value becomes the initial `state`.
+- `update` (function, required): Called as `update(state, event, app)` after each input event or tick. If it returns a non-`nil` value, that value becomes the next `state`. Returning `nil` keeps the current `state`.
+- `view` (function, required): Called as `view(state, app)` to build the root node for the next frame.
 
-動作:
+Behavior:
 
-- 対話型 TTY が必要です。
-- 端末の alternate screen と raw mode を使って実行されます。
-- エラー経路を含め、終了時に端末状態を復元します。
+- Requires an interactive TTY.
+- Runs inside the terminal alternate screen with raw mode enabled.
+- Restores the terminal when the session exits, including error paths.
 
-イベント:
+Events:
 
 - `{ type = "tick" }`
 - `{ type = "resize", width = <integer>, height = <integer> }`
 - `{ type = "key", key = <string>, ctrl = <boolean>, alt = <boolean>, shift = <boolean> }`
 
-主なキー名には `up`、`down`、`left`、`right`、`enter`、`esc`、`tab`、`backspace`、`delete`、`home`、`end`、`pageup`、`pagedown` があります。文字キーは `"q"` や `"j"` のように文字そのものを使います。
+Common key names include `up`, `down`, `left`, `right`, `enter`, `esc`, `tab`, `backspace`, `delete`, `home`, `end`, `pageup`, and `pagedown`. Character keys use the character itself, such as `"q"` or `"j"`.
 
-例:
+Example:
 
 ```lua
 local result = p.tui.run({
@@ -80,77 +80,77 @@ print("selected:", result)
 
 > `Unreleased` - Introduced.
 
-`app` は `update(...)` と `view(...)` に渡されます。
+`app` is passed to `update(...)` and `view(...)`.
 
 ### quit
 
 Canonical API name: `ptool.tui.App:quit`.
 
-`app:quit(value?)` は、現在のコールバックが終わったあとに TUI セッションを停止するよう要求します。
+`app:quit(value?)` requests that the TUI session stop after the current callback completes.
 
-- `value` (Lua value, optional): `ptool.tui.run(...)` の戻り値になります。
+- `value` (Lua value, optional): The value returned by `ptool.tui.run(...)`.
 
-## ノードコンストラクタ
+## Node Constructors
 
 > `Unreleased` - Introduced.
 
-以下のコンストラクタは通常のノードテーブルを返します。`view(...)` は、ルートのビュー木としてこれらのノードのいずれかを返す必要があります。
+The constructor helpers below return plain node tables. `view(...)` must return one of these nodes as the root widget tree.
 
-共通ノードフィールド:
+Common node fields:
 
-- `title` (string, optional): ノードの周囲にタイトル付きブロックを描画します。
-- `border` (boolean, optional): ノードの周囲に枠線を描画します。既定値は `false` です。
-- `padding` (integer, optional): 均一な内側余白です。既定値は `0` です。
-- `grow` (integer, optional): ノードが row または column の中にあるときの相対サイズです。既定値は `1` です。
-- `style` (table, optional): 共通のスタイルフィールド:
-  - `fg` / `bg`: `black`、`red`、`green`、`yellow`、`blue`、`magenta`、`cyan`、`white`、`gray`、`dark_gray` のいずれか。
-  - `bold`、`dim`、`italic`、`underlined`、`reversed`: 真偽値のスタイルフラグ。
+- `title` (string, optional): Draws a block title around the node.
+- `border` (boolean, optional): Draws a border around the node. Defaults to `false`.
+- `padding` (integer, optional): Uniform inner padding. Defaults to `0`.
+- `grow` (integer, optional): Relative size when the node is inside a row or column. Defaults to `1`.
+- `style` (table, optional): Shared style fields:
+  - `fg` / `bg`: One of `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray`, or `dark_gray`.
+  - `bold`, `dim`, `italic`, `underlined`, `reversed`: Boolean style toggles.
 
 ## ptool.tui.text
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.text(text[, options])` はテキストノードを作成します。
+`ptool.tui.text(text[, options])` creates a text node.
 
-- `text` (string, required): 描画するテキスト。
-- `options.align` (string, optional): `left`、`center`、`right`。既定値は `left` です。
+- `text` (string, required): The text to render.
+- `options.align` (string, optional): `left`, `center`, or `right`. Defaults to `left`.
 
 ## ptool.tui.list
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.list(items[, options])` は縦方向のリストノードを作成します。
+`ptool.tui.list(items[, options])` creates a vertical list node.
 
-- `items` (table, required): 密なリストテーブル。要素の値には文字列、数値、真偽値を使えます。
-- `options.selected` (integer, optional): Lua の 1 始まりの添字で選択行を指定します。要素数を超える値は無視されます。
-- `options.highlight_style` (table, optional): 選択行に適用するスタイルです。`style` と同じキーを使います。
+- `items` (table, required): A dense list table. Item values may be strings, numbers, or booleans.
+- `options.selected` (integer, optional): The selected row using Lua's 1-based indexing. Values beyond the item count are ignored.
+- `options.highlight_style` (table, optional): Style applied to the selected row. Uses the same keys as `style`.
 
-注意:
+Notes:
 
-- `highlight_style` が描画スタイルを変えない限り、選択は視覚的にはっきり区別されません。
+- Selection is only visually distinct when `highlight_style` changes the rendered style.
 
 ## ptool.tui.row
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.row(options)` は横方向コンテナを作成します。
+`ptool.tui.row(options)` creates a horizontal container.
 
-- `options.children` (table, required): 子ノードを並べた密なリストテーブル。
+- `options.children` (table, required): A dense list table of child nodes.
 
 ## ptool.tui.column
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.column(options)` は縦方向コンテナを作成します。
+`ptool.tui.column(options)` creates a vertical container.
 
-- `options.children` (table, required): 子ノードを並べた密なリストテーブル。
+- `options.children` (table, required): A dense list table of child nodes.
 
-## 現在の制限
+## Current Limits
 
-`ptool.tui` が現在サポートするもの:
+`ptool.tui` currently supports:
 
-- `tick`、`resize`、キーボードイベント。
-- text、list、row、column ノード。
-- 基本的なブロック装飾とスタイルオプション。
+- `tick`, `resize`, and keyboard events.
+- Text, list, row, and column nodes.
+- Basic block decoration and style options.
 
-現時点では、テキスト入力、ポップアップ、表、マウス駆動のウィジェット、任意の ratatui ウィジェットバインディングはまだ提供していません。
+It does not yet provide text inputs, popups, tables, mouse-driven widgets, or arbitrary ratatui widget bindings.

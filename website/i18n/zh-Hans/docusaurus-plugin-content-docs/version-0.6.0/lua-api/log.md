@@ -1,72 +1,72 @@
 # Log API
 
-`ptool.log` 在 `ptool.log` 和 `p.log` 下提供按 level 分类的终端日志辅助能力。
+`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`.
 
-每次日志调用都会输出一行如下格式的文本：
+Every log call renders a line in this format:
 
 ```text
 [2026-04-30 14:54:56] INFO message text
 ```
 
-行为：
+Behavior:
 
-- 时间戳使用本地时间，格式为 `YYYY-MM-DD HH:MM:SS`。
-- level 标签使用完整名称：`TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`。
-- 当 `ptool` 正在向终端写入时，会自动启用彩色输出。
-- `ptool.log.error(...)` 写入 `stderr`，其余 level 写入 `stdout`。
-- 多个参数会用空格连接；非字符串值会以单行 inspect 形式渲染。
+- The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format.
+- The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and `ERROR`.
+- Colored output is enabled automatically when `ptool` is writing to a terminal.
+- `ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`.
+- Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form.
 
 ## ptool.log.trace
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
 ```lua
 ptool.log.trace(...)
 ```
 
-输出一条 trace 级别日志。
+Writes a trace-level log line.
 
 ## ptool.log.debug
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
 ```lua
 ptool.log.debug(...)
 ```
 
-输出一条 debug 级别日志。
+Writes a debug-level log line.
 
 ## ptool.log.info
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
 ```lua
 ptool.log.info(...)
 ```
 
-输出一条 info 级别日志。
+Writes an info-level log line.
 
 ## ptool.log.warn
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
 ```lua
 ptool.log.warn(...)
 ```
 
-输出一条 warn 级别日志。
+Writes a warning-level log line.
 
 ## ptool.log.error
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
 ```lua
 ptool.log.error(...)
 ```
 
-向 `stderr` 输出一条 error 级别日志。
+Writes an error-level log line to `stderr`.
 
-示例：
+Example:
 
 ```lua
 p.log.info("hello", { answer = 42 })
@@ -74,7 +74,7 @@ p.log.warn("careful")
 p.log.error("boom")
 ```
 
-示例输出：
+Example output:
 
 ```text
 [2026-04-30 14:54:56] INFO hello { answer = 42 }

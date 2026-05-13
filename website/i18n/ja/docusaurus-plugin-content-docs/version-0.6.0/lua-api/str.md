@@ -1,15 +1,15 @@
-# 文字列 API
+# String API
 
-文字列ヘルパーは `ptool.str` と `p.str` にあります。
+String helpers are available under `ptool.str` and `p.str`.
 
 ## ptool.str.trim
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.trim(s)` は先頭と末尾の空白を取り除きます。
+`ptool.str.trim(s)` removes leading and trailing whitespace.
 
-- `s` (string, 必須): 入力文字列。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.trim("  hello\n")) -- hello
@@ -19,10 +19,10 @@ print(ptool.str.trim("  hello\n")) -- hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.trim_start(s)` は先頭の空白を取り除きます。
+`ptool.str.trim_start(s)` removes leading whitespace.
 
-- `s` (string, 必須): 入力文字列。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.trim_start("  hello  ")) -- hello  
@@ -32,10 +32,10 @@ print(ptool.str.trim_start("  hello  ")) -- hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.trim_end(s)` は末尾の空白を取り除きます。
+`ptool.str.trim_end(s)` removes trailing whitespace.
 
-- `s` (string, 必須): 入力文字列。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.trim_end("  hello  ")) --   hello
@@ -45,10 +45,10 @@ print(ptool.str.trim_end("  hello  ")) --   hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.is_blank(s)` は、文字列が空か空白だけで構成されているかを 確認します。
+`ptool.str.is_blank(s)` checks whether a string is empty or contains only whitespace.
 
-- `s` (string, 必須): 入力文字列。
-- 戻り値: `boolean`。
+- `s` (string, required): The input string.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.is_blank(" \t\n")) -- true
@@ -59,11 +59,11 @@ print(ptool.str.is_blank("x")) -- false
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.starts_with(s, prefix)` は `s` が `prefix` で始まるか確認します。
+`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`.
 
-- `s` (string, 必須): 入力文字列。
-- `prefix` (string, 必須): 確認するプレフィックス。
-- 戻り値: `boolean`。
+- `s` (string, required): The input string.
+- `prefix` (string, required): The prefix to test.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.starts_with("hello.lua", "hello")) -- true
@@ -73,11 +73,11 @@ print(ptool.str.starts_with("hello.lua", "hello")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.ends_with(s, suffix)` は `s` が `suffix` で終わるか確認します。
+`ptool.str.ends_with(s, suffix)` checks whether `s` ends with `suffix`.
 
-- `s` (string, 必須): 入力文字列。
-- `suffix` (string, 必須): 確認するサフィックス。
-- 戻り値: `boolean`。
+- `s` (string, required): The input string.
+- `suffix` (string, required): The suffix to test.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.ends_with("hello.lua", ".lua")) -- true
@@ -87,11 +87,11 @@ print(ptool.str.ends_with("hello.lua", ".lua")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.contains(s, needle)` は `needle` が `s` に含まれるか確認します。
+`ptool.str.contains(s, needle)` checks whether `needle` appears in `s`.
 
-- `s` (string, 必須): 入力文字列。
-- `needle` (string, 必須): 探す部分文字列。
-- 戻り値: `boolean`。
+- `s` (string, required): The input string.
+- `needle` (string, required): The substring to search for.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.contains("hello.lua", "lo.l")) -- true
@@ -101,19 +101,19 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split(s, sep[, options])` は、空でない区切り文字で文字列を 分割します。
+`ptool.str.split(s, sep[, options])` splits a string by a non-empty separator.
 
-- `s` (string, 必須): 入力文字列。
-- `sep` (string, 必須): 区切り文字。空文字列は使えません。
-- `options` (table, 任意): 分割オプション。サポートされるフィールド:
-  - `trim` (boolean, 任意): 返す前に各要素をトリムするかどうか。 デフォルトは `false`。
-  - `skip_empty` (boolean, 任意): トリム後に空要素を取り除くかどうか。 デフォルトは `false`。
-- 戻り値: `string[]`。
+- `s` (string, required): The input string.
+- `sep` (string, required): The separator. Empty strings are not allowed.
+- `options` (table, optional): Split options. Supported fields:
+  - `trim` (boolean, optional): Whether to trim each piece before returning it. Defaults to `false`.
+  - `skip_empty` (boolean, optional): Whether to remove empty pieces after optional trimming. Defaults to `false`.
+- Returns: `string[]`.
 
-挙動:
+Behavior:
 
-- 未知のオプション名や不正な値型はエラーになります。
-- `skip_empty = true` は `trim` の後に適用されるため、両方を有効にすると 空白だけの要素も除去できます。
+- Unknown option names or invalid option value types raise an error.
+- `skip_empty = true` is applied after `trim`, so whitespace-only pieces can be removed when both are enabled.
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -128,19 +128,19 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split_lines(s[, options])` は文字列を行に分割します。
+`ptool.str.split_lines(s[, options])` splits a string into lines.
 
-- `s` (string, 必須): 入力文字列。
-- `options` (table, 任意): 行分割オプション。サポートされるフィールド:
-  - `keep_ending` (boolean, 任意): 行末 (`\n`, `\r\n`, `\r`) を返す要素に 残すかどうか。デフォルトは `false`。
-  - `skip_empty` (boolean, 任意): 空行を取り除くかどうか。デフォルトは `false`。
-- 戻り値: `string[]`。
+- `s` (string, required): The input string.
+- `options` (table, optional): Line-splitting options. Supported fields:
+  - `keep_ending` (boolean, optional): Whether to keep line endings (`\n`, `\r\n`, or `\r`) in returned items. Defaults to `false`.
+  - `skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to `false`.
+- Returns: `string[]`.
 
-挙動:
+Behavior:
 
-- Unix (`\n`) と Windows (`\r\n`) の行末、および単独の `\r` を サポートします。
-- `skip_empty = true` のとき、行末だけを含む行は空行として扱われて 取り除かれます。
-- 未知のオプション名や不正な値型はエラーになります。
+- Supports Unix (`\n`) and Windows (`\r\n`) line endings, and also lone `\r`.
+- When `skip_empty = true`, a line containing only a line ending is treated as empty and is removed.
+- Unknown option names or invalid option value types raise an error.
 
 ```lua
 local lines = ptool.str.split_lines("a\n\n b\r\n", {
@@ -154,11 +154,11 @@ print(ptool.inspect(lines)) -- { "a", " b" }
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.join(parts, sep)` は文字列配列を区切り文字で結合します。
+`ptool.str.join(parts, sep)` joins a string array with a separator.
 
-- `parts` (string[], 必須): 結合する文字列要素。
-- `sep` (string, 必須): 区切り文字列。
-- 戻り値: `string`。
+- `parts` (string[], required): The string parts to join.
+- `sep` (string, required): The separator string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
@@ -168,13 +168,13 @@ print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.replace(s, from, to[, n])` は `from` の出現を `to` へ置換します。
+`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with `to`.
 
-- `s` (string, 必須): 入力文字列。
-- `from` (string, 必須): 置換対象の部分文字列。空文字列は使えません。
-- `to` (string, 必須): 置換文字列。
-- `n` (integer, 任意): 最大置換回数。`0` 以上でなければなりません。 省略時はすべての一致を置換します。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- `from` (string, required): The substring to replace. Empty strings are not allowed.
+- `to` (string, required): The replacement string.
+- `n` (integer, optional): Maximum replacement count. Must be greater than or equal to `0`. If omitted, all matches are replaced.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.replace("a-b-c", "-", "/")) -- a/b/c
@@ -185,11 +185,11 @@ print(ptool.str.replace("a-b-c", "-", "/", 1)) -- a/b-c
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.repeat(s, n)` は文字列を `n` 回繰り返します。
+`ptool.str.repeat(s, n)` repeats a string `n` times.
 
-- `s` (string, 必須): 入力文字列。
-- `n` (integer, 必須): 繰り返し回数。`0` 以上でなければなりません。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- `n` (integer, required): Repeat count. Must be greater than or equal to `0`.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.repeat("ab", 3)) -- ababab
@@ -199,15 +199,15 @@ print(ptool.str.repeat("ab", 3)) -- ababab
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_prefix(s, prefix)` は `prefix` が存在する場合に、`s` の 先頭からそれを取り除きます。
+`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` when it is present.
 
-- `s` (string, 必須): 入力文字列。
-- `prefix` (string, 必須): 取り除くプレフィックス。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- `prefix` (string, required): The prefix to remove.
+- Returns: `string`.
 
-挙動:
+Behavior:
 
-- `s` が `prefix` で始まらない場合は、元の文字列がそのまま返されます。
+- If `s` does not start with `prefix`, the original string is returned unchanged.
 
 ```lua
 print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
@@ -217,15 +217,15 @@ print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_suffix(s, suffix)` は `suffix` が存在する場合に、`s` の末尾 からそれを取り除きます。
+`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when it is present.
 
-- `s` (string, 必須): 入力文字列。
-- `suffix` (string, 必須): 取り除くサフィックス。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- `suffix` (string, required): The suffix to remove.
+- Returns: `string`.
 
-挙動:
+Behavior:
 
-- `s` が `suffix` で終わらない場合は、元の文字列がそのまま返されます。
+- If `s` does not end with `suffix`, the original string is returned unchanged.
 
 ```lua
 print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
@@ -235,19 +235,19 @@ print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.indent(s, prefix[, options])` は各行の先頭に `prefix` を 追加します。
+`ptool.str.indent(s, prefix[, options])` adds `prefix` to each line.
 
-- `s` (string, 必須): 入力文字列。
-- `prefix` (string, 必須): 各行の前に挿入するテキスト。
-- `options` (table, 任意): インデントオプション。サポートされる フィールド:
-  - `skip_first` (boolean, 任意): 1 行目を変更しないかどうか。デフォルトは `false`。
-- 戻り値: `string`。
+- `s` (string, required): The input string.
+- `prefix` (string, required): The text inserted before each line.
+- `options` (table, optional): Indent options. Supported fields:
+  - `skip_first` (boolean, optional): Whether to leave the first line unchanged. Defaults to `false`.
+- Returns: `string`.
 
-挙動:
+Behavior:
 
-- 既存の行末は保持されます。
-- 空入力はそのまま返されます。
-- 未知のオプション名や不正な値型はエラーになります。
+- Existing line endings are preserved.
+- Empty input is returned unchanged.
+- Unknown option names or invalid option value types raise an error.
 
 ```lua
 local text = "first\nsecond\n"

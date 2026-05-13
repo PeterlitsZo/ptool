@@ -1,18 +1,18 @@
-# API de plantillas
+# Template API
 
-Las utilidades de renderizado de plantillas están disponibles bajo `ptool.template` y `p.template`.
+Template rendering helpers are available under `ptool.template` and `p.template`.
 
 ## ptool.template.render
 
 > `v0.1.0` - Introduced.
 
-`ptool.template.render(template, context)` renderiza una cadena de plantilla de estilo Jinja y devuelve el resultado renderizado.
+`ptool.template.render(template, context)` renders a Jinja-style template string and returns the rendered result.
 
-- `template` (string, obligatorio): El texto fuente de la plantilla.
-- `context` (cualquier valor Lua serializable, obligatorio): El contexto de la plantilla.
-- Devuelve: La cadena renderizada.
+- `template` (string, required): The template source text.
+- `context` (any serializable Lua value, required): The template context.
+- Returns: The rendered string.
 
-Ejemplo:
+Example:
 
 ```lua
 local template = ptool.unindent([[
@@ -34,11 +34,11 @@ local result = ptool.template.render(template, {
 print(result)
 ```
 
-Notas:
+Notes:
 
-- El contexto debe poder serializarse como valores de datos.
-- Valores Lua como `function`, `thread` y `userdata` no admitidos no se aceptan como valores del contexto de la plantilla.
-- Los valores ausentes usan semántica de undefined encadenable. Esto significa que búsquedas anidadas como `foo.bar.baz` pueden pasarse a filtros como `default(...)` sin producir error. Si se renderizan directamente sin un valor de reserva, los valores undefined se convierten en una cadena vacía.
+- The context must be serializable to data values.
+- Lua values such as `function`, `thread`, and unsupported `userdata` are not accepted as template context values.
+- Missing values use chainable undefined semantics. This means nested lookups such as `foo.bar.baz` can be passed to filters like `default(...)` without raising an error. When rendered directly without a fallback, undefined values become an empty string.
 
 ```lua
 local template = ptool.unindent([[

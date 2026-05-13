@@ -1,31 +1,31 @@
-# API de red
+# Network API
 
-Las utilidades para analizar URL, IP y host/puerto están disponibles bajo `ptool.net` y `p.net`.
+URL, IP, and host/port parsing helpers are available under `ptool.net` and `p.net`.
 
 ## ptool.net.parse_url
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_url(input)` analiza una cadena URL y devuelve una tabla de partes normalizadas.
+`ptool.net.parse_url(input)` parses a URL string and returns a normalized parts table.
 
-Argumentos:
+Arguments:
 
-- `input` (string, obligatorio): La URL que se va a analizar.
+- `input` (string, required): The URL to parse.
 
-Devuelve: una tabla con los siguientes campos:
+Returns: A table with the following fields:
 
-- `kind` (string): Siempre `"url"`.
-- `input` (string): La cadena de entrada original.
-- `normalized` (string): La cadena URL normalizada.
-- `scheme` (string): El esquema de la URL.
-- `username` (string, opcional): El nombre de usuario decodificado, si existe.
-- `password` (string, opcional): La contraseña decodificada, si existe.
-- `host` (string, opcional): El hostname o literal IP, si existe.
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`, opcional): La clasificación del host si hay host.
-- `port` (integer, opcional): El puerto explícito, si existe.
-- `path` (string): La ruta de la URL.
-- `query` (string, opcional): La cadena de consulta sin el `?` inicial.
-- `fragment` (string, opcional): El fragmento sin el `#` inicial.
+- `kind` (string): Always `"url"`.
+- `input` (string): The original input string.
+- `normalized` (string): The normalized URL string.
+- `scheme` (string): The URL scheme.
+- `username` (string, optional): The decoded username, if present.
+- `password` (string, optional): The decoded password, if present.
+- `host` (string, optional): The hostname or IP literal, if present.
+- `host_kind` (`"domain"|"ipv4"|"ipv6"`, optional): The host classification, if a host is present.
+- `port` (integer, optional): The explicit port, if present.
+- `path` (string): The URL path.
+- `query` (string, optional): The query string without the leading `?`.
+- `fragment` (string, optional): The fragment without the leading `#`.
 
 ```lua
 local parts = ptool.net.parse_url("https://user:pass@example.com:8443/a/b?q=1#frag")
@@ -42,18 +42,18 @@ print(parts.fragment)    -- frag
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_ip(input)` analiza una dirección IPv4 o IPv6 y devuelve una tabla de partes normalizadas.
+`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a normalized parts table.
 
-Argumentos:
+Arguments:
 
-- `input` (string, obligatorio): La dirección IP que se va a analizar.
+- `input` (string, required): The IP address to parse.
 
-Devuelve: una tabla con los siguientes campos:
+Returns: A table with the following fields:
 
-- `kind` (string): Siempre `"ip"`.
-- `input` (string): La cadena de entrada original.
-- `normalized` (string): La dirección IP normalizada.
-- `version` (integer): `4` para IPv4 o `6` para IPv6.
+- `kind` (string): Always `"ip"`.
+- `input` (string): The original input string.
+- `normalized` (string): The normalized IP address.
+- `version` (integer): `4` for IPv4 or `6` for IPv6.
 
 ```lua
 local parts = ptool.net.parse_ip("2001:0db8::1")
@@ -66,20 +66,20 @@ print(parts.version)    -- 6
 
 > `v0.2.0` - Introduced.
 
-`ptool.net.parse_host_port(input)` analiza una cadena `host:port` y devuelve una tabla de partes normalizadas.
+`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a normalized parts table.
 
-Argumentos:
+Arguments:
 
-- `input` (string, obligatorio): La cadena host y puerto. Las direcciones IPv6 deben usar notación con corchetes como `[2001:db8::1]:443`.
+- `input` (string, required): The host and port string. IPv6 addresses must use bracket notation such as `[2001:db8::1]:443`.
 
-Devuelve: una tabla con los siguientes campos:
+Returns: A table with the following fields:
 
-- `kind` (string): Siempre `"host_port"`.
-- `input` (string): La cadena de entrada original.
-- `normalized` (string): La cadena `host:port` normalizada.
-- `host` (string): El valor de host normalizado.
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`): La clasificación del host.
-- `port` (integer): El puerto analizado.
+- `kind` (string): Always `"host_port"`.
+- `input` (string): The original input string.
+- `normalized` (string): The normalized `host:port` string.
+- `host` (string): The normalized host value.
+- `host_kind` (`"domain"|"ipv4"|"ipv6"`): The host classification.
+- `port` (integer): The parsed port.
 
 ```lua
 local parts = ptool.net.parse_host_port("[2001:0db8::1]:443")

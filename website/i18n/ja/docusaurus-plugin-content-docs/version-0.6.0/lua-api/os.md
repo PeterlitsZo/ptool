@@ -1,19 +1,19 @@
 # OS API
 
-`ptool.os` は、現在のランタイム環境を読み取り、ホストプロセスに関する基本 情報を取得するためのヘルパーを公開します。
+`ptool.os` exposes helpers for reading the current runtime environment and querying basic host-process details.
 
 ## ptool.os.getenv
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.getenv(name)` は環境変数の現在値を返します。
+`ptool.os.getenv(name)` returns the current value of an environment variable.
 
 - `name` (string, required): Environment variable name.
-- `name` (string, 必須): 環境変数名。
+- Returns: `string|nil`.
 
 Behavior:
 
-- 戻り値: `string|nil`。
+- Returns `nil` when the variable is not set.
 - Reads the current `ptool` runtime environment, including values changed by `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`.
 - Raises an error when `name` is empty or contains invalid characters such as `=`.
 
@@ -28,9 +28,9 @@ print(home)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.env()` は現在のランタイム環境のスナップショットテーブルを返します。
+`ptool.os.env()` returns a snapshot table of the current runtime environment.
 
-- 戻り値: `table`。
+- Returns: `table`.
 
 Behavior:
 
@@ -48,16 +48,16 @@ print(env.HOME)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.setenv(name, value)` は現在の `ptool` ランタイムに環境変数を設定 します。
+`ptool.os.setenv(name, value)` sets an environment variable in the current `ptool` runtime.
 
 - `name` (string, required): Environment variable name.
-- `value` (string, 必須): 環境変数の値。
+- `value` (string, required): Environment variable value.
 
 Behavior:
 
-- これは親シェルではなく、現在の `ptool` ランタイム環境を更新します。
+- This updates the current `ptool` runtime environment, not the parent shell.
 - Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched later through `ptool.run(...)`.
-- ここで設定した値は `ptool.os.getenv(...)`、`ptool.os.env()`、 そして後から `ptool.run(...)` で起動した子プロセスから見えます。
+- Raises an error when `name` is empty, contains `=`, or when `value` contains NUL.
 
 Example:
 
@@ -70,7 +70,7 @@ print(p.os.getenv("APP_ENV"))
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.unsetenv(name)` は現在の `ptool` ランタイムから環境変数を削除 します。
+`ptool.os.unsetenv(name)` removes an environment variable from the current `ptool` runtime.
 
 - `name` (string, required): Environment variable name.
 
@@ -90,9 +90,9 @@ assert(p.os.getenv("APP_ENV") == nil)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.homedir()` は現在のユーザーのホームディレクトリを返します。
+`ptool.os.homedir()` returns the current user's home directory.
 
-- `name` (string, 必須): 環境変数名。
+- Returns: `string|nil`.
 
 Example:
 
@@ -104,9 +104,9 @@ local home = p.os.homedir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.tmpdir()` はシステムの一時ディレクトリを返します。
+`ptool.os.tmpdir()` returns the system temporary directory.
 
-- 戻り値: `string`。
+- Returns: `string`.
 
 Example:
 
@@ -118,33 +118,33 @@ local tmp = p.os.tmpdir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.hostname()` は現在のホスト名を返します。
+`ptool.os.hostname()` returns the current host name.
 
-- `name` (string, 必須): 環境変数名。
+- Returns: `string|nil`.
 
 ## ptool.os.username
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.username()` は現在のユーザー名を返します。
+`ptool.os.username()` returns the current user name.
 
-- `name` (string, 必須): 環境変数名。
+- Returns: `string|nil`.
 
 ## ptool.os.pid
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.pid()` は現在の `ptool` プロセス ID を返します。
+`ptool.os.pid()` returns the current `ptool` process ID.
 
-- 戻り値: `integer`。
+- Returns: `integer`.
 
 ## ptool.os.exepath
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.exepath()` は実行中の `ptool` 実行ファイルの解決済みパスを返します。
+`ptool.os.exepath()` returns the resolved path of the running `ptool` executable.
 
-- `name` (string, 必須): 環境変数名。
+- Returns: `string|nil`.
 
 Example:
 

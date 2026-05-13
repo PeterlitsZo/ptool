@@ -1,32 +1,32 @@
 # JSON API
 
-JSON の解析とシリアライズのヘルパーは `ptool.json` と `p.json` に あります。
+JSON parsing and serialization helpers are available under `ptool.json` and `p.json`.
 
 ## ptool.json.parse
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.parse(input)` は JSON 文字列を Lua 値へ解析します。
+`ptool.json.parse(input)` parses a JSON string into a Lua value.
 
-- `input` (string, 必須): JSON テキスト。
-- 戻り値: 解析された Lua 値。ルートはどの JSON 型でもかまいません。
+- `input` (string, required): The JSON text.
+- Returns: The parsed Lua value. The root can be any JSON type.
 
-型対応:
+Type mapping:
 
 - JSON object -> Lua table
 - JSON array -> Lua sequence table (1-based)
 - JSON string -> Lua string
-- `i64` に収まる JSON integer -> Lua integer
-- それ以外の JSON number -> Lua number
+- JSON integer that fits in `i64` -> Lua integer
+- Other JSON number -> Lua number
 - JSON boolean -> Lua boolean
 - JSON null -> Lua `nil`
 
-エラー時の挙動:
+Error behavior:
 
-- `input` が文字列でない場合はエラーになります。
-- JSON 構文エラーでは、`serde_json` のパーサー詳細を含むメッセージで エラーになります。
+- An error is raised if `input` is not a string.
+- A JSON syntax error raises an error whose message includes the parser detail from `serde_json`.
 
-例:
+Example:
 
 ```lua
 local data = p.json.parse('{"name":"ptool","features":["json","repl"],"stars":42}')
@@ -40,20 +40,20 @@ print(data.stars)
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.stringify(value[, options])` は Lua 値を JSON 文字列へ変換します。
+`ptool.json.stringify(value[, options])` converts a Lua value to a JSON string.
 
-- `value` (JSON 互換 Lua 値, 必須): エンコードする値。
-- `options` (table, 任意): シリアライズオプション。
-- `options.pretty` (boolean, 任意): `true` のとき見やすく整形された JSON を出力します。デフォルトは `false`。
-- 戻り値: エンコードされた JSON 文字列。
+- `value` (JSON-compatible Lua value, required): The value to encode.
+- `options` (table, optional): Serialization options.
+- `options.pretty` (boolean, optional): When `true`, output pretty-printed JSON. Defaults to `false`.
+- Returns: The encoded JSON string.
 
-挙動:
+Behavior:
 
-- デフォルト出力は余分な空白のないコンパクト JSON です。
-- pretty 出力ではインデント付きの複数行 JSON を使います。
-- 値は JSON 互換である必要があります。`function`, `thread`, `userdata` などのシリアライズできない Lua 値はエラーになります。
+- Default output is compact JSON with no extra whitespace.
+- Pretty output uses indented multi-line JSON.
+- Values must be JSON-compatible. Functions, threads, userdata, and other non-serializable Lua values raise an error.
 
-例:
+Example:
 
 ```lua
 local text = p.json.stringify({
@@ -65,7 +65,7 @@ local text = p.json.stringify({
 print(text)
 ```
 
-注意:
+Notes:
 
-- Lua テーブル内の `nil` 値は `mlua` の serde 変換挙動に従うため、 JSON オブジェクトのフィールドとして保持されません。
-- Lua テーブルが配列かオブジェクトかの判定は `mlua` の serde 変換ルールに 従います。
+- `nil` values inside Lua tables follow `mlua`'s serde conversion behavior and are not preserved as JSON object fields.
+- Array/object detection for Lua tables follows `mlua`'s serde conversion rules.

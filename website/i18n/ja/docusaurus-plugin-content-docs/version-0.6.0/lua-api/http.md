@@ -1,37 +1,37 @@
 # HTTP API
 
-HTTP クライアントヘルパーは `ptool.http` と `p.http` にあります。
+HTTP client helpers are available under `ptool.http` and `p.http`.
 
 ## ptool.http.request
 
 > `v0.1.0` - Introduced.
 
-`ptool.http.request(options)` は HTTP リクエストを送り、`Response` オブジェクトを返します。
+`ptool.http.request(options)` sends an HTTP request and returns a `Response` object.
 
-`options` フィールド:
+`options` fields:
 
-- `url` (string, 必須): リクエスト URL。
-- `method` (string, 任意): HTTP メソッド。デフォルトは `"GET"`。
-- `headers` (table, 任意): リクエストヘッダー。キーと値はいずれも文字列です。
-- `query` (table, 任意): リクエスト URL に追加するクエリパラメータ。キーは 文字列でなければならず、値には文字列、数値、真偽値を指定できます。
-- `body` (string, 任意): リクエスト本文。
-- `json` (Lua 値, 任意): JSON にエンコードされてリクエスト本文として使われ ます。`content-type` を明示していない場合は `application/json` が設定されます。
-- `form` (table, 任意): `application/x-www-form-urlencoded` として エンコードされ、リクエスト本文として使われます。キーは文字列でなければ ならず、値には文字列、数値、真偽値を指定できます。
-- `timeout_ms` (integer, 任意): ミリ秒単位のタイムアウト。デフォルトは `30000`。
-- `connect_timeout_ms` (integer, 任意): 接続タイムアウト（ミリ秒）。
-- `follow_redirects` (boolean, 任意): リダイレクトを追跡するかどうか。
-- `max_redirects` (integer, 任意): 追跡する最大リダイレクト数。
-- `user_agent` (string, 任意): `user-agent` リクエストヘッダーを設定します。
-- `basic_auth` (table, 任意): 文字列フィールド `username` と `password` を 持つ HTTP Basic 認証情報です。
-- `bearer_token` (string, 任意): `authorization` ヘッダーに使う Bearer トークンです。
-- `fail_on_http_error` (boolean, 任意): `true` の場合、4xx と 5xx の HTTP レスポンスでエラーを送出します。デフォルトは `false` です。
+- `url` (string, required): The request URL.
+- `method` (string, optional): The HTTP method. Defaults to `"GET"`.
+- `headers` (table, optional): Request headers, where both keys and values are strings.
+- `query` (table, optional): Query parameters appended to the request URL. Keys must be strings. Values may be strings, numbers, or booleans.
+- `body` (string, optional): The request body.
+- `json` (Lua value, optional): A Lua value encoded as JSON and used as the request body. When `content-type` is not already set, it defaults to `application/json`.
+- `form` (table, optional): Form fields encoded as `application/x-www-form-urlencoded` and used as the request body. Keys must be strings. Values may be strings, numbers, or booleans.
+- `timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `30000`.
+- `connect_timeout_ms` (integer, optional): Connection timeout in milliseconds.
+- `follow_redirects` (boolean, optional): Whether redirects should be followed.
+- `max_redirects` (integer, optional): Maximum number of redirects to follow.
+- `user_agent` (string, optional): Sets the `user-agent` request header.
+- `basic_auth` (table, optional): HTTP basic auth credentials with string fields `username` and `password`.
+- `bearer_token` (string, optional): Bearer token used for the `authorization` header.
+- `fail_on_http_error` (boolean, optional): When `true`, raise an error for 4xx and 5xx HTTP responses. Defaults to `false`.
 
-注意:
+Notes:
 
-- `body`、`json`、`form` は相互排他的です。
-- `basic_auth` と `bearer_token` は相互排他的です。
+- `body`, `json`, and `form` are mutually exclusive.
+- `basic_auth` and `bearer_token` are mutually exclusive.
 
-例:
+Example:
 
 ```lua
 local resp = ptool.http.request({
@@ -59,71 +59,71 @@ print(data.json.name)
 
 > `v0.1.0` - Introduced.
 
-`Response` は `ptool.http.request(...)` が返す HTTP レスポンスを表します。
+`Response` represents an HTTP response returned by `ptool.http.request(...)`.
 
-フィールド:
+Fields:
 
-- `status` (integer): HTTP ステータスコード。
-- `ok` (boolean): ステータスコードが 2xx 範囲かどうか。
-- `url` (string): リダイレクト後の最終 URL。
-- `headers` (table): レスポンスヘッダーの簡易ビュー (`table<string, string>`)。重複ヘッダーは `, ` で結合されます。
+- `status` (integer): The HTTP status code.
+- `ok` (boolean): Whether the status code is in the 2xx range.
+- `url` (string): The final URL after redirects.
+- `headers` (table): A flattened convenience view of response headers (`table<string, string>`). Repeated headers are merged with `, `.
 
-メソッド:
+Methods:
 
-- `resp:text()`: レスポンス本文をテキストとして読み取って返します。
-- `resp:json()`: レスポンス本文を読み取り、JSON として解析し、Lua 値を 返します。
-- `resp:bytes()`: 生バイト列を Lua 文字列として読み取って返します。
-- `resp:header(name)`: 最初に一致したレスポンスヘッダー値を返します。 見つからない場合は `nil` を返します。
-- `resp:header_values(name)`: 一致したレスポンスヘッダー値をすべて配列で 返します。
-- `resp:raise_for_status()`: 4xx または 5xx の HTTP レスポンスでエラーを 送出します。
+- `resp:text()`: Reads and returns the response body as text.
+- `resp:json()`: Reads the response body, parses it as JSON, and returns a Lua value.
+- `resp:bytes()`: Reads and returns the raw bytes (as a Lua string).
+- `resp:header(name)`: Returns the first matching response header value, or `nil`.
+- `resp:header_values(name)`: Returns all matching response header values as an array.
+- `resp:raise_for_status()`: Raises an error for 4xx and 5xx HTTP responses.
 
 ### text
 
 Canonical API name: `ptool.http.Response:text`.
 
-`resp:text()` はレスポンス本文をテキストとして読み取り、返します。
+`resp:text()` reads and returns the response body as text.
 
-- 戻り値: `string`。
+- Returns: `string`.
 
 ### json
 
 Canonical API name: `ptool.http.Response:json`.
 
-`resp:json()` はレスポンス本文を読み取り、JSON として解析し、Lua 値を 返します。
+`resp:json()` reads the response body, parses it as JSON, and returns a Lua value.
 
 ### bytes
 
 Canonical API name: `ptool.http.Response:bytes`.
 
-`resp:bytes()` はレスポンス本文を生バイト列として読み取り、返します。
+`resp:bytes()` reads and returns the response body as raw bytes.
 
-- 戻り値: `string`。
+- Returns: `string`.
 
 ### header
 
 Canonical API name: `ptool.http.Response:header`.
 
-`resp:header(name)` は `name` に一致する最初のレスポンスヘッダー値を返し ます。
+`resp:header(name)` returns the first response header value matching `name`.
 
-- `name` (string, 必須): 取得したいヘッダー名。
-- 戻り値: `string | nil`。
+- `name` (string, required): The header name to look up.
+- Returns: `string | nil`.
 
 ### header_values
 
 Canonical API name: `ptool.http.Response:header_values`.
 
-`resp:header_values(name)` は `name` に一致するレスポンスヘッダー値をすべて 返します。
+`resp:header_values(name)` returns all response header values matching `name`.
 
-- `name` (string, 必須): 取得したいヘッダー名。
-- 戻り値: `string[]`。
+- `name` (string, required): The header name to look up.
+- Returns: `string[]`.
 
 ### raise_for_status
 
 Canonical API name: `ptool.http.Response:raise_for_status`.
 
-`resp:raise_for_status()` はレスポンスステータスコードが 4xx または 5xx の 場合にエラーを送出します。
+`resp:raise_for_status()` raises an error when the response status code is in the 4xx or 5xx range.
 
-注意:
+Notes:
 
-- デフォルトでは 2xx 以外の HTTP ステータスはエラーになりません。 呼び出し側は `resp.ok` を確認するか、 `fail_on_http_error = true` を設定するか、 `resp:raise_for_status()` を呼び出してください。
-- レスポンス本文は最初の読み取り後にキャッシュされるため、`text`、`json`、 `bytes` は複数回呼び出せます。
+- Non-2xx HTTP statuses do not raise errors by default. Callers can check `resp.ok`, set `fail_on_http_error = true`, or call `resp:raise_for_status()`.
+- The response body is cached after the first read. Calling `text`, `json`, and `bytes` multiple times is allowed.

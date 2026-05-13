@@ -1,5 +1,5 @@
 import {execFile as execFileCallback} from 'node:child_process';
-import {mkdir, readdir, readFile, rm} from 'node:fs/promises';
+import {access, mkdir, readdir, readFile, rm} from 'node:fs/promises';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
@@ -90,12 +90,37 @@ async function syncCatalogs() {
 async function compileCatalogs() {
   const locales = await readLocales();
   const docSets = await readDocSets();
+  const preparedTemplateDocSets = new Set();
 
   for (const locale of locales) {
     for (const docSet of docSets) {
+      await ensureLocaleDocSetForCompile({
+        locale,
+        docSet,
+        preparedTemplateDocSets,
+      });
       await compileLocaleDocSet({locale, docSet});
     }
   }
+}
+
+async function ensureLocaleDocSetForCompile({
+  locale,
+  docSet,
+  preparedTemplateDocSets,
+}) {
+  const localePoDir = path.join(poDocsDir, locale, docSet.name);
+  if (await pathExists(localePoDir)) {
+    return;
+  }
+
+  const templateDir = path.join(poTemplatesDir, docSet.name);
+  if (!preparedTemplateDocSets.has(docSet.name) && !(await pathExists(templateDir))) {
+    await extractTemplateDocSet(docSet);
+  }
+
+  preparedTemplateDocSets.add(docSet.name);
+  await syncLocaleDocSet({locale, docSet});
 }
 
 async function extractTemplateDocSet(docSet) {
@@ -192,6 +217,18 @@ async function readVersionNames() {
   } catch (error) {
     if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
       return [];
+    }
+    throw error;
+  }
+}
+
+async function pathExists(targetPath) {
+  try {
+    await access(targetPath);
+    return true;
+  } catch (error) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
+      return false;
     }
     throw error;
   }

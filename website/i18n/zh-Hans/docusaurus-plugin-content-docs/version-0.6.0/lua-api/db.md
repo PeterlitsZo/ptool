@@ -1,27 +1,27 @@
 # Database API
 
-数据库连接与查询辅助能力位于 `ptool.db` 和 `p.db` 下。
+Database connection and query helpers are available under `ptool.db` and `p.db`.
 
 ## ptool.db.connect
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`ptool.db.connect(url_or_options)` 打开数据库连接，并返回一个 `Connection` 对象。
+`ptool.db.connect(url_or_options)` opens a database connection and returns a `Connection` object.
 
-支持的数据库：
+Supported databases:
 
 - SQLite
 - PostgreSQL
 - MySQL
 
-参数：
+Arguments:
 
-- `url_or_options`（string|table，必填）：
-  - 传入字符串时，会被视为数据库 URL。
-  - 传入 table 时，目前支持：
-    - `url`（string，必填）：数据库 URL。
+- `url_or_options` (string|table, required):
+  - When a string is provided, it is treated as the database URL.
+  - When a table is provided, it currently supports:
+    - `url` (string, required): The database URL.
 
-支持的 URL 示例：
+Supported URL examples:
 
 ```lua
 local sqlite_db = ptool.db.connect("sqlite:test.db")
@@ -29,13 +29,13 @@ local pg_db = ptool.db.connect("postgres://user:pass@localhost/app")
 local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 ```
 
-SQLite 说明：
+SQLite notes:
 
-- 支持 `sqlite:test.db` 和 `sqlite://test.db`。
-- 相对 SQLite 路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` 的影响。
-- 如果没有提供 `mode=` 查询参数，SQLite 连接默认使用 `mode=rwc`，从而允许自动 创建数据库文件。
+- `sqlite:test.db` and `sqlite://test.db` are supported.
+- Relative SQLite paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
+- If no `mode=` query parameter is provided, SQLite connections default to `mode=rwc`, which allows creating the database file automatically.
 
-示例：
+Example:
 
 ```lua
 ptool.cd("workdir")
@@ -46,13 +46,13 @@ local db = ptool.db.connect({
 
 ## Connection
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`Connection` 表示由 `ptool.db.connect()` 返回的已打开数据库连接。
+`Connection` represents an open database connection returned by `ptool.db.connect()`.
 
-它实现为 Lua userdata。
+It is implemented as a Lua userdata.
 
-方法：
+Methods:
 
 - `db:query(sql, params?)` -> `table`
 - `db:query_one(sql, params?)` -> `table|nil`
@@ -61,44 +61,44 @@ local db = ptool.db.connect({
 - `db:transaction(fn)` -> `any`
 - `db:close()` -> `nil`
 
-参数绑定：
+Parameter binding:
 
-- `params` 可选。
-- 当 `params` 是数组表时，会视为位置参数，SQL 占位符应使用 `?`。
-- 当 `params` 是键值表时，会视为命名参数，SQL 占位符应使用 `:name`。
-- 同一次调用中不能混用位置参数和命名参数。
-- 支持的绑定值类型包括：
+- `params` is optional.
+- When `params` is an array table, it is treated as positional parameters and SQL placeholders should use `?`.
+- When `params` is a key-value table, it is treated as named parameters and SQL placeholders should use `:name`.
+- Positional and named parameters cannot be mixed in the same call.
+- Supported parameter value types are:
   - `boolean`
   - `integer`
   - `number`
   - `string`
-- 在 `v0.1.0` 中，不支持将 `nil` 作为绑定参数。
+- `nil` is not supported as a bound parameter in `v0.1.0`.
 
-结果值规则：
+Result value rules:
 
-- 查询结果仅保证返回以下 Lua 值类型：
+- Query results only guarantee these Lua value types:
   - `boolean`
   - `integer`
   - `number`
   - `string`
-  - `nil`（对应 SQL `NULL`）
-- 文本列会作为 Lua 字符串返回。
-- 二进制 / blob 列也会作为 Lua 字符串返回。
-- 如果查询结果中出现重复列名，会抛出错误。请使用 `AS` 等 SQL 别名消除歧义。
+  - `nil` (for SQL `NULL`)
+- Text columns are returned as Lua strings.
+- Binary/blob columns are also returned as Lua strings.
+- If a query result contains duplicate column names, an error is raised. Use SQL aliases such as `AS` to disambiguate them.
 
 ### query
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-规范 API 名称：`ptool.db.Connection:query`。
+Canonical API name: `ptool.db.Connection:query`.
 
-`db:query(sql, params?)` 执行查询，并返回一个包含以下字段的表：
+`db:query(sql, params?)` executes a query and returns a table with:
 
-- `rows`（table）：行表数组。
-- `columns`（table）：列名数组。
-- `row_count`（integer）：返回的行数。
+- `rows` (table): An array of row tables.
+- `columns` (table): An array of column names.
+- `row_count` (integer): The number of rows returned.
 
-示例：
+Example:
 
 ```lua
 local db = ptool.db.connect("sqlite:test.db")
@@ -116,13 +116,13 @@ print(res.rows[2].name)
 
 ### query_one
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-规范 API 名称：`ptool.db.Connection:query_one`。
+Canonical API name: `ptool.db.Connection:query_one`.
 
-`db:query_one(sql, params?)` 返回第一行记录（table），如果查询没有结果则返回 `nil`。
+`db:query_one(sql, params?)` returns the first row as a table, or `nil` if the query returns no rows.
 
-示例：
+Example:
 
 ```lua
 local row = db:query_one("select id, name from users where name = ?", {"alice"})
@@ -133,13 +133,13 @@ end
 
 ### scalar
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-规范 API 名称：`ptool.db.Connection:scalar`。
+Canonical API name: `ptool.db.Connection:scalar`.
 
-`db:scalar(sql, params?)` 返回第一行第一列的值，如果查询没有结果则返回 `nil`。
+`db:scalar(sql, params?)` returns the first column of the first row, or `nil` if the query returns no rows.
 
-示例：
+Example:
 
 ```lua
 local count = db:scalar("select count(*) from users")
@@ -148,15 +148,15 @@ print(count)
 
 ### execute
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-规范 API 名称：`ptool.db.Connection:execute`。
+Canonical API name: `ptool.db.Connection:execute`.
 
-`db:execute(sql, params?)` 执行语句，并返回一个包含以下字段的表：
+`db:execute(sql, params?)` executes a statement and returns a table with:
 
-- `rows_affected`（integer）：受影响的行数。
+- `rows_affected` (integer): The number of affected rows.
 
-示例：
+Example:
 
 ```lua
 local res = db:execute("update users set name = ? where id = ?", {"alice-2", 1})
@@ -165,27 +165,27 @@ print(res.rows_affected)
 
 ### transaction
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-规范 API 名称：`ptool.db.Connection:transaction`。
+Canonical API name: `ptool.db.Connection:transaction`.
 
-`db:transaction(fn)` 在数据库事务中执行 `fn(tx)`。
+`db:transaction(fn)` runs `fn(tx)` inside a database transaction.
 
-行为说明：
+Behavior:
 
-- 如果 `fn(tx)` 正常返回，则提交事务。
-- 如果 `fn(tx)` 抛错，则回滚事务并重新抛出错误。
-- 不支持嵌套事务。
-- 在回调执行期间，不得使用外层连接对象；应改用传入的 `tx` 对象。
+- If `fn(tx)` returns normally, the transaction is committed.
+- If `fn(tx)` raises an error, the transaction is rolled back and the error is re-raised.
+- Nested transactions are not supported.
+- While the callback is active, the outer connection object must not be used; use the provided `tx` object instead.
 
-`tx` 对象支持与 `Connection` 相同的查询方法：
+The `tx` object supports the same query methods as `Connection`:
 
 - `tx:query(sql, params?)`
 - `tx:query_one(sql, params?)`
 - `tx:scalar(sql, params?)`
 - `tx:execute(sql, params?)`
 
-示例：
+Example:
 
 ```lua
 db:transaction(function(tx)
@@ -205,18 +205,18 @@ print(tostring(err))
 
 ### close
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-规范 API 名称：`ptool.db.Connection:close`。
+Canonical API name: `ptool.db.Connection:close`.
 
-`db:close()` 关闭连接。
+`db:close()` closes the connection.
 
-行为说明：
+Behavior:
 
-- 关闭后，连接不能再继续使用。
-- 如果在活动事务回调期间关闭连接，会抛出错误。
+- After closing, the connection can no longer be used.
+- Closing during an active transaction callback raises an error.
 
-示例：
+Example:
 
 ```lua
 local db = ptool.db.connect("sqlite:test.db")

@@ -1,15 +1,15 @@
-# API de cadenas
+# String API
 
-Las utilidades de cadena están disponibles bajo `ptool.str` y `p.str`.
+String helpers are available under `ptool.str` and `p.str`.
 
 ## ptool.str.trim
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.trim(s)` elimina los espacios en blanco iniciales y finales.
+`ptool.str.trim(s)` removes leading and trailing whitespace.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.trim("  hello\n")) -- hello
@@ -19,10 +19,10 @@ print(ptool.str.trim("  hello\n")) -- hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.trim_start(s)` elimina los espacios en blanco iniciales.
+`ptool.str.trim_start(s)` removes leading whitespace.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.trim_start("  hello  ")) -- hello  
@@ -32,10 +32,10 @@ print(ptool.str.trim_start("  hello  ")) -- hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.trim_end(s)` elimina los espacios en blanco finales.
+`ptool.str.trim_end(s)` removes trailing whitespace.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.trim_end("  hello  ")) --   hello
@@ -45,10 +45,10 @@ print(ptool.str.trim_end("  hello  ")) --   hello
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.is_blank(s)` comprueba si una cadena está vacía o contiene solo espacios en blanco.
+`ptool.str.is_blank(s)` checks whether a string is empty or contains only whitespace.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- Devuelve: `boolean`.
+- `s` (string, required): The input string.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.is_blank(" \t\n")) -- true
@@ -59,11 +59,11 @@ print(ptool.str.is_blank("x")) -- false
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.starts_with(s, prefix)` comprueba si `s` empieza por `prefix`.
+`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `prefix` (string, obligatorio): El prefijo que se comprobará.
-- Devuelve: `boolean`.
+- `s` (string, required): The input string.
+- `prefix` (string, required): The prefix to test.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.starts_with("hello.lua", "hello")) -- true
@@ -73,11 +73,11 @@ print(ptool.str.starts_with("hello.lua", "hello")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.ends_with(s, suffix)` comprueba si `s` termina en `suffix`.
+`ptool.str.ends_with(s, suffix)` checks whether `s` ends with `suffix`.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `suffix` (string, obligatorio): El sufijo que se comprobará.
-- Devuelve: `boolean`.
+- `s` (string, required): The input string.
+- `suffix` (string, required): The suffix to test.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.ends_with("hello.lua", ".lua")) -- true
@@ -87,11 +87,11 @@ print(ptool.str.ends_with("hello.lua", ".lua")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.contains(s, needle)` comprueba si `needle` aparece en `s`.
+`ptool.str.contains(s, needle)` checks whether `needle` appears in `s`.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `needle` (string, obligatorio): La subcadena que se buscará.
-- Devuelve: `boolean`.
+- `s` (string, required): The input string.
+- `needle` (string, required): The substring to search for.
+- Returns: `boolean`.
 
 ```lua
 print(ptool.str.contains("hello.lua", "lo.l")) -- true
@@ -101,19 +101,19 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split(s, sep[, options])` divide una cadena usando un separador no vacío.
+`ptool.str.split(s, sep[, options])` splits a string by a non-empty separator.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `sep` (string, obligatorio): El separador. No se permiten cadenas vacías.
-- `options` (table, opcional): Opciones de división. Campos admitidos:
-  - `trim` (boolean, opcional): Si se recorta cada fragmento antes de devolverlo. Por defecto es `false`.
-  - `skip_empty` (boolean, opcional): Si se eliminan los fragmentos vacíos después del posible recorte. Por defecto es `false`.
-- Devuelve: `string[]`.
+- `s` (string, required): The input string.
+- `sep` (string, required): The separator. Empty strings are not allowed.
+- `options` (table, optional): Split options. Supported fields:
+  - `trim` (boolean, optional): Whether to trim each piece before returning it. Defaults to `false`.
+  - `skip_empty` (boolean, optional): Whether to remove empty pieces after optional trimming. Defaults to `false`.
+- Returns: `string[]`.
 
-Comportamiento:
+Behavior:
 
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
-- `skip_empty = true` se aplica después de `trim`, por lo que los fragmentos compuestos solo por espacios pueden eliminarse cuando ambas opciones están activadas.
+- Unknown option names or invalid option value types raise an error.
+- `skip_empty = true` is applied after `trim`, so whitespace-only pieces can be removed when both are enabled.
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -128,19 +128,19 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.split_lines(s[, options])` divide una cadena en líneas.
+`ptool.str.split_lines(s[, options])` splits a string into lines.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `options` (table, opcional): Opciones de división por líneas. Campos admitidos:
-  - `keep_ending` (boolean, opcional): Si se conservan los finales de línea (`\n`, `\r\n` o `\r`) en los elementos devueltos. Por defecto es `false`.
-  - `skip_empty` (boolean, opcional): Si se eliminan las líneas vacías. Por defecto es `false`.
-- Devuelve: `string[]`.
+- `s` (string, required): The input string.
+- `options` (table, optional): Line-splitting options. Supported fields:
+  - `keep_ending` (boolean, optional): Whether to keep line endings (`\n`, `\r\n`, or `\r`) in returned items. Defaults to `false`.
+  - `skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to `false`.
+- Returns: `string[]`.
 
-Comportamiento:
+Behavior:
 
-- Admite finales de línea Unix (`\n`) y Windows (`\r\n`), y también `\r` aislado.
-- Cuando `skip_empty = true`, una línea que solo contiene un final de línea se considera vacía y se elimina.
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
+- Supports Unix (`\n`) and Windows (`\r\n`) line endings, and also lone `\r`.
+- When `skip_empty = true`, a line containing only a line ending is treated as empty and is removed.
+- Unknown option names or invalid option value types raise an error.
 
 ```lua
 local lines = ptool.str.split_lines("a\n\n b\r\n", {
@@ -154,11 +154,11 @@ print(ptool.inspect(lines)) -- { "a", " b" }
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.join(parts, sep)` une un arreglo de cadenas con un separador.
+`ptool.str.join(parts, sep)` joins a string array with a separator.
 
-- `parts` (string[], obligatorio): Las partes de cadena que se van a unir.
-- `sep` (string, obligatorio): La cadena separadora.
-- Devuelve: `string`.
+- `parts` (string[], required): The string parts to join.
+- `sep` (string, required): The separator string.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
@@ -168,13 +168,13 @@ print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.replace(s, from, to[, n])` reemplaza ocurrencias de `from` por `to`.
+`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with `to`.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `from` (string, obligatorio): La subcadena que se va a reemplazar. No se permiten cadenas vacías.
-- `to` (string, obligatorio): La cadena de reemplazo.
-- `n` (integer, opcional): Número máximo de reemplazos. Debe ser mayor o igual que `0`. Si se omite, se reemplazan todas las coincidencias.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- `from` (string, required): The substring to replace. Empty strings are not allowed.
+- `to` (string, required): The replacement string.
+- `n` (integer, optional): Maximum replacement count. Must be greater than or equal to `0`. If omitted, all matches are replaced.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.replace("a-b-c", "-", "/")) -- a/b/c
@@ -185,11 +185,11 @@ print(ptool.str.replace("a-b-c", "-", "/", 1)) -- a/b-c
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.repeat(s, n)` repite una cadena `n` veces.
+`ptool.str.repeat(s, n)` repeats a string `n` times.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `n` (integer, obligatorio): Número de repeticiones. Debe ser mayor o igual que `0`.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- `n` (integer, required): Repeat count. Must be greater than or equal to `0`.
+- Returns: `string`.
 
 ```lua
 print(ptool.str.repeat("ab", 3)) -- ababab
@@ -199,15 +199,15 @@ print(ptool.str.repeat("ab", 3)) -- ababab
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_prefix(s, prefix)` elimina `prefix` del inicio de `s` cuando está presente.
+`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` when it is present.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `prefix` (string, obligatorio): El prefijo que se va a eliminar.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- `prefix` (string, required): The prefix to remove.
+- Returns: `string`.
 
-Comportamiento:
+Behavior:
 
-- Si `s` no empieza por `prefix`, se devuelve la cadena original sin cambios.
+- If `s` does not start with `prefix`, the original string is returned unchanged.
 
 ```lua
 print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
@@ -217,15 +217,15 @@ print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.cut_suffix(s, suffix)` elimina `suffix` del final de `s` cuando está presente.
+`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when it is present.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `suffix` (string, obligatorio): El sufijo que se va a eliminar.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- `suffix` (string, required): The suffix to remove.
+- Returns: `string`.
 
-Comportamiento:
+Behavior:
 
-- Si `s` no termina en `suffix`, se devuelve la cadena original sin cambios.
+- If `s` does not end with `suffix`, the original string is returned unchanged.
 
 ```lua
 print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
@@ -235,19 +235,19 @@ print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
 
 > `v0.1.0` - Introduced.
 
-`ptool.str.indent(s, prefix[, options])` añade `prefix` a cada línea.
+`ptool.str.indent(s, prefix[, options])` adds `prefix` to each line.
 
-- `s` (string, obligatorio): La cadena de entrada.
-- `prefix` (string, obligatorio): El texto insertado antes de cada línea.
-- `options` (table, opcional): Opciones de indentación. Campos admitidos:
-  - `skip_first` (boolean, opcional): Si la primera línea se deja sin cambios. Por defecto es `false`.
-- Devuelve: `string`.
+- `s` (string, required): The input string.
+- `prefix` (string, required): The text inserted before each line.
+- `options` (table, optional): Indent options. Supported fields:
+  - `skip_first` (boolean, optional): Whether to leave the first line unchanged. Defaults to `false`.
+- Returns: `string`.
 
-Comportamiento:
+Behavior:
 
-- Se conservan los finales de línea existentes.
-- Una entrada vacía se devuelve sin cambios.
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
+- Existing line endings are preserved.
+- Empty input is returned unchanged.
+- Unknown option names or invalid option value types raise an error.
 
 ```lua
 local text = "first\nsecond\n"

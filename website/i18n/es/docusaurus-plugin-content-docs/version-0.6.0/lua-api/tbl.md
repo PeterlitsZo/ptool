@@ -1,24 +1,24 @@
-# API de tablas
+# Table API
 
-Las utilidades de tablas están disponibles en `ptool.tbl` y `p.tbl`.
+Table helpers are available under `ptool.tbl` and `p.tbl`.
 
-Estas APIs están diseñadas para tablas tipo lista densas, con claves enteras contiguas que comienzan en `1`.
+These APIs are designed for dense list tables with contiguous integer keys starting at `1`.
 
 ## ptool.tbl.map
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.map(list, fn)` transforma cada elemento de una tabla tipo lista y devuelve una lista nueva.
+`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a new list.
 
-- `list` (table, obligatorio): Una tabla tipo lista densa.
-- `fn` (function, obligatorio): Un callback que recibe `(value, index)` y debe devolver un valor distinto de `nil`.
-- Devuelve: `table`.
+- `list` (table, required): A dense list table.
+- `fn` (function, required): A callback that receives `(value, index)` and must return a non-`nil` value.
+- Returns: `table`.
 
-Comportamiento:
+Behavior:
 
-- `fn` se llama una vez por cada elemento, en orden.
-- Si `fn` devuelve `nil`, la llamada falla en lugar de crear huecos en el resultado.
-- La tabla de entrada no se modifica.
+- `fn` is called once for each item in order.
+- If `fn` returns `nil`, the call raises an error instead of creating holes in the result.
+- The input table is not modified.
 
 ```lua
 local out = p.tbl.map({ 10, 20, 30 }, function(value, index)
@@ -32,17 +32,17 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.filter(list, fn)` conserva los elementos cuyo resultado del callback sea truthy y los devuelve en una lista densa nueva.
+`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and returns them in a new dense list.
 
-- `list` (table, obligatorio): Una tabla tipo lista densa.
-- `fn` (function, obligatorio): Un callback que recibe `(value, index)`.
-- Devuelve: `table`.
+- `list` (table, required): A dense list table.
+- `fn` (function, required): A callback that receives `(value, index)`.
+- Returns: `table`.
 
-Comportamiento:
+Behavior:
 
-- `nil` y `false` eliminan el elemento actual.
-- Cualquier otro valor de Lua conserva el elemento actual.
-- La tabla devuelta se reindexa desde `1`.
+- `nil` and `false` remove the current item.
+- Any other Lua value keeps the current item.
+- The returned table is reindexed from `1`.
 
 ```lua
 local out = p.tbl.filter({ "a", "bb", "ccc" }, function(value)
@@ -56,16 +56,16 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.concat(...)` concatena una o más tablas tipo lista densas en una lista nueva.
+`ptool.tbl.concat(...)` concatenates one or more dense list tables into a new list.
 
-- `...` (table, obligatorio): Una o más tablas tipo lista densas.
-- Devuelve: `table`.
+- `...` (table, required): One or more dense list tables.
+- Returns: `table`.
 
-Comportamiento:
+Behavior:
 
-- Los argumentos se agregan de izquierda a derecha.
-- Se permiten listas vacías.
-- Las tablas de entrada no se modifican.
+- Arguments are appended from left to right.
+- Empty lists are allowed.
+- The input tables are not modified.
 
 ```lua
 local out = p.tbl.concat({ 1, 2 }, { 3 }, {})
@@ -77,10 +77,10 @@ print(ptool.inspect(out)) -- { 1, 2, 3 }
 
 > `Unreleased` - Introduced.
 
-`ptool.tbl.join(...)` es un alias de `ptool.tbl.concat(...)`.
+`ptool.tbl.join(...)` is an alias of `ptool.tbl.concat(...)`.
 
-- `...` (table, obligatorio): Una o más tablas tipo lista densas.
-- Devuelve: `table`.
+- `...` (table, required): One or more dense list tables.
+- Returns: `table`.
 
 ```lua
 local out = p.tbl.join({ "x" }, { "y", "z" })
@@ -88,11 +88,11 @@ local out = p.tbl.join({ "x" }, { "y", "z" })
 print(ptool.inspect(out)) -- { "x", "y", "z" }
 ```
 
-## Reglas de lista
+## List Rules
 
-`ptool.tbl` actualmente solo admite tablas tipo lista densas.
+`ptool.tbl` currently supports only dense list tables.
 
-- Las claves deben ser enteros.
-- Las claves deben comenzar en `1`.
-- Las claves deben ser contiguas, sin huecos.
-- Las tablas dispersas y las tablas tipo diccionario generan errores.
+- Keys must be integers.
+- Keys must start at `1`.
+- Keys must be contiguous without gaps.
+- Sparse tables and dictionary-style tables raise errors.

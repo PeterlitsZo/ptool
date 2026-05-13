@@ -1,19 +1,19 @@
-# API de sistema operacional
+# OS API
 
-`ptool.os` expõe utilitários para ler o ambiente atual do runtime e consultar detalhes básicos do processo hospedeiro.
+`ptool.os` exposes helpers for reading the current runtime environment and querying basic host-process details.
 
 ## ptool.os.getenv
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.getenv(name)` retorna o valor atual de uma variável de ambiente.
+`ptool.os.getenv(name)` returns the current value of an environment variable.
 
-- `name` (string, obrigatório): Nome da variável de ambiente.
+- `name` (string, required): Environment variable name.
 - Returns: `string|nil`.
 
 Behavior:
 
-- Retorna: `string|nil`.
+- Returns `nil` when the variable is not set.
 - Reads the current `ptool` runtime environment, including values changed by `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`.
 - Raises an error when `name` is empty or contains invalid characters such as `=`.
 
@@ -28,9 +28,9 @@ print(home)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.env()` retorna uma tabela instantânea do ambiente atual do runtime.
+`ptool.os.env()` returns a snapshot table of the current runtime environment.
 
-- Retorna: `table`.
+- Returns: `table`.
 
 Behavior:
 
@@ -48,16 +48,16 @@ print(env.HOME)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.setenv(name, value)` define uma variável de ambiente no runtime atual do `ptool`.
+`ptool.os.setenv(name, value)` sets an environment variable in the current `ptool` runtime.
 
-- `name` (string, obrigatório): Nome da variável de ambiente.
-- `value` (string, obrigatório): Valor da variável.
+- `name` (string, required): Environment variable name.
+- `value` (string, required): Environment variable value.
 
 Behavior:
 
-- Isso atualiza o ambiente do runtime atual do `ptool`, não o shell pai.
+- This updates the current `ptool` runtime environment, not the parent shell.
 - Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched later through `ptool.run(...)`.
-- Os valores definidos aqui ficam visíveis para `ptool.os.getenv(...)`, `ptool.os.env()` e processos filhos iniciados depois com `ptool.run(...)`.
+- Raises an error when `name` is empty, contains `=`, or when `value` contains NUL.
 
 Example:
 
@@ -70,9 +70,9 @@ print(p.os.getenv("APP_ENV"))
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.unsetenv(name)` remove uma variável de ambiente do runtime atual do `ptool`.
+`ptool.os.unsetenv(name)` removes an environment variable from the current `ptool` runtime.
 
-- `name` (string, obrigatório): Nome da variável de ambiente.
+- `name` (string, required): Environment variable name.
 
 Behavior:
 
@@ -90,7 +90,7 @@ assert(p.os.getenv("APP_ENV") == nil)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.homedir()` retorna o diretório pessoal do usuário atual.
+`ptool.os.homedir()` returns the current user's home directory.
 
 - Returns: `string|nil`.
 
@@ -104,9 +104,9 @@ local home = p.os.homedir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.tmpdir()` retorna o diretório temporário do sistema.
+`ptool.os.tmpdir()` returns the system temporary directory.
 
-- Retorna: `string`.
+- Returns: `string`.
 
 Example:
 
@@ -118,7 +118,7 @@ local tmp = p.os.tmpdir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.hostname()` retorna o nome do host atual.
+`ptool.os.hostname()` returns the current host name.
 
 - Returns: `string|nil`.
 
@@ -126,7 +126,7 @@ local tmp = p.os.tmpdir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.username()` retorna o nome do usuário atual.
+`ptool.os.username()` returns the current user name.
 
 - Returns: `string|nil`.
 
@@ -134,15 +134,15 @@ local tmp = p.os.tmpdir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.pid()` retorna o PID do processo atual do `ptool`.
+`ptool.os.pid()` returns the current `ptool` process ID.
 
-- Retorna: `integer`.
+- Returns: `integer`.
 
 ## ptool.os.exepath
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.exepath()` retorna o caminho resolvido do executável `ptool` em execução.
+`ptool.os.exepath()` returns the resolved path of the running `ptool` executable.
 
 - Returns: `string|nil`.
 

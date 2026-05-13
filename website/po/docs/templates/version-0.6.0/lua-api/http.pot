@@ -1,0 +1,334 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-13 11:15+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:1
+msgid "HTTP API"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:3
+msgid "HTTP client helpers are available under `ptool.http` and `p.http`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:5
+msgid "ptool.http.request"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:9
+msgid ""
+"`ptool.http.request(options)` sends an HTTP request and returns a `Response` "
+"object."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:12
+msgid "`options` fields:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:14
+msgid "`url` (string, required): The request URL."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:15
+msgid "`method` (string, optional): The HTTP method. Defaults to `\"GET\"`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:16
+msgid ""
+"`headers` (table, optional): Request headers, where both keys and values are "
+"strings."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:18
+msgid ""
+"`query` (table, optional): Query parameters appended to the request URL. "
+"Keys must be strings. Values may be strings, numbers, or booleans."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:20
+msgid "`body` (string, optional): The request body."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:21
+msgid ""
+"`json` (Lua value, optional): A Lua value encoded as JSON and used as the "
+"request body. When `content-type` is not already set, it defaults to `"
+"application/json`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:24
+msgid ""
+"`form` (table, optional): Form fields encoded as `application/x-www-form-"
+"urlencoded` and used as the request body. Keys must be strings. Values may "
+"be strings, numbers, or booleans."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:27
+msgid ""
+"`timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to "
+"`30000`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:29
+msgid ""
+"`connect_timeout_ms` (integer, optional): Connection timeout in milliseconds."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:30
+msgid ""
+"`follow_redirects` (boolean, optional): Whether redirects should be followed."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:31
+msgid ""
+"`max_redirects` (integer, optional): Maximum number of redirects to follow."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:32
+msgid "`user_agent` (string, optional): Sets the `user-agent` request header."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:33
+msgid ""
+"`basic_auth` (table, optional): HTTP basic auth credentials with string "
+"fields `username` and `password`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:35
+msgid ""
+"`bearer_token` (string, optional): Bearer token used for the `authorization` "
+"header."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:37
+msgid ""
+"`fail_on_http_error` (boolean, optional): When `true`, raise an error for "
+"4xx and 5xx HTTP responses. Defaults to `false`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:40
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:40"
+msgid "Notes:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:42
+msgid "`body`, `json`, and `form` are mutually exclusive."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:43
+msgid "`basic_auth` and `bearer_token` are mutually exclusive."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:45
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:69
+msgid "Response"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:71
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:71"
+msgid "`v0.1.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:73
+msgid ""
+"`Response` represents an HTTP response returned by `ptool.http.request(...)`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:75
+msgid "Fields:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:77
+msgid "`status` (integer): The HTTP status code."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:78
+msgid "`ok` (boolean): Whether the status code is in the 2xx range."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:79
+msgid "`url` (string): The final URL after redirects."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:80
+msgid ""
+"`headers` (table): A flattened convenience view of response headers "
+"(`table<string, string>`). Repeated headers are merged with `, `."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:83
+msgid "Methods:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:85
+msgid "`resp:text()`: Reads and returns the response body as text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:86
+msgid ""
+"`resp:json()`: Reads the response body, parses it as JSON, and returns a Lua "
+"value."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:88
+msgid "`resp:bytes()`: Reads and returns the raw bytes (as a Lua string)."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:89
+msgid ""
+"`resp:header(name)`: Returns the first matching response header value, or "
+"`nil`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:91
+msgid ""
+"`resp:header_values(name)`: Returns all matching response header values as "
+"an array."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:93
+msgid ""
+"`resp:raise_for_status()`: Raises an error for 4xx and 5xx HTTP responses."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:95
+msgid "text"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:97
+msgid "Canonical API name: `ptool.http.Response:text`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:99
+msgid "`resp:text()` reads and returns the response body as text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:101
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:101"
+msgid "Returns: `string`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:103
+msgid "json"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:105
+msgid "Canonical API name: `ptool.http.Response:json`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:107
+msgid ""
+"`resp:json()` reads the response body, parses it as JSON, and returns a Lua "
+"value."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:110
+msgid "bytes"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:112
+msgid "Canonical API name: `ptool.http.Response:bytes`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:114
+msgid "`resp:bytes()` reads and returns the response body as raw bytes."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:116
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:116"
+msgid "Returns: `string`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:118
+msgid "header"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:120
+msgid "Canonical API name: `ptool.http.Response:header`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:122
+msgid ""
+"`resp:header(name)` returns the first response header value matching `name`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:124
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:124"
+msgid "`name` (string, required): The header name to look up."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:125
+msgid "Returns: `string | nil`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:127
+msgid "header_values"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:129
+msgid "Canonical API name: `ptool.http.Response:header_values`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:131
+msgid ""
+"`resp:header_values(name)` returns all response header values matching "
+"`name`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:133
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:133"
+msgid "`name` (string, required): The header name to look up."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:134
+msgid "Returns: `string[]`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:136
+msgid "raise_for_status"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:138
+msgid "Canonical API name: `ptool.http.Response:raise_for_status`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:140
+msgid ""
+"`resp:raise_for_status()` raises an error when the response status code is "
+"in the 4xx or 5xx range."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:143
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:143"
+msgid "Notes:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:145
+msgid ""
+"Non-2xx HTTP statuses do not raise errors by default. Callers can check "
+"`resp.ok`, set `fail_on_http_error = true`, or call "
+"`resp:raise_for_status()`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:147
+msgid ""
+"The response body is cached after the first read. Calling `text`, `json`, "
+"and `bytes` multiple times is allowed."
+msgstr ""

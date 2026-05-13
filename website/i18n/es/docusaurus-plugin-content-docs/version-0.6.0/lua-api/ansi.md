@@ -1,30 +1,30 @@
-# API ANSI
+# ANSI API
 
-Las utilidades de estilo ANSI están disponibles bajo `ptool.ansi` y `p.ansi`.
+ANSI styling helpers are available under `ptool.ansi` and `p.ansi`.
 
 ## ptool.ansi.style
 
 > `v0.1.0` - Introduced.
 
-`ptool.ansi.style(text[, options])` devuelve `text` envuelto con secuencias de escape de estilo ANSI.
+`ptool.ansi.style(text[, options])` returns `text` wrapped in ANSI style escape sequences.
 
-- `text` (string, obligatorio): El texto al que se aplicará estilo.
-- `options` (table, opcional): Opciones de estilo. Campos admitidos:
-  - `enabled` (boolean, opcional): Si deben emitirse escapes ANSI. Por defecto depende de si `ptool` está escribiendo en un terminal.
-  - `fg` (string|nil, opcional): El color de primer plano. Los valores admitidos son `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `purple`, `cyan`, `white`, `bright_black`, `bright_red`, `bright_green`, `bright_yellow`, `bright_blue`, `bright_magenta`, `bright_purple`, `bright_cyan` y `bright_white`.
-  - `bold` (boolean, opcional): Si se aplica texto en negrita.
-  - `dimmed` (boolean, opcional): Si se aplica texto atenuado.
-  - `italic` (boolean, opcional): Si se aplica cursiva.
-  - `underline` (boolean, opcional): Si se aplica subrayado.
-- Devuelve: `string`.
+- `text` (string, required): The text to style.
+- `options` (table, optional): Style options. Supported fields:
+  - `enabled` (boolean, optional): Whether ANSI escapes should be emitted. Defaults to whether `ptool` is writing to a terminal.
+  - `fg` (string|nil, optional): The foreground color. Supported values are `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `purple`, `cyan`, `white`, `bright_black`, `bright_red`, `bright_green`, `bright_yellow`, `bright_blue`, `bright_magenta`, `bright_purple`, `bright_cyan`, and `bright_white`.
+  - `bold` (boolean, optional): Whether to apply bold text.
+  - `dimmed` (boolean, optional): Whether to apply dimmed text.
+  - `italic` (boolean, optional): Whether to apply italic text.
+  - `underline` (boolean, optional): Whether to apply underline text.
+- Returns: `string`.
 
-Comportamiento:
+Behavior:
 
-- Si `enabled = false`, se devuelve el texto original sin cambios.
-- Si `fg = nil` o se omite, no se aplica color de primer plano.
-- Los nombres de opción desconocidos o tipos de valor no válidos producen un error.
+- If `enabled = false`, the original text is returned unchanged.
+- If `fg = nil` or omitted, no foreground color is applied.
+- Unknown option names or invalid option value types raise an error.
 
-Ejemplo:
+Example:
 
 ```lua
 print(ptool.ansi.style("warning", {
@@ -37,15 +37,15 @@ print(ptool.ansi.style("warning", {
 
 > `v0.1.0` - Introduced.
 
-`ptool.ansi.black`, `ptool.ansi.red`, `ptool.ansi.green`, `ptool.ansi.yellow`, `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan` y `ptool.ansi.white` son utilidades de conveniencia con la siguiente firma:
+`ptool.ansi.black`, `ptool.ansi.red`, `ptool.ansi.green`, `ptool.ansi.yellow`, `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan`, and `ptool.ansi.white` are convenience helpers with the following signature:
 
 ```lua
 ptool.ansi.red(text[, options])
 ```
 
-Aceptan el mismo argumento `text` y la misma tabla `options` que `ptool.ansi.style`, salvo que el color de primer plano queda fijado por la propia utilidad. Si también se proporciona `options.fg`, el color de la utilidad tiene prioridad.
+They accept the same `text` argument and the same `options` table as `ptool.ansi.style`, except the foreground color is fixed by the helper itself. If `options.fg` is also provided, the helper color takes precedence.
 
-Ejemplo:
+Example:
 
 ```lua
 print(ptool.ansi.green("ok", { bold = true }))

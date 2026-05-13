@@ -1,24 +1,24 @@
 # Table API
 
-表辅助能力位于 `ptool.tbl` 和 `p.tbl` 下。
+Table helpers are available under `ptool.tbl` and `p.tbl`.
 
-这些 API 只面向从 `1` 开始、整数键连续且无空洞的顺序表。
+These APIs are designed for dense list tables with contiguous integer keys starting at `1`.
 
 ## ptool.tbl.map
 
-> `Unreleased` - 引入。
+> `Unreleased` - Introduced.
 
-`ptool.tbl.map(list, fn)` 对顺序表中的每一项做映射，并返回一个新的顺序表。
+`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a new list.
 
-- `list`（table，必填）：一个致密的顺序表。
-- `fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回非 `nil` 的值。
-- 返回：`table`。
+- `list` (table, required): A dense list table.
+- `fn` (function, required): A callback that receives `(value, index)` and must return a non-`nil` value.
+- Returns: `table`.
 
-行为说明：
+Behavior:
 
-- `fn` 会按顺序对每一项调用一次。
-- 如果 `fn` 返回 `nil`，会直接抛错，而不是在结果里制造空洞。
-- 输入表不会被修改。
+- `fn` is called once for each item in order.
+- If `fn` returns `nil`, the call raises an error instead of creating holes in the result.
+- The input table is not modified.
 
 ```lua
 local out = p.tbl.map({ 10, 20, 30 }, function(value, index)
@@ -30,19 +30,19 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 ## ptool.tbl.filter
 
-> `Unreleased` - 引入。
+> `Unreleased` - Introduced.
 
-`ptool.tbl.filter(list, fn)` 保留回调结果为 truthy 的项，并返回新的致密顺序表。
+`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and returns them in a new dense list.
 
-- `list`（table，必填）：一个致密的顺序表。
-- `fn`（function，必填）：回调函数，接收 `(value, index)`。
-- 返回：`table`。
+- `list` (table, required): A dense list table.
+- `fn` (function, required): A callback that receives `(value, index)`.
+- Returns: `table`.
 
-行为说明：
+Behavior:
 
-- 返回 `nil` 或 `false` 会移除当前项。
-- 返回其他任意 Lua 值都会保留当前项。
-- 返回值会从 `1` 开始重新编号。
+- `nil` and `false` remove the current item.
+- Any other Lua value keeps the current item.
+- The returned table is reindexed from `1`.
 
 ```lua
 local out = p.tbl.filter({ "a", "bb", "ccc" }, function(value)
@@ -54,18 +54,18 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.concat
 
-> `Unreleased` - 引入。
+> `Unreleased` - Introduced.
 
-`ptool.tbl.concat(...)` 将一个或多个致密顺序表按顺序拼接成新的顺序表。
+`ptool.tbl.concat(...)` concatenates one or more dense list tables into a new list.
 
-- `...`（table，必填）：一个或多个致密顺序表。
-- 返回：`table`。
+- `...` (table, required): One or more dense list tables.
+- Returns: `table`.
 
-行为说明：
+Behavior:
 
-- 参数会从左到右依次追加。
-- 允许传入空表。
-- 输入表不会被修改。
+- Arguments are appended from left to right.
+- Empty lists are allowed.
+- The input tables are not modified.
 
 ```lua
 local out = p.tbl.concat({ 1, 2 }, { 3 }, {})
@@ -75,12 +75,12 @@ print(ptool.inspect(out)) -- { 1, 2, 3 }
 
 ## ptool.tbl.join
 
-> `Unreleased` - 引入。
+> `Unreleased` - Introduced.
 
-`ptool.tbl.join(...)` 是 `ptool.tbl.concat(...)` 的别名。
+`ptool.tbl.join(...)` is an alias of `ptool.tbl.concat(...)`.
 
-- `...`（table，必填）：一个或多个致密顺序表。
-- 返回：`table`。
+- `...` (table, required): One or more dense list tables.
+- Returns: `table`.
 
 ```lua
 local out = p.tbl.join({ "x" }, { "y", "z" })
@@ -88,11 +88,11 @@ local out = p.tbl.join({ "x" }, { "y", "z" })
 print(ptool.inspect(out)) -- { "x", "y", "z" }
 ```
 
-## 顺序表规则
+## List Rules
 
-`ptool.tbl` 当前只支持致密顺序表。
+`ptool.tbl` currently supports only dense list tables.
 
-- 键必须是整数。
-- 键必须从 `1` 开始。
-- 键必须连续，不能有空洞。
-- 稀疏表和字典风格的表都会抛错。
+- Keys must be integers.
+- Keys must start at `1`.
+- Keys must be contiguous without gaps.
+- Sparse tables and dictionary-style tables raise errors.

@@ -1,33 +1,33 @@
 # YAML API
 
-YAML 解析与序列化辅助能力位于 `ptool.yaml` 和 `p.yaml` 下。
+YAML parsing and serialization helpers are available under `ptool.yaml` and `p.yaml`.
 
 ## ptool.yaml.parse
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.yaml.parse(input)` 将 YAML 字符串解析为 Lua 值。
+`ptool.yaml.parse(input)` parses a YAML string into a Lua value.
 
-- `input`（string，必填）：YAML 文本。
-- 返回：解析后的 Lua 值。根节点可以是任意受支持的 YAML 类型。
+- `input` (string, required): The YAML text.
+- Returns: The parsed Lua value. The root can be any supported YAML type.
 
-类型映射：
+Type mapping:
 
 - YAML mapping -> Lua table
-- YAML sequence -> Lua 序列表（从 1 开始）
+- YAML sequence -> Lua sequence table (1-based)
 - YAML string -> Lua string
-- 可放入 `i64` 的 YAML integer -> Lua integer
-- 其他 YAML number -> Lua number
+- YAML integer that fits in `i64` -> Lua integer
+- Other YAML number -> Lua number
 - YAML boolean -> Lua boolean
 - YAML null -> Lua `nil`
 
-错误行为：
+Error behavior:
 
-- 如果 `input` 不是字符串，会抛出错误。
-- 如果 YAML 语法有误，会抛出错误，错误信息中包含解析器细节。
-- 如果 YAML 值无法表示为 `ptool` 支持的 Lua 值，也会抛出错误，例如 非字符串 key 的 mapping，或带显式 YAML tag 的值。
+- An error is raised if `input` is not a string.
+- A YAML syntax error raises an error whose message includes parser detail.
+- An error is raised if the YAML value cannot be represented as a Lua value in `ptool`, such as a mapping with non-string keys or an explicit YAML tag.
 
-示例：
+Example:
 
 ```lua
 local data = p.yaml.parse([[
@@ -45,20 +45,20 @@ print(data.stars)
 
 ## ptool.yaml.get
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.yaml.get(input, path)` 从 YAML 文本中读取指定路径上的值。
+`ptool.yaml.get(input, path)` reads the value at a specified path from YAML text.
 
-- `input`（string，必填）：YAML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"spec", "template", "metadata", "name"}` 或 `{"items", 1, "name"}`。
-- 返回：对应的 Lua 值；如果路径不存在，则返回 `nil`。
+- `input` (string, required): The YAML text.
+- `path` ((string|integer)[], required): A non-empty path array, such as `{"spec", "template", "metadata", "name"}` or `{"items", 1, "name"}`.
+- Returns: The corresponding Lua value, or `nil` if the path does not exist.
 
-行为说明：
+Behavior:
 
-- 字符串路径段用于选择 mapping key。
-- 整数路径段用于选择 sequence 元素，使用 Lua 的 1-based 索引。
+- String path segments select mapping keys.
+- Integer path segments select sequence elements using Lua's 1-based indexing.
 
-示例：
+Example:
 
 ```lua
 local text = [[
@@ -73,20 +73,20 @@ print(first_name)
 
 ## ptool.yaml.stringify
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.yaml.stringify(value)` 将 Lua 值编码为 YAML 文本。
+`ptool.yaml.stringify(value)` converts a Lua value to YAML text.
 
-- `value`（兼容 YAML 的 Lua 值，必填）：要编码的值。
-- 返回：编码后的 YAML 字符串。
+- `value` (YAML-compatible Lua value, required): The value to encode.
+- Returns: The encoded YAML string.
 
-行为说明：
+Behavior:
 
-- 值必须能通过与 `ptool.json.stringify` 相同的 Lua 值映射表示为 YAML。
-- Lua 序列表会编码为 YAML sequence。
-- 仅包含字符串 key 的 Lua table 会编码为 YAML mapping。
+- Values must be YAML-compatible through the same Lua value mapping used by `ptool.json.stringify`.
+- Lua sequence tables are encoded as YAML sequences.
+- Lua string-keyed tables are encoded as YAML mappings.
 
-示例：
+Example:
 
 ```lua
 local text = p.yaml.stringify({
@@ -98,10 +98,10 @@ local text = p.yaml.stringify({
 print(text)
 ```
 
-说明：
+Notes:
 
-- 目前只支持单文档 YAML。
-- YAML mapping 的 key 必须是字符串。
-- 不支持显式 YAML tag。
-- `ptool.yaml.get` 的 `path` 参数必须是由字符串和/或正整数构成的非空数组。
-- 整数路径段为 1-based，以与 Lua 数组索引保持一致。
+- Only single-document YAML is supported.
+- YAML mappings must use string keys.
+- Explicit YAML tags are not supported.
+- The `path` argument for `ptool.yaml.get` must be a non-empty array of strings and/or positive integers.
+- Integer path segments are 1-based so they match Lua array indexing.

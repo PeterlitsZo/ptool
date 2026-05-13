@@ -1,28 +1,28 @@
-# コア Lua API
+# Core Lua API
 
-`ptool` は、これらのコアランタイムヘルパーを `ptool` と `p` の直下に 公開します。
+`ptool` exposes these core runtime helpers directly under `ptool` and `p`.
 
-`ptool run <lua_file>` は Lua スクリプトを実行し、グローバル変数 `ptool` (またはその別名 `p`; たとえば `p.run` は `ptool.run` と同等) を注入します。`.lua` で終わるファイルでは、`ptool <lua_file>` も同じ 挙動の CLI 短縮形として使えます。
+`ptool run <lua_file>` runs a Lua script and injects the global variable `ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`). For files ending in `.lua`, `ptool <lua_file>` is a CLI shortcut with the same behavior.
 
-組み込み Lua ランタイムは Lua の基本グローバルを維持しつつ、標準ライブラリ としてはデフォルトで次だけを公開します。
+The embedded Lua runtime keeps the base Lua globals and exposes only these standard libraries by default:
 
 - `table`
 - `string`
 - `math`
 - `utf8`
 
-`io`、`os`、`package` のようなホスト側に近い組み込みモジュールは意図的に 利用できません。ファイルシステム、環境変数、プロセス、ネットワークなどの ランタイム操作には `ptool.fs`、`ptool.os`、`ptool.path`、 `ptool.run` などの API を使ってください。
+Host-facing built-in modules such as `io`, `os`, and `package` are intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`, `ptool.path`, and `ptool.run` for filesystem, environment, process, network, and other runtime operations instead.
 
-Lua スクリプトへ引数を渡したい場合は、次のようにできます。
+If you want to pass arguments to a Lua script, you can do it like this:
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
 ptool script.lua --name alice -v a.txt b.txt
 ```
 
-その引数は `ptool.args.parse(...)` で解析できます。
+The arguments can then be parsed with `ptool.args.parse(...)`.
 
-スクリプト例:
+Here is an example script:
 
 ```lua
 ptool.use("v0.1.0")
@@ -30,7 +30,7 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-shebang もサポートしているため、ファイルの先頭に次を追加できます。
+Shebang is supported, so you can add this to the top of the file:
 
 ```
 #!/usr/bin/env ptool
@@ -40,20 +40,20 @@ shebang もサポートしているため、ファイルの先頭に次を追加
 
 > `v0.1.0` - Introduced.
 
-`ptool.use` は、スクリプトに必要な最小 `ptool` バージョンを宣言します。
+`ptool.use` declares the minimum required `ptool` version for a script.
 
 ```lua
 ptool.use("v0.1.0")
 ```
 
-- 引数はセマンティックバージョン文字列 (SemVer) で、`v0.1.0` や `0.1.0` のように先頭の `v` は省略可能です。
-- 要求バージョンが現在の `ptool` バージョンより高い場合、そのスクリプトは 現在の `ptool` が古すぎるというエラーを出して即座に終了します。
+- The argument is a semantic version string (SemVer) and supports an optional `v` prefix, such as `v0.1.0` or `0.1.0`.
+- If the required version is higher than the current `ptool` version, the script exits immediately with an error saying that the current `ptool` version is too old.
 
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.
 
-`ptool.unindent` は複数行文字列を処理し、各行の先頭インデントのあとにある `| ` プレフィックスを除去し、先頭と末尾の空行を取り除きます。
+`ptool.unindent` processes multi-line strings by removing the `| ` prefix after leading indentation on each line and trimming leading and trailing blank lines.
 
 ```lua
 local str = ptool.unindent([[
@@ -62,7 +62,7 @@ local str = ptool.unindent([[
 ]])
 ```
 
-これは次と等価です。
+This is equivalent to:
 
 ```lua
 local str = [[line 1
@@ -73,24 +73,24 @@ line 2]]
 
 > `v0.1.0` - Introduced.
 
-`ptool.inspect(value[, options])` は Lua 値を読みやすい Lua 風の文字列へ レンダリングします。主な用途はデバッグとテーブル内容の表示です。
+`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-style string. It is primarily intended for debugging and displaying table contents.
 
-- `value` (any, 必須): inspect する Lua 値。
-- `options` (table, 任意): レンダリングオプション。サポートされる フィールド:
-  - `indent` (string, 任意): ネストごとに使うインデント。デフォルトは 2 つのスペースです。
-  - `multiline` (boolean, 任意): テーブルを複数行で描画するかどうか。 デフォルトは `true`。
-  - `max_depth` (integer, 任意): 描画する最大ネスト深さ。それより深い値は `<max-depth>` に置き換えられます。
-- 戻り値: `string`。
+- `value` (any, required): The Lua value to inspect.
+- `options` (table, optional): Rendering options. Supported fields:
+  - `indent` (string, optional): Indentation used for each nesting level. Defaults to two spaces.
+  - `multiline` (boolean, optional): Whether tables are rendered across multiple lines. Defaults to `true`.
+  - `max_depth` (integer, optional): Maximum nesting depth to render. Deeper values are replaced with `<max-depth>`.
+- Returns: `string`.
 
-挙動:
+Behavior:
 
-- 配列風の要素 (`1..n`) が最初に描画されます。
-- 残りのテーブルフィールドは、そのあとに安定したキー順で描画されます。
-- 識別子風の文字列キーは `key = value`、それ以外のキーは `[key] = value` の形式で描画されます。
-- 再帰的なテーブル参照は `<cycle>` として描画されます。
-- 関数、thread、userdata は `<function>` や `<userdata>` のような プレースホルダー値で描画されます。
+- Array-like entries (`1..n`) are rendered first.
+- Remaining table fields are rendered after the array part in stable key order.
+- Identifier-like string keys are rendered as `key = value`; other keys are rendered as `[key] = value`.
+- Recursive table references are rendered as `<cycle>`.
+- Functions, threads, and userdata are rendered as placeholder values such as `<function>` and `<userdata>`.
 
-例:
+Example:
 
 ```lua
 local value = {
@@ -105,34 +105,34 @@ print(ptool.inspect(value, { multiline = false }))
 
 ## ptool.ask
 
-> `v0.1.0` - Introduced. `v0.5.0` - バリデーションオプションと prompt サブコマンドを追加。
+> `v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt subcommands.
 
-`ptool.ask` は対話型プロンプトを提供します。直接呼び出してテキスト入力を 受け取ることもでき、確認、単一選択、複数選択、シークレット入力用の サブプロンプトも使えます。
+`ptool.ask` provides interactive prompts. You can call it directly for text input, or use its prompt subcommands for confirmation, selection, multi-select, and secret input.
 
-共通の挙動:
+Common behavior:
 
-- すべての `ptool.ask` プロンプトは対話型 TTY を必要とします。 非対話環境で実行するとエラーになります。
-- ユーザーがプロンプトをキャンセルすると、スクリプトはエラーになります。
-- 未知のオプション名や不正な値型はエラーになります。
+- All `ptool.ask` prompts require an interactive TTY. Running them in a non-interactive environment raises an error.
+- If the user cancels a prompt, the script raises an error.
+- Unknown option names or invalid option value types raise an error.
 
 ### ptool.ask
 
-`ptool.ask(prompt[, options])` はユーザーに 1 行のテキスト入力を求め、 その回答を返します。
+`ptool.ask(prompt[, options])` asks the user for a line of text and returns the answer.
 
-- `prompt` (string, 必須): ユーザーに表示するプロンプト。
-- `options` (table, 任意): プロンプトオプション。サポートされる フィールド:
-  - `default` (string, 任意): ユーザーが空の回答を送信したときに使う デフォルト値。
-  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
-  - `placeholder` (string, 任意): ユーザーが入力を始める前に表示する プレースホルダー。
-  - `required` (boolean, 任意): 回答を空にできないようにするかどうか。
-  - `allow_empty` (boolean, 任意): 空の回答を許可するかどうか。 デフォルトは `true`。
-  - `trim` (boolean, 任意): 返す前に前後の空白を削除するかどうか。
-  - `min_length` (integer, 任意): 許可される最小文字数。
-  - `max_length` (integer, 任意): 許可される最大文字数。
-  - `pattern` (string, 任意): 回答が一致しなければならない正規表現。
-- 戻り値: `string`。
+- `prompt` (string, required): The prompt shown to the user.
+- `options` (table, optional): Prompt options. Supported fields:
+  - `default` (string, optional): Default value used when the user submits an empty answer.
+  - `help` (string, optional): Extra help text shown below the prompt.
+  - `placeholder` (string, optional): Placeholder text shown before the user starts typing.
+  - `required` (boolean, optional): Whether the answer must be non-empty.
+  - `allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `true`.
+  - `trim` (boolean, optional): Whether to trim leading and trailing whitespace from the answer before returning it.
+  - `min_length` (integer, optional): Minimum accepted character length.
+  - `max_length` (integer, optional): Maximum accepted character length.
+  - `pattern` (string, optional): Regular expression the answer must match.
+- Returns: `string`.
 
-例:
+Example:
 
 ```lua
 local project = ptool.ask("Project name?", {
@@ -148,15 +148,15 @@ local project = ptool.ask("Project name?", {
 
 > `v0.5.0` - Introduced.
 
-`ptool.ask.confirm(prompt[, options])` は yes/no の回答を求めます。
+`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer.
 
-- `prompt` (string, 必須): ユーザーに表示するプロンプト。
-- `options` (table, 任意): プロンプトオプション。サポートされる フィールド:
-  - `default` (boolean, 任意): ユーザーが Enter を押したときに使う デフォルト回答。
-  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
-- 戻り値: `boolean`。
+- `prompt` (string, required): The prompt shown to the user.
+- `options` (table, optional): Prompt options. Supported fields:
+  - `default` (boolean, optional): Default answer used when the user presses Enter without typing.
+  - `help` (string, optional): Extra help text shown below the prompt.
+- Returns: `boolean`.
 
-例:
+Example:
 
 ```lua
 local confirmed = ptool.ask.confirm("Continue?", {
@@ -168,19 +168,19 @@ local confirmed = ptool.ask.confirm("Continue?", {
 
 > `v0.5.0` - Introduced.
 
-`ptool.ask.select(prompt, items[, options])` は一覧から 1 つ選ばせます。
+`ptool.ask.select(prompt, items[, options])` asks the user to choose one item from a list.
 
-- `prompt` (string, 必須): ユーザーに表示するプロンプト。
-- `items` (table, 必須): 候補項目。各要素は次のいずれかです:
-  - string: 表示ラベルと戻り値の両方に使われます。
-  - `{ label = "Patch", value = "patch" }` のような table。
-- `options` (table, 任意): プロンプトオプション。サポートされる フィールド:
-  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
-  - `page_size` (integer, 任意): 一度に表示する最大行数。
-  - `default_index` (integer, 任意): 初期選択位置の 1-based インデックス。
-- 戻り値: `string`。
+- `prompt` (string, required): The prompt shown to the user.
+- `items` (table, required): Candidate items. Each entry may be:
+  - A string, which is used as both the display label and the returned value.
+  - A table like `{ label = "Patch", value = "patch" }`.
+- `options` (table, optional): Prompt options. Supported fields:
+  - `help` (string, optional): Extra help text shown below the prompt.
+  - `page_size` (integer, optional): Maximum number of rows shown at once.
+  - `default_index` (integer, optional): 1-based index of the initially selected item.
+- Returns: `string`.
 
-例:
+Example:
 
 ```lua
 local bump = ptool.ask.select("Select bump type", {
@@ -196,19 +196,19 @@ local bump = ptool.ask.select("Select bump type", {
 
 > `v0.5.0` - Introduced.
 
-`ptool.ask.multiselect(prompt, items[, options])` は一覧から 0 個以上の項目を 選ばせます。
+`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose zero or more items from a list.
 
-- `prompt` (string, 必須): ユーザーに表示するプロンプト。
-- `items` (table, 必須): 候補項目。形式は `ptool.ask.select` と同じです。
-- `options` (table, 任意): プロンプトオプション。サポートされる フィールド:
-  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
-  - `page_size` (integer, 任意): 一度に表示する最大行数。
-  - `default_indexes` (table, 任意): デフォルトで選択される 1-based インデックス配列。
-  - `min_selected` (integer, 任意): 必須の最小選択数。
-  - `max_selected` (integer, 任意): 許可される最大選択数。
-- 戻り値: `table`。
+- `prompt` (string, required): The prompt shown to the user.
+- `items` (table, required): Candidate items. The format is the same as `ptool.ask.select`.
+- `options` (table, optional): Prompt options. Supported fields:
+  - `help` (string, optional): Extra help text shown below the prompt.
+  - `page_size` (integer, optional): Maximum number of rows shown at once.
+  - `default_indexes` (table, optional): 1-based indexes selected by default.
+  - `min_selected` (integer, optional): Minimum number of items that must be selected.
+  - `max_selected` (integer, optional): Maximum number of items that may be selected.
+- Returns: `table`.
 
-例:
+Example:
 
 ```lua
 local targets = ptool.ask.multiselect("Select targets", {
@@ -225,23 +225,23 @@ local targets = ptool.ask.multiselect("Select targets", {
 
 > `v0.5.0` - Introduced.
 
-`ptool.ask.secret(prompt[, options])` はトークンやパスワードのような シークレット入力を求めます。
+`ptool.ask.secret(prompt[, options])` asks the user for secret input such as a token or password.
 
-- `prompt` (string, 必須): ユーザーに表示するプロンプト。
-- `options` (table, 任意): プロンプトオプション。サポートされる フィールド:
-  - `help` (string, 任意): プロンプトの下に表示する補助テキスト。
-  - `required` (boolean, 任意): 回答を空にできないようにするかどうか。
-  - `allow_empty` (boolean, 任意): 空の回答を許可するかどうか。 デフォルトは `false`。
-  - `confirm` (boolean, 任意): 2 回入力して確認させるかどうか。 デフォルトは `false`。
-  - `confirm_prompt` (string, 任意): 確認ステップ用のカスタムプロンプト。
-  - `mismatch_message` (string, 任意): 2 回の入力が一致しないときの カスタムエラーメッセージ。
-  - `display_toggle` (boolean, 任意): 入力した値を一時的に表示できるように するかどうか。
-  - `min_length` (integer, 任意): 許可される最小文字数。
-  - `max_length` (integer, 任意): 許可される最大文字数。
-  - `pattern` (string, 任意): 回答が一致しなければならない正規表現。
-- 戻り値: `string`。
+- `prompt` (string, required): The prompt shown to the user.
+- `options` (table, optional): Prompt options. Supported fields:
+  - `help` (string, optional): Extra help text shown below the prompt.
+  - `required` (boolean, optional): Whether the answer must be non-empty.
+  - `allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `false`.
+  - `confirm` (boolean, optional): Whether to ask the user to type the secret twice. Defaults to `false`.
+  - `confirm_prompt` (string, optional): Custom prompt for the confirmation step.
+  - `mismatch_message` (string, optional): Custom error message shown when the two answers do not match.
+  - `display_toggle` (boolean, optional): Whether to allow temporarily showing the typed secret.
+  - `min_length` (integer, optional): Minimum accepted character length.
+  - `max_length` (integer, optional): Maximum accepted character length.
+  - `pattern` (string, optional): Regular expression the answer must match.
+- Returns: `string`.
 
-例:
+Example:
 
 ```lua
 local token = ptool.ask.secret("API token?", {
@@ -254,17 +254,17 @@ local token = ptool.ask.secret("API token?", {
 
 > `v0.1.0` - Introduced.
 
-`ptool.config` はスクリプトのランタイム設定を行います。
+`ptool.config` sets runtime configuration for the script.
 
-現在サポートされているフィールド:
+Currently supported fields:
 
-- `run` (table, 任意): `ptool.run` のデフォルト設定。サポートされる フィールド:
-  - `echo` (boolean, 任意): デフォルトの echo スイッチ。デフォルトは `true`。
-  - `check` (boolean, 任意): 失敗時にデフォルトでエラーにするかどうか。 デフォルトは `false`。
-  - `confirm` (boolean, 任意): 実行前にデフォルトで確認を要求するかどうか。 デフォルトは `false`。
-  - `retry` (boolean, 任意): `check = true` のとき、実行失敗後に再試行するか どうかをユーザーへ尋ねるかどうか。デフォルトは `false`。
+- `run` (table, optional): Default configuration for `ptool.run`. Supported fields:
+  - `echo` (boolean, optional): Default echo switch. Defaults to `true`.
+  - `check` (boolean, optional): Whether failures raise an error by default. Defaults to `false`.
+  - `confirm` (boolean, optional): Whether to require confirmation before execution by default. Defaults to `false`.
+  - `retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. Defaults to `false`.
 
-例:
+Example:
 
 ```lua
 ptool.config({
@@ -281,17 +281,17 @@ ptool.config({
 
 > `v0.1.0` - Introduced.
 
-`ptool.cd(path)` は `ptool` のランタイムカレントディレクトリを更新します。
+`ptool.cd(path)` updates `ptool`'s runtime current directory.
 
-- `path` (string, 必須): 対象ディレクトリパス。絶対でも相対でも構いません。
+- `path` (string, required): Target directory path, absolute or relative.
 
-挙動:
+Behavior:
 
-- 相対パスは現在の `ptool` ランタイムディレクトリから解決されます。
-- 対象は存在していて、かつディレクトリでなければなりません。
-- これにより `ptool` のランタイム状態が更新され、そのランタイム cwd を 使用する API (`ptool.run`, `ptool.path.abspath`, `ptool.path.relpath` など) に影響します。
+- Relative paths are resolved from the current `ptool` runtime directory.
+- The target must exist and must be a directory.
+- This updates `ptool` runtime state and affects APIs that use runtime cwd (such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`).
 
-例:
+Example:
 
 ```lua
 ptool.cd("foobar")
@@ -303,17 +303,17 @@ print(res.stdout)
 
 > `v0.4.0` - Introduced.
 
-`ptool.script_path()` は現在のエントリスクリプトの絶対パスを返します。
+`ptool.script_path()` returns the absolute path of the current entry script.
 
-- 戻り値: `string|nil`。
+- Returns: `string|nil`.
 
-挙動:
+Behavior:
 
-- `ptool run <file>` で実行した場合、エントリスクリプトのパスを絶対かつ 正規化されたパスとして返します。
-- 返されるパスはランタイム開始時に固定され、その後 `ptool.cd(...)` を 呼んでも変化しません。
-- `ptool repl` では `nil` を返します。
+- When running through `ptool run <file>`, this returns the entry script path as an absolute, normalized path.
+- The returned path is fixed when the runtime starts and does not change after `ptool.cd(...)`.
+- In `ptool repl`, this returns `nil`.
 
-例:
+Example:
 
 ```lua
 local script_path = ptool.script_path()
@@ -325,42 +325,42 @@ local project_root = ptool.path.dirname(script_dir)
 
 > `v0.4.0` - Introduced.
 
-`ptool.try(fn)` は `fn` を実行し、送出されたエラーを戻り値に変換します。
+`ptool.try(fn)` runs `fn` and converts raised errors into return values.
 
-- `fn` (function, 必須): 実行するコールバック。
-- 戻り値: `ok, value, err`。
+- `fn` (function, required): Callback to execute.
+- Returns: `ok, value, err`.
 
-戻り値ルール:
+Return value rules:
 
-- 成功時は `ok = true`、`err = nil` で、`value` にコールバックの戻り値が 入ります。
-- コールバックが値を返さない場合、`value` は `nil` です。
-- コールバックが 1 つだけ値を返す場合、`value` はその値自体です。
-- コールバックが複数の値を返す場合、`value` は配列風のテーブルです。
-- 失敗時は `ok = false`、`value = nil` で、`err` はテーブルです。
+- On success, `ok = true`, `err = nil`, and `value` contains the callback result.
+- If the callback returns no values, `value` is `nil`.
+- If the callback returns one value, `value` is that value.
+- If the callback returns multiple values, `value` is an array-like table.
+- On failure, `ok = false`, `value = nil`, and `err` is a table.
 
-構造化エラーフィールド:
+Structured error fields:
 
-- `kind` (string): `io_error`、`command_failed`、`invalid_argument`、 `http_error`、`lua_error` などの安定したエラーカテゴリ。
-- `message` (string): 人間が読みやすいエラーメッセージ。
-- `op` (string, 任意): `ptool.fs.read` のような API または操作名。
-- `detail` (string, 任意): 追加の失敗詳細。
-- `path` (string, 任意): ファイルシステム失敗に関係するパス。
-- `input` (string, 任意): 解析や検証に失敗した元の入力。
-- `cmd` (string, 任意): コマンド失敗時のコマンド名。
-- `status` (integer, 任意): 利用可能な場合の終了ステータスまたは HTTP ステータス。
-- `stderr` (string, 任意): コマンド失敗時にキャプチャされた stderr。
-- `url` (string, 任意): HTTP 失敗に関係する URL。
-- `cwd` (string, 任意): コマンド失敗時に実際に使われた作業ディレクトリ。
-- `target` (string, 任意): SSH 関連のコマンド失敗時の SSH ターゲット。
-- `retryable` (boolean): 再試行に意味があるかどうか。デフォルトは `false` です。
+- `kind` (string): Stable error category such as `io_error`, `command_failed`, `invalid_argument`, `http_error`, or `lua_error`.
+- `message` (string): Human-readable error message.
+- `op` (string, optional): API or operation name such as `ptool.fs.read`.
+- `detail` (string, optional): Extra detail for the failure.
+- `path` (string, optional): Path involved in a filesystem failure.
+- `input` (string, optional): Original input that failed to parse or validate.
+- `cmd` (string, optional): Command name for command failures.
+- `status` (integer, optional): Exit status or HTTP status when available.
+- `stderr` (string, optional): Captured stderr for command failures.
+- `url` (string, optional): URL involved in an HTTP failure.
+- `cwd` (string, optional): Effective working directory for command failures.
+- `target` (string, optional): SSH target for SSH-related command failures.
+- `retryable` (boolean): Whether retrying may make sense. Defaults to `false`.
 
-挙動:
+Behavior:
 
-- `ptool` の API は構造化エラーを送出します。`ptool.try` はそれらを上記の `err` テーブルへ変換するため、呼び出し側は `err.kind` や関連フィールドで 分岐できます。
-- 通常の Lua エラーも捕捉されます。その場合 `err.kind` は `lua_error` で、 `message` だけが保証されます。
-- `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、 `res:assert_ok()` のような API のエラー処理には `ptool.try` の使用を推奨 します。
+- `ptool` APIs raise structured errors. `ptool.try` converts them into the `err` table above so callers can branch on `err.kind` and related fields.
+- Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, and only `message` is guaranteed.
+- `ptool.try` is the recommended way to handle errors from APIs such as `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, and `res:assert_ok()`.
 
-例:
+Example:
 
 ```lua
 local ok, content, err = ptool.try(function()
@@ -389,9 +389,9 @@ end
 
 > `v0.1.0` - Introduced.
 
-`ptool.run` は Rust から外部コマンドを実行します。
+`ptool.run` executes external commands from Rust.
 
-次の呼び出し形式をサポートします。
+The following call forms are supported:
 
 ```lua
 ptool.run("echo hello world")
@@ -403,31 +403,31 @@ ptool.run({ cmd = "echo", args = {"hello", "world"} })
 ptool.run({ cmd = "echo", args = {"hello"}, stdout = "capture" })
 ```
 
-引数ルール:
+Argument rules:
 
-- `ptool.run(cmdline)`: `cmdline` はシェル風 (`shlex`) ルールで分割され、 最初の項目がコマンド、残りが引数として扱われます。
-- `ptool.run(cmd, argsline)`: `cmd` はそのままコマンドとして使われ、 `argsline` はシェル風 (`shlex`) ルールで引数リストへ分割されます。
-- `ptool.run(cmd, args)`: `cmd` は文字列、`args` は文字列配列です。
-- `ptool.run(cmdline, options)`: `options` は `echo` など、この呼び出し用の 設定を上書きします。
-- `ptool.run(cmd, args, options)`: `args` は文字列または文字列配列で、 `options` は `echo` など、この呼び出し用の設定を上書きします。
-- `ptool.run(options)`: `options` はテーブルです。
-- 第 2 引数がテーブルの場合: それが配列 (連続する整数キー `1..n`) なら `args` として、それ以外なら `options` として扱われます。
+- `ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments.
+- `ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules.
+- `ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings.
+- `ptool.run(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`.
+- `ptool.run(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `echo`.
+- `ptool.run(options)`: `options` is a table.
+- When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`.
 
-戻り値ルール:
+Return value rules:
 
-- 常に次のフィールドを持つテーブルが返されます:
-  - `ok` (boolean): 終了コードが `0` かどうか。
-  - `code` (integer|nil): プロセス終了コード。シグナルで終了した場合は `nil` です。
-  - `cmd` (string): 実行に使われたコマンド名。
-  - `cwd` (string): 実行に使われた実際の作業ディレクトリ。
-  - `stdout` (string, 任意): `stdout = "capture"` のとき存在します。
-  - `stderr` (string, 任意): `stderr = "capture"` のとき存在します。
-  - `assert_ok(self)` (function): `ok = false` のとき構造化エラーを発生 させます。エラー種別は `command_failed` で、`cmd`、`status`、 `stderr`、`cwd` を含むことがあります。
-- `check` のデフォルト値は `ptool.config({ run = { check = ... } })` から取得されます。 未設定ならデフォルトは `false` です。`check = false` のときは、 呼び出し側が自分で `ok` を確認するか `res:assert_ok()` を呼べます。
-- `check = true` かつ `retry = true` の場合、`ptool.run` は失敗した コマンドを再試行するかどうかを最終エラー前に尋ねます。
-- `check = true` の場合、`ptool.run` は `res:assert_ok()` と同じ `command_failed` 構造化エラーを送出します。Lua 側で捕捉して調べたいなら `ptool.try(...)` を使ってください。
+- A table is always returned with the following fields:
+  - `ok` (boolean): Whether the exit code is `0`.
+  - `code` (integer|nil): The process exit code. If the process was terminated by a signal, this is `nil`.
+  - `cmd` (string): Command name used for the execution.
+  - `cwd` (string): Effective working directory used for the execution.
+  - `stdout` (string, optional): Present when `stdout = "capture"`.
+  - `stderr` (string, optional): Present when `stderr = "capture"`.
+  - `assert_ok(self)` (function): Raises a structured error when `ok = false`. The error kind is `command_failed`, and the error may include `cmd`, `status`, `stderr`, and `cwd`.
+- The default value of `check` comes from `ptool.config({ run = { check = ... } })`. If not configured, it defaults to `false`. When `check = false`, callers can inspect `ok` themselves or call `res:assert_ok()`.
+- When both `check = true` and `retry = true`, `ptool.run` asks whether the failed command should be retried before raising the final error.
+- When `check = true`, `ptool.run` raises the same structured `command_failed` error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to catch and inspect it from Lua.
 
-例:
+Example:
 
 ```lua
 ptool.config({ run = { echo = false } })
@@ -448,32 +448,32 @@ print(res.ok, res.code)
 res:assert_ok()
 ```
 
-`ptool.run(options)` もサポートされます。ここで `options` は次のフィールド を持つテーブルです:
+`ptool.run(options)` is also supported, where `options` is a table with the following fields:
 
-- `cmd` (string, 必須): コマンド名または実行ファイルパス。
-- `args` (string[], 任意): 引数リスト。
-- `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
-- `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
-- `echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフォルトは `true` です。
-- `check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかどうか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それも未設定ならデフォルトは `false` です。
-- `confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデフォルトは `false` です。
-- `retry` (boolean, 任意): `check = true` のとき、失敗後に再試行するか ユーザーへ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使われ、それも未設定なら デフォルトは `false` です。
-- `stdout` (string, 任意): stdout の扱い。サポートされる値:
-  - `"inherit"`: 現在の端末へ引き継ぐ (デフォルト)。
-  - `"capture"`: `res.stdout` にキャプチャする。
-  - `"null"`: 出力を破棄する。
-- `stderr` (string, 任意): stderr の扱い。サポートされる値:
-  - `"inherit"`: 現在の端末へ引き継ぐ (デフォルト)。
-  - `"capture"`: `res.stderr` にキャプチャする。
-  - `"null"`: 出力を破棄する。
-- `confirm = true` の場合:
-  - ユーザーが実行を拒否すると即座にエラーになります。
-  - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
-- `retry = true` かつ `check = true` の場合:
-  - コマンドが失敗すると、`ptool.run` は同じコマンドを再試行するか 尋ねます。
-  - 現在の環境が非対話 (TTY なし) なら、再試行を尋ねる代わりに即座に エラーになります。
+- `cmd` (string, required): The command name or executable path.
+- `args` (string[], optional): The argument list.
+- `cwd` (string, optional): The child process working directory.
+- `env` (table, optional): Additional environment variables, where keys are variable names and values are variable values.
+- `echo` (boolean, optional): Whether to echo command information for this execution. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit code is not `0`. If omitted, the value from `ptool.config({ run = { check = ... } })` is used; if that is also unset, the default is `false`.
+- `confirm` (boolean, optional): Whether to ask the user for confirmation before execution. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`.
+- `retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. If omitted, the value from `ptool.config({ run = { retry = ... } })` is used; if that is also unset, the default is `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stdout`.
+  - `"null"`: Discard the output.
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stderr`.
+  - `"null"`: Discard the output.
+- When `confirm = true`:
+  - If the user refuses the execution, an error is raised immediately.
+  - If the current environment is not interactive (no TTY), an error is raised immediately.
+- When `retry = true` and `check = true`:
+  - If the command fails, `ptool.run` asks whether to retry the same command.
+  - If the current environment is not interactive (no TTY), an error is raised immediately instead of prompting for retry.
 
-例:
+Example:
 
 ```lua
 ptool.run({
@@ -499,16 +499,16 @@ res:assert_ok()
 
 > `Unreleased` - Introduced.
 
-`ptool.run_capture` は `ptool.run` と同じ呼び出し形式、引数ルール、 戻り値ルール、オプションで、Rust から外部コマンドを実行します。
+`ptool.run_capture` executes external commands from Rust with the same call forms, argument rules, return value rules, and options as `ptool.run`.
 
-違いはデフォルトのストリーム処理だけです:
+The difference is only the default stream handling:
 
-- `stdout` のデフォルトは `"capture"`。
-- `stderr` のデフォルトは `"capture"`。
+- `stdout` defaults to `"capture"`.
+- `stderr` defaults to `"capture"`.
 
-それでも `options` で各フィールドを明示的に上書きできます。
+You can still override either field explicitly in `options`.
 
-例:
+Example:
 
 ```lua
 local res = ptool.run_capture("echo hello world")

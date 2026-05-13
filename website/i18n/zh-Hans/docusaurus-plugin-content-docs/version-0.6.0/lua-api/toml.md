@@ -1,32 +1,32 @@
 # TOML API
 
-TOML 解析与编辑辅助能力位于 `ptool.toml` 和 `p.toml` 下。
+TOML parsing and editing helpers are available under `ptool.toml` and `p.toml`.
 
 ## ptool.toml.parse
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 
-`ptool.toml.parse(input)` 将 TOML 字符串解析为 Lua 表。
+`ptool.toml.parse(input)` parses a TOML string into a Lua table.
 
-- `input`（string，必填）：TOML 文本。
-- 返回：Lua 表（根节点始终是 table）。
+- `input` (string, required): The TOML text.
+- Returns: A Lua table (the root node is always a table).
 
-类型映射：
+Type mapping:
 
 - TOML table / inline table -> Lua table
-- TOML array -> Lua 序列表（从 1 开始）
+- TOML array -> Lua sequence table (1-based)
 - TOML string -> Lua string
 - TOML integer -> Lua integer
 - TOML float -> Lua number
 - TOML boolean -> Lua boolean
 - TOML datetime/date/time -> Lua string
 
-错误行为：
+Error behavior:
 
-- 如果 `input` 不是字符串，会抛出错误。
-- 如果 TOML 语法有误，会抛出错误，错误信息中包含行号和列号。
+- An error is raised if `input` is not a string.
+- A TOML syntax error raises an error whose message includes line and column information.
 
-示例：
+Example:
 
 ```lua
 local text = ptool.fs.read("ptool.toml")
@@ -39,22 +39,22 @@ print(conf.release_date) -- datetime/date/time values are strings
 
 ## ptool.toml.get
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 > 
-> `v0.4.0` - 新增数组索引用的数字路径段。
+> `v0.4.0` - Added numeric path segments for array indexing.
 
-`ptool.toml.get(input, path)` 从 TOML 文本中读取指定路径上的值。
+`ptool.toml.get(input, path)` reads the value at a specified path from TOML text.
 
-- `input`（string，必填）：TOML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"package", "version"}` 或 `{"bin", 1, "name"}`。
-- 返回：对应的 Lua 值；如果路径不存在，则返回 `nil`。
+- `input` (string, required): The TOML text.
+- `path` ((string|integer)[], required): A non-empty path array, such as `{"package", "version"}` or `{"bin", 1, "name"}`.
+- Returns: The corresponding Lua value, or `nil` if the path does not exist.
 
-行为说明：
+Behavior:
 
-- 字符串路径段用于选择 table 键。
-- 整数路径段用于选择数组元素，采用 Lua 的 1-based 索引。
+- String path segments select table keys.
+- Integer path segments select array elements using Lua's 1-based indexing.
 
-示例：
+Example:
 
 ```lua
 local text = ptool.fs.read("Cargo.toml")
@@ -67,28 +67,28 @@ print(first_bin_name)
 
 ## ptool.toml.set
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 > 
-> `v0.4.0` - 新增复合值写入和数字路径段。
+> `v0.4.0` - Added composite value writes and numeric path segments.
 
-`ptool.toml.set(input, path, value)` 设置指定路径上的值，并返回更新后的 TOML 文本。
+`ptool.toml.set(input, path, value)` sets the value at a specified path and returns the updated TOML text.
 
-- `input`（string，必填）：TOML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"package", "version"}` 或 `{"bin", 1, "name"}`。
-- `value`（string|integer|number|boolean|table，必填）：要写入的值。
-- 返回：更新后的 TOML 字符串。
+- `input` (string, required): The TOML text.
+- `path` ((string|integer)[], required): A non-empty path array, such as `{"package", "version"}` or `{"bin", 1, "name"}`.
+- `value` (string|integer|number|boolean|table, required): The value to write.
+- Returns: The updated TOML string.
 
-行为说明：
+Behavior:
 
-- 缺失的中间路径会自动创建为 table。
-- 如果某个中间路径已存在但不是 table，会抛出错误。
-- 仅包含字符串键的 Lua table 会写成 TOML table。
-- Lua 序列表会写成 TOML array。
-- 由“仅包含字符串键的 Lua table”组成的序列表会写成 TOML array of tables。
-- 空 Lua table 目前会按 TOML table 写入。
-- 解析和回写基于 `toml_edit`，会尽可能保留原始注释和格式。
+- Missing intermediate paths are created automatically as tables.
+- If an intermediate path exists but is not a table, an error is raised.
+- Lua tables with only string keys are written as TOML tables.
+- Lua sequence tables are written as TOML arrays.
+- A Lua sequence of string-keyed tables is written as a TOML array of tables.
+- Empty Lua tables are currently written as TOML tables.
+- Parsing and writing back are based on `toml_edit`, which preserves original comments and formatting as much as possible.
 
-示例：
+Example:
 
 ```lua
 local text = ptool.fs.read("Cargo.toml")
@@ -104,22 +104,22 @@ local text3 = ptool.toml.set(text2, {"package", "metadata"}, {
 
 ## ptool.toml.remove
 
-> `v0.1.0` - 引入。
+> `v0.1.0` - Introduced.
 > 
-> `v0.4.0` - 新增数组索引用的数字路径段。
+> `v0.4.0` - Added numeric path segments for array indexing.
 
-`ptool.toml.remove(input, path)` 删除指定路径，并返回更新后的 TOML 文本。
+`ptool.toml.remove(input, path)` removes the specified path and returns the updated TOML text.
 
-- `input`（string，必填）：TOML 文本。
-- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"package", "name"}` 或 `{"bin", 1}`。
-- 返回：更新后的 TOML 字符串。
+- `input` (string, required): The TOML text.
+- `path` ((string|integer)[], required): A non-empty path array, such as `{"package", "name"}` or `{"bin", 1}`.
+- Returns: The updated TOML string.
 
-行为说明：
+Behavior:
 
-- 如果路径不存在，不会报错，而是返回原始文本或其等价形式。
-- 如果某个中间路径已存在但不是 table，会抛出错误。
+- If the path does not exist, no error is raised and the original text (or an equivalent form) is returned.
+- If an intermediate path exists but is not a table, an error is raised.
 
-示例：
+Example:
 
 ```lua
 local text = ptool.fs.read("Cargo.toml")
@@ -129,20 +129,20 @@ ptool.fs.write("Cargo.toml", updated)
 
 ## ptool.toml.stringify
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.toml.stringify(value)` 将 Lua 值编码为 TOML 文本。
+`ptool.toml.stringify(value)` converts a Lua value to TOML text.
 
-- `value`（table，必填）：要编码的根 TOML table。
-- 返回：编码后的 TOML 字符串。
+- `value` (table, required): The root TOML table to encode.
+- Returns: The encoded TOML string.
 
-行为说明：
+Behavior:
 
-- 根值必须是表示 TOML table 的 Lua table。
-- 嵌套 Lua table 与 `ptool.toml.set` 使用相同的 table/array 判定规则。
-- 空 Lua table 目前会编码为 TOML table。
+- The root value must be a Lua table representing a TOML table.
+- Nested Lua tables follow the same table/array rules as `ptool.toml.set`.
+- Empty Lua tables are currently encoded as TOML tables.
 
-示例：
+Example:
 
 ```lua
 local text = ptool.toml.stringify({
@@ -156,8 +156,8 @@ local text = ptool.toml.stringify({
 print(text)
 ```
 
-说明：
+Notes:
 
-- `ptool.toml.get/set/remove` 的 `path` 参数必须是由字符串和/或正整数构成的非空数组。
-- 整数路径段是 1-based 的，与 Lua 数组索引保持一致。
-- TOML datetime/date/time 值目前仍会读取为 Lua string。
+- The `path` argument for `ptool.toml.get/set/remove` must be a non-empty array of strings and/or positive integers.
+- Integer path segments are 1-based so they match Lua array indexing.
+- TOML datetime/date/time values are still read back as Lua strings.

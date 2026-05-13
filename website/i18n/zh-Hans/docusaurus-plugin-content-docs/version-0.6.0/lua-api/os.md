@@ -1,19 +1,19 @@
 # OS API
 
-`ptool.os` 提供了一组用于读取当前运行时环境、查询宿主进程基础信息的辅助能力。
+`ptool.os` exposes helpers for reading the current runtime environment and querying basic host-process details.
 
 ## ptool.os.getenv
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.getenv(name)` 返回某个环境变量的当前值。
+`ptool.os.getenv(name)` returns the current value of an environment variable.
 
 - `name` (string, required): Environment variable name.
-- `name`（string，必填）：环境变量名。
+- Returns: `string|nil`.
 
 Behavior:
 
-- 返回：`string|nil`。
+- Returns `nil` when the variable is not set.
 - Reads the current `ptool` runtime environment, including values changed by `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`.
 - Raises an error when `name` is empty or contains invalid characters such as `=`.
 
@@ -26,11 +26,11 @@ print(home)
 
 ## ptool.os.env
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.env()` 返回当前运行时环境的快照表。
+`ptool.os.env()` returns a snapshot table of the current runtime environment.
 
-- 返回：`table`。
+- Returns: `table`.
 
 Behavior:
 
@@ -46,18 +46,18 @@ print(env.HOME)
 
 ## ptool.os.setenv
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.setenv(name, value)` 在当前 `ptool` 运行时中设置环境变量。
+`ptool.os.setenv(name, value)` sets an environment variable in the current `ptool` runtime.
 
 - `name` (string, required): Environment variable name.
-- `value`（string，必填）：环境变量值。
+- `value` (string, required): Environment variable value.
 
 Behavior:
 
-- 它修改的是当前 `ptool` 运行时环境，不是父级 shell。
+- This updates the current `ptool` runtime environment, not the parent shell.
 - Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched later through `ptool.run(...)`.
-- 这里设置的值会反映到 `ptool.os.getenv(...)`、`ptool.os.env()`，以及之后 通过 `ptool.run(...)` 启动的子进程中。
+- Raises an error when `name` is empty, contains `=`, or when `value` contains NUL.
 
 Example:
 
@@ -68,9 +68,9 @@ print(p.os.getenv("APP_ENV"))
 
 ## ptool.os.unsetenv
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.unsetenv(name)` 从当前 `ptool` 运行时中移除环境变量。
+`ptool.os.unsetenv(name)` removes an environment variable from the current `ptool` runtime.
 
 - `name` (string, required): Environment variable name.
 
@@ -88,11 +88,11 @@ assert(p.os.getenv("APP_ENV") == nil)
 
 ## ptool.os.homedir
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.homedir()` 返回当前用户的 home 目录。
+`ptool.os.homedir()` returns the current user's home directory.
 
-- `name`（string，必填）：环境变量名。
+- Returns: `string|nil`.
 
 Example:
 
@@ -102,11 +102,11 @@ local home = p.os.homedir()
 
 ## ptool.os.tmpdir
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.tmpdir()` 返回系统临时目录。
+`ptool.os.tmpdir()` returns the system temporary directory.
 
-- 返回：`string`。
+- Returns: `string`.
 
 Example:
 
@@ -116,35 +116,35 @@ local tmp = p.os.tmpdir()
 
 ## ptool.os.hostname
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.hostname()` 返回当前主机名。
+`ptool.os.hostname()` returns the current host name.
 
-- `name`（string，必填）：环境变量名。
+- Returns: `string|nil`.
 
 ## ptool.os.username
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.username()` 返回当前用户名。
+`ptool.os.username()` returns the current user name.
 
-- `name`（string，必填）：环境变量名。
+- Returns: `string|nil`.
 
 ## ptool.os.pid
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.pid()` 返回当前 `ptool` 进程 ID。
+`ptool.os.pid()` returns the current `ptool` process ID.
 
-- 返回：`integer`。
+- Returns: `integer`.
 
 ## ptool.os.exepath
 
-> `v0.4.0` - 引入。
+> `v0.4.0` - Introduced.
 
-`ptool.os.exepath()` 返回当前运行中的 `ptool` 可执行文件解析后路径。
+`ptool.os.exepath()` returns the resolved path of the running `ptool` executable.
 
-- `name`（string，必填）：环境变量名。
+- Returns: `string|nil`.
 
 Example:
 

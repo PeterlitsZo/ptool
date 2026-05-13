@@ -1,31 +1,31 @@
-# API de argumentos
+# Args API
 
-As utilidades de esquema e parse de argumentos de CLI estão disponíveis em `ptool.args` e `p.args`.
+CLI argument schema and parsing helpers are available under `ptool.args` and `p.args`.
 
 ## ptool.args.arg
 
 > `v0.1.0` - Introduced.
 
-`ptool.args.arg(id, kind, options)` cria um builder de argumento para uso em `ptool.args.parse(...).schema.args`.
+`ptool.args.arg(id, kind, options)` creates an argument builder for use in `ptool.args.parse(...).schema.args`.
 
-- `id` (string, obrigatório): O identificador do argumento. Ele também é a chave na tabela retornada.
-- `kind` (string, obrigatório): O tipo do argumento. Valores suportados:
-  - `"flag"`: Um flag booleano.
-  - `"string"`: Uma opção string.
-  - `"int"`: Uma opção inteira (`i64`).
-  - `"positional"`: Um argumento posicional.
-- `options` (table, opcional): Os mesmos campos opcionais suportados por tabelas de argumento em `ptool.args.parse`, como `long`, `short`, `help`, `required`, `multiple` e `default`.
+- `id` (string, required): The argument identifier. It is also the key in the returned table.
+- `kind` (string, required): The argument type. Supported values:
+  - `"flag"`: A boolean flag.
+  - `"string"`: A string option.
+  - `"int"`: An integer option (`i64`).
+  - `"positional"`: A positional argument.
+- `options` (table, optional): The same optional fields supported by argument tables in `ptool.args.parse`, such as `long`, `short`, `help`, `required`, `multiple`, and `default`.
 
-O builder suporta métodos encadeáveis, todos retornando ele mesmo:
+The builder supports chainable methods, all of which return itself:
 
-- `arg:long(value)` define o nome da opção longa. Suportado apenas para argumentos não `positional`.
-- `arg:short(value)` define o nome da opção curta. Suportado apenas para argumentos não `positional`.
-- `arg:help(value)` define o texto de ajuda.
-- `arg:required(value)` define se o argumento é obrigatório. Se `value` for omitido, o padrão é `true`.
-- `arg:multiple(value)` define se o argumento pode se repetir. Se `value` for omitido, o padrão é `true`.
-- `arg:default(value)` define o valor padrão. Se `value = nil`, o padrão é limpo.
+- `arg:long(value)` sets the long option name. Supported only for non-`positional` arguments.
+- `arg:short(value)` sets the short option name. Supported only for non-`positional` arguments.
+- `arg:help(value)` sets the help text.
+- `arg:required(value)` sets whether the argument is required. If `value` is omitted, it defaults to `true`.
+- `arg:multiple(value)` sets whether the argument can be repeated. If `value` is omitted, it defaults to `true`.
+- `arg:default(value)` sets the default value. If `value = nil`, the default is cleared.
 
-Exemplo:
+Example:
 
 ```lua
 local res = ptool.args.parse({
@@ -43,11 +43,11 @@ local res = ptool.args.parse({
 > 
 > `v0.3.0` - Added `subcommands` support.
 
-`ptool.args.parse(schema)` faz o parse dos argumentos do script com `clap` e retorna uma tabela indexada por `id`.
+`ptool.args.parse(schema)` parses script arguments with `clap` and returns a table indexed by `id`.
 
-Os argumentos do script vêm da parte após `--` em `ptool run <lua_file> -- ...`.
+Script arguments come from the part after `--` in `ptool run <lua_file> -- ...`.
 
-Por exemplo:
+For example:
 
 ```lua
 ptool.use("v0.1.0")
@@ -63,35 +63,35 @@ local res = ptool.args.parse({
 print("Hello, " .. res.name .. "!")
 ```
 
-### Estrutura do esquema
+### Schema Structure
 
-- `name` (string, opcional): O nome do comando, usado na saída de ajuda. O padrão é o nome do arquivo do script.
-- `about` (string, opcional): Descrição de ajuda.
-- `args` (table, opcional): Um array de definições de argumento. Cada item suporta duas formas:
-  - Uma tabela de argumento.
-  - Um objeto builder retornado por `ptool.args.arg(...)`.
-- `subcommands` (table, opcional): Um mapa de nome de subcomando para esquema de subcomando. Cada esquema de subcomando suporta `about`, `args` e `subcommands` recursivamente.
+- `name` (string, optional): The command name, used in help output. Defaults to the script file name.
+- `about` (string, optional): Help description.
+- `args` (table, optional): An array of argument definitions. Each item supports two forms:
+  - An argument table.
+  - A builder object returned by `ptool.args.arg(...)`.
+- `subcommands` (table, optional): A map of subcommand name to subcommand schema. Each subcommand schema supports `about`, `args`, and `subcommands` recursively.
 
-Pelo menos um de `args` ou `subcommands` precisa ser fornecido.
+At least one of `args` or `subcommands` must be provided.
 
-Campos da tabela de argumento:
+Argument table fields:
 
-- `id` (string, obrigatório): O identificador do argumento. Ele também é a chave na tabela retornada.
-- `kind` (string, obrigatório): O tipo do argumento. Valores suportados:
-  - `"flag"`: Um flag booleano.
-  - `"string"`: Uma opção string.
-  - `"int"`: Uma opção inteira (`i64`).
-  - `"positional"`: Um argumento posicional.
-- `long` (string, opcional): O nome da opção longa, como `"name"` para `--name`. Para argumentos não `positional`, o padrão pode ser derivado de `id`.
-- `short` (string, opcional): O nome da opção curta, um único caractere como `"v"` para `-v`.
-- `help` (string, opcional): Texto de ajuda do argumento.
-- `required` (boolean, opcional): Se o argumento é obrigatório. O padrão é `false`.
-- `multiple` (boolean, opcional): Se o argumento pode se repetir. O padrão é `false`.
-- `default` (string/integer, opcional): O valor padrão.
+- `id` (string, required): The argument identifier. It is also the key in the returned table.
+- `kind` (string, required): The argument type. Supported values:
+  - `"flag"`: A boolean flag.
+  - `"string"`: A string option.
+  - `"int"`: An integer option (`i64`).
+  - `"positional"`: A positional argument.
+- `long` (string, optional): The long option name, such as `"name"` for `--name`. For non-`positional` arguments, the default can be derived from `id`.
+- `short` (string, optional): The short option name, a single character such as `"v"` for `-v`.
+- `help` (string, optional): Help text for the argument.
+- `required` (boolean, optional): Whether the argument is required. Defaults to `false`.
+- `multiple` (boolean, optional): Whether the argument can be repeated. Defaults to `false`.
+- `default` (string/integer, optional): The default value.
 
-Quando `subcommands` está presente, `args` do comando atual age como opções compartilhadas para aquela árvore de comandos e é aceito antes ou depois do subcomando selecionado.
+When `subcommands` is present, the current command's `args` act as shared options for that command tree, and are accepted before or after the selected subcommand.
 
-Exemplo com subcomandos:
+Example with subcommands:
 
 ```lua
 local res = ptool.args.parse({
@@ -122,36 +122,36 @@ local res = ptool.args.parse({
 })
 ```
 
-### Restrições
+### Constraints
 
-- As seguintes restrições se aplicam tanto a tabelas de argumento quanto à sintaxe de builder.
-- Argumentos não `positional` podem omitir `long` e `short`. Se `long` for omitido, `id` é usado automaticamente.
-- Argumentos `positional` não podem definir `long`, `short` ou `default`.
-- Quando `positional.multiple = true`, ele precisa ser o último argumento em `args`.
-- `multiple = true` só é suportado para `string` e `positional`.
-- `default` só é suportado para `string` e `int`, e não pode ser usado junto com `multiple = true`.
-- Quando `subcommands` está presente, argumentos `positional` não são permitidos nesse mesmo esquema.
-- Quando `subcommands` está presente no nível superior, os ids de argumento `command_path` e `args` ficam reservados.
-- Ao longo de um mesmo caminho de subcomando selecionado, subcomandos ancestrais e descendentes não podem reutilizar o mesmo `id` de argumento, porque seus valores são mesclados em uma única tabela `args`.
+- The following constraints apply to both argument tables and builder syntax.
+- Non-`positional` arguments may omit `long` and `short`. If `long` is omitted, `id` is used automatically.
+- `positional` arguments cannot set `long`, `short`, or `default`.
+- When `positional.multiple = true`, it must be the last argument in `args`.
+- `multiple = true` is supported only for `string` and `positional`.
+- `default` is supported only for `string` and `int`, and cannot be used together with `multiple = true`.
+- When `subcommands` is present, `positional` arguments are not allowed in that same schema.
+- When `subcommands` is present at the top level, argument ids `command_path` and `args` are reserved.
+- Along one selected subcommand path, ancestor and descendant subcommands cannot reuse the same argument `id`, because their values are merged into one `args` table.
 
-### Valor de retorno
+### Return Value
 
-Uma tabela Lua é retornada, em que as chaves são `id` e os tipos de valor são:
+A Lua table is returned where keys are `id` and value types are as follows:
 
 - `flag` -> `boolean`
-- `string` -> `string` (ou `string[]` quando `multiple = true`)
+- `string` -> `string` (or `string[]` when `multiple = true`)
 - `int` -> `integer`
-- `positional` -> `string` (ou `string[]` quando `multiple = true`)
+- `positional` -> `string` (or `string[]` when `multiple = true`)
 
-Quando `subcommands` não está presente, o valor de retorno permanece plano como acima.
+When `subcommands` is not present, the return value stays flat as above.
 
-Quando `subcommands` está presente, o valor de retorno tem este formato:
+When `subcommands` is present, the return value has this shape:
 
-- Valores de `args` do nível superior são retornados diretamente na tabela de nível superior.
-- `command_path` -> `string[]`: O caminho de subcomando correspondente, por exemplo `{"build", "web"}`.
-- `args` -> `table`: Os valores de argumento mesclados do caminho de subcomando correspondente.
+- Top-level `args` values are returned directly on the top-level table.
+- `command_path` -> `string[]`: The matched subcommand path, for example `{"build", "web"}`.
+- `args` -> `table`: The merged argument values from the matched subcommand path.
 
-Por exemplo:
+For example:
 
 ```lua
 {

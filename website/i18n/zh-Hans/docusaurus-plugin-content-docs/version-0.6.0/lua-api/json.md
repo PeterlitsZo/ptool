@@ -1,32 +1,32 @@
 # JSON API
 
-JSON 解析与序列化辅助能力位于 `ptool.json` 和 `p.json` 下。
+JSON parsing and serialization helpers are available under `ptool.json` and `p.json`.
 
 ## ptool.json.parse
 
-> `v0.3.0` - 引入。
+> `v0.3.0` - Introduced.
 
-`ptool.json.parse(input)` 将 JSON 字符串解析为 Lua 值。
+`ptool.json.parse(input)` parses a JSON string into a Lua value.
 
-- `input`（string，必填）：JSON 文本。
-- 返回：解析后的 Lua 值。根节点可以是任意 JSON 类型。
+- `input` (string, required): The JSON text.
+- Returns: The parsed Lua value. The root can be any JSON type.
 
-类型映射：
+Type mapping:
 
 - JSON object -> Lua table
-- JSON array -> Lua 序列表（从 1 开始）
+- JSON array -> Lua sequence table (1-based)
 - JSON string -> Lua string
-- 可放入 `i64` 的 JSON integer -> Lua integer
-- 其他 JSON number -> Lua number
+- JSON integer that fits in `i64` -> Lua integer
+- Other JSON number -> Lua number
 - JSON boolean -> Lua boolean
 - JSON null -> Lua `nil`
 
-错误行为：
+Error behavior:
 
-- 如果 `input` 不是字符串，会抛出错误。
-- 如果 JSON 语法有误，会抛出错误，错误信息中包含 `serde_json` 返回的解析细节。
+- An error is raised if `input` is not a string.
+- A JSON syntax error raises an error whose message includes the parser detail from `serde_json`.
 
-示例：
+Example:
 
 ```lua
 local data = p.json.parse('{"name":"ptool","features":["json","repl"],"stars":42}')
@@ -38,22 +38,22 @@ print(data.stars)
 
 ## ptool.json.stringify
 
-> `v0.3.0` - 引入。
+> `v0.3.0` - Introduced.
 
-`ptool.json.stringify(value[, options])` 将 Lua 值编码为 JSON 字符串。
+`ptool.json.stringify(value[, options])` converts a Lua value to a JSON string.
 
-- `value`（兼容 JSON 的 Lua 值，必填）：要编码的值。
-- `options`（table，可选）：序列化选项。
-- `options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。 默认为 `false`。
-- 返回：编码后的 JSON 字符串。
+- `value` (JSON-compatible Lua value, required): The value to encode.
+- `options` (table, optional): Serialization options.
+- `options.pretty` (boolean, optional): When `true`, output pretty-printed JSON. Defaults to `false`.
+- Returns: The encoded JSON string.
 
-行为说明：
+Behavior:
 
-- 默认输出紧凑 JSON，不额外插入空白。
-- pretty 输出为带缩进的多行 JSON。
-- 值必须与 JSON 兼容。函数、thread、userdata 以及其他不可序列化的 Lua 值会报错。
+- Default output is compact JSON with no extra whitespace.
+- Pretty output uses indented multi-line JSON.
+- Values must be JSON-compatible. Functions, threads, userdata, and other non-serializable Lua values raise an error.
 
-示例：
+Example:
 
 ```lua
 local text = p.json.stringify({
@@ -65,7 +65,7 @@ local text = p.json.stringify({
 print(text)
 ```
 
-说明：
+Notes:
 
-- Lua table 中的 `nil` 值遵循 `mlua` 的 serde 转换行为，不会以 JSON 对象字段的形式保留下来。
-- Lua table 该被视为数组还是对象，遵循 `mlua` 的 serde 转换规则。
+- `nil` values inside Lua tables follow `mlua`'s serde conversion behavior and are not preserved as JSON object fields.
+- Array/object detection for Lua tables follows `mlua`'s serde conversion rules.

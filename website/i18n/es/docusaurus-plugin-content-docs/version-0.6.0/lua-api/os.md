@@ -1,21 +1,21 @@
-# API de sistema operativo
+# OS API
 
-`ptool.os` expone utilidades para leer el entorno actual del runtime y consultar detalles básicos del proceso anfitrión.
+`ptool.os` exposes helpers for reading the current runtime environment and querying basic host-process details.
 
 ## ptool.os.getenv
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.getenv(name)` devuelve el valor actual de una variable de entorno.
+`ptool.os.getenv(name)` returns the current value of an environment variable.
 
-- `name` (string, obligatorio): Nombre de la variable de entorno.
-- Devuelve: `string|nil`.
+- `name` (string, required): Environment variable name.
+- Returns: `string|nil`.
 
-Comportamiento:
+Behavior:
 
-- Devuelve `nil` cuando la variable no está definida.
-- Lee el entorno actual del runtime de `ptool`, incluidos los valores cambiados por `ptool.os.setenv(...)` y `ptool.os.unsetenv(...)`.
-- Lanza un error cuando `name` está vacío o contiene caracteres inválidos como `=`.
+- Returns `nil` when the variable is not set.
+- Reads the current `ptool` runtime environment, including values changed by `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`.
+- Raises an error when `name` is empty or contains invalid characters such as `=`.
 
 Example:
 
@@ -28,11 +28,11 @@ print(home)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.env()` devuelve una tabla instantánea del entorno actual del runtime.
+`ptool.os.env()` returns a snapshot table of the current runtime environment.
 
-- Devuelve: `table`.
+- Returns: `table`.
 
-Comportamiento:
+Behavior:
 
 - The returned table maps variable names to string values.
 - Values changed through `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)` are reflected in the snapshot.
@@ -48,16 +48,16 @@ print(env.HOME)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.setenv(name, value)` define una variable de entorno en el runtime actual de `ptool`.
+`ptool.os.setenv(name, value)` sets an environment variable in the current `ptool` runtime.
 
-- `name` (string, obligatorio): Nombre de la variable de entorno.
-- `value` (string, obligatorio): Valor de la variable.
+- `name` (string, required): Environment variable name.
+- `value` (string, required): Environment variable value.
 
-Comportamiento:
+Behavior:
 
-- Esto actualiza el entorno del runtime actual de `ptool`, no el shell padre.
+- This updates the current `ptool` runtime environment, not the parent shell.
 - Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched later through `ptool.run(...)`.
-- Los valores definidos aquí son visibles para `ptool.os.getenv(...)`, `ptool.os.env()` y los procesos hijos lanzados después mediante `ptool.run(...)`.
+- Raises an error when `name` is empty, contains `=`, or when `value` contains NUL.
 
 Example:
 
@@ -70,14 +70,14 @@ print(p.os.getenv("APP_ENV"))
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.unsetenv(name)` elimina una variable de entorno del runtime actual de `ptool`.
+`ptool.os.unsetenv(name)` removes an environment variable from the current `ptool` runtime.
 
-- `name` (string, obligatorio): Nombre de la variable de entorno.
+- `name` (string, required): Environment variable name.
 
-Comportamiento:
+Behavior:
 
 - This affects later calls to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched by `ptool.run(...)`.
-- Lanza un error cuando `name` está vacío o contiene caracteres inválidos como `=`.
+- Raises an error when `name` is empty or contains invalid characters such as `=`.
 
 Example:
 
@@ -90,9 +90,9 @@ assert(p.os.getenv("APP_ENV") == nil)
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.homedir()` devuelve el directorio personal del usuario actual.
+`ptool.os.homedir()` returns the current user's home directory.
 
-- Devuelve: `string|nil`.
+- Returns: `string|nil`.
 
 Example:
 
@@ -104,9 +104,9 @@ local home = p.os.homedir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.tmpdir()` devuelve el directorio temporal del sistema.
+`ptool.os.tmpdir()` returns the system temporary directory.
 
-- Devuelve: `string`.
+- Returns: `string`.
 
 Example:
 
@@ -118,33 +118,33 @@ local tmp = p.os.tmpdir()
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.hostname()` devuelve el nombre del host actual.
+`ptool.os.hostname()` returns the current host name.
 
-- Devuelve: `string|nil`.
+- Returns: `string|nil`.
 
 ## ptool.os.username
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.username()` devuelve el nombre del usuario actual.
+`ptool.os.username()` returns the current user name.
 
-- Devuelve: `string|nil`.
+- Returns: `string|nil`.
 
 ## ptool.os.pid
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.pid()` devuelve el PID del proceso actual de `ptool`.
+`ptool.os.pid()` returns the current `ptool` process ID.
 
-- Devuelve: `integer`.
+- Returns: `integer`.
 
 ## ptool.os.exepath
 
 > `v0.4.0` - Introduced.
 
-`ptool.os.exepath()` devuelve la ruta resuelta del ejecutable `ptool` en ejecución.
+`ptool.os.exepath()` returns the resolved path of the running `ptool` executable.
 
-- Devuelve: `string|nil`.
+- Returns: `string|nil`.
 
 Example:
 

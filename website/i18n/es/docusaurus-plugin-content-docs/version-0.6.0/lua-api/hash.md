@@ -1,15 +1,15 @@
-# API de hash
+# Hash API
 
-Las utilidades de hash están disponibles bajo `ptool.hash` y `p.hash`.
+Hashing helpers are available under `ptool.hash` and `p.hash`.
 
 ## ptool.hash.sha256
 
 > `v0.2.0` - Introduced.
 
-`ptool.hash.sha256(input)` devuelve el digest SHA-256 de una cadena Lua.
+`ptool.hash.sha256(input)` returns the SHA-256 digest of a Lua string.
 
-- `input` (string, obligatorio): La cadena Lua de entrada. El digest se calcula a partir de los bytes sin procesar de la cadena.
-- Devuelve: `string` (digest hexadecimal en minúsculas).
+- `input` (string, required): The input Lua string. The digest is computed from the string's raw bytes.
+- Returns: `string` (lowercase hexadecimal digest).
 
 ```lua
 print(ptool.hash.sha256("hello"))
@@ -20,10 +20,10 @@ print(ptool.hash.sha256("hello"))
 
 > `v0.2.0` - Introduced.
 
-`ptool.hash.sha1(input)` devuelve el digest SHA-1 de una cadena Lua.
+`ptool.hash.sha1(input)` returns the SHA-1 digest of a Lua string.
 
-- `input` (string, obligatorio): La cadena Lua de entrada. El digest se calcula a partir de los bytes sin procesar de la cadena.
-- Devuelve: `string` (digest hexadecimal en minúsculas).
+- `input` (string, required): The input Lua string. The digest is computed from the string's raw bytes.
+- Returns: `string` (lowercase hexadecimal digest).
 
 ```lua
 print(ptool.hash.sha1("hello"))
@@ -34,10 +34,10 @@ print(ptool.hash.sha1("hello"))
 
 > `v0.2.0` - Introduced.
 
-`ptool.hash.md5(input)` devuelve el digest MD5 de una cadena Lua.
+`ptool.hash.md5(input)` returns the MD5 digest of a Lua string.
 
-- `input` (string, obligatorio): La cadena Lua de entrada. El digest se calcula a partir de los bytes sin procesar de la cadena.
-- Devuelve: `string` (digest hexadecimal en minúsculas).
+- `input` (string, required): The input Lua string. The digest is computed from the string's raw bytes.
+- Returns: `string` (lowercase hexadecimal digest).
 
 ```lua
 print(ptool.hash.md5("hello"))

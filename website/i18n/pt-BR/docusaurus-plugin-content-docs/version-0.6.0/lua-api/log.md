@@ -1,20 +1,20 @@
-# API de log
+# Log API
 
-`ptool.log` expõe utilitários de logging por nível tanto em `ptool.log` quanto em `p.log`.
+`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`.
 
-Cada chamada de log gera uma linha neste formato:
+Every log call renders a line in this format:
 
 ```text
 [2026-04-30 14:54:56] INFO message text
 ```
 
-Comportamento:
+Behavior:
 
-- O timestamp usa a hora local no formato `YYYY-MM-DD HH:MM:SS`.
-- O rótulo de nível usa os nomes completos `TRACE`, `DEBUG`, `INFO`, `WARN` e `ERROR`.
-- A saída colorida é habilitada automaticamente quando o `ptool` está escrevendo em um terminal.
-- `ptool.log.error(...)` escreve em `stderr`. Os demais níveis escrevem em `stdout`.
-- Vários argumentos são unidos com espaços. Valores que não são string são renderizados em uma forma inspect de linha única.
+- The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format.
+- The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, and `ERROR`.
+- Colored output is enabled automatically when `ptool` is writing to a terminal.
+- `ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`.
+- Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form.
 
 ## ptool.log.trace
 
@@ -24,7 +24,7 @@ Comportamento:
 ptool.log.trace(...)
 ```
 
-Escreve uma linha de log no nível trace.
+Writes a trace-level log line.
 
 ## ptool.log.debug
 
@@ -34,7 +34,7 @@ Escreve uma linha de log no nível trace.
 ptool.log.debug(...)
 ```
 
-Escreve uma linha de log no nível debug.
+Writes a debug-level log line.
 
 ## ptool.log.info
 
@@ -44,7 +44,7 @@ Escreve uma linha de log no nível debug.
 ptool.log.info(...)
 ```
 
-Escreve uma linha de log no nível info.
+Writes an info-level log line.
 
 ## ptool.log.warn
 
@@ -54,7 +54,7 @@ Escreve uma linha de log no nível info.
 ptool.log.warn(...)
 ```
 
-Escreve uma linha de log no nível warn.
+Writes a warning-level log line.
 
 ## ptool.log.error
 
@@ -64,9 +64,9 @@ Escreve uma linha de log no nível warn.
 ptool.log.error(...)
 ```
 
-Escreve uma linha de log no nível error em `stderr`.
+Writes an error-level log line to `stderr`.
 
-Exemplo:
+Example:
 
 ```lua
 p.log.info("hello", { answer = 42 })
@@ -74,7 +74,7 @@ p.log.warn("careful")
 p.log.error("boom")
 ```
 
-Saída de exemplo:
+Example output:
 
 ```text
 [2026-04-30 14:54:56] INFO hello { answer = 42 }
