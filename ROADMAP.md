@@ -1,6 +1,9 @@
 # v0.8.0
 
 - [ ] Support to get the ptool's version.
+- [ ] Enhance the `p.semvar`:
+  - Support `Version:is_release` and `Version:is_prerelease`.
+  - Support `Version:bump` method.
 
 # v0.7.0
 

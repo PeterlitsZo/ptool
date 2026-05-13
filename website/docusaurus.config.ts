@@ -2,6 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import type {PluginOptions as LocalSearchOptions} from '@easyops-cn/docusaurus-search-local';
+import {readFileSync} from 'node:fs';
 
 const localSearchOptions = {
   hashed: true,
@@ -17,6 +18,12 @@ const localSearchTheme: NonNullable<Config['themes']>[number] = [
   '@easyops-cn/docusaurus-search-local',
   localSearchOptions,
 ];
+
+const stableDocVersions = readStableDocVersions();
+const lastStableDocVersion = stableDocVersions[0];
+const stableDocVersionConfigs = Object.fromEntries(
+  stableDocVersions.map((version) => [version, {label: `v${version}`}] as const),
+);
 
 const config: Config = {
   title: 'ptool',
@@ -67,15 +74,13 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/PeterlitsZo/ptool/tree/main/website/',
-          lastVersion: '0.5.0',
+          ...(lastStableDocVersion ? {lastVersion: lastStableDocVersion} : {}),
           versions: {
             current: {
               label: 'Unreleased',
               path: 'unreleased',
             },
-            '0.5.0': {
-              label: 'v0.5.0',
-            },
+            ...stableDocVersionConfigs,
           },
         },
         blog: false,
@@ -168,3 +173,21 @@ const config: Config = {
 };
 
 export default config;
+
+function readStableDocVersions(): string[] {
+  try {
+    const content = readFileSync(new URL('./versions.json', import.meta.url), 'utf8');
+    const parsed = JSON.parse(content);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    if (
+      error &&
+      typeof error === 'object' &&
+      'code' in error &&
+      error.code === 'ENOENT'
+    ) {
+      return [];
+    }
+    throw error;
+  }
+}

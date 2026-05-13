@@ -13,7 +13,6 @@ const outputDir = path.join(websiteDir, 'static', 'raw');
 const locales = ['en', 'zh-Hans', 'es', 'pt-BR', 'ja'];
 const currentVersionName = 'current';
 const currentVersionPath = 'unreleased';
-const lastVersionName = '0.5.0';
 
 async function main() {
   await rm(outputDir, {recursive: true, force: true});
@@ -21,8 +20,10 @@ async function main() {
 
   const manifest = [];
   const stableVersions = await readVersionNames();
+  const lastVersionName = stableVersions[0] ?? null;
 
   await exportTree({
+    lastVersionName,
     locale: 'en',
     sourceDir: docsDir,
     outputSubdir: path.join('docs'),
@@ -46,6 +47,7 @@ async function main() {
     }
 
     await exportTree({
+      lastVersionName,
       locale,
       sourceDir: path.join(
         i18nDir,
@@ -87,7 +89,14 @@ async function main() {
   );
 }
 
-async function exportTree({locale, sourceDir, outputSubdir, manifest, versionName}) {
+async function exportTree({
+  locale,
+  lastVersionName,
+  sourceDir,
+  outputSubdir,
+  manifest,
+  versionName,
+}) {
   const files = await collectMarkdownFiles(sourceDir);
 
   for (const file of files) {
@@ -99,6 +108,7 @@ async function exportTree({locale, sourceDir, outputSubdir, manifest, versionNam
     manifest.push(
       await createManifestEntry({
         locale,
+        lastVersionName,
         sourceDir,
         outputSubdir,
         file,
@@ -139,7 +149,14 @@ async function collectMarkdownFiles(dir) {
   return files.flat().sort((a, b) => a.localeCompare(b));
 }
 
-async function createManifestEntry({locale, sourceDir, outputSubdir, file, versionName}) {
+async function createManifestEntry({
+  locale,
+  lastVersionName,
+  sourceDir,
+  outputSubdir,
+  file,
+  versionName,
+}) {
   const relativePath = path.relative(sourceDir, file);
   const rawUrl = `/${toPosixPath(path.join('raw', outputSubdir, relativePath))}`;
   const sourcePath = toPosixPath(path.relative(websiteDir, file));
@@ -151,7 +168,7 @@ async function createManifestEntry({locale, sourceDir, outputSubdir, file, versi
     sourcePath,
     rawUrl,
     version: versionName,
-    permalink: toPermalink({locale, docPath, versionName}),
+    permalink: toPermalink({locale, docPath, lastVersionName, versionName}),
   };
 }
 
@@ -167,7 +184,7 @@ function normalizeDocPath(relativePath) {
   return normalized;
 }
 
-function toPermalink({locale, docPath, versionName}) {
+function toPermalink({locale, docPath, lastVersionName, versionName}) {
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
   const docPrefix = '/docs';
 

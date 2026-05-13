@@ -1,6 +1,6 @@
-#!/usr/bin/env -S ptool run
+#!/usr/bin/env ptool
 
-p.use("v0.4.0")
+p.use("v0.5.0")
 p.config { run = { check = true } }
 
 -- Parse arguments.
@@ -53,6 +53,17 @@ local updated_cargo = p.toml.set(
 )
 p.fs.write("Cargo.toml", updated_cargo)
 
+-- If the version is a stable release, update the website documentation.
+local is_stable_release = next_version.pre == nil
+if is_stable_release then
+  p.run(
+    "node website/scripts/manage-doc-versions.mjs snapshot "
+      .. next_version_str
+      .. " --keep 3"
+  )
+  p.run("cd website && npm run i18n:refresh-docs")
+end
+
 -- Commit, tag, and push.
 local tag_name = "v" .. next_version_str
 p.run("cargo build")
@@ -63,7 +74,18 @@ local update_changelog = p.ask(
 if update_changelog ~= "Yes" then
   error("Please update the CHANGELOG.md file before releasing.", 0)
 end
-p.run("git add CHANGELOG.md Cargo.toml Cargo.lock")
+if is_stable_release then
+  p.run(
+    "git add CHANGELOG.md Cargo.toml Cargo.lock"
+      .. " website/versions.json"
+      .. " website/versioned_docs"
+      .. " website/versioned_sidebars"
+      .. " website/po/docs"
+      .. " website/i18n"
+  )
+else
+  p.run("git add CHANGELOG.md Cargo.toml Cargo.lock")
+end
 p.run(
   "git",
   { "commit", "-m", 'chore: Release "' .. next_version_str .. '".' },
