@@ -454,18 +454,20 @@ res:assert_ok()
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
+- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
 - `echo`（boolean，可选）：本次执行是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
 - `check`（boolean，可选）：退出码不为 `0` 时是否立即抛错。如果省略，则使用 `ptool.config({ run = { check = ... } })` 中的值；若仍未设置，则默认是 `false`。
 - `confirm`（boolean，可选）：执行前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
 - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 如果省略，则使用 `ptool.config({ run = { retry = ... } })` 中的值；若仍未设置， 则默认是 `false`。
 - `stdout`（string，可选）：stdout 处理策略。支持：
-  - `"inherit"`：继承到当前终端（默认）。
+  - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`：捕获到 `res.stdout`。
-  - `"null"`：丢弃输出。
+  - `"null"`: Discard the output.
 - `stderr`（string，可选）：stderr 处理策略。支持：
-  - `"inherit"`：继承到当前终端（默认）。
+  - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`：捕获到 `res.stderr`。
-  - `"null"`：丢弃输出。
+  - `"null"`: Discard the output.
+- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` with the same meaning.
 - 当 `confirm = true` 时：
   - 如果用户拒绝执行，会立即抛出错误。
   - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
@@ -481,6 +483,13 @@ ptool.run({
   args = {"hello"},
   env = { FOO = "bar" },
 })
+
+local res0 = ptool.run({
+  cmd = "cat",
+  stdin = "hello from stdin",
+  stdout = "capture",
+})
+print(res0.stdout)
 
 local res = ptool.run({
   cmd = "sh",
@@ -515,11 +524,10 @@ local res = ptool.run_capture("echo hello world")
 print(res.stdout)
 
 local res2 = ptool.run_capture({
-  cmd = "sh",
-  args = {"-c", "printf 'out'; printf 'err' >&2"},
+  cmd = "cat",
+  stdin = "captured stdin",
 })
 print(res2.stdout)
-print(res2.stderr)
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",

@@ -1,7 +1,9 @@
 use crate::{Error, ErrorKind, Result};
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::Command as ProcessCommand;
 use std::process::Stdio;
+use std::thread;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum RunStreamMode {
@@ -17,6 +19,7 @@ pub struct RunOptions {
     pub cwd: Option<String>,
     pub env: Vec<(String, String)>,
     pub env_remove: Vec<String>,
+    pub stdin: Option<Vec<u8>>,
     pub stdout: RunStreamMode,
     pub stderr: RunStreamMode,
 }
@@ -44,18 +47,59 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
         command.env(key, value);
     }
 
-    apply_stream_mode_for_stdout(&mut command, options.stdout);
-    apply_stream_mode_for_stderr(&mut command, options.stderr);
+    configure_stdio(
+        &mut command,
+        options.stdin.is_some(),
+        options.stdout,
+        options.stderr,
+    );
 
-    let output = command
-        .output()
+    let mut child = command
+        .spawn()
         .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
 
+    let stdin_handle = options.stdin.as_ref().and_then(|bytes| {
+        child.stdin.take().map(|mut pipe| {
+            let bytes = bytes.clone();
+            thread::spawn(move || -> std::io::Result<()> {
+                pipe.write_all(&bytes)?;
+                pipe.flush()?;
+                Ok(())
+            })
+        })
+    });
+
+    let stdout_handle = child.stdout.take().map(spawn_reader_thread);
+    let stderr_handle = child.stderr.take().map(spawn_reader_thread);
+
+    let status = child
+        .wait()
+        .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
+
+    if let Some(handle) = stdin_handle {
+        finish_io_thread(handle, "stdin", &options.cmd, &resolved_cwd)?;
+    }
+
+    let stdout = collect_process_output(
+        stdout_handle,
+        options.stdout,
+        "stdout",
+        &options.cmd,
+        &resolved_cwd,
+    )?;
+    let stderr = collect_process_output(
+        stderr_handle,
+        options.stderr,
+        "stderr",
+        &options.cmd,
+        &resolved_cwd,
+    )?;
+
     Ok(RunResult {
-        ok: output.status.success(),
-        code: output.status.code(),
-        stdout: bytes_to_captured_string(&output.stdout, options.stdout),
-        stderr: bytes_to_captured_string(&output.stderr, options.stderr),
+        ok: status.success(),
+        code: status.code(),
+        stdout: bytes_to_captured_string(&stdout, options.stdout),
+        stderr: bytes_to_captured_string(&stderr, options.stderr),
     })
 }
 
@@ -102,38 +146,99 @@ pub fn format_run_failed_message(
     message
 }
 
-fn apply_stream_mode_for_stdout(command: &mut ProcessCommand, mode: RunStreamMode) {
-    match mode {
-        RunStreamMode::Inherit => {
-            command.stdout(Stdio::inherit());
-        }
-        RunStreamMode::Capture => {
-            command.stdout(Stdio::piped());
-        }
-        RunStreamMode::Null => {
-            command.stdout(Stdio::null());
-        }
-    }
-}
-
-fn apply_stream_mode_for_stderr(command: &mut ProcessCommand, mode: RunStreamMode) {
-    match mode {
-        RunStreamMode::Inherit => {
-            command.stderr(Stdio::inherit());
-        }
-        RunStreamMode::Capture => {
-            command.stderr(Stdio::piped());
-        }
-        RunStreamMode::Null => {
-            command.stderr(Stdio::null());
-        }
-    }
+fn configure_stdio(
+    command: &mut ProcessCommand,
+    has_stdin: bool,
+    stdout_mode: RunStreamMode,
+    stderr_mode: RunStreamMode,
+) {
+    command.stdin(if has_stdin {
+        Stdio::piped()
+    } else {
+        Stdio::inherit()
+    });
+    command.stdout(match stdout_mode {
+        RunStreamMode::Inherit => Stdio::inherit(),
+        RunStreamMode::Capture => Stdio::piped(),
+        RunStreamMode::Null => Stdio::null(),
+    });
+    command.stderr(match stderr_mode {
+        RunStreamMode::Inherit => Stdio::inherit(),
+        RunStreamMode::Capture => Stdio::piped(),
+        RunStreamMode::Null => Stdio::null(),
+    });
 }
 
 fn bytes_to_captured_string(bytes: &[u8], mode: RunStreamMode) -> Option<String> {
     match mode {
         RunStreamMode::Capture => Some(String::from_utf8_lossy(bytes).to_string()),
         RunStreamMode::Inherit | RunStreamMode::Null => None,
+    }
+}
+
+fn spawn_reader_thread<R>(mut reader: R) -> thread::JoinHandle<std::io::Result<Vec<u8>>>
+where
+    R: Read + Send + 'static,
+{
+    thread::spawn(move || {
+        let mut buffer = Vec::new();
+        reader.read_to_end(&mut buffer)?;
+        Ok(buffer)
+    })
+}
+
+fn finish_io_thread(
+    handle: thread::JoinHandle<std::io::Result<()>>,
+    stream_name: &str,
+    cmd: &str,
+    cwd: &Path,
+) -> Result<()> {
+    match handle.join() {
+        Ok(Ok(())) => Ok(()),
+        Ok(Err(err)) => Err(build_run_io_error(
+            cmd,
+            cwd,
+            std::io::Error::new(
+                err.kind(),
+                format!("failed to write child {stream_name}: {err}"),
+            ),
+        )),
+        Err(_) => Err(build_run_io_error(
+            cmd,
+            cwd,
+            std::io::Error::other(format!("child {stream_name} worker panicked")),
+        )),
+    }
+}
+
+fn collect_process_output(
+    handle: Option<thread::JoinHandle<std::io::Result<Vec<u8>>>>,
+    mode: RunStreamMode,
+    stream_name: &str,
+    cmd: &str,
+    cwd: &Path,
+) -> Result<Vec<u8>> {
+    match mode {
+        RunStreamMode::Capture => match handle {
+            Some(handle) => match handle.join() {
+                Ok(Ok(bytes)) => Ok(bytes),
+                Ok(Err(err)) => Err(build_run_io_error(
+                    cmd,
+                    cwd,
+                    std::io::Error::new(
+                        err.kind(),
+                        format!("failed to read child {stream_name}: {err}"),
+                    ),
+                )),
+                Err(_) => Err(build_run_io_error(
+                    cmd,
+                    cwd,
+                    std::io::Error::other(format!("child {stream_name} worker panicked")),
+                )),
+            },
+            None => Ok(Vec::new()),
+        },
+        RunStreamMode::Inherit | RunStreamMode::Null => Ok(Vec::new()),
     }
 }
 

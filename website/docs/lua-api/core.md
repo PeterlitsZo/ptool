@@ -521,6 +521,8 @@ following fields:
 - `cwd` (string, optional): The child process working directory.
 - `env` (table, optional): Additional environment variables, where keys are
   variable names and values are variable values.
+- `stdin` (string, optional): String sent to the child process stdin. When this
+  is omitted, the child process inherits the current process stdin.
 - `echo` (boolean, optional): Whether to echo command information for this
   execution. If omitted, the value from `ptool.config({ run = { echo = ... } })`
   is used; if that is also unset, the default is `true`.
@@ -542,6 +544,9 @@ following fields:
   - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Capture into `res.stderr`.
   - `"null"`: Discard the output.
+- When shortcut call forms such as `ptool.run(cmdline, options)` or
+  `ptool.run(cmd, args, options)` are used, the per-call `options` table also
+  accepts `stdin` with the same meaning.
 - When `confirm = true`:
   - If the user refuses the execution, an error is raised immediately.
   - If the current environment is not interactive (no TTY), an error is raised
@@ -559,6 +564,13 @@ ptool.run({
   args = {"hello"},
   env = { FOO = "bar" },
 })
+
+local res0 = ptool.run({
+  cmd = "cat",
+  stdin = "hello from stdin",
+  stdout = "capture",
+})
+print(res0.stdout)
 
 local res = ptool.run({
   cmd = "sh",
@@ -594,11 +606,10 @@ local res = ptool.run_capture("echo hello world")
 print(res.stdout)
 
 local res2 = ptool.run_capture({
-  cmd = "sh",
-  args = {"-c", "printf 'out'; printf 'err' >&2"},
+  cmd = "cat",
+  stdin = "captured stdin",
 })
 print(res2.stdout)
-print(res2.stderr)
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",

@@ -454,18 +454,20 @@ res:assert_ok()
 - `args` (string[], 任意): 引数リスト。
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
+- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
 - `echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフォルトは `true` です。
 - `check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかどうか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それも未設定ならデフォルトは `false` です。
 - `confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデフォルトは `false` です。
 - `retry` (boolean, 任意): `check = true` のとき、失敗後に再試行するか ユーザーへ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使われ、それも未設定なら デフォルトは `false` です。
 - `stdout` (string, 任意): stdout の扱い。サポートされる値:
-  - `"inherit"`: 現在の端末へ引き継ぐ (デフォルト)。
+  - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: `res.stdout` にキャプチャする。
-  - `"null"`: 出力を破棄する。
+  - `"null"`: Discard the output.
 - `stderr` (string, 任意): stderr の扱い。サポートされる値:
-  - `"inherit"`: 現在の端末へ引き継ぐ (デフォルト)。
+  - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: `res.stderr` にキャプチャする。
-  - `"null"`: 出力を破棄する。
+  - `"null"`: Discard the output.
+- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` with the same meaning.
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -481,6 +483,13 @@ ptool.run({
   args = {"hello"},
   env = { FOO = "bar" },
 })
+
+local res0 = ptool.run({
+  cmd = "cat",
+  stdin = "hello from stdin",
+  stdout = "capture",
+})
+print(res0.stdout)
 
 local res = ptool.run({
   cmd = "sh",
@@ -515,11 +524,10 @@ local res = ptool.run_capture("echo hello world")
 print(res.stdout)
 
 local res2 = ptool.run_capture({
-  cmd = "sh",
-  args = {"-c", "printf 'out'; printf 'err' >&2"},
+  cmd = "cat",
+  stdin = "captured stdin",
 })
 print(res2.stdout)
-print(res2.stderr)
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",

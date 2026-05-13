@@ -454,18 +454,20 @@ res:assert_ok()
 - `args` (string[], opcional): A lista de argumentos.
 - `cwd` (string, opcional): O diretório de trabalho do processo filho.
 - `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
+- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
 - `echo` (boolean, opcional): Se informações do comando devem ser exibidas para esta execução. Se omitido, é usado o valor de `ptool.config({ run = { echo = ... } })`; se ele também estiver ausente, o padrão é `true`.
 - `check` (boolean, opcional): Se deve gerar erro imediatamente quando o código de saída não é `0`. Se omitido, é usado o valor de `ptool.config({ run = { check = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `confirm` (boolean, opcional): Se deve pedir confirmação ao usuário antes da execução. Se omitido, é usado o valor de `ptool.config({ run = { confirm = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma falha quando `check = true`. Se omitido, é usado o valor de `ptool.config({ run = { retry = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `stdout` (string, opcional): Estratégia de tratamento de stdout. Valores suportados:
-  - `"inherit"`: Herda para o terminal atual (padrão).
+  - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Captura em `res.stdout`.
-  - `"null"`: Descarta a saída.
+  - `"null"`: Discard the output.
 - `stderr` (string, opcional): Estratégia de tratamento de stderr. Valores suportados:
-  - `"inherit"`: Herda para o terminal atual (padrão).
+  - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Captura em `res.stderr`.
-  - `"null"`: Descarta a saída.
+  - `"null"`: Discard the output.
+- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` with the same meaning.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
@@ -481,6 +483,13 @@ ptool.run({
   args = {"hello"},
   env = { FOO = "bar" },
 })
+
+local res0 = ptool.run({
+  cmd = "cat",
+  stdin = "hello from stdin",
+  stdout = "capture",
+})
+print(res0.stdout)
 
 local res = ptool.run({
   cmd = "sh",
@@ -515,11 +524,10 @@ local res = ptool.run_capture("echo hello world")
 print(res.stdout)
 
 local res2 = ptool.run_capture({
-  cmd = "sh",
-  args = {"-c", "printf 'out'; printf 'err' >&2"},
+  cmd = "cat",
+  stdin = "captured stdin",
 })
 print(res2.stdout)
-print(res2.stderr)
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",

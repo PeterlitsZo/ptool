@@ -11,6 +11,9 @@
 
 - Added offline on-site search to the Docusaurus docs site, with local search
   indexes for all supported locales.
+- Added `stdin` support to `ptool.run(...)` and `ptool.run_capture(...)`, so
+  Lua scripts can pass explicit input to local child processes without shell
+  piping.
 - Added the `ptool.datetime` / `p.datetime` module for timezone-aware datetime
   parsing, formatting, conversion, and comparison, and documented it across
   all supported locales.
