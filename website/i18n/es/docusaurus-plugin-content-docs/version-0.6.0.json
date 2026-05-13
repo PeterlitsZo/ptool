@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Versión de desarrollo actual",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Guide": {
+    "message": "Guía",
+    "description": "The label for category 'Guide' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Lua API": {
+    "message": "API de Lua",
+    "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
+  }
+}

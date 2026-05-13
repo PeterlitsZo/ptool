@@ -1,0 +1,46 @@
+# Lua API Overview
+
+`ptool` exposes a broad set of helpers through `ptool` and `p`.
+
+## Core APIs
+
+- [Core Lua API](./core.md): Script lifecycle, process execution, config, and
+  terminal helpers.
+
+## Modules
+
+- [Args API](./args.md): Command-line argument schema parsing for Lua scripts.
+- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete
+  datetimes with timezone support.
+- [SemVer API](./semver.md): Parse, compare, and bump semantic versions.
+- [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
+- [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.
+- [OS API](./os.md): Read runtime environment variables and inspect host
+  process details.
+- [Platform API](./platform.md): Detect the current OS, architecture, and target
+  triple.
+- [ANSI API](./ansi.md): Build styled terminal output with ANSI escape
+  sequences.
+- [TUI API](./tui.md): Build simple terminal user interfaces with a structured
+  view tree and event loop.
+- [Log API](./log.md): Write timestamped terminal logs with level-based output.
+- [HTTP API](./http.md): Send HTTP requests and consume response bodies.
+- [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
+- [YAML API](./yaml.md): Parse YAML text, read nested values, and stringify Lua
+  values as YAML.
+- [Database API](./db.md): Open database connections and run SQL queries.
+- [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer
+  files.
+- [Path API](./path.md): Manipulate paths lexically without touching the
+  filesystem.
+- [TOML API](./toml.md): Parse, stringify, read, update, and remove TOML values.
+- [Regex API](./re.md): Compile regexes and search, capture, replace, or split
+  text.
+- [String API](./str.md): Trim, split, join, replace, and format strings.
+- [Table API](./tbl.md): Map, filter, and concatenate dense list tables.
+- [Filesystem API](./fs.md): Read, write, create, and glob filesystem paths.
+- [Shell API](./sh.md): Split shell-like command lines into argument arrays.
+- [Template API](./template.md): Render text templates from Lua data.
+
+Use this page as the entrypoint, then jump to the module page you need for the
+full function reference.
