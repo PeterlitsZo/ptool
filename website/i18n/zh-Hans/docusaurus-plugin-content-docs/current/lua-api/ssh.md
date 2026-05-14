@@ -140,30 +140,32 @@ conn:run({ cmd = "git", args = {"rev-parse", "HEAD"} })
 - `cwd`（string，可选）：远程工作目录。会通过在生成的远程 shell 命令前追加 `cd ... &&` 实现。
 - `env`（table，可选）：远程环境变量，键和值都必须是字符串。会通过在生成的 远程 shell 命令前追加 `export ... &&` 实现。
 - `stdin`（string，可选）：发送给远程进程 stdin 的字符串。
-- `echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `false`。
-- `check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。
-- `stdout`（string，可选）：stdout 处理策略。支持：
-  - `"inherit"`：继承到当前终端（默认）。
-  - `"capture"`：捕获到 `res.stdout`。
-  - `"null"`：丢弃输出。
-- `stderr`（string，可选）：stderr 处理策略。支持：
-  - `"inherit"`：继承到当前终端（默认）。
-  - `"capture"`：捕获到 `res.stderr`。
-  - `"null"`：丢弃输出。
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stdout`.
+  - `"null"`: Discard the output.
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stderr`.
+  - `"null"`: Discard the output.
 
 使用快捷调用形式时，`options` 仅支持：
 
 - `stdin`（string，可选）：发送给远程进程 stdin 的字符串。
-- `echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `false`。
-- `check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。
-- `stdout`（string，可选）：stdout 处理策略。支持：
-  - `"inherit"`：继承到当前终端（默认）。
-  - `"capture"`：捕获到 `res.stdout`。
-  - `"null"`：丢弃输出。
-- `stderr`（string，可选）：stderr 处理策略。支持：
-  - `"inherit"`：继承到当前终端（默认）。
-  - `"capture"`：捕获到 `res.stderr`。
-  - `"null"`：丢弃输出。
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stdout`.
+  - `"null"`: Discard the output.
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stderr`.
+  - `"null"`: Discard the output.
 
 返回值规则：
 
@@ -190,6 +192,7 @@ local res2 = ssh:run({
   env = {
     FOO = "bar",
   },
+  trim = true,
   stdout = "capture",
   check = true,
 })
@@ -212,14 +215,14 @@ print(res2.stdout)
 - `stdout` 默认是 `"capture"`。
 - `stderr` 默认是 `"capture"`。
 
-你仍然可以在 `options` 中显式覆盖任意一个字段。
+`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
 
 示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
 
-local res = ssh:run_capture("uname -a")
+local res = ssh:run_capture("uname -a", { trim = true })
 print(res.stdout)
 
 local res2 = ssh:run_capture({
@@ -258,14 +261,14 @@ ssh:download(remote_release, "./tmp/current.tar.gz")
 
 ### exists
 
-> `v0.2.0` - 引入。
+> `v0.2.0` - Introduced.
 
 规范 API 名称：`ptool.ssh.Connection:exists`。
 
 `conn:exists(path)` 检查远程路径是否存在。
 
-- `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- 返回：远程路径存在时返回 `true`，否则返回 `false`。
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path exists, otherwise `false`.
 
 示例：
 
@@ -278,14 +281,14 @@ print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 
 ### is_file
 
-> `v0.2.0` - 引入。
+> `v0.2.0` - Introduced.
 
 规范 API 名称：`ptool.ssh.Connection:is_file`。
 
 `conn:is_file(path)` 检查远程路径是否存在且为普通文件。
 
-- `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- 返回：远程路径是文件时返回 `true`，否则返回 `false`。
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path is a file, otherwise `false`.
 
 示例：
 
@@ -300,14 +303,14 @@ end
 
 ### is_dir
 
-> `v0.2.0` - 引入。
+> `v0.2.0` - Introduced.
 
 规范 API 名称：`ptool.ssh.Connection:is_dir`。
 
 `conn:is_dir(path)` 检查远程路径是否存在且为目录。
 
-- `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- 返回：远程路径是目录时返回 `true`，否则返回 `false`。
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path is a directory, otherwise `false`.
 
 示例：
 
@@ -330,24 +333,24 @@ end
 
 - `local_path`（string，必填）：要上传的本地文件或目录。
 - `remote_path`（string|remote path，必填）：远程目标路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- `options`（table，可选）：传输选项。
-- 返回：包含以下字段的表：
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
   - `bytes`（integer）：已上传的普通文件字节数。上传目录时，它等于目录内所有已上传 文件大小之和。
   - `from`（string）：本地源路径。
   - `to`（string）：远程目标路径。
 
-支持的传输选项：
+Supported transfer options:
 
 - `parents`（boolean，可选）：上传前是否创建 `remote_path` 的父目录。默认值为 `false`。
-- `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
-- `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
+- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
 
-目录行为：
+Directory behavior:
 
 - 当 `local_path` 是文件时，行为保持不变。
 - 当 `local_path` 是目录且 `remote_path` 不存在时，`remote_path` 会成为目标目录根。
 - 当 `local_path` 是目录且 `remote_path` 已存在并且是目录时，会在其下按源目录的 basename 创建目标目录。
-- `overwrite = false` 时，如果最终目标目录已存在，则会报错。
+- `overwrite = false` rejects an already-existing destination directory for the final directory root.
 - 上传目录时，远程主机需要提供 `tar`。
 
 示例：
@@ -366,7 +369,7 @@ print(res.bytes)
 print(res.to)
 ```
 
-目录示例：
+Directory example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -391,24 +394,24 @@ print(res.to) -- deploy@example.com:22:/srv/app/releases
 
 - `remote_path`（string|remote path，必填）：远程源路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
 - `local_path`（string，必填）：本地目标路径。
-- `options`（table，可选）：传输选项。
-- 返回：包含以下字段的表：
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
   - `bytes`（integer）：已下载的普通文件字节数。下载目录时，它等于目录内所有已下载 文件大小之和。
   - `from`（string）：远程源路径。
   - `to`（string）：本地目标路径。
 
-支持的传输选项：
+Supported transfer options:
 
 - `parents`（boolean，可选）：下载前是否创建 `local_path` 的父目录。默认值为 `false`。
-- `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
-- `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
+- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
 
-目录行为：
+Directory behavior:
 
 - 当 `remote_path` 是文件时，行为保持不变。
 - 当 `remote_path` 是目录且 `local_path` 不存在时，`local_path` 会成为目标目录根。
 - 当 `remote_path` 是目录且 `local_path` 已存在并且是目录时，会在其下按远程源目录的 basename 创建目标目录。
-- `overwrite = false` 时，如果最终目标目录已存在，则会报错。
+- `overwrite = false` rejects an already-existing destination directory for the final directory root.
 - 下载目录时，远程主机需要提供 `tar`。
 
 示例：
@@ -426,7 +429,7 @@ print(res.bytes)
 print(res.from)
 ```
 
-目录示例：
+Directory example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -479,7 +482,7 @@ ssh:close()
 
 `remote:exists()` 检查远程路径是否存在。
 
-- 返回：远程路径存在时返回 `true`，否则返回 `false`。
+- Returns: `true` when the remote path exists, otherwise `false`.
 
 示例：
 
@@ -494,7 +497,7 @@ print(remote_release:exists())
 
 `remote:is_file()` 检查远程路径是否存在且为普通文件。
 
-- 返回：远程路径是文件时返回 `true`，否则返回 `false`。
+- Returns: `true` when the remote path is a file, otherwise `false`.
 
 示例：
 
@@ -511,7 +514,7 @@ end
 
 `remote:is_dir()` 检查远程路径是否存在且为目录。
 
-- 返回：远程路径是目录时返回 `true`，否则返回 `false`。
+- Returns: `true` when the remote path is a directory, otherwise `false`.
 
 示例：
 

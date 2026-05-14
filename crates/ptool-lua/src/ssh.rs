@@ -507,6 +507,7 @@ fn parse_run_call_with_defaults(
                 command: command.to_str()?.to_string(),
                 display_cwd: None,
                 stdin: None,
+                trim: false,
                 echo: true,
                 stdout: stream_defaults.stdout,
                 stderr: stream_defaults.stderr,
@@ -599,6 +600,7 @@ fn parse_run_call_with_defaults(
 
 struct ExecOverrides {
     stdin: Option<Vec<u8>>,
+    trim: Option<bool>,
     echo: Option<bool>,
     stdout: Option<SshStreamMode>,
     stderr: Option<SshStreamMode>,
@@ -619,6 +621,7 @@ fn parse_exec_overrides(options: Table, context: &str) -> mlua::Result<ExecOverr
 
     Ok(ExecOverrides {
         stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, context)?,
+        trim: options.get::<Option<bool>>("trim")?,
         echo: options.get::<Option<bool>>("echo")?,
         stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?,
         stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?,
@@ -635,6 +638,7 @@ fn build_exec_options_from_cmdline(
         command,
         display_cwd: None,
         stdin: options.stdin,
+        trim: options.trim.unwrap_or(false),
         echo: options.echo.unwrap_or(true),
         stdout: options.stdout.unwrap_or(stream_defaults.stdout),
         stderr: options.stderr.unwrap_or(stream_defaults.stderr),
@@ -655,6 +659,7 @@ fn build_exec_options_from_parts(
     )?;
     let options = options.unwrap_or(ExecOverrides {
         stdin: None,
+        trim: None,
         echo: None,
         stdout: None,
         stderr: None,
@@ -665,6 +670,7 @@ fn build_exec_options_from_parts(
         command,
         display_cwd: None,
         stdin: options.stdin,
+        trim: options.trim.unwrap_or(false),
         echo: options.echo.unwrap_or(true),
         stdout: options.stdout.unwrap_or(stream_defaults.stdout),
         stderr: options.stderr.unwrap_or(stream_defaults.stderr),
@@ -707,6 +713,7 @@ fn parse_run_options_table(
         command,
         display_cwd,
         stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, context)?,
+        trim: options.get::<Option<bool>>("trim")?.unwrap_or(false),
         echo: options.get::<Option<bool>>("echo")?.unwrap_or(true),
         stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?
             .unwrap_or(stream_defaults.stdout),

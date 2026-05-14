@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-14 19:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1108,6 +1108,13 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:526
 msgid ""
+"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+"from captured `stdout` and captured `stderr` before returning them. This "
+"only affects streams set to `\"capture\"`. Defaults to `false`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
+msgid ""
 "`echo` (boolean, optional): Whether to echo command information for this "
 "execution. If omitted, the value from `ptool.config({ run = { echo = ... } })"
 "` is used; if that is also unset, the default is `true`."
@@ -1116,7 +1123,7 @@ msgstr ""
 "`ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフ"
 "ォルトは `true` です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532
 msgid ""
 "`check` (boolean, optional): Whether to raise an error immediately when the "
 "exit code is not `0`. If omitted, the value from `ptool.config"
@@ -1127,7 +1134,7 @@ msgstr ""
 "うか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それ"
 "も未設定ならデフォルトは `false` です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:535
 msgid ""
 "`confirm` (boolean, optional): Whether to ask the user for confirmation "
 "before execution. If omitted, the value from `ptool.config"
@@ -1138,7 +1145,7 @@ msgstr ""
 "`ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデ"
 "フォルトは `false` です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:535
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:538
 msgid ""
 "`retry` (boolean, optional): Whether to ask the user whether to retry after "
 "a failed execution when `check = true`. If omitted, the value from "
@@ -1149,100 +1156,100 @@ msgstr ""
 "へ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使"
 "われ、それも未設定なら デフォルトは `false` です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 msgid ""
 "`stdout` (string, optional): Stdout handling strategy. Supported values:"
 msgstr "`stdout` (string, 任意): stdout の扱い。サポートされる値:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: 現在の端末へ引き継ぐ (デフォルト)。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr "`\"capture\"`: `res.stdout` にキャプチャする。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: 出力を破棄する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 msgid ""
 "`stderr` (string, optional): Stderr handling strategy. Supported values:"
 msgstr "`stderr` (string, 任意): stderr の扱い。サポートされる値:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: 現在の端末へ引き継ぐ (デフォルト)。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr "`\"capture\"`: `res.stderr` にキャプチャする。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: 出力を破棄する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:547
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
 msgid ""
 "When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run"
 "(cmd, args, options)` are used, the per-call `options` table also accepts "
-"`stdin` with the same meaning."
+"`stdin` and `trim` with the same meaning."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid "When `confirm = true`:"
 msgstr "`confirm = true` の場合:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid "If the user refuses the execution, an error is raised immediately."
 msgstr "ユーザーが実行を拒否すると即座にエラーになります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately."
 msgstr "現在の環境が非対話 (TTY なし) なら即座にエラーになります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:554
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:557
 msgid "When `retry = true` and `check = true`:"
 msgstr "`retry = true` かつ `check = true` の場合:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:554
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:557
 msgid ""
 "If the command fails, `ptool.run` asks whether to retry the same command."
 msgstr "コマンドが失敗すると、`ptool.run` は同じコマンドを再試行するか 尋ねます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:554
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:557
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately instead of prompting for retry."
 msgstr "現在の環境が非対話 (TTY なし) なら、再試行を尋ねる代わりに即座に エラーになり"
 "ます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:588
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:592
 msgid "ptool.run_capture"
 msgstr "ptool.run_capture"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:590
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:594
 msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:592
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:596
 msgid ""
 "`ptool.run_capture` executes external commands from Rust with the same call "
 "forms, argument rules, return value rules, and options as `ptool.run`."
@@ -1250,27 +1257,52 @@ msgstr ""
 "`ptool.run_capture` は `ptool.run` と同じ呼び出し形式、引数ルール、 戻り値ル"
 "ール、オプションで、Rust から外部コマンドを実行します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:595
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:599
 msgid "The difference is only the default stream handling:"
 msgstr "違いはデフォルトのストリーム処理だけです:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:597
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:601
 msgid "`stdout` defaults to `\"capture\"`."
 msgstr "`stdout` のデフォルトは `\"capture\"`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:598
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602
 msgid "`stderr` defaults to `\"capture\"`."
 msgstr "`stderr` のデフォルトは `\"capture\"`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:600
-msgid "You can still override either field explicitly in `options`."
-msgstr "それでも `options` で各フィールドを明示的に上書きできます。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:604
+msgid ""
+"`trim` still defaults to `false`, and you can still override any of these "
+"fields explicitly in `options`."
+msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607"
 msgid "Example:"
 msgstr "例:"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`: 現在の端末へ引き継ぐ (デフォルト)。"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`: 出力を破棄する。"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgid "You can still override either field explicitly in `options`."
+#~ msgstr "それでも `options` で各フィールドを明示的に上書きできます。"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602"
+#~ msgid "Example:"
+#~ msgstr "例:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:541"
 #~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."

@@ -168,6 +168,9 @@ When `conn:run(options)` is used, `options` currently supports:
   are strings. This is applied by prepending `export ... &&` to the generated
   remote shell command.
 - `stdin` (string, optional): String sent to the remote process stdin.
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace
+  from captured `stdout` and captured `stderr` before returning them. This only
+  affects streams set to `"capture"`. Defaults to `false`.
 - `echo` (boolean, optional): Whether to echo the remote command before
   execution. Defaults to `true`.
 - `check` (boolean, optional): Whether to raise an error immediately when the
@@ -184,6 +187,9 @@ When `conn:run(options)` is used, `options` currently supports:
 When the shortcut forms are used, the `options` table supports only:
 
 - `stdin` (string, optional): String sent to the remote process stdin.
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace
+  from captured `stdout` and captured `stderr` before returning them. This only
+  affects streams set to `"capture"`. Defaults to `false`.
 - `echo` (boolean, optional): Whether to echo the remote command before
   execution. Defaults to `true`.
 - `check` (boolean, optional): Whether to raise an error immediately when the
@@ -223,6 +229,7 @@ local res2 = ssh:run({
   env = {
     FOO = "bar",
   },
+  trim = true,
   stdout = "capture",
   check = true,
 })
@@ -247,14 +254,15 @@ The difference is only the default stream handling:
 - `stdout` defaults to `"capture"`.
 - `stderr` defaults to `"capture"`.
 
-You can still override either field explicitly in `options`.
+`trim` still defaults to `false`, and you can still override any of these
+fields explicitly in `options`.
 
 Example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
 
-local res = ssh:run_capture("uname -a")
+local res = ssh:run_capture("uname -a", { trim = true })
 print(res.stdout)
 
 local res2 = ssh:run_capture({

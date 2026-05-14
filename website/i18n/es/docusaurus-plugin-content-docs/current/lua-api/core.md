@@ -455,6 +455,7 @@ También se admite `ptool.run(options)`, donde `options` es una tabla con los si
 - `cwd` (string, opcional): El directorio de trabajo del proceso hijo.
 - `env` (table, opcional): Variables de entorno adicionales, donde claves y valores son nombres y valores de variable.
 - `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
 - `echo` (boolean, opcional): Si debe imprimirse información del comando para esta ejecución. Si se omite, se usa el valor de `ptool.config({ run = { echo = ... } })`; si también falta, el valor por defecto es `true`.
 - `check` (boolean, opcional): Si debe producirse un error inmediatamente cuando el código de salida no es `0`. Si se omite, se usa el valor de `ptool.config({ run = { check = ... } })`; si también falta, el valor por defecto es `false`.
 - `confirm` (boolean, opcional): Si debe pedirse confirmación al usuario antes de ejecutar. Si se omite, se usa el valor de `ptool.config({ run = { confirm = ... } })`; si también falta, el valor por defecto es `false`.
@@ -467,7 +468,7 @@ También se admite `ptool.run(options)`, donde `options` es una tabla con los si
   - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Capturar en `res.stderr`.
   - `"null"`: Discard the output.
-- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` with the same meaning.
+- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning.
 - Cuando `confirm = true`:
   - Si el usuario rechaza la ejecución, se produce un error de inmediato.
   - Si el entorno actual no es interactivo (sin TTY), se produce un error de inmediato.
@@ -487,6 +488,7 @@ ptool.run({
 local res0 = ptool.run({
   cmd = "cat",
   stdin = "hello from stdin",
+  trim = true,
   stdout = "capture",
 })
 print(res0.stdout)
@@ -515,7 +517,7 @@ La única diferencia es el manejo por defecto de los streams:
 - `stdout` por defecto es `"capture"`.
 - `stderr` por defecto es `"capture"`.
 
-Puedes seguir sobrescribiendo cualquiera de los dos campos explícitamente en `options`.
+`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
 
 Ejemplo:
 
@@ -526,6 +528,7 @@ print(res.stdout)
 local res2 = ptool.run_capture({
   cmd = "cat",
   stdin = "captured stdin",
+  trim = true,
 })
 print(res2.stdout)
 

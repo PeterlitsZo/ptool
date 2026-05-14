@@ -38,6 +38,7 @@ struct RunCallOverrides {
     cwd: Option<String>,
     env: Option<Vec<(String, String)>>,
     stdin: Option<Vec<u8>>,
+    trim: Option<bool>,
     echo: Option<bool>,
     stdout: Option<StreamMode>,
     stderr: Option<StreamMode>,
@@ -233,6 +234,7 @@ fn parse_run_options(
                         env: Vec::new(),
                         env_remove: Vec::new(),
                         stdin: None,
+                        trim: false,
                         stdout: stream_defaults.stdout,
                         stderr: stream_defaults.stderr,
                     },
@@ -259,6 +261,7 @@ fn parse_run_options(
                     env: Vec::new(),
                     env_remove: Vec::new(),
                     stdin: None,
+                    trim: false,
                     stdout: stream_defaults.stdout,
                     stderr: stream_defaults.stderr,
                 },
@@ -288,6 +291,7 @@ fn parse_run_options(
                             env: Vec::new(),
                             env_remove: Vec::new(),
                             stdin: None,
+                            trim: false,
                             stdout: stream_defaults.stdout,
                             stderr: stream_defaults.stderr,
                         },
@@ -362,6 +366,7 @@ fn parse_full_options_table(
     let cwd: Option<String> = options.get("cwd")?;
     let env = parse_env_table(options.get::<Option<Table>>("env")?)?;
     let stdin = parse_stdin(options.get::<Option<Value>>("stdin")?, "ptool.run(options)")?;
+    let trim = options.get::<Option<bool>>("trim")?.unwrap_or(false);
     let echo = options
         .get::<Option<bool>>("echo")?
         .unwrap_or(defaults.echo);
@@ -395,6 +400,7 @@ fn parse_full_options_table(
             env,
             env_remove: Vec::new(),
             stdin,
+            trim,
             stdout,
             stderr,
         },
@@ -463,6 +469,7 @@ fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallO
         cwd: options.get("cwd")?,
         env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
         stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, context)?,
+        trim: options.get::<Option<bool>>("trim")?,
         echo: options.get::<Option<bool>>("echo")?,
         stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?,
         stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?,
@@ -487,6 +494,7 @@ fn apply_overrides(
             env: overrides.env.unwrap_or_default(),
             env_remove: Vec::new(),
             stdin: overrides.stdin,
+            trim: overrides.trim.unwrap_or(false),
             stdout: overrides.stdout.unwrap_or(stream_defaults.stdout),
             stderr: overrides.stderr.unwrap_or(stream_defaults.stderr),
         },

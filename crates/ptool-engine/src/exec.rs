@@ -20,6 +20,7 @@ pub struct RunOptions {
     pub env: Vec<(String, String)>,
     pub env_remove: Vec<String>,
     pub stdin: Option<Vec<u8>>,
+    pub trim: bool,
     pub stdout: RunStreamMode,
     pub stderr: RunStreamMode,
 }
@@ -98,8 +99,8 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
     Ok(RunResult {
         ok: status.success(),
         code: status.code(),
-        stdout: bytes_to_captured_string(&stdout, options.stdout),
-        stderr: bytes_to_captured_string(&stderr, options.stderr),
+        stdout: bytes_to_captured_string(&stdout, options.stdout, options.trim),
+        stderr: bytes_to_captured_string(&stderr, options.stderr, options.trim),
     })
 }
 
@@ -169,9 +170,16 @@ fn configure_stdio(
     });
 }
 
-fn bytes_to_captured_string(bytes: &[u8], mode: RunStreamMode) -> Option<String> {
+fn bytes_to_captured_string(bytes: &[u8], mode: RunStreamMode, trim: bool) -> Option<String> {
     match mode {
-        RunStreamMode::Capture => Some(String::from_utf8_lossy(bytes).to_string()),
+        RunStreamMode::Capture => {
+            let text = String::from_utf8_lossy(bytes);
+            Some(if trim {
+                text.trim().to_string()
+            } else {
+                text.to_string()
+            })
+        }
         RunStreamMode::Inherit | RunStreamMode::Null => None,
     }
 }

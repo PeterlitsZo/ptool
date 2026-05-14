@@ -455,6 +455,7 @@ res:assert_ok()
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
 - `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
 - `echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフォルトは `true` です。
 - `check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかどうか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それも未設定ならデフォルトは `false` です。
 - `confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデフォルトは `false` です。
@@ -467,7 +468,7 @@ res:assert_ok()
   - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: `res.stderr` にキャプチャする。
   - `"null"`: Discard the output.
-- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` with the same meaning.
+- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning.
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -487,6 +488,7 @@ ptool.run({
 local res0 = ptool.run({
   cmd = "cat",
   stdin = "hello from stdin",
+  trim = true,
   stdout = "capture",
 })
 print(res0.stdout)
@@ -515,7 +517,7 @@ res:assert_ok()
 - `stdout` のデフォルトは `"capture"`。
 - `stderr` のデフォルトは `"capture"`。
 
-それでも `options` で各フィールドを明示的に上書きできます。
+`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
 
 例:
 
@@ -526,6 +528,7 @@ print(res.stdout)
 local res2 = ptool.run_capture({
   cmd = "cat",
   stdin = "captured stdin",
+  trim = true,
 })
 print(res2.stdout)
 

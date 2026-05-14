@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+
+- Added a `trim` option to local and SSH command helpers such as `ptool.run`,
+  `ptool.run_capture`, `conn:run`, and `conn:run_capture`, so captured
+  `stdout` and `stderr` can be trimmed before being returned.
+
 ### Changed
 
 - Changed `ptool --help` to print the project website URL so users can find the

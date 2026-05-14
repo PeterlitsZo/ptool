@@ -140,30 +140,32 @@ conn:run({ cmd = "git", args = {"rev-parse", "HEAD"} })
 - `cwd` (string, 任意): リモート作業ディレクトリ。生成されるリモート シェルコマンドの先頭に `cd ... &&` を付けて適用します。
 - `env` (table, 任意): リモート環境変数。キーと値は文字列です。生成される リモートシェルコマンドの先頭に `export ... &&` を付けて適用します。
 - `stdin` (string, 任意): リモートプロセスの stdin に送る文字列。
-- `echo` (boolean, 任意): 実行前にリモートコマンドを表示するかどうか。 デフォルトは `true` です。
-- `check` (boolean, 任意): 終了ステータスが `0` 以外のとき直ちにエラーを 発生させるかどうか。デフォルトは `false` です。
-- `stdout` (string, 任意): stdout の処理戦略。サポートされる値:
-  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
-  - `"capture"`: `res.stdout` にキャプチャします。
-  - `"null"`: 出力を破棄します。
-- `stderr` (string, 任意): stderr の処理戦略。サポートされる値:
-  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
-  - `"capture"`: `res.stderr` にキャプチャします。
-  - `"null"`: 出力を破棄します。
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stdout`.
+  - `"null"`: Discard the output.
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stderr`.
+  - `"null"`: Discard the output.
 
 ショートカット形式を使う場合、`options` テーブルがサポートするのは次だけ です。
 
 - `stdin` (string, 任意): リモートプロセスの stdin に送る文字列。
-- `echo` (boolean, 任意): 実行前にリモートコマンドを表示するかどうか。 デフォルトは `true` です。
-- `check` (boolean, 任意): 終了ステータスが `0` 以外のとき直ちにエラーを 発生させるかどうか。デフォルトは `false` です。
-- `stdout` (string, 任意): stdout の処理戦略。サポートされる値:
-  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
-  - `"capture"`: `res.stdout` にキャプチャします。
-  - `"null"`: 出力を破棄します。
-- `stderr` (string, 任意): stderr の処理戦略。サポートされる値:
-  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
-  - `"capture"`: `res.stderr` にキャプチャします。
-  - `"null"`: 出力を破棄します。
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stdout`.
+  - `"null"`: Discard the output.
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"capture"`: Capture into `res.stderr`.
+  - `"null"`: Discard the output.
 
 戻り値ルール:
 
@@ -190,6 +192,7 @@ local res2 = ssh:run({
   env = {
     FOO = "bar",
   },
+  trim = true,
   stdout = "capture",
   check = true,
 })
@@ -212,14 +215,14 @@ Canonical API name: `ptool.ssh.Connection:run_capture`.
 - `stdout` のデフォルトは `"capture"` です。
 - `stderr` のデフォルトは `"capture"` です。
 
-どちらのフィールドも `options` で明示的に上書きできます。
+`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
 
 例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
 
-local res = ssh:run_capture("uname -a")
+local res = ssh:run_capture("uname -a", { trim = true })
 print(res.stdout)
 
 local res2 = ssh:run_capture({
@@ -264,8 +267,8 @@ Canonical API name: `ptool.ssh.Connection:exists`.
 
 `conn:exists(path)` はリモートパスが存在するかどうかを確認します。
 
-- `path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。
-- 戻り値: リモートパスが存在する場合は `true`、それ以外は `false`。
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path exists, otherwise `false`.
 
 例:
 
@@ -284,8 +287,8 @@ Canonical API name: `ptool.ssh.Connection:is_file`.
 
 `conn:is_file(path)` はリモートパスが存在し、通常ファイルであるかどうかを 確認します。
 
-- `path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。
-- 戻り値: リモートパスがファイルなら `true`、それ以外は `false`。
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path is a file, otherwise `false`.
 
 例:
 
@@ -306,8 +309,8 @@ Canonical API name: `ptool.ssh.Connection:is_dir`.
 
 `conn:is_dir(path)` はリモートパスが存在し、ディレクトリであるかどうかを 確認します。
 
-- `path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。
-- 戻り値: リモートパスがディレクトリなら `true`、それ以外は `false`。
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path is a directory, otherwise `false`.
 
 例:
 
@@ -330,24 +333,24 @@ Canonical API name: `ptool.ssh.Connection:upload`.
 
 - `local_path` (string, 必須): アップロードするローカルファイルまたは ディレクトリ。
 - `remote_path` (string|remote path, 必須): リモートホスト上の宛先パス。 文字列でも `conn:path(...)` が作成した値でも構いません。
-- `options` (table, 任意): 転送オプション。
-- 戻り値: 次のフィールドを持つテーブル:
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
   - `bytes` (integer): アップロードされた通常ファイルのバイト数。 ディレクトリをアップロードした場合は、アップロードされた各ファイル サイズの合計です。
   - `from` (string): ローカルの送信元パス。
   - `to` (string): リモートの宛先パス。
 
-サポートされる転送オプション:
+Supported transfer options:
 
 - `parents` (boolean, 任意): アップロード前に `remote_path` の親 ディレクトリを作成します。デフォルトは `false` です。
-- `overwrite` (boolean, 任意): 既存の宛先ファイルを置き換えてよいか どうか。デフォルトは `true` です。
-- `echo` (boolean, 任意): 実行前に転送内容を表示するかどうか。 デフォルトは `false` です。
+- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
 
-ディレクトリの挙動:
+Directory behavior:
 
 - `local_path` がファイルの場合、挙動は変わりません。
 - `local_path` がディレクトリで `remote_path` が存在しない場合、 `remote_path` が宛先ディレクトリのルートになります。
 - `local_path` がディレクトリで `remote_path` がすでにディレクトリとして 存在する場合、送信元ディレクトリはその配下に送信元 basename を使って 作成されます。
-- `overwrite = false` の場合、最終ディレクトリルートに対して既存の宛先 ディレクトリがあると拒否されます。
+- `overwrite = false` rejects an already-existing destination directory for the final directory root.
 - ディレクトリアップロードには、リモートホストで `tar` が利用できる必要 があります。
 
 例:
@@ -366,7 +369,7 @@ print(res.bytes)
 print(res.to)
 ```
 
-ディレクトリ例:
+Directory example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -391,24 +394,24 @@ Canonical API name: `ptool.ssh.Connection:download`.
 
 - `remote_path` (string|remote path, 必須): リモートホスト上の送信元パス。 文字列でも `conn:path(...)` が作成した値でも構いません。
 - `local_path` (string, 必須): ローカルの宛先パス。
-- `options` (table, 任意): 転送オプション。
-- 戻り値: 次のフィールドを持つテーブル:
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
   - `bytes` (integer): ダウンロードされた通常ファイルのバイト数。 ディレクトリをダウンロードした場合は、ダウンロードされた各ファイル サイズの合計です。
   - `from` (string): リモートの送信元パス。
   - `to` (string): ローカルの宛先パス。
 
-サポートされる転送オプション:
+Supported transfer options:
 
 - `parents` (boolean, 任意): ダウンロード前に `local_path` の親 ディレクトリを作成します。デフォルトは `false` です。
-- `overwrite` (boolean, 任意): 既存の宛先ファイルを置き換えてよいか どうか。デフォルトは `true` です。
-- `echo` (boolean, 任意): 実行前に転送内容を表示するかどうか。 デフォルトは `false` です。
+- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
 
-ディレクトリの挙動:
+Directory behavior:
 
 - `remote_path` がファイルの場合、挙動は変わりません。
 - `remote_path` がディレクトリで `local_path` が存在しない場合、 `local_path` が宛先ディレクトリのルートになります。
 - `remote_path` がディレクトリで `local_path` がすでにディレクトリとして 存在する場合、リモート送信元ディレクトリはその配下にリモート ディレクトリ basename を使って作成されます。
-- `overwrite = false` の場合、最終ディレクトリルートに対して既存の宛先 ディレクトリがあると拒否されます。
+- `overwrite = false` rejects an already-existing destination directory for the final directory root.
 - ディレクトリダウンロードには、リモートホストで `tar` が利用できる必要 があります。
 
 例:
@@ -426,7 +429,7 @@ print(res.bytes)
 print(res.from)
 ```
 
-ディレクトリ例:
+Directory example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -479,7 +482,7 @@ ssh:close()
 
 `remote:exists()` はリモートパスが存在するかどうかを確認します。
 
-- 戻り値: リモートパスが存在する場合は `true`、それ以外は `false`。
+- Returns: `true` when the remote path exists, otherwise `false`.
 
 例:
 
@@ -494,7 +497,7 @@ print(remote_release:exists())
 
 `remote:is_file()` はリモートパスが存在し、通常ファイルであるかどうかを 確認します。
 
-- 戻り値: リモートパスがファイルなら `true`、それ以外は `false`。
+- Returns: `true` when the remote path is a file, otherwise `false`.
 
 例:
 
@@ -511,7 +514,7 @@ end
 
 `remote:is_dir()` はリモートパスが存在し、ディレクトリであるかどうかを 確認します。
 
-- 戻り値: リモートパスがディレクトリなら `true`、それ以外は `false`。
+- Returns: `true` when the remote path is a directory, otherwise `false`.
 
 例:
 

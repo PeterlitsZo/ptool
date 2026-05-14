@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-14 19:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1022,12 +1022,19 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:526
 msgid ""
+"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+"from captured `stdout` and captured `stderr` before returning them. This "
+"only affects streams set to `\"capture\"`. Defaults to `false`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
+msgid ""
 "`echo` (boolean, optional): Whether to echo command information for this "
 "execution. If omitted, the value from `ptool.config({ run = { echo = ... } })"
 "` is used; if that is also unset, the default is `true`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532
 msgid ""
 "`check` (boolean, optional): Whether to raise an error immediately when the "
 "exit code is not `0`. If omitted, the value from `ptool.config"
@@ -1035,7 +1042,7 @@ msgid ""
 "`false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:535
 msgid ""
 "`confirm` (boolean, optional): Whether to ask the user for confirmation "
 "before execution. If omitted, the value from `ptool.config"
@@ -1043,7 +1050,7 @@ msgid ""
 "is `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:535
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:538
 msgid ""
 "`retry` (boolean, optional): Whether to ask the user whether to retry after "
 "a failed execution when `check = true`. If omitted, the value from "
@@ -1051,116 +1058,118 @@ msgid ""
 "the default is `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 msgid ""
 "`stdout` (string, optional): Stdout handling strategy. Supported values:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"null\"`: Discard the output."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 msgid ""
 "`stderr` (string, optional): Stderr handling strategy. Supported values:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"null\"`: Discard the output."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:547
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
 msgid ""
 "When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run"
 "(cmd, args, options)` are used, the per-call `options` table also accepts "
-"`stdin` with the same meaning."
+"`stdin` and `trim` with the same meaning."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid "When `confirm = true`:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid "If the user refuses the execution, an error is raised immediately."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:554
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:557
 msgid "When `retry = true` and `check = true`:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:554
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:557
 msgid ""
 "If the command fails, `ptool.run` asks whether to retry the same command."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:554
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:557
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately instead of prompting for retry."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:588
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:592
 msgid "ptool.run_capture"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:590
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:594
 msgid "`Unreleased` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:592
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:596
 msgid ""
 "`ptool.run_capture` executes external commands from Rust with the same call "
 "forms, argument rules, return value rules, and options as `ptool.run`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:595
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:599
 msgid "The difference is only the default stream handling:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:597
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:601
 msgid "`stdout` defaults to `\"capture\"`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:598
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602
 msgid "`stderr` defaults to `\"capture\"`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:600
-msgid "You can still override either field explicitly in `options`."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:604
+msgid ""
+"`trim` still defaults to `false`, and you can still override any of these "
+"fields explicitly in `options`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607"
 msgid "Example:"
 msgstr ""

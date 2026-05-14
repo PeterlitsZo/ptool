@@ -61,6 +61,7 @@ pub struct SshExecOptions {
     pub command: String,
     pub display_cwd: Option<String>,
     pub stdin: Option<Vec<u8>>,
+    pub trim: bool,
     pub echo: bool,
     pub stdout: SshStreamMode,
     pub stderr: SshStreamMode,
@@ -270,8 +271,8 @@ impl SshConnection {
 
         let result = SshExecResult {
             code: exec.code,
-            stdout: bytes_to_captured_string(exec.stdout, options.stdout),
-            stderr: bytes_to_captured_string(exec.stderr, options.stderr),
+            stdout: bytes_to_captured_string(exec.stdout, options.stdout, options.trim),
+            stderr: bytes_to_captured_string(exec.stderr, options.stderr, options.trim),
         };
 
         if options.check && result.code != Some(0) {
@@ -1393,9 +1394,16 @@ fn build_remote_path_test_failed_error(
     ssh_error(message)
 }
 
-fn bytes_to_captured_string(bytes: Vec<u8>, mode: SshStreamMode) -> Option<String> {
+fn bytes_to_captured_string(bytes: Vec<u8>, mode: SshStreamMode, trim: bool) -> Option<String> {
     match mode {
-        SshStreamMode::Capture => Some(String::from_utf8_lossy(&bytes).to_string()),
+        SshStreamMode::Capture => {
+            let text = String::from_utf8_lossy(&bytes);
+            Some(if trim {
+                text.trim().to_string()
+            } else {
+                text.to_string()
+            })
+        }
         SshStreamMode::Inherit | SshStreamMode::Null => None,
     }
 }
