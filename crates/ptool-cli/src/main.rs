@@ -10,6 +10,7 @@ const APP_NAME: &str = "ptool";
 const APP_VERSION: &str = env!("CARGO_PKG_VERSION");
 const APP_ABOUT: &str = "The PTOOL CLI";
 const LUA_RUNTIME: &str = "Lua 5.4 (embedded, vendored via mlua)";
+const WEBSITE_URL: &str = "https://ptool.peterlits.net";
 
 #[derive(Debug)]
 enum ParsedCli {
@@ -321,6 +322,8 @@ fn top_usage(bin: &OsStr) -> String {
     let bin = bin.to_string_lossy();
     formatdoc! { r#"
         {APP_ABOUT}
+
+        Website: {WEBSITE_URL}
 
         Usage: {bin} <COMMAND>
                {bin} <FILE.lua> [--] [<script_args>...]

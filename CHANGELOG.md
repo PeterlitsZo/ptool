@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Changed `ptool --help` to print the project website URL so users can find the
+  documentation site directly from the CLI.
+
 ## v0.6.0 (2026-05-13)
 
 ### Fixed

@@ -13,11 +13,11 @@
 
 # v0.7.0
 
-- [ ] Support `p.git` module.
+- [x] Support `p.git` module.
 - [x] Let `p.run` support `stdin`?
 - [ ] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
 - [ ] Add a helper for SSH connection to send HTTP request?
-- [ ] Let `ptool --help` print the website's URL.
+- [x] Let `ptool --help` print the website's URL.
 - [ ] Enhance `p.log` and `p.run`, `p.ask` to have better style?
   - The custom `prompt_prefix`? The background color?
 - [ ] How about let `run_capture` have a `trim` option?
