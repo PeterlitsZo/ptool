@@ -8,8 +8,8 @@
 - [ ] Support `p.s3`.
 - [ ] Support `p.redis`.
 - [ ] Support `p.zip.<algo-like-gzip>`.
-- [ ] Let the API document have groups.
 - [ ] Support the pipe -- `p.run("foo | bar")`.
+- [ ] Support `ptool.fs.copy`?
 
 # v0.7.0
 
@@ -22,6 +22,7 @@
   - The custom `prompt_prefix`? The background color?
 - [ ] How about let `run_capture` have a `trim` option?
 - [ ] Let the `ssh:upload`'s `remote_path` can be a directory.
+- [ ] Let the API document have groups.
 
 # v0.6.0
 
