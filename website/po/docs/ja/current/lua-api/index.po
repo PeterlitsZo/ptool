@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-14 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,20 @@ msgid "`ptool` exposes a broad set of helpers through `ptool` and `p`."
 msgstr "`ptool` は `ptool` と `p` を通じて幅広いヘルパーを公開します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:5
-msgid "Core APIs"
-msgstr "コア API"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:7
 msgid ""
-"[Core Lua API]{1}: Script lifecycle, process execution, config, and terminal "
-"helpers."
-msgstr "[コア Lua API]{1}: スクリプトのライフサイクル、プロセス実行、 設定、端末向け"
-"ヘルパー。"
+"Modules are grouped by domain. Within each group, entries are listed in "
+"alphabetical order."
+msgstr ""
+"モジュールは分野ごとにグループ化されています。各グループ内の項目は"
+"アルファベット順です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:8
+msgid "Runtime & Interaction"
+msgstr "ランタイムと対話"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:10
-msgid "Modules"
-msgstr "モジュール"
+msgid "[ANSI API]{1}: Build styled terminal output with ANSI escape sequences."
+msgstr "[ANSI API]{1}: ANSI エスケープシーケンスで装飾された端末出力を 組み立てる。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:12
 msgid "[Args API]{1}: Command-line argument schema parsing for Lua scripts."
@@ -41,119 +42,144 @@ msgstr "[引数 API]{1}: Lua スクリプト向けのコマンドライン引数
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:13
 msgid ""
-"[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
-"with timezone support."
-msgstr ""
+"[Core Lua API]{1}: Script lifecycle, process execution, config, and terminal "
+"helpers."
+msgstr "[コア Lua API]{1}: スクリプトのライフサイクル、プロセス実行、 設定、端末向け"
+"ヘルパー。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:15
-msgid "[SemVer API]{1}: Parse, compare, and bump semantic versions."
-msgstr "[SemVer API]{1}: セマンティックバージョンの解析、比較、更新。"
+msgid "[Log API]{1}: Write timestamped terminal logs with level-based output."
+msgstr "[Log API]{1}: レベルごとのタイムスタンプ付き端末ログを書き出す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:16
-msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
-msgstr "[ハッシュ API]{1}: SHA-256、SHA-1、MD5 ダイジェストを計算する。"
+msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
+msgstr "[シェル API]{1}: シェル風のコマンドラインを引数配列へ分割する。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:17
-msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
-msgstr "[ネットワーク API]{1}: URL、IP アドレス、host-port ペアを解析する。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:18
-msgid ""
-"[OS API]{1}: Read runtime environment variables and inspect host process "
-"details."
-msgstr "[OS API]{1}: ランタイムの環境変数を読み取り、ホストプロセス情報を 確認する。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:20
-msgid ""
-"[Platform API]{1}: Detect the current OS, architecture, and target triple."
-msgstr "[プラットフォーム API]{1}: 現在の OS、アーキテクチャ、 target triple を検出す"
-"る。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:22
-msgid "[ANSI API]{1}: Build styled terminal output with ANSI escape sequences."
-msgstr "[ANSI API]{1}: ANSI エスケープシーケンスで装飾された端末出力を 組み立てる。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
 msgid ""
 "[TUI API]{1}: Build simple terminal user interfaces with a structured view "
 "tree and event loop."
 msgstr "[TUI API]{1}: 構造化されたビュー木とイベントループでシンプルな端末 UI を構築"
 "する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:26
-msgid "[Log API]{1}: Write timestamped terminal logs with level-based output."
-msgstr "[Log API]{1}: レベルごとのタイムスタンプ付き端末ログを書き出す。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:20
+msgid "Data & Text"
+msgstr "データとテキスト"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:27
-msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
-msgstr "[HTTP API]{1}: HTTP リクエストを送り、レスポンス本文を扱う。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:22
+msgid ""
+"[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
+"with timezone support."
+msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:28
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
+msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
+msgstr "[ハッシュ API]{1}: SHA-256、SHA-1、MD5 ダイジェストを計算する。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:25
 msgid "[JSON API]{1}: Parse JSON text and stringify Lua values as JSON."
 msgstr "[JSON API]{1}: JSON テキストを解析し、Lua 値を JSON として 文字列化する。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:26
+msgid ""
+"[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
+msgstr "[正規表現 API]{1}: 正規表現をコンパイルし、検索、キャプチャ、 置換、分割を行"
+"う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:28
+msgid "[SemVer API]{1}: Parse, compare, and bump semantic versions."
+msgstr "[SemVer API]{1}: セマンティックバージョンの解析、比較、更新。"
+
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:29
+msgid "[String API]{1}: Trim, split, join, replace, and format strings."
+msgstr "[文字列 API]{1}: 文字列のトリム、分割、結合、置換、整形を行う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:30
+msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
+msgstr "[Table API]{1}: 密なリストテーブルの map、filter、concat を行う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:31
+msgid "[Template API]{1}: Render text templates from Lua data."
+msgstr "[テンプレート API]{1}: Lua データからテキストテンプレートを レンダリングする"
+"。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:32
+msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
+msgstr "[TOML API]{1}: TOML 値の解析、文字列化、読み取り、更新、削除を行う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:33
 msgid ""
 "[YAML API]{1}: Parse YAML text, read nested values, and stringify Lua values "
 "as YAML."
 msgstr "[YAML API]{1}: YAML テキストを解析し、ネストした値を読み取り、 Lua 値を YAML "
 "として文字列化する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:31
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
+msgid "Filesystem & Platform"
+msgstr "ファイルシステムとプラットフォーム"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:38
+msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
+msgstr "[ファイルシステム API]{1}: ファイルシステムパスの読み取り、書き込み、 作成、"
+"glob を行う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
+msgid ""
+"[OS API]{1}: Read runtime environment variables and inspect host process "
+"details."
+msgstr "[OS API]{1}: ランタイムの環境変数を読み取り、ホストプロセス情報を 確認する。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
+msgid ""
+"[Path API]{1}: Manipulate paths lexically without touching the filesystem."
+msgstr "[パス API]{1}: ファイルシステムに触れずにパスを字句的に操作する。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
+msgid ""
+"[Platform API]{1}: Detect the current OS, architecture, and target triple."
+msgstr "[プラットフォーム API]{1}: 現在の OS、アーキテクチャ、 target triple を検出す"
+"る。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:46
+msgid "Networking & Remote"
+msgstr "ネットワークとリモート"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:48
+msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
+msgstr "[HTTP API]{1}: HTTP リクエストを送り、レスポンス本文を扱う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:49
+msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
+msgstr "[ネットワーク API]{1}: URL、IP アドレス、host-port ペアを解析する。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:50
+msgid ""
+"[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
+msgstr "[SSH API]{1}: リモートホストへ接続し、コマンドを実行し、 ファイルを転送する。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:53
+msgid "Development & Storage"
+msgstr "開発とストレージ"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:55
+msgid "[Database API]{1}: Open database connections and run SQL queries."
+msgstr "[データベース API]{1}: データベース接続を開き、SQL クエリを実行する。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:56
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:33
-msgid "[Database API]{1}: Open database connections and run SQL queries."
-msgstr "[データベース API]{1}: データベース接続を開き、SQL クエリを実行する。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:34
-msgid ""
-"[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
-msgstr "[SSH API]{1}: リモートホストへ接続し、コマンドを実行し、 ファイルを転送する。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
-msgid ""
-"[Path API]{1}: Manipulate paths lexically without touching the filesystem."
-msgstr "[パス API]{1}: ファイルシステムに触れずにパスを字句的に操作する。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:38
-msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
-msgstr "[TOML API]{1}: TOML 値の解析、文字列化、読み取り、更新、削除を行う。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
-msgid ""
-"[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
-msgstr "[正規表現 API]{1}: 正規表現をコンパイルし、検索、キャプチャ、 置換、分割を行"
-"う。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
-msgid "[String API]{1}: Trim, split, join, replace, and format strings."
-msgstr "[文字列 API]{1}: 文字列のトリム、分割、結合、置換、整形を行う。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:42
-msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
-msgstr "[Table API]{1}: 密なリストテーブルの map、filter、concat を行う。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
-msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
-msgstr "[ファイルシステム API]{1}: ファイルシステムパスの読み取り、書き込み、 作成、"
-"glob を行う。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:44
-msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
-msgstr "[シェル API]{1}: シェル風のコマンドラインを引数配列へ分割する。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:45
-msgid "[Template API]{1}: Render text templates from Lua data."
-msgstr "[テンプレート API]{1}: Lua データからテキストテンプレートを レンダリングする"
-"。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:47
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:59
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."
 msgstr "このページを入り口として使い、そのあと必要なモジュールページに移動して 完全な"
 "関数リファレンスを参照してください。"
+
+#~ msgid "Core APIs"
+#~ msgstr "コア API"
+
+#~ msgid "Modules"
+#~ msgstr "モジュール"

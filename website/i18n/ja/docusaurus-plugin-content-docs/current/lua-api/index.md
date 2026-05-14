@@ -2,35 +2,46 @@
 
 `ptool` は `ptool` と `p` を通じて幅広いヘルパーを公開します。
 
-## コア API
+モジュールは分野ごとにグループ化されています。各グループ内の項目はアルファベット順です。
 
-- [コア Lua API](./core.md): スクリプトのライフサイクル、プロセス実行、 設定、端末向けヘルパー。
+## ランタイムと対話
 
-## モジュール
-
-- [引数 API](./args.md): Lua スクリプト向けのコマンドライン引数スキーマ解析。
-- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
-- [SemVer API](./semver.md): セマンティックバージョンの解析、比較、更新。
-- [ハッシュ API](./hash.md): SHA-256、SHA-1、MD5 ダイジェストを計算する。
-- [ネットワーク API](./net.md): URL、IP アドレス、host-port ペアを解析する。
-- [OS API](./os.md): ランタイムの環境変数を読み取り、ホストプロセス情報を 確認する。
-- [プラットフォーム API](./platform.md): 現在の OS、アーキテクチャ、 target triple を検出する。
 - [ANSI API](./ansi.md): ANSI エスケープシーケンスで装飾された端末出力を 組み立てる。
-- [TUI API](./tui.md): 構造化されたビュー木とイベントループでシンプルな端末 UI を構築する。
+- [引数 API](./args.md): Lua スクリプト向けのコマンドライン引数スキーマ解析。
+- [コア Lua API](./core.md): スクリプトのライフサイクル、プロセス実行、 設定、端末向けヘルパー。
 - [Log API](./log.md): レベルごとのタイムスタンプ付き端末ログを書き出す。
-- [HTTP API](./http.md): HTTP リクエストを送り、レスポンス本文を扱う。
+- [シェル API](./sh.md): シェル風のコマンドラインを引数配列へ分割する。
+- [TUI API](./tui.md): 構造化されたビュー木とイベントループでシンプルな端末 UI を構築する。
+
+## データとテキスト
+
+- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
+- [ハッシュ API](./hash.md): SHA-256、SHA-1、MD5 ダイジェストを計算する。
 - [JSON API](./json.md): JSON テキストを解析し、Lua 値を JSON として 文字列化する。
-- [YAML API](./yaml.md): YAML テキストを解析し、ネストした値を読み取り、 Lua 値を YAML として文字列化する。
-- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or push through libgit2-backed handles.
-- [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
-- [SSH API](./ssh.md): リモートホストへ接続し、コマンドを実行し、 ファイルを転送する。
-- [パス API](./path.md): ファイルシステムに触れずにパスを字句的に操作する。
-- [TOML API](./toml.md): TOML 値の解析、文字列化、読み取り、更新、削除を行う。
 - [正規表現 API](./re.md): 正規表現をコンパイルし、検索、キャプチャ、 置換、分割を行う。
+- [SemVer API](./semver.md): セマンティックバージョンの解析、比較、更新。
 - [文字列 API](./str.md): 文字列のトリム、分割、結合、置換、整形を行う。
 - [Table API](./tbl.md): 密なリストテーブルの map、filter、concat を行う。
-- [ファイルシステム API](./fs.md): ファイルシステムパスの読み取り、書き込み、 作成、glob を行う。
-- [シェル API](./sh.md): シェル風のコマンドラインを引数配列へ分割する。
 - [テンプレート API](./template.md): Lua データからテキストテンプレートを レンダリングする。
+- [TOML API](./toml.md): TOML 値の解析、文字列化、読み取り、更新、削除を行う。
+- [YAML API](./yaml.md): YAML テキストを解析し、ネストした値を読み取り、 Lua 値を YAML として文字列化する。
+
+## ファイルシステムとプラットフォーム
+
+- [ファイルシステム API](./fs.md): ファイルシステムパスの読み取り、書き込み、 作成、glob を行う。
+- [OS API](./os.md): ランタイムの環境変数を読み取り、ホストプロセス情報を 確認する。
+- [パス API](./path.md): ファイルシステムに触れずにパスを字句的に操作する。
+- [プラットフォーム API](./platform.md): 現在の OS、アーキテクチャ、 target triple を検出する。
+
+## ネットワークとリモート
+
+- [HTTP API](./http.md): HTTP リクエストを送り、レスポンス本文を扱う。
+- [ネットワーク API](./net.md): URL、IP アドレス、host-port ペアを解析する。
+- [SSH API](./ssh.md): リモートホストへ接続し、コマンドを実行し、 ファイルを転送する。
+
+## 開発とストレージ
+
+- [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
+- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or push through libgit2-backed handles.
 
 このページを入り口として使い、そのあと必要なモジュールページに移動して 完全な関数リファレンスを参照してください。

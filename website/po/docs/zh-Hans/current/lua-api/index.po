@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-14 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,18 +21,18 @@ msgid "`ptool` exposes a broad set of helpers through `ptool` and `p`."
 msgstr "`ptool` 通过 `ptool` 和 `p` 暴露了一整套功能广泛的辅助能力。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:5
-msgid "Core APIs"
-msgstr "核心 API"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:7
 msgid ""
-"[Core Lua API]{1}: Script lifecycle, process execution, config, and terminal "
-"helpers."
-msgstr "[Core Lua API]{1}：脚本生命周期、进程执行、配置以及终端辅助能力。"
+"Modules are grouped by domain. Within each group, entries are listed in "
+"alphabetical order."
+msgstr "模块按领域分组。每组内的条目按字母顺序排列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:8
+msgid "Runtime & Interaction"
+msgstr "运行时与交互"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:10
-msgid "Modules"
-msgstr "模块"
+msgid "[ANSI API]{1}: Build styled terminal output with ANSI escape sequences."
+msgstr "[ANSI API]{1}：用 ANSI 转义序列构造带样式的终端输出。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:12
 msgid "[Args API]{1}: Command-line argument schema parsing for Lua scripts."
@@ -40,112 +40,136 @@ msgstr "[Args API]{1}：为 Lua 脚本提供命令行参数模式定义与解析
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:13
 msgid ""
-"[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
-"with timezone support."
-msgstr ""
+"[Core Lua API]{1}: Script lifecycle, process execution, config, and terminal "
+"helpers."
+msgstr "[Core Lua API]{1}：脚本生命周期、进程执行、配置以及终端辅助能力。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:15
-msgid "[SemVer API]{1}: Parse, compare, and bump semantic versions."
-msgstr "[SemVer API]{1}：解析、比较并提升语义化版本。"
+msgid "[Log API]{1}: Write timestamped terminal logs with level-based output."
+msgstr "[Log API]{1}：按 level 输出带时间戳的终端日志。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:16
-msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
-msgstr "[Hash API]{1}：计算 SHA-256、SHA-1 和 MD5 摘要。"
+msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
+msgstr "[Shell API]{1}：把 shell 风格命令行拆分成参数数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:17
-msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
-msgstr "[Network API]{1}：解析 URL、IP 地址以及 host-port 组合。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:18
-msgid ""
-"[OS API]{1}: Read runtime environment variables and inspect host process "
-"details."
-msgstr "[OS API]{1}：读取运行时环境变量，并查看宿主进程信息。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:20
-msgid ""
-"[Platform API]{1}: Detect the current OS, architecture, and target triple."
-msgstr "[Platform API]{1}：检测当前操作系统、CPU 架构和目标三元组。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:22
-msgid "[ANSI API]{1}: Build styled terminal output with ANSI escape sequences."
-msgstr "[ANSI API]{1}：用 ANSI 转义序列构造带样式的终端输出。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
 msgid ""
 "[TUI API]{1}: Build simple terminal user interfaces with a structured view "
 "tree and event loop."
 msgstr "[TUI API]{1}：使用结构化视图树和事件循环构建简单的终端界面。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:26
-msgid "[Log API]{1}: Write timestamped terminal logs with level-based output."
-msgstr "[Log API]{1}：按 level 输出带时间戳的终端日志。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:20
+msgid "Data & Text"
+msgstr "数据与文本"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:27
-msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
-msgstr "[HTTP API]{1}：发送 HTTP 请求并读取响应体。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:22
+msgid ""
+"[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
+"with timezone support."
+msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:28
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
+msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
+msgstr "[Hash API]{1}：计算 SHA-256、SHA-1 和 MD5 摘要。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:25
 msgid "[JSON API]{1}: Parse JSON text and stringify Lua values as JSON."
 msgstr "[JSON API]{1}：解析 JSON 文本，并把 Lua 值序列化为 JSON。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:26
+msgid ""
+"[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
+msgstr "[Regex API]{1}：编译正则，并对文本进行搜索、捕获、替换或切分。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:28
+msgid "[SemVer API]{1}: Parse, compare, and bump semantic versions."
+msgstr "[SemVer API]{1}：解析、比较并提升语义化版本。"
+
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:29
+msgid "[String API]{1}: Trim, split, join, replace, and format strings."
+msgstr "[String API]{1}：裁剪、拆分、拼接、替换和格式化字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:30
+msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
+msgstr "[Table API]{1}：对致密顺序表执行映射、过滤和拼接。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:31
+msgid "[Template API]{1}: Render text templates from Lua data."
+msgstr "[Template API]{1}：基于 Lua 数据渲染文本模板。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:32
+msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
+msgstr "[TOML API]{1}：解析、序列化、读取、更新并删除 TOML 值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:33
 msgid ""
 "[YAML API]{1}: Parse YAML text, read nested values, and stringify Lua values "
 "as YAML."
 msgstr "[YAML API]{1}：解析 YAML 文本、读取嵌套值，并把 Lua 值序列化为 YAML。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:31
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
+msgid "Filesystem & Platform"
+msgstr "文件系统与平台"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:38
+msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
+msgstr "[Filesystem API]{1}：读取、写入、创建和 glob 文件系统路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
+msgid ""
+"[OS API]{1}: Read runtime environment variables and inspect host process "
+"details."
+msgstr "[OS API]{1}：读取运行时环境变量，并查看宿主进程信息。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
+msgid ""
+"[Path API]{1}: Manipulate paths lexically without touching the filesystem."
+msgstr "[Path API]{1}：以纯词法方式处理路径，不触碰真实文件系统。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
+msgid ""
+"[Platform API]{1}: Detect the current OS, architecture, and target triple."
+msgstr "[Platform API]{1}：检测当前操作系统、CPU 架构和目标三元组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:46
+msgid "Networking & Remote"
+msgstr "网络与远程"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:48
+msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
+msgstr "[HTTP API]{1}：发送 HTTP 请求并读取响应体。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:49
+msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
+msgstr "[Network API]{1}：解析 URL、IP 地址以及 host-port 组合。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:50
+msgid ""
+"[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
+msgstr "[SSH API]{1}：连接远程主机、执行命令并传输文件。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:53
+msgid "Development & Storage"
+msgstr "开发与存储"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:55
+msgid "[Database API]{1}: Open database connections and run SQL queries."
+msgstr "[Database API]{1}：打开数据库连接并执行 SQL 查询。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:56
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:33
-msgid "[Database API]{1}: Open database connections and run SQL queries."
-msgstr "[Database API]{1}：打开数据库连接并执行 SQL 查询。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:34
-msgid ""
-"[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
-msgstr "[SSH API]{1}：连接远程主机、执行命令并传输文件。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:36
-msgid ""
-"[Path API]{1}: Manipulate paths lexically without touching the filesystem."
-msgstr "[Path API]{1}：以纯词法方式处理路径，不触碰真实文件系统。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:38
-msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
-msgstr "[TOML API]{1}：解析、序列化、读取、更新并删除 TOML 值。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:39
-msgid ""
-"[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
-msgstr "[Regex API]{1}：编译正则，并对文本进行搜索、捕获、替换或切分。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:41
-msgid "[String API]{1}: Trim, split, join, replace, and format strings."
-msgstr "[String API]{1}：裁剪、拆分、拼接、替换和格式化字符串。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:42
-msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
-msgstr "[Table API]{1}：对致密顺序表执行映射、过滤和拼接。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:43
-msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
-msgstr "[Filesystem API]{1}：读取、写入、创建和 glob 文件系统路径。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:44
-msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
-msgstr "[Shell API]{1}：把 shell 风格命令行拆分成参数数组。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:45
-msgid "[Template API]{1}: Render text templates from Lua data."
-msgstr "[Template API]{1}：基于 Lua 数据渲染文本模板。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:47
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:59
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."
 msgstr "把这页当作入口，然后跳转到你需要的模块页面查看完整函数参考。"
+
+#~ msgid "Core APIs"
+#~ msgstr "核心 API"
+
+#~ msgid "Modules"
+#~ msgstr "模块"

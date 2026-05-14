@@ -10,5 +10,25 @@
   "sidebar.docsSidebar.category.Lua API": {
     "message": "Lua API",
     "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Runtime & Interaction": {
+    "message": "ランタイムと対話",
+    "description": "The label for category 'Runtime & Interaction' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Data & Text": {
+    "message": "データとテキスト",
+    "description": "The label for category 'Data & Text' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Filesystem & Platform": {
+    "message": "ファイルシステムとプラットフォーム",
+    "description": "The label for category 'Filesystem & Platform' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Networking & Remote": {
+    "message": "ネットワークとリモート",
+    "description": "The label for category 'Networking & Remote' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Development & Storage": {
+    "message": "開発とストレージ",
+    "description": "The label for category 'Development & Storage' in sidebar 'docsSidebar'"
   }
 }

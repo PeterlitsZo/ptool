@@ -10,5 +10,25 @@
   "sidebar.docsSidebar.category.Lua API": {
     "message": "Lua API",
     "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Runtime & Interaction": {
+    "message": "运行时与交互",
+    "description": "The label for category 'Runtime & Interaction' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Data & Text": {
+    "message": "数据与文本",
+    "description": "The label for category 'Data & Text' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Filesystem & Platform": {
+    "message": "文件系统与平台",
+    "description": "The label for category 'Filesystem & Platform' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Networking & Remote": {
+    "message": "网络与远程",
+    "description": "The label for category 'Networking & Remote' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Development & Storage": {
+    "message": "开发与存储",
+    "description": "The label for category 'Development & Storage' in sidebar 'docsSidebar'"
   }
 }
