@@ -683,8 +683,23 @@ impl LuaWorld {
         crate::semver::is_valid(&self.engine, version)
     }
 
+    pub(crate) fn semver_parse_req(
+        &self,
+        requirement: Value,
+    ) -> mlua::Result<crate::semver::LuaSemVerReq> {
+        crate::semver::parse_req(&self.engine, requirement)
+    }
+
+    pub(crate) fn semver_is_valid_req(&self, requirement: Value) -> bool {
+        crate::semver::is_valid_req(&self.engine, requirement)
+    }
+
     pub(crate) fn semver_compare(&self, a: Value, b: Value) -> mlua::Result<i64> {
         crate::semver::compare(&self.engine, a, b)
+    }
+
+    pub(crate) fn semver_matches(&self, requirement: Value, version: Value) -> mlua::Result<bool> {
+        crate::semver::matches(&self.engine, requirement, version)
     }
 
     pub(crate) fn semver_bump(

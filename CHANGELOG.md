@@ -7,11 +7,17 @@
 - Added a `trim` option to local and SSH command helpers such as `ptool.run`,
   `ptool.run_capture`, `conn:run`, and `conn:run_capture`, so captured
   `stdout` and `stderr` can be trimmed before being returned.
+- Added `ptool.semver.parse_req(...)`, `ptool.semver.is_valid_req(...)`, and
+  `ptool.semver.matches(...)`, plus a `VersionReq` userdata, so Lua scripts can
+  parse and evaluate Cargo-style semantic version requirement expressions.
 
 ### Changed
 
 - Changed `ptool --help` to print the project website URL so users can find the
   documentation site directly from the CLI.
+- Changed `ptool.use(...)` to accept Cargo-style semantic version requirement
+  expressions in addition to plain minimum-version strings, and synchronized
+  the versioning docs across all supported locales.
 
 ## v0.6.0 (2026-05-13)
 

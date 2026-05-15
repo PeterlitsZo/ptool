@@ -40,9 +40,10 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` declares the minimum required `ptool` version for the script,
-so the script fails early on older runtimes instead of running with a missing
-API.
+`ptool.use(...)` declares the required `ptool` version or version requirement
+for the script, so it fails early on incompatible runtimes instead of running
+with a missing API. It accepts plain versions such as `v0.1.0` and Cargo-style
+requirements such as `^0.6.0` or `>= v0.6.0, < 0.7.0`.
 
 Useful runtime helpers include `p.os.getenv(...)`, `p.os.setenv(...)`,
 `p.os.unsetenv(...)`, `p.os.homedir()`, and `p.os.tmpdir()`.

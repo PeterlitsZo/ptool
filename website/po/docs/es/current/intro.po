@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-15 13:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,37 +80,40 @@ msgstr "Script mínimo"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:58
 msgid ""
-"`ptool.use(...)` declares the minimum required `ptool` version for the "
-"script. This keeps scripts explicit about the API version they expect and "
-"fails early on older runtimes. See [Core Lua API]{1} for details."
+"`ptool.use(...)` declares the required `ptool` version or version "
+"requirement for the script. This keeps scripts explicit about the API "
+"version they expect and fails early on incompatible runtimes. It accepts "
+"plain versions such as `v0.1.0` and Cargo-style requirements such as `^0.6.0`"
+". See [Core Lua API]{1} for details."
 msgstr ""
-"`ptool.use(...)` declara la versión mínima de `ptool` requerida por el "
-"script. Así el script deja explícita la versión de la API que espera y falla "
-"pronto en runtimes antiguos. Consulta [API principal de Lua]{1} para más "
-"detalles."
+"`ptool.use(...)` declara la versión o el requisito de versión de `ptool` "
+"que necesita el script. Así el script deja explícita la versión de la API "
+"que espera y falla pronto en runtimes incompatibles. Acepta versiones "
+"simples como `v0.1.0` y requisitos al estilo Cargo como `^0.6.0`. Consulta "
+"[API principal de Lua]{1} para más detalles."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:62
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:64
 msgid "Run it with:"
 msgstr "Ejecútalo con:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:69
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:71
 msgid "Passing arguments"
 msgstr "Paso de argumentos"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:71
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:73
 msgid "You can pass extra CLI arguments after the script path:"
 msgstr "Puedes pasar argumentos extra de CLI después de la ruta del script:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:78
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:80
 msgid "Parse them inside the script with `ptool.args.parse(...)`."
 msgstr ""
 "Después puedes analizarlos dentro del script con `ptool.args.parse(...)`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:80
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:82
 msgid "Shebang scripts"
 msgstr "Scripts con shebang"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:82
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:84
 msgid ""
 "`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can "
 "start with:"
@@ -118,29 +121,29 @@ msgstr ""
 "`ptool` admite archivos con shebang. Con la forma abreviada para `.lua`, un "
 "script puede empezar con:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:89
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:91
 msgid ""
 "This lets you execute the script directly once it has the executable bit."
 msgstr ""
 "Esto te permite ejecutar el script directamente una vez que tenga el bit "
 "ejecutable."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:91
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:93
 msgid "What you get"
 msgstr "Qué obtienes"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:93
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
 msgid "A script runner that understands shebang files."
 msgstr "Un ejecutor de scripts que entiende archivos con shebang."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:94
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:96
 msgid ""
 "An interactive REPL for trying Lua expressions and `ptool` APIs directly."
 msgstr ""
 "Un REPL interactivo para probar expresiones de Lua y APIs de `ptool` "
 "directamente."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
 msgid ""
 "Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, "
 "HTTP, SSH, databases, and templates."
@@ -148,7 +151,7 @@ msgstr ""
 "Ayudantes de Lua para semver, fechas y horas, rutas, archivos, TOML, "
 "expresiones regulares, cadenas, HTTP, SSH, bases de datos y plantillas."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:99
 msgid ""
 "CLI-oriented helpers for running commands, parsing arguments, and asking for "
 "interactive input."
@@ -156,11 +159,11 @@ msgstr ""
 "Utilidades orientadas a CLI para ejecutar comandos, analizar argumentos y "
 "pedir entrada interactiva."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:100
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:102
 msgid "Next steps"
 msgstr "Siguientes pasos"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:102
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:104
 msgid ""
 "Open [REPL]{1} for interactive usage, multi-line input, and keyboard "
 "behavior."
@@ -168,14 +171,14 @@ msgstr ""
 "Abre [REPL]{1} para aprender el uso interactivo, la entrada multilínea y el "
 "comportamiento del teclado."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:104
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:106
 msgid ""
 "Use [Lua API Overview]{1} to browse the core APIs and available modules."
 msgstr ""
 "Usa [Resumen de la API de Lua]{1} para recorrer las APIs principales y los "
 "módulos disponibles."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:108
 msgid ""
 "Start with [Core Lua API]{1} for version gating, process execution, config, "
 "and script lifecycle helpers."
@@ -184,10 +187,20 @@ msgstr ""
 "ejecución de procesos, la configuración y las utilidades del ciclo de vida "
 "del script."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:108
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:110
 msgid ""
 "Open a module page such as [Args API]{1} when you need the detailed "
 "reference for a specific feature set."
 msgstr ""
 "Abre una página de módulo como [API de argumentos]{1} cuando necesites la "
 "referencia detallada de una capacidad concreta."
+
+#~ msgid ""
+#~ "`ptool.use(...)` declares the minimum required `ptool` version for the "
+#~ "script. This keeps scripts explicit about the API version they expect and "
+#~ "fails early on older runtimes. See [Core Lua API]{1} for details."
+#~ msgstr ""
+#~ "`ptool.use(...)` declara la versión mínima de `ptool` requerida por el "
+#~ "script. Así el script deja explícita la versión de la API que espera y falla "
+#~ "pronto en runtimes antiguos. Consulta [API principal de Lua]{1} para más "
+#~ "detalles."

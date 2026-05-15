@@ -46,18 +46,28 @@ Shebang is supported, so you can add this to the top of the file:
 ## ptool.use
 
 > `v0.1.0` - Introduced.
+> `v0.7.0` - Added Cargo-style version requirement expressions.
 
-`ptool.use` declares the minimum required `ptool` version for a script.
+`ptool.use` declares the required `ptool` version or version requirement for a
+script.
 
 ```lua
 ptool.use("v0.1.0")
+ptool.use("^0.6.0")
+ptool.use(">= v0.6.0, < 0.7.0")
 ```
 
-- The argument is a semantic version string (SemVer) and supports an optional
-  `v` prefix, such as `v0.1.0` or `0.1.0`.
-- If the required version is higher than the current `ptool` version, the script
-  exits immediately with an error saying that the current `ptool` version is too
-  old.
+- The argument accepts either a plain semantic version string or a Cargo-style
+  version requirement expression.
+- A plain version string supports an optional `v` prefix, such as `v0.1.0` or
+  `0.1.0`, and keeps the historical behavior of declaring the minimum required
+  `ptool` version.
+- Requirement expressions support operators and patterns such as `^0.6.0`,
+  `~0.6.0`, `>=0.6.0, <0.7.0`, `1.*`, and `1.2.*`.
+- Requirement expressions also accept version components with an optional `v`
+  prefix, such as `>= v0.6.0, < 0.7.0`.
+- If the current `ptool` version does not satisfy the declared version or
+  requirement, the script exits immediately with an error.
 
 ## ptool.unindent
 

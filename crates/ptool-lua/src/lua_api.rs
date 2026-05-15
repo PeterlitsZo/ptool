@@ -727,9 +727,21 @@ fn create_ptool_semver_module(
     let is_valid_fn = lua.create_function(move |_, version: Value| {
         Ok(is_valid_state.borrow().semver_is_valid(version))
     })?;
+    let parse_req_state = Rc::clone(&world);
+    let parse_req_fn = lua.create_function(move |_, requirement: Value| {
+        parse_req_state.borrow().semver_parse_req(requirement)
+    })?;
+    let is_valid_req_state = Rc::clone(&world);
+    let is_valid_req_fn = lua.create_function(move |_, requirement: Value| {
+        Ok(is_valid_req_state.borrow().semver_is_valid_req(requirement))
+    })?;
     let compare_state = Rc::clone(&world);
     let compare_fn = lua.create_function(move |_, (a, b): (Value, Value)| {
         compare_state.borrow().semver_compare(a, b)
+    })?;
+    let matches_state = Rc::clone(&world);
+    let matches_fn = lua.create_function(move |_, (req, version): (Value, Value)| {
+        matches_state.borrow().semver_matches(req, version)
     })?;
     let bump_fn = lua.create_function(
         move |_, (v, op, channel): (Value, String, Option<String>)| {
@@ -738,7 +750,10 @@ fn create_ptool_semver_module(
     )?;
     semver_module.set("parse", parse_fn)?;
     semver_module.set("is_valid", is_valid_fn)?;
+    semver_module.set("parse_req", parse_req_fn)?;
+    semver_module.set("is_valid_req", is_valid_req_fn)?;
     semver_module.set("compare", compare_fn)?;
+    semver_module.set("matches", matches_fn)?;
     semver_module.set("bump", bump_fn)?;
     Ok(semver_module)
 }

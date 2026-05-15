@@ -1,6 +1,7 @@
 # SemVer API
 
-Version parsing, validation, comparison, and bumping helpers live under `ptool.semver` and `p.semver`.
+Version parsing, validation, comparison, version requirement matching, and
+bumping helpers live under `ptool.semver` and `p.semver`.
 
 ## ptool.semver.parse
 
@@ -35,6 +36,40 @@ print(ptool.semver.is_valid("1.2.3")) -- true
 print(ptool.semver.is_valid("x.y.z")) -- false
 ```
 
+## ptool.semver.parse_req
+
+> `v0.7.0` - Introduced.
+
+`ptool.semver.parse_req(req)` parses a Cargo-style semantic version requirement
+string and returns a `VersionReq` object.
+
+- `req` (string, required): A version requirement string.
+- Returns: `VersionReq`.
+
+Supported examples include `^1.2.3`, `~1.2.3`, `>=1.2.3, <2.0.0`, `1.*`, and
+`1.2.*`. Version components inside a requirement may also use an optional `v`
+prefix, such as `>= v0.6.0, < 0.7.0`.
+
+```lua
+local req = ptool.semver.parse_req(">= v0.6.0, < 0.7.0")
+print(tostring(req)) -- >=0.6.0, <0.7.0
+```
+
+## ptool.semver.is_valid_req
+
+> `v0.7.0` - Introduced.
+
+`ptool.semver.is_valid_req(req)` checks whether a version requirement string is
+valid.
+
+- `req` (string, required): A version requirement string.
+- Returns: `boolean`.
+
+```lua
+print(ptool.semver.is_valid_req("^1.2.3")) -- true
+print(ptool.semver.is_valid_req(">= 1.2.3, <")) -- false
+```
+
 ## ptool.semver.compare
 
 > `v0.1.0` - Introduced.
@@ -46,6 +81,24 @@ print(ptool.semver.is_valid("x.y.z")) -- false
 
 ```lua
 print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
+```
+
+## ptool.semver.matches
+
+> `v0.7.0` - Introduced.
+
+`ptool.semver.matches(req, version)` checks whether a version satisfies a
+version requirement.
+
+- `req` (string|VersionReq, required): A version requirement string or a
+  `VersionReq` object.
+- `version` (string|Version, required): A version string or a `Version` object.
+- Returns: `boolean`.
+
+```lua
+local req = ptool.semver.parse_req("^0.6.0")
+print(ptool.semver.matches(req, "0.6.3")) -- true
+print(ptool.semver.matches(">=0.6.0, <0.7.0", "0.7.0")) -- false
 ```
 
 ## ptool.semver.bump
@@ -98,6 +151,24 @@ Fields and methods:
   - `tostring(v)` is available.
   - `==`, `<`, and `<=` comparisons are supported.
 
+## VersionReq
+
+> `v0.7.0` - Introduced.
+
+`VersionReq` represents a parsed semantic version requirement returned by
+`ptool.semver.parse_req(...)`.
+
+It is implemented as a Lua userdata.
+
+Methods:
+
+- `req:matches(version)` -> `boolean`
+- `req:to_string()` -> `string`
+
+Metamethods:
+
+- `tostring(req)` is available.
+
 ### compare
 
 Canonical API name: `ptool.semver.Version:compare`.
@@ -125,6 +196,25 @@ Canonical API name: `ptool.semver.Version:bump`.
 Canonical API name: `ptool.semver.Version:to_string`.
 
 `v:to_string()` returns the canonical string form of the version.
+
+- Returns: `string`.
+
+### matches
+
+Canonical API name: `ptool.semver.VersionReq:matches`.
+
+`req:matches(version)` checks whether `version` satisfies the current version
+requirement.
+
+- `version` (string|Version, required): A version string or a `Version` object.
+- Returns: `boolean`.
+
+### to_string
+
+Canonical API name: `ptool.semver.VersionReq:to_string`.
+
+`req:to_string()` returns the canonical string form of the version
+requirement.
 
 - Returns: `string`.
 

@@ -57,7 +57,7 @@ pub use script_args::{
     ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,
     validate_script_arg_spec, validate_script_arg_spec_base, validate_script_args_schema,
 };
-pub use semver::{SemverBuildMetadata, SemverPrerelease, SemverVersion};
+pub use semver::{SemverBuildMetadata, SemverPrerelease, SemverVersion, SemverVersionReq};
 pub use ssh::{
     SshAuthRequest, SshConnectRequest, SshConnection, SshConnectionInfo, SshExecOptions,
     SshExecResult, SshHostKeyRequest, SshStreamMode, SshTransferOptions, SshTransferResult,
@@ -373,8 +373,24 @@ impl PtoolEngine {
         semver::is_valid(input)
     }
 
+    pub fn semver_req_parse(&self, input: &str) -> Result<SemverVersionReq> {
+        semver::parse_req(input)
+    }
+
+    pub fn semver_req_is_valid(&self, input: &str) -> bool {
+        semver::req_is_valid(input)
+    }
+
     pub fn semver_compare(&self, a: &SemverVersion, b: &SemverVersion) -> std::cmp::Ordering {
         semver::compare(a, b)
+    }
+
+    pub fn semver_req_matches(
+        &self,
+        requirement: &SemverVersionReq,
+        version: &SemverVersion,
+    ) -> bool {
+        semver::matches(requirement, version)
     }
 
     pub fn semver_strip_prerelease(&self, version: SemverVersion) -> SemverVersion {

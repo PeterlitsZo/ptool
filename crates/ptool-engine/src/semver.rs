@@ -1,15 +1,12 @@
 use crate::{Error, ErrorKind, Result};
 pub use semver::{
     BuildMetadata as SemverBuildMetadata, Prerelease as SemverPrerelease, Version as SemverVersion,
+    VersionReq as SemverVersionReq,
 };
 use std::cmp::Ordering;
 
 pub(crate) fn parse(input: &str) -> Result<SemverVersion> {
-    let trimmed = input.trim();
-    let normalized = trimmed
-        .strip_prefix('v')
-        .or_else(|| trimmed.strip_prefix('V'))
-        .unwrap_or(trimmed);
+    let normalized = normalize_version_text(input.trim());
 
     SemverVersion::parse(normalized)
         .map_err(|err| Error::new(ErrorKind::InvalidSemver, err.to_string()))
@@ -19,8 +16,23 @@ pub(crate) fn is_valid(input: &str) -> bool {
     parse(input).is_ok()
 }
 
+pub(crate) fn parse_req(input: &str) -> Result<SemverVersionReq> {
+    let normalized = normalize_version_req(input);
+
+    SemverVersionReq::parse(&normalized)
+        .map_err(|err| Error::new(ErrorKind::InvalidSemver, err.to_string()))
+}
+
+pub(crate) fn req_is_valid(input: &str) -> bool {
+    parse_req(input).is_ok()
+}
+
 pub(crate) fn compare(a: &SemverVersion, b: &SemverVersion) -> Ordering {
     a.cmp(b)
+}
+
+pub(crate) fn matches(requirement: &SemverVersionReq, version: &SemverVersion) -> bool {
+    requirement.matches(version)
 }
 
 pub(crate) fn strip_prerelease(version: SemverVersion) -> SemverVersion {
@@ -259,4 +271,48 @@ impl PreChannel {
             Self::Rc => 3,
         }
     }
+}
+
+fn normalize_version_req(input: &str) -> String {
+    input
+        .trim()
+        .split(',')
+        .map(normalize_version_req_comparator)
+        .collect::<Vec<_>>()
+        .join(", ")
+}
+
+fn normalize_version_req_comparator(input: &str) -> String {
+    let trimmed = input.trim();
+    let (op, rest) = split_req_operator(trimmed);
+    let normalized = normalize_version_text(rest.trim());
+    if op.is_empty() {
+        normalized.to_string()
+    } else {
+        format!("{op}{normalized}")
+    }
+}
+
+fn split_req_operator(input: &str) -> (&str, &str) {
+    for op in [">=", "<=", ">", "<", "=", "^", "~"] {
+        if let Some(rest) = input.strip_prefix(op) {
+            return (op, rest);
+        }
+    }
+    ("", input)
+}
+
+fn normalize_version_text(input: &str) -> &str {
+    let trimmed = input.trim();
+    match trimmed
+        .strip_prefix('v')
+        .or_else(|| trimmed.strip_prefix('V'))
+    {
+        Some(stripped) if starts_with_version_char(stripped) => stripped,
+        _ => trimmed,
+    }
+}
+
+fn starts_with_version_char(input: &str) -> bool {
+    matches!(input.chars().next(), Some(ch) if ch.is_ascii_digit() || ch == '*')
 }

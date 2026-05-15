@@ -52,7 +52,7 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` 用来声明脚本要求的最低 `ptool` 版本。 这样可以明确脚本依赖的 API 版本，并在运行时版本过旧时尽早失败。 详见 [Core Lua API](./lua-api/core.md)。
+`ptool.use(...)` 用来声明脚本要求的 `ptool` 版本或版本要求。这样可以明确脚本依赖的 API 版本，并在运行时不兼容时尽早失败。它既接受 `v0.1.0` 这样的普通版本，也接受 `^0.6.0` 这样的 Cargo 风格版本要求。详见 [Core Lua API](./lua-api/core.md)。
 
 运行方式：
 

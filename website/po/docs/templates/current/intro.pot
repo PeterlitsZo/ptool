@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-15 13:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,89 +69,91 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:58
 msgid ""
-"`ptool.use(...)` declares the minimum required `ptool` version for the "
-"script. This keeps scripts explicit about the API version they expect and "
-"fails early on older runtimes. See [Core Lua API]{1} for details."
+"`ptool.use(...)` declares the required `ptool` version or version "
+"requirement for the script. This keeps scripts explicit about the API "
+"version they expect and fails early on incompatible runtimes. It accepts "
+"plain versions such as `v0.1.0` and Cargo-style requirements such as `^0.6.0`"
+". See [Core Lua API]{1} for details."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:62
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:64
 msgid "Run it with:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:69
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:71
 msgid "Passing arguments"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:71
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:73
 msgid "You can pass extra CLI arguments after the script path:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:78
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:80
 msgid "Parse them inside the script with `ptool.args.parse(...)`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:80
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:82
 msgid "Shebang scripts"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:82
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:84
 msgid ""
 "`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can "
 "start with:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:89
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:91
 msgid ""
 "This lets you execute the script directly once it has the executable bit."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:91
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:93
 msgid "What you get"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:93
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
 msgid "A script runner that understands shebang files."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:94
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:96
 msgid ""
 "An interactive REPL for trying Lua expressions and `ptool` APIs directly."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
 msgid ""
 "Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, "
 "HTTP, SSH, databases, and templates."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:99
 msgid ""
 "CLI-oriented helpers for running commands, parsing arguments, and asking for "
 "interactive input."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:100
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:102
 msgid "Next steps"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:102
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:104
 msgid ""
 "Open [REPL]{1} for interactive usage, multi-line input, and keyboard "
 "behavior."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:104
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:106
 msgid ""
 "Use [Lua API Overview]{1} to browse the core APIs and available modules."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:108
 msgid ""
 "Start with [Core Lua API]{1} for version gating, process execution, config, "
 "and script lifecycle helpers."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:108
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:110
 msgid ""
 "Open a module page such as [Args API]{1} when you need the detailed "
 "reference for a specific feature set."

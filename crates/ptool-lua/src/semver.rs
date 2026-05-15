@@ -1,12 +1,14 @@
 use mlua::{AnyUserData, MetaMethod, UserData, UserDataFields, UserDataMethods, Value};
 use ptool_engine::{
     Error as EngineError, ErrorKind as EngineErrorKind, PtoolEngine, SemverBuildMetadata,
-    SemverPrerelease, SemverVersion,
+    SemverPrerelease, SemverVersion, SemverVersionReq,
 };
 use std::cmp::Ordering;
 
 const PARSE_SIGNATURE: &str = "ptool.semver.parse(version)";
+const PARSE_REQ_SIGNATURE: &str = "ptool.semver.parse_req(req)";
 const COMPARE_SIGNATURE: &str = "ptool.semver.compare(a, b)";
+const MATCHES_SIGNATURE: &str = "ptool.semver.matches(req, version)";
 const BUMP_SIGNATURE: &str = "ptool.semver.bump(v, op[, channel])";
 
 #[derive(Clone)]
@@ -15,11 +17,26 @@ pub(crate) struct LuaSemVer {
     version: SemverVersion,
 }
 
+#[derive(Clone)]
+pub(crate) struct LuaSemVerReq {
+    engine: PtoolEngine,
+    requirement: SemverVersionReq,
+}
+
 pub(crate) fn parse(engine: &PtoolEngine, version: Value) -> mlua::Result<LuaSemVer> {
     let version = parse_version_from_string_arg(engine, version, PARSE_SIGNATURE, "version")?;
     Ok(LuaSemVer {
         engine: engine.clone(),
         version,
+    })
+}
+
+pub(crate) fn parse_req(engine: &PtoolEngine, requirement: Value) -> mlua::Result<LuaSemVerReq> {
+    let requirement =
+        parse_requirement_from_string_arg(engine, requirement, PARSE_REQ_SIGNATURE, "req")?;
+    Ok(LuaSemVerReq {
+        engine: engine.clone(),
+        requirement,
     })
 }
 
@@ -33,10 +50,30 @@ pub(crate) fn is_valid(engine: &PtoolEngine, version: Value) -> bool {
     }
 }
 
+pub(crate) fn is_valid_req(engine: &PtoolEngine, requirement: Value) -> bool {
+    match requirement {
+        Value::String(value) => match value.to_str() {
+            Ok(text) => engine.semver_req_is_valid(text.as_ref()),
+            Err(_) => false,
+        },
+        _ => false,
+    }
+}
+
 pub(crate) fn compare(engine: &PtoolEngine, a: Value, b: Value) -> mlua::Result<i64> {
     let left = parse_version_arg(engine, a, COMPARE_SIGNATURE, "a")?;
     let right = parse_version_arg(engine, b, COMPARE_SIGNATURE, "b")?;
     Ok(ordering_to_i64(engine.semver_compare(&left, &right)))
+}
+
+pub(crate) fn matches(
+    engine: &PtoolEngine,
+    requirement: Value,
+    version: Value,
+) -> mlua::Result<bool> {
+    let requirement = parse_requirement_arg(engine, requirement, MATCHES_SIGNATURE, "req")?;
+    let version = parse_version_arg(engine, version, MATCHES_SIGNATURE, "version")?;
+    Ok(engine.semver_req_matches(&requirement, &version))
 }
 
 pub(crate) fn bump(
@@ -112,6 +149,26 @@ impl UserData for LuaSemVer {
     }
 }
 
+impl UserData for LuaSemVerReq {
+    fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
+        methods.add_method("matches", |_, this, version: Value| {
+            let version = parse_version_arg(
+                &this.engine,
+                version,
+                "ptool.semver.VersionReq:matches(version)",
+                "version",
+            )?;
+            Ok(this.engine.semver_req_matches(&this.requirement, &version))
+        });
+
+        methods.add_method("to_string", |_, this, ()| Ok(this.requirement.to_string()));
+
+        methods.add_meta_method(MetaMethod::ToString, |_, this, ()| {
+            Ok(this.requirement.to_string())
+        });
+    }
+}
+
 fn parse_version_arg(
     engine: &PtoolEngine,
     value: Value,
@@ -152,6 +209,46 @@ fn parse_version_from_string_arg(
     }
 }
 
+fn parse_requirement_arg(
+    engine: &PtoolEngine,
+    value: Value,
+    signature: &str,
+    arg_name: &str,
+) -> mlua::Result<SemverVersionReq> {
+    match value {
+        Value::String(value) => {
+            parse_requirement_text(engine, value.to_str()?.as_ref(), signature, arg_name)
+        }
+        Value::UserData(userdata) => {
+            let requirement = userdata.borrow::<LuaSemVerReq>().map_err(|_| {
+                mlua::Error::runtime(format!(
+                    "{signature} `{arg_name}` must be a requirement string or ptool.semver.VersionReq"
+                ))
+            })?;
+            Ok(requirement.requirement.clone())
+        }
+        _ => Err(mlua::Error::runtime(format!(
+            "{signature} `{arg_name}` must be a requirement string or ptool.semver.VersionReq"
+        ))),
+    }
+}
+
+fn parse_requirement_from_string_arg(
+    engine: &PtoolEngine,
+    value: Value,
+    signature: &str,
+    arg_name: &str,
+) -> mlua::Result<SemverVersionReq> {
+    match value {
+        Value::String(value) => {
+            parse_requirement_text(engine, value.to_str()?.as_ref(), signature, arg_name)
+        }
+        _ => Err(mlua::Error::runtime(format!(
+            "{signature} `{arg_name}` must be a string"
+        ))),
+    }
+}
+
 fn parse_version_text(
     engine: &PtoolEngine,
     text: &str,
@@ -159,6 +256,20 @@ fn parse_version_text(
     arg_name: &str,
 ) -> mlua::Result<SemverVersion> {
     engine.semver_parse(text).map_err(|err| {
+        mlua::Error::runtime(format!(
+            "{signature} invalid `{arg_name}` `{text}`: {}",
+            err.msg
+        ))
+    })
+}
+
+fn parse_requirement_text(
+    engine: &PtoolEngine,
+    text: &str,
+    signature: &str,
+    arg_name: &str,
+) -> mlua::Result<SemverVersionReq> {
+    engine.semver_req_parse(text).map_err(|err| {
         mlua::Error::runtime(format!(
             "{signature} invalid `{arg_name}` `{text}`: {}",
             err.msg

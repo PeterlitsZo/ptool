@@ -52,7 +52,7 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` declara a versão mínima de `ptool` exigida pelo script. Isso deixa explícita a versão da API esperada pelo script e falha cedo em runtimes mais antigos. Veja [API principal de Lua](./lua-api/core.md) para detalhes.
+`ptool.use(...)` declara a versão ou o requisito de versão de `ptool` necessário para o script. Isso deixa explícita a versão da API esperada e falha cedo em runtimes incompatíveis. Ele aceita versões simples como `v0.1.0` e requisitos no estilo Cargo como `^0.6.0`. Veja [Core Lua API](./lua-api/core.md) para mais detalhes.
 
 Execute com:
 
