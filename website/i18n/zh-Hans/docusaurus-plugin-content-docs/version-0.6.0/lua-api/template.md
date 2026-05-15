@@ -1,18 +1,18 @@
 # Template API
 
-Template rendering helpers are available under `ptool.template` and `p.template`.
+模板渲染辅助能力位于 `ptool.template` 和 `p.template` 下。
 
 ## ptool.template.render
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.template.render(template, context)` renders a Jinja-style template string and returns the rendered result.
+`ptool.template.render(template, context)` 渲染 Jinja 风格的模板字符串，并返回 渲染结果。
 
-- `template` (string, required): The template source text.
-- `context` (any serializable Lua value, required): The template context.
-- Returns: The rendered string.
+- `template`（string，必填）：模板源文本。
+- `context`（任意可序列化 Lua 值，必填）：模板上下文。
+- 返回：渲染后的字符串。
 
-Example:
+示例：
 
 ```lua
 local template = ptool.unindent([[
@@ -34,11 +34,11 @@ local result = ptool.template.render(template, {
 print(result)
 ```
 
-Notes:
+说明：
 
-- The context must be serializable to data values.
-- Lua values such as `function`, `thread`, and unsupported `userdata` are not accepted as template context values.
-- Missing values use chainable undefined semantics. This means nested lookups such as `foo.bar.baz` can be passed to filters like `default(...)` without raising an error. When rendered directly without a fallback, undefined values become an empty string.
+- `context` 必须能被序列化成数据值。
+- `function`、`thread` 和不受支持的 `userdata` 等 Lua 值，不能作为模板上下文值。
+- 缺失值采用可链式的 undefined 语义。这意味着像 `foo.bar.baz` 这样的嵌套访问， 可以安全传给 `default(...)` 之类的过滤器而不会报错。若直接渲染且没有后备值， undefined 会变成空字符串。
 
 ```lua
 local template = ptool.unindent([[

@@ -29,7 +29,7 @@ msgstr "ptool.re.compile"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:9
 msgid ""
@@ -68,7 +68,7 @@ msgstr "ptool.re.escape"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:26
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:26"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:28
 msgid "`ptool.re.escape(text)` escapes plain text into a regex literal string."
@@ -96,7 +96,7 @@ msgstr "Regex"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:43
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:43"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:45
 msgid ""
@@ -152,7 +152,7 @@ msgstr "is_match"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:63
 msgid "Canonical API name: `ptool.re.Regex:is_match`."
-msgstr "Canonical API name: `ptool.re.Regex:is_match`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:is_match`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:65
 msgid "`re:is_match(input)` checks whether the regex matches `input`."
@@ -173,7 +173,7 @@ msgstr "find"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:72
 msgid "Canonical API name: `ptool.re.Regex:find`."
-msgstr "Canonical API name: `ptool.re.Regex:find`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:find`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:74
 msgid "`re:find(input[, init])` returns the first match in `input`, or `nil`."
@@ -248,7 +248,7 @@ msgstr "find_all"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:97
 msgid "Canonical API name: `ptool.re.Regex:find_all`."
-msgstr "Canonical API name: `ptool.re.Regex:find_all`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:find_all`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:99
 msgid "`re:find_all(input)` returns all matches in `input` as a `Match[]`."
@@ -262,7 +262,7 @@ msgstr "captures"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:103
 msgid "Canonical API name: `ptool.re.Regex:captures`."
-msgstr "Canonical API name: `ptool.re.Regex:captures`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:captures`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:105
 msgid ""
@@ -277,7 +277,7 @@ msgstr "captures_all"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:109
 msgid "Canonical API name: `ptool.re.Regex:captures_all`."
-msgstr "Canonical API name: `ptool.re.Regex:captures_all`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:captures_all`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:111
 msgid ""
@@ -293,7 +293,7 @@ msgstr "replace"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:115
 msgid "Canonical API name: `ptool.re.Regex:replace`."
-msgstr "Canonical API name: `ptool.re.Regex:replace`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:replace`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:117
 msgid "`re:replace(input, replacement)` replaces the first match in `input`."
@@ -307,7 +307,7 @@ msgstr "replace_all"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:121
 msgid "Canonical API name: `ptool.re.Regex:replace_all`."
-msgstr "Canonical API name: `ptool.re.Regex:replace_all`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:replace_all`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:123
 msgid "`re:replace_all(input, replacement)` replaces all matches in `input`."
@@ -321,7 +321,7 @@ msgstr "split"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:127
 msgid "Canonical API name: `ptool.re.Regex:split`."
-msgstr "Canonical API name: `ptool.re.Regex:split`."
+msgstr "Nombre de la API canónica: `ptool.re.Regex:split`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:129
 msgid ""

@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,446 +14,523 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:1
 msgid "Database API"
-msgstr ""
+msgstr "Database API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:3
 msgid ""
 "Database connection and query helpers are available under `ptool.db` and "
 "`p.db`."
-msgstr ""
+msgstr "数据库连接与查询辅助能力位于 `ptool.db` 和 `p.db` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:5
 msgid "ptool.db.connect"
-msgstr ""
+msgstr "ptool.db.connect"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:9
 msgid ""
 "`ptool.db.connect(url_or_options)` opens a database connection and returns a "
 "`Connection` object."
-msgstr ""
+msgstr "`ptool.db.connect(url_or_options)` 打开数据库连接，并返回一个 `Connection` 对"
+"象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:12
 msgid "Supported databases:"
-msgstr ""
+msgstr "支持的数据库："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:14
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:15
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:16
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:18
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:20
 msgid "`url_or_options` (string|table, required):"
-msgstr ""
+msgstr "`url_or_options`（string|table，必填）："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:20
 msgid "When a string is provided, it is treated as the database URL."
-msgstr ""
+msgstr "传入字符串时，会被视为数据库 URL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:20
 msgid "When a table is provided, it currently supports:"
-msgstr ""
+msgstr "传入 table 时，目前支持："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:20
 msgid "`url` (string, required): The database URL."
-msgstr ""
+msgstr "`url`（string，必填）：数据库 URL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:25
 msgid "Supported URL examples:"
-msgstr ""
+msgstr "支持的 URL 示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:33
 msgid "SQLite notes:"
-msgstr ""
+msgstr "SQLite 说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:35
 msgid "`sqlite:test.db` and `sqlite://test.db` are supported."
-msgstr ""
+msgstr "支持 `sqlite:test.db` 和 `sqlite://test.db`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:36
 msgid ""
 "Relative SQLite paths are resolved from the current `ptool` runtime "
 "directory, so they follow `ptool.cd(...)`."
-msgstr ""
+msgstr "相对 SQLite 路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` "
+"的影响。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:38
 msgid ""
 "If no `mode=` query parameter is provided, SQLite connections default to "
 "`mode=rwc`, which allows creating the database file automatically."
-msgstr ""
+msgstr "如果没有提供 `mode=` 查询参数，SQLite 连接默认使用 `mode=rwc`，从而允许自动 "
+"创建数据库文件。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:41"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:50
 msgid "Connection"
-msgstr ""
+msgstr "Connection"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:52
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:52"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:54
 msgid ""
 "`Connection` represents an open database connection returned by "
 "`ptool.db.connect()`."
-msgstr ""
+msgstr "`Connection` 表示由 `ptool.db.connect()` 返回的已打开数据库连接。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:57
 msgid "It is implemented as a Lua userdata."
-msgstr ""
+msgstr "它实现为 Lua userdata。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:59
 msgid "Methods:"
-msgstr ""
+msgstr "方法："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:61
 msgid "`db:query(sql, params?)` -> `table`"
-msgstr ""
+msgstr "`db:query(sql, params?)` -> `table`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:62
 msgid "`db:query_one(sql, params?)` -> `table|nil`"
-msgstr ""
+msgstr "`db:query_one(sql, params?)` -> `table|nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:63
 msgid "`db:scalar(sql, params?)` -> `boolean|integer|number|string|nil`"
-msgstr ""
+msgstr "`db:scalar(sql, params?)` -> `boolean|integer|number|string|nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:64
 msgid "`db:execute(sql, params?)` -> `table`"
-msgstr ""
+msgstr "`db:execute(sql, params?)` -> `table`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:65
 msgid "`db:transaction(fn)` -> `any`"
-msgstr ""
+msgstr "`db:transaction(fn)` -> `any`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:66
 msgid "`db:close()` -> `nil`"
-msgstr ""
+msgstr "`db:close()` -> `nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:68
 msgid "Parameter binding:"
-msgstr ""
+msgstr "参数绑定："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:70
 msgid "`params` is optional."
-msgstr ""
+msgstr "`params` 可选。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:71
 msgid ""
 "When `params` is an array table, it is treated as positional parameters and "
 "SQL placeholders should use `?`."
-msgstr ""
+msgstr "当 `params` 是数组表时，会视为位置参数，SQL 占位符应使用 `?`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:73
 msgid ""
 "When `params` is a key-value table, it is treated as named parameters and "
 "SQL placeholders should use `:name`."
-msgstr ""
+msgstr "当 `params` 是键值表时，会视为命名参数，SQL 占位符应使用 `:name`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:75
 msgid "Positional and named parameters cannot be mixed in the same call."
-msgstr ""
+msgstr "同一次调用中不能混用位置参数和命名参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76
 msgid "Supported parameter value types are:"
-msgstr ""
+msgstr "支持的绑定值类型包括："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76"
 msgid "`boolean`"
-msgstr ""
+msgstr "`boolean`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76"
 msgid "`integer`"
-msgstr ""
+msgstr "`integer`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76"
 msgid "`number`"
-msgstr ""
+msgstr "`number`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:76"
 msgid "`string`"
-msgstr ""
+msgstr "`string`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:81
 msgid "`nil` is not supported as a bound parameter in `v0.1.0`."
-msgstr ""
+msgstr "在 `v0.1.0` 中，不支持将 `nil` 作为绑定参数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:83
 msgid "Result value rules:"
-msgstr ""
+msgstr "结果值规则："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85
 msgid "Query results only guarantee these Lua value types:"
-msgstr ""
+msgstr "查询结果仅保证返回以下 Lua 值类型："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85"
 msgid "`boolean`"
-msgstr ""
+msgstr "`boolean`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85"
 msgid "`integer`"
-msgstr ""
+msgstr "`integer`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85"
 msgid "`number`"
-msgstr ""
+msgstr "`number`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85"
 msgid "`string`"
-msgstr ""
+msgstr "`string`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:85
 msgid "`nil` (for SQL `NULL`)"
-msgstr ""
+msgstr "`nil`（对应 SQL `NULL`）"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:91
 msgid "Text columns are returned as Lua strings."
-msgstr ""
+msgstr "文本列会作为 Lua 字符串返回。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:92
 msgid "Binary/blob columns are also returned as Lua strings."
-msgstr ""
+msgstr "二进制 / blob 列也会作为 Lua 字符串返回。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:93
 msgid ""
 "If a query result contains duplicate column names, an error is raised. Use "
 "SQL aliases such as `AS` to disambiguate them."
-msgstr ""
+msgstr "如果查询结果中出现重复列名，会抛出错误。请使用 `AS` 等 SQL 别名消除歧义。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:96
 msgid "query"
-msgstr ""
+msgstr "query"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:98
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:98"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:100
 msgid "Canonical API name: `ptool.db.Connection:query`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.db.Connection:query`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:102
 msgid "`db:query(sql, params?)` executes a query and returns a table with:"
-msgstr ""
+msgstr "`db:query(sql, params?)` 执行查询，并返回一个包含以下字段的表："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:104
 msgid "`rows` (table): An array of row tables."
-msgstr ""
+msgstr "`rows`（table）：行表数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:105
 msgid "`columns` (table): An array of column names."
-msgstr ""
+msgstr "`columns`（table）：列名数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:106
 msgid "`row_count` (integer): The number of rows returned."
-msgstr ""
+msgstr "`row_count`（integer）：返回的行数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:108
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:108"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:124
 msgid "query_one"
-msgstr ""
+msgstr "query_one"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:126
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:126"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:128
 msgid "Canonical API name: `ptool.db.Connection:query_one`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.db.Connection:query_one`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:130
 msgid ""
 "`db:query_one(sql, params?)` returns the first row as a table, or `nil` if "
 "the query returns no rows."
-msgstr ""
+msgstr "`db:query_one(sql, params?)` 返回第一行记录（table），如果查询没有结果则返回 "
+"`nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:133"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:142
 msgid "scalar"
-msgstr ""
+msgstr "scalar"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:144
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:144"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:146
 msgid "Canonical API name: `ptool.db.Connection:scalar`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.db.Connection:scalar`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:148
 msgid ""
 "`db:scalar(sql, params?)` returns the first column of the first row, or `nil`"
 " if the query returns no rows."
-msgstr ""
+msgstr "`db:scalar(sql, params?)` 返回第一行第一列的值，如果查询没有结果则返回 `nil`"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:151"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:158
 msgid "execute"
-msgstr ""
+msgstr "execute"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:160
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:160"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:162
 msgid "Canonical API name: `ptool.db.Connection:execute`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.db.Connection:execute`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:164
 msgid ""
 "`db:execute(sql, params?)` executes a statement and returns a table with:"
-msgstr ""
+msgstr "`db:execute(sql, params?)` 执行语句，并返回一个包含以下字段的表："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:166
 msgid "`rows_affected` (integer): The number of affected rows."
-msgstr ""
+msgstr "`rows_affected`（integer）：受影响的行数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:168
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:168"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:175
 msgid "transaction"
-msgstr ""
+msgstr "transaction"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:177"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:179
 msgid "Canonical API name: `ptool.db.Connection:transaction`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.db.Connection:transaction`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:181
 msgid "`db:transaction(fn)` runs `fn(tx)` inside a database transaction."
-msgstr ""
+msgstr "`db:transaction(fn)` 在数据库事务中执行 `fn(tx)`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:183
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:183"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:185
 msgid "If `fn(tx)` returns normally, the transaction is committed."
-msgstr ""
+msgstr "如果 `fn(tx)` 正常返回，则提交事务。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:186
 msgid ""
 "If `fn(tx)` raises an error, the transaction is rolled back and the error is "
 "re-raised."
-msgstr ""
+msgstr "如果 `fn(tx)` 抛错，则回滚事务并重新抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:188
 msgid "Nested transactions are not supported."
-msgstr ""
+msgstr "不支持嵌套事务。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:189
 msgid ""
 "While the callback is active, the outer connection object must not be used; "
 "use the provided `tx` object instead."
-msgstr ""
+msgstr "在回调执行期间，不得使用外层连接对象；应改用传入的 `tx` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:192
 msgid "The `tx` object supports the same query methods as `Connection`:"
-msgstr ""
+msgstr "`tx` 对象支持与 `Connection` 相同的查询方法："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:194
 msgid "`tx:query(sql, params?)`"
-msgstr ""
+msgstr "`tx:query(sql, params?)`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:195
 msgid "`tx:query_one(sql, params?)`"
-msgstr ""
+msgstr "`tx:query_one(sql, params?)`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:196
 msgid "`tx:scalar(sql, params?)`"
-msgstr ""
+msgstr "`tx:scalar(sql, params?)`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:197
 msgid "`tx:execute(sql, params?)`"
-msgstr ""
+msgstr "`tx:execute(sql, params?)`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:199
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:199"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:217
 msgid "close"
-msgstr ""
+msgstr "close"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:219
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:219"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:221
 msgid "Canonical API name: `ptool.db.Connection:close`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.db.Connection:close`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:223
 msgid "`db:close()` closes the connection."
-msgstr ""
+msgstr "`db:close()` 关闭连接。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:225
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:225"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:227
 msgid "After closing, the connection can no longer be used."
-msgstr ""
+msgstr "关闭后，连接不能再继续使用。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:228
 msgid "Closing during an active transaction callback raises an error."
-msgstr ""
+msgstr "如果在活动事务回调期间关闭连接，会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:230
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/db.md:230"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:52"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:85"
+#~ msgid "`boolean`"
+#~ msgstr "`boolean`"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:85"
+#~ msgid "`integer`"
+#~ msgstr "`integer`"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:85"
+#~ msgid "`number`"
+#~ msgstr "`number`"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:85"
+#~ msgid "`string`"
+#~ msgstr "`string`"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:98"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:108"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:126"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:133"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:144"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:151"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:160"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:168"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:177"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:199"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:219"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:225"
+#~ msgid "Behavior:"
+#~ msgstr "行为说明："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:230"
+#~ msgid "Example:"
+#~ msgstr "示例："

@@ -8,16 +8,16 @@
 
 `ptool.os.getenv(name)` 返回某个环境变量的当前值。
 
-- `name` (string, required): Environment variable name.
 - `name`（string，必填）：环境变量名。
-
-Behavior:
-
 - 返回：`string|nil`。
-- Reads the current `ptool` runtime environment, including values changed by `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`.
-- Raises an error when `name` is empty or contains invalid characters such as `=`.
 
-Example:
+行为说明：
+
+- 当变量未设置时返回 `nil`。
+- 读取当前 `ptool` 运行时环境，其中也包括通过 `ptool.os.setenv(...)` 和 `ptool.os.unsetenv(...)` 修改过的值。
+- 当 `name` 为空，或包含 `=` 之类的非法字符时会抛出错误。
+
+示例：
 
 ```lua
 local home = p.os.getenv("HOME")
@@ -32,12 +32,12 @@ print(home)
 
 - 返回：`table`。
 
-Behavior:
+行为说明：
 
-- The returned table maps variable names to string values.
-- Values changed through `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)` are reflected in the snapshot.
+- 返回的 table 会把变量名映射到字符串值。
+- 通过 `ptool.os.setenv(...)` 和 `ptool.os.unsetenv(...)` 修改的值也会反映到这个快照中。
 
-Example:
+示例：
 
 ```lua
 local env = p.os.env()
@@ -50,16 +50,16 @@ print(env.HOME)
 
 `ptool.os.setenv(name, value)` 在当前 `ptool` 运行时中设置环境变量。
 
-- `name` (string, required): Environment variable name.
+- `name`（string，必填）：环境变量名。
 - `value`（string，必填）：环境变量值。
 
-Behavior:
+行为说明：
 
 - 它修改的是当前 `ptool` 运行时环境，不是父级 shell。
-- Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched later through `ptool.run(...)`.
-- 这里设置的值会反映到 `ptool.os.getenv(...)`、`ptool.os.env()`，以及之后 通过 `ptool.run(...)` 启动的子进程中。
+- 这里设置的值会反映到 `ptool.os.getenv(...)`、`ptool.os.env()`，以及之后通过 `ptool.run(...)` 启动的子进程中。
+- 当 `name` 为空、包含 `=`，或 `value` 包含 NUL 时会抛出错误。
 
-Example:
+示例：
 
 ```lua
 p.os.setenv("APP_ENV", "dev")
@@ -72,14 +72,14 @@ print(p.os.getenv("APP_ENV"))
 
 `ptool.os.unsetenv(name)` 从当前 `ptool` 运行时中移除环境变量。
 
-- `name` (string, required): Environment variable name.
+- `name`（string，必填）：环境变量名。
 
-Behavior:
+行为说明：
 
-- This affects later calls to `ptool.os.getenv(...)`, `ptool.os.env()`, and child processes launched by `ptool.run(...)`.
-- Raises an error when `name` is empty or contains invalid characters such as `=`.
+- 这会影响之后对 `ptool.os.getenv(...)`、`ptool.os.env()` 的调用，以及由 `ptool.run(...)` 启动的子进程。
+- 当 `name` 为空，或包含 `=` 之类的非法字符时会抛出错误。
 
-Example:
+示例：
 
 ```lua
 p.os.unsetenv("APP_ENV")
@@ -92,9 +92,9 @@ assert(p.os.getenv("APP_ENV") == nil)
 
 `ptool.os.homedir()` 返回当前用户的 home 目录。
 
-- `name`（string，必填）：环境变量名。
+- 返回：`string|nil`。
 
-Example:
+示例：
 
 ```lua
 local home = p.os.homedir()
@@ -108,7 +108,7 @@ local home = p.os.homedir()
 
 - 返回：`string`。
 
-Example:
+示例：
 
 ```lua
 local tmp = p.os.tmpdir()
@@ -120,7 +120,7 @@ local tmp = p.os.tmpdir()
 
 `ptool.os.hostname()` 返回当前主机名。
 
-- `name`（string，必填）：环境变量名。
+- 返回：`string|nil`。
 
 ## ptool.os.username
 
@@ -128,7 +128,7 @@ local tmp = p.os.tmpdir()
 
 `ptool.os.username()` 返回当前用户名。
 
-- `name`（string，必填）：环境变量名。
+- 返回：`string|nil`。
 
 ## ptool.os.pid
 
@@ -144,9 +144,9 @@ local tmp = p.os.tmpdir()
 
 `ptool.os.exepath()` 返回当前运行中的 `ptool` 可执行文件解析后路径。
 
-- `name`（string，必填）：环境变量名。
+- 返回：`string|nil`。
 
-Example:
+示例：
 
 ```lua
 print(p.os.hostname(), p.os.username(), p.os.pid())

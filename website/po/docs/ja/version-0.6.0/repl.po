@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,65 +14,68 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:1
 msgid "REPL"
-msgstr ""
+msgstr "REPL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:3
 msgid ""
 "`ptool repl` starts an interactive Lua session with the standard `ptool` API "
 "already loaded."
-msgstr ""
+msgstr "`ptool repl` は、標準の `ptool` API がすでに読み込まれた状態で対話型の Lua セ"
+"ッションを開始します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:6
 msgid "Start the REPL"
-msgstr ""
+msgstr "REPL を開始する"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:12
 msgid "When the REPL starts, `ptool` shows a banner and waits for Lua input."
-msgstr ""
+msgstr "REPL が起動すると、`ptool` はバナーを表示し、Lua 入力を待ち受けます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:14
 msgid "What it provides"
-msgstr ""
+msgstr "提供されるもの"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:16
 msgid "The global `ptool` table and the shorter alias `p`."
-msgstr ""
+msgstr "グローバルテーブル `ptool` と短い別名 `p`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:17
 msgid "The same bundled helpers you can use from `ptool run <file>`."
-msgstr ""
+msgstr "`ptool run <file>` から使えるものと同じ組み込みヘルパー。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:18
 msgid "Interactive evaluation of Lua expressions and statements."
-msgstr ""
+msgstr "Lua の式や文の対話的な評価。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:19
 msgid ""
 "Readline-style editing, including arrow-key cursor movement and in-session "
 "history navigation."
-msgstr ""
+msgstr "矢印キーによるカーソル移動やセッション内履歴の移動を含む、 readline 風の編集"
+"機能。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:22
 msgid "Basic usage"
-msgstr ""
+msgstr "基本的な使い方"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:24
 msgid "Enter an expression to evaluate it immediately:"
-msgstr ""
+msgstr "式を入力するとすぐに評価されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:30
 msgid ""
 "The REPL prints returned values using the same inspector used elsewhere in "
 "`ptool`."
-msgstr ""
+msgstr "REPL は `ptool` の他の場所でも使われている同じインスペクターで戻り値を 表示し"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:33
 msgid "You can also call `ptool` APIs directly:"
-msgstr ""
+msgstr "`ptool` API を直接呼び出すこともできます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:39
 msgid "Multi-line input"
-msgstr ""
+msgstr "複数行入力"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:41
 msgid ""
@@ -79,44 +83,49 @@ msgid ""
 ". This lets you continue entering a block such as a function or control flow "
 "statement:"
 msgstr ""
+"現在の入力が未完成の場合、プロンプトは `>>> ` から `... ` に変わります。 これ"
+"により、関数や制御フロー文のようなブロックを続けて入力できます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:51
 msgid "Once the input is complete, `ptool` evaluates the whole chunk."
-msgstr ""
+msgstr "入力が完成すると、`ptool` はそのチャンク全体を評価します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:53
 msgid "Keyboard behavior"
-msgstr ""
+msgstr "キーボード操作"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:55
 msgid ""
 "`Up` and `Down` browse commands entered earlier in the same REPL session."
-msgstr ""
+msgstr "`Up` と `Down` は、同じ REPL セッション内で以前に入力したコマンドを たどりま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:56
 msgid "`Left` and `Right` move the cursor within the current input line."
-msgstr ""
+msgstr "`Left` と `Right` は、現在の入力行の中でカーソルを移動します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:57
 msgid ""
 "`Ctrl-C` clears the current input. If you are in the middle of a multi-line "
 "chunk, it discards the buffered chunk and returns to the primary prompt."
-msgstr ""
+msgstr "`Ctrl-C` は現在の入力を消去します。複数行チャンクの途中なら、 バッファされた"
+"チャンクを破棄して通常のプロンプトに戻ります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:59
 msgid "`Ctrl-D` exits the REPL."
-msgstr ""
+msgstr "`Ctrl-D` は REPL を終了します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:61
 msgid "Notes"
-msgstr ""
+msgstr "注意"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:63
 msgid "`ptool repl` requires an interactive TTY."
-msgstr ""
+msgstr "`ptool repl` には対話型 TTY が必要です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:64
 msgid ""
 "REPL history currently lives only for the current session and is not written "
 "to a history file."
-msgstr ""
+msgstr "REPL の履歴は現在のところそのセッション内だけに存在し、 履歴ファイルには書き"
+"込まれません。"

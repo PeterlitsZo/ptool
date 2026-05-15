@@ -15,7 +15,7 @@ Os módulos são agrupados por domínio. Dentro de cada grupo, as entradas são 
 
 ## Dados e texto
 
-- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
+- [API DateTime](./datetime.md): analisa, compara, formata e converte datas e horas concretas com suporte de fuso horário.
 - [API de hash](./hash.md): Calcula digests SHA-256, SHA-1 e MD5.
 - [API JSON](./json.md): Faz parse de texto JSON e serializa valores Lua como JSON.
 - [API de regex](./re.md): Compila regex e busca, captura, substitui ou divide texto.
@@ -42,6 +42,6 @@ Os módulos são agrupados por domínio. Dentro de cada grupo, as entradas são 
 ## Desenvolvimento e armazenamento
 
 - [API de banco de dados](./db.md): Abre conexões de banco de dados e executa consultas SQL.
-- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or push through libgit2-backed handles.
+- [API Git](./git.md): Abra repositórios, inspecione o status e clone, busque ou envie por meio de identificadores apoiados por libgit2.
 
 Use esta página como ponto de entrada e depois salte para o módulo necessário para consultar a referência completa das funções.

@@ -1,59 +1,59 @@
-# Platform API
+# API de plataforma
 
-Platform detection helpers are available under `ptool.platform` and `p.platform`.
+Las utilidades de detección de plataforma están disponibles bajo `ptool.platform` y `p.platform`.
 
 ## ptool.platform.os
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.os()` returns the operating system of the current machine.
+`ptool.platform.os()` devuelve el sistema operativo de la máquina actual.
 
-- Returns: `linux | macos | windows`.
+- Devuelve: `linux | macos | windows`.
 
 ```lua
 print(ptool.platform.os()) -- macos
 ```
 
-Behavior:
+Comportamiento:
 
-- This reports the local machine running `ptool run`.
-- `ptool` currently exposes `linux`, `macos`, and `windows`.
+- Esto informa sobre la máquina local que está ejecutando `ptool run`.
+- Actualmente `ptool` expone `linux`, `macos` y `windows`.
 
 ## ptool.platform.arch
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.arch()` returns the CPU architecture of the current machine.
+`ptool.platform.arch()` devuelve la arquitectura de CPU de la máquina actual.
 
-- Returns: `amd64 | arm64 | x86 | arm | riscv64`.
+- Devuelve: `amd64 | arm64 | x86 | arm | riscv64`.
 
 ```lua
 print(ptool.platform.arch()) -- arm64
 ```
 
-Behavior:
+Comportamiento:
 
-- `x86_64` is exposed as `amd64`.
-- `aarch64` is exposed as `arm64`.
-- 32-bit x86 variants such as `x86` and `i686` are exposed as `x86`.
-- 32-bit ARM variants such as `armv7l` are exposed as `arm`.
-- `riscv64` is exposed as `riscv64`.
+- `x86_64` se expone como `amd64`.
+- `aarch64` se expone como `arm64`.
+- Las variantes x86 de 32 bits como `x86` e `i686` se exponen como `x86`.
+- Las variantes ARM de 32 bits como `armv7l` se exponen como `arm`.
+- `riscv64` se expone como `riscv64`.
 
 ## ptool.platform.target
 
 > `v0.1.0` - Introduced.
 
-`ptool.platform.target()` returns a normalized platform target string for the current machine.
+`ptool.platform.target()` devuelve una cadena de destino de plataforma normalizada para la máquina actual.
 
-- Returns: `string`.
+- Devuelve: `string`.
 
 ```lua
 local target = ptool.platform.target()
 print(target) -- linux-riscv64
 ```
 
-Behavior:
+Comportamiento:
 
-- The result is always `ptool.platform.os() .. "-" .. ptool.platform.arch()`.
-- This is intended for platform-based branching such as selecting download artifacts.
-- Common values include `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64`, and `windows-amd64`.
+- El resultado siempre es `ptool.platform.os() .. "-" .. ptool.platform.arch()`.
+- Esto está pensado para bifurcaciones basadas en plataforma, como seleccionar artefactos de descarga.
+- Los valores comunes incluyen `linux-amd64`, `linux-arm64`, `linux-x86`, `linux-arm`, `linux-riscv64`, `macos-amd64`, `macos-arm64` y `windows-amd64`.

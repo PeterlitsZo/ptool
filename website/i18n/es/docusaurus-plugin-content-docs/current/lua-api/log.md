@@ -18,7 +18,7 @@ Comportamiento:
 
 ## ptool.log.trace
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 ```lua
 ptool.log.trace(...)
@@ -28,7 +28,7 @@ Escribe una línea de log de nivel trace.
 
 ## ptool.log.debug
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 ```lua
 ptool.log.debug(...)
@@ -38,7 +38,7 @@ Escribe una línea de log de nivel debug.
 
 ## ptool.log.info
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 ```lua
 ptool.log.info(...)
@@ -48,7 +48,7 @@ Escribe una línea de log de nivel info.
 
 ## ptool.log.warn
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 ```lua
 ptool.log.warn(...)
@@ -58,7 +58,7 @@ Escribe una línea de log de nivel warn.
 
 ## ptool.log.error
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 ```lua
 ptool.log.error(...)

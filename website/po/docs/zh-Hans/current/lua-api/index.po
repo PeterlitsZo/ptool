@@ -66,7 +66,7 @@ msgstr "数据与文本"
 msgid ""
 "[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
 "with timezone support."
-msgstr ""
+msgstr "[DateTime API]{1}：解析、比较、格式化并转换带时区支持的具体时间点。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
 msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
@@ -160,7 +160,8 @@ msgstr "[Database API]{1}：打开数据库连接并执行 SQL 查询。"
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
-msgstr ""
+msgstr "[Git API]{1}：打开仓库、查看状态，并通过 libgit2 驱动的句柄执行 clone、fetch "
+"或 push。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:59
 msgid ""

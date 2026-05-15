@@ -1,30 +1,30 @@
 # SSH API
 
-SSH connection, remote execution, and file transfer helpers are available under `ptool.ssh` and `p.ssh`.
+SSH 连接、远程执行和文件传输辅助能力位于 `ptool.ssh` 和 `p.ssh` 下。
 
 ## ptool.ssh.connect
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle backed by the system `ssh` command and returns a `Connection` object.
+`ptool.ssh.connect(target_or_options)` 会准备一个由系统 `ssh` 命令驱动的 SSH 连接句柄，并返回一个 `Connection` 对象。
 
-`ssh` must be available on `PATH`.
+运行环境中必须能在 `PATH` 中找到 `ssh`。
 
-Arguments:
+参数：
 
-- `target_or_options` (string|table, required):
-  - When a string is provided, it is treated as an SSH target.
-  - When a table is provided, it currently supports:
-    - `target` (string, optional): SSH target string such as `"deploy@example.com"` or `"deploy@example.com:2222"`.
-    - `host` (string, optional): Hostname or IP address.
-    - `user` (string, optional): SSH username. Defaults to `$USER`, or `"root"` if `$USER` is unavailable.
-    - `port` (integer, optional): SSH port. Defaults to `22`.
-    - `auth` (table, optional): Authentication settings.
-    - `host_key` (table, optional): Host key verification settings.
-    - `connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `10000`.
-    - `keepalive_interval_ms` (integer, optional): Keepalive interval in milliseconds.
+- `target_or_options`（string|table，必填）：
+  - 传入字符串时，会被视为 SSH target。
+  - 传入 table 时，目前支持：
+    - `target`（string，可选）：SSH target 字符串，例如 `"deploy@example.com"` 或 `"deploy@example.com:2222"`。
+    - `host`（string，可选）：主机名或 IP 地址。
+    - `user`（string，可选）：SSH 用户名。默认取 `$USER`；如果 `$USER` 不可用，则默认为 `"root"`。
+    - `port`（integer，可选）：SSH 端口。默认值为 `22`。
+    - `auth`（table，可选）：认证设置。
+    - `host_key`（table，可选）：主机密钥校验设置。
+    - `connect_timeout_ms`（integer，可选）：超时时间（毫秒）。默认值为 `10000`。
+    - `keepalive_interval_ms`（integer，可选）：keepalive 间隔（毫秒）。
 
-Supported target string examples:
+支持的 target 字符串示例：
 
 ```lua
 local a = ptool.ssh.connect("deploy@example.com")
@@ -32,37 +32,37 @@ local b = ptool.ssh.connect("deploy@example.com:2222")
 local c = ptool.ssh.connect("[2001:db8::10]:2222")
 ```
 
-`auth` fields:
+`auth` 字段：
 
-- `private_key_file` (string, optional): Path to a private key file.
-- `private_key_passphrase` (string, optional): Passphrase for the private key. This is currently not supported.
-- `password` (string, optional): Password-based authentication. This is currently not supported.
+- `private_key_file`（string，可选）：私钥文件路径。
+- `private_key_passphrase`（string，可选）：私钥口令。目前不支持。
+- `password`（string，可选）：密码认证所用的密码。目前不支持。
 
-Authentication behavior:
+认证行为：
 
-- If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key via `-i` and also sets `IdentitiesOnly=yes`.
-- If `auth.private_key_passphrase` or `auth.password` is provided, `ptool.ssh.connect(...)` fails because this API does not pass those secrets to the system `ssh` command.
-- Otherwise, authentication is delegated to the local OpenSSH setup, including settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent`, and certificates.
-- Relative key paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- `~` and `~/...` are expanded in key paths.
+- 如果提供了 `auth.private_key_file`，`ptool` 会通过 `-i` 将该私钥传给 `ssh`，并同时设置 `IdentitiesOnly=yes`。
+- 如果提供了 `auth.private_key_passphrase` 或 `auth.password`， `ptool.ssh.connect(...)` 会失败，因为该 API 不会把这些密钥材料直接传给 系统 `ssh` 命令。
+- 否则，认证完全交给本机 OpenSSH 配置处理，包括 `IdentityFile`、 `ProxyJump`、`ProxyCommand`、`ssh-agent` 和证书等机制。
+- 相对私钥路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` 的影响。
+- 私钥路径中的 `~` 和 `~/...` 会被展开。
 
-`host_key` fields:
+`host_key` 字段：
 
-- `verify` (string, optional): Host key verification mode. Supported values:
-  - `"known_hosts"`: Verify against a known_hosts file (default).
-  - `"ignore"`: Skip host key verification.
-- `known_hosts_file` (string, optional): Path to a known_hosts file. Used only when `verify = "known_hosts"`.
+- `verify`（string，可选）：主机密钥校验模式。支持：
+  - `"known_hosts"`：根据 known_hosts 文件校验（默认）。
+  - `"ignore"`：跳过主机密钥校验。
+- `known_hosts_file`（string，可选）：known_hosts 文件路径。仅在 `verify = "known_hosts"` 时使用。
 
-Host key behavior:
+主机密钥行为：
 
-- If `verify = "ignore"`, `ptool` invokes `ssh` with `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`.
-- If `verify = "known_hosts"` and `known_hosts_file` is provided, `ptool` invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`.
-- If `verify = "known_hosts"` and `known_hosts_file` is omitted, or when `host_key` is omitted entirely, host key handling is delegated to the local OpenSSH configuration and defaults.
-- Relative `known_hosts_file` paths are resolved from the current `ptool` runtime directory.
-- `~` and `~/...` are expanded in `known_hosts_file`.
-- When `known_hosts_file` is provided explicitly, it overrides the default `UserKnownHostsFile` used by the local `ssh` command for this connection.
+- 如果 `verify = "ignore"`，`ptool` 会给 `ssh` 传入 `StrictHostKeyChecking=no` 和 `UserKnownHostsFile=/dev/null`。
+- 如果 `verify = "known_hosts"` 且提供了 `known_hosts_file`，`ptool` 会给 `ssh` 传入 `StrictHostKeyChecking=yes`，并设置对应的 `UserKnownHostsFile`。
+- 如果 `verify = "known_hosts"` 但省略了 `known_hosts_file`，或者整个 `host_key` 都被省略，则主机密钥处理交给本机 OpenSSH 配置和默认行为。
+- 相对 `known_hosts_file` 路径会从当前 `ptool` 运行时目录解析。
+- `known_hosts_file` 中的 `~` 和 `~/...` 会被展开。
+- 当显式提供 `known_hosts_file` 时，它会覆盖本次连接中本机 `ssh` 命令默认 使用的 `UserKnownHostsFile`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect({
@@ -80,20 +80,20 @@ local ssh = ptool.ssh.connect({
 
 ## Connection
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`Connection` represents an OpenSSH-backed connection handle returned by `ptool.ssh.connect()`.
+`Connection` 表示由 `ptool.ssh.connect()` 返回的、基于 OpenSSH 的连接句柄。
 
-It is implemented as a Lua userdata.
+它实现为 Lua userdata。
 
-Fields and methods:
+字段和方法：
 
-- Fields:
-  - `conn.host` (string)
-  - `conn.user` (string)
-  - `conn.port` (integer)
-  - `conn.target` (string)
-- Methods:
+- 字段：
+  - `conn.host`（string）
+  - `conn.user`（string）
+  - `conn.port`（integer）
+  - `conn.target`（string）
+- 方法：
   - `conn:run(...)` -> `table`
   - `conn:run_capture(...)` -> `table`
   - `conn:path(path)` -> `RemotePath`
@@ -106,13 +106,13 @@ Fields and methods:
 
 ### run
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:run`.
+规范 API 名称：`ptool.ssh.Connection:run`。
 
-`conn:run(...)` executes a remote command through the current SSH connection.
+`conn:run(...)` 通过当前 SSH 连接执行远程命令。
 
-The following call forms are supported:
+支持以下调用形式：
 
 ```lua
 conn:run("hostname")
@@ -123,59 +123,59 @@ conn:run("echo", {"hello", "world"}, { stdout = "capture" })
 conn:run({ cmd = "git", args = {"rev-parse", "HEAD"} })
 ```
 
-Argument rules:
+参数规则：
 
-- `conn:run(cmdline)`: `cmdline` is sent as the remote command string.
-- `conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` is split using shell-style (`shlex`) rules.
-- `conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. Arguments are shell-quoted before remote execution.
-- `conn:run(cmdline, options)`: `options` overrides this invocation.
-- `conn:run(cmd, args, options)`: `options` overrides this invocation.
-- `conn:run(options)`: `options` is a table.
-- When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`.
+- `conn:run(cmdline)`：`cmdline` 会作为远程命令字符串直接发送。
+- `conn:run(cmd, argsline)`：`cmd` 会被视为命令，`argsline` 会按 shell 风格 （`shlex`）规则拆分。
+- `conn:run(cmd, args)`：`cmd` 是字符串，`args` 是字符串数组。参数会在远程执行前 做 shell quoting。
+- `conn:run(cmdline, options)`：`options` 会覆盖本次调用的行为。
+- `conn:run(cmd, args, options)`：`options` 会覆盖本次调用的行为。
+- `conn:run(options)`：`options` 是一个 table。
+- 当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； 否则视为 `options`。
 
-When `conn:run(options)` is used, `options` currently supports:
+使用 `conn:run(options)` 时，`options` 目前支持：
 
-- `cmd` (string, required): The command name or executable path.
-- `args` (string[], optional): The argument list.
-- `cwd` (string, optional): Remote working directory. This is applied by prepending `cd ... &&` to the generated remote shell command.
-- `env` (table, optional): Remote environment variables, where keys and values are strings. This is applied by prepending `export ... &&` to the generated remote shell command.
-- `stdin` (string, optional): String sent to the remote process stdin.
-- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
+- `cmd`（string，必填）：命令名或可执行文件路径。
+- `args`（string[]，可选）：参数列表。
+- `cwd`（string，可选）：远程工作目录。会通过在生成的远程 shell 命令前追加 `cd ... &&` 实现。
+- `env`（table，可选）：远程环境变量，键和值都必须是字符串。会通过在生成的 远程 shell 命令前追加 `export ... &&` 实现。
+- `stdin`（string，可选）：发送给远程进程 stdin 的字符串。
+- `echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `false`。
+- `check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。
+- `stdout`（string，可选）：stdout 处理策略。支持：
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"capture"`：捕获到 `res.stdout`。
+  - `"null"`：丢弃输出。
+- `stderr`（string，可选）：stderr 处理策略。支持：
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"capture"`：捕获到 `res.stderr`。
+  - `"null"`：丢弃输出。
 
-When the shortcut forms are used, the `options` table supports only:
+使用快捷调用形式时，`options` 仅支持：
 
-- `stdin` (string, optional): String sent to the remote process stdin.
-- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
+- `stdin`（string，可选）：发送给远程进程 stdin 的字符串。
+- `echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `false`。
+- `check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。
+- `stdout`（string，可选）：stdout 处理策略。支持：
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"capture"`：捕获到 `res.stdout`。
+  - `"null"`：丢弃输出。
+- `stderr`（string，可选）：stderr 处理策略。支持：
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"capture"`：捕获到 `res.stderr`。
+  - `"null"`：丢弃输出。
 
-Return value rules:
+返回值规则：
 
-- A table is always returned with the following fields:
-  - `ok` (boolean): Whether the remote exit status is `0`.
-  - `code` (integer|nil): The remote exit status. If the remote process exits by signal, this is `nil`.
-  - `target` (string): The SSH target string in the form `user@host:port`.
-  - `stdout` (string, optional): Present when `stdout = "capture"`.
-  - `stderr` (string, optional): Present when `stderr = "capture"`.
-  - `assert_ok(self)` (function): Raises an error when `ok = false`.
+- 总是返回一个 table，包含以下字段：
+  - `ok`（boolean）：远程退出状态是否为 `0`。
+  - `code`（integer|nil）：远程退出状态。如果远程进程因信号退出，则为 `nil`。
+  - `target`（string）：形如 `user@host:port` 的 SSH target 字符串。
+  - `stdout`（string，可选）：当 `stdout = "capture"` 时提供。
+  - `stderr`（string，可选）：当 `stderr = "capture"` 时提供。
+  - `assert_ok(self)`（function）：当 `ok = false` 时抛出错误。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -199,22 +199,22 @@ print(res2.stdout)
 
 ### run_capture
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:run_capture`.
+规范 API 名称：`ptool.ssh.Connection:run_capture`。
 
-`conn:run_capture(...)` executes a remote command through the current SSH connection.
+`conn:run_capture(...)` 通过当前 SSH 连接执行远程命令。
 
-It accepts the same call forms, argument rules, return value rules, and options as `conn:run(...)`.
+它接受与 `conn:run(...)` 相同的调用形式、参数规则、返回值规则和选项。
 
-The difference is only the default stream handling:
+唯一差异是默认流处理方式：
 
-- `stdout` defaults to `"capture"`.
-- `stderr` defaults to `"capture"`.
+- `stdout` 默认是 `"capture"`。
+- `stderr` 默认是 `"capture"`。
 
-You can still override either field explicitly in `options`.
+你仍然可以在 `options` 中显式覆盖任意一个字段。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -238,16 +238,16 @@ print(res3.stdout)
 
 ### path
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:path`.
+规范 API 名称：`ptool.ssh.Connection:path`。
 
-`conn:path(path)` creates a reusable `RemotePath` object bound to the current SSH connection.
+`conn:path(path)` 创建一个绑定到当前 SSH 连接的可复用 `RemotePath` 对象。
 
-- `path` (string, required): The remote path.
-- Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`.
+- `path`（string，必填）：远程路径。
+- 返回：A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -258,16 +258,16 @@ ssh:download(remote_release, "./tmp/current.tar.gz")
 
 ### exists
 
-> `v0.2.0` - Introduced.
+> `v0.2.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:exists`.
+规范 API 名称：`ptool.ssh.Connection:exists`。
 
-`conn:exists(path)` checks whether a remote path exists.
+`conn:exists(path)` 检查远程路径是否存在。
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path exists, otherwise `false`.
+- `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
+- 返回：`true` when the remote path exists, otherwise `false`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -278,16 +278,16 @@ print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 
 ### is_file
 
-> `v0.2.0` - Introduced.
+> `v0.2.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:is_file`.
+规范 API 名称：`ptool.ssh.Connection:is_file`。
 
-`conn:is_file(path)` checks whether a remote path exists and is a regular file.
+`conn:is_file(path)` 检查远程路径是否存在且为普通文件。
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path is a file, otherwise `false`.
+- `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
+- 返回：`true` when the remote path is a file, otherwise `false`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -300,16 +300,16 @@ end
 
 ### is_dir
 
-> `v0.2.0` - Introduced.
+> `v0.2.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:is_dir`.
+规范 API 名称：`ptool.ssh.Connection:is_dir`。
 
-`conn:is_dir(path)` checks whether a remote path exists and is a directory.
+`conn:is_dir(path)` 检查远程路径是否存在且为目录。
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path is a directory, otherwise `false`.
+- `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
+- 返回：`true` when the remote path is a directory, otherwise `false`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -322,35 +322,35 @@ end
 
 ### upload
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:upload`.
+规范 API 名称：`ptool.ssh.Connection:upload`。
 
-`conn:upload(local_path, remote_path[, options])` uploads a local file or directory to the remote host.
+`conn:upload(local_path, remote_path[, options])` 将本地文件或目录上传到远程主机。
 
-- `local_path` (string, required): The local file or directory to upload.
-- `remote_path` (string|remote path, required): The destination path on the remote host. It can be a string or a value created by `conn:path(...)`.
-- `options` (table, optional): Transfer options.
-- Returns: A table with the following fields:
-  - `bytes` (integer): The number of regular-file bytes uploaded. When a directory is uploaded, this is the sum of the uploaded file sizes.
-  - `from` (string): The local source path.
-  - `to` (string): The remote destination path.
+- `local_path`（string，必填）：要上传的本地文件或目录。
+- `remote_path`（string|remote path，必填）：远程目标路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
+- `options`（table，可选）：传输选项。
+- 返回：A table with the following fields:。
+  - `bytes`（integer）：已上传的普通文件字节数。上传目录时，它等于目录内所有已上传 文件大小之和。
+  - `from`（string）：本地源路径。
+  - `to`（string）：远程目标路径。
 
-Supported transfer options:
+支持的传输选项：
 
-- `parents` (boolean, optional): Create the parent directory of `remote_path` before uploading. Defaults to `false`.
-- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
-- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
+- `parents`（boolean，可选）：上传前是否创建 `remote_path` 的父目录。默认值为 `false`。
+- `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
+- `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
 
-Directory behavior:
+目录行为：
 
-- When `local_path` is a file, the behavior is unchanged.
-- When `local_path` is a directory and `remote_path` does not exist, `remote_path` becomes the destination directory root.
-- When `local_path` is a directory and `remote_path` already exists as a directory, the source directory is created under it using the source directory basename.
-- `overwrite = false` rejects an already-existing destination directory for the final directory root.
-- Directory uploads require `tar` to be available on the remote host.
+- 当 `local_path` 是文件时，行为保持不变。
+- 当 `local_path` 是目录且 `remote_path` 不存在时，`remote_path` 会成为目标目录根。
+- 当 `local_path` 是目录且 `remote_path` 已存在并且是目录时，会在其下按源目录的 basename 创建目标目录。
+- `overwrite = false` 时，如果最终目标目录已存在，则会报错。
+- 上传目录时，远程主机需要提供 `tar`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -366,7 +366,7 @@ print(res.bytes)
 print(res.to)
 ```
 
-Directory example:
+目录示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -383,35 +383,35 @@ print(res.to) -- deploy@example.com:22:/srv/app/releases
 
 ### download
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:download`.
+规范 API 名称：`ptool.ssh.Connection:download`。
 
-`conn:download(remote_path, local_path[, options])` downloads a remote file or directory to a local path.
+`conn:download(remote_path, local_path[, options])` 将远程文件或目录下载到本地路径。
 
-- `remote_path` (string|remote path, required): The source path on the remote host. It can be a string or a value created by `conn:path(...)`.
-- `local_path` (string, required): The local destination path.
-- `options` (table, optional): Transfer options.
-- Returns: A table with the following fields:
-  - `bytes` (integer): The number of regular-file bytes downloaded. When a directory is downloaded, this is the sum of the downloaded file sizes.
-  - `from` (string): The remote source path.
-  - `to` (string): The local destination path.
+- `remote_path`（string|remote path，必填）：远程源路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
+- `local_path`（string，必填）：本地目标路径。
+- `options`（table，可选）：传输选项。
+- 返回：A table with the following fields:。
+  - `bytes`（integer）：已下载的普通文件字节数。下载目录时，它等于目录内所有已下载 文件大小之和。
+  - `from`（string）：远程源路径。
+  - `to`（string）：本地目标路径。
 
-Supported transfer options:
+支持的传输选项：
 
-- `parents` (boolean, optional): Create the parent directory of `local_path` before downloading. Defaults to `false`.
-- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
-- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
+- `parents`（boolean，可选）：下载前是否创建 `local_path` 的父目录。默认值为 `false`。
+- `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
+- `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
 
-Directory behavior:
+目录行为：
 
-- When `remote_path` is a file, the behavior is unchanged.
-- When `remote_path` is a directory and `local_path` does not exist, `local_path` becomes the destination directory root.
-- When `remote_path` is a directory and `local_path` already exists as a directory, the remote source directory is created under it using the remote directory basename.
-- `overwrite = false` rejects an already-existing destination directory for the final directory root.
-- Directory downloads require `tar` to be available on the remote host.
+- 当 `remote_path` 是文件时，行为保持不变。
+- 当 `remote_path` 是目录且 `local_path` 不存在时，`local_path` 会成为目标目录根。
+- 当 `remote_path` 是目录且 `local_path` 已存在并且是目录时，会在其下按远程源目录的 basename 创建目标目录。
+- `overwrite = false` 时，如果最终目标目录已存在，则会报错。
+- 下载目录时，远程主机需要提供 `tar`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -426,7 +426,7 @@ print(res.bytes)
 print(res.from)
 ```
 
-Directory example:
+目录示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -443,18 +443,18 @@ print(res.from)
 
 ### close
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-Canonical API name: `ptool.ssh.Connection:close`.
+规范 API 名称：`ptool.ssh.Connection:close`。
 
-`conn:close()` closes the SSH connection handle.
+`conn:close()` 关闭 SSH 连接句柄。
 
-Behavior:
+行为说明：
 
-- After closing, the connection can no longer be used.
-- Closing an already-closed connection is allowed and has no effect.
+- 关闭后，连接不能再继续使用。
+- 对已经关闭的连接再次关闭是允许的，并且不会产生效果。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -463,13 +463,13 @@ ssh:close()
 
 ## RemotePath
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`RemotePath` represents a remote path bound to a `Connection` and returned by `conn:path(path)`.
+`RemotePath` 表示一个绑定到 `Connection` 的远程路径，由 `conn:path(path)` 返回。
 
-It is implemented as a Lua userdata.
+它实现为 Lua userdata。
 
-Methods:
+方法：
 
 - `remote:exists()` -> `boolean`
 - `remote:is_file()` -> `boolean`
@@ -477,11 +477,11 @@ Methods:
 
 ### exists
 
-`remote:exists()` checks whether the remote path exists.
+`remote:exists()` 检查远程路径是否存在。
 
-- Returns: `true` when the remote path exists, otherwise `false`.
+- 返回：`true` when the remote path exists, otherwise `false`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -492,11 +492,11 @@ print(remote_release:exists())
 
 ### is_file
 
-`remote:is_file()` checks whether the remote path exists and is a regular file.
+`remote:is_file()` 检查远程路径是否存在且为普通文件。
 
-- Returns: `true` when the remote path is a file, otherwise `false`.
+- 返回：`true` when the remote path is a file, otherwise `false`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -509,11 +509,11 @@ end
 
 ### is_dir
 
-`remote:is_dir()` checks whether the remote path exists and is a directory.
+`remote:is_dir()` 检查远程路径是否存在且为目录。
 
-- Returns: `true` when the remote path is a directory, otherwise `false`.
+- 返回：`true` when the remote path is a directory, otherwise `false`。
 
-Example:
+示例：
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")

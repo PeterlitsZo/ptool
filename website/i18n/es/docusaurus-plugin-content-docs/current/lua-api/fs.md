@@ -4,7 +4,7 @@ Las utilidades de sistema de archivos están disponibles bajo `ptool.fs` y `p.fs
 
 ## ptool.fs.read
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.fs.read(path)` lee un archivo como bytes sin procesar y devuelve una cadena Lua.
 
@@ -28,7 +28,7 @@ print(#png)
 
 ## ptool.fs.write
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.fs.write(path, content)` escribe una cadena Lua en un archivo como bytes sin procesar, sobrescribiendo el contenido existente.
 
@@ -49,7 +49,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 ## ptool.fs.mkdir
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.fs.mkdir(path)` crea un directorio. Si los directorios padre no existen, se crean recursivamente.
 
@@ -63,7 +63,7 @@ ptool.fs.mkdir("tmp/a/b")
 
 ## ptool.fs.exists
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.fs.exists(path)` comprueba si una ruta existe.
 
@@ -80,7 +80,7 @@ end
 
 ## ptool.fs.is_file
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
 `ptool.fs.is_file(path)` comprueba si una ruta existe y es un archivo normal.
 
@@ -97,7 +97,7 @@ end
 
 ## ptool.fs.is_dir
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
 `ptool.fs.is_dir(path)` comprueba si una ruta existe y es un directorio.
 
@@ -114,7 +114,7 @@ end
 
 ## ptool.fs.remove
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
 `ptool.fs.remove(path[, options])` elimina un archivo, enlace simbólico o directorio.
 
@@ -139,7 +139,7 @@ ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 
 ## ptool.fs.glob
 
-> `v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option.
+> `v0.2.0` - Introducido. `v0.5.0` - Se ha añadido la opción `working_dir`.
 
 `ptool.fs.glob(pattern[, options])` encuentra rutas del sistema de archivos usando sintaxis glob de estilo Unix y devuelve un arreglo de cadenas ordenado lexicográficamente con las rutas coincidentes.
 

@@ -31,7 +31,7 @@ msgstr "ptool.db.connect"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:9
 msgid ""
@@ -119,7 +119,7 @@ msgstr "Connection"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:52
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:52"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:54
 msgid ""
@@ -274,11 +274,11 @@ msgstr "query"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:98
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:98"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:100
 msgid "Canonical API name: `ptool.db.Connection:query`."
-msgstr "Canonical API name: `ptool.db.Connection:query`."
+msgstr "Nombre de la API canónica: `ptool.db.Connection:query`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:102
 msgid "`db:query(sql, params?)` executes a query and returns a table with:"
@@ -308,11 +308,11 @@ msgstr "query_one"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:126
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:126"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:128
 msgid "Canonical API name: `ptool.db.Connection:query_one`."
-msgstr "Canonical API name: `ptool.db.Connection:query_one`."
+msgstr "Nombre de la API canónica: `ptool.db.Connection:query_one`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:130
 msgid ""
@@ -334,11 +334,11 @@ msgstr "scalar"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:144
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:144"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:146
 msgid "Canonical API name: `ptool.db.Connection:scalar`."
-msgstr "Canonical API name: `ptool.db.Connection:scalar`."
+msgstr "Nombre de la API canónica: `ptool.db.Connection:scalar`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:148
 msgid ""
@@ -360,11 +360,11 @@ msgstr "execute"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:160
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:160"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:162
 msgid "Canonical API name: `ptool.db.Connection:execute`."
-msgstr "Canonical API name: `ptool.db.Connection:execute`."
+msgstr "Nombre de la API canónica: `ptool.db.Connection:execute`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:164
 msgid ""
@@ -388,11 +388,11 @@ msgstr "transaction"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:177"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:179
 msgid "Canonical API name: `ptool.db.Connection:transaction`."
-msgstr "Canonical API name: `ptool.db.Connection:transaction`."
+msgstr "Nombre de la API canónica: `ptool.db.Connection:transaction`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:181
 msgid "`db:transaction(fn)` runs `fn(tx)` inside a database transaction."
@@ -461,11 +461,11 @@ msgstr "close"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:219
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:219"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:221
 msgid "Canonical API name: `ptool.db.Connection:close`."
-msgstr "Canonical API name: `ptool.db.Connection:close`."
+msgstr "Nombre de la API canónica: `ptool.db.Connection:close`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/db.md:223
 msgid "`db:close()` closes the connection."

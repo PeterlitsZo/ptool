@@ -1,41 +1,41 @@
 # REPL
 
-`ptool repl` starts an interactive Lua session with the standard `ptool` API already loaded.
+`ptool repl` inicia uma sessão interativa de Lua com a API padrão de `ptool` já carregada.
 
-## Start the REPL
+## Iniciar o REPL
 
 ```sh
 ptool repl
 ```
 
-When the REPL starts, `ptool` shows a banner and waits for Lua input.
+Quando o REPL inicia, `ptool` mostra um banner e aguarda entrada Lua.
 
-## What it provides
+## O que ele oferece
 
-- The global `ptool` table and the shorter alias `p`.
-- The same bundled helpers you can use from `ptool run <file>`.
-- Interactive evaluation of Lua expressions and statements.
-- Readline-style editing, including arrow-key cursor movement and in-session history navigation.
+- A tabela global `ptool` e o alias curto `p`.
+- Os mesmos utilitários embarcados que você pode usar em `ptool run <file>`.
+- Avaliação interativa de expressões e instruções Lua.
+- Edição estilo readline, incluindo movimento de cursor com as setas e navegação pelo histórico dentro da sessão.
 
-## Basic usage
+## Uso básico
 
-Enter an expression to evaluate it immediately:
+Digite uma expressão para avaliá-la imediatamente:
 
 ```lua
 1 + 2
 ```
 
-The REPL prints returned values using the same inspector used elsewhere in `ptool`.
+O REPL imprime os valores retornados usando o mesmo inspetor usado em outras partes do `ptool`.
 
-You can also call `ptool` APIs directly:
+Você também pode chamar APIs do `ptool` diretamente:
 
 ```lua
 p.str.trim("  hello  ")
 ```
 
-## Multi-line input
+## Entrada multilinha
 
-If the current input is incomplete, the prompt changes from `>>> ` to `... `. This lets you continue entering a block such as a function or control flow statement:
+Se a entrada atual estiver incompleta, o prompt muda de `>>> ` para `... `. Isso permite continuar digitando um bloco como uma função ou uma estrutura de controle de fluxo:
 
 ```lua
 for i = 1, 3 do
@@ -43,16 +43,16 @@ for i = 1, 3 do
 end
 ```
 
-Once the input is complete, `ptool` evaluates the whole chunk.
+Quando a entrada fica completa, `ptool` avalia todo o bloco.
 
-## Keyboard behavior
+## Comportamento do teclado
 
-- `Up` and `Down` browse commands entered earlier in the same REPL session.
-- `Left` and `Right` move the cursor within the current input line.
-- `Ctrl-C` clears the current input. If you are in the middle of a multi-line chunk, it discards the buffered chunk and returns to the primary prompt.
-- `Ctrl-D` exits the REPL.
+- `Up` e `Down` percorrem comandos digitados anteriormente na mesma sessão do REPL.
+- `Left` e `Right` movem o cursor dentro da linha de entrada atual.
+- `Ctrl-C` limpa a entrada atual. Se você estiver no meio de um bloco multilinha, ele descarta o bloco em buffer e volta ao prompt principal.
+- `Ctrl-D` sai do REPL.
 
-## Notes
+## Notas
 
-- `ptool repl` requires an interactive TTY.
-- REPL history currently lives only for the current session and is not written to a history file.
+- `ptool repl` exige um TTY interativo.
+- O histórico do REPL atualmente existe apenas durante a sessão atual e não é gravado em um arquivo de histórico.

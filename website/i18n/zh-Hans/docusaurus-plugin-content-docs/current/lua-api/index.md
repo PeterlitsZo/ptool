@@ -15,7 +15,7 @@
 
 ## 数据与文本
 
-- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
+- [DateTime API](./datetime.md)：解析、比较、格式化并转换带时区支持的具体时间点。
 - [Hash API](./hash.md)：计算 SHA-256、SHA-1 和 MD5 摘要。
 - [JSON API](./json.md)：解析 JSON 文本，并把 Lua 值序列化为 JSON。
 - [Regex API](./re.md)：编译正则，并对文本进行搜索、捕获、替换或切分。
@@ -42,6 +42,6 @@
 ## 开发与存储
 
 - [Database API](./db.md)：打开数据库连接并执行 SQL 查询。
-- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or push through libgit2-backed handles.
+- [Git API](./git.md)：打开仓库、查看状态，并通过 libgit2 驱动的句柄执行 clone、fetch 或 push。
 
 把这页当作入口，然后跳转到你需要的模块页面查看完整函数参考。

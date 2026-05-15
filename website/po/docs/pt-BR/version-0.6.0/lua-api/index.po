@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,132 +14,195 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:1
 msgid "Lua API Overview"
-msgstr ""
+msgstr "Visão geral da API de Lua"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:3
 msgid "`ptool` exposes a broad set of helpers through `ptool` and `p`."
 msgstr ""
+"`ptool` expõe um amplo conjunto de utilitários por meio de `ptool` e `p`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:5
 msgid "Core APIs"
-msgstr ""
+msgstr "APIs principais"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:7
 msgid ""
 "[Core Lua API]{1}: Script lifecycle, process execution, config, and terminal "
 "helpers."
 msgstr ""
+"[API principal de Lua]{1}: Ciclo de vida do script, execução de processos, "
+"configuração e utilitários de terminal."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:10
 msgid "Modules"
-msgstr ""
+msgstr "Módulos"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:12
 msgid "[Args API]{1}: Command-line argument schema parsing for Lua scripts."
 msgstr ""
+"[API de argumentos]{1}: Parse de esquemas de argumentos de linha de comando "
+"para scripts Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:13
 msgid ""
 "[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
 "with timezone support."
 msgstr ""
+"[API DateTime]{1}: analisa, compara, formata e converte datas e horas "
+"concretas com suporte de fuso horário."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:15
 msgid "[SemVer API]{1}: Parse, compare, and bump semantic versions."
-msgstr ""
+msgstr "[API de SemVer]{1}: Faz parse, compara e incrementa versões semânticas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:16
 msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
-msgstr ""
+msgstr "[API de hash]{1}: Calcula digests SHA-256, SHA-1 e MD5."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:17
 msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
-msgstr ""
+msgstr "[API de rede]{1}: Faz parse de URLs, endereços IP e pares host-porta."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:18
 msgid ""
 "[OS API]{1}: Read runtime environment variables and inspect host process "
 "details."
 msgstr ""
+"[API de sistema operacional]{1}: Lê variáveis de ambiente do runtime e "
+"inspeciona detalhes do processo hospedeiro."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:20
 msgid ""
 "[Platform API]{1}: Detect the current OS, architecture, and target triple."
 msgstr ""
+"[API de plataforma]{1}: Detecta o SO, a arquitetura e o target triple atuais."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:22
 msgid "[ANSI API]{1}: Build styled terminal output with ANSI escape sequences."
 msgstr ""
+"[API ANSI]{1}: Monta saída de terminal com estilo usando sequências ANSI."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:24
 msgid ""
 "[TUI API]{1}: Build simple terminal user interfaces with a structured view "
 "tree and event loop."
 msgstr ""
+"[API TUI]{1}: Constrói interfaces de terminal simples com uma árvore de "
+"visualização estruturada e um loop de eventos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:26
 msgid "[Log API]{1}: Write timestamped terminal logs with level-based output."
-msgstr ""
+msgstr "[API de log]{1}: Escreve logs de terminal com timestamp e nível."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:27
 msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
-msgstr ""
+msgstr "[API HTTP]{1}: Envia requisições HTTP e consome corpos de resposta."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:28
 msgid "[JSON API]{1}: Parse JSON text and stringify Lua values as JSON."
 msgstr ""
+"[API JSON]{1}: Faz parse de texto JSON e serializa valores Lua como JSON."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:29
 msgid ""
 "[YAML API]{1}: Parse YAML text, read nested values, and stringify Lua values "
 "as YAML."
 msgstr ""
+"[API YAML]{1}: Faz parse de texto YAML, lê valores aninhados e serializa "
+"valores Lua como YAML."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:31
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr ""
+"[API de banco de dados]{1}: Abre conexões de banco de dados e executa "
+"consultas SQL."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:32
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
 msgstr ""
+"[API SSH]{1}: Conecta-se a hosts remotos, executa comandos e transfere "
+"arquivos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:34
 msgid ""
 "[Path API]{1}: Manipulate paths lexically without touching the filesystem."
 msgstr ""
+"[API de caminhos]{1}: Manipula caminhos lexicalmente sem tocar no sistema de "
+"arquivos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:36
 msgid "[TOML API]{1}: Parse, stringify, read, update, and remove TOML values."
 msgstr ""
+"[API TOML]{1}: Faz parse, serializa, lê, atualiza e remove valores TOML."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:37
 msgid ""
 "[Regex API]{1}: Compile regexes and search, capture, replace, or split text."
 msgstr ""
+"[API de regex]{1}: Compila regex e busca, captura, substitui ou divide texto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:39
 msgid "[String API]{1}: Trim, split, join, replace, and format strings."
 msgstr ""
+"[API de strings]{1}: Remove espaços, divide, junta, substitui e formata "
+"strings."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:40
 msgid "[Table API]{1}: Map, filter, and concatenate dense list tables."
 msgstr ""
+"[API de tabelas]{1}: Mapeia, filtra e concatena tabelas de lista densas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:41
 msgid "[Filesystem API]{1}: Read, write, create, and glob filesystem paths."
 msgstr ""
+"[API de sistema de arquivos]{1}: Lê, grava, cria e faz glob em caminhos do "
+"sistema de arquivos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:42
 msgid "[Shell API]{1}: Split shell-like command lines into argument arrays."
 msgstr ""
+"[API de shell]{1}: Divide linhas de comando em estilo shell em arrays de "
+"argumentos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:43
 msgid "[Template API]{1}: Render text templates from Lua data."
 msgstr ""
+"[API de templates]{1}: Renderiza templates de texto a partir de dados Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/index.md:45
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."
 msgstr ""
+"Use esta página como ponto de entrada e depois salte para o módulo "
+"necessário para consultar a referência completa das funções."
+
+#~ msgid ""
+#~ "Modules are grouped by domain. Within each group, entries are listed in "
+#~ "alphabetical order."
+#~ msgstr ""
+#~ "Os módulos são agrupados por domínio. Dentro de cada grupo, as entradas "
+#~ "são listadas em ordem alfabética."
+
+#~ msgid "Runtime & Interaction"
+#~ msgstr "Runtime e interação"
+
+#~ msgid "Data & Text"
+#~ msgstr "Dados e texto"
+
+#~ msgid "Filesystem & Platform"
+#~ msgstr "Sistema de arquivos e plataforma"
+
+#~ msgid "Networking & Remote"
+#~ msgstr "Rede e remoto"
+
+#~ msgid "Development & Storage"
+#~ msgstr "Desenvolvimento e armazenamento"
+
+#~ msgid ""
+#~ "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
+#~ "through libgit2-backed handles."
+#~ msgstr ""
+#~ "[API Git]{1}: Abra repositórios, inspecione o status e clone, busque ou "
+#~ "envie por meio de identificadores apoiados por libgit2."

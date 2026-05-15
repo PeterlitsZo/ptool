@@ -1,17 +1,17 @@
 # DateTime API
 
-Date and time helpers are available under `ptool.datetime` and `p.datetime`.
+Los ayudantes de fecha y hora están disponibles en `ptool.datetime` y `p.datetime`.
 
-`ptool.datetime` works with concrete instants. Every `DateTime` value carries a timezone or numeric offset.
+`ptool.datetime` trabaja con instantes concretos. Cada valor `DateTime` incluye una zona horaria o un desplazamiento numérico.
 
 ## ptool.datetime.now
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.datetime.now([tz])` returns the current time as a `DateTime`.
+`ptool.datetime.now([tz])` devuelve la hora actual como `DateTime`.
 
-- `tz` (string, optional): An IANA timezone such as `UTC`, `America/New_York`, or `Asia/Shanghai`. If omitted, the local system timezone is used.
-- Returns: `DateTime`.
+- `tz` (cadena, opcional): una zona horaria de IANA como `UTC`, `America/New_York` o `Asia/Shanghai`. Si se omite, se utiliza la zona horaria del sistema local.
+- Devuelve: `DateTime`.
 
 ```lua
 local local_now = p.datetime.now()
@@ -23,25 +23,25 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 
 ## ptool.datetime.parse
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.datetime.parse(input[, options])` parses a datetime string and returns a `DateTime`.
+`ptool.datetime.parse(input[, options])` analiza una cadena de fecha y hora y devuelve un `DateTime`.
 
-- `input` (string, required): A datetime string.
-- `options.timezone` (string, optional): An IANA timezone used only when the input does not already include a timezone or offset.
-- Returns: `DateTime`.
+- `input` (cadena, obligatorio): Una cadena de fecha y hora.
+- `options.timezone` (cadena, opcional): Una zona horaria IANA utilizada solo cuando la entrada no incluye ya una zona horaria o desplazamiento.
+- Devuelve: `DateTime`.
 
-Accepted inputs:
+Entradas aceptadas:
 
-- Zoned inputs such as `2024-07-15T16:24:59-04:00`.
-- Zoned inputs with bracketed timezone annotations when supported by the parser.
-- Naive inputs such as `2024-07-15 16:24:59`, but only when `options.timezone` is provided.
+- Entradas zonificadas como `2024-07-15T16:24:59-04:00`.
+- Entradas zonificadas con anotaciones de zona horaria entre corchetes cuando el analizador lo admite.
+- Entradas ingenuas como `2024-07-15 16:24:59`, pero solo cuando se proporciona `options.timezone`.
 
-Behavior:
+Comportamiento:
 
-- Empty strings are rejected.
-- If `input` already includes a timezone or offset, setting `options.timezone` raises an error.
-- Without `options.timezone`, naive inputs are rejected.
+- Las cadenas vacías se rechazan.
+- Si `input` ya incluye una zona horaria o desplazamiento, la configuración de `options.timezone` genera un error.
+- Sin `options.timezone`, se rechazan las entradas ingenuas.
 
 ```lua
 local a = p.datetime.parse("2024-07-15T16:24:59-04:00")
@@ -55,14 +55,14 @@ print(b.timezone) -- America/New_York
 
 ## ptool.datetime.from_unix
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.datetime.from_unix(value[, options])` constructs a `DateTime` from a Unix timestamp.
+`ptool.datetime.from_unix(value[, options])` construye un `DateTime` a partir de una marca de tiempo de Unix.
 
-- `value` (integer, required): The Unix timestamp.
-- `options.unit` (string, optional): One of `s`, `ms`, or `ns`. Defaults to `s`.
-- `options.timezone` (string, optional): An IANA timezone. If omitted, the timestamp is interpreted in `UTC`.
-- Returns: `DateTime`.
+- `value` (entero, requerido): La marca de tiempo de Unix.
+- `options.unit` (cadena, opcional): uno de `s`, `ms` o `ns`. El valor predeterminado es `s`.
+- `options.timezone` (cadena, opcional): Una zona horaria IANA. Si se omite, la marca de tiempo se interpreta en `UTC`.
+- Devuelve: `DateTime`.
 
 ```lua
 local a = p.datetime.from_unix(1721075099)
@@ -77,14 +77,14 @@ print(b)
 
 ## ptool.datetime.compare
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.datetime.compare(a, b)` compares two instants.
+`ptool.datetime.compare(a, b)` compara dos instantes.
 
-- `a` / `b` (string|DateTime, required): A datetime string or `DateTime` object.
-- Returns: `-1 | 0 | 1`.
+- `a` / `b` (string|DateTime, requerido): Una cadena de fecha y hora u objeto `DateTime`.
+- Devuelve: `-1 | 0 | 1`.
 
-String arguments are parsed using the same strict rules as `ptool.datetime.parse(input)`, so they must already include a timezone or offset.
+Los argumentos de cadena se analizan utilizando las mismas reglas estrictas que `ptool.datetime.parse(input)`, por lo que ya deben incluir una zona horaria o un desplazamiento.
 
 ```lua
 print(ptool.datetime.compare(
@@ -95,13 +95,13 @@ print(ptool.datetime.compare(
 
 ## ptool.datetime.is_valid
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.datetime.is_valid(input[, options])` checks whether a datetime string can be parsed.
+`ptool.datetime.is_valid(input[, options])` comprueba si se puede analizar una cadena de fecha y hora.
 
-- `input` (string, required): A datetime string.
-- `options.timezone` (string, optional): An IANA timezone for naive input.
-- Returns: `boolean`.
+- `input` (cadena, obligatorio): Una cadena de fecha y hora.
+- `options.timezone` (cadena, opcional): Una zona horaria IANA para la entrada ingenua.
+- Devuelve: `boolean`.
 
 ```lua
 print(ptool.datetime.is_valid("2024-07-15T16:24:59-04:00")) -- true
@@ -113,42 +113,42 @@ print(ptool.datetime.is_valid("2024-07-15 16:24:59", {
 
 ## DateTime
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`DateTime` represents a concrete instant returned by `ptool.datetime.now(...)`, `parse(...)`, or `from_unix(...)`.
+`DateTime` representa un instante concreto devuelto por `ptool.datetime.now(...)`, `parse(...)` o `from_unix(...)`.
 
-It is implemented as a Lua userdata.
+Se implementa como datos de usuario de Lua.
 
-Fields and methods:
+Campos y métodos:
 
-- Fields:
-  - `year` (integer)
-  - `month` (integer)
-  - `day` (integer)
-  - `hour` (integer)
-  - `minute` (integer)
-  - `second` (integer)
-  - `nanosecond` (integer)
-  - `offset` (string)
-  - `timezone` (string)
-- Methods:
+- Campos:
+  - `year` (entero)
+  - `month` (entero)
+  - `day` (entero)
+  - `hour` (entero)
+  - `minute` (entero)
+  - `second` (entero)
+  - `nanosecond` (entero)
+  - `offset` (cadena)
+  - `timezone` (cadena)
+- Métodos:
   - `dt:format(fmt)` -> `string`
   - `dt:to_string()` -> `string`
   - `dt:unix([unit])` -> `integer`
   - `dt:in_tz(tz)` -> `DateTime`
   - `dt:compare(other)` -> `-1|0|1`
-- Metamethods:
-  - `tostring(dt)` is available.
-  - `==`, `<`, and `<=` comparisons are supported.
+- Metamétodos:
+  - `tostring(dt)` está disponible.
+  - Se admiten comparaciones `==`, `<` y `<=`.
 
 ### format
 
-Canonical API name: `ptool.datetime.DateTime:format`.
+Nombre de la API canónica: `ptool.datetime.DateTime:format`.
 
-`dt:format(fmt)` formats the datetime using `strftime`-style directives.
+`dt:format(fmt)` formatea la fecha y hora utilizando directivas de estilo `strftime`.
 
-- `fmt` (string, required): A format string such as `%Y-%m-%d %H:%M:%S %Z`.
-- Returns: `string`.
+- `fmt` (cadena, obligatorio): Una cadena de formato como `%Y-%m-%d %H:%M:%S %Z`.
+- Devuelve: `string`.
 
 ```lua
 local dt = p.datetime.parse("2024-07-15T16:24:59-04:00")
@@ -157,11 +157,11 @@ print(dt:format("%Y-%m-%d %H:%M:%S %:z"))
 
 ### to_string
 
-Canonical API name: `ptool.datetime.DateTime:to_string`.
+Nombre de la API canónica: `ptool.datetime.DateTime:to_string`.
 
-`dt:to_string()` returns the canonical string form with a numeric offset.
+`dt:to_string()` devuelve la forma de cadena canónica con un desplazamiento numérico.
 
-- Returns: `string`.
+- Devuelve: `string`.
 
 ```lua
 local dt = p.datetime.parse("2024-07-15T16:24:59-04:00")
@@ -170,16 +170,16 @@ print(dt:to_string()) -- 2024-07-15T16:24:59-04:00
 
 ### unix
 
-Canonical API name: `ptool.datetime.DateTime:unix`.
+Nombre de la API canónica: `ptool.datetime.DateTime:unix`.
 
-`dt:unix([unit])` returns the Unix timestamp of the instant.
+`dt:unix([unit])` devuelve la marca de tiempo Unix del instante.
 
-- `unit` (string, optional): One of `s`, `ms`, or `ns`. Defaults to `s`.
-- Returns: `integer`.
+- `unit` (cadena, opcional): uno de `s`, `ms` o `ns`. El valor predeterminado es `s`.
+- Devuelve: `integer`.
 
-Notes:
+Notas:
 
-- `ns` may raise an error if the result does not fit in Lua's integer range.
+- `ns` puede generar un error si el resultado no encaja en el rango entero de Lua.
 
 ```lua
 local dt = p.datetime.parse("2024-07-15T20:24:59+00:00")
@@ -189,12 +189,12 @@ print(dt:unix("ms"))   -- milliseconds
 
 ### in_tz
 
-Canonical API name: `ptool.datetime.DateTime:in_tz`.
+Nombre de la API canónica: `ptool.datetime.DateTime:in_tz`.
 
-`dt:in_tz(tz)` converts the same instant into another timezone.
+`dt:in_tz(tz)` convierte el mismo instante en otra zona horaria.
 
-- `tz` (string, required): An IANA timezone.
-- Returns: `DateTime`.
+- `tz` (cadena, obligatorio): Una zona horaria IANA.
+- Devuelve: `DateTime`.
 
 ```lua
 local dt = p.datetime.parse("2024-07-15T20:24:59+00:00")
@@ -206,12 +206,12 @@ print(tokyo)
 
 ### compare
 
-Canonical API name: `ptool.datetime.DateTime:compare`.
+Nombre de la API canónica: `ptool.datetime.DateTime:compare`.
 
-`dt:compare(other)` compares the current instant with `other`.
+`dt:compare(other)` compara el instante actual con `other`.
 
-- `other` (string|DateTime, required): A datetime string or another `DateTime` object.
-- Returns: `-1 | 0 | 1`.
+- `other` (string|DateTime, requerido): Una cadena de fecha y hora u otro objeto `DateTime`.
+- Devuelve: `-1 | 0 | 1`.
 
 ```lua
 local a = p.datetime.parse("2024-07-15T20:24:59+00:00")
@@ -221,8 +221,8 @@ print(a:compare(b)) -- -1
 print(a < b)        -- true
 ```
 
-## Notes
+## Notas
 
-- `ptool.datetime` does not parse natural-language phrases such as `"tomorrow 8am"`.
-- Timezone names should be IANA identifiers such as `UTC`, `Asia/Tokyo`, or `America/New_York`.
-- Comparisons operate on the instant, not on the displayed wall-clock fields.
+- `ptool.datetime` no analiza frases en lenguaje natural como `"tomorrow 8am"`.
+- Los nombres de zonas horarias deben ser identificadores IANA como `UTC`, `Asia/Tokyo` o `America/New_York`.
+- Las comparaciones operan en el instante, no en los campos de reloj de pared mostrados.

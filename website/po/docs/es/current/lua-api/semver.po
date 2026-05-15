@@ -31,7 +31,7 @@ msgstr "ptool.semver.parse"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:9
 msgid ""
@@ -60,7 +60,7 @@ msgstr "ptool.semver.is_valid"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:26
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:26"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:28
 msgid ""
@@ -84,7 +84,7 @@ msgstr "ptool.semver.compare"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:40
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:40"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:42
 msgid "`ptool.semver.compare(a, b)` compares two versions."
@@ -109,7 +109,7 @@ msgstr "ptool.semver.bump"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:53"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:55
 msgid ""
@@ -153,7 +153,7 @@ msgstr "Version"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:78
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:78"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:80
 msgid ""
@@ -177,23 +177,23 @@ msgstr "Campos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:87
 msgid "`major` (integer)"
-msgstr "`major` (integer)"
+msgstr "`major` (entero)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:87
 msgid "`minor` (integer)"
-msgstr "`minor` (integer)"
+msgstr "`minor` (entero)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:87
 msgid "`patch` (integer)"
-msgstr "`patch` (integer)"
+msgstr "`patch` (entero)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:87
 msgid "`pre` (string|nil)"
-msgstr "`pre` (string|nil)"
+msgstr "`pre` (cadena|cero)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:87
 msgid "`build` (string|nil)"
-msgstr "`build` (string|nil)"
+msgstr "`build` (cadena|cero)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:93
 msgid "Methods:"

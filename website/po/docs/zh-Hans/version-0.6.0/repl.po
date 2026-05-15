@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,110 +14,112 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:1
 msgid "REPL"
-msgstr ""
+msgstr "REPL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:3
 msgid ""
 "`ptool repl` starts an interactive Lua session with the standard `ptool` API "
 "already loaded."
-msgstr ""
+msgstr "`ptool repl` 会启动一个交互式 Lua 会话，并预先加载标准 `ptool` API。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:6
 msgid "Start the REPL"
-msgstr ""
+msgstr "启动 REPL"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:12
 msgid "When the REPL starts, `ptool` shows a banner and waits for Lua input."
-msgstr ""
+msgstr "REPL 启动后，`ptool` 会先打印欢迎信息，然后等待 Lua 输入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:14
 msgid "What it provides"
-msgstr ""
+msgstr "它提供什么"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:16
 msgid "The global `ptool` table and the shorter alias `p`."
-msgstr ""
+msgstr "全局表 `ptool` 以及更短的别名 `p`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:17
 msgid "The same bundled helpers you can use from `ptool run <file>`."
-msgstr ""
+msgstr "与 `ptool run <file>` 相同的一组内置辅助能力。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:18
 msgid "Interactive evaluation of Lua expressions and statements."
-msgstr ""
+msgstr "对 Lua 表达式和语句的交互式求值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:19
 msgid ""
 "Readline-style editing, including arrow-key cursor movement and in-session "
 "history navigation."
-msgstr ""
+msgstr "类似 readline 的行编辑能力，包括方向键移动光标和当前会话内的历史记录浏览。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:22
 msgid "Basic usage"
-msgstr ""
+msgstr "基本用法"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:24
 msgid "Enter an expression to evaluate it immediately:"
-msgstr ""
+msgstr "输入一个表达式即可立即求值："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:30
 msgid ""
 "The REPL prints returned values using the same inspector used elsewhere in "
 "`ptool`."
-msgstr ""
+msgstr "REPL 会使用 `ptool` 现有的 inspect 渲染逻辑打印返回值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:33
 msgid "You can also call `ptool` APIs directly:"
-msgstr ""
+msgstr "你也可以直接调用 `ptool` API："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:39
 msgid "Multi-line input"
-msgstr ""
+msgstr "多行输入"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:41
 msgid ""
 "If the current input is incomplete, the prompt changes from `>>> ` to `... `"
 ". This lets you continue entering a block such as a function or control flow "
 "statement:"
-msgstr ""
+msgstr "如果当前输入还不完整，提示符会从 `>>> ` 变成 `... `。这样你就可以继续输入 函"
+"数定义或控制流语句等代码块："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:51
 msgid "Once the input is complete, `ptool` evaluates the whole chunk."
-msgstr ""
+msgstr "当输入完整后，`ptool` 会对整个代码块求值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:53
 msgid "Keyboard behavior"
-msgstr ""
+msgstr "键盘行为"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:55
 msgid ""
 "`Up` and `Down` browse commands entered earlier in the same REPL session."
-msgstr ""
+msgstr "`Up` 和 `Down` 用于浏览当前 REPL 会话中之前输入过的命令。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:56
 msgid "`Left` and `Right` move the cursor within the current input line."
-msgstr ""
+msgstr "`Left` 和 `Right` 用于在当前输入行内移动光标。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:57
 msgid ""
 "`Ctrl-C` clears the current input. If you are in the middle of a multi-line "
 "chunk, it discards the buffered chunk and returns to the primary prompt."
-msgstr ""
+msgstr "`Ctrl-C` 会清空当前输入；如果你正处于多行输入中，它会丢弃当前缓存的代码块并回"
+"到主提示符。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:59
 msgid "`Ctrl-D` exits the REPL."
-msgstr ""
+msgstr "`Ctrl-D` 会退出 REPL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:61
 msgid "Notes"
-msgstr ""
+msgstr "说明"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:63
 msgid "`ptool repl` requires an interactive TTY."
-msgstr ""
+msgstr "`ptool repl` 需要交互式 TTY。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/repl.md:64
 msgid ""
 "REPL history currently lives only for the current session and is not written "
 "to a history file."
-msgstr ""
+msgstr "当前历史记录只保存在本次会话中，不会写入历史文件。"

@@ -4,7 +4,7 @@ Las utilidades de esquema y análisis de argumentos CLI están disponibles bajo 
 
 ## ptool.args.arg
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.args.arg(id, kind, options)` crea un builder de argumentos para usar en `ptool.args.parse(...).schema.args`.
 
@@ -39,9 +39,9 @@ local res = ptool.args.parse({
 
 ## ptool.args.parse
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 > 
-> `v0.3.0` - Added `subcommands` support.
+> `v0.3.0`: se agregó compatibilidad con `subcommands`.
 
 `ptool.args.parse(schema)` analiza los argumentos del script con `clap` y devuelve una tabla indexada por `id`.
 

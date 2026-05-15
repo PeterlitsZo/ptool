@@ -1,18 +1,18 @@
-# Regex API
+# 正規表現 API
 
-Regular expression helpers are available under `ptool.re` and `p.re`.
+正規表現ヘルパーは `ptool.re` と `p.re` にあります。
 
 ## ptool.re.compile
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.compile(pattern[, opts])` compiles a regular expression and returns a `Regex` object.
+`ptool.re.compile(pattern[, opts])` は正規表現をコンパイルし、 `Regex` オブジェクトを返します。
 
-- `pattern` (string, required): The regex pattern.
-- `opts` (table, optional): Compile options. Currently supported:
-  - `case_insensitive` (boolean, optional): Whether matching is case-insensitive. Defaults to `false`.
+- `pattern` (string, 必須): 正規表現パターン。
+- `opts` (table, 任意): コンパイルオプション。現在サポートされるもの:
+  - `case_insensitive` (boolean, 任意): 大文字小文字を区別しないかどうか。 デフォルトは `false`。
 
-Example:
+例:
 
 ```lua
 local re = ptool.re.compile("(?P<name>\\w+)", { case_insensitive = true })
@@ -23,12 +23,12 @@ print(re:is_match("Alice")) -- true
 
 > `v0.1.0` - Introduced.
 
-`ptool.re.escape(text)` escapes plain text into a regex literal string.
+`ptool.re.escape(text)` はプレーンテキストを正規表現リテラル文字列として エスケープします。
 
-- `text` (string, required): The text to escape.
-- Returns: The escaped string.
+- `text` (string, 必須): エスケープするテキスト。
+- 戻り値: エスケープ後の文字列。
 
-Example:
+例:
 
 ```lua
 local keyword = "a+b?"
@@ -40,11 +40,11 @@ print(re:is_match("a+b?")) -- true
 
 > `v0.1.0` - Introduced.
 
-`Regex` represents a compiled regular expression returned by `ptool.re.compile(...)`.
+`Regex` は `ptool.re.compile(...)` が返すコンパイル済み正規表現を 表します。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
-Methods:
+メソッド:
 
 - `re:is_match(input)` -> `boolean`
 - `re:find(input[, init])` -> `Match|nil`
@@ -59,72 +59,72 @@ Methods:
 
 Canonical API name: `ptool.re.Regex:is_match`.
 
-`re:is_match(input)` checks whether the regex matches `input`.
+`re:is_match(input)` は、その正規表現が `input` に一致するか確認します。
 
-- `input` (string, required): The input text.
-- Returns: `boolean`.
+- `input` (string, 必須): 入力テキスト。
+- 戻り値: `boolean`。
 
 ### find
 
 Canonical API name: `ptool.re.Regex:find`.
 
-`re:find(input[, init])` returns the first match in `input`, or `nil`.
+`re:find(input[, init])` は `input` 内の最初の一致を返します。一致しない 場合は `nil` を返します。
 
-- `input` (string, required): The input text.
+- `input` (string, 必須): 入力テキスト。
 
-Parameter notes:
+パラメータに関する注意:
 
-- `init` is a 1-based start position and defaults to `1`.
-- `limit` must be greater than `0`.
+- `init` は 1 始まりの開始位置で、デフォルトは `1` です。
+- `limit` は `0` より大きくなければなりません。
 
-Return structures:
+戻り値の構造:
 
 - `Match`:
-  - `start` (integer): The 1-based start index.
-  - `finish` (integer): The end index, directly usable with `string.sub`.
-  - `text` (string): The matched text.
+  - `start` (integer): 1 始まりの開始インデックス。
+  - `finish` (integer): `string.sub` にそのまま渡せる終了インデックス。
+  - `text` (string): 一致したテキスト。
 - `Captures`:
-  - `full` (string): The full matched text.
-  - `groups` (table): An array of capture groups in capture order. Unmatched groups are `nil`.
-  - `named` (table): A mapping of named capture groups, keyed by group name.
+  - `full` (string): 完全一致したテキスト。
+  - `groups` (table): キャプチャ順のキャプチャグループ配列。一致しない グループは `nil`。
+  - `named` (table): グループ名をキーにした名前付きキャプチャのマップ。
 
 ### find_all
 
 Canonical API name: `ptool.re.Regex:find_all`.
 
-`re:find_all(input)` returns all matches in `input` as a `Match[]`.
+`re:find_all(input)` は `input` 内のすべての一致を `Match[]` として返します。
 
 ### captures
 
 Canonical API name: `ptool.re.Regex:captures`.
 
-`re:captures(input)` returns the first capture set in `input`, or `nil`.
+`re:captures(input)` は `input` 内の最初のキャプチャセットを返します。 一致しない場合は `nil` を返します。
 
 ### captures_all
 
 Canonical API name: `ptool.re.Regex:captures_all`.
 
-`re:captures_all(input)` returns all capture sets in `input` as a `Captures[]`.
+`re:captures_all(input)` は `input` 内のすべてのキャプチャセットを `Captures[]` として返します。
 
 ### replace
 
 Canonical API name: `ptool.re.Regex:replace`.
 
-`re:replace(input, replacement)` replaces the first match in `input`.
+`re:replace(input, replacement)` は `input` 内の最初の一致を置換します。
 
 ### replace_all
 
 Canonical API name: `ptool.re.Regex:replace_all`.
 
-`re:replace_all(input, replacement)` replaces all matches in `input`.
+`re:replace_all(input, replacement)` は `input` 内のすべての一致を 置換します。
 
 ### split
 
 Canonical API name: `ptool.re.Regex:split`.
 
-`re:split(input[, limit])` splits `input` using the regex as the separator.
+`re:split(input[, limit])` は、その正規表現を区切り文字として `input` を 分割します。
 
-Example:
+例:
 
 ```lua
 local re = ptool.re.compile("(?P<word>\\w+)")

@@ -1,22 +1,22 @@
-# Filesystem API
+# ファイルシステム API
 
-Filesystem helpers are available under `ptool.fs` and `p.fs`.
+ファイルシステムヘルパーは `ptool.fs` と `p.fs` にあります。
 
 ## ptool.fs.read
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string.
+`ptool.fs.read(path)` はファイルを生のバイト列として読み取り、Lua 文字列を 返します。
 
-- `path` (string, required): The file path.
-- Returns: `string`.
+- `path` (string, 必須): ファイルパス。
+- 戻り値: `string`。
 
-Notes:
+注意:
 
-- The returned Lua string contains the file bytes exactly as stored on disk.
-- Text files continue to work as before, but binary files are also supported.
+- 返される Lua 文字列には、ディスク上のファイルバイトがそのまま入ります。
+- テキストファイルは従来どおり扱えますが、バイナリファイルも読み取れます。
 
-Example:
+例:
 
 ```lua
 local content = ptool.fs.read("README.md")
@@ -30,17 +30,17 @@ print(#png)
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, overwriting existing contents.
+`ptool.fs.write(path, content)` は Lua 文字列を生のバイト列としてファイルへ 書き込み、既存の内容を上書きします。
 
-- `path` (string, required): The file path.
-- `content` (string, required): The content to write.
+- `path` (string, 必須): ファイルパス。
+- `content` (string, 必須): 書き込む内容。
 
-Notes:
+注意:
 
-- `content` is written byte-for-byte.
-- Embedded NUL bytes and non-UTF-8 bytes are preserved.
+- `content` は 1 バイトずつそのまま書き込まれます。
+- 埋め込み NUL バイトや非 UTF-8 バイトも保持されます。
 
-Example:
+例:
 
 ```lua
 ptool.fs.write("tmp/hello.txt", "hello\n")
@@ -51,11 +51,11 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.mkdir(path)` creates a directory. If parent directories do not exist, they are created recursively.
+`ptool.fs.mkdir(path)` はディレクトリを作成します。親ディレクトリが存在 しない場合は再帰的に作成されます。
 
-- `path` (string, required): The directory path.
+- `path` (string, 必須): ディレクトリパス。
 
-Example:
+例:
 
 ```lua
 ptool.fs.mkdir("tmp/a/b")
@@ -65,12 +65,12 @@ ptool.fs.mkdir("tmp/a/b")
 
 > `v0.1.0` - Introduced.
 
-`ptool.fs.exists(path)` checks whether a path exists.
+`ptool.fs.exists(path)` はパスが存在するか確認します。
 
-- `path` (string, required): A file or directory path.
-- Returns: `boolean`.
+- `path` (string, 必須): ファイルまたはディレクトリのパス。
+- 戻り値: `boolean`。
 
-Example:
+例:
 
 ```lua
 if ptool.fs.exists("tmp/hello.txt") then
@@ -82,12 +82,12 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.is_file(path)` checks whether a path exists and is a regular file.
+`ptool.fs.is_file(path)` は、パスが存在し通常ファイルかどうかを確認します。
 
-- `path` (string, required): The path to check.
-- Returns: `boolean`.
+- `path` (string, 必須): 確認するパス。
+- 戻り値: `boolean`。
 
-Example:
+例:
 
 ```lua
 if ptool.fs.is_file("tmp/hello.txt") then
@@ -99,12 +99,12 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.is_dir(path)` checks whether a path exists and is a directory.
+`ptool.fs.is_dir(path)` は、パスが存在しディレクトリかどうかを確認します。
 
-- `path` (string, required): The path to check.
-- Returns: `boolean`.
+- `path` (string, 必須): 確認するパス。
+- 戻り値: `boolean`。
 
-Example:
+例:
 
 ```lua
 if ptool.fs.is_dir("tmp") then
@@ -116,20 +116,20 @@ end
 
 > `Unreleased` - Introduced.
 
-`ptool.fs.remove(path[, options])` removes a file, symlink, or directory.
+`ptool.fs.remove(path[, options])` は、ファイル、シンボリックリンク、 ディレクトリを削除します。
 
-- `path` (string, required): The path to remove.
-- `options` (table, optional): Remove options. Supported fields:
-  - `recursive` (boolean, optional): Whether to remove directories recursively. Defaults to `false`.
-  - `missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults to `false`.
+- `path` (string, 必須): 削除するパス。
+- `options` (table, 任意): 削除オプション。サポートされるフィールド:
+  - `recursive` (boolean, 任意): ディレクトリを再帰的に削除するかどうか。 デフォルトは `false`。
+  - `missing_ok` (boolean, 任意): パスが存在しない場合に無視するかどうか。 デフォルトは `false`。
 
-Behavior:
+動作:
 
-- Files and symlinks can be removed without `recursive`.
-- Directories require `recursive = true` when they are not empty.
-- Unknown option names or invalid option value types raise an error.
+- ファイルとシンボリックリンクは `recursive` なしで削除できます。
+- 空でないディレクトリは `recursive = true` が必要です。
+- 不明なオプション名や不正な値型はエラーになります。
 
-Example:
+例:
 
 ```lua
 ptool.fs.remove("tmp/hello.txt")
@@ -139,17 +139,17 @@ ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 
 ## ptool.fs.glob
 
-> `v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option.
+> `v0.2.0` - Introduced. `v0.5.0` - `working_dir` オプションを追加。
 
-`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically.
+`ptool.fs.glob(pattern[, options])` は Unix 風 glob 構文でファイルシステムパスを 照合し、辞書順に並んだ一致パスの文字列配列を返します。
 
-- `pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- `options` (table, optional): Glob options. Supported fields:
-  - `working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory.
-- Returns: `string[]`.
-- Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`.
+- `pattern` (string, 必須): glob パターン。相対パターンは現在の `ptool` ランタイムディレクトリから解決されるため、 `ptool.cd(...)` に従います。
+- `options` (table, 任意): glob オプション。サポートされるフィールド:
+  - `working_dir` (string, 任意): 相対パターンの解決に使う基準 ディレクトリを上書きします。相対 `working_dir` は現在の `ptool` ランタイムディレクトリから解決されます。
+- 戻り値: `string[]`。
+- 隠しファイルや隠しディレクトリは、対応するパターン要素が明示的に `.` で始まる場合にだけ一致します。
 
-Example:
+例:
 
 ```lua
 ptool.cd("src")

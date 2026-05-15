@@ -1,23 +1,23 @@
-# Shell API
+# シェル API
 
-Shell parsing helpers are available under `ptool.sh` and `p.sh`.
+シェル解析ヘルパーは `ptool.sh` と `p.sh` にあります。
 
 ## ptool.sh.split
 
 > `v0.1.0` - Introduced.
 
-`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array.
+`ptool.sh.split(command)` はシェル風ルールでコマンド文字列を解析し、 引数配列を返します。
 
-- `command` (string, required): The command string to split.
-- Returns: `string[]`.
+- `command` (string, 必須): 分割するコマンド文字列。
+- 戻り値: `string[]`。
 
-Example:
+例:
 
 ```lua
 local args = ptool.sh.split("clippy --all-targets -- -D warnings")
 ```
 
-The `args` above is equivalent to:
+上の `args` は次と等価です。
 
 ```lua
 {"clippy", "--all-targets", "--", "-D", "warnings"}

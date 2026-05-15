@@ -1,30 +1,30 @@
-# SSH API
+# API de SSH
 
-SSH connection, remote execution, and file transfer helpers are available under `ptool.ssh` and `p.ssh`.
+Los helpers para conexión SSH, ejecución remota y transferencia de archivos están disponibles bajo `ptool.ssh` y `p.ssh`.
 
 ## ptool.ssh.connect
 
 > `v0.1.0` - Introduced.
 
-`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle backed by the system `ssh` command and returns a `Connection` object.
+`ptool.ssh.connect(target_or_options)` prepara un manejador de conexión SSH respaldado por el comando `ssh` del sistema y devuelve un objeto `Connection`.
 
-`ssh` must be available on `PATH`.
+`ssh` debe estar disponible en `PATH`.
 
-Arguments:
+Argumentos:
 
-- `target_or_options` (string|table, required):
-  - When a string is provided, it is treated as an SSH target.
-  - When a table is provided, it currently supports:
-    - `target` (string, optional): SSH target string such as `"deploy@example.com"` or `"deploy@example.com:2222"`.
-    - `host` (string, optional): Hostname or IP address.
-    - `user` (string, optional): SSH username. Defaults to `$USER`, or `"root"` if `$USER` is unavailable.
-    - `port` (integer, optional): SSH port. Defaults to `22`.
-    - `auth` (table, optional): Authentication settings.
-    - `host_key` (table, optional): Host key verification settings.
-    - `connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `10000`.
-    - `keepalive_interval_ms` (integer, optional): Keepalive interval in milliseconds.
+- `target_or_options` (string|table, obligatorio):
+  - Cuando se proporciona una cadena, se trata como un destino SSH.
+  - Cuando se proporciona una tabla, actualmente admite:
+    - `target` (string, opcional): Cadena de destino SSH, como `"deploy@example.com"` o `"deploy@example.com:2222"`.
+    - `host` (string, opcional): Nombre de host o dirección IP.
+    - `user` (string, opcional): Nombre de usuario SSH. Por defecto usa `$USER`, o `"root"` si `$USER` no está disponible.
+    - `port` (integer, opcional): Puerto SSH. Por defecto es `22`.
+    - `auth` (table, opcional): Configuración de autenticación.
+    - `host_key` (table, opcional): Configuración de verificación de clave de host.
+    - `connect_timeout_ms` (integer, opcional): Timeout en milisegundos. Por defecto es `10000`.
+    - `keepalive_interval_ms` (integer, opcional): Intervalo de keepalive en milisegundos.
 
-Supported target string examples:
+Ejemplos de cadenas de destino admitidas:
 
 ```lua
 local a = ptool.ssh.connect("deploy@example.com")
@@ -32,37 +32,37 @@ local b = ptool.ssh.connect("deploy@example.com:2222")
 local c = ptool.ssh.connect("[2001:db8::10]:2222")
 ```
 
-`auth` fields:
+Campos de `auth`:
 
-- `private_key_file` (string, optional): Path to a private key file.
-- `private_key_passphrase` (string, optional): Passphrase for the private key. This is currently not supported.
-- `password` (string, optional): Password-based authentication. This is currently not supported.
+- `private_key_file` (string, opcional): Ruta a un archivo de clave privada.
+- `private_key_passphrase` (string, opcional): Frase de contraseña de la clave privada. Actualmente no es compatible.
+- `password` (string, opcional): Autenticación basada en contraseña. Actualmente no es compatible.
 
-Authentication behavior:
+Comportamiento de autenticación:
 
-- If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key via `-i` and also sets `IdentitiesOnly=yes`.
-- If `auth.private_key_passphrase` or `auth.password` is provided, `ptool.ssh.connect(...)` fails because this API does not pass those secrets to the system `ssh` command.
-- Otherwise, authentication is delegated to the local OpenSSH setup, including settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent`, and certificates.
-- Relative key paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- `~` and `~/...` are expanded in key paths.
+- Si se proporciona `auth.private_key_file`, `ptool` invoca `ssh` con esa clave mediante `-i` y también establece `IdentitiesOnly=yes`.
+- Si se proporciona `auth.private_key_passphrase` o `auth.password`, `ptool.ssh.connect(...)` falla porque esta API no pasa esos secretos al comando `ssh` del sistema.
+- En caso contrario, la autenticación se delega a la configuración local de OpenSSH, incluidas opciones y mecanismos como `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent` y certificados.
+- Las rutas de clave relativas se resuelven desde el directorio de runtime actual de `ptool`, por lo que siguen `ptool.cd(...)`.
+- `~` y `~/...` se expanden en las rutas de clave.
 
-`host_key` fields:
+Campos de `host_key`:
 
-- `verify` (string, optional): Host key verification mode. Supported values:
-  - `"known_hosts"`: Verify against a known_hosts file (default).
-  - `"ignore"`: Skip host key verification.
-- `known_hosts_file` (string, optional): Path to a known_hosts file. Used only when `verify = "known_hosts"`.
+- `verify` (string, opcional): Modo de verificación de la clave de host. Valores admitidos:
+  - `"known_hosts"`: Verifica contra un archivo `known_hosts` (predeterminado).
+  - `"ignore"`: Omite la verificación de la clave de host.
+- `known_hosts_file` (string, opcional): Ruta a un archivo `known_hosts`. Solo se usa cuando `verify = "known_hosts"`.
 
-Host key behavior:
+Comportamiento de clave de host:
 
-- If `verify = "ignore"`, `ptool` invokes `ssh` with `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`.
-- If `verify = "known_hosts"` and `known_hosts_file` is provided, `ptool` invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`.
-- If `verify = "known_hosts"` and `known_hosts_file` is omitted, or when `host_key` is omitted entirely, host key handling is delegated to the local OpenSSH configuration and defaults.
-- Relative `known_hosts_file` paths are resolved from the current `ptool` runtime directory.
-- `~` and `~/...` are expanded in `known_hosts_file`.
-- When `known_hosts_file` is provided explicitly, it overrides the default `UserKnownHostsFile` used by the local `ssh` command for this connection.
+- Si `verify = "ignore"`, `ptool` invoca `ssh` con `StrictHostKeyChecking=no` y `UserKnownHostsFile=/dev/null`.
+- Si `verify = "known_hosts"` y se proporciona `known_hosts_file`, `ptool` invoca `ssh` con `StrictHostKeyChecking=yes` y ese `UserKnownHostsFile`.
+- Si `verify = "known_hosts"` y se omite `known_hosts_file`, o si `host_key` se omite por completo, el manejo de la clave de host se delega a la configuración local de OpenSSH y a sus valores predeterminados.
+- Las rutas relativas de `known_hosts_file` se resuelven desde el directorio de runtime actual de `ptool`.
+- `~` y `~/...` se expanden en `known_hosts_file`.
+- Cuando `known_hosts_file` se proporciona explícitamente, reemplaza el valor predeterminado de `UserKnownHostsFile` que usa el comando `ssh` local para esta conexión.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect({
@@ -82,18 +82,18 @@ local ssh = ptool.ssh.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` represents an OpenSSH-backed connection handle returned by `ptool.ssh.connect()`.
+`Connection` representa un manejador de conexión respaldado por OpenSSH devuelto por `ptool.ssh.connect()`.
 
-It is implemented as a Lua userdata.
+Está implementado como un userdata de Lua.
 
-Fields and methods:
+Campos y métodos:
 
-- Fields:
+- Campos:
   - `conn.host` (string)
   - `conn.user` (string)
   - `conn.port` (integer)
   - `conn.target` (string)
-- Methods:
+- Métodos:
   - `conn:run(...)` -> `table`
   - `conn:run_capture(...)` -> `table`
   - `conn:path(path)` -> `RemotePath`
@@ -110,9 +110,9 @@ Fields and methods:
 
 Canonical API name: `ptool.ssh.Connection:run`.
 
-`conn:run(...)` executes a remote command through the current SSH connection.
+`conn:run(...)` ejecuta un comando remoto a través de la conexión SSH actual.
 
-The following call forms are supported:
+Se admiten las siguientes formas de llamada:
 
 ```lua
 conn:run("hostname")
@@ -123,59 +123,59 @@ conn:run("echo", {"hello", "world"}, { stdout = "capture" })
 conn:run({ cmd = "git", args = {"rev-parse", "HEAD"} })
 ```
 
-Argument rules:
+Reglas de argumentos:
 
-- `conn:run(cmdline)`: `cmdline` is sent as the remote command string.
-- `conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` is split using shell-style (`shlex`) rules.
-- `conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. Arguments are shell-quoted before remote execution.
-- `conn:run(cmdline, options)`: `options` overrides this invocation.
-- `conn:run(cmd, args, options)`: `options` overrides this invocation.
-- `conn:run(options)`: `options` is a table.
-- When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`.
+- `conn:run(cmdline)`: `cmdline` se envía como la cadena de comando remoto.
+- `conn:run(cmd, argsline)`: `cmd` se trata como el comando, y `argsline` se divide usando reglas de estilo shell (`shlex`).
+- `conn:run(cmd, args)`: `cmd` es una cadena y `args` es un arreglo de cadenas. Los argumentos se escapan para shell antes de la ejecución remota.
+- `conn:run(cmdline, options)`: `options` sobrescribe esta invocación.
+- `conn:run(cmd, args, options)`: `options` sobrescribe esta invocación.
+- `conn:run(options)`: `options` es una tabla.
+- Cuando el segundo argumento es una tabla: si es un arreglo (claves enteras consecutivas `1..n`), se trata como `args`; en caso contrario se trata como `options`.
 
-When `conn:run(options)` is used, `options` currently supports:
+Cuando se usa `conn:run(options)`, `options` actualmente admite:
 
-- `cmd` (string, required): The command name or executable path.
-- `args` (string[], optional): The argument list.
-- `cwd` (string, optional): Remote working directory. This is applied by prepending `cd ... &&` to the generated remote shell command.
-- `env` (table, optional): Remote environment variables, where keys and values are strings. This is applied by prepending `export ... &&` to the generated remote shell command.
-- `stdin` (string, optional): String sent to the remote process stdin.
-- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
+- `cmd` (string, obligatorio): Nombre del comando o ruta del ejecutable.
+- `args` (string[], opcional): Lista de argumentos.
+- `cwd` (string, opcional): Directorio de trabajo remoto. Se aplica anteponiendo `cd ... &&` al comando shell remoto generado.
+- `env` (table, opcional): Variables de entorno remotas, donde claves y valores son cadenas. Se aplica anteponiendo `export ... &&` al comando shell remoto generado.
+- `stdin` (string, opcional): Cadena enviada al stdin del proceso remoto.
+- `echo` (boolean, opcional): Si debe imprimir el comando remoto antes de ejecutarlo. Por defecto es `true`.
+- `check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando el código de salida no sea `0`. Por defecto es `false`.
+- `stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:
+  - `"inherit"`: Hereda el terminal actual (predeterminado).
+  - `"capture"`: Captura en `res.stdout`.
+  - `"null"`: Descarta la salida.
+- `stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:
+  - `"inherit"`: Hereda el terminal actual (predeterminado).
+  - `"capture"`: Captura en `res.stderr`.
+  - `"null"`: Descarta la salida.
 
-When the shortcut forms are used, the `options` table supports only:
+Cuando se usan las formas abreviadas, la tabla `options` solo admite:
 
-- `stdin` (string, optional): String sent to the remote process stdin.
-- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
+- `stdin` (string, opcional): Cadena enviada al stdin del proceso remoto.
+- `echo` (boolean, opcional): Si debe imprimir el comando remoto antes de ejecutarlo. Por defecto es `true`.
+- `check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando el código de salida no sea `0`. Por defecto es `false`.
+- `stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:
+  - `"inherit"`: Hereda el terminal actual (predeterminado).
+  - `"capture"`: Captura en `res.stdout`.
+  - `"null"`: Descarta la salida.
+- `stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:
+  - `"inherit"`: Hereda el terminal actual (predeterminado).
+  - `"capture"`: Captura en `res.stderr`.
+  - `"null"`: Descarta la salida.
 
-Return value rules:
+Reglas del valor de retorno:
 
-- A table is always returned with the following fields:
-  - `ok` (boolean): Whether the remote exit status is `0`.
-  - `code` (integer|nil): The remote exit status. If the remote process exits by signal, this is `nil`.
-  - `target` (string): The SSH target string in the form `user@host:port`.
-  - `stdout` (string, optional): Present when `stdout = "capture"`.
-  - `stderr` (string, optional): Present when `stderr = "capture"`.
-  - `assert_ok(self)` (function): Raises an error when `ok = false`.
+- Siempre se devuelve una tabla con los siguientes campos:
+  - `ok` (boolean): Si el código de salida remoto es `0`.
+  - `code` (integer|nil): Código de salida remoto. Si el proceso remoto termina por señal, este valor es `nil`.
+  - `target` (string): Cadena de destino SSH con el formato `user@host:port`.
+  - `stdout` (string, opcional): Presente cuando `stdout = "capture"`.
+  - `stderr` (string, opcional): Presente cuando `stderr = "capture"`.
+  - `assert_ok(self)` (function): Lanza un error cuando `ok = false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -203,18 +203,18 @@ print(res2.stdout)
 
 Canonical API name: `ptool.ssh.Connection:run_capture`.
 
-`conn:run_capture(...)` executes a remote command through the current SSH connection.
+`conn:run_capture(...)` ejecuta un comando remoto a través de la conexión SSH actual.
 
-It accepts the same call forms, argument rules, return value rules, and options as `conn:run(...)`.
+Acepta las mismas formas de llamada, reglas de argumentos, reglas del valor de retorno y opciones que `conn:run(...)`.
 
-The difference is only the default stream handling:
+La única diferencia es el manejo predeterminado de flujos:
 
-- `stdout` defaults to `"capture"`.
-- `stderr` defaults to `"capture"`.
+- `stdout` usa `"capture"` por defecto.
+- `stderr` usa `"capture"` por defecto.
 
-You can still override either field explicitly in `options`.
+Todavía puedes sobrescribir cualquiera de esos campos explícitamente en `options`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -242,12 +242,12 @@ print(res3.stdout)
 
 Canonical API name: `ptool.ssh.Connection:path`.
 
-`conn:path(path)` creates a reusable `RemotePath` object bound to the current SSH connection.
+`conn:path(path)` crea un objeto `RemotePath` reutilizable vinculado a la conexión SSH actual.
 
-- `path` (string, required): The remote path.
-- Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`.
+- `path` (string, obligatorio): La ruta remota.
+- Devuelve: Un objeto `RemotePath` que puede pasarse a `conn:upload(...)`, `conn:download(...)` y `ptool.fs.copy(...)`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -262,12 +262,12 @@ ssh:download(remote_release, "./tmp/current.tar.gz")
 
 Canonical API name: `ptool.ssh.Connection:exists`.
 
-`conn:exists(path)` checks whether a remote path exists.
+`conn:exists(path)` comprueba si existe una ruta remota.
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path exists, otherwise `false`.
+- `path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`.
+- Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -282,12 +282,12 @@ print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 
 Canonical API name: `ptool.ssh.Connection:is_file`.
 
-`conn:is_file(path)` checks whether a remote path exists and is a regular file.
+`conn:is_file(path)` comprueba si una ruta remota existe y es un archivo regular.
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path is a file, otherwise `false`.
+- `path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`.
+- Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, `false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -304,12 +304,12 @@ end
 
 Canonical API name: `ptool.ssh.Connection:is_dir`.
 
-`conn:is_dir(path)` checks whether a remote path exists and is a directory.
+`conn:is_dir(path)` comprueba si una ruta remota existe y es un directorio.
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path is a directory, otherwise `false`.
+- `path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`.
+- Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, `false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -326,31 +326,31 @@ end
 
 Canonical API name: `ptool.ssh.Connection:upload`.
 
-`conn:upload(local_path, remote_path[, options])` uploads a local file or directory to the remote host.
+`conn:upload(local_path, remote_path[, options])` sube un archivo o directorio local al host remoto.
 
-- `local_path` (string, required): The local file or directory to upload.
-- `remote_path` (string|remote path, required): The destination path on the remote host. It can be a string or a value created by `conn:path(...)`.
-- `options` (table, optional): Transfer options.
-- Returns: A table with the following fields:
-  - `bytes` (integer): The number of regular-file bytes uploaded. When a directory is uploaded, this is the sum of the uploaded file sizes.
-  - `from` (string): The local source path.
-  - `to` (string): The remote destination path.
+- `local_path` (string, obligatorio): El archivo o directorio local que se va a subir.
+- `remote_path` (string|remote path, obligatorio): La ruta de destino en el host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`.
+- `options` (table, opcional): Opciones de transferencia.
+- Devuelve: Una tabla con los siguientes campos:
+  - `bytes` (integer): El número de bytes de archivos regulares subidos. Cuando se sube un directorio, es la suma de los tamaños de los archivos subidos.
+  - `from` (string): La ruta local de origen.
+  - `to` (string): La ruta remota de destino.
 
-Supported transfer options:
+Opciones de transferencia admitidas:
 
-- `parents` (boolean, optional): Create the parent directory of `remote_path` before uploading. Defaults to `false`.
-- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
-- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
+- `parents` (boolean, opcional): Crea el directorio padre de `remote_path` antes de subir. Por defecto es `false`.
+- `overwrite` (boolean, opcional): Si se puede reemplazar un archivo de destino existente. Por defecto es `true`.
+- `echo` (boolean, opcional): Si debe imprimir la transferencia antes de ejecutarla. Por defecto es `false`.
 
-Directory behavior:
+Comportamiento con directorios:
 
-- When `local_path` is a file, the behavior is unchanged.
-- When `local_path` is a directory and `remote_path` does not exist, `remote_path` becomes the destination directory root.
-- When `local_path` is a directory and `remote_path` already exists as a directory, the source directory is created under it using the source directory basename.
-- `overwrite = false` rejects an already-existing destination directory for the final directory root.
-- Directory uploads require `tar` to be available on the remote host.
+- Cuando `local_path` es un archivo, el comportamiento no cambia.
+- Cuando `local_path` es un directorio y `remote_path` no existe, `remote_path` se convierte en la raíz del directorio de destino.
+- Cuando `local_path` es un directorio y `remote_path` ya existe como directorio, el directorio de origen se crea dentro de él usando el basename del directorio de origen.
+- `overwrite = false` rechaza un directorio de destino ya existente para la raíz final del directorio.
+- Las subidas de directorios requieren que `tar` esté disponible en el host remoto.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -366,7 +366,7 @@ print(res.bytes)
 print(res.to)
 ```
 
-Directory example:
+Ejemplo con directorio:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -387,31 +387,31 @@ print(res.to) -- deploy@example.com:22:/srv/app/releases
 
 Canonical API name: `ptool.ssh.Connection:download`.
 
-`conn:download(remote_path, local_path[, options])` downloads a remote file or directory to a local path.
+`conn:download(remote_path, local_path[, options])` descarga un archivo o directorio remoto a una ruta local.
 
-- `remote_path` (string|remote path, required): The source path on the remote host. It can be a string or a value created by `conn:path(...)`.
-- `local_path` (string, required): The local destination path.
-- `options` (table, optional): Transfer options.
-- Returns: A table with the following fields:
-  - `bytes` (integer): The number of regular-file bytes downloaded. When a directory is downloaded, this is the sum of the downloaded file sizes.
-  - `from` (string): The remote source path.
-  - `to` (string): The local destination path.
+- `remote_path` (string|remote path, obligatorio): La ruta de origen en el host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`.
+- `local_path` (string, obligatorio): La ruta de destino local.
+- `options` (table, opcional): Opciones de transferencia.
+- Devuelve: Una tabla con los siguientes campos:
+  - `bytes` (integer): El número de bytes de archivos regulares descargados. Cuando se descarga un directorio, es la suma de los tamaños de los archivos descargados.
+  - `from` (string): La ruta remota de origen.
+  - `to` (string): La ruta local de destino.
 
-Supported transfer options:
+Opciones de transferencia admitidas:
 
-- `parents` (boolean, optional): Create the parent directory of `local_path` before downloading. Defaults to `false`.
-- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
-- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
+- `parents` (boolean, opcional): Crea el directorio padre de `local_path` antes de descargar. Por defecto es `false`.
+- `overwrite` (boolean, opcional): Si se puede reemplazar un archivo de destino existente. Por defecto es `true`.
+- `echo` (boolean, opcional): Si debe imprimir la transferencia antes de ejecutarla. Por defecto es `false`.
 
-Directory behavior:
+Comportamiento con directorios:
 
-- When `remote_path` is a file, the behavior is unchanged.
-- When `remote_path` is a directory and `local_path` does not exist, `local_path` becomes the destination directory root.
-- When `remote_path` is a directory and `local_path` already exists as a directory, the remote source directory is created under it using the remote directory basename.
-- `overwrite = false` rejects an already-existing destination directory for the final directory root.
-- Directory downloads require `tar` to be available on the remote host.
+- Cuando `remote_path` es un archivo, el comportamiento no cambia.
+- Cuando `remote_path` es un directorio y `local_path` no existe, `local_path` se convierte en la raíz del directorio de destino.
+- Cuando `remote_path` es un directorio y `local_path` ya existe como directorio, el directorio remoto de origen se crea dentro de él usando el basename del directorio remoto.
+- `overwrite = false` rechaza un directorio de destino ya existente para la raíz final del directorio.
+- Las descargas de directorios requieren que `tar` esté disponible en el host remoto.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -426,7 +426,7 @@ print(res.bytes)
 print(res.from)
 ```
 
-Directory example:
+Ejemplo con directorio:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -447,14 +447,14 @@ print(res.from)
 
 Canonical API name: `ptool.ssh.Connection:close`.
 
-`conn:close()` closes the SSH connection handle.
+`conn:close()` cierra el manejador de conexión SSH.
 
-Behavior:
+Comportamiento:
 
-- After closing, the connection can no longer be used.
-- Closing an already-closed connection is allowed and has no effect.
+- Después de cerrarla, la conexión ya no puede usarse.
+- Cerrar una conexión que ya está cerrada está permitido y no tiene efecto.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -465,11 +465,11 @@ ssh:close()
 
 > `v0.1.0` - Introduced.
 
-`RemotePath` represents a remote path bound to a `Connection` and returned by `conn:path(path)`.
+`RemotePath` representa una ruta remota vinculada a un `Connection` y devuelta por `conn:path(path)`.
 
-It is implemented as a Lua userdata.
+Está implementado como un userdata de Lua.
 
-Methods:
+Métodos:
 
 - `remote:exists()` -> `boolean`
 - `remote:is_file()` -> `boolean`
@@ -477,11 +477,11 @@ Methods:
 
 ### exists
 
-`remote:exists()` checks whether the remote path exists.
+`remote:exists()` comprueba si existe la ruta remota.
 
-- Returns: `true` when the remote path exists, otherwise `false`.
+- Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -492,11 +492,11 @@ print(remote_release:exists())
 
 ### is_file
 
-`remote:is_file()` checks whether the remote path exists and is a regular file.
+`remote:is_file()` comprueba si la ruta remota existe y es un archivo regular.
 
-- Returns: `true` when the remote path is a file, otherwise `false`.
+- Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, `false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -509,11 +509,11 @@ end
 
 ### is_dir
 
-`remote:is_dir()` checks whether the remote path exists and is a directory.
+`remote:is_dir()` comprueba si la ruta remota existe y es un directorio.
 
-- Returns: `true` when the remote path is a directory, otherwise `false`.
+- Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, `false`.
 
-Example:
+Ejemplo:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")

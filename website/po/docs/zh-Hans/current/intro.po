@@ -63,7 +63,7 @@ msgstr "如果你想安装某个指定的发布标签，而不是最新稳定版
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:44
 msgid "To install into a custom binary directory instead of `~/.local/bin`:"
-msgstr ""
+msgstr "如果你想安装到自定义二进制目录，而不是 `~/.local/bin`："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:50
 msgid "Minimal script"
@@ -123,12 +123,11 @@ msgid ""
 msgstr "一个可交互使用的 REPL，方便直接试验 Lua 表达式和 `ptool` API。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
-#, fuzzy
 msgid ""
 "Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, "
 "HTTP, SSH, databases, and templates."
-msgstr "一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、 HTTP、"
-"SSH、数据库和模板。"
+msgstr "一组面向 Lua 的辅助能力，涵盖 semver、日期时间、路径、文件、TOML、正则、字符"
+"串、HTTP、SSH、数据库和模板。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
 msgid ""

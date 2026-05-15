@@ -80,6 +80,8 @@ msgid ""
 "[DateTime API]{1}: Parse, compare, format, and convert concrete datetimes "
 "with timezone support."
 msgstr ""
+"[DateTime API]{1}: analiza, compara, formatea y convierte fechas concretas "
+"con soporte de zona horaria."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:24
 msgid "[Hash API]{1}: Compute SHA-256, SHA-1, and MD5 digests."
@@ -192,6 +194,8 @@ msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
 msgstr ""
+"[Git API]{1}: abre repositorios, inspecciona el estado y clona, recupera o "
+"introduce identificadores respaldados por libgit2."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:59
 msgid ""

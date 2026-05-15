@@ -1,32 +1,32 @@
-# JSON API
+# API JSON
 
-JSON parsing and serialization helpers are available under `ptool.json` and `p.json`.
+As utilidades de parse e serialização JSON estão disponíveis em `ptool.json` e `p.json`.
 
 ## ptool.json.parse
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.parse(input)` parses a JSON string into a Lua value.
+`ptool.json.parse(input)` faz o parse de uma string JSON em um valor Lua.
 
-- `input` (string, required): The JSON text.
-- Returns: The parsed Lua value. The root can be any JSON type.
+- `input` (string, obrigatório): O texto JSON.
+- Retorna: O valor Lua analisado. A raiz pode ser qualquer tipo JSON.
 
-Type mapping:
+Mapeamento de tipos:
 
-- JSON object -> Lua table
-- JSON array -> Lua sequence table (1-based)
-- JSON string -> Lua string
-- JSON integer that fits in `i64` -> Lua integer
-- Other JSON number -> Lua number
-- JSON boolean -> Lua boolean
+- Objeto JSON -> tabela Lua
+- Array JSON -> tabela sequencial Lua (base 1)
+- String JSON -> string Lua
+- Inteiro JSON que cabe em `i64` -> inteiro Lua
+- Outro número JSON -> número Lua
+- Booleano JSON -> booleano Lua
 - JSON null -> Lua `nil`
 
-Error behavior:
+Comportamento de erro:
 
-- An error is raised if `input` is not a string.
-- A JSON syntax error raises an error whose message includes the parser detail from `serde_json`.
+- Um erro é gerado se `input` não for uma string.
+- Um erro de sintaxe JSON gera uma mensagem que inclui o detalhe do parser de `serde_json`.
 
-Example:
+Exemplo:
 
 ```lua
 local data = p.json.parse('{"name":"ptool","features":["json","repl"],"stars":42}')
@@ -40,20 +40,20 @@ print(data.stars)
 
 > `v0.3.0` - Introduced.
 
-`ptool.json.stringify(value[, options])` converts a Lua value to a JSON string.
+`ptool.json.stringify(value[, options])` converte um valor Lua em uma string JSON.
 
-- `value` (JSON-compatible Lua value, required): The value to encode.
-- `options` (table, optional): Serialization options.
-- `options.pretty` (boolean, optional): When `true`, output pretty-printed JSON. Defaults to `false`.
-- Returns: The encoded JSON string.
+- `value` (valor Lua compatível com JSON, obrigatório): O valor a ser codificado.
+- `options` (table, opcional): Opções de serialização.
+- `options.pretty` (boolean, opcional): Quando `true`, produz JSON formatado. O padrão é `false`.
+- Retorna: A string JSON codificada.
 
-Behavior:
+Comportamento:
 
-- Default output is compact JSON with no extra whitespace.
-- Pretty output uses indented multi-line JSON.
-- Values must be JSON-compatible. Functions, threads, userdata, and other non-serializable Lua values raise an error.
+- A saída padrão é JSON compacto, sem espaços extras.
+- A saída pretty usa JSON indentado em múltiplas linhas.
+- Os valores precisam ser compatíveis com JSON. Funções, threads, userdata e outros valores Lua não serializáveis geram erro.
 
-Example:
+Exemplo:
 
 ```lua
 local text = p.json.stringify({
@@ -65,7 +65,7 @@ local text = p.json.stringify({
 print(text)
 ```
 
-Notes:
+Notas:
 
-- `nil` values inside Lua tables follow `mlua`'s serde conversion behavior and are not preserved as JSON object fields.
-- Array/object detection for Lua tables follows `mlua`'s serde conversion rules.
+- Valores `nil` dentro de tabelas Lua seguem o comportamento de conversão serde de `mlua` e não são preservados como campos de objetos JSON.
+- A detecção de array/objeto em tabelas Lua segue as regras de conversão serde de `mlua`.

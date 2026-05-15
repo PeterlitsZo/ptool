@@ -1,27 +1,27 @@
-# Database API
+# API de base de datos
 
-Database connection and query helpers are available under `ptool.db` and `p.db`.
+Las utilidades de conexión y consulta de bases de datos están disponibles bajo `ptool.db` y `p.db`.
 
 ## ptool.db.connect
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`ptool.db.connect(url_or_options)` opens a database connection and returns a `Connection` object.
+`ptool.db.connect(url_or_options)` abre una conexión de base de datos y devuelve un objeto `Connection`.
 
-Supported databases:
+Bases de datos admitidas:
 
 - SQLite
 - PostgreSQL
 - MySQL
 
-Arguments:
+Argumentos:
 
-- `url_or_options` (string|table, required):
-  - When a string is provided, it is treated as the database URL.
-  - When a table is provided, it currently supports:
-    - `url` (string, required): The database URL.
+- `url_or_options` (string|table, obligatorio):
+  - Cuando se proporciona una cadena, se trata como la URL de base de datos.
+  - Cuando se proporciona una tabla, actualmente admite:
+    - `url` (string, obligatorio): La URL de base de datos.
 
-Supported URL examples:
+Ejemplos de URL admitidos:
 
 ```lua
 local sqlite_db = ptool.db.connect("sqlite:test.db")
@@ -29,13 +29,13 @@ local pg_db = ptool.db.connect("postgres://user:pass@localhost/app")
 local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 ```
 
-SQLite notes:
+Notas sobre SQLite:
 
-- `sqlite:test.db` and `sqlite://test.db` are supported.
-- Relative SQLite paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- If no `mode=` query parameter is provided, SQLite connections default to `mode=rwc`, which allows creating the database file automatically.
+- Se admiten `sqlite:test.db` y `sqlite://test.db`.
+- Las rutas SQLite relativas se resuelven desde el directorio de ejecución actual de `ptool`, por lo que siguen a `ptool.cd(...)`.
+- Si no se proporciona el parámetro de consulta `mode=`, las conexiones SQLite usan por defecto `mode=rwc`, lo que permite crear el archivo de base de datos automáticamente.
 
-Example:
+Ejemplo:
 
 ```lua
 ptool.cd("workdir")
@@ -46,13 +46,13 @@ local db = ptool.db.connect({
 
 ## Connection
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`Connection` represents an open database connection returned by `ptool.db.connect()`.
+`Connection` representa una conexión de base de datos abierta devuelta por `ptool.db.connect()`.
 
-It is implemented as a Lua userdata.
+Está implementada como userdata de Lua.
 
-Methods:
+Métodos:
 
 - `db:query(sql, params?)` -> `table`
 - `db:query_one(sql, params?)` -> `table|nil`
@@ -61,44 +61,44 @@ Methods:
 - `db:transaction(fn)` -> `any`
 - `db:close()` -> `nil`
 
-Parameter binding:
+Enlace de parámetros:
 
-- `params` is optional.
-- When `params` is an array table, it is treated as positional parameters and SQL placeholders should use `?`.
-- When `params` is a key-value table, it is treated as named parameters and SQL placeholders should use `:name`.
-- Positional and named parameters cannot be mixed in the same call.
-- Supported parameter value types are:
+- `params` es opcional.
+- Cuando `params` es una tabla tipo arreglo, se trata como parámetros posicionales y los placeholders SQL deben usar `?`.
+- Cuando `params` es una tabla clave-valor, se trata como parámetros con nombre y los placeholders SQL deben usar `:name`.
+- No se pueden mezclar parámetros posicionales y con nombre en la misma llamada.
+- Los tipos de valor de parámetro admitidos son:
   - `boolean`
   - `integer`
   - `number`
   - `string`
-- `nil` is not supported as a bound parameter in `v0.1.0`.
+- `nil` no se admite como parámetro enlazado en `v0.1.0`.
 
-Result value rules:
+Reglas de valores devueltos:
 
-- Query results only guarantee these Lua value types:
+- Los resultados de consulta solo garantizan estos tipos de valor Lua:
   - `boolean`
   - `integer`
   - `number`
   - `string`
-  - `nil` (for SQL `NULL`)
-- Text columns are returned as Lua strings.
-- Binary/blob columns are also returned as Lua strings.
-- If a query result contains duplicate column names, an error is raised. Use SQL aliases such as `AS` to disambiguate them.
+  - `nil` (para SQL `NULL`)
+- Las columnas de texto se devuelven como cadenas Lua.
+- Las columnas binarias/blob también se devuelven como cadenas Lua.
+- Si un resultado de consulta contiene nombres de columna duplicados, se produce un error. Usa alias SQL como `AS` para desambiguarlos.
 
 ### query
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:query`.
+Nombre de la API canónica: `ptool.db.Connection:query`.
 
-`db:query(sql, params?)` executes a query and returns a table with:
+`db:query(sql, params?)` ejecuta una consulta y devuelve una tabla con:
 
-- `rows` (table): An array of row tables.
-- `columns` (table): An array of column names.
-- `row_count` (integer): The number of rows returned.
+- `rows` (table): Un arreglo de tablas de fila.
+- `columns` (table): Un arreglo de nombres de columna.
+- `row_count` (integer): El número de filas devueltas.
 
-Example:
+Ejemplo:
 
 ```lua
 local db = ptool.db.connect("sqlite:test.db")
@@ -116,13 +116,13 @@ print(res.rows[2].name)
 
 ### query_one
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:query_one`.
+Nombre de la API canónica: `ptool.db.Connection:query_one`.
 
-`db:query_one(sql, params?)` returns the first row as a table, or `nil` if the query returns no rows.
+`db:query_one(sql, params?)` devuelve la primera fila como tabla, o `nil` si la consulta no devuelve filas.
 
-Example:
+Ejemplo:
 
 ```lua
 local row = db:query_one("select id, name from users where name = ?", {"alice"})
@@ -133,13 +133,13 @@ end
 
 ### scalar
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:scalar`.
+Nombre de la API canónica: `ptool.db.Connection:scalar`.
 
-`db:scalar(sql, params?)` returns the first column of the first row, or `nil` if the query returns no rows.
+`db:scalar(sql, params?)` devuelve la primera columna de la primera fila, o `nil` si la consulta no devuelve filas.
 
-Example:
+Ejemplo:
 
 ```lua
 local count = db:scalar("select count(*) from users")
@@ -148,15 +148,15 @@ print(count)
 
 ### execute
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:execute`.
+Nombre de la API canónica: `ptool.db.Connection:execute`.
 
-`db:execute(sql, params?)` executes a statement and returns a table with:
+`db:execute(sql, params?)` ejecuta una sentencia y devuelve una tabla con:
 
-- `rows_affected` (integer): The number of affected rows.
+- `rows_affected` (integer): El número de filas afectadas.
 
-Example:
+Ejemplo:
 
 ```lua
 local res = db:execute("update users set name = ? where id = ?", {"alice-2", 1})
@@ -165,27 +165,27 @@ print(res.rows_affected)
 
 ### transaction
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:transaction`.
+Nombre de la API canónica: `ptool.db.Connection:transaction`.
 
-`db:transaction(fn)` runs `fn(tx)` inside a database transaction.
+`db:transaction(fn)` ejecuta `fn(tx)` dentro de una transacción de base de datos.
 
-Behavior:
+Comportamiento:
 
-- If `fn(tx)` returns normally, the transaction is committed.
-- If `fn(tx)` raises an error, the transaction is rolled back and the error is re-raised.
-- Nested transactions are not supported.
-- While the callback is active, the outer connection object must not be used; use the provided `tx` object instead.
+- Si `fn(tx)` devuelve normalmente, la transacción se confirma.
+- Si `fn(tx)` produce un error, la transacción se revierte y el error se vuelve a lanzar.
+- No se admiten transacciones anidadas.
+- Mientras la devolución de llamada está activa, no debe usarse el objeto de conexión exterior; usa en su lugar el objeto `tx` proporcionado.
 
-The `tx` object supports the same query methods as `Connection`:
+El objeto `tx` admite los mismos métodos de consulta que `Connection`:
 
 - `tx:query(sql, params?)`
 - `tx:query_one(sql, params?)`
 - `tx:scalar(sql, params?)`
 - `tx:execute(sql, params?)`
 
-Example:
+Ejemplo:
 
 ```lua
 db:transaction(function(tx)
@@ -205,18 +205,18 @@ print(tostring(err))
 
 ### close
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:close`.
+Nombre de la API canónica: `ptool.db.Connection:close`.
 
-`db:close()` closes the connection.
+`db:close()` cierra la conexión.
 
-Behavior:
+Comportamiento:
 
-- After closing, the connection can no longer be used.
-- Closing during an active transaction callback raises an error.
+- Después de cerrar, la conexión ya no puede usarse.
+- Cerrar durante una devolución de llamada de transacción activa produce un error.
 
-Example:
+Ejemplo:
 
 ```lua
 local db = ptool.db.connect("sqlite:test.db")

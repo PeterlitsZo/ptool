@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,54 +14,55 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:1
 msgid "HTTP API"
-msgstr ""
+msgstr "HTTP API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:3
 msgid "HTTP client helpers are available under `ptool.http` and `p.http`."
-msgstr ""
+msgstr "HTTP 客户端辅助能力位于 `ptool.http` 和 `p.http` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:5
 msgid "ptool.http.request"
-msgstr ""
+msgstr "ptool.http.request"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:9
 msgid ""
 "`ptool.http.request(options)` sends an HTTP request and returns a `Response` "
 "object."
-msgstr ""
+msgstr "`ptool.http.request(options)` 发送一个 HTTP 请求，并返回 `Response` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:12
 msgid "`options` fields:"
-msgstr ""
+msgstr "`options` 字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:14
 msgid "`url` (string, required): The request URL."
-msgstr ""
+msgstr "`url`（string，必填）：请求 URL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:15
 msgid "`method` (string, optional): The HTTP method. Defaults to `\"GET\"`."
-msgstr ""
+msgstr "`method`（string，可选）：HTTP 方法。默认值为 `\"GET\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:16
 msgid ""
 "`headers` (table, optional): Request headers, where both keys and values are "
 "strings."
-msgstr ""
+msgstr "`headers`（table，可选）：请求头，键和值都必须是字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:18
 msgid ""
 "`query` (table, optional): Query parameters appended to the request URL. "
 "Keys must be strings. Values may be strings, numbers, or booleans."
-msgstr ""
+msgstr "`query`（table，可选）：追加到请求 URL 的查询参数。键必须是字符串，值可以 是"
+"字符串、数字或布尔值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:20
 msgid "`body` (string, optional): The request body."
-msgstr ""
+msgstr "`body`（string，可选）：请求体。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:21
 msgid ""
@@ -68,6 +70,8 @@ msgid ""
 "request body. When `content-type` is not already set, it defaults to `"
 "application/json`."
 msgstr ""
+"`json`（Lua 值，可选）：会被编码为 JSON 并作为请求体发送。当未显式设置 "
+"`content-type` 时，默认使用 `application/json`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:24
 msgid ""
@@ -75,249 +79,256 @@ msgid ""
 "urlencoded` and used as the request body. Keys must be strings. Values may "
 "be strings, numbers, or booleans."
 msgstr ""
+"`form`（table，可选）：会被编码为 `application/x-www-form-urlencoded` 并作为"
+"请求体发送。键必须是字符串，值 可以是字符串、数字或布尔值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:27
 msgid ""
 "`timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to "
 "`30000`."
-msgstr ""
+msgstr "`timeout_ms`（integer，可选）：超时时间，单位毫秒。默认值为 `30000`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:29
 msgid ""
 "`connect_timeout_ms` (integer, optional): Connection timeout in milliseconds."
-msgstr ""
+msgstr "`connect_timeout_ms`（integer，可选）：连接超时时间，单位毫秒。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:30
 msgid ""
 "`follow_redirects` (boolean, optional): Whether redirects should be followed."
-msgstr ""
+msgstr "`follow_redirects`（boolean，可选）：是否跟随重定向。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:31
 msgid ""
 "`max_redirects` (integer, optional): Maximum number of redirects to follow."
-msgstr ""
+msgstr "`max_redirects`（integer，可选）：允许跟随的最大重定向次数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:32
 msgid "`user_agent` (string, optional): Sets the `user-agent` request header."
-msgstr ""
+msgstr "`user_agent`（string，可选）：设置 `user-agent` 请求头。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:33
 msgid ""
 "`basic_auth` (table, optional): HTTP basic auth credentials with string "
 "fields `username` and `password`."
-msgstr ""
+msgstr "`basic_auth`（table，可选）：HTTP Basic 认证信息，包含字符串字段 `username` "
+"和 `password`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:35
 msgid ""
 "`bearer_token` (string, optional): Bearer token used for the `authorization` "
 "header."
-msgstr ""
+msgstr "`bearer_token`（string，可选）：用于 `authorization` 请求头的 Bearer Token。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:37
 msgid ""
 "`fail_on_http_error` (boolean, optional): When `true`, raise an error for "
 "4xx and 5xx HTTP responses. Defaults to `false`."
 msgstr ""
+"`fail_on_http_error`（boolean，可选）：为 `true` 时，4xx 和 5xx HTTP 响应会直"
+"接抛错。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:40
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:40"
 msgid "Notes:"
-msgstr ""
+msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:42
 msgid "`body`, `json`, and `form` are mutually exclusive."
-msgstr ""
+msgstr "`body`、`json` 和 `form` 互斥。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:43
 msgid "`basic_auth` and `bearer_token` are mutually exclusive."
-msgstr ""
+msgstr "`basic_auth` 和 `bearer_token` 互斥。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:45
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:69
 msgid "Response"
-msgstr ""
+msgstr "Response"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:71
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:71"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:73
 msgid ""
 "`Response` represents an HTTP response returned by `ptool.http.request(...)`."
-msgstr ""
+msgstr "`Response` 表示 `ptool.http.request(...)` 返回的 HTTP 响应。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:75
 msgid "Fields:"
-msgstr ""
+msgstr "字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:77
 msgid "`status` (integer): The HTTP status code."
-msgstr ""
+msgstr "`status`（integer）：HTTP 状态码。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:78
 msgid "`ok` (boolean): Whether the status code is in the 2xx range."
-msgstr ""
+msgstr "`ok`（boolean）：状态码是否位于 2xx 范围内。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:79
 msgid "`url` (string): The final URL after redirects."
-msgstr ""
+msgstr "`url`（string）：重定向后的最终 URL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:80
 msgid ""
 "`headers` (table): A flattened convenience view of response headers "
 "(`table<string, string>`). Repeated headers are merged with `, `."
 msgstr ""
+"`headers`（table）：响应头的扁平化便捷视图（`table<string, string>`）。 重复"
+"响应头会使用 `, ` 合并。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:83
 msgid "Methods:"
-msgstr ""
+msgstr "方法："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:85
 msgid "`resp:text()`: Reads and returns the response body as text."
-msgstr ""
+msgstr "`resp:text()`：读取并以文本形式返回响应体。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:86
 msgid ""
 "`resp:json()`: Reads the response body, parses it as JSON, and returns a Lua "
 "value."
-msgstr ""
+msgstr "`resp:json()`：读取响应体，按 JSON 解析后返回 Lua 值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:88
 msgid "`resp:bytes()`: Reads and returns the raw bytes (as a Lua string)."
-msgstr ""
+msgstr "`resp:bytes()`：读取并返回原始字节（作为 Lua 字符串）。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:89
 msgid ""
 "`resp:header(name)`: Returns the first matching response header value, or "
 "`nil`."
-msgstr ""
+msgstr "`resp:header(name)`：返回第一个匹配的响应头值，若不存在则返回 `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:91
 msgid ""
 "`resp:header_values(name)`: Returns all matching response header values as "
 "an array."
-msgstr ""
+msgstr "`resp:header_values(name)`：返回所有匹配的响应头值数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:93
 msgid ""
 "`resp:raise_for_status()`: Raises an error for 4xx and 5xx HTTP responses."
-msgstr ""
+msgstr "`resp:raise_for_status()`：对 4xx 和 5xx HTTP 响应抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:95
 msgid "text"
-msgstr ""
+msgstr "text"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:97
 msgid "Canonical API name: `ptool.http.Response:text`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.http.Response:text`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:99
 msgid "`resp:text()` reads and returns the response body as text."
-msgstr ""
+msgstr "`resp:text()` 读取并以文本形式返回响应体。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:101
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:101"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "返回：`string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:103
 msgid "json"
-msgstr ""
+msgstr "json"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:105
 msgid "Canonical API name: `ptool.http.Response:json`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.http.Response:json`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:107
 msgid ""
 "`resp:json()` reads the response body, parses it as JSON, and returns a Lua "
 "value."
-msgstr ""
+msgstr "`resp:json()` 读取响应体，按 JSON 解析后返回 Lua 值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:110
 msgid "bytes"
-msgstr ""
+msgstr "bytes"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:112
 msgid "Canonical API name: `ptool.http.Response:bytes`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.http.Response:bytes`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:114
 msgid "`resp:bytes()` reads and returns the response body as raw bytes."
-msgstr ""
+msgstr "`resp:bytes()` 读取并以原始字节形式返回响应体。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:116
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:116"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "返回：`string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:118
 msgid "header"
-msgstr ""
+msgstr "header"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:120
 msgid "Canonical API name: `ptool.http.Response:header`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.http.Response:header`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:122
 msgid ""
 "`resp:header(name)` returns the first response header value matching `name`."
-msgstr ""
+msgstr "`resp:header(name)` 返回第一个匹配 `name` 的响应头值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:124
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:124"
 msgid "`name` (string, required): The header name to look up."
-msgstr ""
+msgstr "`name`（string，必填）：要查找的响应头名称。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:125
 msgid "Returns: `string | nil`."
-msgstr ""
+msgstr "返回：`string | nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:127
 msgid "header_values"
-msgstr ""
+msgstr "header_values"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:129
 msgid "Canonical API name: `ptool.http.Response:header_values`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.http.Response:header_values`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:131
 msgid ""
 "`resp:header_values(name)` returns all response header values matching "
 "`name`."
-msgstr ""
+msgstr "`resp:header_values(name)` 返回所有匹配 `name` 的响应头值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:133"
 msgid "`name` (string, required): The header name to look up."
-msgstr ""
+msgstr "`name`（string，必填）：要查找的响应头名称。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:134
 msgid "Returns: `string[]`."
-msgstr ""
+msgstr "返回：`string[]`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:136
 msgid "raise_for_status"
-msgstr ""
+msgstr "raise_for_status"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:138
 msgid "Canonical API name: `ptool.http.Response:raise_for_status`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.http.Response:raise_for_status`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:140
 msgid ""
 "`resp:raise_for_status()` raises an error when the response status code is "
 "in the 4xx or 5xx range."
-msgstr ""
+msgstr "`resp:raise_for_status()` 会在响应状态码处于 4xx 或 5xx 范围时抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:143
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:143"
 msgid "Notes:"
-msgstr ""
+msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:145
 msgid ""
@@ -325,9 +336,27 @@ msgid ""
 "`resp.ok`, set `fail_on_http_error = true`, or call "
 "`resp:raise_for_status()`."
 msgstr ""
+"默认情况下，非 2xx HTTP 状态不会抛错。调用方可以检查 `resp.ok`、设置 `"
+"fail_on_http_error = true`，或调用 `resp:raise_for_status()`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/http.md:147
 msgid ""
 "The response body is cached after the first read. Calling `text`, `json`, "
 "and `bytes` multiple times is allowed."
-msgstr ""
+msgstr "响应体会在首次读取后缓存，因此 `text`、`json` 和 `bytes` 可以重复调用。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:71"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:116"
+#~ msgid "Returns: `string`."
+#~ msgstr "返回：`string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:133"
+#~ msgid "`name` (string, required): The header name to look up."
+#~ msgstr "`name`（string，必填）：要查找的响应头名称。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:143"
+#~ msgid "Notes:"
+#~ msgstr "说明："

@@ -29,7 +29,7 @@ msgstr "ptool.http.request"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:9
 msgid ""
@@ -171,7 +171,7 @@ msgstr "Response"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:71
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:71"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:73
 msgid ""
@@ -253,7 +253,7 @@ msgstr "text"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:97
 msgid "Canonical API name: `ptool.http.Response:text`."
-msgstr "Canonical API name: `ptool.http.Response:text`."
+msgstr "Nombre de la API canónica: `ptool.http.Response:text`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:99
 msgid "`resp:text()` reads and returns the response body as text."
@@ -270,7 +270,7 @@ msgstr "json"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:105
 msgid "Canonical API name: `ptool.http.Response:json`."
-msgstr "Canonical API name: `ptool.http.Response:json`."
+msgstr "Nombre de la API canónica: `ptool.http.Response:json`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:107
 msgid ""
@@ -286,7 +286,7 @@ msgstr "bytes"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:112
 msgid "Canonical API name: `ptool.http.Response:bytes`."
-msgstr "Canonical API name: `ptool.http.Response:bytes`."
+msgstr "Nombre de la API canónica: `ptool.http.Response:bytes`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:114
 msgid "`resp:bytes()` reads and returns the response body as raw bytes."
@@ -305,7 +305,7 @@ msgstr "header"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:120
 msgid "Canonical API name: `ptool.http.Response:header`."
-msgstr "Canonical API name: `ptool.http.Response:header`."
+msgstr "Nombre de la API canónica: `ptool.http.Response:header`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:122
 msgid ""
@@ -329,7 +329,7 @@ msgstr "header_values"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:129
 msgid "Canonical API name: `ptool.http.Response:header_values`."
-msgstr "Canonical API name: `ptool.http.Response:header_values`."
+msgstr "Nombre de la API canónica: `ptool.http.Response:header_values`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:131
 msgid ""
@@ -354,7 +354,7 @@ msgstr "raise_for_status"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:138
 msgid "Canonical API name: `ptool.http.Response:raise_for_status`."
-msgstr "Canonical API name: `ptool.http.Response:raise_for_status`."
+msgstr "Nombre de la API canónica: `ptool.http.Response:raise_for_status`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/http.md:140
 msgid ""

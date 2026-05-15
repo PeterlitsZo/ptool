@@ -31,7 +31,7 @@ msgstr "ptool.args.arg"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:9
 msgid ""
@@ -145,11 +145,11 @@ msgstr "ptool.args.parse"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:51
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:51"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:51
 msgid "`v0.3.0` - Added `subcommands` support."
-msgstr "`v0.3.0` - Added `subcommands` support."
+msgstr "`v0.3.0`: se agregó compatibilidad con `subcommands`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/args.md:55
 msgid ""

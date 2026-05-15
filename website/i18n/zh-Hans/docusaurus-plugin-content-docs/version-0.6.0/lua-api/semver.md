@@ -1,16 +1,16 @@
 # SemVer API
 
-Version parsing, validation, comparison, and bumping helpers live under `ptool.semver` and `p.semver`.
+版本解析、校验、比较和提升辅助能力位于 `ptool.semver` 和 `p.semver` 下。
 
 ## ptool.semver.parse
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.semver.parse(version)` parses a version string and returns a `Version` object.
+`ptool.semver.parse(version)` 解析版本字符串，并返回 `Version` 对象。
 
-- `version` (string, required): A semantic version string, optionally prefixed with `v`.
+- `version`（string，必填）：语义化版本字符串，可选带 `v` 前缀。
 
-Example:
+示例：
 
 ```lua
 local v = ptool.semver.parse("v1.2.3-alpha.1+build.9")
@@ -21,12 +21,12 @@ print(tostring(v))
 
 ## ptool.semver.is_valid
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.semver.is_valid(version)` checks whether a version string is valid.
+`ptool.semver.is_valid(version)` 检查版本字符串是否合法。
 
-- `version` (string, required): A semantic version string.
-- Returns: `boolean`.
+- `version`（string，必填）：语义化版本字符串。
+- 返回：`boolean`。
 
 ```lua
 print(ptool.semver.is_valid("1.2.3")) -- true
@@ -35,12 +35,12 @@ print(ptool.semver.is_valid("x.y.z")) -- false
 
 ## ptool.semver.compare
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.semver.compare(a, b)` compares two versions.
+`ptool.semver.compare(a, b)` 比较两个版本。
 
-- `a` / `b` (string|Version, required): A version string or a `Version` object.
-- Returns: `-1 | 0 | 1`.
+- `a` / `b`（string|Version，必填）：版本字符串或 `Version` 对象。
+- 返回：`-1 | 0 | 1`。
 
 ```lua
 print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
@@ -48,14 +48,14 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 
 ## ptool.semver.bump
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.semver.bump(v, op[, channel])` returns a new version object after applying the bump.
+`ptool.semver.bump(v, op[, channel])` 应用版本提升操作，并返回新的版本对象。
 
-- `v` (string|Version, required): The original version.
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `v`（string|Version，必填）：原始版本。
+- `op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。
+- `channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。
+- 返回：`Version`。
 
 ```lua
 local v = ptool.semver.bump("1.2.3", "alpha")
@@ -70,59 +70,59 @@ print(tostring(stable)) -- 1.2.4
 
 ## Version
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`Version` represents a parsed semantic version returned by `ptool.semver.parse(...)` or `ptool.semver.bump(...)`.
+`Version` 表示由 `ptool.semver.parse(...)` 或 `ptool.semver.bump(...)` 返回的 已解析语义化版本。
 
-It is implemented as a Lua userdata.
+它实现为 Lua userdata。
 
-Fields and methods:
+字段和方法：
 
-- Fields:
-  - `major` (integer)
-  - `minor` (integer)
-  - `patch` (integer)
-  - `pre` (string|nil)
-  - `build` (string|nil)
-- Methods:
+- 字段：
+  - `major`（integer）
+  - `minor`（integer）
+  - `patch`（integer）
+  - `pre`（string|nil）
+  - `build`（string|nil）
+- 方法：
   - `v:compare(other)` -> `-1|0|1`
   - `v:bump(op[, channel])` -> `Version`
   - `v:to_string()` -> `string`
-- Metamethods:
-  - `tostring(v)` is available.
-  - `==`, `<`, and `<=` comparisons are supported.
+- 元方法：
+  - 支持 `tostring(v)`。
+  - 支持 `==`、`<` 和 `<=` 比较。
 
 ### compare
 
-Canonical API name: `ptool.semver.Version:compare`.
+规范 API 名称：`ptool.semver.Version:compare`。
 
-`v:compare(other)` compares the current version with `other`.
+`v:compare(other)` 比较当前版本和 `other`。
 
-- `other` (string|Version, required): A version string or another `Version` object.
-- Returns: `-1 | 0 | 1`.
+- `other`（string|Version，必填）：版本字符串或另一个 `Version` 对象。
+- 返回：`-1 | 0 | 1`。
 
 ### bump
 
-Canonical API name: `ptool.semver.Version:bump`.
+规范 API 名称：`ptool.semver.Version:bump`。
 
-`v:bump(op[, channel])` returns a new `Version` object after applying the bump.
+`v:bump(op[, channel])` 应用版本提升操作，并返回新的 `Version` 对象。
 
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `op`（string，必填）：取值之一：`major`、`minor`、`patch`、`release`、 `alpha`、`beta`、`rc`、`prepatch`、`preminor` 或 `premajor`。
+- `channel`（string，可选）：仅对 `prepatch`、`preminor` 和 `premajor` 有效。 必须是 `alpha`、`beta` 或 `rc` 之一，默认值为 `alpha`。
+- 返回：`Version`。
 
 ### to_string
 
-Canonical API name: `ptool.semver.Version:to_string`.
+规范 API 名称：`ptool.semver.Version:to_string`。
 
-`v:to_string()` returns the canonical string form of the version.
+`v:to_string()` 返回版本的规范字符串形式。
 
-- Returns: `string`.
+- 返回：`string`。
 
-Prerelease bump rules:
+预发布提升规则：
 
-- Bumping a stable version to `alpha`, `beta`, or `rc` first increments the patch version, then enters the target channel starting from `.1`.
-- `prepatch`, `preminor`, and `premajor` start a fresh prerelease from the next patch, minor, or major version respectively, such as `1.2.3 -> 1.3.0-rc.1` with `preminor` + `rc`.
-- Bumping within the same channel increments the sequence number, such as `alpha.1 -> alpha.2`.
-- `release` removes prerelease and build metadata while keeping the same `major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`.
-- Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade is not (for example, `rc -> beta` raises an error).
+- 将稳定版本提升到 `alpha`、`beta` 或 `rc` 时，会先递增 patch 版本，再进入目标 通道并从 `.1` 开始。
+- `prepatch`、`preminor` 和 `premajor` 会分别从下一个 patch、minor 或 major 版本开始全新的预发布，例如使用 `preminor` + `rc` 时， `1.2.3 -> 1.3.0-rc.1`。
+- 在同一通道内继续提升时，会递增序号，例如 `alpha.1 -> alpha.2`。
+- `release` 会移除预发布和 build 元数据，同时保持 `major.minor.patch` 不变， 例如 `1.2.3-rc.2 -> 1.2.3`。
+- 允许通道升级（`alpha -> beta -> rc`），但不允许通道降级 （例如 `rc -> beta` 会抛出错误）。

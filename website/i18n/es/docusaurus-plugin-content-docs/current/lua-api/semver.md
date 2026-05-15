@@ -4,7 +4,7 @@ Las utilidades para analizar, validar, comparar e incrementar versiones viven ba
 
 ## ptool.semver.parse
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.semver.parse(version)` analiza una cadena de versión y devuelve un objeto `Version`.
 
@@ -21,7 +21,7 @@ print(tostring(v))
 
 ## ptool.semver.is_valid
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.semver.is_valid(version)` comprueba si una cadena de versión es válida.
 
@@ -35,7 +35,7 @@ print(ptool.semver.is_valid("x.y.z")) -- false
 
 ## ptool.semver.compare
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.semver.compare(a, b)` compara dos versiones.
 
@@ -48,7 +48,7 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 
 ## ptool.semver.bump
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.semver.bump(v, op[, channel])` devuelve un nuevo objeto de versión tras aplicar el incremento.
 
@@ -70,7 +70,7 @@ print(tostring(stable)) -- 1.2.4
 
 ## Version
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `Version` representa una versión semántica analizada devuelta por `ptool.semver.parse(...)` o `ptool.semver.bump(...)`.
 
@@ -79,11 +79,11 @@ Está implementado como userdata de Lua.
 Campos y métodos:
 
 - Campos:
-  - `major` (integer)
-  - `minor` (integer)
-  - `patch` (integer)
-  - `pre` (string|nil)
-  - `build` (string|nil)
+  - `major` (entero)
+  - `minor` (entero)
+  - `patch` (entero)
+  - `pre` (cadena|cero)
+  - `build` (cadena|cero)
 - Métodos:
   - `v:compare(other)` -> `-1|0|1`
   - `v:bump(op[, channel])` -> `Version`

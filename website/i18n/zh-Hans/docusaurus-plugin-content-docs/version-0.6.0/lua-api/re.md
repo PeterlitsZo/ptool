@@ -1,18 +1,18 @@
 # Regex API
 
-Regular expression helpers are available under `ptool.re` and `p.re`.
+正则表达式辅助能力位于 `ptool.re` 和 `p.re` 下。
 
 ## ptool.re.compile
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.re.compile(pattern[, opts])` compiles a regular expression and returns a `Regex` object.
+`ptool.re.compile(pattern[, opts])` 编译正则表达式，并返回一个 `Regex` 对象。
 
-- `pattern` (string, required): The regex pattern.
-- `opts` (table, optional): Compile options. Currently supported:
-  - `case_insensitive` (boolean, optional): Whether matching is case-insensitive. Defaults to `false`.
+- `pattern`（string，必填）：正则模式。
+- `opts`（table，可选）：编译选项。目前支持：
+  - `case_insensitive`（boolean，可选）：是否大小写不敏感。默认值是 `false`。
 
-Example:
+示例：
 
 ```lua
 local re = ptool.re.compile("(?P<name>\\w+)", { case_insensitive = true })
@@ -21,14 +21,14 @@ print(re:is_match("Alice")) -- true
 
 ## ptool.re.escape
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.re.escape(text)` escapes plain text into a regex literal string.
+`ptool.re.escape(text)` 把普通文本转义成正则字面量字符串。
 
-- `text` (string, required): The text to escape.
-- Returns: The escaped string.
+- `text`（string，必填）：要转义的文本。
+- 返回：转义后的字符串。
 
-Example:
+示例：
 
 ```lua
 local keyword = "a+b?"
@@ -38,13 +38,13 @@ print(re:is_match("a+b?")) -- true
 
 ## Regex
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`Regex` represents a compiled regular expression returned by `ptool.re.compile(...)`.
+`Regex` 表示由 `ptool.re.compile(...)` 返回的已编译正则表达式。
 
-It is implemented as a Lua userdata.
+它实现为 Lua userdata。
 
-Methods:
+方法：
 
 - `re:is_match(input)` -> `boolean`
 - `re:find(input[, init])` -> `Match|nil`
@@ -57,74 +57,74 @@ Methods:
 
 ### is_match
 
-Canonical API name: `ptool.re.Regex:is_match`.
+规范 API 名称：`ptool.re.Regex:is_match`。
 
-`re:is_match(input)` checks whether the regex matches `input`.
+`re:is_match(input)` 检查正则是否能匹配 `input`。
 
-- `input` (string, required): The input text.
-- Returns: `boolean`.
+- `input`（string，必填）：输入文本。
+- 返回：`boolean`。
 
 ### find
 
-Canonical API name: `ptool.re.Regex:find`.
+规范 API 名称：`ptool.re.Regex:find`。
 
-`re:find(input[, init])` returns the first match in `input`, or `nil`.
+`re:find(input[, init])` 返回 `input` 中第一个匹配项；如果没有匹配，则返回 `nil`。
 
-- `input` (string, required): The input text.
+- `input`（string，必填）：输入文本。
 
-Parameter notes:
+参数说明：
 
-- `init` is a 1-based start position and defaults to `1`.
-- `limit` must be greater than `0`.
+- `init` 是从 `1` 开始的起始位置，默认值为 `1`。
+- `limit` 必须大于 `0`。
 
-Return structures:
+返回结构：
 
-- `Match`:
-  - `start` (integer): The 1-based start index.
-  - `finish` (integer): The end index, directly usable with `string.sub`.
-  - `text` (string): The matched text.
-- `Captures`:
-  - `full` (string): The full matched text.
-  - `groups` (table): An array of capture groups in capture order. Unmatched groups are `nil`.
-  - `named` (table): A mapping of named capture groups, keyed by group name.
+- `Match`：
+  - `start`（integer）：从 `1` 开始的起始索引。
+  - `finish`（integer）：结束索引，可直接用于 `string.sub`。
+  - `text`（string）：匹配到的文本。
+- `Captures`：
+  - `full`（string）：完整匹配文本。
+  - `groups`（table）：按捕获顺序排列的捕获组数组。未命中的组为 `nil`。
+  - `named`（table）：命名捕获组映射，键为组名。
 
 ### find_all
 
-Canonical API name: `ptool.re.Regex:find_all`.
+规范 API 名称：`ptool.re.Regex:find_all`。
 
-`re:find_all(input)` returns all matches in `input` as a `Match[]`.
+`re:find_all(input)` 以 `Match[]` 形式返回 `input` 中的全部匹配项。
 
 ### captures
 
-Canonical API name: `ptool.re.Regex:captures`.
+规范 API 名称：`ptool.re.Regex:captures`。
 
-`re:captures(input)` returns the first capture set in `input`, or `nil`.
+`re:captures(input)` 返回 `input` 中第一组捕获结果；如果没有匹配，则返回 `nil`。
 
 ### captures_all
 
-Canonical API name: `ptool.re.Regex:captures_all`.
+规范 API 名称：`ptool.re.Regex:captures_all`。
 
-`re:captures_all(input)` returns all capture sets in `input` as a `Captures[]`.
+`re:captures_all(input)` 以 `Captures[]` 形式返回 `input` 中全部捕获结果。
 
 ### replace
 
-Canonical API name: `ptool.re.Regex:replace`.
+规范 API 名称：`ptool.re.Regex:replace`。
 
-`re:replace(input, replacement)` replaces the first match in `input`.
+`re:replace(input, replacement)` 替换 `input` 中第一个匹配项。
 
 ### replace_all
 
-Canonical API name: `ptool.re.Regex:replace_all`.
+规范 API 名称：`ptool.re.Regex:replace_all`。
 
-`re:replace_all(input, replacement)` replaces all matches in `input`.
+`re:replace_all(input, replacement)` 替换 `input` 中全部匹配项。
 
 ### split
 
-Canonical API name: `ptool.re.Regex:split`.
+规范 API 名称：`ptool.re.Regex:split`。
 
-`re:split(input[, limit])` splits `input` using the regex as the separator.
+`re:split(input[, limit])` 使用正则作为分隔符拆分 `input`。
 
-Example:
+示例：
 
 ```lua
 local re = ptool.re.compile("(?P<word>\\w+)")

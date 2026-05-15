@@ -1,27 +1,27 @@
-# Database API
+# データベース API
 
-Database connection and query helpers are available under `ptool.db` and `p.db`.
+データベース接続とクエリのヘルパーは `ptool.db` と `p.db` にあります。
 
 ## ptool.db.connect
 
 > `v0.1.0` - Introduced.
 
-`ptool.db.connect(url_or_options)` opens a database connection and returns a `Connection` object.
+`ptool.db.connect(url_or_options)` はデータベース接続を開き、 `Connection` オブジェクトを返します。
 
-Supported databases:
+サポートされるデータベース:
 
 - SQLite
 - PostgreSQL
 - MySQL
 
-Arguments:
+引数:
 
-- `url_or_options` (string|table, required):
-  - When a string is provided, it is treated as the database URL.
-  - When a table is provided, it currently supports:
-    - `url` (string, required): The database URL.
+- `url_or_options` (string|table, 必須):
+  - 文字列が渡された場合は、データベース URL として扱われます。
+  - テーブルが渡された場合、現在サポートされるのは次のとおりです:
+    - `url` (string, 必須): データベース URL。
 
-Supported URL examples:
+サポートされる URL の例:
 
 ```lua
 local sqlite_db = ptool.db.connect("sqlite:test.db")
@@ -29,13 +29,13 @@ local pg_db = ptool.db.connect("postgres://user:pass@localhost/app")
 local mysql_db = ptool.db.connect("mysql://user:pass@localhost/app")
 ```
 
-SQLite notes:
+SQLite に関する注意:
 
-- `sqlite:test.db` and `sqlite://test.db` are supported.
-- Relative SQLite paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- If no `mode=` query parameter is provided, SQLite connections default to `mode=rwc`, which allows creating the database file automatically.
+- `sqlite:test.db` と `sqlite://test.db` がサポートされます。
+- 相対 SQLite パスは現在の `ptool` ランタイムディレクトリから解決される ため、`ptool.cd(...)` に従います。
+- `mode=` クエリパラメータが指定されていない場合、SQLite 接続のデフォルト は `mode=rwc` で、データベースファイルの自動作成が可能です。
 
-Example:
+例:
 
 ```lua
 ptool.cd("workdir")
@@ -48,11 +48,11 @@ local db = ptool.db.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` represents an open database connection returned by `ptool.db.connect()`.
+`Connection` は `ptool.db.connect()` が返す開かれたデータベース接続を 表します。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
-Methods:
+メソッド:
 
 - `db:query(sql, params?)` -> `table`
 - `db:query_one(sql, params?)` -> `table|nil`
@@ -61,30 +61,30 @@ Methods:
 - `db:transaction(fn)` -> `any`
 - `db:close()` -> `nil`
 
-Parameter binding:
+パラメータバインディング:
 
-- `params` is optional.
-- When `params` is an array table, it is treated as positional parameters and SQL placeholders should use `?`.
-- When `params` is a key-value table, it is treated as named parameters and SQL placeholders should use `:name`.
-- Positional and named parameters cannot be mixed in the same call.
-- Supported parameter value types are:
+- `params` は任意です。
+- `params` が配列テーブルの場合は位置パラメータとして扱われ、 SQL プレースホルダーには `?` を使います。
+- `params` がキーと値のテーブルの場合は名前付きパラメータとして扱われ、 SQL プレースホルダーには `:name` を使います。
+- 位置パラメータと名前付きパラメータは同じ呼び出し内で混在できません。
+- サポートされるパラメータ値の型:
   - `boolean`
   - `integer`
   - `number`
   - `string`
-- `nil` is not supported as a bound parameter in `v0.1.0`.
+- `v0.1.0` では、バインドパラメータとして `nil` はサポートされません。
 
-Result value rules:
+戻り値のルール:
 
-- Query results only guarantee these Lua value types:
+- クエリ結果で保証される Lua 値型は次のものだけです:
   - `boolean`
   - `integer`
   - `number`
   - `string`
-  - `nil` (for SQL `NULL`)
-- Text columns are returned as Lua strings.
-- Binary/blob columns are also returned as Lua strings.
-- If a query result contains duplicate column names, an error is raised. Use SQL aliases such as `AS` to disambiguate them.
+  - `nil` (SQL `NULL` 用)
+- テキスト列は Lua 文字列として返されます。
+- バイナリ/blob 列も Lua 文字列として返されます。
+- クエリ結果に重複した列名が含まれる場合はエラーになります。`AS` などの SQL エイリアスで区別してください。
 
 ### query
 
@@ -92,13 +92,13 @@ Result value rules:
 
 Canonical API name: `ptool.db.Connection:query`.
 
-`db:query(sql, params?)` executes a query and returns a table with:
+`db:query(sql, params?)` はクエリを実行し、次を持つテーブルを返します:
 
-- `rows` (table): An array of row tables.
-- `columns` (table): An array of column names.
-- `row_count` (integer): The number of rows returned.
+- `rows` (table): 行テーブルの配列。
+- `columns` (table): 列名の配列。
+- `row_count` (integer): 返された行数。
 
-Example:
+例:
 
 ```lua
 local db = ptool.db.connect("sqlite:test.db")
@@ -120,9 +120,9 @@ print(res.rows[2].name)
 
 Canonical API name: `ptool.db.Connection:query_one`.
 
-`db:query_one(sql, params?)` returns the first row as a table, or `nil` if the query returns no rows.
+`db:query_one(sql, params?)` は最初の 1 行をテーブルとして返します。 クエリ結果が 0 行なら `nil` を返します。
 
-Example:
+例:
 
 ```lua
 local row = db:query_one("select id, name from users where name = ?", {"alice"})
@@ -137,9 +137,9 @@ end
 
 Canonical API name: `ptool.db.Connection:scalar`.
 
-`db:scalar(sql, params?)` returns the first column of the first row, or `nil` if the query returns no rows.
+`db:scalar(sql, params?)` は最初の行の最初の列を返します。クエリ結果が 0 行なら `nil` を返します。
 
-Example:
+例:
 
 ```lua
 local count = db:scalar("select count(*) from users")
@@ -152,11 +152,11 @@ print(count)
 
 Canonical API name: `ptool.db.Connection:execute`.
 
-`db:execute(sql, params?)` executes a statement and returns a table with:
+`db:execute(sql, params?)` は文を実行し、次を持つテーブルを返します:
 
-- `rows_affected` (integer): The number of affected rows.
+- `rows_affected` (integer): 影響を受けた行数。
 
-Example:
+例:
 
 ```lua
 local res = db:execute("update users set name = ? where id = ?", {"alice-2", 1})
@@ -169,23 +169,23 @@ print(res.rows_affected)
 
 Canonical API name: `ptool.db.Connection:transaction`.
 
-`db:transaction(fn)` runs `fn(tx)` inside a database transaction.
+`db:transaction(fn)` はデータベーストランザクション内で `fn(tx)` を 実行します。
 
-Behavior:
+挙動:
 
-- If `fn(tx)` returns normally, the transaction is committed.
-- If `fn(tx)` raises an error, the transaction is rolled back and the error is re-raised.
-- Nested transactions are not supported.
-- While the callback is active, the outer connection object must not be used; use the provided `tx` object instead.
+- `fn(tx)` が正常に返れば、トランザクションはコミットされます。
+- `fn(tx)` がエラーを投げると、トランザクションはロールバックされ、 そのエラーが再送出されます。
+- ネストしたトランザクションはサポートされません。
+- コールバックが有効な間は外側の接続オブジェクトを使ってはいけません。 代わりに渡された `tx` オブジェクトを使ってください。
 
-The `tx` object supports the same query methods as `Connection`:
+`tx` オブジェクトは `Connection` と同じクエリメソッドをサポートします:
 
 - `tx:query(sql, params?)`
 - `tx:query_one(sql, params?)`
 - `tx:scalar(sql, params?)`
 - `tx:execute(sql, params?)`
 
-Example:
+例:
 
 ```lua
 db:transaction(function(tx)
@@ -209,14 +209,14 @@ print(tostring(err))
 
 Canonical API name: `ptool.db.Connection:close`.
 
-`db:close()` closes the connection.
+`db:close()` は接続を閉じます。
 
-Behavior:
+挙動:
 
-- After closing, the connection can no longer be used.
-- Closing during an active transaction callback raises an error.
+- 閉じた後、その接続はもう使えません。
+- アクティブなトランザクションコールバックの最中に閉じるとエラーに なります。
 
-Example:
+例:
 
 ```lua
 local db = ptool.db.connect("sqlite:test.db")

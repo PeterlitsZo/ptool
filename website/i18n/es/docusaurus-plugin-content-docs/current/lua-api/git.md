@@ -1,25 +1,25 @@
-# Git API
+# API de Git
 
-Git repository helpers are available under `ptool.git` and `p.git`.
+Los ayudantes de repositorio de Git están disponibles en `ptool.git` y `p.git`.
 
-This module is backed by `git2` / `libgit2`, not by invoking the `git` command-line tool.
+Este módulo se basa en `git2` / `libgit2`, no en invocar la herramienta de línea de comandos `git`.
 
 ## ptool.git.open
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.git.open(path?)` opens a repository directly and returns a `Repo` object.
+`ptool.git.open(path?)` abre un repositorio directamente y devuelve un objeto `Repo`.
 
-Arguments:
+Argumentos:
 
-- `path` (string, optional): Repository path. If omitted, the current `ptool` runtime directory is used.
+- `path` (cadena, opcional): Ruta del repositorio. Si se omite, se utiliza el directorio de tiempo de ejecución `ptool` actual.
 
-Behavior:
+Comportamiento:
 
-- Relative paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- This does not search parent directories. Use `ptool.git.discover(...)` when you want repository discovery behavior.
+- Las rutas relativas se resuelven desde el directorio de tiempo de ejecución `ptool` actual, por lo que siguen a `ptool.cd(...)`.
+- Esto no busca directorios principales. Utilice `ptool.git.discover(...)` cuando desee un comportamiento de descubrimiento de repositorios.
 
-Example:
+Ejemplo:
 
 ```lua
 local repo = ptool.git.open(".")
@@ -28,20 +28,20 @@ print(repo:path())
 
 ## ptool.git.discover
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.git.discover(path?)` finds a repository starting from `path` and walking up parent directories, then returns a `Repo` object.
+`ptool.git.discover(path?)` encuentra un repositorio que comienza desde `path` y avanza por los directorios principales, luego devuelve un objeto `Repo`.
 
-Arguments:
+Argumentos:
 
-- `path` (string, optional): Starting path. If omitted, the current `ptool` runtime directory is used.
+- `path` (cadena, opcional): Ruta de inicio. Si se omite, se utiliza el directorio de tiempo de ejecución `ptool` actual.
 
-Behavior:
+Comportamiento:
 
-- Relative paths are resolved from the current `ptool` runtime directory.
-- This is useful when a script may run from a subdirectory inside a worktree.
+- Las rutas relativas se resuelven desde el directorio de tiempo de ejecución `ptool` actual.
+- Esto es útil cuando un script puede ejecutarse desde un subdirectorio dentro de un árbol de trabajo.
 
-Example:
+Ejemplo:
 
 ```lua
 local repo = ptool.git.discover("src")
@@ -50,35 +50,35 @@ print(repo:root())
 
 ## ptool.git.clone
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`ptool.git.clone(url, path[, options])` clones a repository and returns a `Repo` object for the cloned repository.
+`ptool.git.clone(url, path[, options])` clona un repositorio y devuelve un objeto `Repo` para el repositorio clonado.
 
-Arguments:
+Argumentos:
 
-- `url` (string, required): Remote repository URL.
-- `path` (string, required): Destination path.
-- `options` (table, optional): Clone options. Supported fields:
-  - `branch` (string, optional): Branch name to check out after cloning.
-  - `bare` (boolean, optional): Whether to create a bare repository. Defaults to `false`.
-  - `auth` (table, optional): Remote authentication settings.
+- `url` (string, requerido): URL del repositorio remoto.
+- `path` (string, required): Ruta de destino.
+- `options` (tabla, opcional): Opciones de clonación. Campos admitidos:
+  - `branch` (cadena, opcional): Nombre de la rama a hacer checkout después de clonar.
+  - `bare` (booleano, opcional): Si se debe crear un repositorio bare. El valor predeterminado es `false`.
+  - `auth` (tabla, opcional): Configuración de autenticación remota.
 
-`auth` fields:
+Campos `auth`:
 
-- `kind` (string, required): Authentication mode. Supported values:
-  - `"default"`: Use libgit2 default credentials.
-  - `"ssh_agent"`: Authenticate through the local SSH agent.
-  - `"userpass"`: Use a plaintext username and password.
-- `username` (string, optional): Username for `"ssh_agent"`.
-- `username` (string, required): Username for `"userpass"`.
-- `password` (string, required): Password for `"userpass"`.
+- `kind` (string, required): Modo de autenticación. Valores admitidos:
+  - `"default"`: Utilice las credenciales predeterminadas de libgit2.
+  - `"ssh_agent"`: Autenticar a través del agente SSH local.
+  - `"userpass"`: Utiliza un nombre de usuario y una contraseña en texto plano.
+- `username` (cadena, opcional): Nombre de usuario para `"ssh_agent"`.
+- `username` (string, requerido): Nombre de usuario para `"userpass"`.
+- `password` (string, requerido): Contraseña para `"userpass"`.
 
-Behavior:
+Comportamiento:
 
-- Relative destination paths are resolved from the current `ptool` runtime directory.
-- Authentication options are also used by `repo:fetch(...)` and `repo:push(...)`.
+- Las rutas de destino relativas se resuelven desde el directorio de tiempo de ejecución `ptool` actual.
+- Las opciones de autenticación también son utilizadas por `repo:fetch(...)` y `repo:push(...)`.
 
-Example:
+Ejemplo:
 
 ```lua
 local repo = ptool.git.clone(
@@ -97,13 +97,13 @@ print(repo:root())
 
 ## Repo
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-`Repo` represents an open Git repository handle returned by `ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`.
+`Repo` representa un identificador de repositorio Git abierto devuelto por `ptool.git.open()`, `ptool.git.discover()` o `ptool.git.clone()`.
 
-It is implemented as a Lua userdata.
+Se implementa como datos de usuario de Lua.
 
-Methods:
+Métodos:
 
 - `repo:path()` -> `string`
 - `repo:root()` -> `string|nil`
@@ -121,57 +121,57 @@ Methods:
 
 ### path
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:path`.
+Nombre de la API canónica: `ptool.git.Repo:path`.
 
-`repo:path()` returns the repository git directory path.
+`repo:path()` devuelve la ruta del directorio git del repositorio.
 
-- Returns: `string`.
+- Devuelve: `string`.
 
-Notes:
+Notas:
 
-- For a non-bare repository this is typically the `.git` directory.
-- For a bare repository this is the repository directory itself.
+- Para un repositorio no bare, normalmente este es el directorio `.git`.
+- Para un repositorio bare, este es el propio directorio del repositorio.
 
 ### root
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:root`.
+Nombre de la API canónica: `ptool.git.Repo:root`.
 
-`repo:root()` returns the worktree root directory.
+`repo:root()` devuelve el directorio raíz del árbol de trabajo.
 
-- Returns: `string|nil`.
+- Devuelve: `string|nil`.
 
-Notes:
+Notas:
 
-- This returns `nil` for bare repositories.
+- Esto devuelve `nil` para repositorios bare.
 
 ### is_bare
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:is_bare`.
+Nombre de la API canónica: `ptool.git.Repo:is_bare`.
 
-`repo:is_bare()` reports whether the repository is bare.
+`repo:is_bare()` informa si el repositorio es bare.
 
-- Returns: `boolean`.
+- Devuelve: `boolean`.
 
 ### head
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:head`.
+Nombre de la API canónica: `ptool.git.Repo:head`.
 
-`repo:head()` returns HEAD information as a table with:
+`repo:head()` devuelve información de HEAD en una tabla con:
 
-- `oid` (string|nil): The current commit OID if available.
-- `shorthand` (string|nil): A short name for HEAD, such as a branch name.
-- `detached` (boolean): Whether HEAD is detached.
-- `unborn` (boolean): Whether the repository does not yet have an initial commit.
+- `oid` (string|nil): El OID del commit actual, si está disponible.
+- `shorthand` (string|nil): Un nombre corto para HEAD, como el nombre de una rama.
+- `detached` (booleano): Si HEAD está detached.
+- `unborn` (booleano): Si el repositorio todavía no tiene un commit inicial.
 
-Example:
+Ejemplo:
 
 ```lua
 local head = repo:head()
@@ -181,51 +181,51 @@ print(head.detached)
 
 ### current_branch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:current_branch`.
+Nombre de la API canónica: `ptool.git.Repo:current_branch`.
 
-`repo:current_branch()` returns the current local branch name.
+`repo:current_branch()` devuelve el nombre de la rama local actual.
 
-- Returns: `string|nil`.
+- Devuelve: `string|nil`.
 
-Notes:
+Notas:
 
-- This returns `nil` when HEAD is detached.
-- This also returns `nil` for an unborn branch before the first commit.
+- Esto devuelve `nil` cuando HEAD está detached.
+- Esto también devuelve `nil` para una rama unborn antes del primer commit.
 
 ### status
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:status`.
+Nombre de la API canónica: `ptool.git.Repo:status`.
 
-`repo:status([options])` summarizes repository status and returns a table with:
+`repo:status([options])` resume el estado del repositorio y devuelve una tabla con:
 
-- `root` (string|nil): The worktree root directory.
-- `branch` (string|nil): The current local branch name.
-- `head` (table): The same HEAD information returned by `repo:head()`.
-- `upstream` (string|nil): The upstream branch name, when configured.
-- `ahead` (integer): Number of commits ahead of upstream.
-- `behind` (integer): Number of commits behind upstream.
-- `clean` (boolean): Whether the repository has no visible status entries.
-- `entries` (table): An array of status entry tables.
+- `root` (string|nil): El directorio raíz del árbol de trabajo.
+- `branch` (string|nil): El nombre de la rama local actual.
+- `head` (tabla): La misma información de HEAD devuelta por `repo:head()`.
+- `upstream` (string|nil): El nombre de la rama upstream, cuando está configurada.
+- `ahead` (entero): Número de commits por delante del upstream.
+- `behind` (entero): Número de commits por detrás del upstream.
+- `clean` (booleano): si el repositorio no tiene entradas de estado visibles.
+- `entries` (tabla): Una matriz de tablas de entrada de estado.
 
-`entries[i]` contains:
+`entries[i]` contiene:
 
-- `path` (string): Repository-relative path.
-- `index_status` (string|nil): Index-side status. Supported values currently include `"new"`, `"modified"`, `"deleted"`, `"renamed"`, and `"typechange"`.
-- `worktree_status` (string|nil): Worktree-side status. Supported values currently include `"new"`, `"modified"`, `"deleted"`, `"renamed"`, `"typechange"`, and `"ignored"`.
-- `conflicted` (boolean): Whether the path is conflicted.
-- `ignored` (boolean): Whether the path is ignored.
+- `path` (string): Ruta relativa al repositorio.
+- `index_status` (string|nil): Estado del lado del índice. Los valores admitidos actualmente incluyen `"new"`, `"modified"`, `"deleted"`, `"renamed"` y `"typechange"`.
+- `worktree_status` (string|nil): estado del lado del árbol de trabajo. Los valores admitidos actualmente incluyen `"new"`, `"modified"`, `"deleted"`, `"renamed"`, `"typechange"` y `"ignored"`.
+- `conflicted` (booleano): si la ruta está en conflicto.
+- `ignored` (booleano): si se ignora la ruta.
 
-`options` fields:
+Campos `options`:
 
-- `include_untracked` (boolean, optional): Whether to include untracked files. Defaults to `true`.
-- `include_ignored` (boolean, optional): Whether to include ignored files. Defaults to `false`.
-- `recurse_untracked_dirs` (boolean, optional): Whether to recurse into untracked directories. Defaults to `true`.
+- `include_untracked` (booleano, opcional): si se deben incluir archivos no rastreados. El valor predeterminado es `true`.
+- `include_ignored` (booleano, opcional): si se deben incluir archivos ignorados. El valor predeterminado es `false`.
+- `recurse_untracked_dirs` (booleano, opcional): Si se recurre en directorios no rastreados. El valor predeterminado es `true`.
 
-Example:
+Ejemplo:
 
 ```lua
 local st = repo:status()
@@ -239,34 +239,34 @@ end
 
 ### is_clean
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:is_clean`.
+Nombre de la API canónica: `ptool.git.Repo:is_clean`.
 
-`repo:is_clean([options])` returns whether the repository is clean.
+`repo:is_clean([options])` devuelve si el repositorio está limpio.
 
-- `options` (table, optional): The same options accepted by `repo:status(...)`.
-- Returns: `boolean`.
+- `options` (tabla, opcional): Las mismas opciones aceptadas por `repo:status(...)`.
+- Devuelve: `boolean`.
 
 ### add
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:add`.
+Nombre de la API canónica: `ptool.git.Repo:add`.
 
-`repo:add(paths[, options])` stages one or more paths in the index.
+`repo:add(paths[, options])` añade una o más rutas al índice.
 
-Arguments:
+Argumentos:
 
-- `paths` (string|string[], required): A path or an array of paths.
-- `options` (table, optional): Add options. Supported fields:
-  - `update` (boolean, optional): Update only paths already known to the index. Defaults to `false`.
+- `paths` (string|string[], requerido): Una ruta o una matriz de rutas.
+- `options` (tabla, opcional): Añadir opciones. Campos admitidos:
+  - `update` (booleano, opcional): Actualiza solo las rutas ya conocidas por el índice. El valor predeterminado es `false`.
 
-Behavior:
+Comportamiento:
 
-- Paths are interpreted relative to the repository worktree.
+- Las rutas se interpretan en relación con el árbol de trabajo del repositorio.
 
-Example:
+Ejemplo:
 
 ```lua
 repo:add("README.md")
@@ -275,30 +275,30 @@ repo:add({"src", "Cargo.toml"})
 
 ### commit
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:commit`.
+Nombre de la API canónica: `ptool.git.Repo:commit`.
 
-`repo:commit(message[, options])` creates a commit from the current index and returns the new commit OID.
+`repo:commit(message[, options])` crea un commit a partir del índice actual y devuelve el nuevo OID del commit.
 
-Arguments:
+Argumentos:
 
-- `message` (string, required): Commit message.
-- `options` (table, optional): Commit options. Supported fields:
-  - `author` (table, optional): Author signature.
-  - `committer` (table, optional): Committer signature.
+- `message` (cadena, obligatorio): Mensaje del commit.
+- `options` (tabla, opcional): Opciones de confirmación. Campos admitidos:
+  - `author` (tabla, opcional): Firma del autor.
+  - `committer` (tabla, opcional): Firma del comitente.
 
-Signature fields:
+Campos de firma:
 
-- `name` (string, required)
-- `email` (string, required)
+- `name` (string, requerido)
+- `email` (string, requerido)
 
-Behavior:
+Comportamiento:
 
-- When `author` and `committer` are omitted, `ptool` tries to use the Git repository identity from configuration.
-- If no identity is configured and no explicit signature is provided, an error is raised.
+- Cuando se omiten `author` y `committer`, `ptool` intenta utilizar la identidad del repositorio Git desde la configuración.
+- Si no se configura ninguna identidad y no se proporciona ninguna firma explícita, se genera un error.
 
-Example:
+Ejemplo:
 
 ```lua
 local oid = repo:commit("Release v0.7.0", {
@@ -313,39 +313,39 @@ print(oid)
 
 ### checkout
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:checkout`.
+Nombre de la API canónica: `ptool.git.Repo:checkout`.
 
-`repo:checkout(rev[, options])` checks out a revision.
+`repo:checkout(rev[, options])` hace checkout de una revisión.
 
-Arguments:
+Argumentos:
 
-- `rev` (string, required): Revision expression such as a branch name, tag name, or commit OID.
-- `options` (table, optional): Checkout options. Supported fields:
-  - `force` (boolean, optional): Whether to force checkout. Defaults to `false`.
+- `rev` (string, required): expresión de revisión como un nombre de rama, nombre de etiqueta u Oid de confirmación.
+- `options` (tabla, opcional): Opciones de checkout. Campos admitidos:
+  - `force` (booleano, opcional): Si se debe forzar el checkout. El valor predeterminado es `false`.
 
-Behavior:
+Comportamiento:
 
-- This can detach HEAD when `rev` does not resolve to a named reference.
+- Esto puede dejar HEAD en detached cuando `rev` no se resuelve a una referencia con nombre.
 
 ### switch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:switch`.
+Nombre de la API canónica: `ptool.git.Repo:switch`.
 
-`repo:switch(branch[, options])` switches HEAD to a local branch.
+`repo:switch(branch[, options])` cambia HEAD a una rama local.
 
-Arguments:
+Argumentos:
 
-- `branch` (string, required): Local branch name.
-- `options` (table, optional): Switch options. Supported fields:
-  - `create` (boolean, optional): Whether to create the branch first. Defaults to `false`.
-  - `force` (boolean, optional): Whether to force the checkout. Defaults to `false`.
-  - `start_point` (string, optional): Revision to branch from when `create = true`. Defaults to `HEAD`.
+- `branch` (cadena, obligatorio): Nombre de la rama local.
+- `options` (tabla, opcional): Opciones de switch. Campos admitidos:
+  - `create` (booleano, opcional): Si se crea primero la rama. El valor predeterminado es `false`.
+  - `force` (booleano, opcional): Si forzar el pago. El valor predeterminado es `false`.
+  - `start_point` (cadena, opcional): Revisión para ramificar desde cuando `create = true`. El valor predeterminado es `HEAD`.
 
-Example:
+Ejemplo:
 
 ```lua
 repo:switch("release")
@@ -357,28 +357,28 @@ repo:switch("release-next", {
 
 ### fetch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:fetch`.
+Nombre de la API canónica: `ptool.git.Repo:fetch`.
 
-`repo:fetch([remote[, options]])` fetches from a remote and returns transfer statistics.
+`repo:fetch([remote[, options]])` hace fetch desde un remoto y devuelve estadísticas de transferencia.
 
-Arguments:
+Argumentos:
 
-- `remote` (string, optional): Remote name. Defaults to `"origin"`.
-- `options` (table, optional): Fetch options. Supported fields:
-  - `refspecs` (string|string[], optional): One refspec or an array of refspecs.
-  - `auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`.
+- `remote` (cadena, opcional): Nombre remoto. El valor predeterminado es `"origin"`.
+- `options` (tabla, opcional): Opciones de fetch. Campos admitidos:
+  - `refspecs` (string|string[], opcional): Una refspec o una matriz de refspecs.
+  - `auth` (tabla, opcional): Configuración de autenticación remota. Utiliza la misma estructura que `ptool.git.clone(...)`.
 
-Returns:
+Devuelve:
 
-- `received_objects` (integer)
-- `indexed_objects` (integer)
-- `local_objects` (integer)
-- `total_objects` (integer)
-- `received_bytes` (integer)
+- `received_objects` (entero)
+- `indexed_objects` (entero)
+- `local_objects` (entero)
+- `total_objects` (entero)
+- `received_bytes` (entero)
 
-Example:
+Ejemplo:
 
 ```lua
 local stats = repo:fetch("origin", {
@@ -392,25 +392,25 @@ print(stats.received_objects, stats.received_bytes)
 
 ### push
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
-Canonical API name: `ptool.git.Repo:push`.
+Nombre de la API canónica: `ptool.git.Repo:push`.
 
-`repo:push([remote[, refspecs[, options]]])` pushes refs to a remote.
+`repo:push([remote[, refspecs[, options]]])` hace push de refs a un remoto.
 
-Arguments:
+Argumentos:
 
-- `remote` (string, optional): Remote name. Defaults to `"origin"`.
-- `refspecs` (string|string[], optional): One refspec or an array of refspecs.
-- `options` (table, optional): Push options. Supported fields:
-  - `auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`.
+- `remote` (cadena, opcional): Nombre remoto. El valor predeterminado es `"origin"`.
+- `refspecs` (string|string[], opcional): Una refspec o una matriz de refspecs.
+- `options` (tabla, opcional): Opciones de push. Campos admitidos:
+  - `auth` (tabla, opcional): Configuración de autenticación remota. Utiliza la misma estructura que `ptool.git.clone(...)`.
 
-Behavior:
+Comportamiento:
 
-- When `refspecs` is omitted, `ptool` tries to push the current local branch to the branch of the same name on the remote.
-- Omitting `refspecs` while HEAD is detached raises an error.
+- Cuando se omite `refspecs`, `ptool` intenta hacer push de la rama local actual a la rama del mismo nombre en el remoto.
+- Omitir `refspecs` cuando HEAD está detached genera un error.
 
-Example:
+Ejemplo:
 
 ```lua
 repo:push("origin", nil, {

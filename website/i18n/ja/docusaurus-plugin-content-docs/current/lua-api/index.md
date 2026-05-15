@@ -15,7 +15,7 @@
 
 ## データとテキスト
 
-- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
+- [DateTime API](./datetime.md): タイムゾーンをサポートする具体的な日付時刻を解析、比較、フォーマット、変換します。
 - [ハッシュ API](./hash.md): SHA-256、SHA-1、MD5 ダイジェストを計算する。
 - [JSON API](./json.md): JSON テキストを解析し、Lua 値を JSON として 文字列化する。
 - [正規表現 API](./re.md): 正規表現をコンパイルし、検索、キャプチャ、 置換、分割を行う。
@@ -42,6 +42,6 @@
 ## 開発とストレージ
 
 - [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
-- [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or push through libgit2-backed handles.
+- [Git API](./git.md): リポジトリを開いてステータスを検査し、libgit2 でサポートされるハンドルを介してクローン、フェッチ、またはプッシュします。
 
 このページを入り口として使い、そのあと必要なモジュールページに移動して 完全な関数リファレンスを参照してください。

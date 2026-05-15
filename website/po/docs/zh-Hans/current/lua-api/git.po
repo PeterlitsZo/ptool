@@ -13,507 +13,512 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:1
 msgid "Git API"
-msgstr ""
+msgstr "Git API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:3
 msgid "Git repository helpers are available under `ptool.git` and `p.git`."
-msgstr ""
+msgstr "Git 仓库辅助能力位于 `ptool.git` 和 `p.git` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:5
 msgid ""
 "This module is backed by `git2` / `libgit2`, not by invoking the `git` "
 "command-line tool."
-msgstr ""
+msgstr "这个模块基于 `git2` / `libgit2`，而不是通过调用 `git` 命令行工具实现。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:8
 msgid "ptool.git.open"
-msgstr ""
+msgstr "ptool.git.open"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:12
 msgid ""
 "`ptool.git.open(path?)` opens a repository directly and returns a `Repo` "
 "object."
-msgstr ""
+msgstr "`ptool.git.open(path?)` 直接打开一个仓库，并返回 `Repo` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:15
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:15"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:17
 msgid ""
 "`path` (string, optional): Repository path. If omitted, the current `ptool` "
 "runtime directory is used."
-msgstr ""
+msgstr "`path`（string，可选）：仓库路径。省略时使用当前 `ptool` 运行时目录。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:20
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:20"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:22
 msgid ""
 "Relative paths are resolved from the current `ptool` runtime directory, so "
 "they follow `ptool.cd(...)`."
-msgstr ""
+msgstr "相对路径会从当前 `ptool` 运行时目录解析，因此会跟随 `ptool.cd(...)`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:24
 msgid ""
 "This does not search parent directories. Use `ptool.git.discover(...)` when "
 "you want repository discovery behavior."
-msgstr ""
+msgstr "这个 API 不会向父目录继续搜索仓库。如果你需要仓库发现行为，请使用 "
+"`ptool.git.discover(...)`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:27
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:27"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:34
 msgid "ptool.git.discover"
-msgstr ""
+msgstr "ptool.git.discover"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:38
 msgid ""
 "`ptool.git.discover(path?)` finds a repository starting from `path` and "
 "walking up parent directories, then returns a `Repo` object."
-msgstr ""
+msgstr "`ptool.git.discover(path?)` 从 `path` 开始向上遍历父目录查找仓库，然后返回一"
+"个 `Repo` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:43
 msgid ""
 "`path` (string, optional): Starting path. If omitted, the current `ptool` "
 "runtime directory is used."
-msgstr ""
+msgstr "`path`（string，可选）：起始路径。省略时使用当前 `ptool` 运行时目录。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:48
 msgid "Relative paths are resolved from the current `ptool` runtime directory."
-msgstr ""
+msgstr "相对路径会从当前 `ptool` 运行时目录解析。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:49
 msgid ""
 "This is useful when a script may run from a subdirectory inside a worktree."
-msgstr ""
+msgstr "当脚本可能在 worktree 的某个子目录中运行时，这个 API 很有用。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:58
 msgid "ptool.git.clone"
-msgstr ""
+msgstr "ptool.git.clone"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:62
 msgid ""
 "`ptool.git.clone(url, path[, options])` clones a repository and returns a "
 "`Repo` object for the cloned repository."
-msgstr ""
+msgstr "`ptool.git.clone(url, path[, options])` 克隆一个仓库，并返回该克隆仓库对应的 "
+"`Repo` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:67
 msgid "`url` (string, required): Remote repository URL."
-msgstr ""
+msgstr "`url`（string，必填）：远端仓库 URL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:68
 msgid "`path` (string, required): Destination path."
-msgstr ""
+msgstr "`path`（string，必填）：目标路径。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
 msgid "`options` (table, optional): Clone options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：克隆选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
 msgid "`branch` (string, optional): Branch name to check out after cloning."
-msgstr ""
+msgstr "`branch`（string，可选）：克隆完成后要检出的分支名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
 msgid ""
 "`bare` (boolean, optional): Whether to create a bare repository. Defaults to "
 "`false`."
-msgstr ""
+msgstr "`bare`（boolean，可选）：是否创建裸仓库。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
 msgid "`auth` (table, optional): Remote authentication settings."
-msgstr ""
+msgstr "`auth`（table，可选）：远端认证设置。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:75
 msgid "`auth` fields:"
-msgstr ""
+msgstr "`auth` 字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
 msgid "`kind` (string, required): Authentication mode. Supported values:"
-msgstr ""
+msgstr "`kind`（string，必填）：认证模式。支持的值："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
 msgid "`\"default\"`: Use libgit2 default credentials."
-msgstr ""
+msgstr "`\"default\"`: 使用 libgit2 的默认凭据。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
 msgid "`\"ssh_agent\"`: Authenticate through the local SSH agent."
-msgstr ""
+msgstr "`\"ssh_agent\"`: 通过本地 SSH agent 进行认证。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
 msgid "`\"userpass\"`: Use a plaintext username and password."
-msgstr ""
+msgstr "`\"userpass\"`: 使用明文用户名和密码。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:81
 msgid "`username` (string, optional): Username for `\"ssh_agent\"`."
-msgstr ""
+msgstr "`username`（string，可选）：用于 `\"ssh_agent\"` 的用户名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:82
 msgid "`username` (string, required): Username for `\"userpass\"`."
-msgstr ""
+msgstr "`username`（string，必填）：用于 `\"userpass\"` 的用户名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:83
 msgid "`password` (string, required): Password for `\"userpass\"`."
-msgstr ""
+msgstr "`password`（string，必填）：用于 `\"userpass\"` 的密码。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:85"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:87
 msgid ""
 "Relative destination paths are resolved from the current `ptool` runtime "
 "directory."
-msgstr ""
+msgstr "相对目标路径会从当前 `ptool` 运行时目录解析。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:89
 msgid ""
 "Authentication options are also used by `repo:fetch(...)` and `repo:push(...)"
 "`."
-msgstr ""
+msgstr "认证选项同样会被 `repo:fetch(...)` 和 `repo:push(...)` 使用。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:109
 msgid "Repo"
-msgstr ""
+msgstr "Repo"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:113
 msgid ""
 "`Repo` represents an open Git repository handle returned by "
 "`ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`."
 msgstr ""
+"`Repo` 表示一个打开中的 Git 仓库句柄，由 `ptool.git.open()`、"
+"`ptool.git.discover()` 或 `ptool.git.clone()` 返回。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:116
 msgid "It is implemented as a Lua userdata."
-msgstr ""
+msgstr "它实现为 Lua userdata。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:118
 msgid "Methods:"
-msgstr ""
+msgstr "方法："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:120
 msgid "`repo:path()` -> `string`"
-msgstr ""
+msgstr "`repo:path()` -> `string`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:121
 msgid "`repo:root()` -> `string|nil`"
-msgstr ""
+msgstr "`repo:root()` -> `string|nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:122
 msgid "`repo:is_bare()` -> `boolean`"
-msgstr ""
+msgstr "`repo:is_bare()` -> `boolean`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:123
 msgid "`repo:head()` -> `table`"
-msgstr ""
+msgstr "`repo:head()` -> `table`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:124
 msgid "`repo:current_branch()` -> `string|nil`"
-msgstr ""
+msgstr "`repo:current_branch()` -> `string|nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:125
 msgid "`repo:status([options])` -> `table`"
-msgstr ""
+msgstr "`repo:status([options])` -> `table`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:126
 msgid "`repo:is_clean([options])` -> `boolean`"
-msgstr ""
+msgstr "`repo:is_clean([options])` -> `boolean`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:127
 msgid "`repo:add(paths[, options])` -> `nil`"
-msgstr ""
+msgstr "`repo:add(paths[, options])` -> `nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:128
 msgid "`repo:commit(message[, options])` -> `string`"
-msgstr ""
+msgstr "`repo:commit(message[, options])` -> `string`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:129
 msgid "`repo:checkout(rev[, options])` -> `nil`"
-msgstr ""
+msgstr "`repo:checkout(rev[, options])` -> `nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:130
 msgid "`repo:switch(branch[, options])` -> `nil`"
-msgstr ""
+msgstr "`repo:switch(branch[, options])` -> `nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:131
 msgid "`repo:fetch([remote[, options]])` -> `table`"
-msgstr ""
+msgstr "`repo:fetch([remote[, options]])` -> `table`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:132
 msgid "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
-msgstr ""
+msgstr "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:134
 msgid "path"
-msgstr ""
+msgstr "path"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:138
 msgid "Canonical API name: `ptool.git.Repo:path`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:path`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:140
 msgid "`repo:path()` returns the repository git directory path."
-msgstr ""
+msgstr "`repo:path()` 返回仓库的 Git 目录路径。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:142
 msgid "Returns: `string`."
-msgstr ""
+msgstr "返回：`string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:144
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:144"
 msgid "Notes:"
-msgstr ""
+msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:146
 msgid "For a non-bare repository this is typically the `.git` directory."
-msgstr ""
+msgstr "对于非裸仓库，这通常是 `.git` 目录。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:147
 msgid "For a bare repository this is the repository directory itself."
-msgstr ""
+msgstr "对于裸仓库，这就是仓库目录本身。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:149
 msgid "root"
-msgstr ""
+msgstr "root"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:153
 msgid "Canonical API name: `ptool.git.Repo:root`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:root`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:155
 msgid "`repo:root()` returns the worktree root directory."
-msgstr ""
+msgstr "`repo:root()` 返回 worktree 的根目录。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:157
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:157"
 msgid "Returns: `string|nil`."
-msgstr ""
+msgstr "返回：`string|nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:159
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:159"
 msgid "Notes:"
-msgstr ""
+msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:161
 msgid "This returns `nil` for bare repositories."
-msgstr ""
+msgstr "对于裸仓库，这里会返回 `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:163
 msgid "is_bare"
-msgstr ""
+msgstr "is_bare"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:167
 msgid "Canonical API name: `ptool.git.Repo:is_bare`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:is_bare`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:169
 msgid "`repo:is_bare()` reports whether the repository is bare."
-msgstr ""
+msgstr "`repo:is_bare()` 用来报告该仓库是否为裸仓库。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:171
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:171"
 msgid "Returns: `boolean`."
-msgstr ""
+msgstr "返回：`boolean`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:173
 msgid "head"
-msgstr ""
+msgstr "head"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:177
 msgid "Canonical API name: `ptool.git.Repo:head`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:head`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:179
 msgid "`repo:head()` returns HEAD information as a table with:"
-msgstr ""
+msgstr "`repo:head()` 以 table 形式返回 HEAD 信息，包含："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:181
 msgid "`oid` (string|nil): The current commit OID if available."
-msgstr ""
+msgstr "`oid`（string|nil）：当前提交的 OID；如果不可用则为 `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:182
 msgid "`shorthand` (string|nil): A short name for HEAD, such as a branch name."
-msgstr ""
+msgstr "`shorthand`（string|nil）：HEAD 的简写名称，例如分支名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:183
 msgid "`detached` (boolean): Whether HEAD is detached."
-msgstr ""
+msgstr "`detached`（boolean）：HEAD 是否处于 detached 状态。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:184
 msgid ""
 "`unborn` (boolean): Whether the repository does not yet have an initial "
 "commit."
-msgstr ""
+msgstr "`unborn`（boolean）：仓库是否还没有初始提交。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:187
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:187"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:195
 msgid "current_branch"
-msgstr ""
+msgstr "current_branch"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:199
 msgid "Canonical API name: `ptool.git.Repo:current_branch`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:current_branch`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:201
 msgid "`repo:current_branch()` returns the current local branch name."
-msgstr ""
+msgstr "`repo:current_branch()` 返回当前本地分支名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:203
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:203"
 msgid "Returns: `string|nil`."
-msgstr ""
+msgstr "返回：`string|nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:205
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:205"
 msgid "Notes:"
-msgstr ""
+msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:207
 msgid "This returns `nil` when HEAD is detached."
-msgstr ""
+msgstr "当 HEAD 处于 detached 状态时，这里会返回 `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:208
 msgid "This also returns `nil` for an unborn branch before the first commit."
-msgstr ""
+msgstr "对于首次提交之前的 unborn branch，这里同样会返回 `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:210
 msgid "status"
-msgstr ""
+msgstr "status"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:214
 msgid "Canonical API name: `ptool.git.Repo:status`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:status`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:216
 msgid ""
 "`repo:status([options])` summarizes repository status and returns a table "
 "with:"
-msgstr ""
+msgstr "`repo:status([options])` 汇总仓库状态，并返回一个包含以下内容的 table："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:218
 msgid "`root` (string|nil): The worktree root directory."
-msgstr ""
+msgstr "`root`（string|nil）：worktree 根目录。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:219
 msgid "`branch` (string|nil): The current local branch name."
-msgstr ""
+msgstr "`branch`（string|nil）：当前本地分支名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:220
 msgid "`head` (table): The same HEAD information returned by `repo:head()`."
-msgstr ""
+msgstr "`head`（table）：与 `repo:head()` 返回的 HEAD 信息相同。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:221
 msgid "`upstream` (string|nil): The upstream branch name, when configured."
-msgstr ""
+msgstr "`upstream`（string|nil）：上游分支名；仅在已配置时提供。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:222
 msgid "`ahead` (integer): Number of commits ahead of upstream."
-msgstr ""
+msgstr "`ahead`（integer）：领先上游的提交数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:223
 msgid "`behind` (integer): Number of commits behind upstream."
-msgstr ""
+msgstr "`behind`（integer）：落后上游的提交数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:224
 msgid ""
 "`clean` (boolean): Whether the repository has no visible status entries."
-msgstr ""
+msgstr "`clean`（boolean）：仓库是否没有可见的状态项。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:225
 msgid "`entries` (table): An array of status entry tables."
-msgstr ""
+msgstr "`entries`（table）：状态条目 table 的数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:227
 msgid "`entries[i]` contains:"
-msgstr ""
+msgstr "`entries[i]` 包含："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:229
 msgid "`path` (string): Repository-relative path."
-msgstr ""
+msgstr "`path`（string）：相对于仓库的路径。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:230
 msgid ""
@@ -521,6 +526,8 @@ msgid ""
 "include `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"`, and `"
 "\"typechange\"`."
 msgstr ""
+"`index_status`（string|nil）：index 侧状态。当前支持的值包括 `\"new\"`、`"
+"\"modified\"`、`\"deleted\"`、`\"renamed\"` 和 `\"typechange\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:232
 msgid ""
@@ -528,427 +535,434 @@ msgid ""
 "currently include `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"`, `"
 "\"typechange\"`, and `\"ignored\"`."
 msgstr ""
+"`worktree_status`（string|nil）：worktree 侧状态。当前支持的值包括 `\"new\"`"
+"、`\"modified\"`、`\"deleted\"`、`\"renamed\"`、`\"typechange\"` 和 `"
+"\"ignored\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:235
 msgid "`conflicted` (boolean): Whether the path is conflicted."
-msgstr ""
+msgstr "`conflicted`（boolean）：该路径是否存在冲突。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:236
 msgid "`ignored` (boolean): Whether the path is ignored."
-msgstr ""
+msgstr "`ignored`（boolean）：该路径是否被忽略。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:238
 msgid "`options` fields:"
-msgstr ""
+msgstr "`options` 字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:240
 msgid ""
 "`include_untracked` (boolean, optional): Whether to include untracked files. "
 "Defaults to `true`."
-msgstr ""
+msgstr "`include_untracked`（boolean，可选）：是否包含未跟踪文件。默认值为 `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:242
 msgid ""
 "`include_ignored` (boolean, optional): Whether to include ignored files. "
 "Defaults to `false`."
-msgstr ""
+msgstr "`include_ignored`（boolean，可选）：是否包含已忽略文件。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:244
 msgid ""
 "`recurse_untracked_dirs` (boolean, optional): Whether to recurse into "
 "untracked directories. Defaults to `true`."
-msgstr ""
+msgstr "`recurse_untracked_dirs`（boolean，可选）：是否递归进入未跟踪目录。默认值为 "
+"`true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:247
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:247"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:259
 msgid "is_clean"
-msgstr ""
+msgstr "is_clean"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:263
 msgid "Canonical API name: `ptool.git.Repo:is_clean`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:is_clean`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:265
 msgid "`repo:is_clean([options])` returns whether the repository is clean."
-msgstr ""
+msgstr "`repo:is_clean([options])` 返回仓库是否干净。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:267
 msgid ""
 "`options` (table, optional): The same options accepted by `repo:status(...)`."
-msgstr ""
+msgstr "`options`（table，可选）：与 `repo:status(...)` 接受的选项相同。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268"
 msgid "Returns: `boolean`."
-msgstr ""
+msgstr "返回：`boolean`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:270
 msgid "add"
-msgstr ""
+msgstr "add"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:274
 msgid "Canonical API name: `ptool.git.Repo:add`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:add`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:276
 msgid "`repo:add(paths[, options])` stages one or more paths in the index."
-msgstr ""
+msgstr "`repo:add(paths[, options])` 将一个或多个路径加入 index 暂存区。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:278
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:278"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:280
 msgid "`paths` (string|string[], required): A path or an array of paths."
-msgstr ""
+msgstr "`paths`（string|string[]，必填）：单个路径或路径数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:281
 msgid "`options` (table, optional): Add options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：add 选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:281
 msgid ""
 "`update` (boolean, optional): Update only paths already known to the index. "
 "Defaults to `false`."
-msgstr ""
+msgstr "`update`（boolean，可选）：只更新 index 中已知的路径。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:287
 msgid "Paths are interpreted relative to the repository worktree."
-msgstr ""
+msgstr "路径会按仓库 worktree 的相对路径解释。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:289
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:289"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:296
 msgid "commit"
-msgstr ""
+msgstr "commit"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:300
 msgid "Canonical API name: `ptool.git.Repo:commit`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:commit`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:302
 msgid ""
 "`repo:commit(message[, options])` creates a commit from the current index "
 "and returns the new commit OID."
-msgstr ""
+msgstr "`repo:commit(message[, options])` 根据当前 index 创建提交，并返回新提交的 OID"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:305
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:305"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:307
 msgid "`message` (string, required): Commit message."
-msgstr ""
+msgstr "`message`（string，必填）：提交信息。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:308
 msgid "`options` (table, optional): Commit options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：commit 选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:308
 msgid "`author` (table, optional): Author signature."
-msgstr ""
+msgstr "`author`（table，可选）：作者签名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:308
 msgid "`committer` (table, optional): Committer signature."
-msgstr ""
+msgstr "`committer`（table，可选）：提交者签名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:312
 msgid "Signature fields:"
-msgstr ""
+msgstr "签名字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:314
 msgid "`name` (string, required)"
-msgstr ""
+msgstr "`name` (string, required)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:315
 msgid "`email` (string, required)"
-msgstr ""
+msgstr "`email` (string, required)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:319
 msgid ""
 "When `author` and `committer` are omitted, `ptool` tries to use the Git "
 "repository identity from configuration."
-msgstr ""
+msgstr "当 `author` 和 `committer` 都省略时，`ptool` 会尝试使用 Git 配置中的仓库身份"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:321
 msgid ""
 "If no identity is configured and no explicit signature is provided, an error "
 "is raised."
-msgstr ""
+msgstr "如果既没有配置身份，也没有显式提供签名，就会报错。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:324
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:324"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:337
 msgid "checkout"
-msgstr ""
+msgstr "checkout"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:341
 msgid "Canonical API name: `ptool.git.Repo:checkout`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:checkout`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:343
 msgid "`repo:checkout(rev[, options])` checks out a revision."
-msgstr ""
+msgstr "`repo:checkout(rev[, options])` 检出一个修订版本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:345
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:345"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:347
 msgid ""
 "`rev` (string, required): Revision expression such as a branch name, tag "
 "name, or commit OID."
-msgstr ""
+msgstr "`rev`（string，必填）：修订表达式，例如分支名、标签名或提交 OID。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:349
 msgid "`options` (table, optional): Checkout options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：checkout 选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:349
 msgid ""
 "`force` (boolean, optional): Whether to force checkout. Defaults to `false`."
-msgstr ""
+msgstr "`force`（boolean，可选）：是否强制检出。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:353
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:353"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:355
 msgid "This can detach HEAD when `rev` does not resolve to a named reference."
-msgstr ""
+msgstr "当 `rev` 无法解析到具名引用时，这个操作可能会让 HEAD 进入 detached 状态。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:357
 msgid "switch"
-msgstr ""
+msgstr "switch"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:361
 msgid "Canonical API name: `ptool.git.Repo:switch`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:switch`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:363
 msgid "`repo:switch(branch[, options])` switches HEAD to a local branch."
-msgstr ""
+msgstr "`repo:switch(branch[, options])` 将 HEAD 切换到一个本地分支。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:365
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:365"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:367
 msgid "`branch` (string, required): Local branch name."
-msgstr ""
+msgstr "`branch`（string，必填）：本地分支名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
 msgid "`options` (table, optional): Switch options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：switch 选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
 msgid ""
 "`create` (boolean, optional): Whether to create the branch first. Defaults "
 "to `false`."
-msgstr ""
+msgstr "`create`（boolean，可选）：是否先创建分支。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
 msgid ""
 "`force` (boolean, optional): Whether to force the checkout. Defaults to "
 "`false`."
-msgstr ""
+msgstr "`force`（boolean，可选）：是否强制检出。默认值为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
 msgid ""
 "`start_point` (string, optional): Revision to branch from when `create = "
 "true`. Defaults to `HEAD`."
-msgstr ""
+msgstr "`start_point`（string，可选）：当 `create = true` 时作为建分支起点的修订。默"
+"认值为 `HEAD`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:376
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:376"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:386
 msgid "fetch"
-msgstr ""
+msgstr "fetch"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:390
 msgid "Canonical API name: `ptool.git.Repo:fetch`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:fetch`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:392
 msgid ""
 "`repo:fetch([remote[, options]])` fetches from a remote and returns transfer "
 "statistics."
-msgstr ""
+msgstr "`repo:fetch([remote[, options]])` 从远端抓取，并返回传输统计信息。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:395
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:395"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:397
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:397"
 msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
-msgstr ""
+msgstr "`remote`（string，可选）：远端名称。默认值为 `\"origin\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398
 msgid "`options` (table, optional): Fetch options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：fetch 选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398"
 msgid ""
 "`refspecs` (string|string[], optional): One refspec or an array of refspecs."
-msgstr ""
+msgstr "`refspecs`（string|string[]，可选）：单个 refspec 或 refspec 数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398"
 msgid ""
 "`auth` (table, optional): Remote authentication settings. Uses the same "
 "structure as `ptool.git.clone(...)`."
-msgstr ""
+msgstr "`auth`（table，可选）：远端认证设置。结构与 `ptool.git.clone(...)` 相同。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:404
 msgid "Returns:"
-msgstr ""
+msgstr "返回："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:406
 msgid "`received_objects` (integer)"
-msgstr ""
+msgstr "`received_objects` (integer)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:407
 msgid "`indexed_objects` (integer)"
-msgstr ""
+msgstr "`indexed_objects` (integer)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:408
 msgid "`local_objects` (integer)"
-msgstr ""
+msgstr "`local_objects` (integer)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:409
 msgid "`total_objects` (integer)"
-msgstr ""
+msgstr "`total_objects` (integer)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:410
 msgid "`received_bytes` (integer)"
-msgstr ""
+msgstr "`received_bytes` (integer)"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:412
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:412"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:424
 msgid "push"
-msgstr ""
+msgstr "push"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426"
 msgid "`Unreleased` - Introduced."
-msgstr ""
+msgstr "`Unreleased` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:428
 msgid "Canonical API name: `ptool.git.Repo:push`."
-msgstr ""
+msgstr "规范 API 名称：`ptool.git.Repo:push`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:430
 msgid "`repo:push([remote[, refspecs[, options]]])` pushes refs to a remote."
-msgstr ""
+msgstr "`repo:push([remote[, refspecs[, options]]])` 将引用推送到远端。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:432
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:432"
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:434
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:434"
 msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
-msgstr ""
+msgstr "`remote`（string，可选）：远端名称。默认值为 `\"origin\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:435
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:435"
 msgid ""
 "`refspecs` (string|string[], optional): One refspec or an array of refspecs."
-msgstr ""
+msgstr "`refspecs`（string|string[]，可选）：单个 refspec 或 refspec 数组。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:436
 msgid "`options` (table, optional): Push options. Supported fields:"
-msgstr ""
+msgstr "`options`（table，可选）：push 选项。支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:436
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:436"
 msgid ""
 "`auth` (table, optional): Remote authentication settings. Uses the same "
 "structure as `ptool.git.clone(...)`."
-msgstr ""
+msgstr "`auth`（table，可选）：远端认证设置。结构与 `ptool.git.clone(...)` 相同。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:440
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:440"
 msgid "Behavior:"
-msgstr ""
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:442
 msgid ""
 "When `refspecs` is omitted, `ptool` tries to push the current local branch "
 "to the branch of the same name on the remote."
-msgstr ""
+msgstr "省略 `refspecs` 时，`ptool` 会尝试把当前本地分支推送到远端同名分支。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:444
 msgid "Omitting `refspecs` while HEAD is detached raises an error."
-msgstr ""
+msgstr "当 HEAD 处于 detached 状态时省略 `refspecs` 会报错。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:446
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:446"
 msgid "Example:"
-msgstr ""
+msgstr "示例："

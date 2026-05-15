@@ -1,25 +1,25 @@
 # Git API
 
-Git repository helpers are available under `ptool.git` and `p.git`.
+Git リポジトリ ヘルパーは、`ptool.git` および `p.git` で利用できます。
 
-This module is backed by `git2` / `libgit2`, not by invoking the `git` command-line tool.
+このモジュールは、`git` コマンド ライン ツールの呼び出しではなく、`git2` / `libgit2` によってサポートされます。
 
 ## ptool.git.open
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-`ptool.git.open(path?)` opens a repository directly and returns a `Repo` object.
+`ptool.git.open(path?)` はリポジトリを直接開き、`Repo` オブジェクトを返します。
 
-Arguments:
+引数:
 
-- `path` (string, optional): Repository path. If omitted, the current `ptool` runtime directory is used.
+- `path` (文字列、オプション): リポジトリのパス。省略した場合、現在の `ptool` ランタイム ディレクトリが使用されます。
 
-Behavior:
+挙動:
 
-- Relative paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- This does not search parent directories. Use `ptool.git.discover(...)` when you want repository discovery behavior.
+- 相対パスは現在の `ptool` ランタイム ディレクトリから解決されるため、`ptool.cd(...)` の後に続きます。
+- これは親ディレクトリを検索しません。リポジトリ検出動作が必要な場合は、`ptool.git.discover(...)` を使用します。
 
-Example:
+例:
 
 ```lua
 local repo = ptool.git.open(".")
@@ -28,20 +28,20 @@ print(repo:path())
 
 ## ptool.git.discover
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-`ptool.git.discover(path?)` finds a repository starting from `path` and walking up parent directories, then returns a `Repo` object.
+`ptool.git.discover(path?)` は、`path` から開始して親ディレクトリをたどってリポジトリを検索し、`Repo` オブジェクトを返します。
 
-Arguments:
+引数:
 
-- `path` (string, optional): Starting path. If omitted, the current `ptool` runtime directory is used.
+- `path` (文字列、オプション): 開始パス。省略した場合、現在の `ptool` ランタイム ディレクトリが使用されます。
 
-Behavior:
+挙動:
 
-- Relative paths are resolved from the current `ptool` runtime directory.
-- This is useful when a script may run from a subdirectory inside a worktree.
+- 相対パスは現在の `ptool` ランタイムディレクトリから解決されます。
+- これは、スクリプトがワークツリー内のサブディレクトリから実行される可能性がある場合に便利です。
 
-Example:
+例:
 
 ```lua
 local repo = ptool.git.discover("src")
@@ -50,35 +50,35 @@ print(repo:root())
 
 ## ptool.git.clone
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-`ptool.git.clone(url, path[, options])` clones a repository and returns a `Repo` object for the cloned repository.
+`ptool.git.clone(url, path[, options])` はリポジトリのクローンを作成し、クローンされたリポジトリの `Repo` オブジェクトを返します。
 
-Arguments:
+引数:
 
-- `url` (string, required): Remote repository URL.
-- `path` (string, required): Destination path.
-- `options` (table, optional): Clone options. Supported fields:
-  - `branch` (string, optional): Branch name to check out after cloning.
-  - `bare` (boolean, optional): Whether to create a bare repository. Defaults to `false`.
-  - `auth` (table, optional): Remote authentication settings.
+- `url` (文字列、必須): リモート リポジトリ URL。
+- `path` (文字列、必須): 宛先パス。
+- `options` (テーブル、オプション): クローン オプション。サポートされているフィールド:
+  - `branch` (文字列、オプション): クローン作成後にチェックアウトするブランチ名。
+  - `bare` (ブール値、オプション): ベア リポジトリを作成するかどうか。デフォルトは`false`です。
+  - `auth` (テーブル、オプション): リモート認証設定。
 
-`auth` fields:
+`auth` のフィールド:
 
-- `kind` (string, required): Authentication mode. Supported values:
-  - `"default"`: Use libgit2 default credentials.
-  - `"ssh_agent"`: Authenticate through the local SSH agent.
-  - `"userpass"`: Use a plaintext username and password.
-- `username` (string, optional): Username for `"ssh_agent"`.
-- `username` (string, required): Username for `"userpass"`.
-- `password` (string, required): Password for `"userpass"`.
+- `kind` (文字列、必須): 認証モード。サポートされている値:
+  - `"default"`: libgit2 のデフォルトの資格情報を使用します。
+  - `"ssh_agent"`: ローカル SSH エージェントを通じて認証します。
+  - `"userpass"`: プレーンテキストのユーザー名とパスワードを使用します。
+- `username` (文字列、オプション): `"ssh_agent"` のユーザー名。
+- `username` (文字列、必須): `"userpass"` のユーザー名。
+- `password` (文字列、必須): `"userpass"` のパスワード。
 
-Behavior:
+挙動:
 
-- Relative destination paths are resolved from the current `ptool` runtime directory.
-- Authentication options are also used by `repo:fetch(...)` and `repo:push(...)`.
+- 相対宛先パスは、現在の `ptool` ランタイム ディレクトリから解決されます。
+- 認証オプションは、`repo:fetch(...)` および `repo:push(...)` でも使用されます。
 
-Example:
+例:
 
 ```lua
 local repo = ptool.git.clone(
@@ -97,13 +97,13 @@ print(repo:root())
 
 ## Repo
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-`Repo` represents an open Git repository handle returned by `ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`.
+`Repo` は、`ptool.git.open()`、`ptool.git.discover()`、または `ptool.git.clone()` によって返される、開いている Git リポジトリ ハンドルを表します。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
-Methods:
+メソッド:
 
 - `repo:path()` -> `string`
 - `repo:root()` -> `string|nil`
@@ -121,57 +121,57 @@ Methods:
 
 ### path
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:path`.
+正規 API 名: `ptool.git.Repo:path`。
 
-`repo:path()` returns the repository git directory path.
+`repo:path()` は、リポジトリの git ディレクトリ パスを返します。
 
-- Returns: `string`.
+- 戻り値: `string`。
 
-Notes:
+注意:
 
-- For a non-bare repository this is typically the `.git` directory.
-- For a bare repository this is the repository directory itself.
+- 非ベア リポジトリの場合、これは通常、`.git` ディレクトリです。
+- ベア リポジトリの場合、これはリポジトリ ディレクトリ自体です。
 
 ### root
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:root`.
+正規 API 名: `ptool.git.Repo:root`。
 
-`repo:root()` returns the worktree root directory.
+`repo:root()` は、ワークツリーのルート ディレクトリを返します。
 
-- Returns: `string|nil`.
+- 戻り値: `string|nil`。
 
-Notes:
+注意:
 
-- This returns `nil` for bare repositories.
+- これにより、ベア リポジトリの場合は `nil` が返されます。
 
 ### is_bare
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:is_bare`.
+正規 API 名: `ptool.git.Repo:is_bare`。
 
-`repo:is_bare()` reports whether the repository is bare.
+`repo:is_bare()` は、リポジトリがベアかどうかを報告します。
 
-- Returns: `boolean`.
+- 戻り値: `boolean`。
 
 ### head
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:head`.
+正規 API 名: `ptool.git.Repo:head`。
 
-`repo:head()` returns HEAD information as a table with:
+`repo:head()` は、HEAD 情報を以下のテーブルとして返します。
 
-- `oid` (string|nil): The current commit OID if available.
-- `shorthand` (string|nil): A short name for HEAD, such as a branch name.
-- `detached` (boolean): Whether HEAD is detached.
-- `unborn` (boolean): Whether the repository does not yet have an initial commit.
+- `oid` (文字列|nil): 現在のコミット OID (使用可能な場合)。
+- `shorthand` (文字列|nil): ブランチ名などの HEAD の短縮名。
+- `detached` (ブール値): HEAD が切り離されているかどうか。
+- `unborn` (ブール値): リポジトリに初期コミットがまだ存在しないかどうか。
 
-Example:
+例:
 
 ```lua
 local head = repo:head()
@@ -181,51 +181,51 @@ print(head.detached)
 
 ### current_branch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:current_branch`.
+正規 API 名: `ptool.git.Repo:current_branch`。
 
-`repo:current_branch()` returns the current local branch name.
+`repo:current_branch()` は、現在のローカル ブランチ名を返します。
 
-- Returns: `string|nil`.
+- 戻り値: `string|nil`。
 
-Notes:
+注意:
 
-- This returns `nil` when HEAD is detached.
-- This also returns `nil` for an unborn branch before the first commit.
+- HEAD が切り離された場合、これは `nil` を返します。
+- これは、最初のコミット前の unborn ブランチでも `nil` を返します。
 
 ### status
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:status`.
+正規 API 名: `ptool.git.Repo:status`。
 
-`repo:status([options])` summarizes repository status and returns a table with:
+`repo:status([options])` はリポジトリのステータスを要約し、以下を含むテーブルを返します。
 
-- `root` (string|nil): The worktree root directory.
-- `branch` (string|nil): The current local branch name.
-- `head` (table): The same HEAD information returned by `repo:head()`.
-- `upstream` (string|nil): The upstream branch name, when configured.
-- `ahead` (integer): Number of commits ahead of upstream.
-- `behind` (integer): Number of commits behind upstream.
-- `clean` (boolean): Whether the repository has no visible status entries.
-- `entries` (table): An array of status entry tables.
+- `root` (文字列|nil): ワークツリーのルート ディレクトリ。
+- `branch` (文字列|nil): 現在のローカル ブランチ名。
+- `head` (テーブル): `repo:head()` によって返される同じ HEAD 情報。
+- `upstream` (文字列|nil): 構成された場合の上流ブランチ名。
+- `ahead` (整数): アップストリームよりも先にあるコミットの数。
+- `behind` (整数): アップストリームの背後にあるコミットの数。
+- `clean` (ブール値): リポジトリに表示可能なステータス エントリがないかどうか。
+- `entries` (テーブル): ステータスエントリテーブルの配列。
 
-`entries[i]` contains:
+`entries[i]` には以下が含まれます:
 
-- `path` (string): Repository-relative path.
-- `index_status` (string|nil): Index-side status. Supported values currently include `"new"`, `"modified"`, `"deleted"`, `"renamed"`, and `"typechange"`.
-- `worktree_status` (string|nil): Worktree-side status. Supported values currently include `"new"`, `"modified"`, `"deleted"`, `"renamed"`, `"typechange"`, and `"ignored"`.
-- `conflicted` (boolean): Whether the path is conflicted.
-- `ignored` (boolean): Whether the path is ignored.
+- `path` (文字列): リポジトリの相対パス。
+- `index_status` (文字列|nil): インデックス側のステータス。現在サポートされている値には、`"new"`、`"modified"`、`"deleted"`、`"renamed"`、`"typechange"` があります。
+- `worktree_status` (文字列|nil): ワークツリー側のステータス。現在サポートされている値には、`"new"`、`"modified"`、`"deleted"`、`"renamed"`、`"typechange"`、`"ignored"` があります。
+- `conflicted` (ブール値): パスが競合しているかどうか。
+- `ignored` (ブール値): パスが無視されるかどうか。
 
-`options` fields:
+`options` のフィールド:
 
-- `include_untracked` (boolean, optional): Whether to include untracked files. Defaults to `true`.
-- `include_ignored` (boolean, optional): Whether to include ignored files. Defaults to `false`.
-- `recurse_untracked_dirs` (boolean, optional): Whether to recurse into untracked directories. Defaults to `true`.
+- `include_untracked` (ブール値、オプション): 追跡されていないファイルを含めるかどうか。デフォルトは`true`です。
+- `include_ignored` (ブール値、オプション): 無視されたファイルを含めるかどうか。デフォルトは`false`です。
+- `recurse_untracked_dirs` (ブール値、オプション): 追跡されていないディレクトリを再帰するかどうか。デフォルトは`true`です。
 
-Example:
+例:
 
 ```lua
 local st = repo:status()
@@ -239,34 +239,34 @@ end
 
 ### is_clean
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:is_clean`.
+正規 API 名: `ptool.git.Repo:is_clean`。
 
-`repo:is_clean([options])` returns whether the repository is clean.
+`repo:is_clean([options])` は、リポジトリがクリーンかどうかを返します。
 
-- `options` (table, optional): The same options accepted by `repo:status(...)`.
-- Returns: `boolean`.
+- `options` (テーブル、オプション): `repo:status(...)` で受け入れられるのと同じオプション。
+- 戻り値: `boolean`。
 
 ### add
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:add`.
+正規 API 名: `ptool.git.Repo:add`。
 
-`repo:add(paths[, options])` stages one or more paths in the index.
+`repo:add(paths[, options])` は、インデックス内の 1 つ以上のパスをステージングします。
 
-Arguments:
+引数:
 
-- `paths` (string|string[], required): A path or an array of paths.
-- `options` (table, optional): Add options. Supported fields:
-  - `update` (boolean, optional): Update only paths already known to the index. Defaults to `false`.
+- `paths` (文字列|文字列[]、必須): パスまたはパスの配列。
+- `options` (テーブル、オプション): 追加オプション。サポートされているフィールド:
+  - `update` (ブール値、オプション): インデックスにすでに認識されているパスのみを更新します。デフォルトは`false`です。
 
-Behavior:
+挙動:
 
-- Paths are interpreted relative to the repository worktree.
+- パスはリポジトリ ワークツリーに対して相対的に解釈されます。
 
-Example:
+例:
 
 ```lua
 repo:add("README.md")
@@ -275,30 +275,30 @@ repo:add({"src", "Cargo.toml"})
 
 ### commit
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:commit`.
+正規 API 名: `ptool.git.Repo:commit`。
 
-`repo:commit(message[, options])` creates a commit from the current index and returns the new commit OID.
+`repo:commit(message[, options])` は、現在のインデックスからコミットを作成し、新しいコミット OID を返します。
 
-Arguments:
+引数:
 
-- `message` (string, required): Commit message.
-- `options` (table, optional): Commit options. Supported fields:
-  - `author` (table, optional): Author signature.
-  - `committer` (table, optional): Committer signature.
+- `message` (文字列、必須): コミットメッセージ。
+- `options` (テーブル、オプション): コミットオプション。サポートされているフィールド:
+  - `author` (テーブル、オプション): 著者の署名。
+  - `committer` (テーブル、オプション): コミッターの署名。
 
-Signature fields:
+署名フィールド:
 
-- `name` (string, required)
-- `email` (string, required)
+- `name` (文字列、必須)
+- `email` (文字列、必須)
 
-Behavior:
+挙動:
 
-- When `author` and `committer` are omitted, `ptool` tries to use the Git repository identity from configuration.
-- If no identity is configured and no explicit signature is provided, an error is raised.
+- `author` と `committer` が省略された場合、`ptool` は構成からの Git リポジトリ ID の使用を試みます。
+- ID が構成されておらず、明示的な署名も提供されていない場合は、エラーが発生します。
 
-Example:
+例:
 
 ```lua
 local oid = repo:commit("Release v0.7.0", {
@@ -311,41 +311,41 @@ local oid = repo:commit("Release v0.7.0", {
 print(oid)
 ```
 
-### checkout
+### チェックアウト
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:checkout`.
+正規 API 名: `ptool.git.Repo:checkout`。
 
-`repo:checkout(rev[, options])` checks out a revision.
+`repo:checkout(rev[, options])` はリビジョンをチェックアウトします。
 
-Arguments:
+引数:
 
-- `rev` (string, required): Revision expression such as a branch name, tag name, or commit OID.
-- `options` (table, optional): Checkout options. Supported fields:
-  - `force` (boolean, optional): Whether to force checkout. Defaults to `false`.
+- `rev` (文字列、必須): ブランチ名、タグ名、コミット OID などのリビジョン式。
+- `options` (テーブル、オプション): チェックアウト オプション。サポートされているフィールド:
+  - `force` (ブール値、オプション): チェックアウトを強制するかどうか。デフォルトは`false`です。
 
-Behavior:
+挙動:
 
-- This can detach HEAD when `rev` does not resolve to a named reference.
+- これにより、`rev` が名前付き参照に解決されない場合に HEAD が切り離される可能性があります。
 
 ### switch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:switch`.
+正規 API 名: `ptool.git.Repo:switch`。
 
-`repo:switch(branch[, options])` switches HEAD to a local branch.
+`repo:switch(branch[, options])` は HEAD をローカル ブランチに切り替えます。
 
-Arguments:
+引数:
 
-- `branch` (string, required): Local branch name.
-- `options` (table, optional): Switch options. Supported fields:
-  - `create` (boolean, optional): Whether to create the branch first. Defaults to `false`.
-  - `force` (boolean, optional): Whether to force the checkout. Defaults to `false`.
-  - `start_point` (string, optional): Revision to branch from when `create = true`. Defaults to `HEAD`.
+- `branch` (文字列、必須): ローカルブランチ名。
+- `options` (テーブル、オプション): Switch オプション。サポートされているフィールド:
+  - `create` (ブール値、オプション): ブランチを最初に作成するかどうか。デフォルトは`false`です。
+  - `force` (ブール値、オプション): チェックアウトを強制するかどうか。デフォルトは`false`です。
+  - `start_point` (文字列、オプション): `create = true` の時点から分岐するリビジョン。デフォルトは`HEAD`です。
 
-Example:
+例:
 
 ```lua
 repo:switch("release")
@@ -357,28 +357,28 @@ repo:switch("release-next", {
 
 ### fetch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:fetch`.
+正規 API 名: `ptool.git.Repo:fetch`。
 
-`repo:fetch([remote[, options]])` fetches from a remote and returns transfer statistics.
+`repo:fetch([remote[, options]])` はリモートからフェッチし、転送統計を返します。
 
-Arguments:
+引数:
 
-- `remote` (string, optional): Remote name. Defaults to `"origin"`.
-- `options` (table, optional): Fetch options. Supported fields:
-  - `refspecs` (string|string[], optional): One refspec or an array of refspecs.
-  - `auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`.
+- `remote` (文字列、オプション): リモート名。デフォルトは`"origin"`です。
+- `options` (テーブル、オプション): Fetch オプション。サポートされているフィールド:
+  - `refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。
+  - `auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。
 
-Returns:
+戻り値:
 
-- `received_objects` (integer)
-- `indexed_objects` (integer)
-- `local_objects` (integer)
-- `total_objects` (integer)
-- `received_bytes` (integer)
+- `received_objects` (整数)
+- `indexed_objects` (整数)
+- `local_objects` (整数)
+- `total_objects` (整数)
+- `received_bytes` (整数)
 
-Example:
+例:
 
 ```lua
 local stats = repo:fetch("origin", {
@@ -392,25 +392,25 @@ print(stats.received_objects, stats.received_bytes)
 
 ### push
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 導入されました。
 
-Canonical API name: `ptool.git.Repo:push`.
+正規 API 名: `ptool.git.Repo:push`。
 
-`repo:push([remote[, refspecs[, options]]])` pushes refs to a remote.
+`repo:push([remote[, refspecs[, options]]])` は refs をリモートにプッシュします。
 
-Arguments:
+引数:
 
-- `remote` (string, optional): Remote name. Defaults to `"origin"`.
-- `refspecs` (string|string[], optional): One refspec or an array of refspecs.
-- `options` (table, optional): Push options. Supported fields:
-  - `auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`.
+- `remote` (文字列、オプション): リモート名。デフォルトは`"origin"`です。
+- `refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。
+- `options` (テーブル、オプション): Push オプション。サポートされているフィールド:
+  - `auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。
 
-Behavior:
+挙動:
 
-- When `refspecs` is omitted, `ptool` tries to push the current local branch to the branch of the same name on the remote.
-- Omitting `refspecs` while HEAD is detached raises an error.
+- `refspecs` が省略された場合、`ptool` は現在のローカル ブランチをリモート上の同じ名前のブランチにプッシュしようとします。
+- HEAD が切り離されているときに `refspecs` を省略すると、エラーが発生します。
 
-Example:
+例:
 
 ```lua
 repo:push("origin", nil, {

@@ -1,50 +1,50 @@
-# Getting Started
+# Primeiros passos
 
-`ptool` runs Lua scripts and injects a standard library for practical automation.
+`ptool` executa scripts Lua e injeta uma biblioteca padrão voltada para automação prática.
 
-The main entrypoint today is:
+Hoje, o ponto de entrada principal é:
 
 ```sh
 ptool run <file>
 ```
 
-For `.lua` files, you can also use the shortcut form:
+Para arquivos `.lua`, você também pode usar a forma abreviada:
 
 ```sh
 ptool <file.lua>
 ```
 
-For interactive exploration, `ptool` also provides:
+Para exploração interativa, `ptool` também oferece:
 
 ```sh
 ptool repl
 ```
 
-When a script runs, `ptool` exposes its API through the global `ptool` table and the shorter alias `p`.
+Quando um script é executado, `ptool` expõe sua API por meio da tabela global `ptool` e do alias curto `p`.
 
-## Install
+## Instalação
 
-On Linux and macOS, install `ptool` with the release installer:
+No Linux e no macOS, instale o `ptool` com o instalador de releases:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash
 ```
 
-The installer downloads the latest prebuilt release for the current platform, installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed.
+O instalador baixa a release pré-compilada mais recente para a plataforma atual, instala o `ptool` em `~/.local/bin/ptool` e mostra uma dica de PATH se necessário.
 
-To install a specific release tag instead of the latest stable release:
+Para instalar uma tag de release específica em vez da versão estável mais recente:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
 ```
 
-To install into a custom binary directory instead of `~/.local/bin`:
+Para instalar em um diretório de binários personalizado em vez de `~/.local/bin`:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
 ```
 
-## Minimal script
+## Script mínimo
 
 ```lua
 ptool.use("v0.1.0")
@@ -52,46 +52,46 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` declares the minimum required `ptool` version for the script. This keeps scripts explicit about the API version they expect and fails early on older runtimes. See [Core Lua API](./lua-api/core.md) for details.
+`ptool.use(...)` declara a versão mínima de `ptool` exigida pelo script. Isso deixa explícita a versão da API esperada pelo script e falha cedo em runtimes mais antigos. Veja [API principal de Lua](./lua-api/core.md) para detalhes.
 
-Run it with:
+Execute com:
 
 ```sh
 ptool run script.lua
 ptool script.lua
 ```
 
-## Passing arguments
+## Passando argumentos
 
-You can pass extra CLI arguments after the script path:
+Você pode passar argumentos extras de CLI após o caminho do script:
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
 ptool script.lua --name alice -v a.txt b.txt
 ```
 
-Parse them inside the script with `ptool.args.parse(...)`.
+Depois, faça o parse deles dentro do script com `ptool.args.parse(...)`.
 
-## Shebang scripts
+## Scripts com shebang
 
-`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can start with:
+`ptool` oferece suporte a arquivos com shebang. Com a forma abreviada para `.lua`, um script pode começar com:
 
 ```text
 #!/usr/bin/env ptool
 ```
 
-This lets you execute the script directly once it has the executable bit.
+Isso permite executar o script diretamente depois que ele tiver o bit de execução.
 
-## What you get
+## O que você recebe
 
-- A script runner that understands shebang files.
-- An interactive REPL for trying Lua expressions and `ptool` APIs directly.
-- Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, HTTP, SSH, databases, and templates.
-- CLI-oriented helpers for running commands, parsing arguments, and asking for interactive input.
+- Um executor de scripts que entende arquivos com shebang.
+- Um REPL interativo para testar expressões Lua e APIs do `ptool` diretamente.
+- Auxiliares Lua para semver, data e hora, caminhos, arquivos, TOML, regexes, strings, HTTP, SSH, bancos de dados e modelos.
+- Utilitários voltados para CLI para executar comandos, fazer parse de argumentos e solicitar entrada interativa.
 
-## Next steps
+## Próximos passos
 
-- Open [REPL](./repl.md) for interactive usage, multi-line input, and keyboard behavior.
-- Use [Lua API Overview](./lua-api/index.md) to browse the core APIs and available modules.
-- Start with [Core Lua API](./lua-api/core.md) for version gating, process execution, config, and script lifecycle helpers.
-- Open a module page such as [Args API](./lua-api/args.md) when you need the detailed reference for a specific feature set.
+- Abra [REPL](./repl.md) para ver uso interativo, entrada multilinha e comportamento do teclado.
+- Use [Visão geral da API de Lua](./lua-api/index.md) para navegar pelas APIs principais e pelos módulos disponíveis.
+- Comece por [API principal de Lua](./lua-api/core.md) para entender controle de versão, execução de processos, configuração e utilitários de ciclo de vida do script.
+- Abra uma página de módulo como [API de argumentos](./lua-api/args.md) quando precisar da referência detalhada de um conjunto específico de recursos.

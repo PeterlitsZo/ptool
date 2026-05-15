@@ -1,25 +1,25 @@
 # Git API
 
-Git repository helpers are available under `ptool.git` and `p.git`.
+Git 仓库辅助能力位于 `ptool.git` 和 `p.git` 下。
 
-This module is backed by `git2` / `libgit2`, not by invoking the `git` command-line tool.
+这个模块基于 `git2` / `libgit2`，而不是通过调用 `git` 命令行工具实现。
 
 ## ptool.git.open
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-`ptool.git.open(path?)` opens a repository directly and returns a `Repo` object.
+`ptool.git.open(path?)` 直接打开一个仓库，并返回 `Repo` 对象。
 
-Arguments:
+参数：
 
-- `path` (string, optional): Repository path. If omitted, the current `ptool` runtime directory is used.
+- `path`（string，可选）：仓库路径。省略时使用当前 `ptool` 运行时目录。
 
-Behavior:
+行为说明：
 
-- Relative paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- This does not search parent directories. Use `ptool.git.discover(...)` when you want repository discovery behavior.
+- 相对路径会从当前 `ptool` 运行时目录解析，因此会跟随 `ptool.cd(...)`。
+- 这个 API 不会向父目录继续搜索仓库。如果你需要仓库发现行为，请使用 `ptool.git.discover(...)`。
 
-Example:
+示例：
 
 ```lua
 local repo = ptool.git.open(".")
@@ -28,20 +28,20 @@ print(repo:path())
 
 ## ptool.git.discover
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-`ptool.git.discover(path?)` finds a repository starting from `path` and walking up parent directories, then returns a `Repo` object.
+`ptool.git.discover(path?)` 从 `path` 开始向上遍历父目录查找仓库，然后返回一个 `Repo` 对象。
 
-Arguments:
+参数：
 
-- `path` (string, optional): Starting path. If omitted, the current `ptool` runtime directory is used.
+- `path`（string，可选）：起始路径。省略时使用当前 `ptool` 运行时目录。
 
-Behavior:
+行为说明：
 
-- Relative paths are resolved from the current `ptool` runtime directory.
-- This is useful when a script may run from a subdirectory inside a worktree.
+- 相对路径会从当前 `ptool` 运行时目录解析。
+- 当脚本可能在 worktree 的某个子目录中运行时，这个 API 很有用。
 
-Example:
+示例：
 
 ```lua
 local repo = ptool.git.discover("src")
@@ -50,35 +50,35 @@ print(repo:root())
 
 ## ptool.git.clone
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-`ptool.git.clone(url, path[, options])` clones a repository and returns a `Repo` object for the cloned repository.
+`ptool.git.clone(url, path[, options])` 克隆一个仓库，并返回该克隆仓库对应的 `Repo` 对象。
 
-Arguments:
+参数：
 
-- `url` (string, required): Remote repository URL.
-- `path` (string, required): Destination path.
-- `options` (table, optional): Clone options. Supported fields:
-  - `branch` (string, optional): Branch name to check out after cloning.
-  - `bare` (boolean, optional): Whether to create a bare repository. Defaults to `false`.
-  - `auth` (table, optional): Remote authentication settings.
+- `url`（string，必填）：远端仓库 URL。
+- `path`（string，必填）：目标路径。
+- `options`（table，可选）：克隆选项。支持的字段：
+  - `branch`（string，可选）：克隆完成后要检出的分支名。
+  - `bare`（boolean，可选）：是否创建裸仓库。默认值为 `false`。
+  - `auth`（table，可选）：远端认证设置。
 
-`auth` fields:
+`auth` 字段：
 
-- `kind` (string, required): Authentication mode. Supported values:
-  - `"default"`: Use libgit2 default credentials.
-  - `"ssh_agent"`: Authenticate through the local SSH agent.
-  - `"userpass"`: Use a plaintext username and password.
-- `username` (string, optional): Username for `"ssh_agent"`.
-- `username` (string, required): Username for `"userpass"`.
-- `password` (string, required): Password for `"userpass"`.
+- `kind`（string，必填）：认证模式。支持的值：
+  - `"default"`: 使用 libgit2 的默认凭据。
+  - `"ssh_agent"`: 通过本地 SSH agent 进行认证。
+  - `"userpass"`: 使用明文用户名和密码。
+- `username`（string，可选）：用于 `"ssh_agent"` 的用户名。
+- `username`（string，必填）：用于 `"userpass"` 的用户名。
+- `password`（string，必填）：用于 `"userpass"` 的密码。
 
-Behavior:
+行为说明：
 
-- Relative destination paths are resolved from the current `ptool` runtime directory.
-- Authentication options are also used by `repo:fetch(...)` and `repo:push(...)`.
+- 相对目标路径会从当前 `ptool` 运行时目录解析。
+- 认证选项同样会被 `repo:fetch(...)` 和 `repo:push(...)` 使用。
 
-Example:
+示例：
 
 ```lua
 local repo = ptool.git.clone(
@@ -97,13 +97,13 @@ print(repo:root())
 
 ## Repo
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-`Repo` represents an open Git repository handle returned by `ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`.
+`Repo` 表示一个打开中的 Git 仓库句柄，由 `ptool.git.open()`、`ptool.git.discover()` 或 `ptool.git.clone()` 返回。
 
-It is implemented as a Lua userdata.
+它实现为 Lua userdata。
 
-Methods:
+方法：
 
 - `repo:path()` -> `string`
 - `repo:root()` -> `string|nil`
@@ -121,57 +121,57 @@ Methods:
 
 ### path
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:path`.
+规范 API 名称：`ptool.git.Repo:path`。
 
-`repo:path()` returns the repository git directory path.
+`repo:path()` 返回仓库的 Git 目录路径。
 
-- Returns: `string`.
+- 返回：`string`。
 
-Notes:
+说明：
 
-- For a non-bare repository this is typically the `.git` directory.
-- For a bare repository this is the repository directory itself.
+- 对于非裸仓库，这通常是 `.git` 目录。
+- 对于裸仓库，这就是仓库目录本身。
 
 ### root
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:root`.
+规范 API 名称：`ptool.git.Repo:root`。
 
-`repo:root()` returns the worktree root directory.
+`repo:root()` 返回 worktree 的根目录。
 
-- Returns: `string|nil`.
+- 返回：`string|nil`。
 
-Notes:
+说明：
 
-- This returns `nil` for bare repositories.
+- 对于裸仓库，这里会返回 `nil`。
 
 ### is_bare
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:is_bare`.
+规范 API 名称：`ptool.git.Repo:is_bare`。
 
-`repo:is_bare()` reports whether the repository is bare.
+`repo:is_bare()` 用来报告该仓库是否为裸仓库。
 
-- Returns: `boolean`.
+- 返回：`boolean`。
 
 ### head
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:head`.
+规范 API 名称：`ptool.git.Repo:head`。
 
-`repo:head()` returns HEAD information as a table with:
+`repo:head()` 以 table 形式返回 HEAD 信息，包含：
 
-- `oid` (string|nil): The current commit OID if available.
-- `shorthand` (string|nil): A short name for HEAD, such as a branch name.
-- `detached` (boolean): Whether HEAD is detached.
-- `unborn` (boolean): Whether the repository does not yet have an initial commit.
+- `oid`（string|nil）：当前提交的 OID；如果不可用则为 `nil`。
+- `shorthand`（string|nil）：HEAD 的简写名称，例如分支名。
+- `detached`（boolean）：HEAD 是否处于 detached 状态。
+- `unborn`（boolean）：仓库是否还没有初始提交。
 
-Example:
+示例：
 
 ```lua
 local head = repo:head()
@@ -181,51 +181,51 @@ print(head.detached)
 
 ### current_branch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:current_branch`.
+规范 API 名称：`ptool.git.Repo:current_branch`。
 
-`repo:current_branch()` returns the current local branch name.
+`repo:current_branch()` 返回当前本地分支名。
 
-- Returns: `string|nil`.
+- 返回：`string|nil`。
 
-Notes:
+说明：
 
-- This returns `nil` when HEAD is detached.
-- This also returns `nil` for an unborn branch before the first commit.
+- 当 HEAD 处于 detached 状态时，这里会返回 `nil`。
+- 对于首次提交之前的 unborn branch，这里同样会返回 `nil`。
 
 ### status
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:status`.
+规范 API 名称：`ptool.git.Repo:status`。
 
-`repo:status([options])` summarizes repository status and returns a table with:
+`repo:status([options])` 汇总仓库状态，并返回一个包含以下内容的 table：
 
-- `root` (string|nil): The worktree root directory.
-- `branch` (string|nil): The current local branch name.
-- `head` (table): The same HEAD information returned by `repo:head()`.
-- `upstream` (string|nil): The upstream branch name, when configured.
-- `ahead` (integer): Number of commits ahead of upstream.
-- `behind` (integer): Number of commits behind upstream.
-- `clean` (boolean): Whether the repository has no visible status entries.
-- `entries` (table): An array of status entry tables.
+- `root`（string|nil）：worktree 根目录。
+- `branch`（string|nil）：当前本地分支名。
+- `head`（table）：与 `repo:head()` 返回的 HEAD 信息相同。
+- `upstream`（string|nil）：上游分支名；仅在已配置时提供。
+- `ahead`（integer）：领先上游的提交数。
+- `behind`（integer）：落后上游的提交数。
+- `clean`（boolean）：仓库是否没有可见的状态项。
+- `entries`（table）：状态条目 table 的数组。
 
-`entries[i]` contains:
+`entries[i]` 包含：
 
-- `path` (string): Repository-relative path.
-- `index_status` (string|nil): Index-side status. Supported values currently include `"new"`, `"modified"`, `"deleted"`, `"renamed"`, and `"typechange"`.
-- `worktree_status` (string|nil): Worktree-side status. Supported values currently include `"new"`, `"modified"`, `"deleted"`, `"renamed"`, `"typechange"`, and `"ignored"`.
-- `conflicted` (boolean): Whether the path is conflicted.
-- `ignored` (boolean): Whether the path is ignored.
+- `path`（string）：相对于仓库的路径。
+- `index_status`（string|nil）：index 侧状态。当前支持的值包括 `"new"`、`"modified"`、`"deleted"`、`"renamed"` 和 `"typechange"`。
+- `worktree_status`（string|nil）：worktree 侧状态。当前支持的值包括 `"new"`、`"modified"`、`"deleted"`、`"renamed"`、`"typechange"` 和 `"ignored"`。
+- `conflicted`（boolean）：该路径是否存在冲突。
+- `ignored`（boolean）：该路径是否被忽略。
 
-`options` fields:
+`options` 字段：
 
-- `include_untracked` (boolean, optional): Whether to include untracked files. Defaults to `true`.
-- `include_ignored` (boolean, optional): Whether to include ignored files. Defaults to `false`.
-- `recurse_untracked_dirs` (boolean, optional): Whether to recurse into untracked directories. Defaults to `true`.
+- `include_untracked`（boolean，可选）：是否包含未跟踪文件。默认值为 `true`。
+- `include_ignored`（boolean，可选）：是否包含已忽略文件。默认值为 `false`。
+- `recurse_untracked_dirs`（boolean，可选）：是否递归进入未跟踪目录。默认值为 `true`。
 
-Example:
+示例：
 
 ```lua
 local st = repo:status()
@@ -239,34 +239,34 @@ end
 
 ### is_clean
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:is_clean`.
+规范 API 名称：`ptool.git.Repo:is_clean`。
 
-`repo:is_clean([options])` returns whether the repository is clean.
+`repo:is_clean([options])` 返回仓库是否干净。
 
-- `options` (table, optional): The same options accepted by `repo:status(...)`.
-- Returns: `boolean`.
+- `options`（table，可选）：与 `repo:status(...)` 接受的选项相同。
+- 返回：`boolean`。
 
 ### add
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:add`.
+规范 API 名称：`ptool.git.Repo:add`。
 
-`repo:add(paths[, options])` stages one or more paths in the index.
+`repo:add(paths[, options])` 将一个或多个路径加入 index 暂存区。
 
-Arguments:
+参数：
 
-- `paths` (string|string[], required): A path or an array of paths.
-- `options` (table, optional): Add options. Supported fields:
-  - `update` (boolean, optional): Update only paths already known to the index. Defaults to `false`.
+- `paths`（string|string[]，必填）：单个路径或路径数组。
+- `options`（table，可选）：add 选项。支持的字段：
+  - `update`（boolean，可选）：只更新 index 中已知的路径。默认值为 `false`。
 
-Behavior:
+行为说明：
 
-- Paths are interpreted relative to the repository worktree.
+- 路径会按仓库 worktree 的相对路径解释。
 
-Example:
+示例：
 
 ```lua
 repo:add("README.md")
@@ -275,30 +275,30 @@ repo:add({"src", "Cargo.toml"})
 
 ### commit
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:commit`.
+规范 API 名称：`ptool.git.Repo:commit`。
 
-`repo:commit(message[, options])` creates a commit from the current index and returns the new commit OID.
+`repo:commit(message[, options])` 根据当前 index 创建提交，并返回新提交的 OID。
 
-Arguments:
+参数：
 
-- `message` (string, required): Commit message.
-- `options` (table, optional): Commit options. Supported fields:
-  - `author` (table, optional): Author signature.
-  - `committer` (table, optional): Committer signature.
+- `message`（string，必填）：提交信息。
+- `options`（table，可选）：commit 选项。支持的字段：
+  - `author`（table，可选）：作者签名。
+  - `committer`（table，可选）：提交者签名。
 
-Signature fields:
+签名字段：
 
 - `name` (string, required)
 - `email` (string, required)
 
-Behavior:
+行为说明：
 
-- When `author` and `committer` are omitted, `ptool` tries to use the Git repository identity from configuration.
-- If no identity is configured and no explicit signature is provided, an error is raised.
+- 当 `author` 和 `committer` 都省略时，`ptool` 会尝试使用 Git 配置中的仓库身份。
+- 如果既没有配置身份，也没有显式提供签名，就会报错。
 
-Example:
+示例：
 
 ```lua
 local oid = repo:commit("Release v0.7.0", {
@@ -313,39 +313,39 @@ print(oid)
 
 ### checkout
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:checkout`.
+规范 API 名称：`ptool.git.Repo:checkout`。
 
-`repo:checkout(rev[, options])` checks out a revision.
+`repo:checkout(rev[, options])` 检出一个修订版本。
 
-Arguments:
+参数：
 
-- `rev` (string, required): Revision expression such as a branch name, tag name, or commit OID.
-- `options` (table, optional): Checkout options. Supported fields:
-  - `force` (boolean, optional): Whether to force checkout. Defaults to `false`.
+- `rev`（string，必填）：修订表达式，例如分支名、标签名或提交 OID。
+- `options`（table，可选）：checkout 选项。支持的字段：
+  - `force`（boolean，可选）：是否强制检出。默认值为 `false`。
 
-Behavior:
+行为说明：
 
-- This can detach HEAD when `rev` does not resolve to a named reference.
+- 当 `rev` 无法解析到具名引用时，这个操作可能会让 HEAD 进入 detached 状态。
 
 ### switch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:switch`.
+规范 API 名称：`ptool.git.Repo:switch`。
 
-`repo:switch(branch[, options])` switches HEAD to a local branch.
+`repo:switch(branch[, options])` 将 HEAD 切换到一个本地分支。
 
-Arguments:
+参数：
 
-- `branch` (string, required): Local branch name.
-- `options` (table, optional): Switch options. Supported fields:
-  - `create` (boolean, optional): Whether to create the branch first. Defaults to `false`.
-  - `force` (boolean, optional): Whether to force the checkout. Defaults to `false`.
-  - `start_point` (string, optional): Revision to branch from when `create = true`. Defaults to `HEAD`.
+- `branch`（string，必填）：本地分支名。
+- `options`（table，可选）：switch 选项。支持的字段：
+  - `create`（boolean，可选）：是否先创建分支。默认值为 `false`。
+  - `force`（boolean，可选）：是否强制检出。默认值为 `false`。
+  - `start_point`（string，可选）：当 `create = true` 时作为建分支起点的修订。默认值为 `HEAD`。
 
-Example:
+示例：
 
 ```lua
 repo:switch("release")
@@ -357,20 +357,20 @@ repo:switch("release-next", {
 
 ### fetch
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:fetch`.
+规范 API 名称：`ptool.git.Repo:fetch`。
 
-`repo:fetch([remote[, options]])` fetches from a remote and returns transfer statistics.
+`repo:fetch([remote[, options]])` 从远端抓取，并返回传输统计信息。
 
-Arguments:
+参数：
 
-- `remote` (string, optional): Remote name. Defaults to `"origin"`.
-- `options` (table, optional): Fetch options. Supported fields:
-  - `refspecs` (string|string[], optional): One refspec or an array of refspecs.
-  - `auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`.
+- `remote`（string，可选）：远端名称。默认值为 `"origin"`。
+- `options`（table，可选）：fetch 选项。支持的字段：
+  - `refspecs`（string|string[]，可选）：单个 refspec 或 refspec 数组。
+  - `auth`（table，可选）：远端认证设置。结构与 `ptool.git.clone(...)` 相同。
 
-Returns:
+返回：
 
 - `received_objects` (integer)
 - `indexed_objects` (integer)
@@ -378,7 +378,7 @@ Returns:
 - `total_objects` (integer)
 - `received_bytes` (integer)
 
-Example:
+示例：
 
 ```lua
 local stats = repo:fetch("origin", {
@@ -392,25 +392,25 @@ print(stats.received_objects, stats.received_bytes)
 
 ### push
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-Canonical API name: `ptool.git.Repo:push`.
+规范 API 名称：`ptool.git.Repo:push`。
 
-`repo:push([remote[, refspecs[, options]]])` pushes refs to a remote.
+`repo:push([remote[, refspecs[, options]]])` 将引用推送到远端。
 
-Arguments:
+参数：
 
-- `remote` (string, optional): Remote name. Defaults to `"origin"`.
-- `refspecs` (string|string[], optional): One refspec or an array of refspecs.
-- `options` (table, optional): Push options. Supported fields:
-  - `auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`.
+- `remote`（string，可选）：远端名称。默认值为 `"origin"`。
+- `refspecs`（string|string[]，可选）：单个 refspec 或 refspec 数组。
+- `options`（table，可选）：push 选项。支持的字段：
+  - `auth`（table，可选）：远端认证设置。结构与 `ptool.git.clone(...)` 相同。
 
-Behavior:
+行为说明：
 
-- When `refspecs` is omitted, `ptool` tries to push the current local branch to the branch of the same name on the remote.
-- Omitting `refspecs` while HEAD is detached raises an error.
+- 省略 `refspecs` 时，`ptool` 会尝试把当前本地分支推送到远端同名分支。
+- 当 HEAD 处于 detached 状态时省略 `refspecs` 会报错。
 
-Example:
+示例：
 
 ```lua
 repo:push("origin", nil, {

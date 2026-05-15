@@ -454,21 +454,21 @@ res:assert_ok()
 - `args` (string[], opcional): A lista de argumentos.
 - `cwd` (string, opcional): O diretório de trabalho do processo filho.
 - `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
-- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
-- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `stdin` (string, opcional): String enviada ao processo filho stdin. Quando isso é omitido, o processo filho herda o stdin do processo atual.
+- `trim` (booleano, opcional): se deve cortar os espaços em branco iniciais e finais do `stdout` capturado e do `stderr` capturado antes de retorná-los. Isso afeta apenas fluxos definidos como `"capture"`. O padrão é `false`.
 - `echo` (boolean, opcional): Se informações do comando devem ser exibidas para esta execução. Se omitido, é usado o valor de `ptool.config({ run = { echo = ... } })`; se ele também estiver ausente, o padrão é `true`.
 - `check` (boolean, opcional): Se deve gerar erro imediatamente quando o código de saída não é `0`. Se omitido, é usado o valor de `ptool.config({ run = { check = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `confirm` (boolean, opcional): Se deve pedir confirmação ao usuário antes da execução. Se omitido, é usado o valor de `ptool.config({ run = { confirm = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma falha quando `check = true`. Se omitido, é usado o valor de `ptool.config({ run = { retry = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `stdout` (string, opcional): Estratégia de tratamento de stdout. Valores suportados:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: Herda para o terminal atual (padrão).
   - `"capture"`: Captura em `res.stdout`.
-  - `"null"`: Discard the output.
+  - `"null"`: Descarta a saída.
 - `stderr` (string, opcional): Estratégia de tratamento de stderr. Valores suportados:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: Herda para o terminal atual (padrão).
   - `"capture"`: Captura em `res.stderr`.
-  - `"null"`: Discard the output.
-- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning.
+  - `"null"`: Descarta a saída.
+- Quando formulários de chamada de atalho como `ptool.run(cmdline, options)` ou `ptool.run(cmd, args, options)` são usados, a tabela `options` por chamada também aceita `stdin` e `trim` com o mesmo significado.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
@@ -517,7 +517,7 @@ A única diferença é o tratamento padrão de streams:
 - `stdout` tem padrão `"capture"`.
 - `stderr` tem padrão `"capture"`.
 
-`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
+`trim` ainda tem como padrão `false` e você ainda pode substituir qualquer um desses campos explicitamente em `options`.
 
 Exemplo:
 

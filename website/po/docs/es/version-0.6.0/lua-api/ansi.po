@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,40 +14,45 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:1
 msgid "ANSI API"
-msgstr ""
+msgstr "API ANSI"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:3
 msgid "ANSI styling helpers are available under `ptool.ansi` and `p.ansi`."
 msgstr ""
+"Las utilidades de estilo ANSI están disponibles bajo `ptool.ansi` y `p.ansi`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:5
 msgid "ptool.ansi.style"
-msgstr ""
+msgstr "ptool.ansi.style"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:9
 msgid ""
 "`ptool.ansi.style(text[, options])` returns `text` wrapped in ANSI style "
 "escape sequences."
 msgstr ""
+"`ptool.ansi.style(text[, options])` devuelve `text` envuelto con secuencias "
+"de escape de estilo ANSI."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:12
 msgid "`text` (string, required): The text to style."
-msgstr ""
+msgstr "`text` (string, obligatorio): El texto al que se aplicará estilo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid "`options` (table, optional): Style options. Supported fields:"
-msgstr ""
+msgstr "`options` (table, opcional): Opciones de estilo. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid ""
 "`enabled` (boolean, optional): Whether ANSI escapes should be emitted. "
 "Defaults to whether `ptool` is writing to a terminal."
 msgstr ""
+"`enabled` (boolean, opcional): Si deben emitirse escapes ANSI. Por defecto "
+"depende de si `ptool` está escribiendo en un terminal."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid ""
@@ -56,56 +62,63 @@ msgid ""
 "`bright_blue`, `bright_magenta`, `bright_purple`, `bright_cyan`, and "
 "`bright_white`."
 msgstr ""
+"`fg` (string|nil, opcional): El color de primer plano. Los valores admitidos "
+"son `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `purple`, `cyan`, "
+"`white`, `bright_black`, `bright_red`, `bright_green`, `bright_yellow`, "
+"`bright_blue`, `bright_magenta`, `bright_purple`, `bright_cyan` y "
+"`bright_white`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid "`bold` (boolean, optional): Whether to apply bold text."
-msgstr ""
+msgstr "`bold` (boolean, opcional): Si se aplica texto en negrita."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid "`dimmed` (boolean, optional): Whether to apply dimmed text."
-msgstr ""
+msgstr "`dimmed` (boolean, opcional): Si se aplica texto atenuado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid "`italic` (boolean, optional): Whether to apply italic text."
-msgstr ""
+msgstr "`italic` (boolean, opcional): Si se aplica cursiva."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:13
 msgid "`underline` (boolean, optional): Whether to apply underline text."
-msgstr ""
+msgstr "`underline` (boolean, opcional): Si se aplica subrayado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:25
 msgid "Returns: `string`."
-msgstr ""
+msgstr "Devuelve: `string`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:27
 msgid "Behavior:"
-msgstr ""
+msgstr "Comportamiento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:29
 msgid "If `enabled = false`, the original text is returned unchanged."
-msgstr ""
+msgstr "Si `enabled = false`, se devuelve el texto original sin cambios."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:30
 msgid "If `fg = nil` or omitted, no foreground color is applied."
-msgstr ""
+msgstr "Si `fg = nil` o se omite, no se aplica color de primer plano."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:31
 msgid "Unknown option names or invalid option value types raise an error."
 msgstr ""
+"Los nombres de opción desconocidos o tipos de valor no válidos producen un "
+"error."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:33
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:33"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:42
 msgid "ptool.ansi.\\<color\\>"
-msgstr ""
+msgstr "ptool.ansi.\\<color\\>"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:44
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:44"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:46
 msgid ""
@@ -113,6 +126,9 @@ msgid ""
 ", `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan`, and "
 "`ptool.ansi.white` are convenience helpers with the following signature:"
 msgstr ""
+"`ptool.ansi.black`, `ptool.ansi.red`, `ptool.ansi.green`, `ptool.ansi.yellow`"
+", `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan` y "
+"`ptool.ansi.white` son utilidades de conveniencia con la siguiente firma:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:55
 msgid ""
@@ -120,8 +136,20 @@ msgid ""
 "`ptool.ansi.style`, except the foreground color is fixed by the helper "
 "itself. If `options.fg` is also provided, the helper color takes precedence."
 msgstr ""
+"Aceptan el mismo argumento `text` y la misma tabla `options` que "
+"`ptool.ansi.style`, salvo que el color de primer plano queda fijado por la "
+"propia utilidad. Si también se proporciona `options.fg`, el color de la "
+"utilidad tiene prioridad."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:59
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/ansi.md:59"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:44"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:59"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"

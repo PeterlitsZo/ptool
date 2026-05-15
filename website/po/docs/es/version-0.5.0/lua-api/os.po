@@ -31,7 +31,7 @@ msgstr "ptool.os.getenv"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:8
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:8"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:10
 msgid ""
@@ -42,7 +42,7 @@ msgstr ""
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:12
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:12"
 msgid "`name` (string, required): Environment variable name."
-msgstr "`name` (string, obligatorio): Nombre de la variable de entorno."
+msgstr "`name` (string, obligatorio): Nombre de la variable."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:13
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:13"
@@ -72,13 +72,13 @@ msgid ""
 "Raises an error when `name` is empty or contains invalid characters such as "
 "`=`."
 msgstr ""
-"Lanza un error cuando `name` está vacío o contiene caracteres inválidos como "
-"`=`."
+"Se genera un error cuando `name` está vacío o contiene caracteres no válidos "
+"como `=`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:23
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:23"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:30
 msgid "ptool.os.env"
@@ -87,7 +87,7 @@ msgstr "ptool.os.env"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:32
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:32"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:34
 msgid ""
@@ -101,25 +101,26 @@ msgid "Returns: `table`."
 msgstr "Devuelve: `table`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:38
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:38"
 msgid "Behavior:"
 msgstr "Comportamiento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:40
 msgid "The returned table maps variable names to string values."
-msgstr ""
+msgstr "La tabla devuelta asigna nombres de variables a valores de cadena."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:41
 msgid ""
 "Values changed through `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)` "
 "are reflected in the snapshot."
 msgstr ""
+"Los valores cambiados a través de `ptool.os.setenv(...)` y `ptool.os.unsetenv"
+"(...)` se reflejan en la instantánea."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:44
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:44"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:51
 msgid "ptool.os.setenv"
@@ -128,7 +129,7 @@ msgstr "ptool.os.setenv"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:53"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:55
 msgid ""
@@ -163,6 +164,9 @@ msgid ""
 "Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and "
 "child processes launched later through `ptool.run(...)`."
 msgstr ""
+"Los valores establecidos aquí son visibles para `ptool.os.getenv(...)`, "
+"`ptool.os.env()` y los procesos secundarios lanzados posteriormente a través "
+"de `ptool.run(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:66
 msgid ""
@@ -176,7 +180,7 @@ msgstr ""
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:69
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:69"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:76
 msgid "ptool.os.unsetenv"
@@ -185,7 +189,7 @@ msgstr "ptool.os.unsetenv"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:78
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:78"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:80
 msgid ""
@@ -201,7 +205,6 @@ msgid "`name` (string, required): Environment variable name."
 msgstr "`name` (string, obligatorio): Nombre de la variable."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:85
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:85"
 msgid "Behavior:"
 msgstr "Comportamiento:"
@@ -211,21 +214,22 @@ msgid ""
 "This affects later calls to `ptool.os.getenv(...)`, `ptool.os.env()`, and "
 "child processes launched by `ptool.run(...)`."
 msgstr ""
+"Esto afecta a las llamadas posteriores a `ptool.os.getenv(...)`, "
+"`ptool.os.env()` y a los procesos secundarios iniciados por `ptool.run(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:89
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:89"
 msgid ""
 "Raises an error when `name` is empty or contains invalid characters such as "
 "`=`."
 msgstr ""
-"Lanza un error cuando `name` está vacío o contiene caracteres inválidos como "
-"`=`."
+"Se genera un error cuando `name` está vacío o contiene caracteres no válidos "
+"como `=`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:92
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:92"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:99
 msgid "ptool.os.homedir"
@@ -234,7 +238,7 @@ msgstr "ptool.os.homedir"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:101
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:101"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:103
 msgid "`ptool.os.homedir()` returns the current user's home directory."
@@ -249,7 +253,7 @@ msgstr "Devuelve: `string|nil`."
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:107
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:107"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:113
 msgid "ptool.os.tmpdir"
@@ -258,7 +262,7 @@ msgstr "ptool.os.tmpdir"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:115
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:115"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:117
 msgid "`ptool.os.tmpdir()` returns the system temporary directory."
@@ -271,7 +275,7 @@ msgstr "Devuelve: `string`."
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:121
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:121"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:127
 msgid "ptool.os.hostname"
@@ -280,7 +284,7 @@ msgstr "ptool.os.hostname"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:129
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:129"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:131
 msgid "`ptool.os.hostname()` returns the current host name."
@@ -298,7 +302,7 @@ msgstr "ptool.os.username"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:137
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:137"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:139
 msgid "`ptool.os.username()` returns the current user name."
@@ -316,7 +320,7 @@ msgstr "ptool.os.pid"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:145
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:145"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:147
 msgid "`ptool.os.pid()` returns the current `ptool` process ID."
@@ -333,7 +337,7 @@ msgstr "ptool.os.exepath"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:153
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:153"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:155
 msgid ""
@@ -351,4 +355,108 @@ msgstr "Devuelve: `string|nil`."
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:160
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/lua-api/os.md:160"
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:32"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:38"
+#~ msgid "Behavior:"
+#~ msgstr "Comportamiento:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:44"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:53"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:58"
+#~ msgid "`name` (string, required): Environment variable name."
+#~ msgstr "`name` (string, obligatorio): Nombre de la variable."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:61"
+#~ msgid "Behavior:"
+#~ msgstr "Comportamiento:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:69"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:78"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:83"
+#~ msgid "`name` (string, required): Environment variable name."
+#~ msgstr "`name` (string, obligatorio): Nombre de la variable."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:85"
+#~ msgid "Behavior:"
+#~ msgstr "Comportamiento:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:89"
+#~ msgid ""
+#~ "Raises an error when `name` is empty or contains invalid characters such as "
+#~ "`=`."
+#~ msgstr ""
+#~ "Se genera un error cuando `name` está vacío o contiene caracteres no válidos "
+#~ "como `=`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:92"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:101"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:105"
+#~ msgid "Returns: `string|nil`."
+#~ msgstr "Devuelve: `string|nil`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:107"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:115"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:121"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:129"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:133"
+#~ msgid "Returns: `string|nil`."
+#~ msgstr "Devuelve: `string|nil`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:137"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:141"
+#~ msgid "Returns: `string|nil`."
+#~ msgstr "Devuelve: `string|nil`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:145"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:153"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:158"
+#~ msgid "Returns: `string|nil`."
+#~ msgstr "Devuelve: `string|nil`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:160"
+#~ msgid "Example:"
+#~ msgstr "Ejemplo:"

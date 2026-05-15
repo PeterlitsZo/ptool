@@ -86,7 +86,7 @@ ptool script.lua --name alice -v a.txt b.txt
 
 - shebang ファイルを理解するスクリプトランナー。
 - Lua 式や `ptool` API をその場で試せる対話型 REPL。
-- semver、パス、ファイル、TOML、正規表現、文字列、HTTP、SSH、 データベース、テンプレートの Lua ヘルパー。
+- サーバー、日時、パス、ファイル、TOML、正規表現、文字列、HTTP、SSH、データベース、テンプレート用の Lua ヘルパー。
 - コマンド実行、引数解析、対話入力のための CLI 向けヘルパー。
 
 ## 次のステップ

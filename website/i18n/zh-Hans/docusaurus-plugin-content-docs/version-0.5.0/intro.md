@@ -38,7 +38,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
 ```
 
-To install into a custom binary directory instead of `~/.local/bin`:
+如果你想安装到自定义二进制目录，而不是 `~/.local/bin`：
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
@@ -86,7 +86,7 @@ ptool script.lua --name alice -v a.txt b.txt
 
 - 一个支持 shebang 文件的脚本运行器。
 - 一个可交互使用的 REPL，方便直接试验 Lua 表达式和 `ptool` API。
-- 一组面向 Lua 的辅助能力，涵盖 semver、路径、文件、TOML、正则、字符串、 HTTP、SSH、数据库和模板。
+- 一组面向 Lua 的辅助能力，涵盖 semver、日期时间、路径、文件、TOML、正则、字符串、HTTP、SSH、数据库和模板。
 - 一组面向命令行场景的辅助能力，用于执行命令、解析参数和进行交互式输入。
 
 ## 下一步

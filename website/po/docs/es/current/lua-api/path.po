@@ -29,7 +29,7 @@ msgstr "ptool.path.join"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:9
 msgid ""
@@ -60,7 +60,7 @@ msgstr "ptool.path.normalize"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:23
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:23"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:25
 msgid ""
@@ -92,7 +92,7 @@ msgstr "ptool.path.abspath"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:39
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:39"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:41
 msgid "`ptool.path.abspath(path[, base])` computes an absolute path."
@@ -133,7 +133,7 @@ msgstr "ptool.path.relpath"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:58
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:58"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:60
 msgid ""
@@ -177,7 +177,7 @@ msgstr "ptool.path.isabs"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:77
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:77"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:79
 msgid "`ptool.path.isabs(path)` checks whether a path is absolute."
@@ -204,7 +204,7 @@ msgstr "ptool.path.dirname"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:92
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:92"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:94
 msgid "`ptool.path.dirname(path)` returns the directory-name portion."
@@ -232,7 +232,7 @@ msgstr "ptool.path.basename"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:107
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:107"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:109
 msgid ""
@@ -264,7 +264,7 @@ msgstr "ptool.path.extname"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:123
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:123"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:125
 msgid ""

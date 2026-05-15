@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,277 +14,389 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:1
 msgid "Path API"
-msgstr ""
+msgstr "パス API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:3
 msgid "Lexical path helpers are available under `ptool.path` and `p.path`."
-msgstr ""
+msgstr "字句的なパスヘルパーは `ptool.path` と `p.path` にあります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:5
 msgid "ptool.path.join"
-msgstr ""
+msgstr "ptool.path.join"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:9
 msgid ""
 "`ptool.path.join(...segments)` joins multiple path segments and returns the "
 "normalized path."
-msgstr ""
+msgstr "`ptool.path.join(...segments)` は複数のパスセグメントを連結し、 正規化された"
+"パスを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:12
 msgid "`segments` (string, at least one): Path segments."
-msgstr ""
+msgstr "`segments` (string, 1 つ以上): パスセグメント。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:13
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:13"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:15
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:15"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:21
 msgid "ptool.path.normalize"
-msgstr ""
+msgstr "ptool.path.normalize"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:23
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:23"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:25
 msgid ""
 "`ptool.path.normalize(path)` performs lexical path normalization "
 "(processing `.` and `..`)."
-msgstr ""
+msgstr "`ptool.path.normalize(path)` は字句的なパス正規化 (`.` と `..` の処理) を 行"
+"います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:28
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:28"
 msgid "`path` (string, required): The input path."
-msgstr ""
+msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:29
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:29"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:31
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:31"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:37
 msgid "ptool.path.abspath"
-msgstr ""
+msgstr "ptool.path.abspath"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:39
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:39"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:41
 msgid "`ptool.path.abspath(path[, base])` computes an absolute path."
-msgstr ""
+msgstr "`ptool.path.abspath(path[, base])` は絶対パスを計算します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:43
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:43"
 msgid "`path` (string, required): The input path."
-msgstr ""
+msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:44
 msgid ""
 "`base` (string, optional): The base directory. If omitted, the current "
 "process working directory is used."
-msgstr ""
+msgstr "`base` (string, 任意): ベースディレクトリ。省略時は現在のプロセスの 作業ディ"
+"レクトリが使われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:46
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:46"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:47
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:47"
 msgid "Accepts only 1 or 2 string arguments."
-msgstr ""
+msgstr "受け付ける文字列引数は 1 個または 2 個のみです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:49
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:49"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:56
 msgid "ptool.path.relpath"
-msgstr ""
+msgstr "ptool.path.relpath"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:58
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:58"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:60
 msgid ""
 "`ptool.path.relpath(path[, base])` computes a relative path from `base` to "
 "`path`."
-msgstr ""
+msgstr "`ptool.path.relpath(path[, base])` は `base` から `path` への相対パスを 計算"
+"します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:63
 msgid "`path` (string, required): The target path."
-msgstr ""
+msgstr "`path` (string, 必須): 対象パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:64
 msgid ""
 "`base` (string, optional): The starting directory. If omitted, the current "
 "process working directory is used."
-msgstr ""
+msgstr "`base` (string, 任意): 開始ディレクトリ。省略時は現在のプロセスの 作業ディレ"
+"クトリが使われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:66
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:66"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:67
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:67"
 msgid "Accepts only 1 or 2 string arguments."
-msgstr ""
+msgstr "受け付ける文字列引数は 1 個または 2 個のみです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:69
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:69"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:75
 msgid "ptool.path.isabs"
-msgstr ""
+msgstr "ptool.path.isabs"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:77
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:77"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:79
 msgid "`ptool.path.isabs(path)` checks whether a path is absolute."
-msgstr ""
+msgstr "`ptool.path.isabs(path)` はパスが絶対パスかどうかを確認します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:81
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:81"
 msgid "`path` (string, required): The input path."
-msgstr ""
+msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:82
 msgid "Returns: `boolean`."
-msgstr ""
+msgstr "戻り値: `boolean`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:84
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:84"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:90
 msgid "ptool.path.dirname"
-msgstr ""
+msgstr "ptool.path.dirname"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:92
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:92"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:94
 msgid "`ptool.path.dirname(path)` returns the directory-name portion."
-msgstr ""
+msgstr "`ptool.path.dirname(path)` はディレクトリ名部分を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:96
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:96"
 msgid "`path` (string, required): The input path."
-msgstr ""
+msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:97
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:97"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:99
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:99"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:105
 msgid "ptool.path.basename"
-msgstr ""
+msgstr "ptool.path.basename"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:107
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:107"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:109
 msgid ""
 "`ptool.path.basename(path)` returns the last path segment "
 "(the filename portion)."
-msgstr ""
+msgstr "`ptool.path.basename(path)` は最後のパスセグメント (ファイル名部分) を返しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:112
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:112"
 msgid "`path` (string, required): The input path."
-msgstr ""
+msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:113
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:113"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:115
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:115"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:121
 msgid "ptool.path.extname"
-msgstr ""
+msgstr "ptool.path.extname"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:123
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:123"
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:125
 msgid ""
 "`ptool.path.extname(path)` returns the extension (including `.`). If there "
 "is no extension, it returns an empty string."
-msgstr ""
+msgstr "`ptool.path.extname(path)` は拡張子 (`.` を含む) を返します。拡張子がない 場"
+"合は空文字列を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:128
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:128"
 msgid "`path` (string, required): The input path."
-msgstr ""
+msgstr "`path` (string, 必須): 入力パス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:129
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:129"
 msgid "Returns: `string`."
-msgstr ""
+msgstr "戻り値: `string`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:131
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:131"
 msgid "Example:"
-msgstr ""
+msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:137
 msgid "Notes:"
-msgstr ""
+msgstr "注意:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:139
 msgid ""
 "Path handling in `ptool.path` is purely lexical. It does not check whether "
 "paths exist and does not resolve symlinks."
-msgstr ""
+msgstr "`ptool.path` のパス処理は完全に字句的です。パスの存在確認や シンボリックリン"
+"クの解決は行いません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/path.md:141
 msgid ""
 "None of the interfaces accept empty string arguments. Passing one raises an "
 "error."
-msgstr ""
+msgstr "どのインターフェースも空文字列引数を受け付けません。渡すとエラーに なります。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:23"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:29"
+#~ msgid "Returns: `string`."
+#~ msgstr "戻り値: `string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:31"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:39"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:43"
+#~ msgid "`path` (string, required): The input path."
+#~ msgstr "`path` (string, 必須): 入力パス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:46"
+#~ msgid "Returns: `string`."
+#~ msgstr "戻り値: `string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:49"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:58"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:66"
+#~ msgid "Returns: `string`."
+#~ msgstr "戻り値: `string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:67"
+#~ msgid "Accepts only 1 or 2 string arguments."
+#~ msgstr "受け付ける文字列引数は 1 個または 2 個のみです。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:69"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:77"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:81"
+#~ msgid "`path` (string, required): The input path."
+#~ msgstr "`path` (string, 必須): 入力パス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:84"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:92"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:96"
+#~ msgid "`path` (string, required): The input path."
+#~ msgstr "`path` (string, 必須): 入力パス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:97"
+#~ msgid "Returns: `string`."
+#~ msgstr "戻り値: `string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:99"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:107"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:112"
+#~ msgid "`path` (string, required): The input path."
+#~ msgstr "`path` (string, 必須): 入力パス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:113"
+#~ msgid "Returns: `string`."
+#~ msgstr "戻り値: `string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:115"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:123"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:128"
+#~ msgid "`path` (string, required): The input path."
+#~ msgstr "`path` (string, 必須): 入力パス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:129"
+#~ msgid "Returns: `string`."
+#~ msgstr "戻り値: `string`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/path.md:131"
+#~ msgid "Example:"
+#~ msgstr "例:"

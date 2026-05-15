@@ -4,7 +4,7 @@ Las utilidades léxicas de rutas están disponibles bajo `ptool.path` y `p.path`
 
 ## ptool.path.join
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.join(...segments)` une varios segmentos de ruta y devuelve la ruta normalizada.
 
@@ -19,7 +19,7 @@ print(ptool.path.join("tmp", "a", "..", "b")) -- tmp/b
 
 ## ptool.path.normalize
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.normalize(path)` realiza normalización léxica de rutas (procesamiento de `.` y `..`).
 
@@ -34,7 +34,7 @@ print(ptool.path.normalize("./a/../b")) -- b
 
 ## ptool.path.abspath
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.abspath(path[, base])` calcula una ruta absoluta.
 
@@ -52,7 +52,7 @@ print(ptool.path.abspath("lib", "/tmp/demo"))
 
 ## ptool.path.relpath
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.relpath(path[, base])` calcula una ruta relativa desde `base` hasta `path`.
 
@@ -69,7 +69,7 @@ print(ptool.path.relpath("src/main.rs", "/tmp/project"))
 
 ## ptool.path.isabs
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.isabs(path)` comprueba si una ruta es absoluta.
 
@@ -84,7 +84,7 @@ print(ptool.path.isabs("/tmp")) -- true
 
 ## ptool.path.dirname
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.dirname(path)` devuelve la parte de nombre de directorio.
 
@@ -99,7 +99,7 @@ print(ptool.path.dirname("a/b/c.txt")) -- a/b
 
 ## ptool.path.basename
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.basename(path)` devuelve el último segmento de la ruta (la parte del nombre de archivo).
 
@@ -114,7 +114,7 @@ print(ptool.path.basename("a/b/c.txt")) -- c.txt
 
 ## ptool.path.extname
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.path.extname(path)` devuelve la extensión, incluido el `.`. Si no hay extensión, devuelve una cadena vacía.
 

@@ -1,35 +1,35 @@
-# Lua API Overview
+# Resumen de la API de Lua
 
-`ptool` exposes a broad set of helpers through `ptool` and `p`.
+`ptool` expone un amplio conjunto de utilidades a través de `ptool` y `p`.
 
-## Core APIs
+## APIs principales
 
-- [Core Lua API](./core.md): Script lifecycle, process execution, config, and terminal helpers.
+- [API principal de Lua](./core.md): Ciclo de vida del script, ejecución de procesos, configuración y utilidades de terminal.
 
-## Modules
+## Módulos
 
-- [Args API](./args.md): Command-line argument schema parsing for Lua scripts.
-- [DateTime API](./datetime.md): Parse, compare, format, and convert concrete datetimes with timezone support.
-- [SemVer API](./semver.md): Parse, compare, and bump semantic versions.
-- [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
-- [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.
-- [OS API](./os.md): Read runtime environment variables and inspect host process details.
-- [Platform API](./platform.md): Detect the current OS, architecture, and target triple.
-- [ANSI API](./ansi.md): Build styled terminal output with ANSI escape sequences.
-- [TUI API](./tui.md): Build simple terminal user interfaces with a structured view tree and event loop.
-- [Log API](./log.md): Write timestamped terminal logs with level-based output.
-- [HTTP API](./http.md): Send HTTP requests and consume response bodies.
-- [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
-- [YAML API](./yaml.md): Parse YAML text, read nested values, and stringify Lua values as YAML.
-- [Database API](./db.md): Open database connections and run SQL queries.
-- [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer files.
-- [Path API](./path.md): Manipulate paths lexically without touching the filesystem.
-- [TOML API](./toml.md): Parse, stringify, read, update, and remove TOML values.
-- [Regex API](./re.md): Compile regexes and search, capture, replace, or split text.
-- [String API](./str.md): Trim, split, join, replace, and format strings.
-- [Table API](./tbl.md): Map, filter, and concatenate dense list tables.
-- [Filesystem API](./fs.md): Read, write, create, and glob filesystem paths.
-- [Shell API](./sh.md): Split shell-like command lines into argument arrays.
-- [Template API](./template.md): Render text templates from Lua data.
+- [API de argumentos](./args.md): Análisis de esquemas de argumentos de línea de comandos para scripts Lua.
+- [DateTime API](./datetime.md): analiza, compara, formatea y convierte fechas concretas con soporte de zona horaria.
+- [API de SemVer](./semver.md): Analiza, compara y actualiza versiones semánticas.
+- [API de hash](./hash.md): Calcula resúmenes SHA-256, SHA-1 y MD5.
+- [API de red](./net.md): Analiza URL, direcciones IP y pares host-puerto.
+- [API de sistema operativo](./os.md): Lee variables de entorno del runtime e inspecciona detalles del proceso anfitrión.
+- [API de plataforma](./platform.md): Detecta el SO, la arquitectura y el target triple actuales.
+- [API ANSI](./ansi.md): Construye salida de terminal con estilo mediante secuencias ANSI.
+- [API TUI](./tui.md): Construye interfaces de terminal simples con un árbol de vistas estructurado y un bucle de eventos.
+- [API de log](./log.md): Escribe logs de terminal con marcas de tiempo y nivel.
+- [API HTTP](./http.md): Envía solicitudes HTTP y consume cuerpos de respuesta.
+- [API JSON](./json.md): Analiza texto JSON y serializa valores Lua como JSON.
+- [API YAML](./yaml.md): Analiza texto YAML, lee valores anidados y serializa valores Lua como YAML.
+- [API de base de datos](./db.md): Abre conexiones de base de datos y ejecuta consultas SQL.
+- [API SSH](./ssh.md): Conéctate a hosts remotos, ejecuta comandos y transfiere archivos.
+- [API de rutas](./path.md): Manipula rutas de forma léxica sin tocar el sistema de archivos.
+- [API TOML](./toml.md): Analiza, serializa, lee, actualiza y elimina valores TOML.
+- [API de regex](./re.md): Compila regex y busca, captura, reemplaza o divide texto.
+- [API de cadenas](./str.md): Recorta, divide, une, reemplaza y formatea cadenas.
+- [API de tablas](./tbl.md): Mapea, filtra y concatena tablas tipo lista densas.
+- [API de sistema de archivos](./fs.md): Lee, escribe, crea y hace glob sobre rutas del sistema de archivos.
+- [API de shell](./sh.md): Divide líneas de comandos con sintaxis tipo shell en arreglos de argumentos.
+- [API de plantillas](./template.md): Renderiza plantillas de texto a partir de datos Lua.
 
-Use this page as the entrypoint, then jump to the module page you need for the full function reference.
+Usa esta página como punto de entrada y luego salta al módulo que necesites para ver la referencia completa de funciones.

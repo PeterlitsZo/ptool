@@ -1,15 +1,15 @@
 # String API
 
-String helpers are available under `ptool.str` and `p.str`.
+字符串辅助能力位于 `ptool.str` 和 `p.str` 下。
 
 ## ptool.str.trim
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.trim(s)` removes leading and trailing whitespace.
+`ptool.str.trim(s)` 移除首尾空白字符。
 
-- `s` (string, required): The input string.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- 返回：`string`。
 
 ```lua
 print(ptool.str.trim("  hello\n")) -- hello
@@ -17,12 +17,12 @@ print(ptool.str.trim("  hello\n")) -- hello
 
 ## ptool.str.trim_start
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.trim_start(s)` removes leading whitespace.
+`ptool.str.trim_start(s)` 移除开头的空白字符。
 
-- `s` (string, required): The input string.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- 返回：`string`。
 
 ```lua
 print(ptool.str.trim_start("  hello  ")) -- hello  
@@ -30,12 +30,12 @@ print(ptool.str.trim_start("  hello  ")) -- hello
 
 ## ptool.str.trim_end
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.trim_end(s)` removes trailing whitespace.
+`ptool.str.trim_end(s)` 移除结尾的空白字符。
 
-- `s` (string, required): The input string.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- 返回：`string`。
 
 ```lua
 print(ptool.str.trim_end("  hello  ")) --   hello
@@ -43,12 +43,12 @@ print(ptool.str.trim_end("  hello  ")) --   hello
 
 ## ptool.str.is_blank
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.is_blank(s)` checks whether a string is empty or contains only whitespace.
+`ptool.str.is_blank(s)` 检查字符串是否为空，或是否只包含空白字符。
 
-- `s` (string, required): The input string.
-- Returns: `boolean`.
+- `s`（string，必填）：输入字符串。
+- 返回：`boolean`。
 
 ```lua
 print(ptool.str.is_blank(" \t\n")) -- true
@@ -57,13 +57,13 @@ print(ptool.str.is_blank("x")) -- false
 
 ## ptool.str.starts_with
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.starts_with(s, prefix)` checks whether `s` starts with `prefix`.
+`ptool.str.starts_with(s, prefix)` 检查 `s` 是否以 `prefix` 开头。
 
-- `s` (string, required): The input string.
-- `prefix` (string, required): The prefix to test.
-- Returns: `boolean`.
+- `s`（string，必填）：输入字符串。
+- `prefix`（string，必填）：要判断的前缀。
+- 返回：`boolean`。
 
 ```lua
 print(ptool.str.starts_with("hello.lua", "hello")) -- true
@@ -71,13 +71,13 @@ print(ptool.str.starts_with("hello.lua", "hello")) -- true
 
 ## ptool.str.ends_with
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.ends_with(s, suffix)` checks whether `s` ends with `suffix`.
+`ptool.str.ends_with(s, suffix)` 检查 `s` 是否以 `suffix` 结尾。
 
-- `s` (string, required): The input string.
-- `suffix` (string, required): The suffix to test.
-- Returns: `boolean`.
+- `s`（string，必填）：输入字符串。
+- `suffix`（string，必填）：要判断的后缀。
+- 返回：`boolean`。
 
 ```lua
 print(ptool.str.ends_with("hello.lua", ".lua")) -- true
@@ -85,13 +85,13 @@ print(ptool.str.ends_with("hello.lua", ".lua")) -- true
 
 ## ptool.str.contains
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.contains(s, needle)` checks whether `needle` appears in `s`.
+`ptool.str.contains(s, needle)` 检查 `needle` 是否出现在 `s` 中。
 
-- `s` (string, required): The input string.
-- `needle` (string, required): The substring to search for.
-- Returns: `boolean`.
+- `s`（string，必填）：输入字符串。
+- `needle`（string，必填）：要查找的子串。
+- 返回：`boolean`。
 
 ```lua
 print(ptool.str.contains("hello.lua", "lo.l")) -- true
@@ -99,21 +99,21 @@ print(ptool.str.contains("hello.lua", "lo.l")) -- true
 
 ## ptool.str.split
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.split(s, sep[, options])` splits a string by a non-empty separator.
+`ptool.str.split(s, sep[, options])` 使用非空分隔符拆分字符串。
 
-- `s` (string, required): The input string.
-- `sep` (string, required): The separator. Empty strings are not allowed.
-- `options` (table, optional): Split options. Supported fields:
-  - `trim` (boolean, optional): Whether to trim each piece before returning it. Defaults to `false`.
-  - `skip_empty` (boolean, optional): Whether to remove empty pieces after optional trimming. Defaults to `false`.
-- Returns: `string[]`.
+- `s`（string，必填）：输入字符串。
+- `sep`（string，必填）：分隔符。不允许空字符串。
+- `options`（table，可选）：拆分选项。支持：
+  - `trim`（boolean，可选）：是否在返回前裁剪每个片段。默认值为 `false`。
+  - `skip_empty`（boolean，可选）：是否在可选裁剪后移除空片段。默认值为 `false`。
+- 返回：`string[]`。
 
-Behavior:
+行为说明：
 
-- Unknown option names or invalid option value types raise an error.
-- `skip_empty = true` is applied after `trim`, so whitespace-only pieces can be removed when both are enabled.
+- 未知选项名或非法选项值类型都会抛出错误。
+- `skip_empty = true` 会在 `trim` 之后生效，因此当两者都启用时，只包含空白字符的 片段也会被移除。
 
 ```lua
 local parts = ptool.str.split(" a, b ,, c ", ",", {
@@ -126,21 +126,21 @@ print(ptool.inspect(parts)) -- { "a", "b", "c" }
 
 ## ptool.str.split_lines
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.split_lines(s[, options])` splits a string into lines.
+`ptool.str.split_lines(s[, options])` 把字符串拆分成多行。
 
-- `s` (string, required): The input string.
-- `options` (table, optional): Line-splitting options. Supported fields:
-  - `keep_ending` (boolean, optional): Whether to keep line endings (`\n`, `\r\n`, or `\r`) in returned items. Defaults to `false`.
-  - `skip_empty` (boolean, optional): Whether to remove empty lines. Defaults to `false`.
-- Returns: `string[]`.
+- `s`（string，必填）：输入字符串。
+- `options`（table，可选）：按行拆分选项。支持：
+  - `keep_ending`（boolean，可选）：是否保留行结束符（`\n`、`\r\n` 或 `\r`）。 默认值为 `false`。
+  - `skip_empty`（boolean，可选）：是否移除空行。默认值为 `false`。
+- 返回：`string[]`。
 
-Behavior:
+行为说明：
 
-- Supports Unix (`\n`) and Windows (`\r\n`) line endings, and also lone `\r`.
-- When `skip_empty = true`, a line containing only a line ending is treated as empty and is removed.
-- Unknown option names or invalid option value types raise an error.
+- 支持 Unix（`\n`）和 Windows（`\r\n`）换行，也支持单独的 `\r`。
+- 当 `skip_empty = true` 时，仅包含行结束符的行会被视为空行并移除。
+- 未知选项名或非法选项值类型都会抛出错误。
 
 ```lua
 local lines = ptool.str.split_lines("a\n\n b\r\n", {
@@ -152,13 +152,13 @@ print(ptool.inspect(lines)) -- { "a", " b" }
 
 ## ptool.str.join
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.join(parts, sep)` joins a string array with a separator.
+`ptool.str.join(parts, sep)` 使用分隔符拼接字符串数组。
 
-- `parts` (string[], required): The string parts to join.
-- `sep` (string, required): The separator string.
-- Returns: `string`.
+- `parts`（string[]，必填）：待拼接的字符串片段。
+- `sep`（string，必填）：分隔符字符串。
+- 返回：`string`。
 
 ```lua
 print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
@@ -166,15 +166,15 @@ print(ptool.str.join({"a", "b", "c"}, "/")) -- a/b/c
 
 ## ptool.str.replace
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.replace(s, from, to[, n])` replaces occurrences of `from` with `to`.
+`ptool.str.replace(s, from, to[, n])` 将 `from` 替换为 `to`。
 
-- `s` (string, required): The input string.
-- `from` (string, required): The substring to replace. Empty strings are not allowed.
-- `to` (string, required): The replacement string.
-- `n` (integer, optional): Maximum replacement count. Must be greater than or equal to `0`. If omitted, all matches are replaced.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- `from`（string，必填）：要替换的子串。不允许空字符串。
+- `to`（string，必填）：替换字符串。
+- `n`（integer，可选）：最大替换次数。必须大于等于 `0`。如果省略，则替换全部匹配。
+- 返回：`string`。
 
 ```lua
 print(ptool.str.replace("a-b-c", "-", "/")) -- a/b/c
@@ -183,13 +183,13 @@ print(ptool.str.replace("a-b-c", "-", "/", 1)) -- a/b-c
 
 ## ptool.str.repeat
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.repeat(s, n)` repeats a string `n` times.
+`ptool.str.repeat(s, n)` 将字符串 `s` 重复 `n` 次。
 
-- `s` (string, required): The input string.
-- `n` (integer, required): Repeat count. Must be greater than or equal to `0`.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- `n`（integer，必填）：重复次数。必须大于等于 `0`。
+- 返回：`string`。
 
 ```lua
 print(ptool.str.repeat("ab", 3)) -- ababab
@@ -197,17 +197,17 @@ print(ptool.str.repeat("ab", 3)) -- ababab
 
 ## ptool.str.cut_prefix
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.cut_prefix(s, prefix)` removes `prefix` from the start of `s` when it is present.
+`ptool.str.cut_prefix(s, prefix)` 当 `s` 以 `prefix` 开头时，将其从开头移除。
 
-- `s` (string, required): The input string.
-- `prefix` (string, required): The prefix to remove.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- `prefix`（string，必填）：要移除的前缀。
+- 返回：`string`。
 
-Behavior:
+行为说明：
 
-- If `s` does not start with `prefix`, the original string is returned unchanged.
+- 如果 `s` 不以 `prefix` 开头，则原样返回原始字符串。
 
 ```lua
 print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
@@ -215,17 +215,17 @@ print(ptool.str.cut_prefix("refs/heads/main", "refs/heads/")) -- main
 
 ## ptool.str.cut_suffix
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.cut_suffix(s, suffix)` removes `suffix` from the end of `s` when it is present.
+`ptool.str.cut_suffix(s, suffix)` 当 `s` 以 `suffix` 结尾时，将其从末尾移除。
 
-- `s` (string, required): The input string.
-- `suffix` (string, required): The suffix to remove.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- `suffix`（string，必填）：要移除的后缀。
+- 返回：`string`。
 
-Behavior:
+行为说明：
 
-- If `s` does not end with `suffix`, the original string is returned unchanged.
+- 如果 `s` 不以 `suffix` 结尾，则原样返回原始字符串。
 
 ```lua
 print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
@@ -233,21 +233,21 @@ print(ptool.str.cut_suffix("archive.tar.gz", ".gz")) -- archive.tar
 
 ## ptool.str.indent
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.str.indent(s, prefix[, options])` adds `prefix` to each line.
+`ptool.str.indent(s, prefix[, options])` 为每一行添加 `prefix`。
 
-- `s` (string, required): The input string.
-- `prefix` (string, required): The text inserted before each line.
-- `options` (table, optional): Indent options. Supported fields:
-  - `skip_first` (boolean, optional): Whether to leave the first line unchanged. Defaults to `false`.
-- Returns: `string`.
+- `s`（string，必填）：输入字符串。
+- `prefix`（string，必填）：插入到每行前面的文本。
+- `options`（table，可选）：缩进选项。支持：
+  - `skip_first`（boolean，可选）：是否保持第一行不变。默认值为 `false`。
+- 返回：`string`。
 
-Behavior:
+行为说明：
 
-- Existing line endings are preserved.
-- Empty input is returned unchanged.
-- Unknown option names or invalid option value types raise an error.
+- 会保留已有的行结束符。
+- 空输入会原样返回。
+- 未知选项名或非法选项值类型都会抛出错误。
 
 ```lua
 local text = "first\nsecond\n"

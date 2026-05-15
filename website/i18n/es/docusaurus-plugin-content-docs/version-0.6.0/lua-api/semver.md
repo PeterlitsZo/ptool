@@ -1,16 +1,16 @@
-# SemVer API
+# API de SemVer
 
-Version parsing, validation, comparison, and bumping helpers live under `ptool.semver` and `p.semver`.
+Las utilidades para analizar, validar, comparar e incrementar versiones viven bajo `ptool.semver` y `p.semver`.
 
 ## ptool.semver.parse
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`ptool.semver.parse(version)` parses a version string and returns a `Version` object.
+`ptool.semver.parse(version)` analiza una cadena de versión y devuelve un objeto `Version`.
 
-- `version` (string, required): A semantic version string, optionally prefixed with `v`.
+- `version` (string, obligatorio): Una cadena de versión semántica, con prefijo `v` opcional.
 
-Example:
+Ejemplo:
 
 ```lua
 local v = ptool.semver.parse("v1.2.3-alpha.1+build.9")
@@ -21,12 +21,12 @@ print(tostring(v))
 
 ## ptool.semver.is_valid
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`ptool.semver.is_valid(version)` checks whether a version string is valid.
+`ptool.semver.is_valid(version)` comprueba si una cadena de versión es válida.
 
-- `version` (string, required): A semantic version string.
-- Returns: `boolean`.
+- `version` (string, obligatorio): Una cadena de versión semántica.
+- Devuelve: `boolean`.
 
 ```lua
 print(ptool.semver.is_valid("1.2.3")) -- true
@@ -35,12 +35,12 @@ print(ptool.semver.is_valid("x.y.z")) -- false
 
 ## ptool.semver.compare
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`ptool.semver.compare(a, b)` compares two versions.
+`ptool.semver.compare(a, b)` compara dos versiones.
 
-- `a` / `b` (string|Version, required): A version string or a `Version` object.
-- Returns: `-1 | 0 | 1`.
+- `a` / `b` (string|Version, obligatorio): Una cadena de versión o un objeto `Version`.
+- Devuelve: `-1 | 0 | 1`.
 
 ```lua
 print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
@@ -48,14 +48,14 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 
 ## ptool.semver.bump
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`ptool.semver.bump(v, op[, channel])` returns a new version object after applying the bump.
+`ptool.semver.bump(v, op[, channel])` devuelve un nuevo objeto de versión tras aplicar el incremento.
 
-- `v` (string|Version, required): The original version.
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `v` (string|Version, obligatorio): La versión original.
+- `op` (string, obligatorio): Uno de `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor` o `premajor`.
+- `channel` (string, opcional): Solo se admite para `prepatch`, `preminor` y `premajor`. Debe ser `alpha`, `beta` o `rc`. Por defecto es `alpha`.
+- Devuelve: `Version`.
 
 ```lua
 local v = ptool.semver.bump("1.2.3", "alpha")
@@ -70,59 +70,59 @@ print(tostring(stable)) -- 1.2.4
 
 ## Version
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-`Version` represents a parsed semantic version returned by `ptool.semver.parse(...)` or `ptool.semver.bump(...)`.
+`Version` representa una versión semántica analizada devuelta por `ptool.semver.parse(...)` o `ptool.semver.bump(...)`.
 
-It is implemented as a Lua userdata.
+Está implementado como userdata de Lua.
 
-Fields and methods:
+Campos y métodos:
 
-- Fields:
-  - `major` (integer)
-  - `minor` (integer)
-  - `patch` (integer)
-  - `pre` (string|nil)
-  - `build` (string|nil)
-- Methods:
+- Campos:
+  - `major` (entero)
+  - `minor` (entero)
+  - `patch` (entero)
+  - `pre` (cadena|cero)
+  - `build` (cadena|cero)
+- Métodos:
   - `v:compare(other)` -> `-1|0|1`
   - `v:bump(op[, channel])` -> `Version`
   - `v:to_string()` -> `string`
-- Metamethods:
-  - `tostring(v)` is available.
-  - `==`, `<`, and `<=` comparisons are supported.
+- Metamétodos:
+  - `tostring(v)` está disponible.
+  - Se admiten las comparaciones `==`, `<` y `<=`.
 
 ### compare
 
-Canonical API name: `ptool.semver.Version:compare`.
+Nombre canónico de API: `ptool.semver.Version:compare`.
 
-`v:compare(other)` compares the current version with `other`.
+`v:compare(other)` compara la versión actual con `other`.
 
-- `other` (string|Version, required): A version string or another `Version` object.
-- Returns: `-1 | 0 | 1`.
+- `other` (string|Version, obligatorio): Una cadena de versión u otro objeto `Version`.
+- Devuelve: `-1 | 0 | 1`.
 
 ### bump
 
-Canonical API name: `ptool.semver.Version:bump`.
+Nombre canónico de API: `ptool.semver.Version:bump`.
 
-`v:bump(op[, channel])` returns a new `Version` object after applying the bump.
+`v:bump(op[, channel])` devuelve un nuevo objeto `Version` tras aplicar el incremento.
 
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `op` (string, obligatorio): Uno de `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor` o `premajor`.
+- `channel` (string, opcional): Solo se admite para `prepatch`, `preminor` y `premajor`. Debe ser `alpha`, `beta` o `rc`. Por defecto es `alpha`.
+- Devuelve: `Version`.
 
 ### to_string
 
-Canonical API name: `ptool.semver.Version:to_string`.
+Nombre canónico de API: `ptool.semver.Version:to_string`.
 
-`v:to_string()` returns the canonical string form of the version.
+`v:to_string()` devuelve la forma de cadena canónica de la versión.
 
-- Returns: `string`.
+- Devuelve: `string`.
 
-Prerelease bump rules:
+Reglas de incremento prerelease:
 
-- Bumping a stable version to `alpha`, `beta`, or `rc` first increments the patch version, then enters the target channel starting from `.1`.
-- `prepatch`, `preminor`, and `premajor` start a fresh prerelease from the next patch, minor, or major version respectively, such as `1.2.3 -> 1.3.0-rc.1` with `preminor` + `rc`.
-- Bumping within the same channel increments the sequence number, such as `alpha.1 -> alpha.2`.
-- `release` removes prerelease and build metadata while keeping the same `major.minor.patch` values, such as `1.2.3-rc.2 -> 1.2.3`.
-- Channel promotion is allowed (`alpha -> beta -> rc`), but channel downgrade is not (for example, `rc -> beta` raises an error).
+- Al incrementar una versión estable a `alpha`, `beta` o `rc`, primero se incrementa la versión patch y luego se entra en el canal objetivo desde `.1`.
+- `prepatch`, `preminor` y `premajor` inician una nueva prerelease desde la siguiente versión patch, minor o major respectivamente, por ejemplo `1.2.3 -> 1.3.0-rc.1` con `preminor` + `rc`.
+- Al incrementar dentro del mismo canal se aumenta el número de secuencia, como `alpha.1 -> alpha.2`.
+- `release` elimina los metadatos de prerelease y build manteniendo el mismo `major.minor.patch`, por ejemplo `1.2.3-rc.2 -> 1.2.3`.
+- Se permite promocionar de canal (`alpha -> beta -> rc`), pero no degradarlo por ejemplo `rc -> beta` produce un error.

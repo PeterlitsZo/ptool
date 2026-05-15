@@ -4,7 +4,7 @@ Las utilidades de expresiones regulares están disponibles bajo `ptool.re` y `p.
 
 ## ptool.re.compile
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.re.compile(pattern[, opts])` compila una expresión regular y devuelve un objeto `Regex`.
 
@@ -21,7 +21,7 @@ print(re:is_match("Alice")) -- true
 
 ## ptool.re.escape
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.re.escape(text)` escapa texto plano para convertirlo en una cadena literal de regex.
 
@@ -38,7 +38,7 @@ print(re:is_match("a+b?")) -- true
 
 ## Regex
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `Regex` representa una expresión regular compilada devuelta por `ptool.re.compile(...)`.
 
@@ -57,7 +57,7 @@ Métodos:
 
 ### is_match
 
-Canonical API name: `ptool.re.Regex:is_match`.
+Nombre de la API canónica: `ptool.re.Regex:is_match`.
 
 `re:is_match(input)` comprueba si la regex coincide con `input`.
 
@@ -66,7 +66,7 @@ Canonical API name: `ptool.re.Regex:is_match`.
 
 ### find
 
-Canonical API name: `ptool.re.Regex:find`.
+Nombre de la API canónica: `ptool.re.Regex:find`.
 
 `re:find(input[, init])` devuelve la primera coincidencia en `input`, o `nil`.
 
@@ -90,37 +90,37 @@ Estructuras devueltas:
 
 ### find_all
 
-Canonical API name: `ptool.re.Regex:find_all`.
+Nombre de la API canónica: `ptool.re.Regex:find_all`.
 
 `re:find_all(input)` devuelve todas las coincidencias en `input` como `Match[]`.
 
 ### captures
 
-Canonical API name: `ptool.re.Regex:captures`.
+Nombre de la API canónica: `ptool.re.Regex:captures`.
 
 `re:captures(input)` devuelve el primer conjunto de capturas en `input`, o `nil`.
 
 ### captures_all
 
-Canonical API name: `ptool.re.Regex:captures_all`.
+Nombre de la API canónica: `ptool.re.Regex:captures_all`.
 
 `re:captures_all(input)` devuelve todos los conjuntos de capturas en `input` como `Captures[]`.
 
 ### replace
 
-Canonical API name: `ptool.re.Regex:replace`.
+Nombre de la API canónica: `ptool.re.Regex:replace`.
 
 `re:replace(input, replacement)` reemplaza la primera coincidencia en `input`.
 
 ### replace_all
 
-Canonical API name: `ptool.re.Regex:replace_all`.
+Nombre de la API canónica: `ptool.re.Regex:replace_all`.
 
 `re:replace_all(input, replacement)` reemplaza todas las coincidencias en `input`.
 
 ### split
 
-Canonical API name: `ptool.re.Regex:split`.
+Nombre de la API canónica: `ptool.re.Regex:split`.
 
 `re:split(input[, limit])` divide `input` usando la regex como separador.
 

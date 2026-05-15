@@ -4,7 +4,7 @@ Las utilidades de cliente HTTP están disponibles bajo `ptool.http` y `p.http`.
 
 ## ptool.http.request
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.http.request(options)` envía una solicitud HTTP y devuelve un objeto `Response`.
 
@@ -57,7 +57,7 @@ print(data.json.name)
 
 ## Response
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `Response` representa una respuesta HTTP devuelta por `ptool.http.request(...)`.
 
@@ -79,7 +79,7 @@ Métodos:
 
 ### text
 
-Canonical API name: `ptool.http.Response:text`.
+Nombre de la API canónica: `ptool.http.Response:text`.
 
 `resp:text()` lee y devuelve el cuerpo de la respuesta como texto.
 
@@ -87,13 +87,13 @@ Canonical API name: `ptool.http.Response:text`.
 
 ### json
 
-Canonical API name: `ptool.http.Response:json`.
+Nombre de la API canónica: `ptool.http.Response:json`.
 
 `resp:json()` lee el cuerpo de la respuesta, lo analiza como JSON y devuelve un valor Lua.
 
 ### bytes
 
-Canonical API name: `ptool.http.Response:bytes`.
+Nombre de la API canónica: `ptool.http.Response:bytes`.
 
 `resp:bytes()` lee y devuelve el cuerpo de la respuesta como bytes sin procesar.
 
@@ -101,7 +101,7 @@ Canonical API name: `ptool.http.Response:bytes`.
 
 ### header
 
-Canonical API name: `ptool.http.Response:header`.
+Nombre de la API canónica: `ptool.http.Response:header`.
 
 `resp:header(name)` devuelve el primer valor de cabecera de respuesta que coincide con `name`.
 
@@ -110,7 +110,7 @@ Canonical API name: `ptool.http.Response:header`.
 
 ### header_values
 
-Canonical API name: `ptool.http.Response:header_values`.
+Nombre de la API canónica: `ptool.http.Response:header_values`.
 
 `resp:header_values(name)` devuelve todos los valores de cabecera de respuesta que coinciden con `name`.
 
@@ -119,7 +119,7 @@ Canonical API name: `ptool.http.Response:header_values`.
 
 ### raise_for_status
 
-Canonical API name: `ptool.http.Response:raise_for_status`.
+Nombre de la API canónica: `ptool.http.Response:raise_for_status`.
 
 `resp:raise_for_status()` produce un error cuando el código de estado de la respuesta está en el rango 4xx o 5xx.
 

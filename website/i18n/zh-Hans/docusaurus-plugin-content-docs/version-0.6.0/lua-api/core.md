@@ -1,28 +1,28 @@
 # Core Lua API
 
-`ptool` exposes these core runtime helpers directly under `ptool` and `p`.
+`ptool` 会直接在 `ptool` 和 `p` 下暴露这些核心运行时辅助能力。
 
-`ptool run <lua_file>` runs a Lua script and injects the global variable `ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`). For files ending in `.lua`, `ptool <lua_file>` is a CLI shortcut with the same behavior.
+`ptool run <lua_file>` 会运行 Lua 脚本，并注入全局变量 `ptool` （以及它的别名 `p`；例如 `p.run` 与 `ptool.run` 等价）。对于以 `.lua` 结尾的文件，`ptool <lua_file>` 也是一个行为相同的 CLI 快捷写法。
 
-The embedded Lua runtime keeps the base Lua globals and exposes only these standard libraries by default:
+内嵌的 Lua 运行时会保留基础 Lua 全局能力，并默认只暴露这些标准库：
 
 - `table`
 - `string`
 - `math`
 - `utf8`
 
-Host-facing built-in modules such as `io`, `os`, and `package` are intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`, `ptool.path`, and `ptool.run` for filesystem, environment, process, network, and other runtime operations instead.
+像 `io`、`os`、`package` 这类面向宿主环境的内建模块会被有意禁用。 文件系统、环境变量、进程、网络等运行时操作应改用 `ptool.fs`、 `ptool.os`、`ptool.path`、`ptool.run` 等 API。
 
-If you want to pass arguments to a Lua script, you can do it like this:
+如果你想向 Lua 脚本传参，可以这样做：
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
 ptool script.lua --name alice -v a.txt b.txt
 ```
 
-The arguments can then be parsed with `ptool.args.parse(...)`.
+随后可以用 `ptool.args.parse(...)` 来解析这些参数。
 
-Here is an example script:
+示例脚本如下：
 
 ```lua
 ptool.use("v0.1.0")
@@ -30,7 +30,7 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-Shebang is supported, so you can add this to the top of the file:
+也支持 shebang，因此你可以把下面这行放到文件开头：
 
 ```
 #!/usr/bin/env ptool
@@ -38,22 +38,22 @@ Shebang is supported, so you can add this to the top of the file:
 
 ## ptool.use
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.use` declares the minimum required `ptool` version for a script.
+`ptool.use` 用来声明脚本所要求的最低 `ptool` 版本。
 
 ```lua
 ptool.use("v0.1.0")
 ```
 
-- The argument is a semantic version string (SemVer) and supports an optional `v` prefix, such as `v0.1.0` or `0.1.0`.
-- If the required version is higher than the current `ptool` version, the script exits immediately with an error saying that the current `ptool` version is too old.
+- 参数是一个语义化版本字符串（SemVer），可选带 `v` 前缀，例如 `v0.1.0` 或 `0.1.0`。
+- 如果要求的版本高于当前 `ptool` 版本，脚本会立即退出，并报错说明当前 `ptool` 版本过旧。
 
 ## ptool.unindent
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.unindent` processes multi-line strings by removing the `| ` prefix after leading indentation on each line and trimming leading and trailing blank lines.
+`ptool.unindent` 处理多行字符串时，会在每行前导缩进之后移除 `| ` 前缀，并裁掉 首尾空白行。
 
 ```lua
 local str = ptool.unindent([[
@@ -62,7 +62,7 @@ local str = ptool.unindent([[
 ]])
 ```
 
-This is equivalent to:
+这等价于：
 
 ```lua
 local str = [[line 1
@@ -71,26 +71,26 @@ line 2]]
 
 ## ptool.inspect
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-style string. It is primarily intended for debugging and displaying table contents.
+`ptool.inspect(value[, options])` 会把 Lua 值渲染成可读的 Lua 风格字符串， 主要用于调试和展示 table 内容。
 
-- `value` (any, required): The Lua value to inspect.
-- `options` (table, optional): Rendering options. Supported fields:
-  - `indent` (string, optional): Indentation used for each nesting level. Defaults to two spaces.
-  - `multiline` (boolean, optional): Whether tables are rendered across multiple lines. Defaults to `true`.
-  - `max_depth` (integer, optional): Maximum nesting depth to render. Deeper values are replaced with `<max-depth>`.
-- Returns: `string`.
+- `value`（任意类型，必填）：要查看的 Lua 值。
+- `options`（table，可选）：渲染选项。支持：
+  - `indent`（string，可选）：每层嵌套使用的缩进。默认是两个空格。
+  - `multiline`（boolean，可选）：table 是否跨多行渲染。默认值为 `true`。
+  - `max_depth`（integer，可选）：最大渲染深度。更深的值会被替换为 `<max-depth>`。
+- 返回：`string`。
 
-Behavior:
+行为说明：
 
-- Array-like entries (`1..n`) are rendered first.
-- Remaining table fields are rendered after the array part in stable key order.
-- Identifier-like string keys are rendered as `key = value`; other keys are rendered as `[key] = value`.
-- Recursive table references are rendered as `<cycle>`.
-- Functions, threads, and userdata are rendered as placeholder values such as `<function>` and `<userdata>`.
+- 类数组条目（`1..n`）会优先渲染。
+- 其余 table 字段会在数组部分之后，按稳定键顺序渲染。
+- 类标识符的字符串键会渲染为 `key = value`；其他键会渲染为 `[key] = value`。
+- 递归 table 引用会渲染为 `<cycle>`。
+- function、thread 和 userdata 会渲染为 `<function>`、`<userdata>` 等占位值。
 
-Example:
+示例：
 
 ```lua
 local value = {
@@ -105,34 +105,34 @@ print(ptool.inspect(value, { multiline = false }))
 
 ## ptool.ask
 
-> `v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt subcommands.
+> `v0.1.0` - 引入。 `v0.5.0` - 新增输入校验选项和 prompt 子命令。
 
-`ptool.ask` provides interactive prompts. You can call it directly for text input, or use its prompt subcommands for confirmation, selection, multi-select, and secret input.
+`ptool.ask` 提供交互式提示能力。你既可以直接调用它来读取文本输入，也可以 使用它的子 prompt 来做确认、单选、多选和密文输入。
 
-Common behavior:
+通用行为：
 
-- All `ptool.ask` prompts require an interactive TTY. Running them in a non-interactive environment raises an error.
-- If the user cancels a prompt, the script raises an error.
-- Unknown option names or invalid option value types raise an error.
+- 所有 `ptool.ask` prompt 都需要交互式 TTY。在非交互环境中运行会抛出错误。
+- 如果用户取消 prompt，脚本会抛出错误。
+- 未知选项名或非法选项值类型都会抛出错误。
 
 ### ptool.ask
 
-`ptool.ask(prompt[, options])` asks the user for a line of text and returns the answer.
+`ptool.ask(prompt[, options])` 向用户询问一行文本，并返回用户输入。
 
-- `prompt` (string, required): The prompt shown to the user.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `default` (string, optional): Default value used when the user submits an empty answer.
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `placeholder` (string, optional): Placeholder text shown before the user starts typing.
-  - `required` (boolean, optional): Whether the answer must be non-empty.
-  - `allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `true`.
-  - `trim` (boolean, optional): Whether to trim leading and trailing whitespace from the answer before returning it.
-  - `min_length` (integer, optional): Minimum accepted character length.
-  - `max_length` (integer, optional): Maximum accepted character length.
-  - `pattern` (string, optional): Regular expression the answer must match.
-- Returns: `string`.
+- `prompt`（string，必填）：展示给用户的提示语。
+- `options`（table，可选）：提示选项。支持：
+  - `default`（string，可选）：用户提交空输入时采用的默认值。
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `placeholder`（string，可选）：用户开始输入前显示的占位文本。
+  - `required`（boolean，可选）：是否要求答案非空。
+  - `allow_empty`（boolean，可选）：是否允许空答案。默认值为 `true`。
+  - `trim`（boolean，可选）：返回前是否裁剪答案首尾空白。
+  - `min_length`（integer，可选）：允许的最小字符长度。
+  - `max_length`（integer，可选）：允许的最大字符长度。
+  - `pattern`（string，可选）：答案必须匹配的正则表达式。
+- 返回：`string`。
 
-Example:
+示例：
 
 ```lua
 local project = ptool.ask("Project name?", {
@@ -146,17 +146,17 @@ local project = ptool.ask("Project name?", {
 
 ### ptool.ask.confirm
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - 引入。
 
-`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer.
+`ptool.ask.confirm(prompt[, options])` 向用户询问一个是/否答案。
 
-- `prompt` (string, required): The prompt shown to the user.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `default` (boolean, optional): Default answer used when the user presses Enter without typing.
-  - `help` (string, optional): Extra help text shown below the prompt.
-- Returns: `boolean`.
+- `prompt`（string，必填）：展示给用户的提示语。
+- `options`（table，可选）：提示选项。支持：
+  - `default`（boolean，可选）：用户直接按 Enter 时采用的默认答案。
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+- 返回：`boolean`。
 
-Example:
+示例：
 
 ```lua
 local confirmed = ptool.ask.confirm("Continue?", {
@@ -166,21 +166,21 @@ local confirmed = ptool.ask.confirm("Continue?", {
 
 ### ptool.ask.select
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - 引入。
 
-`ptool.ask.select(prompt, items[, options])` asks the user to choose one item from a list.
+`ptool.ask.select(prompt, items[, options])` 让用户从列表中选择一个条目。
 
-- `prompt` (string, required): The prompt shown to the user.
-- `items` (table, required): Candidate items. Each entry may be:
-  - A string, which is used as both the display label and the returned value.
-  - A table like `{ label = "Patch", value = "patch" }`.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `page_size` (integer, optional): Maximum number of rows shown at once.
-  - `default_index` (integer, optional): 1-based index of the initially selected item.
-- Returns: `string`.
+- `prompt`（string，必填）：展示给用户的提示语。
+- `items`（table，必填）：候选条目。每一项可以是：
+  - string，会同时作为显示标签和返回值。
+  - 形如 `{ label = "Patch", value = "patch" }` 的 table。
+- `options`（table，可选）：提示选项。支持：
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `page_size`（integer，可选）：一次最多显示多少行。
+  - `default_index`（integer，可选）：初始选中项的 1-based 下标。
+- 返回：`string`。
 
-Example:
+示例：
 
 ```lua
 local bump = ptool.ask.select("Select bump type", {
@@ -194,21 +194,21 @@ local bump = ptool.ask.select("Select bump type", {
 
 ### ptool.ask.multiselect
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - 引入。
 
-`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose zero or more items from a list.
+`ptool.ask.multiselect(prompt, items[, options])` 让用户从列表中选择零个 或多个条目。
 
-- `prompt` (string, required): The prompt shown to the user.
-- `items` (table, required): Candidate items. The format is the same as `ptool.ask.select`.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `page_size` (integer, optional): Maximum number of rows shown at once.
-  - `default_indexes` (table, optional): 1-based indexes selected by default.
-  - `min_selected` (integer, optional): Minimum number of items that must be selected.
-  - `max_selected` (integer, optional): Maximum number of items that may be selected.
-- Returns: `table`.
+- `prompt`（string，必填）：展示给用户的提示语。
+- `items`（table，必填）：候选条目，格式与 `ptool.ask.select` 相同。
+- `options`（table，可选）：提示选项。支持：
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `page_size`（integer，可选）：一次最多显示多少行。
+  - `default_indexes`（table，可选）：默认选中的 1-based 下标数组。
+  - `min_selected`（integer，可选）：最少必须选中的条目数。
+  - `max_selected`（integer，可选）：最多允许选中的条目数。
+- 返回：`table`。
 
-Example:
+示例：
 
 ```lua
 local targets = ptool.ask.multiselect("Select targets", {
@@ -223,25 +223,25 @@ local targets = ptool.ask.multiselect("Select targets", {
 
 ### ptool.ask.secret
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - 引入。
 
-`ptool.ask.secret(prompt[, options])` asks the user for secret input such as a token or password.
+`ptool.ask.secret(prompt[, options])` 用来读取 token、密码等密文输入。
 
-- `prompt` (string, required): The prompt shown to the user.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `required` (boolean, optional): Whether the answer must be non-empty.
-  - `allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `false`.
-  - `confirm` (boolean, optional): Whether to ask the user to type the secret twice. Defaults to `false`.
-  - `confirm_prompt` (string, optional): Custom prompt for the confirmation step.
-  - `mismatch_message` (string, optional): Custom error message shown when the two answers do not match.
-  - `display_toggle` (boolean, optional): Whether to allow temporarily showing the typed secret.
-  - `min_length` (integer, optional): Minimum accepted character length.
-  - `max_length` (integer, optional): Maximum accepted character length.
-  - `pattern` (string, optional): Regular expression the answer must match.
-- Returns: `string`.
+- `prompt`（string，必填）：展示给用户的提示语。
+- `options`（table，可选）：提示选项。支持：
+  - `help`（string，可选）：显示在提示下方的额外帮助文本。
+  - `required`（boolean，可选）：是否要求答案非空。
+  - `allow_empty`（boolean，可选）：是否允许空答案。默认值为 `false`。
+  - `confirm`（boolean，可选）：是否要求用户重复输入一次进行确认。 默认值为 `false`。
+  - `confirm_prompt`（string，可选）：确认步骤使用的自定义提示语。
+  - `mismatch_message`（string，可选）：两次输入不一致时显示的自定义错误消息。
+  - `display_toggle`（boolean，可选）：是否允许临时显示已输入的密文。
+  - `min_length`（integer，可选）：允许的最小字符长度。
+  - `max_length`（integer，可选）：允许的最大字符长度。
+  - `pattern`（string，可选）：答案必须匹配的正则表达式。
+- 返回：`string`。
 
-Example:
+示例：
 
 ```lua
 local token = ptool.ask.secret("API token?", {
@@ -252,19 +252,19 @@ local token = ptool.ask.secret("API token?", {
 
 ## ptool.config
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.config` sets runtime configuration for the script.
+`ptool.config` 用来设置脚本的运行时配置。
 
-Currently supported fields:
+当前支持的字段：
 
-- `run` (table, optional): Default configuration for `ptool.run`. Supported fields:
-  - `echo` (boolean, optional): Default echo switch. Defaults to `true`.
-  - `check` (boolean, optional): Whether failures raise an error by default. Defaults to `false`.
-  - `confirm` (boolean, optional): Whether to require confirmation before execution by default. Defaults to `false`.
-  - `retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. Defaults to `false`.
+- `run`（table，可选）：`ptool.run` 的默认配置。支持：
+  - `echo`（boolean，可选）：默认是否回显。默认值为 `true`。
+  - `check`（boolean，可选）：默认在失败时是否抛错。默认值为 `false`。
+  - `confirm`（boolean，可选）：默认执行前是否要求确认。默认值为 `false`。
+  - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 默认值为 `false`。
 
-Example:
+示例：
 
 ```lua
 ptool.config({
@@ -279,19 +279,19 @@ ptool.config({
 
 ## ptool.cd
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.cd(path)` updates `ptool`'s runtime current directory.
+`ptool.cd(path)` 更新 `ptool` 的运行时当前目录。
 
-- `path` (string, required): Target directory path, absolute or relative.
+- `path`（string，必填）：目标目录路径，可以是绝对路径或相对路径。
 
-Behavior:
+行为说明：
 
-- Relative paths are resolved from the current `ptool` runtime directory.
-- The target must exist and must be a directory.
-- This updates `ptool` runtime state and affects APIs that use runtime cwd (such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`).
+- 相对路径会从当前 `ptool` 运行时目录解析。
+- 目标必须存在，而且必须是目录。
+- 这会更新 `ptool` 的运行时状态，并影响依赖运行时 cwd 的 API （例如 `ptool.run`、`ptool.path.abspath` 和 `ptool.path.relpath`）。
 
-Example:
+示例：
 
 ```lua
 ptool.cd("foobar")
@@ -301,19 +301,19 @@ print(res.stdout)
 
 ## ptool.script_path
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - 引入。
 
-`ptool.script_path()` returns the absolute path of the current entry script.
+`ptool.script_path()` 返回当前入口脚本的绝对路径。
 
-- Returns: `string|nil`.
+- 返回：`string|nil`。
 
-Behavior:
+行为说明：
 
-- When running through `ptool run <file>`, this returns the entry script path as an absolute, normalized path.
-- The returned path is fixed when the runtime starts and does not change after `ptool.cd(...)`.
-- In `ptool repl`, this returns `nil`.
+- 通过 `ptool run <file>` 运行时，它会返回入口脚本的绝对规范化路径。
+- 返回值会在 runtime 启动时固定下来，之后不会随着 `ptool.cd(...)` 改变。
+- 在 `ptool repl` 中，它会返回 `nil`。
 
-Example:
+示例：
 
 ```lua
 local script_path = ptool.script_path()
@@ -323,44 +323,44 @@ local project_root = ptool.path.dirname(script_dir)
 
 ## ptool.try
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - 引入。
 
-`ptool.try(fn)` runs `fn` and converts raised errors into return values.
+`ptool.try(fn)` 会执行 `fn`，并把抛出的错误转换成返回值。
 
-- `fn` (function, required): Callback to execute.
-- Returns: `ok, value, err`.
+- `fn`（function，必填）：要执行的回调。
+- 返回：`ok, value, err`。
 
-Return value rules:
+返回值规则：
 
-- On success, `ok = true`, `err = nil`, and `value` contains the callback result.
-- If the callback returns no values, `value` is `nil`.
-- If the callback returns one value, `value` is that value.
-- If the callback returns multiple values, `value` is an array-like table.
-- On failure, `ok = false`, `value = nil`, and `err` is a table.
+- 成功时，`ok = true`，`err = nil`，`value` 是回调返回结果。
+- 如果回调没有返回值，`value` 为 `nil`。
+- 如果回调只返回一个值，`value` 就是该值本身。
+- 如果回调返回多个值，`value` 是一个类数组 table。
+- 失败时，`ok = false`，`value = nil`，`err` 是一个 table。
 
-Structured error fields:
+结构化错误字段：
 
-- `kind` (string): Stable error category such as `io_error`, `command_failed`, `invalid_argument`, `http_error`, or `lua_error`.
-- `message` (string): Human-readable error message.
-- `op` (string, optional): API or operation name such as `ptool.fs.read`.
-- `detail` (string, optional): Extra detail for the failure.
-- `path` (string, optional): Path involved in a filesystem failure.
-- `input` (string, optional): Original input that failed to parse or validate.
-- `cmd` (string, optional): Command name for command failures.
-- `status` (integer, optional): Exit status or HTTP status when available.
-- `stderr` (string, optional): Captured stderr for command failures.
-- `url` (string, optional): URL involved in an HTTP failure.
-- `cwd` (string, optional): Effective working directory for command failures.
-- `target` (string, optional): SSH target for SSH-related command failures.
-- `retryable` (boolean): Whether retrying may make sense. Defaults to `false`.
+- `kind`（string）：稳定的错误类别，例如 `io_error`、`command_failed`、 `invalid_argument`、`http_error` 或 `lua_error`。
+- `message`（string）：便于阅读的错误消息。
+- `op`（string，可选）：发生错误的 API 或操作名，例如 `ptool.fs.read`。
+- `detail`（string，可选）：额外的失败细节。
+- `path`（string，可选）：文件系统错误涉及的路径。
+- `input`（string，可选）：解析或校验失败时的原始输入。
+- `cmd`（string，可选）：命令执行失败时的命令名。
+- `status`（integer，可选）：退出码或 HTTP 状态码（如果可用）。
+- `stderr`（string，可选）：命令失败时捕获到的 stderr。
+- `url`（string，可选）：HTTP 失败涉及的 URL。
+- `cwd`（string，可选）：命令执行时实际使用的工作目录。
+- `target`（string，可选）：SSH 相关命令失败时的目标主机。
+- `retryable`（boolean）：是否适合重试。默认值为 `false`。
 
-Behavior:
+行为说明：
 
-- `ptool` APIs raise structured errors. `ptool.try` converts them into the `err` table above so callers can branch on `err.kind` and related fields.
-- Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, and only `message` is guaranteed.
-- `ptool.try` is the recommended way to handle errors from APIs such as `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, and `res:assert_ok()`.
+- `ptool` 自带 API 抛出的都是结构化错误。`ptool.try` 会把它们转换成上面的 `err` table，方便调用方根据 `err.kind` 和其他字段做分支处理。
+- 普通 Lua 错误也会被捕获。这种情况下，`err.kind` 为 `lua_error`，并且只保证 `message` 一定存在。
+- 对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })` 和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。
 
-Example:
+示例：
 
 ```lua
 local ok, content, err = ptool.try(function()
@@ -387,11 +387,11 @@ end
 
 ## ptool.run
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.run` executes external commands from Rust.
+`ptool.run` 从 Rust 执行外部命令。
 
-The following call forms are supported:
+支持以下调用形式：
 
 ```lua
 ptool.run("echo hello world")
@@ -403,31 +403,31 @@ ptool.run({ cmd = "echo", args = {"hello", "world"} })
 ptool.run({ cmd = "echo", args = {"hello"}, stdout = "capture" })
 ```
 
-Argument rules:
+参数规则：
 
-- `ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments.
-- `ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules.
-- `ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings.
-- `ptool.run(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`.
-- `ptool.run(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `echo`.
-- `ptool.run(options)`: `options` is a table.
-- When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`.
+- `ptool.run(cmdline)`：`cmdline` 会按 shell 风格（`shlex`）规则拆分。第一项 作为命令，其余项作为参数。
+- `ptool.run(cmd, argsline)`：`cmd` 直接作为命令，`argsline` 会按 shell 风格 （`shlex`）规则拆分成参数列表。
+- `ptool.run(cmd, args)`：`cmd` 是字符串，`args` 是字符串数组。
+- `ptool.run(cmdline, options)`：`options` 会覆盖本次调用的配置，例如 `echo`。
+- `ptool.run(cmd, args, options)`：`args` 可以是字符串，也可以是字符串数组； `options` 会覆盖本次调用的配置，例如 `echo`。
+- `ptool.run(options)`：`options` 是一个 table。
+- 当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； 否则视为 `options`。
 
-Return value rules:
+返回值规则：
 
-- A table is always returned with the following fields:
-  - `ok` (boolean): Whether the exit code is `0`.
-  - `code` (integer|nil): The process exit code. If the process was terminated by a signal, this is `nil`.
-  - `cmd` (string): Command name used for the execution.
-  - `cwd` (string): Effective working directory used for the execution.
-  - `stdout` (string, optional): Present when `stdout = "capture"`.
-  - `stderr` (string, optional): Present when `stderr = "capture"`.
-  - `assert_ok(self)` (function): Raises a structured error when `ok = false`. The error kind is `command_failed`, and the error may include `cmd`, `status`, `stderr`, and `cwd`.
-- The default value of `check` comes from `ptool.config({ run = { check = ... } })`. If not configured, it defaults to `false`. When `check = false`, callers can inspect `ok` themselves or call `res:assert_ok()`.
-- When both `check = true` and `retry = true`, `ptool.run` asks whether the failed command should be retried before raising the final error.
-- When `check = true`, `ptool.run` raises the same structured `command_failed` error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to catch and inspect it from Lua.
+- 总是返回一个 table，包含以下字段：
+  - `ok`（boolean）：退出码是否为 `0`。
+  - `code`（integer|nil）：进程退出码。如果进程因信号终止，则为 `nil`。
+  - `cmd`（string）：本次执行使用的命令名。
+  - `cwd`（string）：本次执行实际使用的工作目录。
+  - `stdout`（string，可选）：当 `stdout = "capture"` 时提供。
+  - `stderr`（string，可选）：当 `stderr = "capture"` 时提供。
+  - `assert_ok(self)`（function）：当 `ok = false` 时抛出结构化错误。错误类别 为 `command_failed`，并且可能包含 `cmd`、`status`、`stderr` 和 `cwd`。
+- `check` 的默认值来自 `ptool.config({ run = { check = ... } })`。如果未配置， 默认是 `false`。当 `check = false` 时，调用方可以自行检查 `ok`，或者调用 `res:assert_ok()`。
+- 当同时设置 `check = true` 和 `retry = true` 时，`ptool.run` 会在最终抛错前， 询问是否要重试失败的命令。
+- 当 `check = true` 时，`ptool.run` 抛出的也是与 `res:assert_ok()` 相同的 `command_failed` 结构化错误。如果你想在 Lua 里捕获并检查它，使用 `ptool.try(...)`。
 
-Example:
+示例：
 
 ```lua
 ptool.config({ run = { echo = false } })
@@ -448,32 +448,32 @@ print(res.ok, res.code)
 res:assert_ok()
 ```
 
-`ptool.run(options)` is also supported, where `options` is a table with the following fields:
+也支持 `ptool.run(options)` 形式，其中 `options` 是一个包含以下字段的 table：
 
-- `cmd` (string, required): The command name or executable path.
-- `args` (string[], optional): The argument list.
-- `cwd` (string, optional): The child process working directory.
-- `env` (table, optional): Additional environment variables, where keys are variable names and values are variable values.
-- `echo` (boolean, optional): Whether to echo command information for this execution. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit code is not `0`. If omitted, the value from `ptool.config({ run = { check = ... } })` is used; if that is also unset, the default is `false`.
-- `confirm` (boolean, optional): Whether to ask the user for confirmation before execution. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`.
-- `retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. If omitted, the value from `ptool.config({ run = { retry = ... } })` is used; if that is also unset, the default is `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
-- When `confirm = true`:
-  - If the user refuses the execution, an error is raised immediately.
-  - If the current environment is not interactive (no TTY), an error is raised immediately.
-- When `retry = true` and `check = true`:
-  - If the command fails, `ptool.run` asks whether to retry the same command.
-  - If the current environment is not interactive (no TTY), an error is raised immediately instead of prompting for retry.
+- `cmd`（string，必填）：命令名或可执行文件路径。
+- `args`（string[]，可选）：参数列表。
+- `cwd`（string，可选）：子进程工作目录。
+- `env`（table，可选）：附加环境变量，键和值都应为字符串。
+- `echo`（boolean，可选）：本次执行是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
+- `check`（boolean，可选）：退出码不为 `0` 时是否立即抛错。如果省略，则使用 `ptool.config({ run = { check = ... } })` 中的值；若仍未设置，则默认是 `false`。
+- `confirm`（boolean，可选）：执行前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
+- `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 如果省略，则使用 `ptool.config({ run = { retry = ... } })` 中的值；若仍未设置， 则默认是 `false`。
+- `stdout`（string，可选）：stdout 处理策略。支持：
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"capture"`：捕获到 `res.stdout`。
+  - `"null"`：丢弃输出。
+- `stderr`（string，可选）：stderr 处理策略。支持：
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"capture"`：捕获到 `res.stderr`。
+  - `"null"`：丢弃输出。
+- 当 `confirm = true` 时：
+  - 如果用户拒绝执行，会立即抛出错误。
+  - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
+- 当 `retry = true` 且 `check = true` 时：
+  - 如果命令执行失败，`ptool.run` 会询问是否重试相同命令。
+  - 如果当前环境不是交互式环境（无 TTY），则不会弹出重试提示，而是直接抛错。
 
-Example:
+示例：
 
 ```lua
 ptool.run({
@@ -497,18 +497,18 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 引入。
 
-`ptool.run_capture` executes external commands from Rust with the same call forms, argument rules, return value rules, and options as `ptool.run`.
+`ptool.run_capture` 从 Rust 执行外部命令，调用形式、参数规则、返回值规则和选项 都与 `ptool.run` 相同。
 
-The difference is only the default stream handling:
+唯一差异是默认流处理方式：
 
-- `stdout` defaults to `"capture"`.
-- `stderr` defaults to `"capture"`.
+- `stdout` 默认是 `"capture"`。
+- `stderr` 默认是 `"capture"`。
 
-You can still override either field explicitly in `options`.
+你仍然可以在 `options` 中显式覆盖任意一个字段。
 
-Example:
+示例：
 
 ```lua
 local res = ptool.run_capture("echo hello world")

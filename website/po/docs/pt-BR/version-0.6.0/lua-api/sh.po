@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,38 +14,41 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:1
 msgid "Shell API"
-msgstr ""
+msgstr "API de shell"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:3
 msgid "Shell parsing helpers are available under `ptool.sh` and `p.sh`."
 msgstr ""
+"As utilidades de parsing de shell estão disponíveis em `ptool.sh` e `p.sh`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:5
 msgid "ptool.sh.split"
-msgstr ""
+msgstr "ptool.sh.split"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:7
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:9
 msgid ""
 "`ptool.sh.split(command)` parses a command string using shell-style rules "
 "and returns an argument array."
 msgstr ""
+"`ptool.sh.split(command)` faz o parse de uma string de comando usando regras "
+"em estilo shell e retorna um array de argumentos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:12
 msgid "`command` (string, required): The command string to split."
-msgstr ""
+msgstr "`command` (string, obrigatório): A string de comando a dividir."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:13
 msgid "Returns: `string[]`."
-msgstr ""
+msgstr "Retorna: `string[]`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:15
 msgid "Example:"
-msgstr ""
+msgstr "Exemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/sh.md:21
 msgid "The `args` above is equivalent to:"
-msgstr ""
+msgstr "O `args` acima equivale a:"

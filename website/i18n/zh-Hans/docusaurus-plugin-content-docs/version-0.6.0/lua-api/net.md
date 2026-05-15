@@ -1,31 +1,31 @@
 # Network API
 
-URL, IP, and host/port parsing helpers are available under `ptool.net` and `p.net`.
+URL、IP 和 host/port 解析辅助能力位于 `ptool.net` 和 `p.net` 下。
 
 ## ptool.net.parse_url
 
-> `v0.2.0` - Introduced.
+> `v0.2.0` - 引入。
 
-`ptool.net.parse_url(input)` parses a URL string and returns a normalized parts table.
+`ptool.net.parse_url(input)` 解析 URL 字符串，并返回一个规范化的组成部分表。
 
-Arguments:
+参数：
 
-- `input` (string, required): The URL to parse.
+- `input`（string，必填）：要解析的 URL。
 
-Returns: A table with the following fields:
+返回：包含以下字段的表：
 
-- `kind` (string): Always `"url"`.
-- `input` (string): The original input string.
-- `normalized` (string): The normalized URL string.
-- `scheme` (string): The URL scheme.
-- `username` (string, optional): The decoded username, if present.
-- `password` (string, optional): The decoded password, if present.
-- `host` (string, optional): The hostname or IP literal, if present.
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`, optional): The host classification, if a host is present.
-- `port` (integer, optional): The explicit port, if present.
-- `path` (string): The URL path.
-- `query` (string, optional): The query string without the leading `?`.
-- `fragment` (string, optional): The fragment without the leading `#`.
+- `kind`（string）：固定为 `"url"`。
+- `input`（string）：原始输入字符串。
+- `normalized`（string）：规范化后的 URL 字符串。
+- `scheme`（string）：URL 方案。
+- `username`（string，可选）：解码后的用户名（如果存在）。
+- `password`（string，可选）：解码后的密码（如果存在）。
+- `host`（string，可选）：主机名或 IP 字面量（如果存在）。
+- `host_kind`（`"domain"|"ipv4"|"ipv6"`，可选）：主机分类，仅当存在主机时提供。
+- `port`（integer，可选）：显式端口（如果存在）。
+- `path`（string）：URL 路径。
+- `query`（string，可选）：不带前导 `?` 的查询字符串。
+- `fragment`（string，可选）：不带前导 `#` 的片段。
 
 ```lua
 local parts = ptool.net.parse_url("https://user:pass@example.com:8443/a/b?q=1#frag")
@@ -40,20 +40,20 @@ print(parts.fragment)    -- frag
 
 ## ptool.net.parse_ip
 
-> `v0.2.0` - Introduced.
+> `v0.2.0` - 引入。
 
-`ptool.net.parse_ip(input)` parses an IPv4 or IPv6 address and returns a normalized parts table.
+`ptool.net.parse_ip(input)` 解析 IPv4 或 IPv6 地址，并返回一个规范化的组成部分表。
 
-Arguments:
+参数：
 
-- `input` (string, required): The IP address to parse.
+- `input`（string，必填）：要解析的 IP 地址。
 
-Returns: A table with the following fields:
+返回：包含以下字段的表：
 
-- `kind` (string): Always `"ip"`.
-- `input` (string): The original input string.
-- `normalized` (string): The normalized IP address.
-- `version` (integer): `4` for IPv4 or `6` for IPv6.
+- `kind`（string）：固定为 `"ip"`。
+- `input`（string）：原始输入字符串。
+- `normalized`（string）：规范化后的 IP 地址。
+- `version`（integer）：IPv4 返回 `4`，IPv6 返回 `6`。
 
 ```lua
 local parts = ptool.net.parse_ip("2001:0db8::1")
@@ -64,22 +64,22 @@ print(parts.version)    -- 6
 
 ## ptool.net.parse_host_port
 
-> `v0.2.0` - Introduced.
+> `v0.2.0` - 引入。
 
-`ptool.net.parse_host_port(input)` parses a `host:port` string and returns a normalized parts table.
+`ptool.net.parse_host_port(input)` 解析 `host:port` 字符串，并返回一个规范化的 组成部分表。
 
-Arguments:
+参数：
 
-- `input` (string, required): The host and port string. IPv6 addresses must use bracket notation such as `[2001:db8::1]:443`.
+- `input`（string，必填）：主机和端口字符串。IPv6 地址必须使用方括号形式， 例如 `[2001:db8::1]:443`。
 
-Returns: A table with the following fields:
+返回：包含以下字段的表：
 
-- `kind` (string): Always `"host_port"`.
-- `input` (string): The original input string.
-- `normalized` (string): The normalized `host:port` string.
-- `host` (string): The normalized host value.
-- `host_kind` (`"domain"|"ipv4"|"ipv6"`): The host classification.
-- `port` (integer): The parsed port.
+- `kind`（string）：固定为 `"host_port"`。
+- `input`（string）：原始输入字符串。
+- `normalized`（string）：规范化后的 `host:port` 字符串。
+- `host`（string）：规范化后的主机值。
+- `host_kind`（`"domain"|"ipv4"|"ipv6"`）：主机分类。
+- `port`（integer）：解析后的端口。
 
 ```lua
 local parts = ptool.net.parse_host_port("[2001:0db8::1]:443")

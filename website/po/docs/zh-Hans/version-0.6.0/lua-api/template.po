@@ -6,6 +6,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,57 +14,59 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:1
 msgid "Template API"
-msgstr ""
+msgstr "Template API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:3
 msgid ""
 "Template rendering helpers are available under `ptool.template` and "
 "`p.template`."
-msgstr ""
+msgstr "模板渲染辅助能力位于 `ptool.template` 和 `p.template` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:5
 msgid "ptool.template.render"
-msgstr ""
+msgstr "ptool.template.render"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:7
 msgid "`v0.1.0` - Introduced."
-msgstr ""
+msgstr "`v0.1.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:9
 msgid ""
 "`ptool.template.render(template, context)` renders a Jinja-style template "
 "string and returns the rendered result."
-msgstr ""
+msgstr "`ptool.template.render(template, context)` 渲染 Jinja 风格的模板字符串，并返"
+"回 渲染结果。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:12
 msgid "`template` (string, required): The template source text."
-msgstr ""
+msgstr "`template`（string，必填）：模板源文本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:13
 msgid "`context` (any serializable Lua value, required): The template context."
-msgstr ""
+msgstr "`context`（任意可序列化 Lua 值，必填）：模板上下文。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:14
 msgid "Returns: The rendered string."
-msgstr ""
+msgstr "返回：渲染后的字符串。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:16
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:38
 msgid "Notes:"
-msgstr ""
+msgstr "说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:40
 msgid "The context must be serializable to data values."
-msgstr ""
+msgstr "`context` 必须能被序列化成数据值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:41
 msgid ""
 "Lua values such as `function`, `thread`, and unsupported `userdata` are not "
 "accepted as template context values."
-msgstr ""
+msgstr "`function`、`thread` 和不受支持的 `userdata` 等 Lua 值，不能作为模板上下文值"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.6.0/lua-api/template.md:43
 msgid ""
@@ -72,3 +75,6 @@ msgid ""
 "raising an error. When rendered directly without a fallback, undefined "
 "values become an empty string."
 msgstr ""
+"缺失值采用可链式的 undefined 语义。这意味着像 `foo.bar.baz` 这样的嵌套访问， "
+"可以安全传给 `default(...)` 之类的过滤器而不会报错。若直接渲染且没有后备值， "
+"undefined 会变成空字符串。"

@@ -1,41 +1,41 @@
 # REPL
 
-`ptool repl` starts an interactive Lua session with the standard `ptool` API already loaded.
+`ptool repl` は、標準の `ptool` API がすでに読み込まれた状態で対話型の Lua セッションを開始します。
 
-## Start the REPL
+## REPL を開始する
 
 ```sh
 ptool repl
 ```
 
-When the REPL starts, `ptool` shows a banner and waits for Lua input.
+REPL が起動すると、`ptool` はバナーを表示し、Lua 入力を待ち受けます。
 
-## What it provides
+## 提供されるもの
 
-- The global `ptool` table and the shorter alias `p`.
-- The same bundled helpers you can use from `ptool run <file>`.
-- Interactive evaluation of Lua expressions and statements.
-- Readline-style editing, including arrow-key cursor movement and in-session history navigation.
+- グローバルテーブル `ptool` と短い別名 `p`。
+- `ptool run <file>` から使えるものと同じ組み込みヘルパー。
+- Lua の式や文の対話的な評価。
+- 矢印キーによるカーソル移動やセッション内履歴の移動を含む、 readline 風の編集機能。
 
-## Basic usage
+## 基本的な使い方
 
-Enter an expression to evaluate it immediately:
+式を入力するとすぐに評価されます。
 
 ```lua
 1 + 2
 ```
 
-The REPL prints returned values using the same inspector used elsewhere in `ptool`.
+REPL は `ptool` の他の場所でも使われている同じインスペクターで戻り値を 表示します。
 
-You can also call `ptool` APIs directly:
+`ptool` API を直接呼び出すこともできます。
 
 ```lua
 p.str.trim("  hello  ")
 ```
 
-## Multi-line input
+## 複数行入力
 
-If the current input is incomplete, the prompt changes from `>>> ` to `... `. This lets you continue entering a block such as a function or control flow statement:
+現在の入力が未完成の場合、プロンプトは `>>> ` から `... ` に変わります。 これにより、関数や制御フロー文のようなブロックを続けて入力できます。
 
 ```lua
 for i = 1, 3 do
@@ -43,16 +43,16 @@ for i = 1, 3 do
 end
 ```
 
-Once the input is complete, `ptool` evaluates the whole chunk.
+入力が完成すると、`ptool` はそのチャンク全体を評価します。
 
-## Keyboard behavior
+## キーボード操作
 
-- `Up` and `Down` browse commands entered earlier in the same REPL session.
-- `Left` and `Right` move the cursor within the current input line.
-- `Ctrl-C` clears the current input. If you are in the middle of a multi-line chunk, it discards the buffered chunk and returns to the primary prompt.
-- `Ctrl-D` exits the REPL.
+- `Up` と `Down` は、同じ REPL セッション内で以前に入力したコマンドを たどります。
+- `Left` と `Right` は、現在の入力行の中でカーソルを移動します。
+- `Ctrl-C` は現在の入力を消去します。複数行チャンクの途中なら、 バッファされたチャンクを破棄して通常のプロンプトに戻ります。
+- `Ctrl-D` は REPL を終了します。
 
-## Notes
+## 注意
 
-- `ptool repl` requires an interactive TTY.
-- REPL history currently lives only for the current session and is not written to a history file.
+- `ptool repl` には対話型 TTY が必要です。
+- REPL の履歴は現在のところそのセッション内だけに存在し、 履歴ファイルには書き込まれません。

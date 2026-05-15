@@ -1,23 +1,23 @@
-# Shell API
+# API de shell
 
-Shell parsing helpers are available under `ptool.sh` and `p.sh`.
+Las utilidades de análisis de shell están disponibles bajo `ptool.sh` y `p.sh`.
 
 ## ptool.sh.split
 
 > `v0.1.0` - Introduced.
 
-`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array.
+`ptool.sh.split(command)` analiza una cadena de comando usando reglas de estilo shell y devuelve un arreglo de argumentos.
 
-- `command` (string, required): The command string to split.
-- Returns: `string[]`.
+- `command` (string, obligatorio): La cadena de comando que se va a dividir.
+- Devuelve: `string[]`.
 
-Example:
+Ejemplo:
 
 ```lua
 local args = ptool.sh.split("clippy --all-targets -- -D warnings")
 ```
 
-The `args` above is equivalent to:
+El `args` anterior equivale a:
 
 ```lua
 {"clippy", "--all-targets", "--", "-D", "warnings"}

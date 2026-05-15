@@ -1,37 +1,37 @@
-# TUI API
+# API TUI
 
-Terminal UI helpers are available under `ptool.tui` and `p.tui`.
+Las utilidades de interfaz de terminal están disponibles bajo `ptool.tui` y `p.tui`.
 
-The first version focuses on small interactive terminal screens driven by a Lua event loop.
+La primera versión se centra en pantallas interactivas pequeñas controladas por un bucle de eventos en Lua.
 
 ## ptool.tui.run
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.run(options)` starts a TUI session, runs the Lua lifecycle callbacks, and returns the value passed to `app:quit(value)`. If `app:quit()` is called without a value, the function returns `nil`.
+`ptool.tui.run(options)` inicia una sesión TUI, ejecuta los callbacks del ciclo de vida en Lua y devuelve el valor pasado a `app:quit(value)`. Si se llama a `app:quit()` sin valor, la función devuelve `nil`.
 
-`options` fields:
+Campos de `options`:
 
-- `tick_ms` (integer, optional): Tick interval in milliseconds. Defaults to `100`.
-- `init` (function, optional): Called once before the first frame is drawn. Its return value becomes the initial `state`.
-- `update` (function, required): Called as `update(state, event, app)` after each input event or tick. If it returns a non-`nil` value, that value becomes the next `state`. Returning `nil` keeps the current `state`.
-- `view` (function, required): Called as `view(state, app)` to build the root node for the next frame.
+- `tick_ms` (integer, opcional): Intervalo de tick en milisegundos. El valor por defecto es `100`.
+- `init` (function, opcional): Se llama una vez antes de dibujar el primer frame. Su valor de retorno se convierte en el `state` inicial.
+- `update` (function, obligatorio): Se llama como `update(state, event, app)` después de cada evento de entrada o tick. Si devuelve un valor distinto de `nil`, ese valor se convierte en el siguiente `state`. Si devuelve `nil`, se conserva el `state` actual.
+- `view` (function, obligatorio): Se llama como `view(state, app)` para construir el nodo raíz del siguiente frame.
 
-Behavior:
+Comportamiento:
 
-- Requires an interactive TTY.
-- Runs inside the terminal alternate screen with raw mode enabled.
-- Restores the terminal when the session exits, including error paths.
+- Requiere un TTY interactivo.
+- Se ejecuta dentro de la pantalla alternativa del terminal con raw mode activado.
+- Restaura el terminal al salir, incluso en rutas de error.
 
-Events:
+Eventos:
 
 - `{ type = "tick" }`
 - `{ type = "resize", width = <integer>, height = <integer> }`
 - `{ type = "key", key = <string>, ctrl = <boolean>, alt = <boolean>, shift = <boolean> }`
 
-Common key names include `up`, `down`, `left`, `right`, `enter`, `esc`, `tab`, `backspace`, `delete`, `home`, `end`, `pageup`, and `pagedown`. Character keys use the character itself, such as `"q"` or `"j"`.
+Los nombres de tecla comunes incluyen `up`, `down`, `left`, `right`, `enter`, `esc`, `tab`, `backspace`, `delete`, `home`, `end`, `pageup` y `pagedown`. Las teclas de caracteres usan el propio carácter, como `"q"` o `"j"`.
 
-Example:
+Ejemplo:
 
 ```lua
 local result = p.tui.run({
@@ -80,77 +80,77 @@ print("selected:", result)
 
 > `Unreleased` - Introduced.
 
-`app` is passed to `update(...)` and `view(...)`.
+`app` se pasa a `update(...)` y `view(...)`.
 
 ### quit
 
 Canonical API name: `ptool.tui.App:quit`.
 
-`app:quit(value?)` requests that the TUI session stop after the current callback completes.
+`app:quit(value?)` solicita detener la sesión TUI cuando termine el callback actual.
 
-- `value` (Lua value, optional): The value returned by `ptool.tui.run(...)`.
+- `value` (valor Lua, opcional): El valor devuelto por `ptool.tui.run(...)`.
 
-## Node Constructors
+## Constructores de nodos
 
 > `Unreleased` - Introduced.
 
-The constructor helpers below return plain node tables. `view(...)` must return one of these nodes as the root widget tree.
+Los constructores siguientes devuelven tablas de nodo normales. `view(...)` debe devolver uno de estos nodos como árbol de vista raíz.
 
-Common node fields:
+Campos comunes de nodo:
 
-- `title` (string, optional): Draws a block title around the node.
-- `border` (boolean, optional): Draws a border around the node. Defaults to `false`.
-- `padding` (integer, optional): Uniform inner padding. Defaults to `0`.
-- `grow` (integer, optional): Relative size when the node is inside a row or column. Defaults to `1`.
-- `style` (table, optional): Shared style fields:
-  - `fg` / `bg`: One of `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray`, or `dark_gray`.
-  - `bold`, `dim`, `italic`, `underlined`, `reversed`: Boolean style toggles.
+- `title` (string, opcional): Dibuja un bloque con título alrededor del nodo.
+- `border` (boolean, opcional): Dibuja un borde alrededor del nodo. El valor por defecto es `false`.
+- `padding` (integer, opcional): Relleno interior uniforme. El valor por defecto es `0`.
+- `grow` (integer, opcional): Tamaño relativo cuando el nodo está dentro de una fila o columna. El valor por defecto es `1`.
+- `style` (table, opcional): Campos de estilo compartidos:
+  - `fg` / `bg`: Uno de `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray` o `dark_gray`.
+  - `bold`, `dim`, `italic`, `underlined`, `reversed`: Banderas booleanas de estilo.
 
 ## ptool.tui.text
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.text(text[, options])` creates a text node.
+`ptool.tui.text(text[, options])` crea un nodo de texto.
 
-- `text` (string, required): The text to render.
-- `options.align` (string, optional): `left`, `center`, or `right`. Defaults to `left`.
+- `text` (string, obligatorio): El texto a renderizar.
+- `options.align` (string, opcional): `left`, `center` o `right`. El valor por defecto es `left`.
 
 ## ptool.tui.list
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.list(items[, options])` creates a vertical list node.
+`ptool.tui.list(items[, options])` crea un nodo de lista vertical.
 
-- `items` (table, required): A dense list table. Item values may be strings, numbers, or booleans.
-- `options.selected` (integer, optional): The selected row using Lua's 1-based indexing. Values beyond the item count are ignored.
-- `options.highlight_style` (table, optional): Style applied to the selected row. Uses the same keys as `style`.
+- `items` (table, obligatorio): Una tabla de lista densa. Los valores de los elementos pueden ser cadenas, números o booleanos.
+- `options.selected` (integer, opcional): La fila seleccionada usando el índice base 1 de Lua. Los valores mayores que la cantidad de elementos se ignoran.
+- `options.highlight_style` (table, opcional): Estilo aplicado a la fila seleccionada. Usa las mismas claves que `style`.
 
-Notes:
+Notas:
 
-- Selection is only visually distinct when `highlight_style` changes the rendered style.
+- La selección solo se distingue visualmente cuando `highlight_style` cambia el estilo renderizado.
 
 ## ptool.tui.row
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.row(options)` creates a horizontal container.
+`ptool.tui.row(options)` crea un contenedor horizontal.
 
-- `options.children` (table, required): A dense list table of child nodes.
+- `options.children` (table, obligatorio): Una tabla de lista densa con nodos hijos.
 
 ## ptool.tui.column
 
 > `Unreleased` - Introduced.
 
-`ptool.tui.column(options)` creates a vertical container.
+`ptool.tui.column(options)` crea un contenedor vertical.
 
-- `options.children` (table, required): A dense list table of child nodes.
+- `options.children` (table, obligatorio): Una tabla de lista densa con nodos hijos.
 
-## Current Limits
+## Límites actuales
 
-`ptool.tui` currently supports:
+`ptool.tui` actualmente soporta:
 
-- `tick`, `resize`, and keyboard events.
-- Text, list, row, and column nodes.
-- Basic block decoration and style options.
+- Eventos `tick`, `resize` y de teclado.
+- Nodos text, list, row y column.
+- Decoración básica de bloques y opciones de estilo.
 
-It does not yet provide text inputs, popups, tables, mouse-driven widgets, or arbitrary ratatui widget bindings.
+Todavía no ofrece entradas de texto, popups, tablas, widgets controlados por ratón ni bindings arbitrarios de widgets de ratatui.

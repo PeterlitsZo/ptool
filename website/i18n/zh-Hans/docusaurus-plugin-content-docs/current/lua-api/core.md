@@ -454,21 +454,21 @@ res:assert_ok()
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
-- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
-- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `stdin`（string，可选）：发送给子进程 stdin 的字符串。省略时，子进程会继承当前进程的 stdin。
+- `trim`（boolean，可选）：返回前是否裁掉已捕获 `stdout` 和已捕获 `stderr` 两端的空白字符。只影响设置为 `"capture"` 的流。默认值为 `false`。
 - `echo`（boolean，可选）：本次执行是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
 - `check`（boolean，可选）：退出码不为 `0` 时是否立即抛错。如果省略，则使用 `ptool.config({ run = { check = ... } })` 中的值；若仍未设置，则默认是 `false`。
 - `confirm`（boolean，可选）：执行前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
 - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 如果省略，则使用 `ptool.config({ run = { retry = ... } })` 中的值；若仍未设置， 则默认是 `false`。
 - `stdout`（string，可选）：stdout 处理策略。支持：
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`：继承到当前终端（默认）。
   - `"capture"`：捕获到 `res.stdout`。
-  - `"null"`: Discard the output.
+  - `"null"`：丢弃输出。
 - `stderr`（string，可选）：stderr 处理策略。支持：
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`：继承到当前终端（默认）。
   - `"capture"`：捕获到 `res.stderr`。
-  - `"null"`: Discard the output.
-- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning.
+  - `"null"`：丢弃输出。
+- 当使用 `ptool.run(cmdline, options)` 或 `ptool.run(cmd, args, options)` 这类快捷调用形式时，单次调用的 `options` 表同样支持 `stdin` 和 `trim`，含义一致。
 - 当 `confirm = true` 时：
   - 如果用户拒绝执行，会立即抛出错误。
   - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
@@ -517,7 +517,7 @@ res:assert_ok()
 - `stdout` 默认是 `"capture"`。
 - `stderr` 默认是 `"capture"`。
 
-`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
+`trim` 仍然默认是 `false`，并且这些字段都仍然可以在 `options` 中显式覆盖。
 
 示例：
 

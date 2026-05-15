@@ -1,50 +1,50 @@
-# Getting Started
+# はじめに
 
-`ptool` runs Lua scripts and injects a standard library for practical automation.
+`ptool` は Lua スクリプトを実行し、実用的な自動化のための標準 ライブラリを注入します。
 
-The main entrypoint today is:
+現在の主なエントリーポイントは次のとおりです。
 
 ```sh
 ptool run <file>
 ```
 
-For `.lua` files, you can also use the shortcut form:
+`.lua` ファイルでは、短縮形も使えます。
 
 ```sh
 ptool <file.lua>
 ```
 
-For interactive exploration, `ptool` also provides:
+対話的に試したい場合、`ptool` には次のコマンドもあります。
 
 ```sh
 ptool repl
 ```
 
-When a script runs, `ptool` exposes its API through the global `ptool` table and the shorter alias `p`.
+スクリプトの実行時、`ptool` はグローバルテーブル `ptool` と短い別名 `p` を通じて API を公開します。
 
-## Install
+## インストール
 
-On Linux and macOS, install `ptool` with the release installer:
+Linux と macOS では、リリース用インストーラーで `ptool` を インストールできます。
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash
 ```
 
-The installer downloads the latest prebuilt release for the current platform, installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed.
+このインストーラーは現在のプラットフォーム向けの最新ビルド済み リリースをダウンロードし、`ptool` を `~/.local/bin/ptool` に インストールし、必要に応じて PATH のヒントを表示します。
 
-To install a specific release tag instead of the latest stable release:
+最新の安定版ではなく特定のリリースタグをインストールするには:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
 ```
 
-To install into a custom binary directory instead of `~/.local/bin`:
+`~/.local/bin` ではなく独自のバイナリディレクトリにインストールする には:
 
 ```sh
 curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/.cargo/bin"
 ```
 
-## Minimal script
+## 最小スクリプト
 
 ```lua
 ptool.use("v0.1.0")
@@ -52,46 +52,46 @@ ptool.use("v0.1.0")
 ptool.run("echo", {"hello", "world"})
 ```
 
-`ptool.use(...)` declares the minimum required `ptool` version for the script. This keeps scripts explicit about the API version they expect and fails early on older runtimes. See [Core Lua API](./lua-api/core.md) for details.
+`ptool.use(...)` は、そのスクリプトが必要とする最小の `ptool` バージョンを宣言します。これにより期待する API バージョンを明示でき、 古いランタイムでは早い段階で失敗します。詳しくは [コア Lua API](./lua-api/core.md) を参照してください。
 
-Run it with:
+実行方法:
 
 ```sh
 ptool run script.lua
 ptool script.lua
 ```
 
-## Passing arguments
+## 引数の受け渡し
 
-You can pass extra CLI arguments after the script path:
+スクリプトのパスの後ろに追加の CLI 引数を渡せます。
 
 ```sh
 ptool run script.lua --name alice -v a.txt b.txt
 ptool script.lua --name alice -v a.txt b.txt
 ```
 
-Parse them inside the script with `ptool.args.parse(...)`.
+これらはスクリプト内で `ptool.args.parse(...)` を使って解析できます。
 
-## Shebang scripts
+## Shebang スクリプト
 
-`ptool` supports shebang files. With the `.lua` CLI shortcut, a script can start with:
+`ptool` は shebang ファイルをサポートしています。`.lua` 向けの短縮形を 使うと、スクリプトは次のように始められます。
 
 ```text
 #!/usr/bin/env ptool
 ```
 
-This lets you execute the script directly once it has the executable bit.
+これにより、実行権限ビットを付けたあとでスクリプトを直接実行できます。
 
-## What you get
+## 利用できるもの
 
-- A script runner that understands shebang files.
-- An interactive REPL for trying Lua expressions and `ptool` APIs directly.
-- Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, HTTP, SSH, databases, and templates.
-- CLI-oriented helpers for running commands, parsing arguments, and asking for interactive input.
+- shebang ファイルを理解するスクリプトランナー。
+- Lua 式や `ptool` API をその場で試せる対話型 REPL。
+- サーバー、日時、パス、ファイル、TOML、正規表現、文字列、HTTP、SSH、データベース、テンプレート用の Lua ヘルパー。
+- コマンド実行、引数解析、対話入力のための CLI 向けヘルパー。
 
-## Next steps
+## 次のステップ
 
-- Open [REPL](./repl.md) for interactive usage, multi-line input, and keyboard behavior.
-- Use [Lua API Overview](./lua-api/index.md) to browse the core APIs and available modules.
-- Start with [Core Lua API](./lua-api/core.md) for version gating, process execution, config, and script lifecycle helpers.
-- Open a module page such as [Args API](./lua-api/args.md) when you need the detailed reference for a specific feature set.
+- [REPL](./repl.md) を開いて、対話的な使い方、複数行入力、キーボードの 挙動を確認する。
+- [Lua API 概要](./lua-api/index.md) を使って、コア API と利用可能な モジュールを確認する。
+- [コア Lua API](./lua-api/core.md) から始めて、バージョン制御、 プロセス実行、設定、スクリプトのライフサイクルヘルパーを理解する。
+- 特定の機能セットの詳細なリファレンスが必要な場合は、 [引数 API](./lua-api/args.md) のようなモジュールページを開く。

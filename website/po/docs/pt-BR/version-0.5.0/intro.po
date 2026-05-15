@@ -143,8 +143,8 @@ msgid ""
 "Lua helpers for semver, paths, files, TOML, regexes, strings, HTTP, SSH, "
 "databases, and templates."
 msgstr ""
-"Utilitários Lua para semver, caminhos, arquivos, TOML, regex, strings, HTTP, "
-"SSH, bancos de dados e templates."
+"Auxiliares Lua para semver, data e hora, caminhos, arquivos, TOML, regexes, "
+"strings, HTTP, SSH, bancos de dados e modelos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:97
 msgid ""

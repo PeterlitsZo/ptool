@@ -467,9 +467,12 @@ msgid ""
 "from captured `stdout` and captured `stderr` before returning them. This "
 "only affects streams set to `\"capture\"`. Defaults to `false`."
 msgstr ""
+"`trim` (booleano, opcional): si se deben recortar los espacios en blanco "
+"iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. "
+"Esto solo afecta a las transmisiones configuradas en `\"capture\"`. El valor "
+"predeterminado es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:174
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:174"
 msgid ""
 "`echo` (boolean, optional): Whether to echo the remote command before "
@@ -479,7 +482,6 @@ msgstr ""
 "ejecutarlo. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:176
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:176"
 msgid ""
 "`check` (boolean, optional): Whether to raise an error immediately when the "
@@ -489,7 +491,6 @@ msgstr ""
 "el código de salida no sea `0`. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178"
 msgid ""
 "`stdout` (string, optional): Stdout handling strategy. Supported values:"
@@ -498,25 +499,21 @@ msgstr ""
 "admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: Hereda el terminal actual (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178"
 msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr "`\"capture\"`: Captura en `res.stdout`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:178"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182"
 msgid ""
 "`stderr` (string, optional): Stderr handling strategy. Supported values:"
@@ -525,19 +522,16 @@ msgstr ""
 "admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: Hereda el terminal actual (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182"
 msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr "`\"capture\"`: Captura en `res.stderr`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta la salida."
@@ -547,7 +541,6 @@ msgid "When the shortcut forms are used, the `options` table supports only:"
 msgstr "Cuando se usan las formas abreviadas, la tabla `options` solo admite:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189"
 msgid "`stdin` (string, optional): String sent to the remote process stdin."
 msgstr "`stdin` (string, opcional): Cadena enviada al stdin del proceso remoto."
@@ -559,9 +552,12 @@ msgid ""
 "from captured `stdout` and captured `stderr` before returning them. This "
 "only affects streams set to `\"capture\"`. Defaults to `false`."
 msgstr ""
+"`trim` (booleano, opcional): si se deben recortar los espacios en blanco "
+"iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. "
+"Esto solo afecta a las transmisiones configuradas en `\"capture\"`. El valor "
+"predeterminado es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:193
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:193"
 msgid ""
 "`echo` (boolean, optional): Whether to echo the remote command before "
@@ -571,7 +567,6 @@ msgstr ""
 "ejecutarlo. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
 msgid ""
 "`check` (boolean, optional): Whether to raise an error immediately when the "
@@ -581,7 +576,6 @@ msgstr ""
 "el código de salida no sea `0`. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
 msgid ""
 "`stdout` (string, optional): Stdout handling strategy. Supported values:"
@@ -590,25 +584,21 @@ msgstr ""
 "admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: Hereda el terminal actual (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
 msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr "`\"capture\"`: Captura en `res.stdout`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
 msgid ""
 "`stderr` (string, optional): Stderr handling strategy. Supported values:"
@@ -617,19 +607,16 @@ msgstr ""
 "admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: Hereda el terminal actual (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
 msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr "`\"capture\"`: Captura en `res.stderr`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta la salida."
@@ -672,7 +659,6 @@ msgid "`assert_ok(self)` (function): Raises an error when `ok = false`."
 msgstr "`assert_ok(self)` (function): Lanza un error cuando `ok = false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:217
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:217"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -722,9 +708,10 @@ msgid ""
 "`trim` still defaults to `false`, and you can still override any of these "
 "fields explicitly in `options`."
 msgstr ""
+"`trim` todavía tiene como valor predeterminado `false` y aún puede anular "
+"cualquiera de estos campos explícitamente en `options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:260
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:260"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -734,10 +721,9 @@ msgid "path"
 msgstr "path"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:284
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:284"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:286
 msgid "Canonical API name: `ptool.ssh.Connection:path`."
@@ -764,22 +750,19 @@ msgstr ""
 "`conn:download(...)` y `ptool.fs.copy(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:295
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:295"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304"
 msgid "exists"
-msgstr "exists"
+msgstr "existe"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306"
 msgid "`v0.2.0` - Introduced."
-msgstr "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308
 msgid "Canonical API name: `ptool.ssh.Connection:exists`."
@@ -790,7 +773,6 @@ msgid "`conn:exists(path)` checks whether a remote path exists."
 msgstr "`conn:exists(path)` comprueba si existe una ruta remota."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:312
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:312"
 msgid ""
 "`path` (string|remote path, required): The remote path to check. It can be a "
@@ -800,29 +782,25 @@ msgstr ""
 "comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:314
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:314"
 msgid "Returns: `true` when the remote path exists, otherwise `false`."
 msgstr ""
 "Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:316
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:316"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325"
 msgid "is_file"
-msgstr "is_file"
+msgstr "es_archivo"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327"
 msgid "`v0.2.0` - Introduced."
-msgstr "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:329
 msgid "Canonical API name: `ptool.ssh.Connection:is_file`."
@@ -837,7 +815,6 @@ msgstr ""
 "regular."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:333
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:333"
 msgid ""
 "`path` (string|remote path, required): The remote path to check. It can be a "
@@ -847,7 +824,6 @@ msgstr ""
 "comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:335
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:335"
 msgid "Returns: `true` when the remote path is a file, otherwise `false`."
 msgstr ""
@@ -855,22 +831,19 @@ msgstr ""
 "`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:337
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:337"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348"
 msgid "is_dir"
-msgstr "is_dir"
+msgstr "es_dir"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350"
 msgid "`v0.2.0` - Introduced."
-msgstr "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:352
 msgid "Canonical API name: `ptool.ssh.Connection:is_dir`."
@@ -883,7 +856,6 @@ msgstr ""
 "`conn:is_dir(path)` comprueba si una ruta remota existe y es un directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:356
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:356"
 msgid ""
 "`path` (string|remote path, required): The remote path to check. It can be a "
@@ -893,7 +865,6 @@ msgstr ""
 "comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:358
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:358"
 msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
 msgstr ""
@@ -901,7 +872,6 @@ msgstr ""
 "`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:360
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:360"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -911,10 +881,9 @@ msgid "upload"
 msgstr "upload"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:373
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:373"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:375
 msgid "Canonical API name: `ptool.ssh.Connection:upload`."
@@ -943,13 +912,11 @@ msgstr ""
 "host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:383
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:383"
 msgid "`options` (table, optional): Transfer options."
 msgstr "`options` (table, opcional): Opciones de transferencia."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:384
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:384"
 msgid "Returns: A table with the following fields:"
 msgstr "Devuelve: Una tabla con los siguientes campos:"
@@ -971,7 +938,6 @@ msgid "`to` (string): The remote destination path."
 msgstr "`to` (string): La ruta remota de destino."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:390
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:390"
 msgid "Supported transfer options:"
 msgstr "Opciones de transferencia admitidas:"
@@ -985,7 +951,6 @@ msgstr ""
 "antes de subir. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:394
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:394"
 msgid ""
 "`overwrite` (boolean, optional): Whether an existing destination file may be "
@@ -995,7 +960,6 @@ msgstr ""
 "destino existente. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:396
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:396"
 msgid ""
 "`echo` (boolean, optional): Whether to print the transfer before executing "
@@ -1005,7 +969,6 @@ msgstr ""
 "ejecutarla. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399"
 msgid "Directory behavior:"
 msgstr "Comportamiento con directorios:"
@@ -1033,7 +996,6 @@ msgstr ""
 "del directorio de origen."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:407
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:407"
 msgid ""
 "`overwrite = false` rejects an already-existing destination directory for "
@@ -1049,13 +1011,11 @@ msgstr ""
 "remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:411
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:411"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:427
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:427"
 msgid "Directory example:"
 msgstr "Ejemplo con directorio:"
@@ -1065,10 +1025,9 @@ msgid "download"
 msgstr "download"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:444
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:444"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:446
 msgid "Canonical API name: `ptool.ssh.Connection:download`."
@@ -1095,13 +1054,11 @@ msgid "`local_path` (string, required): The local destination path."
 msgstr "`local_path` (string, obligatorio): La ruta de destino local."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:454
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:454"
 msgid "`options` (table, optional): Transfer options."
 msgstr "`options` (table, opcional): Opciones de transferencia."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:455
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:455"
 msgid "Returns: A table with the following fields:"
 msgstr "Devuelve: Una tabla con los siguientes campos:"
@@ -1124,7 +1081,6 @@ msgid "`to` (string): The local destination path."
 msgstr "`to` (string): La ruta local de destino."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:461
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:461"
 msgid "Supported transfer options:"
 msgstr "Opciones de transferencia admitidas:"
@@ -1138,7 +1094,6 @@ msgstr ""
 "antes de descargar. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:465
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:465"
 msgid ""
 "`overwrite` (boolean, optional): Whether an existing destination file may be "
@@ -1148,7 +1103,6 @@ msgstr ""
 "destino existente. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:467
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:467"
 msgid ""
 "`echo` (boolean, optional): Whether to print the transfer before executing "
@@ -1158,7 +1112,6 @@ msgstr ""
 "ejecutarla. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470"
 msgid "Directory behavior:"
 msgstr "Comportamiento con directorios:"
@@ -1186,7 +1139,6 @@ msgstr ""
 "basename del directorio remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:478
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:478"
 msgid ""
 "`overwrite = false` rejects an already-existing destination directory for "
@@ -1202,13 +1154,11 @@ msgstr ""
 "remoto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:482
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:482"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:497
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:497"
 msgid "Directory example:"
 msgstr "Ejemplo con directorio:"
@@ -1218,10 +1168,9 @@ msgid "close"
 msgstr "close"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:514
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:514"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:516
 msgid "Canonical API name: `ptool.ssh.Connection:close`."
@@ -1245,7 +1194,6 @@ msgstr ""
 "Cerrar una conexión que ya está cerrada está permitido y no tiene efecto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:525
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:525"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -1255,10 +1203,9 @@ msgid "RemotePath"
 msgstr "RemotePath"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:534
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:534"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:536
 msgid ""
@@ -1269,13 +1216,11 @@ msgstr ""
 "devuelta por `conn:path(path)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:539
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:539"
 msgid "It is implemented as a Lua userdata."
 msgstr "Está implementado como un userdata de Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:541
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:541"
 msgid "Methods:"
 msgstr "Métodos:"
@@ -1293,33 +1238,29 @@ msgid "`remote:is_dir()` -> `boolean`"
 msgstr "`remote:is_dir()` -> `boolean`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:547
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:547"
 msgid "exists"
-msgstr "exists"
+msgstr "existe"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:549
 msgid "`remote:exists()` checks whether the remote path exists."
 msgstr "`remote:exists()` comprueba si existe la ruta remota."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:551
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:551"
 msgid "Returns: `true` when the remote path exists, otherwise `false`."
 msgstr ""
 "Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:553
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:553"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:562
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:562"
 msgid "is_file"
-msgstr "is_file"
+msgstr "es_archivo"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:564
 msgid ""
@@ -1330,7 +1271,6 @@ msgstr ""
 "regular."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:566
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:566"
 msgid "Returns: `true` when the remote path is a file, otherwise `false`."
 msgstr ""
@@ -1338,16 +1278,14 @@ msgstr ""
 "`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:568
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:568"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:579
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:579"
 msgid "is_dir"
-msgstr "is_dir"
+msgstr "es_dir"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:581
 msgid ""
@@ -1356,7 +1294,6 @@ msgstr ""
 "`remote:is_dir()` comprueba si la ruta remota existe y es un directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:583
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:583"
 msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
 msgstr ""
@@ -1364,7 +1301,6 @@ msgstr ""
 "`false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:585
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:585"
 msgid "Example:"
 msgstr "Ejemplo:"

@@ -1,33 +1,33 @@
 # YAML API
 
-YAML parsing and serialization helpers are available under `ptool.yaml` and `p.yaml`.
+YAML の解析とシリアライズのヘルパーは `ptool.yaml` と `p.yaml` に あります。
 
 ## ptool.yaml.parse
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.parse(input)` parses a YAML string into a Lua value.
+`ptool.yaml.parse(input)` は YAML 文字列を Lua 値へ解析します。
 
-- `input` (string, required): The YAML text.
-- Returns: The parsed Lua value. The root can be any supported YAML type.
+- `input` (string, 必須): YAML テキスト。
+- 戻り値: 解析された Lua 値。ルートは対応している任意の YAML 型を使えます。
 
-Type mapping:
+型対応:
 
 - YAML mapping -> Lua table
 - YAML sequence -> Lua sequence table (1-based)
 - YAML string -> Lua string
-- YAML integer that fits in `i64` -> Lua integer
-- Other YAML number -> Lua number
+- `i64` に収まる YAML integer -> Lua integer
+- それ以外の YAML number -> Lua number
 - YAML boolean -> Lua boolean
 - YAML null -> Lua `nil`
 
-Error behavior:
+エラー時の挙動:
 
-- An error is raised if `input` is not a string.
-- A YAML syntax error raises an error whose message includes parser detail.
-- An error is raised if the YAML value cannot be represented as a Lua value in `ptool`, such as a mapping with non-string keys or an explicit YAML tag.
+- `input` が文字列でない場合はエラーになります。
+- YAML 構文エラーでは、パーサー詳細を含むメッセージでエラーになります。
+- 非文字列キーを持つ mapping や明示的な YAML tag など、`ptool` の Lua 値へ 変換できない YAML 値でもエラーになります。
 
-Example:
+例:
 
 ```lua
 local data = p.yaml.parse([[
@@ -47,18 +47,18 @@ print(data.stars)
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.get(input, path)` reads the value at a specified path from YAML text.
+`ptool.yaml.get(input, path)` は YAML テキストから指定パスの値を読み出します。
 
-- `input` (string, required): The YAML text.
-- `path` ((string|integer)[], required): A non-empty path array, such as `{"spec", "template", "metadata", "name"}` or `{"items", 1, "name"}`.
-- Returns: The corresponding Lua value, or `nil` if the path does not exist.
+- `input` (string, 必須): YAML テキスト。
+- `path` ((string|integer)[], 必須): `{"spec", "template", "metadata", "name"}` や `{"items", 1, "name"}` のような空でないパス配列。
+- 戻り値: 対応する Lua 値。パスが存在しない場合は `nil`。
 
-Behavior:
+挙動:
 
-- String path segments select mapping keys.
-- Integer path segments select sequence elements using Lua's 1-based indexing.
+- 文字列のパス要素は mapping key を選択します。
+- 整数のパス要素は Lua の 1-based 添字で sequence 要素を選択します。
 
-Example:
+例:
 
 ```lua
 local text = [[
@@ -75,18 +75,18 @@ print(first_name)
 
 > `v0.4.0` - Introduced.
 
-`ptool.yaml.stringify(value)` converts a Lua value to YAML text.
+`ptool.yaml.stringify(value)` は Lua 値を YAML テキストへ変換します。
 
-- `value` (YAML-compatible Lua value, required): The value to encode.
-- Returns: The encoded YAML string.
+- `value` (YAML 互換 Lua 値, 必須): エンコードする値。
+- 戻り値: エンコードされた YAML 文字列。
 
-Behavior:
+挙動:
 
-- Values must be YAML-compatible through the same Lua value mapping used by `ptool.json.stringify`.
-- Lua sequence tables are encoded as YAML sequences.
-- Lua string-keyed tables are encoded as YAML mappings.
+- 値は `ptool.json.stringify` と同じ Lua 値マッピングで YAML に変換可能である 必要があります。
+- Lua sequence table は YAML sequence としてエンコードされます。
+- 文字列キーを持つ Lua table は YAML mapping としてエンコードされます。
 
-Example:
+例:
 
 ```lua
 local text = p.yaml.stringify({
@@ -98,10 +98,10 @@ local text = p.yaml.stringify({
 print(text)
 ```
 
-Notes:
+注意:
 
-- Only single-document YAML is supported.
-- YAML mappings must use string keys.
-- Explicit YAML tags are not supported.
-- The `path` argument for `ptool.yaml.get` must be a non-empty array of strings and/or positive integers.
-- Integer path segments are 1-based so they match Lua array indexing.
+- 現在は単一ドキュメントの YAML のみ対応しています。
+- YAML mapping のキーは文字列である必要があります。
+- 明示的な YAML tag は対応していません。
+- `ptool.yaml.get` の `path` 引数は、文字列および正の整数から成る空でない配列で ある必要があります。
+- 整数のパス要素は Lua の配列添字に合わせて 1-based です。

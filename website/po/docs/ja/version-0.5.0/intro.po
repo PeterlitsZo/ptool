@@ -132,8 +132,8 @@ msgstr "Lua 式や `ptool` API をその場で試せる対話型 REPL。"
 msgid ""
 "Lua helpers for semver, paths, files, TOML, regexes, strings, HTTP, SSH, "
 "databases, and templates."
-msgstr "semver、パス、ファイル、TOML、正規表現、文字列、HTTP、SSH、 データベース、テ"
-"ンプレートの Lua ヘルパー。"
+msgstr "サーバー、日時、パス、ファイル、TOML、正規表現、文字列、HTTP、SSH、データベー"
+"ス、テンプレート用の Lua ヘルパー。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/versioned_docs/version-0.5.0/intro.md:97
 msgid ""

@@ -28,7 +28,7 @@ msgstr "ptool.ansi.style"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:9
 msgid ""
@@ -118,7 +118,7 @@ msgstr "ptool.ansi.\\<color\\>"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:44
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:44"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ansi.md:46
 msgid ""

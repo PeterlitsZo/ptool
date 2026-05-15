@@ -1,37 +1,37 @@
 # HTTP API
 
-HTTP client helpers are available under `ptool.http` and `p.http`.
+HTTP 客户端辅助能力位于 `ptool.http` 和 `p.http` 下。
 
 ## ptool.http.request
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`ptool.http.request(options)` sends an HTTP request and returns a `Response` object.
+`ptool.http.request(options)` 发送一个 HTTP 请求，并返回 `Response` 对象。
 
-`options` fields:
+`options` 字段：
 
-- `url` (string, required): The request URL.
-- `method` (string, optional): The HTTP method. Defaults to `"GET"`.
-- `headers` (table, optional): Request headers, where both keys and values are strings.
-- `query` (table, optional): Query parameters appended to the request URL. Keys must be strings. Values may be strings, numbers, or booleans.
-- `body` (string, optional): The request body.
-- `json` (Lua value, optional): A Lua value encoded as JSON and used as the request body. When `content-type` is not already set, it defaults to `application/json`.
-- `form` (table, optional): Form fields encoded as `application/x-www-form-urlencoded` and used as the request body. Keys must be strings. Values may be strings, numbers, or booleans.
-- `timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `30000`.
-- `connect_timeout_ms` (integer, optional): Connection timeout in milliseconds.
-- `follow_redirects` (boolean, optional): Whether redirects should be followed.
-- `max_redirects` (integer, optional): Maximum number of redirects to follow.
-- `user_agent` (string, optional): Sets the `user-agent` request header.
-- `basic_auth` (table, optional): HTTP basic auth credentials with string fields `username` and `password`.
-- `bearer_token` (string, optional): Bearer token used for the `authorization` header.
-- `fail_on_http_error` (boolean, optional): When `true`, raise an error for 4xx and 5xx HTTP responses. Defaults to `false`.
+- `url`（string，必填）：请求 URL。
+- `method`（string，可选）：HTTP 方法。默认值为 `"GET"`。
+- `headers`（table，可选）：请求头，键和值都必须是字符串。
+- `query`（table，可选）：追加到请求 URL 的查询参数。键必须是字符串，值可以 是字符串、数字或布尔值。
+- `body`（string，可选）：请求体。
+- `json`（Lua 值，可选）：会被编码为 JSON 并作为请求体发送。当未显式设置 `content-type` 时，默认使用 `application/json`。
+- `form`（table，可选）：会被编码为 `application/x-www-form-urlencoded` 并作为请求体发送。键必须是字符串，值 可以是字符串、数字或布尔值。
+- `timeout_ms`（integer，可选）：超时时间，单位毫秒。默认值为 `30000`。
+- `connect_timeout_ms`（integer，可选）：连接超时时间，单位毫秒。
+- `follow_redirects`（boolean，可选）：是否跟随重定向。
+- `max_redirects`（integer，可选）：允许跟随的最大重定向次数。
+- `user_agent`（string，可选）：设置 `user-agent` 请求头。
+- `basic_auth`（table，可选）：HTTP Basic 认证信息，包含字符串字段 `username` 和 `password`。
+- `bearer_token`（string，可选）：用于 `authorization` 请求头的 Bearer Token。
+- `fail_on_http_error`（boolean，可选）：为 `true` 时，4xx 和 5xx HTTP 响应会直接抛错。默认值为 `false`。
 
-Notes:
+说明：
 
-- `body`, `json`, and `form` are mutually exclusive.
-- `basic_auth` and `bearer_token` are mutually exclusive.
+- `body`、`json` 和 `form` 互斥。
+- `basic_auth` 和 `bearer_token` 互斥。
 
-Example:
+示例：
 
 ```lua
 local resp = ptool.http.request({
@@ -57,73 +57,73 @@ print(data.json.name)
 
 ## Response
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - 引入。
 
-`Response` represents an HTTP response returned by `ptool.http.request(...)`.
+`Response` 表示 `ptool.http.request(...)` 返回的 HTTP 响应。
 
-Fields:
+字段：
 
-- `status` (integer): The HTTP status code.
-- `ok` (boolean): Whether the status code is in the 2xx range.
-- `url` (string): The final URL after redirects.
-- `headers` (table): A flattened convenience view of response headers (`table<string, string>`). Repeated headers are merged with `, `.
+- `status`（integer）：HTTP 状态码。
+- `ok`（boolean）：状态码是否位于 2xx 范围内。
+- `url`（string）：重定向后的最终 URL。
+- `headers`（table）：响应头的扁平化便捷视图（`table<string, string>`）。 重复响应头会使用 `, ` 合并。
 
-Methods:
+方法：
 
-- `resp:text()`: Reads and returns the response body as text.
-- `resp:json()`: Reads the response body, parses it as JSON, and returns a Lua value.
-- `resp:bytes()`: Reads and returns the raw bytes (as a Lua string).
-- `resp:header(name)`: Returns the first matching response header value, or `nil`.
-- `resp:header_values(name)`: Returns all matching response header values as an array.
-- `resp:raise_for_status()`: Raises an error for 4xx and 5xx HTTP responses.
+- `resp:text()`：读取并以文本形式返回响应体。
+- `resp:json()`：读取响应体，按 JSON 解析后返回 Lua 值。
+- `resp:bytes()`：读取并返回原始字节（作为 Lua 字符串）。
+- `resp:header(name)`：返回第一个匹配的响应头值，若不存在则返回 `nil`。
+- `resp:header_values(name)`：返回所有匹配的响应头值数组。
+- `resp:raise_for_status()`：对 4xx 和 5xx HTTP 响应抛出错误。
 
 ### text
 
-Canonical API name: `ptool.http.Response:text`.
+规范 API 名称：`ptool.http.Response:text`。
 
-`resp:text()` reads and returns the response body as text.
+`resp:text()` 读取并以文本形式返回响应体。
 
-- Returns: `string`.
+- 返回：`string`。
 
 ### json
 
-Canonical API name: `ptool.http.Response:json`.
+规范 API 名称：`ptool.http.Response:json`。
 
-`resp:json()` reads the response body, parses it as JSON, and returns a Lua value.
+`resp:json()` 读取响应体，按 JSON 解析后返回 Lua 值。
 
 ### bytes
 
-Canonical API name: `ptool.http.Response:bytes`.
+规范 API 名称：`ptool.http.Response:bytes`。
 
-`resp:bytes()` reads and returns the response body as raw bytes.
+`resp:bytes()` 读取并以原始字节形式返回响应体。
 
-- Returns: `string`.
+- 返回：`string`。
 
 ### header
 
-Canonical API name: `ptool.http.Response:header`.
+规范 API 名称：`ptool.http.Response:header`。
 
-`resp:header(name)` returns the first response header value matching `name`.
+`resp:header(name)` 返回第一个匹配 `name` 的响应头值。
 
-- `name` (string, required): The header name to look up.
-- Returns: `string | nil`.
+- `name`（string，必填）：要查找的响应头名称。
+- 返回：`string | nil`。
 
 ### header_values
 
-Canonical API name: `ptool.http.Response:header_values`.
+规范 API 名称：`ptool.http.Response:header_values`。
 
-`resp:header_values(name)` returns all response header values matching `name`.
+`resp:header_values(name)` 返回所有匹配 `name` 的响应头值。
 
-- `name` (string, required): The header name to look up.
-- Returns: `string[]`.
+- `name`（string，必填）：要查找的响应头名称。
+- 返回：`string[]`。
 
 ### raise_for_status
 
-Canonical API name: `ptool.http.Response:raise_for_status`.
+规范 API 名称：`ptool.http.Response:raise_for_status`。
 
-`resp:raise_for_status()` raises an error when the response status code is in the 4xx or 5xx range.
+`resp:raise_for_status()` 会在响应状态码处于 4xx 或 5xx 范围时抛出错误。
 
-Notes:
+说明：
 
-- Non-2xx HTTP statuses do not raise errors by default. Callers can check `resp.ok`, set `fail_on_http_error = true`, or call `resp:raise_for_status()`.
-- The response body is cached after the first read. Calling `text`, `json`, and `bytes` multiple times is allowed.
+- 默认情况下，非 2xx HTTP 状态不会抛错。调用方可以检查 `resp.ok`、设置 `fail_on_http_error = true`，或调用 `resp:raise_for_status()`。
+- 响应体会在首次读取后缓存，因此 `text`、`json` 和 `bytes` 可以重复调用。

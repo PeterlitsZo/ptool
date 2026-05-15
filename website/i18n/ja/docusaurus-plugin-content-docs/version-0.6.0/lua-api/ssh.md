@@ -1,30 +1,30 @@
 # SSH API
 
-SSH connection, remote execution, and file transfer helpers are available under `ptool.ssh` and `p.ssh`.
+SSH 接続、リモート実行、ファイル転送のヘルパーは `ptool.ssh` と `p.ssh` で利用できます。
 
 ## ptool.ssh.connect
 
 > `v0.1.0` - Introduced.
 
-`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle backed by the system `ssh` command and returns a `Connection` object.
+`ptool.ssh.connect(target_or_options)` は、システムの `ssh` コマンドを 利用する SSH 接続ハンドルを準備し、`Connection` オブジェクトを返します。
 
-`ssh` must be available on `PATH`.
+`ssh` は `PATH` 上で利用可能である必要があります。
 
-Arguments:
+引数:
 
-- `target_or_options` (string|table, required):
-  - When a string is provided, it is treated as an SSH target.
-  - When a table is provided, it currently supports:
-    - `target` (string, optional): SSH target string such as `"deploy@example.com"` or `"deploy@example.com:2222"`.
-    - `host` (string, optional): Hostname or IP address.
-    - `user` (string, optional): SSH username. Defaults to `$USER`, or `"root"` if `$USER` is unavailable.
-    - `port` (integer, optional): SSH port. Defaults to `22`.
-    - `auth` (table, optional): Authentication settings.
-    - `host_key` (table, optional): Host key verification settings.
-    - `connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults to `10000`.
-    - `keepalive_interval_ms` (integer, optional): Keepalive interval in milliseconds.
+- `target_or_options` (string|table, 必須):
+  - 文字列を指定した場合は SSH ターゲットとして扱われます。
+  - テーブルを指定した場合、現在サポートされるフィールドは次の通りです:
+    - `target` (string, 任意): `"deploy@example.com"` や `"deploy@example.com:2222"` のような SSH ターゲット文字列。
+    - `host` (string, 任意): ホスト名または IP アドレス。
+    - `user` (string, 任意): SSH ユーザー名。デフォルトは `$USER`、`$USER` が利用できない場合は `"root"` です。
+    - `port` (integer, 任意): SSH ポート。デフォルトは `22` です。
+    - `auth` (table, 任意): 認証設定。
+    - `host_key` (table, 任意): ホストキー検証設定。
+    - `connect_timeout_ms` (integer, 任意): ミリ秒単位のタイムアウト。 デフォルトは `10000` です。
+    - `keepalive_interval_ms` (integer, 任意): ミリ秒単位の keepalive 間隔。
 
-Supported target string examples:
+サポートされるターゲット文字列の例:
 
 ```lua
 local a = ptool.ssh.connect("deploy@example.com")
@@ -32,37 +32,37 @@ local b = ptool.ssh.connect("deploy@example.com:2222")
 local c = ptool.ssh.connect("[2001:db8::10]:2222")
 ```
 
-`auth` fields:
+`auth` のフィールド:
 
-- `private_key_file` (string, optional): Path to a private key file.
-- `private_key_passphrase` (string, optional): Passphrase for the private key. This is currently not supported.
-- `password` (string, optional): Password-based authentication. This is currently not supported.
+- `private_key_file` (string, 任意): 秘密鍵ファイルへのパス。
+- `private_key_passphrase` (string, 任意): 秘密鍵のパスフレーズ。 現時点では未サポートです。
+- `password` (string, 任意): パスワードベース認証。現時点では未サポート です。
 
-Authentication behavior:
+認証の挙動:
 
-- If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key via `-i` and also sets `IdentitiesOnly=yes`.
-- If `auth.private_key_passphrase` or `auth.password` is provided, `ptool.ssh.connect(...)` fails because this API does not pass those secrets to the system `ssh` command.
-- Otherwise, authentication is delegated to the local OpenSSH setup, including settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, `ssh-agent`, and certificates.
-- Relative key paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`.
-- `~` and `~/...` are expanded in key paths.
+- `auth.private_key_file` を指定すると、`ptool` は `-i` でその鍵を渡して `ssh` を呼び出し、さらに `IdentitiesOnly=yes` も設定します。
+- `auth.private_key_passphrase` または `auth.password` を指定すると、 この API はそれらの秘密情報をシステムの `ssh` コマンドへ渡さないため `ptool.ssh.connect(...)` は失敗します。
+- それ以外の場合、認証はローカルの OpenSSH 設定に委譲されます。 これには `IdentityFile`、`ProxyJump`、`ProxyCommand`、`ssh-agent`、 証明書などの設定や仕組みが含まれます。
+- 相対鍵パスは現在の `ptool` ランタイムディレクトリから解決されるため、 `ptool.cd(...)` に従います。
+- 鍵パス内の `~` と `~/...` は展開されます。
 
-`host_key` fields:
+`host_key` のフィールド:
 
-- `verify` (string, optional): Host key verification mode. Supported values:
-  - `"known_hosts"`: Verify against a known_hosts file (default).
-  - `"ignore"`: Skip host key verification.
-- `known_hosts_file` (string, optional): Path to a known_hosts file. Used only when `verify = "known_hosts"`.
+- `verify` (string, 任意): ホストキー検証モード。サポートされる値:
+  - `"known_hosts"`: `known_hosts` ファイルに対して検証します (デフォルト)。
+  - `"ignore"`: ホストキー検証をスキップします。
+- `known_hosts_file` (string, 任意): `known_hosts` ファイルへのパス。 `verify = "known_hosts"` のときだけ使用されます。
 
-Host key behavior:
+ホストキーの挙動:
 
-- If `verify = "ignore"`, `ptool` invokes `ssh` with `StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`.
-- If `verify = "known_hosts"` and `known_hosts_file` is provided, `ptool` invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`.
-- If `verify = "known_hosts"` and `known_hosts_file` is omitted, or when `host_key` is omitted entirely, host key handling is delegated to the local OpenSSH configuration and defaults.
-- Relative `known_hosts_file` paths are resolved from the current `ptool` runtime directory.
-- `~` and `~/...` are expanded in `known_hosts_file`.
-- When `known_hosts_file` is provided explicitly, it overrides the default `UserKnownHostsFile` used by the local `ssh` command for this connection.
+- `verify = "ignore"` の場合、`ptool` は `StrictHostKeyChecking=no` と `UserKnownHostsFile=/dev/null` を付けて `ssh` を呼び出します。
+- `verify = "known_hosts"` で `known_hosts_file` も指定されている場合、 `ptool` は `StrictHostKeyChecking=yes` とその `UserKnownHostsFile` を 付けて `ssh` を呼び出します。
+- `verify = "known_hosts"` で `known_hosts_file` を省略した場合、または `host_key` 自体を省略した場合、ホストキー処理はローカル OpenSSH の 設定とデフォルト値へ委譲されます。
+- 相対 `known_hosts_file` パスは現在の `ptool` ランタイムディレクトリ から解決されます。
+- `known_hosts_file` 内の `~` と `~/...` は展開されます。
+- `known_hosts_file` を明示的に指定した場合、この接続に対してローカルの `ssh` コマンドが使うデフォルトの `UserKnownHostsFile` を上書きします。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect({
@@ -82,18 +82,18 @@ local ssh = ptool.ssh.connect({
 
 > `v0.1.0` - Introduced.
 
-`Connection` represents an OpenSSH-backed connection handle returned by `ptool.ssh.connect()`.
+`Connection` は `ptool.ssh.connect()` が返す、OpenSSH ベースの接続 ハンドルを表します。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
-Fields and methods:
+フィールドとメソッド:
 
-- Fields:
+- フィールド:
   - `conn.host` (string)
   - `conn.user` (string)
   - `conn.port` (integer)
   - `conn.target` (string)
-- Methods:
+- メソッド:
   - `conn:run(...)` -> `table`
   - `conn:run_capture(...)` -> `table`
   - `conn:path(path)` -> `RemotePath`
@@ -110,9 +110,9 @@ Fields and methods:
 
 Canonical API name: `ptool.ssh.Connection:run`.
 
-`conn:run(...)` executes a remote command through the current SSH connection.
+`conn:run(...)` は現在の SSH 接続を通してリモートコマンドを実行します。
 
-The following call forms are supported:
+次の呼び出し形式をサポートします。
 
 ```lua
 conn:run("hostname")
@@ -123,59 +123,59 @@ conn:run("echo", {"hello", "world"}, { stdout = "capture" })
 conn:run({ cmd = "git", args = {"rev-parse", "HEAD"} })
 ```
 
-Argument rules:
+引数ルール:
 
-- `conn:run(cmdline)`: `cmdline` is sent as the remote command string.
-- `conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` is split using shell-style (`shlex`) rules.
-- `conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. Arguments are shell-quoted before remote execution.
-- `conn:run(cmdline, options)`: `options` overrides this invocation.
-- `conn:run(cmd, args, options)`: `options` overrides this invocation.
-- `conn:run(options)`: `options` is a table.
-- When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`.
+- `conn:run(cmdline)`: `cmdline` はリモートコマンド文字列として送られます。
+- `conn:run(cmd, argsline)`: `cmd` はコマンドとして扱われ、`argsline` は シェル風 (`shlex`) ルールで分割されます。
+- `conn:run(cmd, args)`: `cmd` は文字列で、`args` は文字列配列です。 引数はリモート実行前にシェルクォートされます。
+- `conn:run(cmdline, options)`: `options` がこの呼び出しを上書きします。
+- `conn:run(cmd, args, options)`: `options` がこの呼び出しを上書きします。
+- `conn:run(options)`: `options` はテーブルです。
+- 第 2 引数がテーブルの場合: 配列 (連続する整数キー `1..n`) なら `args`、 それ以外なら `options` として扱われます。
 
-When `conn:run(options)` is used, `options` currently supports:
+`conn:run(options)` を使う場合、`options` は現在次をサポートします。
 
-- `cmd` (string, required): The command name or executable path.
-- `args` (string[], optional): The argument list.
-- `cwd` (string, optional): Remote working directory. This is applied by prepending `cd ... &&` to the generated remote shell command.
-- `env` (table, optional): Remote environment variables, where keys and values are strings. This is applied by prepending `export ... &&` to the generated remote shell command.
-- `stdin` (string, optional): String sent to the remote process stdin.
-- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
+- `cmd` (string, 必須): コマンド名または実行ファイルパス。
+- `args` (string[], 任意): 引数リスト。
+- `cwd` (string, 任意): リモート作業ディレクトリ。生成されるリモート シェルコマンドの先頭に `cd ... &&` を付けて適用します。
+- `env` (table, 任意): リモート環境変数。キーと値は文字列です。生成される リモートシェルコマンドの先頭に `export ... &&` を付けて適用します。
+- `stdin` (string, 任意): リモートプロセスの stdin に送る文字列。
+- `echo` (boolean, 任意): 実行前にリモートコマンドを表示するかどうか。 デフォルトは `true` です。
+- `check` (boolean, 任意): 終了ステータスが `0` 以外のとき直ちにエラーを 発生させるかどうか。デフォルトは `false` です。
+- `stdout` (string, 任意): stdout の処理戦略。サポートされる値:
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
+  - `"capture"`: `res.stdout` にキャプチャします。
+  - `"null"`: 出力を破棄します。
+- `stderr` (string, 任意): stderr の処理戦略。サポートされる値:
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
+  - `"capture"`: `res.stderr` にキャプチャします。
+  - `"null"`: 出力を破棄します。
 
-When the shortcut forms are used, the `options` table supports only:
+ショートカット形式を使う場合、`options` テーブルがサポートするのは次だけ です。
 
-- `stdin` (string, optional): String sent to the remote process stdin.
-- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
-- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stdout`.
-  - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
-  - `"inherit"`: Inherit to the current terminal (default).
-  - `"capture"`: Capture into `res.stderr`.
-  - `"null"`: Discard the output.
+- `stdin` (string, 任意): リモートプロセスの stdin に送る文字列。
+- `echo` (boolean, 任意): 実行前にリモートコマンドを表示するかどうか。 デフォルトは `true` です。
+- `check` (boolean, 任意): 終了ステータスが `0` 以外のとき直ちにエラーを 発生させるかどうか。デフォルトは `false` です。
+- `stdout` (string, 任意): stdout の処理戦略。サポートされる値:
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
+  - `"capture"`: `res.stdout` にキャプチャします。
+  - `"null"`: 出力を破棄します。
+- `stderr` (string, 任意): stderr の処理戦略。サポートされる値:
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
+  - `"capture"`: `res.stderr` にキャプチャします。
+  - `"null"`: 出力を破棄します。
 
-Return value rules:
+戻り値ルール:
 
-- A table is always returned with the following fields:
-  - `ok` (boolean): Whether the remote exit status is `0`.
-  - `code` (integer|nil): The remote exit status. If the remote process exits by signal, this is `nil`.
-  - `target` (string): The SSH target string in the form `user@host:port`.
-  - `stdout` (string, optional): Present when `stdout = "capture"`.
-  - `stderr` (string, optional): Present when `stderr = "capture"`.
-  - `assert_ok(self)` (function): Raises an error when `ok = false`.
+- 常に次のフィールドを持つテーブルが返ります:
+  - `ok` (boolean): リモート終了ステータスが `0` かどうか。
+  - `code` (integer|nil): リモート終了ステータス。リモートプロセスが シグナルで終了した場合は `nil` です。
+  - `target` (string): `user@host:port` 形式の SSH ターゲット文字列。
+  - `stdout` (string, 任意): `stdout = "capture"` のとき存在します。
+  - `stderr` (string, 任意): `stderr = "capture"` のとき存在します。
+  - `assert_ok(self)` (function): `ok = false` のときエラーを発生させます。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -203,18 +203,18 @@ print(res2.stdout)
 
 Canonical API name: `ptool.ssh.Connection:run_capture`.
 
-`conn:run_capture(...)` executes a remote command through the current SSH connection.
+`conn:run_capture(...)` は現在の SSH 接続を通してリモートコマンドを実行 します。
 
-It accepts the same call forms, argument rules, return value rules, and options as `conn:run(...)`.
+呼び出し形式、引数ルール、戻り値ルール、オプションは `conn:run(...)` と 同じです。
 
-The difference is only the default stream handling:
+違いはデフォルトのストリーム処理だけです。
 
-- `stdout` defaults to `"capture"`.
-- `stderr` defaults to `"capture"`.
+- `stdout` のデフォルトは `"capture"` です。
+- `stderr` のデフォルトは `"capture"` です。
 
-You can still override either field explicitly in `options`.
+どちらのフィールドも `options` で明示的に上書きできます。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -242,12 +242,12 @@ print(res3.stdout)
 
 Canonical API name: `ptool.ssh.Connection:path`.
 
-`conn:path(path)` creates a reusable `RemotePath` object bound to the current SSH connection.
+`conn:path(path)` は現在の SSH 接続に紐づいた再利用可能な `RemotePath` オブジェクトを作成します。
 
-- `path` (string, required): The remote path.
-- Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`.
+- `path` (string, 必須): リモートパス。
+- 戻り値: `conn:upload(...)`、`conn:download(...)`、`ptool.fs.copy(...)` に渡せる `RemotePath` オブジェクト。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -262,12 +262,12 @@ ssh:download(remote_release, "./tmp/current.tar.gz")
 
 Canonical API name: `ptool.ssh.Connection:exists`.
 
-`conn:exists(path)` checks whether a remote path exists.
+`conn:exists(path)` はリモートパスが存在するかどうかを確認します。
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path exists, otherwise `false`.
+- `path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。
+- 戻り値: リモートパスが存在する場合は `true`、それ以外は `false`。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -282,12 +282,12 @@ print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 
 Canonical API name: `ptool.ssh.Connection:is_file`.
 
-`conn:is_file(path)` checks whether a remote path exists and is a regular file.
+`conn:is_file(path)` はリモートパスが存在し、通常ファイルであるかどうかを 確認します。
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path is a file, otherwise `false`.
+- `path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。
+- 戻り値: リモートパスがファイルなら `true`、それ以外は `false`。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -304,12 +304,12 @@ end
 
 Canonical API name: `ptool.ssh.Connection:is_dir`.
 
-`conn:is_dir(path)` checks whether a remote path exists and is a directory.
+`conn:is_dir(path)` はリモートパスが存在し、ディレクトリであるかどうかを 確認します。
 
-- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
-- Returns: `true` when the remote path is a directory, otherwise `false`.
+- `path` (string|remote path, 必須): 確認するリモートパス。文字列でも `conn:path(...)` が作成した値でも構いません。
+- 戻り値: リモートパスがディレクトリなら `true`、それ以外は `false`。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -326,31 +326,31 @@ end
 
 Canonical API name: `ptool.ssh.Connection:upload`.
 
-`conn:upload(local_path, remote_path[, options])` uploads a local file or directory to the remote host.
+`conn:upload(local_path, remote_path[, options])` はローカルのファイルまたは ディレクトリをリモートホストへアップロードします。
 
-- `local_path` (string, required): The local file or directory to upload.
-- `remote_path` (string|remote path, required): The destination path on the remote host. It can be a string or a value created by `conn:path(...)`.
-- `options` (table, optional): Transfer options.
-- Returns: A table with the following fields:
-  - `bytes` (integer): The number of regular-file bytes uploaded. When a directory is uploaded, this is the sum of the uploaded file sizes.
-  - `from` (string): The local source path.
-  - `to` (string): The remote destination path.
+- `local_path` (string, 必須): アップロードするローカルファイルまたは ディレクトリ。
+- `remote_path` (string|remote path, 必須): リモートホスト上の宛先パス。 文字列でも `conn:path(...)` が作成した値でも構いません。
+- `options` (table, 任意): 転送オプション。
+- 戻り値: 次のフィールドを持つテーブル:
+  - `bytes` (integer): アップロードされた通常ファイルのバイト数。 ディレクトリをアップロードした場合は、アップロードされた各ファイル サイズの合計です。
+  - `from` (string): ローカルの送信元パス。
+  - `to` (string): リモートの宛先パス。
 
-Supported transfer options:
+サポートされる転送オプション:
 
-- `parents` (boolean, optional): Create the parent directory of `remote_path` before uploading. Defaults to `false`.
-- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
-- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
+- `parents` (boolean, 任意): アップロード前に `remote_path` の親 ディレクトリを作成します。デフォルトは `false` です。
+- `overwrite` (boolean, 任意): 既存の宛先ファイルを置き換えてよいか どうか。デフォルトは `true` です。
+- `echo` (boolean, 任意): 実行前に転送内容を表示するかどうか。 デフォルトは `false` です。
 
-Directory behavior:
+ディレクトリの挙動:
 
-- When `local_path` is a file, the behavior is unchanged.
-- When `local_path` is a directory and `remote_path` does not exist, `remote_path` becomes the destination directory root.
-- When `local_path` is a directory and `remote_path` already exists as a directory, the source directory is created under it using the source directory basename.
-- `overwrite = false` rejects an already-existing destination directory for the final directory root.
-- Directory uploads require `tar` to be available on the remote host.
+- `local_path` がファイルの場合、挙動は変わりません。
+- `local_path` がディレクトリで `remote_path` が存在しない場合、 `remote_path` が宛先ディレクトリのルートになります。
+- `local_path` がディレクトリで `remote_path` がすでにディレクトリとして 存在する場合、送信元ディレクトリはその配下に送信元 basename を使って 作成されます。
+- `overwrite = false` の場合、最終ディレクトリルートに対して既存の宛先 ディレクトリがあると拒否されます。
+- ディレクトリアップロードには、リモートホストで `tar` が利用できる必要 があります。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -366,7 +366,7 @@ print(res.bytes)
 print(res.to)
 ```
 
-Directory example:
+ディレクトリ例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -387,31 +387,31 @@ print(res.to) -- deploy@example.com:22:/srv/app/releases
 
 Canonical API name: `ptool.ssh.Connection:download`.
 
-`conn:download(remote_path, local_path[, options])` downloads a remote file or directory to a local path.
+`conn:download(remote_path, local_path[, options])` はリモートのファイルまたは ディレクトリをローカルパスへダウンロードします。
 
-- `remote_path` (string|remote path, required): The source path on the remote host. It can be a string or a value created by `conn:path(...)`.
-- `local_path` (string, required): The local destination path.
-- `options` (table, optional): Transfer options.
-- Returns: A table with the following fields:
-  - `bytes` (integer): The number of regular-file bytes downloaded. When a directory is downloaded, this is the sum of the downloaded file sizes.
-  - `from` (string): The remote source path.
-  - `to` (string): The local destination path.
+- `remote_path` (string|remote path, 必須): リモートホスト上の送信元パス。 文字列でも `conn:path(...)` が作成した値でも構いません。
+- `local_path` (string, 必須): ローカルの宛先パス。
+- `options` (table, 任意): 転送オプション。
+- 戻り値: 次のフィールドを持つテーブル:
+  - `bytes` (integer): ダウンロードされた通常ファイルのバイト数。 ディレクトリをダウンロードした場合は、ダウンロードされた各ファイル サイズの合計です。
+  - `from` (string): リモートの送信元パス。
+  - `to` (string): ローカルの宛先パス。
 
-Supported transfer options:
+サポートされる転送オプション:
 
-- `parents` (boolean, optional): Create the parent directory of `local_path` before downloading. Defaults to `false`.
-- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
-- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
+- `parents` (boolean, 任意): ダウンロード前に `local_path` の親 ディレクトリを作成します。デフォルトは `false` です。
+- `overwrite` (boolean, 任意): 既存の宛先ファイルを置き換えてよいか どうか。デフォルトは `true` です。
+- `echo` (boolean, 任意): 実行前に転送内容を表示するかどうか。 デフォルトは `false` です。
 
-Directory behavior:
+ディレクトリの挙動:
 
-- When `remote_path` is a file, the behavior is unchanged.
-- When `remote_path` is a directory and `local_path` does not exist, `local_path` becomes the destination directory root.
-- When `remote_path` is a directory and `local_path` already exists as a directory, the remote source directory is created under it using the remote directory basename.
-- `overwrite = false` rejects an already-existing destination directory for the final directory root.
-- Directory downloads require `tar` to be available on the remote host.
+- `remote_path` がファイルの場合、挙動は変わりません。
+- `remote_path` がディレクトリで `local_path` が存在しない場合、 `local_path` が宛先ディレクトリのルートになります。
+- `remote_path` がディレクトリで `local_path` がすでにディレクトリとして 存在する場合、リモート送信元ディレクトリはその配下にリモート ディレクトリ basename を使って作成されます。
+- `overwrite = false` の場合、最終ディレクトリルートに対して既存の宛先 ディレクトリがあると拒否されます。
+- ディレクトリダウンロードには、リモートホストで `tar` が利用できる必要 があります。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -426,7 +426,7 @@ print(res.bytes)
 print(res.from)
 ```
 
-Directory example:
+ディレクトリ例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -447,14 +447,14 @@ print(res.from)
 
 Canonical API name: `ptool.ssh.Connection:close`.
 
-`conn:close()` closes the SSH connection handle.
+`conn:close()` は SSH 接続ハンドルを閉じます。
 
-Behavior:
+挙動:
 
-- After closing, the connection can no longer be used.
-- Closing an already-closed connection is allowed and has no effect.
+- 閉じたあとは、その接続をもう使えません。
+- すでに閉じられた接続を再度閉じても問題なく、効果はありません。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -465,11 +465,11 @@ ssh:close()
 
 > `v0.1.0` - Introduced.
 
-`RemotePath` represents a remote path bound to a `Connection` and returned by `conn:path(path)`.
+`RemotePath` は `Connection` に紐づくリモートパスを表し、 `conn:path(path)` から返されます。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
-Methods:
+メソッド:
 
 - `remote:exists()` -> `boolean`
 - `remote:is_file()` -> `boolean`
@@ -477,11 +477,11 @@ Methods:
 
 ### exists
 
-`remote:exists()` checks whether the remote path exists.
+`remote:exists()` はリモートパスが存在するかどうかを確認します。
 
-- Returns: `true` when the remote path exists, otherwise `false`.
+- 戻り値: リモートパスが存在する場合は `true`、それ以外は `false`。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -492,11 +492,11 @@ print(remote_release:exists())
 
 ### is_file
 
-`remote:is_file()` checks whether the remote path exists and is a regular file.
+`remote:is_file()` はリモートパスが存在し、通常ファイルであるかどうかを 確認します。
 
-- Returns: `true` when the remote path is a file, otherwise `false`.
+- 戻り値: リモートパスがファイルなら `true`、それ以外は `false`。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -509,11 +509,11 @@ end
 
 ### is_dir
 
-`remote:is_dir()` checks whether the remote path exists and is a directory.
+`remote:is_dir()` はリモートパスが存在し、ディレクトリであるかどうかを 確認します。
 
-- Returns: `true` when the remote path is a directory, otherwise `false`.
+- 戻り値: リモートパスがディレクトリなら `true`、それ以外は `false`。
 
-Example:
+例:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")

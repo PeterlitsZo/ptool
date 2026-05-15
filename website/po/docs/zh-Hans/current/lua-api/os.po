@@ -37,7 +37,6 @@ msgid ""
 msgstr "`ptool.os.getenv(name)` 返回某个环境变量的当前值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:12
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:12"
 msgid "`name` (string, required): Environment variable name."
 msgstr "`name`（string，必填）：环境变量名。"
@@ -45,35 +44,36 @@ msgstr "`name`（string，必填）：环境变量名。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:13
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:13"
 msgid "Returns: `string|nil`."
-msgstr "`name`（string，必填）：环境变量名。"
+msgstr "返回：`string|nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:15
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:15"
 msgid "Behavior:"
-msgstr "行为："
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:17
 msgid "Returns `nil` when the variable is not set."
-msgstr "返回：`string|nil`。"
+msgstr "当变量未设置时返回 `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:18
 msgid ""
 "Reads the current `ptool` runtime environment, including values changed by "
 "`ptool.os.setenv(...)` and `ptool.os.unsetenv(...)`."
 msgstr ""
+"读取当前 `ptool` 运行时环境，其中也包括通过 `ptool.os.setenv(...)` 和 "
+"`ptool.os.unsetenv(...)` 修改过的值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:20
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:20"
 msgid ""
 "Raises an error when `name` is empty or contains invalid characters such as "
 "`=`."
-msgstr ""
+msgstr "当 `name` 为空，或包含 `=` 之类的非法字符时会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:23
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:23"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:30
 msgid "ptool.os.env"
@@ -94,25 +94,25 @@ msgid "Returns: `table`."
 msgstr "返回：`table`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:38
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:38"
 msgid "Behavior:"
-msgstr "行为："
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:40
 msgid "The returned table maps variable names to string values."
-msgstr ""
+msgstr "返回的 table 会把变量名映射到字符串值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:41
 msgid ""
 "Values changed through `ptool.os.setenv(...)` and `ptool.os.unsetenv(...)` "
 "are reflected in the snapshot."
-msgstr ""
+msgstr "通过 `ptool.os.setenv(...)` 和 `ptool.os.unsetenv(...)` 修改的值也会反映到这"
+"个快照中。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:44
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:44"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:51
 msgid "ptool.os.setenv"
@@ -141,7 +141,7 @@ msgstr "`value`（string，必填）：环境变量值。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:61
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:61"
 msgid "Behavior:"
-msgstr "行为："
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:63
 msgid ""
@@ -153,19 +153,19 @@ msgid ""
 "Values set here are visible to `ptool.os.getenv(...)`, `ptool.os.env()`, and "
 "child processes launched later through `ptool.run(...)`."
 msgstr ""
+"这里设置的值会反映到 `ptool.os.getenv(...)`、`ptool.os.env()`，以及之后通过 "
+"`ptool.run(...)` 启动的子进程中。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:66
 msgid ""
 "Raises an error when `name` is empty, contains `=`, or when `value` contains "
 "NUL."
-msgstr ""
-"这里设置的值会反映到 `ptool.os.getenv(...)`、`ptool.os.env()`，以及之后 通过 "
-"`ptool.run(...)` 启动的子进程中。"
+msgstr "当 `name` 为空、包含 `=`，或 `value` 包含 NUL 时会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:69
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:69"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:76
 msgid "ptool.os.unsetenv"
@@ -188,28 +188,29 @@ msgid "`name` (string, required): Environment variable name."
 msgstr "`name`（string，必填）：环境变量名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:85
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:85"
 msgid "Behavior:"
-msgstr "行为："
+msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:87
 msgid ""
 "This affects later calls to `ptool.os.getenv(...)`, `ptool.os.env()`, and "
 "child processes launched by `ptool.run(...)`."
 msgstr ""
+"这会影响之后对 `ptool.os.getenv(...)`、`ptool.os.env()` 的调用，以及由 "
+"`ptool.run(...)` 启动的子进程。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:89
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:89"
 msgid ""
 "Raises an error when `name` is empty or contains invalid characters such as "
 "`=`."
-msgstr ""
+msgstr "当 `name` 为空，或包含 `=` 之类的非法字符时会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:92
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:92"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:99
 msgid "ptool.os.homedir"
@@ -232,7 +233,7 @@ msgstr "返回：`string|nil`。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:107
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:107"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:113
 msgid "ptool.os.tmpdir"
@@ -254,7 +255,7 @@ msgstr "返回：`string`。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:121
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:121"
 msgid "Example:"
-msgstr ""
+msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:127
 msgid "ptool.os.hostname"
@@ -332,4 +333,4 @@ msgstr "返回：`string|nil`。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:160
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/os.md:160"
 msgid "Example:"
-msgstr ""
+msgstr "示例："

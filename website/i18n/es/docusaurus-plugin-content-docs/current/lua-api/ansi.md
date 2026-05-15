@@ -4,7 +4,7 @@ Las utilidades de estilo ANSI están disponibles bajo `ptool.ansi` y `p.ansi`.
 
 ## ptool.ansi.style
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.ansi.style(text[, options])` devuelve `text` envuelto con secuencias de escape de estilo ANSI.
 
@@ -35,7 +35,7 @@ print(ptool.ansi.style("warning", {
 
 ## ptool.ansi.\<color\>
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.ansi.black`, `ptool.ansi.red`, `ptool.ansi.green`, `ptool.ansi.yellow`, `ptool.ansi.blue`, `ptool.ansi.magenta`, `ptool.ansi.cyan` y `ptool.ansi.white` son utilidades de conveniencia con la siguiente firma:
 

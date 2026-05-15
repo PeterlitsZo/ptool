@@ -139,13 +139,12 @@ msgstr ""
 "Um REPL interativo para testar expressões Lua e APIs do `ptool` diretamente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
-#, fuzzy
 msgid ""
 "Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, "
 "HTTP, SSH, databases, and templates."
 msgstr ""
-"Utilitários Lua para semver, caminhos, arquivos, TOML, regex, strings, HTTP, "
-"SSH, bancos de dados e templates."
+"Auxiliares Lua para semver, data e hora, caminhos, arquivos, TOML, regexes, "
+"strings, HTTP, SSH, bancos de dados e modelos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
 msgid ""

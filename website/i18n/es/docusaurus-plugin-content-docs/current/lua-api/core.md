@@ -38,7 +38,7 @@ Se admite shebang, así que puedes añadir esto al comienzo del archivo:
 
 ## ptool.use
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.use` declara la versión mínima de `ptool` requerida por un script.
 
@@ -51,7 +51,7 @@ ptool.use("v0.1.0")
 
 ## ptool.unindent
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.unindent` procesa cadenas multilínea eliminando el prefijo `| ` después de la indentación inicial en cada línea y recortando las líneas en blanco del principio y del final.
 
@@ -71,7 +71,7 @@ line 2]]
 
 ## ptool.inspect
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.inspect(value[, options])` representa un valor Lua como una cadena legible al estilo Lua. Su objetivo principal es depurar y mostrar el contenido de tablas.
 
@@ -146,7 +146,7 @@ local project = ptool.ask("Project name?", {
 
 ### ptool.ask.confirm
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - Introducido.
 
 `ptool.ask.confirm(prompt[, options])` pide al usuario una respuesta de sí/no.
 
@@ -166,7 +166,7 @@ local confirmed = ptool.ask.confirm("Continue?", {
 
 ### ptool.ask.select
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - Introducido.
 
 `ptool.ask.select(prompt, items[, options])` pide al usuario elegir un elemento de una lista.
 
@@ -194,7 +194,7 @@ local bump = ptool.ask.select("Select bump type", {
 
 ### ptool.ask.multiselect
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - Introducido.
 
 `ptool.ask.multiselect(prompt, items[, options])` pide al usuario elegir cero o más elementos de una lista.
 
@@ -223,7 +223,7 @@ local targets = ptool.ask.multiselect("Select targets", {
 
 ### ptool.ask.secret
 
-> `v0.5.0` - Introduced.
+> `v0.5.0` - Introducido.
 
 `ptool.ask.secret(prompt[, options])` pide al usuario una entrada secreta, como un token o una contraseña.
 
@@ -252,7 +252,7 @@ local token = ptool.ask.secret("API token?", {
 
 ## ptool.config
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.config` establece la configuración de runtime del script.
 
@@ -279,7 +279,7 @@ ptool.config({
 
 ## ptool.cd
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.cd(path)` actualiza el directorio actual de runtime de `ptool`.
 
@@ -301,7 +301,7 @@ print(res.stdout)
 
 ## ptool.script_path
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 `ptool.script_path()` devuelve la ruta absoluta del script de entrada actual.
 
@@ -323,7 +323,7 @@ local project_root = ptool.path.dirname(script_dir)
 
 ## ptool.try
 
-> `v0.4.0` - Introduced.
+> `v0.4.0` - Introducido.
 
 `ptool.try(fn)` ejecuta `fn` y convierte los errores lanzados en valores de retorno.
 
@@ -387,7 +387,7 @@ end
 
 ## ptool.run
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.run` ejecuta comandos externos desde Rust.
 
@@ -454,21 +454,21 @@ También se admite `ptool.run(options)`, donde `options` es una tabla con los si
 - `args` (string[], opcional): La lista de argumentos.
 - `cwd` (string, opcional): El directorio de trabajo del proceso hijo.
 - `env` (table, opcional): Variables de entorno adicionales, donde claves y valores son nombres y valores de variable.
-- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
-- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `stdin` (cadena, opcional): cadena enviada a la entrada estándar del proceso secundario. Cuando se omite, el proceso hijo hereda la entrada estándar del proceso actual.
+- `trim` (booleano, opcional): si se deben recortar los espacios en blanco iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. Esto solo afecta a las transmisiones configuradas en `"capture"`. El valor predeterminado es `false`.
 - `echo` (boolean, opcional): Si debe imprimirse información del comando para esta ejecución. Si se omite, se usa el valor de `ptool.config({ run = { echo = ... } })`; si también falta, el valor por defecto es `true`.
 - `check` (boolean, opcional): Si debe producirse un error inmediatamente cuando el código de salida no es `0`. Si se omite, se usa el valor de `ptool.config({ run = { check = ... } })`; si también falta, el valor por defecto es `false`.
 - `confirm` (boolean, opcional): Si debe pedirse confirmación al usuario antes de ejecutar. Si se omite, se usa el valor de `ptool.config({ run = { confirm = ... } })`; si también falta, el valor por defecto es `false`.
 - `retry` (boolean, opcional): Si debe preguntarse al usuario si quiere reintentar después de un fallo cuando `check = true`. Si se omite, se usa el valor de `ptool.config({ run = { retry = ... } })`; si también falta, el valor por defecto es `false`.
 - `stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: hereda del terminal actual (predeterminado).
   - `"capture"`: Capturar en `res.stdout`.
-  - `"null"`: Discard the output.
+  - `"null"`: Descarta la salida.
 - `stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: hereda del terminal actual (predeterminado).
   - `"capture"`: Capturar en `res.stderr`.
-  - `"null"`: Discard the output.
-- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning.
+  - `"null"`: Descarta la salida.
+- Cuando se utilizan formularios de llamadas abreviadas como `ptool.run(cmdline, options)` o `ptool.run(cmd, args, options)`, la tabla `options` por llamada también acepta `stdin` y `trim` con el mismo significado.
 - Cuando `confirm = true`:
   - Si el usuario rechaza la ejecución, se produce un error de inmediato.
   - Si el entorno actual no es interactivo (sin TTY), se produce un error de inmediato.
@@ -508,7 +508,7 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introducido.
 
 `ptool.run_capture` ejecuta comandos externos desde Rust con las mismas formas de llamada, reglas de argumentos, reglas de valor devuelto y opciones que `ptool.run`.
 
@@ -517,7 +517,7 @@ La única diferencia es el manejo por defecto de los streams:
 - `stdout` por defecto es `"capture"`.
 - `stderr` por defecto es `"capture"`.
 
-`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
+`trim` todavía tiene como valor predeterminado `false` y aún puede anular cualquiera de estos campos explícitamente en `options`.
 
 Ejemplo:
 

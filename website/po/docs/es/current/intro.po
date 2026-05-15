@@ -141,13 +141,12 @@ msgstr ""
 "directamente."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:95
-#, fuzzy
 msgid ""
 "Lua helpers for semver, datetimes, paths, files, TOML, regexes, strings, "
 "HTTP, SSH, databases, and templates."
 msgstr ""
-"Utilidades de Lua para semver, rutas, archivos, TOML, expresiones regulares, "
-"cadenas, HTTP, SSH, bases de datos y plantillas."
+"Ayudantes de Lua para semver, fechas y horas, rutas, archivos, TOML, "
+"expresiones regulares, cadenas, HTTP, SSH, bases de datos y plantillas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/intro.md:97
 msgid ""

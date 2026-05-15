@@ -29,7 +29,7 @@ msgstr "ptool.fs.read"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:7"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:9
 msgid ""
@@ -77,7 +77,7 @@ msgstr "ptool.fs.write"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:33
 msgid ""
@@ -121,7 +121,7 @@ msgstr "ptool.fs.mkdir"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:55
 msgid ""
@@ -147,7 +147,7 @@ msgstr "ptool.fs.exists"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:70
 msgid "`ptool.fs.exists(path)` checks whether a path exists."
@@ -174,7 +174,7 @@ msgstr "ptool.fs.is_file"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:85"
 msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:87
 msgid ""
@@ -204,7 +204,7 @@ msgstr "ptool.fs.is_dir"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102"
 msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:104
 msgid ""
@@ -234,7 +234,7 @@ msgstr "ptool.fs.remove"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119"
 msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:121
 msgid ""
@@ -296,7 +296,8 @@ msgstr "ptool.fs.glob"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:146
 msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
-msgstr "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
+msgstr ""
+"`v0.2.0` - Introducido. `v0.5.0` - Se ha añadido la opción `working_dir`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:149
 msgid ""

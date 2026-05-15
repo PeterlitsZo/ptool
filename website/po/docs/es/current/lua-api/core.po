@@ -94,7 +94,7 @@ msgstr "ptool.use"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:48
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:48"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:50
 msgid "`ptool.use` declares the minimum required `ptool` version for a script."
@@ -126,7 +126,7 @@ msgstr "ptool.unindent"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:64
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:64"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:66
 msgid ""
@@ -149,7 +149,7 @@ msgstr "ptool.inspect"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:85
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:85"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:87
 msgid ""
@@ -384,7 +384,7 @@ msgstr "ptool.ask.confirm"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:175
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:175"
 msgid "`v0.5.0` - Introduced."
-msgstr "`v0.5.0` - Introduced."
+msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:177
 msgid ""
@@ -433,7 +433,7 @@ msgstr "ptool.ask.select"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:196
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:196"
 msgid "`v0.5.0` - Introduced."
-msgstr "`v0.5.0` - Introduced."
+msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:198
 msgid ""
@@ -504,7 +504,7 @@ msgstr "ptool.ask.multiselect"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:226
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:226"
 msgid "`v0.5.0` - Introduced."
-msgstr "`v0.5.0` - Introduced."
+msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:228
 msgid ""
@@ -583,7 +583,7 @@ msgstr "ptool.ask.secret"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:259
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:259"
 msgid "`v0.5.0` - Introduced."
-msgstr "`v0.5.0` - Introduced."
+msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:261
 msgid ""
@@ -687,7 +687,7 @@ msgstr "ptool.config"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:294
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:294"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:296
 msgid "`ptool.config` sets runtime configuration for the script."
@@ -748,7 +748,7 @@ msgstr "ptool.cd"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:325
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:325"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:327
 msgid "`ptool.cd(path)` updates `ptool`'s runtime current directory."
@@ -796,7 +796,7 @@ msgstr "ptool.script_path"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:348
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:348"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:350
 msgid ""
@@ -845,7 +845,7 @@ msgstr "ptool.try"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:372
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:372"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:374
 msgid ""
@@ -1015,7 +1015,7 @@ msgstr "ptool.run"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:442
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:442"
 msgid "`v0.1.0` - Introduced."
-msgstr "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:444
 msgid "`ptool.run` executes external commands from Rust."
@@ -1202,6 +1202,9 @@ msgid ""
 "`stdin` (string, optional): String sent to the child process stdin. When "
 "this is omitted, the child process inherits the current process stdin."
 msgstr ""
+"`stdin` (cadena, opcional): cadena enviada a la entrada estándar del proceso "
+"secundario. Cuando se omite, el proceso hijo hereda la entrada estándar del "
+"proceso actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:526
 msgid ""
@@ -1209,6 +1212,10 @@ msgid ""
 "from captured `stdout` and captured `stderr` before returning them. This "
 "only affects streams set to `\"capture\"`. Defaults to `false`."
 msgstr ""
+"`trim` (booleano, opcional): si se deben recortar los espacios en blanco "
+"iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. "
+"Esto solo afecta a las transmisiones configuradas en `\"capture\"`. El valor "
+"predeterminado es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
 msgid ""
@@ -1265,20 +1272,18 @@ msgstr ""
 "admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
-msgstr "`\"inherit\"`: Heredar hacia el terminal actual (por defecto)."
+msgstr "`\"inherit\"`: hereda del terminal actual (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
 msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr "`\"capture\"`: Capturar en `res.stdout`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"null\"`: Discard the output."
-msgstr "`\"null\"`: Descartar la salida."
+msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 msgid ""
@@ -1288,20 +1293,18 @@ msgstr ""
 "admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
-msgstr "`\"inherit\"`: Heredar hacia el terminal actual (por defecto)."
+msgstr "`\"inherit\"`: hereda del terminal actual (predeterminado)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
 msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr "`\"capture\"`: Capturar en `res.stderr`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"null\"`: Discard the output."
-msgstr "`\"null\"`: Descartar la salida."
+msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
 msgid ""
@@ -1309,6 +1312,9 @@ msgid ""
 "(cmd, args, options)` are used, the per-call `options` table also accepts "
 "`stdin` and `trim` with the same meaning."
 msgstr ""
+"Cuando se utilizan formularios de llamadas abreviadas como `ptool.run"
+"(cmdline, options)` o `ptool.run(cmd, args, options)`, la tabla `options` "
+"por llamada también acepta `stdin` y `trim` con el mismo significado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid "When `confirm = true`:"
@@ -1346,7 +1352,6 @@ msgstr ""
 "inmediato en lugar de pedir reintento."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -1357,7 +1362,7 @@ msgstr "ptool.run_capture"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:594
 msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:596
 msgid ""
@@ -1385,24 +1390,22 @@ msgid ""
 "`trim` still defaults to `false`, and you can still override any of these "
 "fields explicitly in `options`."
 msgstr ""
+"`trim` todavía tiene como valor predeterminado `false` y aún puede anular "
+"cualquiera de estos campos explícitamente en `options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607"
 msgid "Example:"
 msgstr "Ejemplo:"
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
 #~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
-#~ msgstr "`\"inherit\"`: Heredar hacia el terminal actual (por defecto)."
+#~ msgstr "`\"inherit\"`: hereda del terminal actual (predeterminado)."
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
 #~ msgid "`\"null\"`: Discard the output."
-#~ msgstr "`\"null\"`: Descartar la salida."
+#~ msgstr "`\"null\"`: Descarta la salida."
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559"
 #~ msgid "Example:"
 #~ msgstr "Ejemplo:"
@@ -1412,7 +1415,6 @@ msgstr "Ejemplo:"
 #~ "Puedes seguir sobrescribiendo cualquiera de los dos campos explícitamente en "
 #~ "`options`."
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602"
 #~ msgid "Example:"
 #~ msgstr "Ejemplo:"

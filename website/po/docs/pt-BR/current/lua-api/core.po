@@ -1188,6 +1188,8 @@ msgid ""
 "`stdin` (string, optional): String sent to the child process stdin. When "
 "this is omitted, the child process inherits the current process stdin."
 msgstr ""
+"`stdin` (string, opcional): String enviada ao processo filho stdin. Quando "
+"isso é omitido, o processo filho herda o stdin do processo atual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:526
 msgid ""
@@ -1195,6 +1197,9 @@ msgid ""
 "from captured `stdout` and captured `stderr` before returning them. This "
 "only affects streams set to `\"capture\"`. Defaults to `false`."
 msgstr ""
+"`trim` (booleano, opcional): se deve cortar os espaços em branco iniciais e "
+"finais do `stdout` capturado e do `stderr` capturado antes de retorná-los. "
+"Isso afeta apenas fluxos definidos como `\"capture\"`. O padrão é `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
 msgid ""
@@ -1251,7 +1256,6 @@ msgstr ""
 "suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: Herda para o terminal atual (padrão)."
@@ -1261,7 +1265,6 @@ msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr "`\"capture\"`: Captura em `res.stdout`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta a saída."
@@ -1274,7 +1277,6 @@ msgstr ""
 "suportados:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: Herda para o terminal atual (padrão)."
@@ -1284,7 +1286,6 @@ msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr "`\"capture\"`: Captura em `res.stderr`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:546"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta a saída."
@@ -1295,6 +1296,9 @@ msgid ""
 "(cmd, args, options)` are used, the per-call `options` table also accepts "
 "`stdin` and `trim` with the same meaning."
 msgstr ""
+"Quando formulários de chamada de atalho como `ptool.run(cmdline, options)` "
+"ou `ptool.run(cmd, args, options)` são usados, a tabela `options` por "
+"chamada também aceita `stdin` e `trim` com o mesmo significado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:553
 msgid "When `confirm = true`:"
@@ -1332,7 +1336,6 @@ msgstr ""
 "imediatamente em vez de perguntar sobre retry."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562"
 msgid "Example:"
 msgstr "Exemplo:"
@@ -1371,24 +1374,22 @@ msgid ""
 "`trim` still defaults to `false`, and you can still override any of these "
 "fields explicitly in `options`."
 msgstr ""
+"`trim` ainda tem como padrão `false` e você ainda pode substituir qualquer "
+"um desses campos explicitamente em `options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:607"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
 #~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 #~ msgstr "`\"inherit\"`: Herda para o terminal atual (padrão)."
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:543"
 #~ msgid "`\"null\"`: Discard the output."
 #~ msgstr "`\"null\"`: Descarta a saída."
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559"
 #~ msgid "Example:"
 #~ msgstr "Exemplo:"
@@ -1398,7 +1399,6 @@ msgstr "Exemplo:"
 #~ "Você ainda pode sobrescrever qualquer um dos campos explicitamente em "
 #~ "`options`."
 
-#, fuzzy
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602"
 #~ msgid "Example:"
 #~ msgstr "Exemplo:"

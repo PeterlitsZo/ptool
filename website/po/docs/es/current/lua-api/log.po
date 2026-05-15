@@ -75,7 +75,7 @@ msgstr "ptool.log.trace"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:25
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:25"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:31
 msgid "Writes a trace-level log line."
@@ -88,7 +88,7 @@ msgstr "ptool.log.debug"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:35
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:35"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:41
 msgid "Writes a debug-level log line."
@@ -101,7 +101,7 @@ msgstr "ptool.log.info"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:45
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:45"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:51
 msgid "Writes an info-level log line."
@@ -114,7 +114,7 @@ msgstr "ptool.log.warn"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:55
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:55"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:61
 msgid "Writes a warning-level log line."
@@ -127,7 +127,7 @@ msgstr "ptool.log.error"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:65
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:65"
 msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:71
 msgid "Writes an error-level log line to `stderr`."

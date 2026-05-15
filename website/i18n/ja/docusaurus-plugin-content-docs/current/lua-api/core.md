@@ -454,21 +454,21 @@ res:assert_ok()
 - `args` (string[], 任意): 引数リスト。
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
-- `stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin.
-- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `stdin` (文字列、オプション): 子プロセスの標準入力に送信される文字列。これを省略すると、子プロセスは現在のプロセスの標準入力を継承します。
+- `trim` (ブール値、オプション): キャプチャされた `stdout` とキャプチャされた `stderr` を返す前に、それらから先頭と末尾の空白をトリミングするかどうか。これは、`"capture"` に設定されたストリームにのみ影響します。デフォルトは`false`です。
 - `echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフォルトは `true` です。
 - `check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかどうか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それも未設定ならデフォルトは `false` です。
 - `confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデフォルトは `false` です。
 - `retry` (boolean, 任意): `check = true` のとき、失敗後に再試行するか ユーザーへ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使われ、それも未設定なら デフォルトは `false` です。
 - `stdout` (string, 任意): stdout の扱い。サポートされる値:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
   - `"capture"`: `res.stdout` にキャプチャする。
-  - `"null"`: Discard the output.
+  - `"null"`: 出力を破棄します。
 - `stderr` (string, 任意): stderr の扱い。サポートされる値:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
   - `"capture"`: `res.stderr` にキャプチャする。
-  - `"null"`: Discard the output.
-- When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning.
+  - `"null"`: 出力を破棄します。
+- `ptool.run(cmdline, options)` や `ptool.run(cmd, args, options)` などのショートカット呼び出し形式が使用される場合、呼び出しごとの `options` テーブルは同じ意味の `stdin` および `trim` も受け入れます。
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -517,7 +517,7 @@ res:assert_ok()
 - `stdout` のデフォルトは `"capture"`。
 - `stderr` のデフォルトは `"capture"`。
 
-`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`.
+`trim` のデフォルトは引き続き `false` であり、これらのフィールドのいずれかを `options` で明示的にオーバーライドできます。
 
 例:
 

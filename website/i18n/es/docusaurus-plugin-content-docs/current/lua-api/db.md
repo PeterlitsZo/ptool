@@ -4,7 +4,7 @@ Las utilidades de conexión y consulta de bases de datos están disponibles bajo
 
 ## ptool.db.connect
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `ptool.db.connect(url_or_options)` abre una conexión de base de datos y devuelve un objeto `Connection`.
 
@@ -46,7 +46,7 @@ local db = ptool.db.connect({
 
 ## Connection
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
 `Connection` representa una conexión de base de datos abierta devuelta por `ptool.db.connect()`.
 
@@ -88,9 +88,9 @@ Reglas de valores devueltos:
 
 ### query
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:query`.
+Nombre de la API canónica: `ptool.db.Connection:query`.
 
 `db:query(sql, params?)` ejecuta una consulta y devuelve una tabla con:
 
@@ -116,9 +116,9 @@ print(res.rows[2].name)
 
 ### query_one
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:query_one`.
+Nombre de la API canónica: `ptool.db.Connection:query_one`.
 
 `db:query_one(sql, params?)` devuelve la primera fila como tabla, o `nil` si la consulta no devuelve filas.
 
@@ -133,9 +133,9 @@ end
 
 ### scalar
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:scalar`.
+Nombre de la API canónica: `ptool.db.Connection:scalar`.
 
 `db:scalar(sql, params?)` devuelve la primera columna de la primera fila, o `nil` si la consulta no devuelve filas.
 
@@ -148,9 +148,9 @@ print(count)
 
 ### execute
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:execute`.
+Nombre de la API canónica: `ptool.db.Connection:execute`.
 
 `db:execute(sql, params?)` ejecuta una sentencia y devuelve una tabla con:
 
@@ -165,9 +165,9 @@ print(res.rows_affected)
 
 ### transaction
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:transaction`.
+Nombre de la API canónica: `ptool.db.Connection:transaction`.
 
 `db:transaction(fn)` ejecuta `fn(tx)` dentro de una transacción de base de datos.
 
@@ -205,9 +205,9 @@ print(tostring(err))
 
 ### close
 
-> `v0.1.0` - Introduced.
+> `v0.1.0` - Introducido.
 
-Canonical API name: `ptool.db.Connection:close`.
+Nombre de la API canónica: `ptool.db.Connection:close`.
 
 `db:close()` cierra la conexión.
 
