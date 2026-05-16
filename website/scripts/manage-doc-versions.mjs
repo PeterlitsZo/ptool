@@ -1,5 +1,5 @@
 import {execFile as execFileCallback} from 'node:child_process';
-import {readdir, readFile, rm, writeFile} from 'node:fs/promises';
+import {access, mkdir, readdir, readFile, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
@@ -24,6 +24,9 @@ async function main() {
     case 'snapshot':
       await runSnapshot(restArgs);
       break;
+    case 'sync-metadata':
+      await runSyncMetadata(restArgs);
+      break;
     case 'prune':
       await runPrune(restArgs);
       break;
@@ -45,15 +48,28 @@ async function runSnapshot(args) {
     throw new Error('snapshot requires a version name.');
   }
 
+  parseVersion(versionName);
   const keep = parseKeepCount(args.slice(1));
   await execFile('npx', ['docusaurus', 'docs:version', versionName], {
     cwd: websiteDir,
     maxBuffer: 32 * 1024 * 1024,
   });
   console.log(`snapshotted docs for ${versionName}`);
+  await syncVersionTranslationMetadata(versionName);
+  console.log(`synced version metadata for ${versionName}`);
 
   const {keptVersions, prunedVersions} = await pruneVersions({keep});
   printSummary({keptVersions, prunedVersions});
+}
+
+async function runSyncMetadata(args) {
+  const versionNames = args[0] ? [args[0]] : await readVersionNames();
+
+  for (const versionName of versionNames) {
+    parseVersion(versionName);
+    await syncVersionTranslationMetadata(versionName);
+    console.log(`synced version metadata for ${versionName}`);
+  }
 }
 
 async function runPrune(args) {
@@ -127,6 +143,9 @@ async function removeVersionArtifacts(versionName) {
     ...i18nLocales.map((locale) =>
       path.join(i18nDir, locale, 'docusaurus-plugin-content-docs', versionDirName),
     ),
+    ...i18nLocales.map((locale) =>
+      path.join(i18nDir, locale, 'docusaurus-plugin-content-docs', `${versionDirName}.json`),
+    ),
   ];
 
   await Promise.all(
@@ -144,6 +163,57 @@ async function readLocaleDirs(rootDir, excludedNames = []) {
   } catch (error) {
     if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
       return [];
+    }
+    throw error;
+  }
+}
+
+async function syncVersionTranslationMetadata(versionName) {
+  const docsPluginDirName = 'docusaurus-plugin-content-docs';
+  const targetFileName = `version-${versionName}.json`;
+  const locales = await readLocaleDirs(i18nDir);
+
+  for (const locale of locales) {
+    const localeDocsDir = path.join(i18nDir, locale, docsPluginDirName);
+    const currentJsonPath = path.join(localeDocsDir, 'current.json');
+    const targetJsonPath = path.join(localeDocsDir, targetFileName);
+
+    let content = null;
+    if (await pathExists(targetJsonPath)) {
+      content = await readJsonFile(targetJsonPath);
+    } else if (await pathExists(currentJsonPath)) {
+      content = await readJsonFile(currentJsonPath);
+    }
+
+    if (!content || typeof content !== 'object' || Array.isArray(content)) {
+      continue;
+    }
+
+    content['version.label'] = {
+      message: `v${versionName}`,
+      description: `The label for version ${versionName}`,
+    };
+
+    await mkdir(localeDocsDir, {recursive: true});
+    await writeJsonFile(targetJsonPath, content);
+  }
+}
+
+async function readJsonFile(filePath) {
+  return JSON.parse(await readFile(filePath, 'utf8'));
+}
+
+async function writeJsonFile(filePath, value) {
+  await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+async function pathExists(targetPath) {
+  try {
+    await access(targetPath);
+    return true;
+  } catch (error) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
+      return false;
     }
     throw error;
   }
@@ -178,6 +248,7 @@ function printSummary({keptVersions, prunedVersions}) {
 function printHelp() {
   console.log(`manage-doc-versions commands:
   snapshot <version> [--keep <count>]  Snapshot current docs and keep newest versions.
+  sync-metadata [version]              Sync version label metadata for one or all versions.
   prune [--keep <count>]               Keep only the newest versions.
   help                                 Show this message.`);
 }

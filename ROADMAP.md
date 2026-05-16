@@ -15,14 +15,14 @@
 
 - [x] Support `p.git` module.
 - [x] Let `p.run` support `stdin`?
-- [ ] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
+- [x] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
 - [ ] Add a helper for SSH connection to send HTTP request?
 - [x] Let `ptool --help` print the website's URL.
 - [ ] Enhance `p.log` and `p.run`, `p.ask` to have better style?
   - The custom `prompt_prefix`? The background color?
 - [ ] How about let `run_capture` have a `trim` option?
 - [ ] Let the `ssh:upload`'s `remote_path` can be a directory.
-- [ ] Let the API document have groups.
+- [x] Let the API document have groups.
 
 # v0.6.0
 
