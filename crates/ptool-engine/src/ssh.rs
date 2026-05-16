@@ -326,6 +326,7 @@ impl SshConnection {
     ) -> Result<SshTransferResult> {
         ensure_local_file(local_path, "local_path")?;
         ensure_non_empty_string(remote_path, "remote_path")?;
+        let destination_path = self.resolve_remote_file_destination(local_path, remote_path)?;
 
         let content = std::fs::read(local_path).map_err(|err| {
             ssh_error(format!("failed to read `{}`: {err}", local_path.display()))
@@ -336,11 +337,11 @@ impl SshConnection {
                 "[ssh upload {}] {} -> {}",
                 self.info().target,
                 local_path.display(),
-                remote_path
+                destination_path
             );
         }
 
-        let command = build_upload_command(remote_path, options)?;
+        let command = build_upload_command(&destination_path, options)?;
         self.exec_binary(command.as_str(), Some(content), false)?;
 
         Ok(SshTransferResult {
@@ -348,7 +349,7 @@ impl SshConnection {
                 .map(|metadata| metadata.len())
                 .unwrap_or(0),
             from: local_path.display().to_string(),
-            to: format!("{}:{}", self.info().target, remote_path),
+            to: format!("{}:{}", self.info().target, destination_path),
         })
     }
 
@@ -753,6 +754,36 @@ impl SshConnection {
             remote_path
         };
         validate_remote_directory_destination(self, &destination_root, options)
+    }
+
+    fn resolve_remote_file_destination(
+        &self,
+        local_path: &Path,
+        remote_path: &str,
+    ) -> Result<String> {
+        let is_directory_hint = remote_path.ends_with('/');
+        let remote_path = normalize_remote_path(remote_path);
+
+        if self.exists(&remote_path)? {
+            if self.is_dir(&remote_path)? {
+                return Ok(join_remote_path(
+                    &remote_path,
+                    &path_basename(local_path, "local_path")?,
+                ));
+            }
+            if is_directory_hint {
+                return Err(ssh_error(format!(
+                    "`remote_path` must be a directory for file upload: `{remote_path}`"
+                )));
+            }
+        } else if is_directory_hint {
+            return Ok(join_remote_path(
+                &remote_path,
+                &path_basename(local_path, "local_path")?,
+            ));
+        }
+
+        Ok(remote_path)
     }
 
     fn resolve_local_directory_destination(

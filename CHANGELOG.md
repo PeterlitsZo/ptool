@@ -2,7 +2,12 @@
 
 ## Unreleased
 
-TODO...
+### Changed
+
+- Changed `ptool.ssh.Connection:upload(...)` so file uploads now accept a
+  directory-style `remote_path`, either by targeting an existing remote
+  directory or by using a trailing `/`, and documented the updated behavior
+  across all supported locales.
 
 ## v0.7.2 (2026-05-16)
 

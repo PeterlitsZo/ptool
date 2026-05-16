@@ -445,9 +445,16 @@ Supported transfer options:
 - `echo` (boolean, optional): Whether to print the transfer before executing
   it. Defaults to `false`.
 
-Directory behavior:
+Destination path behavior:
 
-- When `local_path` is a file, the behavior is unchanged.
+- When `local_path` is a file and `remote_path` is a file path, the file is
+  uploaded to that exact path.
+- When `local_path` is a file and `remote_path` already exists as a directory,
+  the file is uploaded under that directory using the local file basename.
+- When `local_path` is a file and `remote_path` ends with `/`, `remote_path`
+  is treated as a destination directory path and the uploaded file keeps the
+  local file basename. If that directory does not exist yet, `parents = true`
+  can create it.
 - When `local_path` is a directory and `remote_path` does not exist,
   `remote_path` becomes the destination directory root.
 - When `local_path` is a directory and `remote_path` already exists as a

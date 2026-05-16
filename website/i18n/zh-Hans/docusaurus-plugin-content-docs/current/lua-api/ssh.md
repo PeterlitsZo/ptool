@@ -386,9 +386,11 @@ end
 - `overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。
 - `echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。
 
-目录行为：
+目标路径行为：
 
-- 当 `local_path` 是文件时，行为保持不变。
+- 当 `local_path` 是文件且 `remote_path` 是文件路径时，文件会上传到该精确路径。
+- 当 `local_path` 是文件且 `remote_path` 已存在并且是目录时，文件会在该目录下按本地文件的 basename 上传。
+- 当 `local_path` 是文件且 `remote_path` 以 `/` 结尾时，`remote_path` 会被视为目标目录路径，上传后的文件会保留本地文件的 basename。如果该目录尚不存在，可通过 `parents = true` 创建。
 - 当 `local_path` 是目录且 `remote_path` 不存在时，`remote_path` 会成为目标目录根。
 - 当 `local_path` 是目录且 `remote_path` 已存在并且是目录时，会在其下按源目录的 basename 创建目标目录。
 - `overwrite = false` 时，如果最终目标目录已存在，则会报错。
