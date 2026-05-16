@@ -1,4 +1,12 @@
+use crate::http::{
+    HttpRequestOptions, HttpResponse, apply_request_header_overrides, build_request_body_for,
+    build_request_url, collect_response_headers, http_error_for, http_status_error_for,
+    invalid_http_options_for, is_http_error, parse_headers, parse_method,
+    parse_nonnegative_usize_for, parse_timeout_ms, parse_timeout_value,
+};
 use crate::{Error, ErrorKind, Result};
+use reqwest::StatusCode;
+use reqwest::header::AUTHORIZATION;
 use shlex::try_quote;
 use std::borrow::Cow;
 use std::cell::RefCell;
@@ -13,6 +21,9 @@ use std::thread;
 use std::time::{SystemTime, UNIX_EPOCH};
 use tar::{Archive, Builder};
 use tokio::runtime::Runtime;
+
+const SSH_HTTP_REQUEST_OP: &str = "ptool.ssh.Connection:http_request";
+const SSH_HTTP_FRAME_MAGIC: &[u8] = b"PTSSHHTTP\n";
 
 #[derive(Clone, Debug, Default)]
 pub struct SshConnectRequest {
@@ -110,6 +121,7 @@ struct ConnectionState {
     closed: bool,
     info: SshConnectionInfo,
     options: ConnectOptions,
+    remote_http_client: Option<RemoteHttpClient>,
 }
 
 #[derive(Clone, Debug)]
@@ -166,6 +178,11 @@ enum ProcessOutputMode {
     Capture,
     Inherit,
     Null,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum RemoteHttpClient {
+    Curl,
 }
 
 impl TempArchivePath {
@@ -242,6 +259,7 @@ pub fn connect(
             closed: false,
             info,
             options,
+            remote_http_client: None,
         })),
     })
 }
@@ -284,6 +302,12 @@ impl SshConnection {
         }
 
         Ok(result)
+    }
+
+    pub fn http_request(&self, options: HttpRequestOptions) -> Result<HttpResponse> {
+        match self.ensure_remote_http_client()? {
+            RemoteHttpClient::Curl => self.http_request_with_curl(options),
+        }
     }
 
     pub fn resolve_display_cwd(&self, cwd: Option<&str>) -> Result<String> {
@@ -400,6 +424,194 @@ impl SshConnection {
             return Err(ssh_error("cannot use a closed connection"));
         }
         Ok(state.options.clone())
+    }
+
+    fn ensure_remote_http_client(&self) -> Result<RemoteHttpClient> {
+        if let Some(client) = self.state.borrow().remote_http_client {
+            return Ok(client);
+        }
+
+        let result = self.exec_ssh(
+            "command -v curl >/dev/null 2>&1",
+            None,
+            ProcessOutputMode::Null,
+            ProcessOutputMode::Capture,
+        )?;
+        match result.code {
+            Some(0) => {
+                self.state.borrow_mut().remote_http_client = Some(RemoteHttpClient::Curl);
+                Ok(RemoteHttpClient::Curl)
+            }
+            Some(1) if result.stderr.is_empty() => Err(ssh_error(
+                "remote HTTP request requires `curl` on the SSH host",
+            )),
+            _ => Err(build_binary_exec_failed_error(
+                &self.info().target,
+                "command -v curl >/dev/null 2>&1",
+                result.code,
+                &result.stderr,
+            )),
+        }
+    }
+
+    fn http_request_with_curl(&self, options: HttpRequestOptions) -> Result<HttpResponse> {
+        let HttpRequestOptions {
+            url,
+            method,
+            headers,
+            body,
+            query,
+            json,
+            form,
+            timeout_ms,
+            connect_timeout_ms,
+            follow_redirects,
+            max_redirects,
+            user_agent,
+            basic_auth,
+            bearer_token,
+            fail_on_http_error,
+        } = options;
+
+        if basic_auth.is_some() && bearer_token.is_some() {
+            return Err(invalid_http_options_for(
+                SSH_HTTP_REQUEST_OP,
+                "`basic_auth` and `bearer_token` are mutually exclusive",
+            ));
+        }
+        if matches!(follow_redirects, Some(false)) && max_redirects.is_some() {
+            return Err(invalid_http_options_for(
+                SSH_HTTP_REQUEST_OP,
+                "`max_redirects` cannot be set when `follow_redirects` is false",
+            ));
+        }
+
+        let url = build_request_url(&url, &query)?;
+        let method = parse_method(method)?;
+        let mut headers = parse_headers(headers)?;
+        let body = build_request_body_for(SSH_HTTP_REQUEST_OP, body, json, form, &mut headers)?;
+        apply_request_header_overrides(&mut headers, user_agent.as_deref())?;
+        if basic_auth.is_some() || bearer_token.is_some() {
+            headers.remove(AUTHORIZATION);
+        }
+
+        let mut curl_args = vec![
+            "curl".to_string(),
+            "--silent".to_string(),
+            "--show-error".to_string(),
+            "--globoff".to_string(),
+            "--request".to_string(),
+            shell_quote_arg(method.as_str())?,
+            "--dump-header".to_string(),
+            "\"$headers\"".to_string(),
+            "--output".to_string(),
+            "\"$body\"".to_string(),
+            "--write-out".to_string(),
+            shell_quote_arg("%{http_code}\n%{url_effective}")?,
+        ];
+
+        let timeout_ms = parse_timeout_ms(timeout_ms, "timeout_ms")?;
+        curl_args.push("--max-time".to_string());
+        curl_args.push(format_curl_timeout(timeout_ms));
+
+        if let Some(connect_timeout_ms) = connect_timeout_ms {
+            curl_args.push("--connect-timeout".to_string());
+            curl_args.push(format_curl_timeout(parse_timeout_value(
+                connect_timeout_ms,
+                "connect_timeout_ms",
+            )?));
+        }
+
+        if follow_redirects != Some(false) {
+            curl_args.push("--location".to_string());
+            if let Some(max_redirects) = max_redirects {
+                curl_args.push("--max-redirs".to_string());
+                curl_args.push(
+                    parse_nonnegative_usize_for(
+                        SSH_HTTP_REQUEST_OP,
+                        max_redirects,
+                        "max_redirects",
+                    )?
+                    .to_string(),
+                );
+            }
+        }
+
+        for (name, value) in collect_response_headers(&headers) {
+            curl_args.push("--header".to_string());
+            curl_args.push(shell_quote_arg(&format!("{name}: {value}"))?);
+        }
+
+        if let Some((username, password)) = basic_auth {
+            curl_args.push("--user".to_string());
+            curl_args.push(shell_quote_arg(&format!("{username}:{password}"))?);
+        } else if let Some(bearer_token) = bearer_token {
+            curl_args.push("--header".to_string());
+            curl_args.push(shell_quote_arg(&format!(
+                "Authorization: Bearer {bearer_token}"
+            ))?);
+        }
+
+        if body.is_some() {
+            curl_args.push("--data-binary".to_string());
+            curl_args.push("@-".to_string());
+        }
+
+        curl_args.push(shell_quote_arg(&url)?);
+
+        let command = build_remote_curl_command(&curl_args);
+        let result = self.exec_ssh(
+            &command,
+            body,
+            ProcessOutputMode::Capture,
+            ProcessOutputMode::Capture,
+        )?;
+        if result.code != Some(0) {
+            return Err(build_binary_exec_failed_error(
+                &self.info().target,
+                &command,
+                result.code,
+                &result.stderr,
+            ));
+        }
+
+        let frame = parse_remote_http_frame(&result.stdout)?;
+        let (status, final_url) = parse_remote_http_meta(&frame.meta, &url)?;
+        if frame.curl_exit != 0 {
+            let stderr = String::from_utf8_lossy(&frame.stderr).trim().to_string();
+            let detail = if stderr.is_empty() {
+                format!("remote curl exited with status {}", frame.curl_exit)
+            } else {
+                stderr
+            };
+            return Err(
+                http_error_for(SSH_HTTP_REQUEST_OP, format!("request failed: {detail}"))
+                    .with_url(final_url),
+            );
+        }
+
+        let headers = parse_remote_response_headers(&frame.headers)?;
+        let status_code = StatusCode::from_u16(status).map_err(|_| {
+            http_error_for(
+                SSH_HTTP_REQUEST_OP,
+                format!("invalid response status `{status}`"),
+            )
+        })?;
+        if fail_on_http_error && is_http_error(status_code) {
+            return Err(http_status_error_for(
+                SSH_HTTP_REQUEST_OP,
+                status_code,
+                &final_url,
+            ));
+        }
+
+        Ok(HttpResponse::from_parts_with_op(
+            SSH_HTTP_REQUEST_OP,
+            i64::from(status),
+            final_url,
+            headers,
+            frame.body,
+        ))
     }
 
     fn check_remote_path(
@@ -648,6 +860,204 @@ fn ensure_ssh_available() -> Result<()> {
         }
         Err(err) => Err(ssh_error(format!("failed to execute `ssh -V`: {err}"))),
     }
+}
+
+struct RemoteHttpFrame {
+    curl_exit: i64,
+    headers: Vec<u8>,
+    body: Vec<u8>,
+    meta: Vec<u8>,
+    stderr: Vec<u8>,
+}
+
+fn build_remote_curl_command(args: &[String]) -> String {
+    let curl_command = format!("{} > \"$meta\" 2> \"$stderr_file\"", args.join(" "));
+    format!(
+        "tmpdir=$(mktemp -d) || exit 1\n\
+headers=\"$tmpdir/headers\"\n\
+body=\"$tmpdir/body\"\n\
+meta=\"$tmpdir/meta\"\n\
+stderr_file=\"$tmpdir/stderr\"\n\
+trap 'rm -rf \"$tmpdir\"' EXIT HUP INT TERM\n\
+: > \"$headers\"\n\
+: > \"$body\"\n\
+: > \"$meta\"\n\
+: > \"$stderr_file\"\n\
+{}\n\
+curl_exit=$?\n\
+printf 'PTSSHHTTP\\n%s\\n' \"$curl_exit\"\n\
+wc -c < \"$headers\"\n\
+cat \"$headers\"\n\
+wc -c < \"$body\"\n\
+cat \"$body\"\n\
+wc -c < \"$meta\"\n\
+cat \"$meta\"\n\
+wc -c < \"$stderr_file\"\n\
+cat \"$stderr_file\"\n",
+        curl_command
+    )
+}
+
+fn parse_remote_http_frame(bytes: &[u8]) -> Result<RemoteHttpFrame> {
+    let mut cursor = bytes;
+    if !cursor.starts_with(SSH_HTTP_FRAME_MAGIC) {
+        return Err(http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            "remote HTTP response framing is invalid",
+        ));
+    }
+    cursor = &cursor[SSH_HTTP_FRAME_MAGIC.len()..];
+
+    let curl_exit = parse_frame_line_i64(&mut cursor, "curl exit code")?;
+    let headers = parse_frame_block(&mut cursor, "response headers")?;
+    let body = parse_frame_block(&mut cursor, "response body")?;
+    let meta = parse_frame_block(&mut cursor, "response metadata")?;
+    let stderr = parse_frame_block(&mut cursor, "response stderr")?;
+
+    if !cursor.is_empty() {
+        return Err(http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            "remote HTTP response framing has trailing bytes",
+        ));
+    }
+
+    Ok(RemoteHttpFrame {
+        curl_exit,
+        headers,
+        body,
+        meta,
+        stderr,
+    })
+}
+
+fn parse_frame_line_i64(cursor: &mut &[u8], label: &str) -> Result<i64> {
+    let value = parse_frame_line(cursor, label)?;
+    value.parse::<i64>().map_err(|_| {
+        http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            format!("remote HTTP response has invalid {label}"),
+        )
+    })
+}
+
+fn parse_frame_block(cursor: &mut &[u8], label: &str) -> Result<Vec<u8>> {
+    let len = parse_frame_line(cursor, label)?
+        .parse::<usize>()
+        .map_err(|_| {
+            http_error_for(
+                SSH_HTTP_REQUEST_OP,
+                format!("remote HTTP response has invalid {label} length"),
+            )
+        })?;
+    if cursor.len() < len {
+        return Err(http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            format!("remote HTTP response is truncated while reading {label}"),
+        ));
+    }
+    let (block, rest) = cursor.split_at(len);
+    *cursor = rest;
+    Ok(block.to_vec())
+}
+
+fn parse_frame_line<'a>(cursor: &mut &'a [u8], label: &str) -> Result<&'a str> {
+    let Some(pos) = cursor.iter().position(|byte| *byte == b'\n') else {
+        return Err(http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            format!("remote HTTP response is missing {label}"),
+        ));
+    };
+    let (line, rest) = cursor.split_at(pos);
+    *cursor = &rest[1..];
+    std::str::from_utf8(line).map_err(|_| {
+        http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            format!("remote HTTP response has non-UTF-8 {label}"),
+        )
+    })
+}
+
+fn parse_remote_http_meta(meta: &[u8], fallback_url: &str) -> Result<(u16, String)> {
+    let text = String::from_utf8(meta.to_vec()).map_err(|_| {
+        http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            "remote HTTP response metadata is not valid UTF-8",
+        )
+    })?;
+    let mut lines = text.lines();
+    let status = lines
+        .next()
+        .ok_or_else(|| {
+            http_error_for(
+                SSH_HTTP_REQUEST_OP,
+                "remote HTTP response metadata is missing status",
+            )
+        })?
+        .parse::<u16>()
+        .map_err(|_| {
+            http_error_for(
+                SSH_HTTP_REQUEST_OP,
+                "remote HTTP response metadata has invalid status",
+            )
+        })?;
+    let url = lines
+        .next()
+        .filter(|value| !value.is_empty())
+        .unwrap_or(fallback_url)
+        .to_string();
+    Ok((status, url))
+}
+
+fn parse_remote_response_headers(bytes: &[u8]) -> Result<Vec<(String, String)>> {
+    if bytes.is_empty() {
+        return Ok(Vec::new());
+    }
+
+    let normalized = String::from_utf8_lossy(bytes).replace("\r\n", "\n");
+    let mut last_block = None;
+    for block in normalized.split("\n\n") {
+        let trimmed = block.trim();
+        if trimmed.starts_with("HTTP/") {
+            last_block = Some(trimmed.to_string());
+        }
+    }
+    let block = last_block.ok_or_else(|| {
+        http_error_for(
+            SSH_HTTP_REQUEST_OP,
+            "remote HTTP response headers are missing the status line",
+        )
+    })?;
+
+    let mut headers = Vec::new();
+    for line in block.lines().skip(1) {
+        if line.is_empty() {
+            continue;
+        }
+        let Some((name, value)) = line.split_once(':') else {
+            return Err(http_error_for(
+                SSH_HTTP_REQUEST_OP,
+                format!("remote HTTP response has invalid header line `{line}`"),
+            ));
+        };
+        headers.push((name.trim().to_string(), value.trim().to_string()));
+    }
+    Ok(headers)
+}
+
+fn format_curl_timeout(timeout_ms: u64) -> String {
+    let seconds = timeout_ms / 1000;
+    let millis = timeout_ms % 1000;
+    if millis == 0 {
+        seconds.to_string()
+    } else {
+        format!("{seconds}.{millis:03}")
+    }
+}
+
+fn shell_quote_arg(value: &str) -> Result<String> {
+    try_quote(value)
+        .map(|quoted| quoted.into_owned())
+        .map_err(|err| ssh_error(format!("invalid shell argument: {err}")))
 }
 
 fn build_connect_options(request: SshConnectRequest, current_dir: &Path) -> Result<ConnectOptions> {

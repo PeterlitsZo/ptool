@@ -8,6 +8,8 @@ As utilidades de cliente HTTP estão disponíveis em `ptool.http` e `p.http`.
 
 `ptool.http.request(options)` envia uma requisição HTTP e retorna um objeto `Response`.
 
+Para enviar o mesmo formato de requisição a partir de um host SSH remoto, use `ptool.ssh.Connection:http_request(options)`.
+
 Campos de `options`:
 
 - `url` (string, obrigatório): A URL da requisição.
@@ -26,7 +28,7 @@ Campos de `options`:
 - `bearer_token` (string, opcional): Token Bearer usado no cabeçalho `authorization`.
 - `fail_on_http_error` (boolean, opcional): Quando `true`, respostas HTTP 4xx e 5xx geram erro. O padrão é `false`.
 
-Notas:
+Notes:
 
 - `body`, `json` e `form` são mutuamente exclusivos.
 - `basic_auth` e `bearer_token` são mutuamente exclusivos.
@@ -83,7 +85,7 @@ Canonical API name: `ptool.http.Response:text`.
 
 `resp:text()` lê e retorna o corpo da resposta como texto.
 
-- Retorna: `string`.
+- Returns: `string`.
 
 ### json
 
@@ -97,7 +99,7 @@ Canonical API name: `ptool.http.Response:bytes`.
 
 `resp:bytes()` lê e retorna o corpo da resposta como bytes brutos.
 
-- Retorna: `string`.
+- Returns: `string`.
 
 ### header
 
@@ -105,7 +107,7 @@ Canonical API name: `ptool.http.Response:header`.
 
 `resp:header(name)` retorna o primeiro valor de cabeçalho de resposta que corresponde a `name`.
 
-- `name` (string, obrigatório): O nome do cabeçalho a consultar.
+- `name` (string, required): The header name to look up.
 - Retorna: `string | nil`.
 
 ### header_values
@@ -114,7 +116,7 @@ Canonical API name: `ptool.http.Response:header_values`.
 
 `resp:header_values(name)` retorna todos os valores de cabeçalho de resposta que correspondem a `name`.
 
-- `name` (string, obrigatório): O nome do cabeçalho a consultar.
+- `name` (string, required): The header name to look up.
 - Retorna: `string[]`.
 
 ### raise_for_status
@@ -123,7 +125,7 @@ Canonical API name: `ptool.http.Response:raise_for_status`.
 
 `resp:raise_for_status()` gera erro quando o código de status da resposta está na faixa 4xx ou 5xx.
 
-Notas:
+Notes:
 
 - Por padrão, status HTTP fora de 2xx não geram erro. Quem chama pode verificar `resp.ok`, definir `fail_on_http_error = true` ou chamar `resp:raise_for_status()`.
 - O corpo da resposta é armazenado em cache após a primeira leitura, então `text`, `json` e `bytes` podem ser chamados várias vezes.

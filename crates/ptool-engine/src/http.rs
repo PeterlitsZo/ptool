@@ -11,6 +11,7 @@ use std::time::Duration;
 use url::{Url, form_urlencoded};
 
 const DEFAULT_TIMEOUT_MS: u64 = 30_000;
+pub(crate) const HTTP_REQUEST_OP: &str = "ptool.http.request";
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct HttpRequestOptions {
@@ -42,6 +43,7 @@ pub struct HttpResponse {
     pub url: String,
     pub headers: Vec<(String, String)>,
     body: BodyState,
+    op: &'static str,
 }
 
 pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
@@ -64,7 +66,8 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
     } = options;
 
     if basic_auth.is_some() && bearer_token.is_some() {
-        return Err(invalid_http_options(
+        return Err(invalid_http_options_for(
+            HTTP_REQUEST_OP,
             "`basic_auth` and `bearer_token` are mutually exclusive",
         ));
     }
@@ -83,7 +86,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
 
     let client = client_builder
         .build()
-        .map_err(|err| http_error(format!("request build failed: {err:?}")))?;
+        .map_err(|err| http_error_for(HTTP_REQUEST_OP, format!("request build failed: {err:?}")))?;
 
     let mut headers = parse_headers(headers)?;
     let body = build_request_body(body, json, form, &mut headers)?;
@@ -107,7 +110,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
 
     let response = request
         .send()
-        .map_err(|err| http_error(format!("request failed: {err:?}")))?;
+        .map_err(|err| http_error_for(HTTP_REQUEST_OP, format!("request failed: {err:?}")))?;
 
     let status_code = response.status();
     let status = i64::from(status_code.as_u16());
@@ -115,7 +118,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
     let url = response.url().to_string();
     let headers = collect_response_headers(response.headers());
     if fail_on_http_error && is_http_error(status_code) {
-        return Err(http_status_error(status_code, &url));
+        return Err(http_status_error_for(HTTP_REQUEST_OP, status_code, &url));
     }
 
     Ok(HttpResponse {
@@ -124,10 +127,28 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
         url,
         headers,
         body: BodyState::Unread(response),
+        op: HTTP_REQUEST_OP,
     })
 }
 
 impl HttpResponse {
+    pub(crate) fn from_parts_with_op(
+        op: &'static str,
+        status: i64,
+        url: String,
+        headers: Vec<(String, String)>,
+        body: Vec<u8>,
+    ) -> Self {
+        Self {
+            status,
+            ok: (200..=299).contains(&status),
+            url,
+            headers,
+            body: BodyState::Cached(body),
+            op,
+        }
+    }
+
     pub fn text(&mut self) -> Result<String> {
         let bytes = self.body_bytes()?;
         Ok(String::from_utf8_lossy(bytes).to_string())
@@ -136,7 +157,7 @@ impl HttpResponse {
     pub fn json(&mut self) -> Result<JsonValue> {
         let bytes = self.body_bytes()?;
         serde_json::from_slice(bytes)
-            .map_err(|err| http_error(format!("response json parse failed: {err}")))
+            .map_err(|err| http_error_for(self.op, format!("response json parse failed: {err}")))
     }
 
     pub fn bytes(&mut self) -> Result<Vec<u8>> {
@@ -162,9 +183,14 @@ impl HttpResponse {
         let status = u16::try_from(self.status)
             .ok()
             .and_then(|status| StatusCode::from_u16(status).ok())
-            .ok_or_else(|| http_error(format!("invalid response status `{}`", self.status)))?;
+            .ok_or_else(|| {
+                http_error_for(
+                    self.op,
+                    format!("invalid response status `{}`", self.status),
+                )
+            })?;
         if is_http_error(status) {
-            return Err(http_status_error(status, &self.url));
+            return Err(http_status_error_for(self.op, status, &self.url));
         }
         Ok(())
     }
@@ -176,7 +202,7 @@ impl HttpResponse {
                 BodyState::Unread(response) => response
                     .bytes()
                     .map(|body| body.to_vec())
-                    .map_err(map_response_read_error)?,
+                    .map_err(|err| map_response_read_error_for(self.op, err))?,
                 BodyState::Cached(bytes) => bytes,
             };
             self.body = BodyState::Cached(bytes);
@@ -189,7 +215,7 @@ impl HttpResponse {
     }
 }
 
-fn build_request_url(url: &str, query: &[(String, String)]) -> Result<String> {
+pub(crate) fn build_request_url(url: &str, query: &[(String, String)]) -> Result<String> {
     if query.is_empty() {
         return Ok(url.to_string());
     }
@@ -212,7 +238,8 @@ fn apply_redirect_policy(
     max_redirects: Option<i64>,
 ) -> Result<ClientBuilder> {
     if matches!(follow_redirects, Some(false)) && max_redirects.is_some() {
-        return Err(invalid_http_options(
+        return Err(invalid_http_options_for(
+            HTTP_REQUEST_OP,
             "`max_redirects` cannot be set when `follow_redirects` is false",
         ));
     }
@@ -229,7 +256,17 @@ fn apply_redirect_policy(
     Ok(builder)
 }
 
-fn build_request_body(
+pub(crate) fn build_request_body(
+    body: Option<Vec<u8>>,
+    json: Option<JsonValue>,
+    form: Vec<(String, String)>,
+    headers: &mut HeaderMap,
+) -> Result<Option<Vec<u8>>> {
+    build_request_body_for(HTTP_REQUEST_OP, body, json, form, headers)
+}
+
+pub(crate) fn build_request_body_for(
+    op: &'static str,
     body: Option<Vec<u8>>,
     json: Option<JsonValue>,
     form: Vec<(String, String)>,
@@ -238,7 +275,8 @@ fn build_request_body(
     let body_count =
         usize::from(body.is_some()) + usize::from(json.is_some()) + usize::from(!form.is_empty());
     if body_count > 1 {
-        return Err(invalid_http_options(
+        return Err(invalid_http_options_for(
+            op,
             "`body`, `json`, and `form` are mutually exclusive",
         ));
     }
@@ -253,7 +291,7 @@ fn build_request_body(
         }
         return serde_json::to_vec(&json)
             .map(Some)
-            .map_err(|err| http_error(format!("request json encode failed: {err}")));
+            .map_err(|err| http_error_for(op, format!("request json encode failed: {err}")));
     }
 
     if !form.is_empty() {
@@ -273,7 +311,10 @@ fn build_request_body(
     Ok(None)
 }
 
-fn apply_request_header_overrides(headers: &mut HeaderMap, user_agent: Option<&str>) -> Result<()> {
+pub(crate) fn apply_request_header_overrides(
+    headers: &mut HeaderMap,
+    user_agent: Option<&str>,
+) -> Result<()> {
     if let Some(user_agent) = user_agent {
         headers.remove(USER_AGENT);
         let value = HeaderValue::from_str(user_agent).map_err(|err| {
@@ -288,7 +329,7 @@ fn apply_request_header_overrides(headers: &mut HeaderMap, user_agent: Option<&s
     Ok(())
 }
 
-fn parse_method(method: Option<String>) -> Result<Method> {
+pub(crate) fn parse_method(method: Option<String>) -> Result<Method> {
     let method = method.unwrap_or_else(|| "GET".to_string());
     Method::from_bytes(method.as_bytes()).map_err(|err| {
         Error::new(
@@ -298,7 +339,7 @@ fn parse_method(method: Option<String>) -> Result<Method> {
     })
 }
 
-fn parse_headers(headers: Vec<(String, String)>) -> Result<HeaderMap> {
+pub(crate) fn parse_headers(headers: Vec<(String, String)>) -> Result<HeaderMap> {
     let mut header_map = HeaderMap::new();
     for (name, value) in headers {
         let header_name = HeaderName::from_bytes(name.as_bytes()).map_err(|err| {
@@ -319,12 +360,12 @@ fn parse_headers(headers: Vec<(String, String)>) -> Result<HeaderMap> {
     Ok(header_map)
 }
 
-fn parse_timeout_ms(timeout_ms: Option<i64>, label: &str) -> Result<u64> {
+pub(crate) fn parse_timeout_ms(timeout_ms: Option<i64>, label: &str) -> Result<u64> {
     let timeout_ms = timeout_ms.unwrap_or(DEFAULT_TIMEOUT_MS as i64);
     parse_timeout_value(timeout_ms, label)
 }
 
-fn parse_timeout_value(timeout_ms: i64, label: &str) -> Result<u64> {
+pub(crate) fn parse_timeout_value(timeout_ms: i64, label: &str) -> Result<u64> {
     if timeout_ms <= 0 {
         return Err(Error::new(
             ErrorKind::InvalidHttpTimeout,
@@ -340,15 +381,27 @@ fn parse_timeout_value(timeout_ms: i64, label: &str) -> Result<u64> {
     })
 }
 
-fn parse_nonnegative_usize(value: i64, label: &str) -> Result<usize> {
-    if value < 0 {
-        return Err(invalid_http_options(format!("`{label}` must be >= 0")));
-    }
-
-    usize::try_from(value).map_err(|_| invalid_http_options(format!("`{label}` is too large")))
+pub(crate) fn parse_nonnegative_usize(value: i64, label: &str) -> Result<usize> {
+    parse_nonnegative_usize_for(HTTP_REQUEST_OP, value, label)
 }
 
-fn collect_response_headers(headers: &HeaderMap) -> Vec<(String, String)> {
+pub(crate) fn parse_nonnegative_usize_for(
+    op: &'static str,
+    value: i64,
+    label: &str,
+) -> Result<usize> {
+    if value < 0 {
+        return Err(invalid_http_options_for(
+            op,
+            format!("`{label}` must be >= 0"),
+        ));
+    }
+
+    usize::try_from(value)
+        .map_err(|_| invalid_http_options_for(op, format!("`{label}` is too large")))
+}
+
+pub(crate) fn collect_response_headers(headers: &HeaderMap) -> Vec<(String, String)> {
     headers
         .iter()
         .map(|(name, value)| {
@@ -361,27 +414,28 @@ fn collect_response_headers(headers: &HeaderMap) -> Vec<(String, String)> {
         .collect()
 }
 
-fn is_http_error(status: StatusCode) -> bool {
+pub(crate) fn is_http_error(status: StatusCode) -> bool {
     status.is_client_error() || status.is_server_error()
 }
 
-fn http_status_error(status: StatusCode, url: &str) -> Error {
-    http_error(format!(
-        "request failed with HTTP status {status} for `{url}`"
-    ))
+pub(crate) fn http_status_error_for(op: &'static str, status: StatusCode, url: &str) -> Error {
+    http_error_for(
+        op,
+        format!("request failed with HTTP status {status} for `{url}`"),
+    )
     .with_url(url)
     .with_status(i32::from(status.as_u16()))
 }
 
-fn invalid_http_options(msg: impl Into<String>) -> Error {
-    Error::new(ErrorKind::InvalidHttpOptions, msg).with_op("ptool.http.request")
+pub(crate) fn invalid_http_options_for(op: &'static str, msg: impl Into<String>) -> Error {
+    Error::new(ErrorKind::InvalidHttpOptions, msg).with_op(op)
 }
 
-fn http_error(msg: impl Into<String>) -> Error {
-    Error::new(ErrorKind::Http, msg).with_op("ptool.http.request")
+pub(crate) fn http_error_for(op: &'static str, msg: impl Into<String>) -> Error {
+    Error::new(ErrorKind::Http, msg).with_op(op)
 }
 
-fn map_response_read_error(err: reqwest::Error) -> Error {
+fn map_response_read_error_for(op: &'static str, err: reqwest::Error) -> Error {
     let message = if err.is_timeout() {
         "response read timed out; increase `timeout_ms` for slow downloads".to_string()
     } else if let Some(detail) = error_source_message(&err) {
@@ -390,7 +444,7 @@ fn map_response_read_error(err: reqwest::Error) -> Error {
         format!("response read failed: {err}")
     };
 
-    http_error(message)
+    http_error_for(op, message)
 }
 
 fn error_source_message(err: &reqwest::Error) -> Option<String> {

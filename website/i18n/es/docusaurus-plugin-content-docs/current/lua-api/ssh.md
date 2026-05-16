@@ -96,6 +96,7 @@ Campos y métodos:
 - Métodos:
   - `conn:run(...)` -> `table`
   - `conn:run_capture(...)` -> `table`
+  - `conn:http_request(options)` -> `Response`
   - `conn:path(path)` -> `RemotePath`
   - `conn:exists(path)` -> `boolean`
   - `conn:is_file(path)` -> `boolean`
@@ -139,32 +140,32 @@ Cuando se usa `conn:run(options)`, `options` actualmente admite:
 - `args` (string[], opcional): Lista de argumentos.
 - `cwd` (string, opcional): Directorio de trabajo remoto. Se aplica anteponiendo `cd ... &&` al comando shell remoto generado.
 - `env` (table, opcional): Variables de entorno remotas, donde claves y valores son cadenas. Se aplica anteponiendo `export ... &&` al comando shell remoto generado.
-- `stdin` (string, opcional): Cadena enviada al stdin del proceso remoto.
-- `trim` (booleano, opcional): si se deben recortar los espacios en blanco iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. Esto solo afecta a las transmisiones configuradas en `"capture"`. El valor predeterminado es `false`.
-- `echo` (boolean, opcional): Si debe imprimir el comando remoto antes de ejecutarlo. Por defecto es `true`.
-- `check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando el código de salida no sea `0`. Por defecto es `false`.
-- `stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:
+- `stdin` (string, optional): String sent to the remote process stdin.
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
   - `"inherit"`: Hereda el terminal actual (predeterminado).
-  - `"capture"`: Captura en `res.stdout`.
+  - `"capture"`: Capture into `res.stdout`.
   - `"null"`: Descarta la salida.
-- `stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
   - `"inherit"`: Hereda el terminal actual (predeterminado).
-  - `"capture"`: Captura en `res.stderr`.
+  - `"capture"`: Capture into `res.stderr`.
   - `"null"`: Descarta la salida.
 
 Cuando se usan las formas abreviadas, la tabla `options` solo admite:
 
-- `stdin` (string, opcional): Cadena enviada al stdin del proceso remoto.
-- `trim` (booleano, opcional): si se deben recortar los espacios en blanco iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. Esto solo afecta a las transmisiones configuradas en `"capture"`. El valor predeterminado es `false`.
-- `echo` (boolean, opcional): Si debe imprimir el comando remoto antes de ejecutarlo. Por defecto es `true`.
-- `check` (boolean, opcional): Si debe lanzar un error inmediatamente cuando el código de salida no sea `0`. Por defecto es `false`.
-- `stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:
+- `stdin` (string, optional): String sent to the remote process stdin.
+- `trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `"capture"`. Defaults to `false`.
+- `echo` (boolean, optional): Whether to echo the remote command before execution. Defaults to `true`.
+- `check` (boolean, optional): Whether to raise an error immediately when the exit status is not `0`. Defaults to `false`.
+- `stdout` (string, optional): Stdout handling strategy. Supported values:
   - `"inherit"`: Hereda el terminal actual (predeterminado).
-  - `"capture"`: Captura en `res.stdout`.
+  - `"capture"`: Capture into `res.stdout`.
   - `"null"`: Descarta la salida.
-- `stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:
+- `stderr` (string, optional): Stderr handling strategy. Supported values:
   - `"inherit"`: Hereda el terminal actual (predeterminado).
-  - `"capture"`: Captura en `res.stderr`.
+  - `"capture"`: Capture into `res.stderr`.
   - `"null"`: Descarta la salida.
 
 Reglas del valor de retorno:
@@ -239,6 +240,46 @@ local res3 = ssh:run_capture("echo hello", {
 print(res3.stdout)
 ```
 
+### http_request
+
+> `Unreleased` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:http_request`.
+
+`conn:http_request(options)` envía una solicitud HTTP desde el host SSH remoto y devuelve el mismo tipo de objeto `Response` que `ptool.http.request(...)`.
+
+`options` admite los mismos campos y las mismas reglas de validación que `ptool.http.request(options)`.
+
+Esto es útil cuando solo se puede acceder al endpoint de destino desde el host remoto, por ejemplo, un servicio vinculado a `127.0.0.1`, una dirección de VPC privada o un endpoint de metadatos.
+
+Notas:
+
+- La solicitud se ejecuta en el host remoto, por lo que la resolución DNS, el acceso de red saliente, la configuración de proxy, la confianza TLS y las reglas del firewall provienen de ese host y no de la máquina local.
+- El host remoto debe tener `curl` disponible en `PATH`.
+- Los cuerpos de solicitud se envían al proceso remoto `curl` a través de SSH.
+- Los encabezados y el cuerpo de la respuesta se transmiten de vuelta por SSH y luego se consumen mediante los métodos normales de `Response` documentados en la API HTTP.
+- `basic_auth` y `bearer_token` siguen siendo mutuamente excluyentes.
+- `fail_on_http_error`, el manejo de redirecciones, el manejo de tiempos de espera y el almacenamiento en caché del cuerpo de la respuesta se comportan igual que en `ptool.http.request(...)`.
+
+Ejemplo:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local resp = ssh:http_request({
+  url = "http://127.0.0.1:8080/health",
+  headers = {
+    accept = "application/json",
+  },
+  timeout_ms = 5000,
+  fail_on_http_error = true,
+})
+
+local data = resp:json()
+print(resp.status)
+print(data.status)
+```
+
 ### path
 
 > `v0.1.0` - Introduced.
@@ -259,16 +300,16 @@ local remote_release = ssh:path("/srv/app/releases/current.tar.gz")
 ssh:download(remote_release, "./tmp/current.tar.gz")
 ```
 
-### existe
+### exists
 
-> `v0.2.0` - Introducido.
+> `v0.2.0` - Introduced.
 
 Canonical API name: `ptool.ssh.Connection:exists`.
 
 `conn:exists(path)` comprueba si existe una ruta remota.
 
-- `path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`.
-- Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`.
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path exists, otherwise `false`.
 
 Ejemplo:
 
@@ -279,16 +320,16 @@ print(ssh:exists("/srv/app"))
 print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 ```
 
-### es_archivo
+### is_file
 
-> `v0.2.0` - Introducido.
+> `v0.2.0` - Introduced.
 
 Canonical API name: `ptool.ssh.Connection:is_file`.
 
 `conn:is_file(path)` comprueba si una ruta remota existe y es un archivo regular.
 
-- `path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`.
-- Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, `false`.
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path is a file, otherwise `false`.
 
 Ejemplo:
 
@@ -301,16 +342,16 @@ if ssh:is_file(remote_tarball) then
 end
 ```
 
-### es_dir
+### is_dir
 
-> `v0.2.0` - Introducido.
+> `v0.2.0` - Introduced.
 
 Canonical API name: `ptool.ssh.Connection:is_dir`.
 
 `conn:is_dir(path)` comprueba si una ruta remota existe y es un directorio.
 
-- `path` (string|remote path, obligatorio): La ruta remota que se debe comprobar. Puede ser una cadena o un valor creado por `conn:path(...)`.
-- Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, `false`.
+- `path` (string|remote path, required): The remote path to check. It can be a string or a value created by `conn:path(...)`.
+- Returns: `true` when the remote path is a directory, otherwise `false`.
 
 Ejemplo:
 
@@ -333,24 +374,24 @@ Canonical API name: `ptool.ssh.Connection:upload`.
 
 - `local_path` (string, obligatorio): El archivo o directorio local que se va a subir.
 - `remote_path` (string|remote path, obligatorio): La ruta de destino en el host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`.
-- `options` (table, opcional): Opciones de transferencia.
-- Devuelve: Una tabla con los siguientes campos:
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
   - `bytes` (integer): El número de bytes de archivos regulares subidos. Cuando se sube un directorio, es la suma de los tamaños de los archivos subidos.
   - `from` (string): La ruta local de origen.
   - `to` (string): La ruta remota de destino.
 
-Opciones de transferencia admitidas:
+Supported transfer options:
 
 - `parents` (boolean, opcional): Crea el directorio padre de `remote_path` antes de subir. Por defecto es `false`.
-- `overwrite` (boolean, opcional): Si se puede reemplazar un archivo de destino existente. Por defecto es `true`.
-- `echo` (boolean, opcional): Si debe imprimir la transferencia antes de ejecutarla. Por defecto es `false`.
+- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
 
-Comportamiento con directorios:
+Directory behavior:
 
 - Cuando `local_path` es un archivo, el comportamiento no cambia.
 - Cuando `local_path` es un directorio y `remote_path` no existe, `remote_path` se convierte en la raíz del directorio de destino.
 - Cuando `local_path` es un directorio y `remote_path` ya existe como directorio, el directorio de origen se crea dentro de él usando el basename del directorio de origen.
-- `overwrite = false` rechaza un directorio de destino ya existente para la raíz final del directorio.
+- `overwrite = false` rejects an already-existing destination directory for the final directory root.
 - Las subidas de directorios requieren que `tar` esté disponible en el host remoto.
 
 Ejemplo:
@@ -369,7 +410,7 @@ print(res.bytes)
 print(res.to)
 ```
 
-Ejemplo con directorio:
+Directory example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -394,24 +435,24 @@ Canonical API name: `ptool.ssh.Connection:download`.
 
 - `remote_path` (string|remote path, obligatorio): La ruta de origen en el host remoto. Puede ser una cadena o un valor creado por `conn:path(...)`.
 - `local_path` (string, obligatorio): La ruta de destino local.
-- `options` (table, opcional): Opciones de transferencia.
-- Devuelve: Una tabla con los siguientes campos:
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
   - `bytes` (integer): El número de bytes de archivos regulares descargados. Cuando se descarga un directorio, es la suma de los tamaños de los archivos descargados.
   - `from` (string): La ruta remota de origen.
   - `to` (string): La ruta local de destino.
 
-Opciones de transferencia admitidas:
+Supported transfer options:
 
 - `parents` (boolean, opcional): Crea el directorio padre de `local_path` antes de descargar. Por defecto es `false`.
-- `overwrite` (boolean, opcional): Si se puede reemplazar un archivo de destino existente. Por defecto es `true`.
-- `echo` (boolean, opcional): Si debe imprimir la transferencia antes de ejecutarla. Por defecto es `false`.
+- `overwrite` (boolean, optional): Whether an existing destination file may be replaced. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`.
 
-Comportamiento con directorios:
+Directory behavior:
 
 - Cuando `remote_path` es un archivo, el comportamiento no cambia.
 - Cuando `remote_path` es un directorio y `local_path` no existe, `local_path` se convierte en la raíz del directorio de destino.
 - Cuando `remote_path` es un directorio y `local_path` ya existe como directorio, el directorio remoto de origen se crea dentro de él usando el basename del directorio remoto.
-- `overwrite = false` rechaza un directorio de destino ya existente para la raíz final del directorio.
+- `overwrite = false` rejects an already-existing destination directory for the final directory root.
 - Las descargas de directorios requieren que `tar` esté disponible en el host remoto.
 
 Ejemplo:
@@ -429,7 +470,7 @@ print(res.bytes)
 print(res.from)
 ```
 
-Ejemplo con directorio:
+Directory example:
 
 ```lua
 local ssh = ptool.ssh.connect("deploy@example.com")
@@ -478,11 +519,11 @@ Métodos:
 - `remote:is_file()` -> `boolean`
 - `remote:is_dir()` -> `boolean`
 
-### existe
+### exists
 
 `remote:exists()` comprueba si existe la ruta remota.
 
-- Devuelve: `true` cuando la ruta remota existe; de lo contrario, `false`.
+- Returns: `true` when the remote path exists, otherwise `false`.
 
 Ejemplo:
 
@@ -493,11 +534,11 @@ local remote_release = ssh:path("/srv/app/releases/current.tar.gz")
 print(remote_release:exists())
 ```
 
-### es_archivo
+### is_file
 
 `remote:is_file()` comprueba si la ruta remota existe y es un archivo regular.
 
-- Devuelve: `true` cuando la ruta remota es un archivo; de lo contrario, `false`.
+- Returns: `true` when the remote path is a file, otherwise `false`.
 
 Ejemplo:
 
@@ -510,11 +551,11 @@ if remote_tarball:is_file() then
 end
 ```
 
-### es_dir
+### is_dir
 
 `remote:is_dir()` comprueba si la ruta remota existe y es un directorio.
 
-- Devuelve: `true` cuando la ruta remota es un directorio; de lo contrario, `false`.
+- Returns: `true` when the remote path is a directory, otherwise `false`.
 
 Ejemplo:
 

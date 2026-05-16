@@ -37,7 +37,7 @@ Los módulos se agrupan por dominio. Dentro de cada grupo, las entradas se enume
 
 - [API HTTP](./http.md): Envía solicitudes HTTP y consume cuerpos de respuesta.
 - [API de red](./net.md): Analiza URL, direcciones IP y pares host-puerto.
-- [API SSH](./ssh.md): Conéctate a hosts remotos, ejecuta comandos y transfiere archivos.
+- [SSH API](./ssh.md): Conectarse a hosts remotos, ejecutar comandos, enviar solicitudes HTTP desde el host remoto y transferir archivos.
 
 ## Desarrollo y almacenamiento
 

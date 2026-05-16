@@ -11,6 +11,7 @@ use std::path::Path;
 const CONNECT_SIGNATURE: &str = "ptool.ssh.connect(target_or_options)";
 const RUN_SIGNATURE: &str = "ptool.ssh.Connection:run(...)";
 const RUN_CAPTURE_SIGNATURE: &str = "ptool.ssh.Connection:run_capture(...)";
+const HTTP_REQUEST_SIGNATURE: &str = "ptool.ssh.Connection:http_request(options)";
 const CLOSE_SIGNATURE: &str = "ptool.ssh.Connection:close()";
 const PATH_SIGNATURE: &str = "ptool.ssh.Connection:path(path)";
 const EXISTS_SIGNATURE: &str = "ptool.ssh.Connection:exists(path)";
@@ -79,6 +80,9 @@ impl UserData for LuaSshConnection {
         });
         methods.add_method("run_capture", |lua, this, args: Variadic<Value>| {
             this.run_capture(lua, args)
+        });
+        methods.add_method("http_request", |lua, this, options: Table| {
+            this.http_request(lua, options)
         });
         methods.add_method("path", |_, this, path: String| this.path(path));
         methods.add_method("exists", |_, this, value: Value| this.exists(value));
@@ -165,6 +169,15 @@ impl LuaSshConnection {
             .run(options)
             .map_err(|err| ssh_error(RUN_CAPTURE_SIGNATURE, err))?;
         build_exec_result(lua, result, info.target)
+    }
+
+    fn http_request(&self, lua: &Lua, options: Table) -> mlua::Result<crate::http::HttpResponse> {
+        let options = crate::http::parse_request_options(lua, options, HTTP_REQUEST_SIGNATURE)?;
+        let response = self
+            .connection
+            .http_request(options)
+            .map_err(|err| ssh_error(HTTP_REQUEST_SIGNATURE, err))?;
+        Ok(crate::http::HttpResponse::from_engine(response))
     }
 
     fn path(&self, path: String) -> mlua::Result<LuaSshPath> {

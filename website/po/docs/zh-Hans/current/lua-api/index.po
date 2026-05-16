@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 17:30+0800\n"
+"POT-Creation-Date: 2026-05-16 10:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,8 +145,9 @@ msgstr "[Network API]{1}：解析 URL、IP 地址以及 host-port 组合。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:50
 msgid ""
-"[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
-msgstr "[SSH API]{1}：连接远程主机、执行命令并传输文件。"
+"[SSH API]{1}: Connect to remote hosts, run commands, send HTTP requests from "
+"the remote host, and transfer files."
+msgstr "[SSH API]{1}：连接远程主机、运行命令、从远程主机发出 HTTP 请求并传输文件。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:53
 msgid "Development & Storage"
@@ -168,6 +169,10 @@ msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."
 msgstr "把这页当作入口，然后跳转到你需要的模块页面查看完整函数参考。"
+
+#~ msgid ""
+#~ "[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
+#~ msgstr "[SSH API]{1}：连接远程主机、执行命令并传输文件。"
 
 #~ msgid "Core APIs"
 #~ msgstr "核心 API"

@@ -84,7 +84,7 @@ local ssh = ptool.ssh.connect({
 
 `Connection` 表示由 `ptool.ssh.connect()` 返回的、基于 OpenSSH 的连接句柄。
 
-它实现为 Lua userdata。
+它实现为 Lua 用户数据（userdata）。
 
 字段和方法：
 
@@ -96,6 +96,7 @@ local ssh = ptool.ssh.connect({
 - 方法：
   - `conn:run(...)` -> `table`
   - `conn:run_capture(...)` -> `table`
+  - `conn:http_request(options)` -> `Response`
   - `conn:path(path)` -> `RemotePath`
   - `conn:exists(path)` -> `boolean`
   - `conn:is_file(path)` -> `boolean`
@@ -239,6 +240,46 @@ local res3 = ssh:run_capture("echo hello", {
 print(res3.stdout)
 ```
 
+### http_request
+
+> `Unreleased` - 引入。
+
+规范 API 名称：`ptool.ssh.Connection:http_request`。
+
+`conn:http_request(options)` 从远程 SSH 主机发出 HTTP 请求，并返回与 `ptool.http.request(...)` 相同形状的 `Response` 对象。
+
+`options` 支持与 `ptool.http.request(options)` 相同的字段和校验规则。
+
+当目标端点只能从远程主机访问时，这很有用，例如绑定到 `127.0.0.1` 的服务、私有 VPC 地址或元数据端点。
+
+说明：
+
+- 请求是在远程主机上执行的，因此 DNS 解析、出站网络访问、代理设置、TLS 信任链和防火墙规则都来自该主机，而不是本地机器。
+- 远程主机必须能在 `PATH` 中找到 `curl`。
+- 请求体会通过 SSH 发送给远程 `curl` 进程。
+- 响应头和响应体会通过 SSH 流式传回，然后通过 HTTP API 文档中说明的常规 `Response` 方法来读取。
+- `basic_auth` 和 `bearer_token` 仍然互斥。
+- `fail_on_http_error`、重定向处理、超时处理和响应体缓存的行为，与 `ptool.http.request(...)` 保持一致。
+
+示例：
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local resp = ssh:http_request({
+  url = "http://127.0.0.1:8080/health",
+  headers = {
+    accept = "application/json",
+  },
+  timeout_ms = 5000,
+  fail_on_http_error = true,
+})
+
+local data = resp:json()
+print(resp.status)
+print(data.status)
+```
+
 ### path
 
 > `v0.1.0` - 引入。
@@ -248,7 +289,7 @@ print(res3.stdout)
 `conn:path(path)` 创建一个绑定到当前 SSH 连接的可复用 `RemotePath` 对象。
 
 - `path`（string，必填）：远程路径。
-- 返回：A `RemotePath` object that can be passed to `conn:upload(...)`, `conn:download(...)`, and `ptool.fs.copy(...)`。
+- 返回：一个 `RemotePath` 对象，可传给 `conn:upload(...)`、`conn:download(...)` 和 `ptool.fs.copy(...)`。
 
 示例：
 
@@ -268,7 +309,7 @@ ssh:download(remote_release, "./tmp/current.tar.gz")
 `conn:exists(path)` 检查远程路径是否存在。
 
 - `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- 返回：`true` when the remote path exists, otherwise `false`。
+- 返回：如果远程路径存在，则为 `true`；否则为 `false`。
 
 示例：
 
@@ -288,7 +329,7 @@ print(ssh:path("/srv/app/releases/current.tar.gz"):exists())
 `conn:is_file(path)` 检查远程路径是否存在且为普通文件。
 
 - `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- 返回：`true` when the remote path is a file, otherwise `false`。
+- 返回：如果远程路径是文件，则为 `true`；否则为 `false`。
 
 示例：
 
@@ -310,7 +351,7 @@ end
 `conn:is_dir(path)` 检查远程路径是否存在且为目录。
 
 - `path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
-- 返回：`true` when the remote path is a directory, otherwise `false`。
+- 返回：如果远程路径是目录，则为 `true`；否则为 `false`。
 
 示例：
 
@@ -334,7 +375,7 @@ end
 - `local_path`（string，必填）：要上传的本地文件或目录。
 - `remote_path`（string|remote path，必填）：远程目标路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
 - `options`（table，可选）：传输选项。
-- 返回：A table with the following fields:。
+- 返回：一个包含以下字段的 table。
   - `bytes`（integer）：已上传的普通文件字节数。上传目录时，它等于目录内所有已上传 文件大小之和。
   - `from`（string）：本地源路径。
   - `to`（string）：远程目标路径。
@@ -395,7 +436,7 @@ print(res.to) -- deploy@example.com:22:/srv/app/releases
 - `remote_path`（string|remote path，必填）：远程源路径。可以是字符串，也可以是 `conn:path(...)` 创建的值。
 - `local_path`（string，必填）：本地目标路径。
 - `options`（table，可选）：传输选项。
-- 返回：A table with the following fields:。
+- 返回：一个包含以下字段的 table。
   - `bytes`（integer）：已下载的普通文件字节数。下载目录时，它等于目录内所有已下载 文件大小之和。
   - `from`（string）：远程源路径。
   - `to`（string）：本地目标路径。
@@ -470,7 +511,7 @@ ssh:close()
 
 `RemotePath` 表示一个绑定到 `Connection` 的远程路径，由 `conn:path(path)` 返回。
 
-它实现为 Lua userdata。
+它实现为 Lua 用户数据（userdata）。
 
 方法：
 
@@ -482,7 +523,7 @@ ssh:close()
 
 `remote:exists()` 检查远程路径是否存在。
 
-- 返回：`true` when the remote path exists, otherwise `false`。
+- 返回：如果远程路径存在，则为 `true`；否则为 `false`。
 
 示例：
 
@@ -497,7 +538,7 @@ print(remote_release:exists())
 
 `remote:is_file()` 检查远程路径是否存在且为普通文件。
 
-- 返回：`true` when the remote path is a file, otherwise `false`。
+- 返回：如果远程路径是文件，则为 `true`；否则为 `false`。
 
 示例：
 
@@ -514,7 +555,7 @@ end
 
 `remote:is_dir()` 检查远程路径是否存在且为目录。
 
-- 返回：`true` when the remote path is a directory, otherwise `false`。
+- 返回：如果远程路径是目录，则为 `true`；否则为 `false`。
 
 示例：
 

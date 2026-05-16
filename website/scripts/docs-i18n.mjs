@@ -207,6 +207,8 @@ async function syncLocaleDocSet({locale, docSet, previousHashes}) {
       continue;
     }
 
+    const previousContent = (await pathExists(outputPath)) ? await readFile(outputPath, 'utf8') : null;
+
     await mkdir(path.dirname(outputPath), {recursive: true});
     const args = [
       '--progress=none',
@@ -219,6 +221,7 @@ async function syncLocaleDocSet({locale, docSet, previousHashes}) {
       args.push('-t', outputPath);
     }
     await runPythonModule('translate.convert.pot2po', args);
+    await restoreMovedTranslations(outputPath, previousContent);
   }
 
   await removeUnexpectedFiles(localePoDir, expectedOutputFiles, /\.po$/);
@@ -246,6 +249,222 @@ async function compileLocaleDocSet({locale, docSet}) {
   ]);
 
   console.log(`compiled ${locale}/${docSet.name}`);
+}
+
+async function restoreMovedTranslations(poPath, previousContent) {
+  const currentContent = await readFile(poPath, 'utf8');
+  const currentDoc = parsePoDocument(currentContent);
+  const previousDoc = previousContent ? parsePoDocument(previousContent) : {entries: []};
+  const translationLookup = buildTranslationLookup([
+    ...previousDoc.entries,
+    ...currentDoc.entries.filter((entry) => entry.obsolete),
+  ]);
+
+  let changed = false;
+
+  for (const entry of currentDoc.entries) {
+    if (entry.obsolete || entry.msgid === null) {
+      continue;
+    }
+
+    const previousEntry = translationLookup.get(entry.msgid);
+    if (!previousEntry || !previousEntry.msgstr) {
+      continue;
+    }
+
+    if (!entry.flags.has('fuzzy') && entry.msgstr) {
+      continue;
+    }
+
+    if (entry.msgstr === previousEntry.msgstr && !entry.flags.has('fuzzy')) {
+      continue;
+    }
+
+    entry.msgstr = previousEntry.msgstr;
+    entry.flags.delete('fuzzy');
+    changed = true;
+  }
+
+  if (changed) {
+    await writeFile(poPath, serializePoDocument(currentDoc));
+  }
+}
+
+function buildTranslationLookup(entries) {
+  const lookup = new Map();
+
+  for (const entry of entries) {
+    if (entry.msgid === null || !entry.msgstr) {
+      continue;
+    }
+    if (!lookup.has(entry.msgid)) {
+      lookup.set(entry.msgid, entry);
+    }
+  }
+
+  return lookup;
+}
+
+function parsePoDocument(content) {
+  const normalized = content.replace(/\r\n/g, '\n');
+  const blocks = normalized.split(/\n{2,}/);
+  const entries = [];
+
+  for (const block of blocks) {
+    if (!block.trim()) {
+      continue;
+    }
+    entries.push(parsePoEntry(block));
+  }
+
+  return {entries};
+}
+
+function parsePoEntry(block) {
+  const lines = block.split('\n');
+  const comments = [];
+  const flags = new Set();
+  let obsolete = false;
+  let currentField = null;
+  let msgctxt = null;
+  let msgid = null;
+  let msgstr = null;
+
+  for (const rawLine of lines) {
+    if (!rawLine) {
+      continue;
+    }
+
+    let line = rawLine;
+    let lineObsolete = false;
+    if (line.startsWith('#~ ')) {
+      line = line.slice(3);
+      lineObsolete = true;
+      obsolete = true;
+    }
+
+    if (line.startsWith('#,')) {
+      for (const flag of line.slice(2).split(',')) {
+        const normalizedFlag = flag.trim();
+        if (normalizedFlag) {
+          flags.add(normalizedFlag);
+        }
+      }
+      continue;
+    }
+
+    if (line.startsWith('#')) {
+      comments.push(rawLine);
+      continue;
+    }
+
+    if (line.startsWith('msgctxt ')) {
+      msgctxt = parsePoStringLiteral(line.slice(8));
+      currentField = 'msgctxt';
+      continue;
+    }
+
+    if (line.startsWith('msgid ')) {
+      msgid = parsePoStringLiteral(line.slice(6));
+      currentField = 'msgid';
+      continue;
+    }
+
+    if (line.startsWith('msgstr ')) {
+      msgstr = parsePoStringLiteral(line.slice(7));
+      currentField = 'msgstr';
+      continue;
+    }
+
+    if (line.startsWith('"')) {
+      const value = parsePoStringLiteral(line);
+      if (currentField === 'msgctxt') {
+        msgctxt = (msgctxt ?? '') + value;
+      } else if (currentField === 'msgid') {
+        msgid = (msgid ?? '') + value;
+      } else if (currentField === 'msgstr') {
+        msgstr = (msgstr ?? '') + value;
+      }
+      continue;
+    }
+
+    if (lineObsolete) {
+      comments.push(rawLine);
+      continue;
+    }
+
+    comments.push(rawLine);
+  }
+
+  return {
+    comments,
+    flags,
+    obsolete,
+    msgctxt,
+    msgid,
+    msgstr: msgstr ?? '',
+  };
+}
+
+function parsePoStringLiteral(source) {
+  return JSON.parse(source);
+}
+
+function serializePoDocument(document) {
+  return `${document.entries.map(serializePoEntry).join('\n\n')}\n`;
+}
+
+function serializePoEntry(entry) {
+  const lines = [...entry.comments];
+
+  if (entry.flags.size > 0) {
+    lines.push(`#, ${[...entry.flags].join(', ')}`);
+  }
+
+  const prefix = entry.obsolete ? '#~ ' : '';
+
+  if (entry.msgctxt !== null) {
+    lines.push(...formatPoField('msgctxt', entry.msgctxt, prefix));
+  }
+  if (entry.msgid !== null) {
+    lines.push(...formatPoField('msgid', entry.msgid, prefix));
+  }
+  lines.push(...formatPoField('msgstr', entry.msgstr, prefix));
+
+  return lines.join('\n');
+}
+
+function formatPoField(name, value, prefix = '') {
+  if (!value.includes('\n')) {
+    return [`${prefix}${name} ${JSON.stringify(value)}`];
+  }
+
+  return [
+    `${prefix}${name} ""`,
+    ...splitPoMultilineValue(value).map((part) => `${prefix}${JSON.stringify(part)}`),
+  ];
+}
+
+function splitPoMultilineValue(value) {
+  const parts = [];
+  let start = 0;
+
+  while (start < value.length) {
+    const nextNewline = value.indexOf('\n', start);
+    if (nextNewline === -1) {
+      parts.push(value.slice(start));
+      break;
+    }
+
+    parts.push(value.slice(start, nextNewline + 1));
+    start = nextNewline + 1;
+  }
+
+  if (parts.length === 0) {
+    parts.push('');
+  }
+
+  return parts;
 }
 
 async function runPythonModule(moduleName, args) {

@@ -9,6 +9,9 @@ HTTP client helpers are available under `ptool.http` and `p.http`.
 `ptool.http.request(options)` sends an HTTP request and returns a `Response`
 object.
 
+To send the same request shape from a remote SSH host, use
+`ptool.ssh.Connection:http_request(options)`.
+
 `options` fields:
 
 - `url` (string, required): The request URL.

@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added `ptool.ssh.Connection:http_request(...)`, which sends HTTP requests
+  from the remote SSH host and returns the same response shape as
+  `ptool.http.request(...)`, and documented the new SSH/HTTP workflow across
+  all supported locales.
 - Added a `trim` option to local and SSH command helpers such as `ptool.run`,
   `ptool.run_capture`, `conn:run`, and `conn:run_capture`, so captured
   `stdout` and `stderr` can be trimmed before being returned.

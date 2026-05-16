@@ -118,6 +118,7 @@ Fields and methods:
 - Methods:
   - `conn:run(...)` -> `table`
   - `conn:run_capture(...)` -> `table`
+  - `conn:http_request(options)` -> `Response`
   - `conn:path(path)` -> `RemotePath`
   - `conn:exists(path)` -> `boolean`
   - `conn:is_file(path)` -> `boolean`
@@ -277,6 +278,54 @@ local res3 = ssh:run_capture("echo hello", {
   stderr = "inherit",
 })
 print(res3.stdout)
+```
+
+### http_request
+
+> `Unreleased` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:http_request`.
+
+`conn:http_request(options)` sends an HTTP request from the remote SSH host and
+returns the same `Response` object shape as `ptool.http.request(...)`.
+
+`options` supports the same fields and validation rules as
+`ptool.http.request(options)`.
+
+This is useful when the target endpoint is reachable only from the remote host,
+for example a service bound to `127.0.0.1`, a private VPC address, or a
+metadata endpoint.
+
+Notes:
+
+- The request is executed on the remote host, so DNS resolution, outbound
+  network access, proxy settings, TLS trust, and firewall rules come from that
+  host rather than the local machine.
+- The remote host must have `curl` available on `PATH`.
+- Request bodies are sent to the remote `curl` process over SSH.
+- Response headers and body are streamed back over SSH and then consumed
+  through the normal `Response` methods documented in the HTTP API.
+- `basic_auth` and `bearer_token` remain mutually exclusive.
+- `fail_on_http_error`, redirect handling, timeout handling, and response body
+  caching behave the same as `ptool.http.request(...)`.
+
+Example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local resp = ssh:http_request({
+  url = "http://127.0.0.1:8080/health",
+  headers = {
+    accept = "application/json",
+  },
+  timeout_ms = 5000,
+  fail_on_http_error = true,
+})
+
+local data = resp:json()
+print(resp.status)
+print(data.status)
 ```
 
 ### path

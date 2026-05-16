@@ -47,8 +47,8 @@ alphabetical order.
 
 - [HTTP API](./http.md): Send HTTP requests and consume response bodies.
 - [Network API](./net.md): Parse URLs, IP addresses, and host-port pairs.
-- [SSH API](./ssh.md): Connect to remote hosts, run commands, and transfer
-  files.
+- [SSH API](./ssh.md): Connect to remote hosts, run commands, send HTTP
+  requests from the remote host, and transfer files.
 
 ## Development & Storage
 

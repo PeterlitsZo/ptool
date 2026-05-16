@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 17:30+0800\n"
+"POT-Creation-Date: 2026-05-16 10:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,7 +145,8 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:50
 msgid ""
-"[SSH API]{1}: Connect to remote hosts, run commands, and transfer files."
+"[SSH API]{1}: Connect to remote hosts, run commands, send HTTP requests from "
+"the remote host, and transfer files."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:53

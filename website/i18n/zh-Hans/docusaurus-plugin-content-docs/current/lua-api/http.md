@@ -8,6 +8,8 @@ HTTP 客户端辅助能力位于 `ptool.http` 和 `p.http` 下。
 
 `ptool.http.request(options)` 发送一个 HTTP 请求，并返回 `Response` 对象。
 
+如果要从远程 SSH 主机发出相同形状的请求，请使用 `ptool.ssh.Connection:http_request(options)`。
+
 `options` 字段：
 
 - `url`（string，必填）：请求 URL。

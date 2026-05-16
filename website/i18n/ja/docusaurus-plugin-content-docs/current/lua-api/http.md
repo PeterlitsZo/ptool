@@ -8,6 +8,8 @@ HTTP クライアントヘルパーは `ptool.http` と `p.http` にあります
 
 `ptool.http.request(options)` は HTTP リクエストを送り、`Response` オブジェクトを返します。
 
+リモート SSH ホストから同じリクエスト形状を送るには、`ptool.ssh.Connection:http_request(options)` を使います。
+
 `options` フィールド:
 
 - `url` (string, 必須): リクエスト URL。
@@ -26,7 +28,7 @@ HTTP クライアントヘルパーは `ptool.http` と `p.http` にあります
 - `bearer_token` (string, 任意): `authorization` ヘッダーに使う Bearer トークンです。
 - `fail_on_http_error` (boolean, 任意): `true` の場合、4xx と 5xx の HTTP レスポンスでエラーを送出します。デフォルトは `false` です。
 
-注意:
+Notes:
 
 - `body`、`json`、`form` は相互排他的です。
 - `basic_auth` と `bearer_token` は相互排他的です。
@@ -83,7 +85,7 @@ Canonical API name: `ptool.http.Response:text`.
 
 `resp:text()` はレスポンス本文をテキストとして読み取り、返します。
 
-- 戻り値: `string`。
+- Returns: `string`.
 
 ### json
 
@@ -97,7 +99,7 @@ Canonical API name: `ptool.http.Response:bytes`.
 
 `resp:bytes()` はレスポンス本文を生バイト列として読み取り、返します。
 
-- 戻り値: `string`。
+- Returns: `string`.
 
 ### header
 
@@ -105,7 +107,7 @@ Canonical API name: `ptool.http.Response:header`.
 
 `resp:header(name)` は `name` に一致する最初のレスポンスヘッダー値を返し ます。
 
-- `name` (string, 必須): 取得したいヘッダー名。
+- `name` (string, required): The header name to look up.
 - 戻り値: `string | nil`。
 
 ### header_values
@@ -114,7 +116,7 @@ Canonical API name: `ptool.http.Response:header_values`.
 
 `resp:header_values(name)` は `name` に一致するレスポンスヘッダー値をすべて 返します。
 
-- `name` (string, 必須): 取得したいヘッダー名。
+- `name` (string, required): The header name to look up.
 - 戻り値: `string[]`。
 
 ### raise_for_status
@@ -123,7 +125,7 @@ Canonical API name: `ptool.http.Response:raise_for_status`.
 
 `resp:raise_for_status()` はレスポンスステータスコードが 4xx または 5xx の 場合にエラーを送出します。
 
-注意:
+Notes:
 
 - デフォルトでは 2xx 以外の HTTP ステータスはエラーになりません。 呼び出し側は `resp.ok` を確認するか、 `fail_on_http_error = true` を設定するか、 `resp:raise_for_status()` を呼び出してください。
 - レスポンス本文は最初の読み取り後にキャッシュされるため、`text`、`json`、 `bytes` は複数回呼び出せます。

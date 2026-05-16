@@ -37,7 +37,7 @@
 
 - [HTTP API](./http.md)：发送 HTTP 请求并读取响应体。
 - [Network API](./net.md)：解析 URL、IP 地址以及 host-port 组合。
-- [SSH API](./ssh.md)：连接远程主机、执行命令并传输文件。
+- [SSH API](./ssh.md)：连接远程主机、运行命令、从远程主机发出 HTTP 请求并传输文件。
 
 ## 开发与存储
 
