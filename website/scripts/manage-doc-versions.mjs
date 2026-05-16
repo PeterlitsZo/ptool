@@ -1,5 +1,5 @@
 import {execFile as execFileCallback} from 'node:child_process';
-import {access, mkdir, readdir, readFile, rm, writeFile} from 'node:fs/promises';
+import {access, cp, mkdir, readdir, readFile, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
@@ -13,6 +13,7 @@ const versionedDocsDir = path.join(websiteDir, 'versioned_docs');
 const versionedSidebarsDir = path.join(websiteDir, 'versioned_sidebars');
 const poDocsDir = path.join(websiteDir, 'po', 'docs');
 const poTemplatesDir = path.join(poDocsDir, 'templates');
+const docsI18nLockPath = path.join(poDocsDir, 'docs-i18n.lock.json');
 const i18nDir = path.join(websiteDir, 'i18n');
 
 const [command, ...restArgs] = process.argv.slice(2);
@@ -55,8 +56,8 @@ async function runSnapshot(args) {
     maxBuffer: 32 * 1024 * 1024,
   });
   console.log(`snapshotted docs for ${versionName}`);
-  await syncVersionTranslationMetadata(versionName);
-  console.log(`synced version metadata for ${versionName}`);
+  await syncVersionTranslationArtifacts(versionName);
+  console.log(`synced version translation artifacts for ${versionName}`);
 
   const {keptVersions, prunedVersions} = await pruneVersions({keep});
   printSummary({keptVersions, prunedVersions});
@@ -67,8 +68,8 @@ async function runSyncMetadata(args) {
 
   for (const versionName of versionNames) {
     parseVersion(versionName);
-    await syncVersionTranslationMetadata(versionName);
-    console.log(`synced version metadata for ${versionName}`);
+    await syncVersionTranslationArtifacts(versionName);
+    console.log(`synced version translation artifacts for ${versionName}`);
   }
 }
 
@@ -168,6 +169,48 @@ async function readLocaleDirs(rootDir, excludedNames = []) {
   }
 }
 
+async function syncVersionTranslationArtifacts(versionName) {
+  await seedVersionTranslationSources(versionName);
+  await syncVersionTranslationMetadata(versionName);
+}
+
+async function seedVersionTranslationSources(versionName) {
+  const docSetName = `version-${versionName}`;
+  const currentTemplateDir = path.join(poTemplatesDir, 'current');
+  const targetTemplateDir = path.join(poTemplatesDir, docSetName);
+  const locales = await readLocaleDirs(poDocsDir, ['templates']);
+  const lock = await readDocsI18nLock();
+  let lockChanged = false;
+  const seedTemplateFromCurrent = !lock.templates[docSetName];
+
+  await seedDirFromCurrent(currentTemplateDir, targetTemplateDir, {
+    force: seedTemplateFromCurrent,
+  });
+  if (seedTemplateFromCurrent && lock.templates.current) {
+    lock.templates[docSetName] = {...lock.templates.current};
+    lockChanged = true;
+  }
+
+  for (const locale of locales) {
+    const currentLocaleDir = path.join(poDocsDir, locale, 'current');
+    const targetLocaleDir = path.join(poDocsDir, locale, docSetName);
+    lock.locales[locale] ??= {};
+    const seedLocaleFromCurrent = !lock.locales[locale][docSetName];
+    await seedDirFromCurrent(currentLocaleDir, targetLocaleDir, {
+      force: seedLocaleFromCurrent,
+    });
+
+    if (seedLocaleFromCurrent && lock.locales[locale].current) {
+      lock.locales[locale][docSetName] = {...lock.locales[locale].current};
+      lockChanged = true;
+    }
+  }
+
+  if (lockChanged) {
+    await writeDocsI18nLock(lock);
+  }
+}
+
 async function syncVersionTranslationMetadata(versionName) {
   const docsPluginDirName = 'docusaurus-plugin-content-docs';
   const targetFileName = `version-${versionName}.json`;
@@ -197,6 +240,21 @@ async function syncVersionTranslationMetadata(versionName) {
     await mkdir(localeDocsDir, {recursive: true});
     await writeJsonFile(targetJsonPath, content);
   }
+}
+
+async function seedDirFromCurrent(sourceDir, targetDir, {force = false} = {}) {
+  if (!(await pathExists(sourceDir))) {
+    return;
+  }
+
+  if (force) {
+    await rm(targetDir, {recursive: true, force: true});
+  } else if (await pathExists(targetDir)) {
+    return;
+  }
+
+  await mkdir(path.dirname(targetDir), {recursive: true});
+  await cp(sourceDir, targetDir, {recursive: true});
 }
 
 async function readJsonFile(filePath) {
@@ -248,7 +306,32 @@ function printSummary({keptVersions, prunedVersions}) {
 function printHelp() {
   console.log(`manage-doc-versions commands:
   snapshot <version> [--keep <count>]  Snapshot current docs and keep newest versions.
-  sync-metadata [version]              Sync version label metadata for one or all versions.
+  sync-metadata [version]              Sync version i18n artifacts for one or all versions.
   prune [--keep <count>]               Keep only the newest versions.
   help                                 Show this message.`);
+}
+
+async function readDocsI18nLock() {
+  try {
+    const content = await readFile(docsI18nLockPath, 'utf8');
+    const parsed = JSON.parse(content);
+    return {
+      version: parsed?.version ?? 1,
+      templates: parsed?.templates ?? {},
+      locales: parsed?.locales ?? {},
+    };
+  } catch (error) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
+      return {
+        version: 1,
+        templates: {},
+        locales: {},
+      };
+    }
+    throw error;
+  }
+}
+
+async function writeDocsI18nLock(lock) {
+  await writeFile(docsI18nLockPath, `${JSON.stringify(lock, null, 2)}\n`, 'utf8');
 }

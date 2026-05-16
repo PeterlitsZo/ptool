@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:1
+msgid "Hash API"
+msgstr "API de hash"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:3
+msgid "Hashing helpers are available under `ptool.hash` and `p.hash`."
+msgstr "As utilidades de hash estão disponíveis em `ptool.hash` e `p.hash`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:5
+msgid "ptool.hash.sha256"
+msgstr "ptool.hash.sha256"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:7"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:9
+msgid "`ptool.hash.sha256(input)` returns the SHA-256 digest of a Lua string."
+msgstr "`ptool.hash.sha256(input)` retorna o digest SHA-256 de uma string Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:11
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:11"
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
+msgstr ""
+"`input` (string, obrigatório): A string Lua de entrada. O digest é calculado "
+"a partir dos bytes brutos da string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:13
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:13"
+msgid "Returns: `string` (lowercase hexadecimal digest)."
+msgstr "Retorna: `string` (digest hexadecimal em minúsculas)."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:20
+msgid "ptool.hash.sha1"
+msgstr "ptool.hash.sha1"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:22
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:22"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:24
+msgid "`ptool.hash.sha1(input)` returns the SHA-1 digest of a Lua string."
+msgstr "`ptool.hash.sha1(input)` retorna o digest SHA-1 de uma string Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:26
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:26"
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
+msgstr ""
+"`input` (string, obrigatório): A string Lua de entrada. O digest é calculado "
+"a partir dos bytes brutos da string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:28
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:28"
+msgid "Returns: `string` (lowercase hexadecimal digest)."
+msgstr "Retorna: `string` (digest hexadecimal em minúsculas)."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:35
+msgid "ptool.hash.md5"
+msgstr "ptool.hash.md5"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:37
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:37"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:39
+msgid "`ptool.hash.md5(input)` returns the MD5 digest of a Lua string."
+msgstr "`ptool.hash.md5(input)` retorna o digest MD5 de uma string Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:41
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:41"
+msgid ""
+"`input` (string, required): The input Lua string. The digest is computed "
+"from the string's raw bytes."
+msgstr ""
+"`input` (string, obrigatório): A string Lua de entrada. O digest é calculado "
+"a partir dos bytes brutos da string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:43"
+msgid "Returns: `string` (lowercase hexadecimal digest)."
+msgstr "Retorna: `string` (digest hexadecimal em minúsculas)."

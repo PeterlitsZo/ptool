@@ -1,5 +1,10 @@
 # v0.9.0
 
+- [ ] Enhance the `p.semvar`:
+  - Support `Version:is_release` and `Version:is_prerelease`.
+  - Support `Version:bump` method.
+- [ ] Let ptool support more hash functions.
+- [ ] Support `p.s3`.
 - [ ] Support `ptool.fs.copy`?
 - [ ] Support `p.redis`.
 - [ ] Support the pipe -- `p.run("foo | bar")`.
@@ -11,12 +16,17 @@
   - The custom `prompt_prefix`? The background color?
 - [ ] Let the `ssh:upload`'s `remote_path` can be a directory.
 - [ ] Support to get the ptool's version.
-- [ ] Enhance the `p.semvar`:
-  - Support `Version:is_release` and `Version:is_prerelease`.
-  - Support `Version:bump` method.
-- [ ] Let ptool support more hash functions.
-- [ ] Support `p.s3`.
 - [ ] Support `p.zip.<algo-like-gzip>`.
+- [ ] Let `p.run` and `p.exec` support redirecting stdin, stdout and stderr to a
+      file.
+- [ ] Let `p.fs.write` support appending to a file (or support `p.fs.append`?).
+- [ ] Support `p.fs.open`? It returns a file userdata and support many methods.
+- [ ] Support `p.proc` module. Like (?):
+      ```lua
+      local pids = p.proc.find({ cmdline_contains = "user-service" })
+      p.proc.kill(pids)
+      p.proc.wait_gone(pids, { timeout = "1s" })
+      ```
 
 # v0.7.0
 
