@@ -1,4 +1,5 @@
 use crate::{Error, ErrorKind, Result};
+use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 #[cfg(unix)]
 use std::os::unix::process::CommandExt;
@@ -7,11 +8,19 @@ use std::process::Command as ProcessCommand;
 use std::process::Stdio;
 use std::thread;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum RunStdin {
+    Inherit,
+    Bytes(Vec<u8>),
+    File { path: String },
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum RunStreamMode {
     Inherit,
     Capture,
     Null,
+    File { path: String, append: bool },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -21,7 +30,7 @@ pub struct RunOptions {
     pub cwd: Option<String>,
     pub env: Vec<(String, String)>,
     pub env_remove: Vec<String>,
-    pub stdin: Option<Vec<u8>>,
+    pub stdin: RunStdin,
     pub trim: bool,
     pub stdout: RunStreamMode,
     pub stderr: RunStreamMode,
@@ -42,6 +51,9 @@ pub struct ExecOptions {
     pub cwd: Option<String>,
     pub env: Vec<(String, String)>,
     pub env_remove: Vec<String>,
+    pub stdin: RunStdin,
+    pub stdout: RunStreamMode,
+    pub stderr: RunStreamMode,
 }
 
 pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
@@ -59,25 +71,28 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
 
     configure_stdio(
         &mut command,
-        options.stdin.is_some(),
-        options.stdout,
-        options.stderr,
-    );
+        &options.stdin,
+        &options.stdout,
+        &options.stderr,
+        &resolved_cwd,
+        &options.cmd,
+    )?;
 
     let mut child = command
         .spawn()
         .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
 
-    let stdin_handle = options.stdin.as_ref().and_then(|bytes| {
-        child.stdin.take().map(|mut pipe| {
+    let stdin_handle = match &options.stdin {
+        RunStdin::Bytes(bytes) => child.stdin.take().map(|mut pipe| {
             let bytes = bytes.clone();
             thread::spawn(move || -> std::io::Result<()> {
                 pipe.write_all(&bytes)?;
                 pipe.flush()?;
                 Ok(())
             })
-        })
-    });
+        }),
+        RunStdin::Inherit | RunStdin::File { .. } => None,
+    };
 
     let stdout_handle = child.stdout.take().map(spawn_reader_thread);
     let stderr_handle = child.stderr.take().map(spawn_reader_thread);
@@ -92,14 +107,14 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
 
     let stdout = collect_process_output(
         stdout_handle,
-        options.stdout,
+        &options.stdout,
         "stdout",
         &options.cmd,
         &resolved_cwd,
     )?;
     let stderr = collect_process_output(
         stderr_handle,
-        options.stderr,
+        &options.stderr,
         "stderr",
         &options.cmd,
         &resolved_cwd,
@@ -108,13 +123,14 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
     Ok(RunResult {
         ok: status.success(),
         code: status.code(),
-        stdout: bytes_to_captured_string(&stdout, options.stdout, options.trim),
-        stderr: bytes_to_captured_string(&stderr, options.stderr, options.trim),
+        stdout: bytes_to_captured_string(&stdout, &options.stdout, options.trim),
+        stderr: bytes_to_captured_string(&stderr, &options.stderr, options.trim),
     })
 }
 
 pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
+    validate_exec_stdio(options)?;
     let mut command = ProcessCommand::new(&options.cmd);
     configure_command(
         &mut command,
@@ -124,6 +140,14 @@ pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
         &options.env,
         &options.env_remove,
     );
+    configure_stdio(
+        &mut command,
+        &options.stdin,
+        &options.stdout,
+        &options.stderr,
+        &resolved_cwd,
+        &options.cmd,
+    )?;
 
     exec_current_process(command, &options.cmd, &resolved_cwd)
 }
@@ -173,25 +197,20 @@ pub fn format_run_failed_message(
 
 fn configure_stdio(
     command: &mut ProcessCommand,
-    has_stdin: bool,
-    stdout_mode: RunStreamMode,
-    stderr_mode: RunStreamMode,
-) {
-    command.stdin(if has_stdin {
-        Stdio::piped()
-    } else {
-        Stdio::inherit()
+    stdin_mode: &RunStdin,
+    stdout_mode: &RunStreamMode,
+    stderr_mode: &RunStreamMode,
+    cwd: &Path,
+    cmd: &str,
+) -> Result<()> {
+    command.stdin(match stdin_mode {
+        RunStdin::Inherit => Stdio::inherit(),
+        RunStdin::Bytes(_) => Stdio::piped(),
+        RunStdin::File { path } => Stdio::from(open_stdin_redirect_file(path, cwd, cmd)?),
     });
-    command.stdout(match stdout_mode {
-        RunStreamMode::Inherit => Stdio::inherit(),
-        RunStreamMode::Capture => Stdio::piped(),
-        RunStreamMode::Null => Stdio::null(),
-    });
-    command.stderr(match stderr_mode {
-        RunStreamMode::Inherit => Stdio::inherit(),
-        RunStreamMode::Capture => Stdio::piped(),
-        RunStreamMode::Null => Stdio::null(),
-    });
+    command.stdout(configure_output_stdio(stdout_mode, "stdout", cwd, cmd)?);
+    command.stderr(configure_output_stdio(stderr_mode, "stderr", cwd, cmd)?);
+    Ok(())
 }
 
 fn configure_command(
@@ -214,7 +233,7 @@ fn configure_command(
     }
 }
 
-fn bytes_to_captured_string(bytes: &[u8], mode: RunStreamMode, trim: bool) -> Option<String> {
+fn bytes_to_captured_string(bytes: &[u8], mode: &RunStreamMode, trim: bool) -> Option<String> {
     match mode {
         RunStreamMode::Capture => {
             let text = String::from_utf8_lossy(bytes);
@@ -224,7 +243,7 @@ fn bytes_to_captured_string(bytes: &[u8], mode: RunStreamMode, trim: bool) -> Op
                 text.to_string()
             })
         }
-        RunStreamMode::Inherit | RunStreamMode::Null => None,
+        RunStreamMode::Inherit | RunStreamMode::Null | RunStreamMode::File { .. } => None,
     }
 }
 
@@ -265,7 +284,7 @@ fn finish_io_thread(
 
 fn collect_process_output(
     handle: Option<thread::JoinHandle<std::io::Result<Vec<u8>>>>,
-    mode: RunStreamMode,
+    mode: &RunStreamMode,
     stream_name: &str,
     cmd: &str,
     cwd: &Path,
@@ -290,7 +309,83 @@ fn collect_process_output(
             },
             None => Ok(Vec::new()),
         },
-        RunStreamMode::Inherit | RunStreamMode::Null => Ok(Vec::new()),
+        RunStreamMode::Inherit | RunStreamMode::Null | RunStreamMode::File { .. } => Ok(Vec::new()),
+    }
+}
+
+fn configure_output_stdio(
+    mode: &RunStreamMode,
+    stream_name: &str,
+    cwd: &Path,
+    cmd: &str,
+) -> Result<Stdio> {
+    match mode {
+        RunStreamMode::Inherit => Ok(Stdio::inherit()),
+        RunStreamMode::Capture => Ok(Stdio::piped()),
+        RunStreamMode::Null => Ok(Stdio::null()),
+        RunStreamMode::File { path, append } => Ok(Stdio::from(open_output_redirect_file(
+            path,
+            *append,
+            stream_name,
+            cwd,
+            cmd,
+        )?)),
+    }
+}
+
+fn open_stdin_redirect_file(path: &str, cwd: &Path, cmd: &str) -> Result<File> {
+    let resolved_path = resolve_redirect_path(cwd, path);
+    File::open(&resolved_path).map_err(|err| {
+        build_run_io_error(
+            cmd,
+            cwd,
+            std::io::Error::new(
+                err.kind(),
+                format!(
+                    "failed to open redirected stdin file `{}`: {err}",
+                    resolved_path.display()
+                ),
+            ),
+        )
+    })
+}
+
+fn open_output_redirect_file(
+    path: &str,
+    append: bool,
+    stream_name: &str,
+    cwd: &Path,
+    cmd: &str,
+) -> Result<File> {
+    let resolved_path = resolve_redirect_path(cwd, path);
+    let mut options = OpenOptions::new();
+    options.create(true).write(true);
+    if append {
+        options.append(true);
+    } else {
+        options.truncate(true);
+    }
+    options.open(&resolved_path).map_err(|err| {
+        build_run_io_error(
+            cmd,
+            cwd,
+            std::io::Error::new(
+                err.kind(),
+                format!(
+                    "failed to open redirected {stream_name} file `{}`: {err}",
+                    resolved_path.display()
+                ),
+            ),
+        )
+    })
+}
+
+fn resolve_redirect_path(cwd: &Path, path: &str) -> PathBuf {
+    let path = PathBuf::from(path);
+    if path.is_absolute() {
+        path
+    } else {
+        cwd.join(path)
     }
 }
 
@@ -303,6 +398,37 @@ fn shell_quote(value: &str) -> String {
 
     let escaped = value.replace('\'', "'\"'\"'");
     format!("'{escaped}'")
+}
+
+fn validate_exec_stdio(options: &ExecOptions) -> Result<()> {
+    if matches!(options.stdin, RunStdin::Bytes(_)) {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            "ptool.exec does not support string stdin; use `stdin = { file = ... }` instead",
+        )
+        .with_op("ptool.exec")
+        .with_cmd(&options.cmd));
+    }
+
+    if matches!(options.stdout, RunStreamMode::Capture) {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            "ptool.exec does not support `stdout = \"capture\"`; redirect to a file or use inherit/null instead",
+        )
+        .with_op("ptool.exec")
+        .with_cmd(&options.cmd));
+    }
+
+    if matches!(options.stderr, RunStreamMode::Capture) {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            "ptool.exec does not support `stderr = \"capture\"`; redirect to a file or use inherit/null instead",
+        )
+        .with_op("ptool.exec")
+        .with_cmd(&options.cmd));
+    }
+
+    Ok(())
 }
 
 #[cfg(unix)]

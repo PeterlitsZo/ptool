@@ -31,8 +31,8 @@ pub use datetime::{
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
 pub use exec::{
-    ExecOptions, RunOptions, RunResult, RunStreamMode, exec_replace, format_command_for_display,
-    format_run_failed_message, resolve_run_cwd, run_command,
+    ExecOptions, RunOptions, RunResult, RunStdin, RunStreamMode, exec_replace,
+    format_command_for_display, format_run_failed_message, resolve_run_cwd, run_command,
 };
 pub use fs::{FsCopyOptions, FsCopyResult, FsGlobOptions, FsMkdirOptions, FsRemoveOptions};
 pub use git::{

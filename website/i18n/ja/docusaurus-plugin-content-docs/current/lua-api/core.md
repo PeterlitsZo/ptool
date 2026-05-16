@@ -476,21 +476,29 @@ res:assert_ok()
 - `args` (string[], 任意): 引数リスト。
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
-- `stdin` (文字列、オプション): 子プロセスの標準入力に送信される文字列。これを省略すると、子プロセスは現在のプロセスの標準入力を継承します。
+- `stdin` (string|table, 任意): 子プロセスの stdin の入力元。
+  - 文字列を指定すると、その文字列が子プロセスの stdin に送られます。
+  - テーブル `{ file = "path" }` を指定すると、ファイルから stdin を読み込みます。
+  - 省略時は、子プロセスが現在のプロセスの stdin を継承します。
 - `trim` (ブール値、オプション): キャプチャされた `stdout` とキャプチャされた `stderr` を返す前に、それらから先頭と末尾の空白をトリミングするかどうか。これは、`"capture"` に設定されたストリームにのみ影響します。デフォルトは`false`です。
 - `echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフォルトは `true` です。
 - `check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかどうか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それも未設定ならデフォルトは `false` です。
 - `confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデフォルトは `false` です。
 - `retry` (boolean, 任意): `check = true` のとき、失敗後に再試行するか ユーザーへ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使われ、それも未設定なら デフォルトは `false` です。
-- `stdout` (string, 任意): stdout の扱い。サポートされる値:
+- `stdout` (string|table, 任意): stdout の処理方法。
   - `"inherit"`: 現在の端末へ継承します (デフォルト)。
   - `"capture"`: `res.stdout` にキャプチャする。
   - `"null"`: 出力を破棄します。
-- `stderr` (string, 任意): stderr の扱い。サポートされる値:
+  - `{ file = "path" }`: stdout をファイルへ書き込み、最初に内容を切り詰めます。
+  - `{ file = "path", append = true }`: stdout をファイルへ追記します。
+- `stderr` (string|table, 任意): stderr の処理方法。
   - `"inherit"`: 現在の端末へ継承します (デフォルト)。
   - `"capture"`: `res.stderr` にキャプチャする。
   - `"null"`: 出力を破棄します。
+  - `{ file = "path" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます。
+  - `{ file = "path", append = true }`: stderr をファイルへ追記します。
 - `ptool.run(cmdline, options)` や `ptool.run(cmd, args, options)` などのショートカット呼び出し形式が使用される場合、呼び出しごとの `options` テーブルは同じ意味の `stdin` および `trim` も受け入れます。
+- ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス `cwd` からの相対パスとして解決されます。
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -514,6 +522,14 @@ local res0 = ptool.run({
   stdout = "capture",
 })
 print(res0.stdout)
+
+ptool.run({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' err' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
+})
 
 local res = ptool.run({
   cmd = "sh",
@@ -553,6 +569,13 @@ local res2 = ptool.run_capture({
   trim = true,
 })
 print(res2.stdout)
+
+ptool.run_capture({
+  cmd = "sh",
+  args = {"-c", "printf 'captured'; printf ' problem' >&2"},
+  stdout = { file = "captured.log" },
+  stderr = { file = "captured.err" },
+})
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",
@@ -601,9 +624,22 @@ ptool.exec({ cmd = "echo", args = {"hello", "world"} })
 - `args` (string[], 任意): 引数リスト。
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
+- `stdin` (table, 任意): 子プロセスの stdin の入力元。
+  - `{ file = "path" }`: ファイルから stdin を読み込みます。
 - `echo` (boolean, 任意): 置換前にコマンド情報を表示するかどうか。省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、それも未設定ならデフォルトは `true` です。
 - `confirm` (boolean, 任意): 置換前にユーザー確認を行うかどうか。省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、それも未設定ならデフォルトは `false` です。
-- `ptool.run` と異なり、`ptool.exec` は `stdin`、`trim`、`stdout`、`stderr`、`check`、`retry` をサポートしません。
+- `stdout` (string|table, 任意): stdout の処理方法。
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
+  - `"null"`: 出力を破棄します。
+  - `{ file = "path" }`: stdout をファイルへ書き込み、最初に内容を切り詰めます。
+  - `{ file = "path", append = true }`: stdout をファイルへ追記します。
+- `stderr` (string|table, 任意): stderr の処理方法。
+  - `"inherit"`: 現在の端末へ継承します (デフォルト)。
+  - `"null"`: 出力を破棄します。
+  - `{ file = "path" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます。
+  - `{ file = "path", append = true }`: stderr をファイルへ追記します。
+- `ptool.run` と異なり、`ptool.exec` は文字列 `stdin`、`stdout = "capture"`、`stderr = "capture"`、`trim`、`check`、`retry` をサポートしません。
+- ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス `cwd` からの相対パスとして解決されます。
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -622,5 +658,13 @@ ptool.exec({
   args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
   cwd = "crates",
   env = { FOO = "bar" },
+})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' done'; printf ' warn' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
 })
 ```

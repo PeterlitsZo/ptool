@@ -15,8 +15,8 @@
 
 - [ ] Enhance `p.log` and `p.run`, `p.ask` to have better style?
   - The custom `prompt_prefix`? The background color?
-- [ ] Let the `ssh:upload`'s `remote_path` can be a directory.
-- [ ] Support to get the ptool's version.
+- [x] Let the `ssh:upload`'s `remote_path` can be a directory.
+- [x] Support to get the ptool's version.
 - [ ] Support `p.zip.<algo-like-gzip>`.
 - [ ] Let `p.run` and `p.exec` support redirecting stdin, stdout and stderr to a
       file.

@@ -549,8 +549,10 @@ following fields:
 - `cwd` (string, optional): The child process working directory.
 - `env` (table, optional): Additional environment variables, where keys are
   variable names and values are variable values.
-- `stdin` (string, optional): String sent to the child process stdin. When this
-  is omitted, the child process inherits the current process stdin.
+- `stdin` (string|table, optional): Child process stdin source.
+  - A string sends that string to the child process stdin.
+  - A table `{ file = "path" }` reads stdin from a file.
+  - When omitted, the child process inherits the current process stdin.
 - `trim` (boolean, optional): Whether to trim leading and trailing whitespace
   from captured `stdout` and captured `stderr` before returning them. This only
   affects streams set to `"capture"`. Defaults to `false`.
@@ -567,17 +569,23 @@ following fields:
   failed execution when `check = true`. If omitted, the value from
   `ptool.config({ run = { retry = ... } })` is used; if that is also unset, the
   default is `false`.
-- `stdout` (string, optional): Stdout handling strategy. Supported values:
+- `stdout` (string|table, optional): Stdout handling strategy.
   - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Capture into `res.stdout`.
   - `"null"`: Discard the output.
-- `stderr` (string, optional): Stderr handling strategy. Supported values:
+  - `{ file = "path" }`: Write stdout to a file, truncating it first.
+  - `{ file = "path", append = true }`: Append stdout to a file.
+- `stderr` (string|table, optional): Stderr handling strategy.
   - `"inherit"`: Inherit to the current terminal (default).
   - `"capture"`: Capture into `res.stderr`.
   - `"null"`: Discard the output.
+  - `{ file = "path" }`: Write stderr to a file, truncating it first.
+  - `{ file = "path", append = true }`: Append stderr to a file.
 - When shortcut call forms such as `ptool.run(cmdline, options)` or
   `ptool.run(cmd, args, options)` are used, the per-call `options` table also
   accepts `stdin` and `trim` with the same meaning.
+- File redirect paths are resolved relative to the effective child-process
+  `cwd`, unless an absolute path is provided.
 - When `confirm = true`:
   - If the user refuses the execution, an error is raised immediately.
   - If the current environment is not interactive (no TTY), an error is raised
@@ -603,6 +611,14 @@ local res0 = ptool.run({
   stdout = "capture",
 })
 print(res0.stdout)
+
+ptool.run({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' err' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
+})
 
 local res = ptool.run({
   cmd = "sh",
@@ -644,6 +660,13 @@ local res2 = ptool.run_capture({
   trim = true,
 })
 print(res2.stdout)
+
+ptool.run_capture({
+  cmd = "sh",
+  args = {"-c", "printf 'captured'; printf ' problem' >&2"},
+  stdout = { file = "captured.log" },
+  stderr = { file = "captured.err" },
+})
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",
@@ -702,14 +725,28 @@ following fields:
 - `cwd` (string, optional): The child process working directory.
 - `env` (table, optional): Additional environment variables, where keys are
   variable names and values are variable values.
+- `stdin` (table, optional): Child process stdin source.
+  - `{ file = "path" }`: Read stdin from a file.
 - `echo` (boolean, optional): Whether to echo command information before
   replacement. If omitted, the value from `ptool.config({ run = { echo = ... }
   })` is used; if that is also unset, the default is `true`.
 - `confirm` (boolean, optional): Whether to ask the user for confirmation
   before replacement. If omitted, the value from `ptool.config({ run = {
   confirm = ... } })` is used; if that is also unset, the default is `false`.
-- Unlike `ptool.run`, `ptool.exec` does not support `stdin`, `trim`, `stdout`,
-  `stderr`, `check`, or `retry`.
+- `stdout` (string|table, optional): Stdout handling strategy.
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"null"`: Discard the output.
+  - `{ file = "path" }`: Write stdout to a file, truncating it first.
+  - `{ file = "path", append = true }`: Append stdout to a file.
+- `stderr` (string|table, optional): Stderr handling strategy.
+  - `"inherit"`: Inherit to the current terminal (default).
+  - `"null"`: Discard the output.
+  - `{ file = "path" }`: Write stderr to a file, truncating it first.
+  - `{ file = "path", append = true }`: Append stderr to a file.
+- Unlike `ptool.run`, `ptool.exec` does not support string `stdin`,
+  `stdout = "capture"`, `stderr = "capture"`, `trim`, `check`, or `retry`.
+- File redirect paths are resolved relative to the effective child-process
+  `cwd`, unless an absolute path is provided.
 - When `confirm = true`:
   - If the user refuses the execution, an error is raised immediately.
   - If the current environment is not interactive (no TTY), an error is raised
@@ -729,5 +766,13 @@ ptool.exec({
   args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
   cwd = "crates",
   env = { FOO = "bar" },
+})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' done'; printf ' warn' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
 })
 ```

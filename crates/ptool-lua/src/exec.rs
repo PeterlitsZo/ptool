@@ -3,14 +3,15 @@ use crate::lua_error::{self, LuaError};
 use crate::lua_world::RunConfig;
 use mlua::{Lua, Table, Value, Variadic};
 use ptool_engine::{
-    PromptConfirmOptions, PtoolEngine, RunResult, RunStreamMode, format_command_for_display,
-    resolve_run_cwd,
+    PromptConfirmOptions, PtoolEngine, RunResult, RunStdin, RunStreamMode,
+    format_command_for_display, resolve_run_cwd,
 };
 use std::path::Path;
 
+type StdinMode = RunStdin;
 type StreamMode = RunStreamMode;
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 struct StreamDefaults {
     stdout: StreamMode,
     stderr: StreamMode,
@@ -37,7 +38,7 @@ struct RunOptions {
 struct RunCallOverrides {
     cwd: Option<String>,
     env: Option<Vec<(String, String)>>,
-    stdin: Option<Vec<u8>>,
+    stdin: Option<StdinMode>,
     trim: Option<bool>,
     echo: Option<bool>,
     stdout: Option<StreamMode>,
@@ -56,6 +57,9 @@ struct ExecOptions {
 struct ExecCallOverrides {
     cwd: Option<String>,
     env: Option<Vec<(String, String)>>,
+    stdin: Option<StdinMode>,
+    stdout: Option<StreamMode>,
+    stderr: Option<StreamMode>,
     echo: Option<bool>,
     confirm: Option<bool>,
 }
@@ -307,6 +311,9 @@ fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Resul
                         cwd: None,
                         env: Vec::new(),
                         env_remove: Vec::new(),
+                        stdin: StdinMode::Inherit,
+                        stdout: StreamMode::Inherit,
+                        stderr: StreamMode::Inherit,
                     },
                     echo: defaults.echo,
                     confirm: defaults.confirm,
@@ -326,6 +333,9 @@ fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Resul
                     cwd: None,
                     env: Vec::new(),
                     env_remove: Vec::new(),
+                    stdin: StdinMode::Inherit,
+                    stdout: StreamMode::Inherit,
+                    stderr: StreamMode::Inherit,
                 },
                 echo: defaults.echo,
                 confirm: defaults.confirm,
@@ -346,6 +356,9 @@ fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Resul
                             cwd: None,
                             env: Vec::new(),
                             env_remove: Vec::new(),
+                            stdin: StdinMode::Inherit,
+                            stdout: StreamMode::Inherit,
+                            stderr: StreamMode::Inherit,
                         },
                         echo: defaults.echo,
                         confirm: defaults.confirm,
@@ -420,10 +433,10 @@ fn parse_run_options(
                         cwd: None,
                         env: Vec::new(),
                         env_remove: Vec::new(),
-                        stdin: None,
+                        stdin: StdinMode::Inherit,
                         trim: false,
-                        stdout: stream_defaults.stdout,
-                        stderr: stream_defaults.stderr,
+                        stdout: stream_defaults.stdout.clone(),
+                        stderr: stream_defaults.stderr.clone(),
                     },
                     echo: defaults.echo,
                     check: defaults.check,
@@ -447,10 +460,10 @@ fn parse_run_options(
                     cwd: None,
                     env: Vec::new(),
                     env_remove: Vec::new(),
-                    stdin: None,
+                    stdin: StdinMode::Inherit,
                     trim: false,
-                    stdout: stream_defaults.stdout,
-                    stderr: stream_defaults.stderr,
+                    stdout: stream_defaults.stdout.clone(),
+                    stderr: stream_defaults.stderr.clone(),
                 },
                 echo: defaults.echo,
                 check: defaults.check,
@@ -477,10 +490,10 @@ fn parse_run_options(
                             cwd: None,
                             env: Vec::new(),
                             env_remove: Vec::new(),
-                            stdin: None,
+                            stdin: StdinMode::Inherit,
                             trim: false,
-                            stdout: stream_defaults.stdout,
-                            stderr: stream_defaults.stderr,
+                            stdout: stream_defaults.stdout.clone(),
+                            stderr: stream_defaults.stderr.clone(),
                         },
                         echo: defaults.echo,
                         check: defaults.check,
@@ -558,17 +571,17 @@ fn parse_full_options_table(
         .get::<Option<bool>>("echo")?
         .unwrap_or(defaults.echo);
     let stdout = parse_stream_mode(
-        options.get::<Option<String>>("stdout")?,
+        options.get::<Option<Value>>("stdout")?,
         "stdout",
         "ptool.run(options)",
     )?
-    .unwrap_or(stream_defaults.stdout);
+    .unwrap_or_else(|| stream_defaults.stdout.clone());
     let stderr = parse_stream_mode(
-        options.get::<Option<String>>("stderr")?,
+        options.get::<Option<Value>>("stderr")?,
         "stderr",
         "ptool.run(options)",
     )?
-    .unwrap_or(stream_defaults.stderr);
+    .unwrap_or_else(|| stream_defaults.stderr.clone());
     let check = options
         .get::<Option<bool>>("check")?
         .unwrap_or(defaults.check);
@@ -615,6 +628,22 @@ fn parse_exec_full_options_table(options: Table, defaults: RunConfig) -> mlua::R
             cwd: options.get("cwd")?,
             env: parse_env_table(options.get::<Option<Table>>("env")?)?,
             env_remove: Vec::new(),
+            stdin: parse_stdin(
+                options.get::<Option<Value>>("stdin")?,
+                "ptool.exec(options)",
+            )?,
+            stdout: parse_stream_mode(
+                options.get::<Option<Value>>("stdout")?,
+                "stdout",
+                "ptool.exec(options)",
+            )?
+            .unwrap_or(StreamMode::Inherit),
+            stderr: parse_stream_mode(
+                options.get::<Option<Value>>("stderr")?,
+                "stderr",
+                "ptool.exec(options)",
+            )?
+            .unwrap_or(StreamMode::Inherit),
         },
         echo: options
             .get::<Option<bool>>("echo")?
@@ -682,11 +711,11 @@ fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallO
     Ok(RunCallOverrides {
         cwd: options.get("cwd")?,
         env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
-        stdin: parse_stdin(options.get::<Option<Value>>("stdin")?, context)?,
+        stdin: parse_optional_stdin(options.get::<Option<Value>>("stdin")?, context)?,
         trim: options.get::<Option<bool>>("trim")?,
         echo: options.get::<Option<bool>>("echo")?,
-        stdout: parse_stream_mode(options.get::<Option<String>>("stdout")?, "stdout", context)?,
-        stderr: parse_stream_mode(options.get::<Option<String>>("stderr")?, "stderr", context)?,
+        stdout: parse_stream_mode(options.get::<Option<Value>>("stdout")?, "stdout", context)?,
+        stderr: parse_stream_mode(options.get::<Option<Value>>("stderr")?, "stderr", context)?,
         check: options.get::<Option<bool>>("check")?,
         confirm: options.get::<Option<bool>>("confirm")?,
         retry: options.get::<Option<bool>>("retry")?,
@@ -705,13 +734,16 @@ fn parse_exec_overrides_table(options: Table, context: &str) -> mlua::Result<Exe
     Ok(ExecCallOverrides {
         cwd: options.get("cwd")?,
         env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
+        stdin: parse_optional_stdin(options.get::<Option<Value>>("stdin")?, context)?,
+        stdout: parse_stream_mode(options.get::<Option<Value>>("stdout")?, "stdout", context)?,
+        stderr: parse_stream_mode(options.get::<Option<Value>>("stderr")?, "stderr", context)?,
         echo: options.get::<Option<bool>>("echo")?,
         confirm: options.get::<Option<bool>>("confirm")?,
     })
 }
 
 fn reject_exec_only_invalid_fields(options: &Table, context: &str) -> mlua::Result<()> {
-    for key in ["stdin", "trim", "stdout", "stderr", "check", "retry"] {
+    for key in ["trim", "check", "retry"] {
         if has_key(options, key)? {
             return Err(lua_error::invalid_option(
                 context,
@@ -736,10 +768,14 @@ fn apply_overrides(
             cwd: overrides.cwd,
             env: overrides.env.unwrap_or_default(),
             env_remove: Vec::new(),
-            stdin: overrides.stdin,
+            stdin: overrides.stdin.unwrap_or(StdinMode::Inherit),
             trim: overrides.trim.unwrap_or(false),
-            stdout: overrides.stdout.unwrap_or(stream_defaults.stdout),
-            stderr: overrides.stderr.unwrap_or(stream_defaults.stderr),
+            stdout: overrides
+                .stdout
+                .unwrap_or_else(|| stream_defaults.stdout.clone()),
+            stderr: overrides
+                .stderr
+                .unwrap_or_else(|| stream_defaults.stderr.clone()),
         },
         echo: overrides.echo.unwrap_or(defaults.echo),
         check: overrides.check.unwrap_or(defaults.check),
@@ -761,6 +797,9 @@ fn apply_exec_overrides(
             cwd: overrides.cwd,
             env: overrides.env.unwrap_or_default(),
             env_remove: Vec::new(),
+            stdin: overrides.stdin.unwrap_or(StdinMode::Inherit),
+            stdout: overrides.stdout.unwrap_or(StreamMode::Inherit),
+            stderr: overrides.stderr.unwrap_or(StreamMode::Inherit),
         },
         echo: overrides.echo.unwrap_or(defaults.echo),
         confirm: overrides.confirm.unwrap_or(defaults.confirm),
@@ -809,7 +848,7 @@ fn build_run_result(
 }
 
 fn parse_stream_mode(
-    mode: Option<String>,
+    mode: Option<Value>,
     field_name: &str,
     context: &str,
 ) -> mlua::Result<Option<StreamMode>> {
@@ -817,18 +856,31 @@ fn parse_stream_mode(
         return Ok(None);
     };
 
-    let mode = match mode.as_str() {
-        "inherit" => StreamMode::Inherit,
-        "capture" => StreamMode::Capture,
-        "null" => StreamMode::Null,
-        _ => {
-            return Err(lua_error::invalid_option(
-                context,
-                format!("`{field_name}` must be one of `inherit`, `capture`, `null`"),
-            ));
+    match mode {
+        Value::String(mode) => {
+            let mode = match mode.to_str()?.as_ref() {
+                "inherit" => StreamMode::Inherit,
+                "capture" => StreamMode::Capture,
+                "null" => StreamMode::Null,
+                _ => {
+                    return Err(lua_error::invalid_option(
+                        context,
+                        format!(
+                            "`{field_name}` must be one of `inherit`, `capture`, `null`, or a redirect table"
+                        ),
+                    ));
+                }
+            };
+            Ok(Some(mode))
         }
-    };
-    Ok(Some(mode))
+        Value::Table(options) => Ok(Some(parse_stream_redirect_table(
+            options, field_name, context,
+        )?)),
+        _ => Err(lua_error::invalid_argument(
+            context,
+            format!("`{field_name}` must be a string or table"),
+        )),
+    }
 }
 
 fn build_run_failed_error(
@@ -995,15 +1047,77 @@ fn parse_optional_env_table(env: Option<Table>) -> mlua::Result<Option<Vec<(Stri
     }
 }
 
-fn parse_stdin(value: Option<Value>, context: &str) -> mlua::Result<Option<Vec<u8>>> {
+fn parse_stdin(value: Option<Value>, context: &str) -> mlua::Result<StdinMode> {
     match value {
-        None | Some(Value::Nil) => Ok(None),
-        Some(Value::String(value)) => Ok(Some(value.as_bytes().to_vec())),
+        None | Some(Value::Nil) => Ok(StdinMode::Inherit),
+        Some(Value::String(value)) => Ok(StdinMode::Bytes(value.as_bytes().to_vec())),
+        Some(Value::Table(options)) => parse_stdin_redirect_table(options, context),
         Some(_) => Err(lua_error::invalid_argument(
             context,
-            "`stdin` must be a string",
+            "`stdin` must be a string or table",
         )),
     }
+}
+
+fn parse_optional_stdin(value: Option<Value>, context: &str) -> mlua::Result<Option<StdinMode>> {
+    match value {
+        None | Some(Value::Nil) => Ok(None),
+        other => parse_stdin(other, context).map(Some),
+    }
+}
+
+fn parse_stdin_redirect_table(options: Table, context: &str) -> mlua::Result<StdinMode> {
+    let file = options.get::<Option<String>>("file")?.ok_or_else(|| {
+        lua_error::invalid_option(context, "`stdin` redirect table requires `file`")
+    })?;
+
+    reject_unknown_option_keys(&options, &["file"], context, "stdin")?;
+    Ok(StdinMode::File { path: file })
+}
+
+fn parse_stream_redirect_table(
+    options: Table,
+    field_name: &str,
+    context: &str,
+) -> mlua::Result<StreamMode> {
+    let file = options.get::<Option<String>>("file")?.ok_or_else(|| {
+        lua_error::invalid_option(
+            context,
+            format!("`{field_name}` redirect table requires `file`"),
+        )
+    })?;
+    let append = options.get::<Option<bool>>("append")?.unwrap_or(false);
+
+    reject_unknown_option_keys(&options, &["file", "append"], context, field_name)?;
+    Ok(StreamMode::File { path: file, append })
+}
+
+fn reject_unknown_option_keys(
+    options: &Table,
+    allowed: &[&str],
+    context: &str,
+    field_name: &str,
+) -> mlua::Result<()> {
+    for pair in options.pairs::<Value, Value>() {
+        let (key, _) = pair?;
+        let Value::String(key) = key else {
+            return Err(lua_error::invalid_option(
+                context,
+                format!("`{field_name}` table keys must be strings"),
+            ));
+        };
+        let key = key.to_str()?;
+        if !allowed
+            .iter()
+            .any(|allowed_key| *allowed_key == key.as_ref())
+        {
+            return Err(lua_error::invalid_option(
+                context,
+                format!("`{field_name}` table does not allow `{key}`"),
+            ));
+        }
+    }
+    Ok(())
 }
 
 fn engine_error(err: ptool_engine::Error, op: &str, cmd: &str, cwd: &Path) -> mlua::Error {

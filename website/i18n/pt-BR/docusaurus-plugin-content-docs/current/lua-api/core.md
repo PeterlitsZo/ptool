@@ -476,21 +476,29 @@ res:assert_ok()
 - `args` (string[], opcional): A lista de argumentos.
 - `cwd` (string, opcional): O diretório de trabalho do processo filho.
 - `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
-- `stdin` (string, opcional): String enviada ao processo filho stdin. Quando isso é omitido, o processo filho herda o stdin do processo atual.
+- `stdin` (string|table, opcional): Fonte de stdin do processo filho.
+  - Uma string envia esse conteúdo para o stdin do processo filho.
+  - Uma tabela `{ file = "path" }` lê o stdin a partir de um arquivo.
+  - Quando omitido, o processo filho herda o stdin do processo atual.
 - `trim` (booleano, opcional): se deve cortar os espaços em branco iniciais e finais do `stdout` capturado e do `stderr` capturado antes de retorná-los. Isso afeta apenas fluxos definidos como `"capture"`. O padrão é `false`.
 - `echo` (boolean, opcional): Se informações do comando devem ser exibidas para esta execução. Se omitido, é usado o valor de `ptool.config({ run = { echo = ... } })`; se ele também estiver ausente, o padrão é `true`.
 - `check` (boolean, opcional): Se deve gerar erro imediatamente quando o código de saída não é `0`. Se omitido, é usado o valor de `ptool.config({ run = { check = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `confirm` (boolean, opcional): Se deve pedir confirmação ao usuário antes da execução. Se omitido, é usado o valor de `ptool.config({ run = { confirm = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma falha quando `check = true`. Se omitido, é usado o valor de `ptool.config({ run = { retry = ... } })`; se ele também estiver ausente, o padrão é `false`.
-- `stdout` (string, opcional): Estratégia de tratamento de stdout. Valores suportados:
+- `stdout` (string|table, opcional): Estratégia de tratamento de stdout.
   - `"inherit"`: Herda para o terminal atual (padrão).
   - `"capture"`: Captura em `res.stdout`.
   - `"null"`: Descarta a saída.
-- `stderr` (string, opcional): Estratégia de tratamento de stderr. Valores suportados:
+  - `{ file = "path" }`: Escreve stdout em um arquivo, truncando-o antes.
+  - `{ file = "path", append = true }`: Acrescenta stdout ao final de um arquivo.
+- `stderr` (string|table, opcional): Estratégia de tratamento de stderr.
   - `"inherit"`: Herda para o terminal atual (padrão).
   - `"capture"`: Captura em `res.stderr`.
   - `"null"`: Descarta a saída.
+  - `{ file = "path" }`: Escreve stderr em um arquivo, truncando-o antes.
+  - `{ file = "path", append = true }`: Acrescenta stderr ao final de um arquivo.
 - Quando formulários de chamada de atalho como `ptool.run(cmdline, options)` ou `ptool.run(cmd, args, options)` são usados, a tabela `options` por chamada também aceita `stdin` e `trim` com o mesmo significado.
+- Os caminhos de redirecionamento para arquivos são resolvidos em relação ao `cwd` efetivo do processo filho, a menos que um caminho absoluto seja fornecido.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
@@ -514,6 +522,14 @@ local res0 = ptool.run({
   stdout = "capture",
 })
 print(res0.stdout)
+
+ptool.run({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' err' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
+})
 
 local res = ptool.run({
   cmd = "sh",
@@ -553,6 +569,13 @@ local res2 = ptool.run_capture({
   trim = true,
 })
 print(res2.stdout)
+
+ptool.run_capture({
+  cmd = "sh",
+  args = {"-c", "printf 'captured'; printf ' problem' >&2"},
+  stdout = { file = "captured.log" },
+  stderr = { file = "captured.err" },
+})
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",
@@ -601,9 +624,22 @@ Regras de argumento:
 - `args` (string[], opcional): A lista de argumentos.
 - `cwd` (string, opcional): O diretório de trabalho do processo filho.
 - `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
+- `stdin` (table, opcional): Fonte de stdin do processo filho.
+  - `{ file = "path" }`: Lê stdin a partir de um arquivo.
 - `echo` (boolean, opcional): Se informações do comando devem ser exibidas antes da substituição. Se omitido, é usado o valor de `ptool.config({ run = { echo = ... } })`; se ele também estiver ausente, o padrão é `true`.
 - `confirm` (boolean, opcional): Se deve pedir confirmação ao usuário antes da substituição. Se omitido, é usado o valor de `ptool.config({ run = { confirm = ... } })`; se ele também estiver ausente, o padrão é `false`.
-- Ao contrário de `ptool.run`, `ptool.exec` não oferece suporte a `stdin`, `trim`, `stdout`, `stderr`, `check` nem `retry`.
+- `stdout` (string|table, opcional): Estratégia de tratamento de stdout.
+  - `"inherit"`: Herda para o terminal atual (padrão).
+  - `"null"`: Descarta a saída.
+  - `{ file = "path" }`: Escreve stdout em um arquivo, truncando-o antes.
+  - `{ file = "path", append = true }`: Acrescenta stdout ao final de um arquivo.
+- `stderr` (string|table, opcional): Estratégia de tratamento de stderr.
+  - `"inherit"`: Herda para o terminal atual (padrão).
+  - `"null"`: Descarta a saída.
+  - `{ file = "path" }`: Escreve stderr em um arquivo, truncando-o antes.
+  - `{ file = "path", append = true }`: Acrescenta stderr ao final de um arquivo.
+- Diferentemente de `ptool.run`, `ptool.exec` não oferece suporte a `stdin` como string, `stdout = "capture"`, `stderr = "capture"`, `trim`, `check` nem `retry`.
+- Os caminhos de redirecionamento para arquivos são resolvidos em relação ao `cwd` efetivo do processo filho, a menos que um caminho absoluto seja fornecido.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
@@ -622,5 +658,13 @@ ptool.exec({
   args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
   cwd = "crates",
   env = { FOO = "bar" },
+})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' done'; printf ' warn' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
 })
 ```

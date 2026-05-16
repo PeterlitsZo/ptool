@@ -7,6 +7,11 @@
 - Added `ptool.version()` / `p.version()`, which returns the current `ptool`
   version string to Lua scripts, and documented it across all supported
   locales.
+- Added file-based stdio redirection for local process helpers: `ptool.run(...)`
+  and `ptool.run_capture(...)` now accept `{ file = ... }` redirection for
+  `stdin`, `stdout`, and `stderr`, while `ptool.exec(...)` now supports file
+  redirection for `stdin`, `stdout`, and `stderr` where true process
+  replacement semantics allow it.
 
 ### Changed
 

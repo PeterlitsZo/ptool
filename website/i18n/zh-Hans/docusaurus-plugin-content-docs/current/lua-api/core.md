@@ -476,21 +476,29 @@ res:assert_ok()
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
-- `stdin`（string，可选）：发送给子进程 stdin 的字符串。省略时，子进程会继承当前进程的 stdin。
+- `stdin`（string|table，可选）：子进程 stdin 的输入来源。
+  - 传入字符串时，会将该字符串发送到子进程 stdin。
+  - 传入表 `{ file = "path" }` 时，会从文件读取 stdin。
+  - 省略时，子进程会继承当前进程的 stdin。
 - `trim`（boolean，可选）：返回前是否裁掉已捕获 `stdout` 和已捕获 `stderr` 两端的空白字符。只影响设置为 `"capture"` 的流。默认值为 `false`。
 - `echo`（boolean，可选）：本次执行是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
 - `check`（boolean，可选）：退出码不为 `0` 时是否立即抛错。如果省略，则使用 `ptool.config({ run = { check = ... } })` 中的值；若仍未设置，则默认是 `false`。
 - `confirm`（boolean，可选）：执行前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
 - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 如果省略，则使用 `ptool.config({ run = { retry = ... } })` 中的值；若仍未设置， 则默认是 `false`。
-- `stdout`（string，可选）：stdout 处理策略。支持：
+- `stdout`（string|table，可选）：stdout 处理策略。
   - `"inherit"`：继承到当前终端（默认）。
   - `"capture"`：捕获到 `res.stdout`。
   - `"null"`：丢弃输出。
-- `stderr`（string，可选）：stderr 处理策略。支持：
+  - `{ file = "path" }`：将 stdout 写入文件，并先清空文件原有内容。
+  - `{ file = "path", append = true }`：将 stdout 追加到文件末尾。
+- `stderr`（string|table，可选）：stderr 处理策略。
   - `"inherit"`：继承到当前终端（默认）。
   - `"capture"`：捕获到 `res.stderr`。
   - `"null"`：丢弃输出。
+  - `{ file = "path" }`：将 stderr 写入文件，并先清空文件原有内容。
+  - `{ file = "path", append = true }`：将 stderr 追加到文件末尾。
 - 当使用 `ptool.run(cmdline, options)` 或 `ptool.run(cmd, args, options)` 这类快捷调用形式时，单次调用的 `options` 表同样支持 `stdin` 和 `trim`，含义一致。
+- 文件重定向路径会相对于实际子进程 `cwd` 解析；如果提供的是绝对路径，则直接使用该绝对路径。
 - 当 `confirm = true` 时：
   - 如果用户拒绝执行，会立即抛出错误。
   - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
@@ -514,6 +522,14 @@ local res0 = ptool.run({
   stdout = "capture",
 })
 print(res0.stdout)
+
+ptool.run({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' err' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
+})
 
 local res = ptool.run({
   cmd = "sh",
@@ -553,6 +569,13 @@ local res2 = ptool.run_capture({
   trim = true,
 })
 print(res2.stdout)
+
+ptool.run_capture({
+  cmd = "sh",
+  args = {"-c", "printf 'captured'; printf ' problem' >&2"},
+  stdout = { file = "captured.log" },
+  stderr = { file = "captured.err" },
+})
 
 local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",
@@ -601,9 +624,22 @@ ptool.exec({ cmd = "echo", args = {"hello", "world"} })
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
+- `stdin`（table，可选）：子进程 stdin 的输入来源。
+  - `{ file = "path" }`：从文件读取 stdin。
 - `echo`（boolean，可选）：替换前是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
 - `confirm`（boolean，可选）：替换前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
-- 与 `ptool.run` 不同，`ptool.exec` 不支持 `stdin`、`trim`、`stdout`、`stderr`、`check` 或 `retry`。
+- `stdout`（string|table，可选）：stdout 处理策略。
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"null"`：丢弃输出。
+  - `{ file = "path" }`：将 stdout 写入文件，并先清空文件原有内容。
+  - `{ file = "path", append = true }`：将 stdout 追加到文件末尾。
+- `stderr`（string|table，可选）：stderr 处理策略。
+  - `"inherit"`：继承到当前终端（默认）。
+  - `"null"`：丢弃输出。
+  - `{ file = "path" }`：将 stderr 写入文件，并先清空文件原有内容。
+  - `{ file = "path", append = true }`：将 stderr 追加到文件末尾。
+- 与 `ptool.run` 不同，`ptool.exec` 不支持字符串形式的 `stdin`、`stdout = "capture"`、`stderr = "capture"`、`trim`、`check` 或 `retry`。
+- 文件重定向路径会相对于实际子进程 `cwd` 解析；如果提供的是绝对路径，则直接使用该绝对路径。
 - 当 `confirm = true` 时：
   - 如果用户拒绝执行，会立即抛出错误。
   - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
@@ -622,5 +658,13 @@ ptool.exec({
   args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
   cwd = "crates",
   env = { FOO = "bar" },
+})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "cat; printf ' done'; printf ' warn' >&2"},
+  stdin = { file = "input.txt" },
+  stdout = { file = "output.log" },
+  stderr = { file = "error.log", append = true },
 })
 ```
