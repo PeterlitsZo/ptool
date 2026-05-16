@@ -54,6 +54,23 @@ ptool.use(">= v0.6.0, < 0.7.0")
 - 版本要求表达式里的版本组件也支持可选的 `v` 前缀，例如 `>= v0.6.0, < 0.7.0`。
 - 如果当前 `ptool` 版本不满足声明的版本或版本要求，脚本会立即退出并报错。
 
+## ptool.version
+
+> `Unreleased` - 引入。
+
+`ptool.version()` 会返回当前 `ptool` 的版本字符串。
+
+- 返回：`string`。
+- 返回值是一个语义化版本字符串，例如 `0.7.2`。
+- 当脚本需要打印、记录或比较运行时 `ptool` 版本时，可以使用它。
+
+示例：
+
+```lua
+print(ptool.version())
+print(p.version())
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - 引入。

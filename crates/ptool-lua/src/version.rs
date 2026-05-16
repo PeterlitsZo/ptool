@@ -1,14 +1,18 @@
 use ptool_engine::PtoolEngine;
 
-const CURRENT_PTOOL_VERSION: &str = env!("CARGO_PKG_VERSION");
+pub(crate) fn current_ptool_version(engine: &PtoolEngine) -> &'static str {
+    engine.ptool_version()
+}
 
 pub(crate) fn ensure_min_ptool_version(
     engine: &PtoolEngine,
     required_raw: &str,
 ) -> mlua::Result<()> {
+    let current_ptool_version = current_ptool_version(engine);
+
     if supports_legacy_min_version(engine, required_raw) {
         let is_ok = engine
-            .semver_is_min_version(CURRENT_PTOOL_VERSION, required_raw)
+            .semver_is_min_version(current_ptool_version, required_raw)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
 
         if is_ok {
@@ -20,7 +24,7 @@ pub(crate) fn ensure_min_ptool_version(
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
         let current = engine.semver_strip_prerelease(
             engine
-                .semver_parse(CURRENT_PTOOL_VERSION)
+                .semver_parse(current_ptool_version)
                 .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?,
         );
         return Err(crate::lua_error::to_mlua_error(
@@ -39,7 +43,7 @@ pub(crate) fn ensure_min_ptool_version(
         .semver_req_parse(required_raw)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
     let current = engine
-        .semver_parse(CURRENT_PTOOL_VERSION)
+        .semver_parse(current_ptool_version)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.use"))?;
 
     if engine.semver_req_matches(&requirement, &current) {

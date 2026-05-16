@@ -75,6 +75,8 @@ pub use tui::{
 };
 pub use yaml::{YamlPathSegment, YamlValue};
 
+pub const PTOOL_VERSION: &str = env!("CARGO_PKG_VERSION");
+
 #[derive(Clone, Debug)]
 pub struct PtoolEngine {
     runtime: Arc<Runtime>,
@@ -106,6 +108,10 @@ impl PtoolEngine {
 
     pub fn log(&self, level: LogLevel, message: &str) -> Result<()> {
         log::write_line(level, message)
+    }
+
+    pub fn ptool_version(&self) -> &'static str {
+        PTOOL_VERSION
     }
 
     pub fn current_os(&self) -> OS {

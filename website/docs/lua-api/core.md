@@ -69,6 +69,24 @@ ptool.use(">= v0.6.0, < 0.7.0")
 - If the current `ptool` version does not satisfy the declared version or
   requirement, the script exits immediately with an error.
 
+## ptool.version
+
+> `Unreleased` - Introduced.
+
+`ptool.version()` returns the current `ptool` version string.
+
+- Returns: `string`.
+- The returned value is a semantic version string such as `0.7.2`.
+- Use this when a script needs to print, record, or compare the runtime
+  `ptool` version.
+
+Example:
+
+```lua
+print(ptool.version())
+print(p.version())
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.

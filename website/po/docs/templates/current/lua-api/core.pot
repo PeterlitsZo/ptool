@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 11:21+0800\n"
+"POT-Creation-Date: 2026-05-16 16:46+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,16 +12,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:1
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:1
 msgid "Core Lua API"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:3
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:3
 msgid ""
 "`ptool` exposes these core runtime helpers directly under `ptool` and `p`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:5
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:5
 msgid ""
 "`ptool run <lua_file>` runs a Lua script and injects the global variable "
 "`ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`)"
@@ -29,29 +29,29 @@ msgid ""
 "same behavior."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:10
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:10
 msgid ""
 "The embedded Lua runtime keeps the base Lua globals and exposes only these "
 "standard libraries by default:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:13
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:13
 msgid "`table`"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:14
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:14
 msgid "`string`"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:15
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:15
 msgid "`math`"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:16
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:16
 msgid "`utf8`"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:18
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:18
 msgid ""
 "Host-facing built-in modules such as `io`, `os`, and `package` are "
 "intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`"
@@ -59,935 +59,968 @@ msgid ""
 "network, and other runtime operations instead."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:23
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:23
 msgid "If you want to pass arguments to a Lua script, you can do it like this:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:30
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:30
 msgid "The arguments can then be parsed with `ptool.args.parse(...)`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:32
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:32
 msgid "Here is an example script:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:40
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:40
 msgid "Shebang is supported, so you can add this to the top of the file:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:46
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:46
 msgid "ptool.use"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:48
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:48
 msgid ""
 "`v0.1.0` - Introduced. `v0.7.0` - Added Cargo-style version requirement "
 "expressions."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:51
 msgid ""
 "`ptool.use` declares the required `ptool` version or version requirement for "
 "a script."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:60
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:60
 msgid ""
 "The argument accepts either a plain semantic version string or a Cargo-style "
 "version requirement expression."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:62
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:62
 msgid ""
 "A plain version string supports an optional `v` prefix, such as `v0.1.0` or "
 "`0.1.0`, and keeps the historical behavior of declaring the minimum required "
 "`ptool` version."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:65
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:65
 msgid ""
 "Requirement expressions support operators and patterns such as `^0.6.0`, "
 "`~0.6.0`, `>=0.6.0, <0.7.0`, `1.*`, and `1.2.*`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:67
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:67
 msgid ""
 "Requirement expressions also accept version components with an optional `v` "
 "prefix, such as `>= v0.6.0, < 0.7.0`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:69
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:69
 msgid ""
 "If the current `ptool` version does not satisfy the declared version or "
 "requirement, the script exits immediately with an error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:72
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:72
+msgid "ptool.version"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:74
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:74"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:76
+msgid "`ptool.version()` returns the current `ptool` version string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:78
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:78"
+msgid "Returns: `string`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:79
+msgid "The returned value is a semantic version string such as `0.7.2`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:80
+msgid ""
+"Use this when a script needs to print, record, or compare the runtime `ptool`"
+" version."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:83
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:83"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:90
 msgid "ptool.unindent"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:92
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:92"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:76
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:94
 msgid ""
 "`ptool.unindent` processes multi-line strings by removing the `| ` prefix "
 "after leading indentation on each line and trimming leading and trailing "
 "blank lines."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:86
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:104
 msgid "This is equivalent to:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:93
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:111
 msgid "ptool.inspect"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:95
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:95"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:113
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:113"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:97
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:115
 msgid ""
 "`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-"
 "style string. It is primarily intended for debugging and displaying table "
 "contents."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:100
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:118
 msgid "`value` (any, required): The Lua value to inspect."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:119
 msgid "`options` (table, optional): Rendering options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:119
 msgid ""
 "`indent` (string, optional): Indentation used for each nesting level. "
 "Defaults to two spaces."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:119
 msgid ""
 "`multiline` (boolean, optional): Whether tables are rendered across multiple "
 "lines. Defaults to `true`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:119
 msgid ""
 "`max_depth` (integer, optional): Maximum nesting depth to render. Deeper "
 "values are replaced with `<max-depth>`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:108
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:108"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:126
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:126"
 msgid "Returns: `string`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:110
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:110"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:128
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:128"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:112
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:130
 msgid "Array-like entries (`1..n`) are rendered first."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:113
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:131
 msgid ""
 "Remaining table fields are rendered after the array part in stable key order."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:114
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:132
 msgid ""
 "Identifier-like string keys are rendered as `key = value`; other keys are "
 "rendered as `[key] = value`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:116
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:134
 msgid "Recursive table references are rendered as `<cycle>`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:117
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:135
 msgid ""
 "Functions, threads, and userdata are rendered as placeholder values such as "
 "`<function>` and `<userdata>`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:120
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:120"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:138
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:138"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:133
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:133"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:151
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:151"
 msgid "ptool.ask"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:135
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:153
 msgid ""
 "`v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt "
 "subcommands."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:138
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:156
 msgid ""
 "`ptool.ask` provides interactive prompts. You can call it directly for text "
 "input, or use its prompt subcommands for confirmation, selection, multi-"
 "select, and secret input."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:142
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:160
 msgid "Common behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:144
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:162
 msgid ""
 "All `ptool.ask` prompts require an interactive TTY. Running them in a non-"
 "interactive environment raises an error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:146
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:164
 msgid "If the user cancels a prompt, the script raises an error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:147
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:165
 msgid "Unknown option names or invalid option value types raise an error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:149
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:149"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:167
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:167"
 msgid "ptool.ask"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:151
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:169
 msgid ""
 "`ptool.ask(prompt[, options])` asks the user for a line of text and returns "
 "the answer."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:154
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:154"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:172
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:172"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
 msgid ""
 "`default` (string, optional): Default value used when the user submits an "
 "empty answer."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
 msgid ""
 "`placeholder` (string, optional): Placeholder text shown before the user "
 "starts typing."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173"
 msgid "`required` (boolean, optional): Whether the answer must be non-empty."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
 msgid ""
 "`allow_empty` (boolean, optional): Whether to accept an empty answer. "
 "Defaults to `true`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
 msgid ""
 "`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
 "from the answer before returning it."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173"
 msgid "`min_length` (integer, optional): Minimum accepted character length."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173"
 msgid "`max_length` (integer, optional): Maximum accepted character length."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:173"
 msgid "`pattern` (string, optional): Regular expression the answer must match."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:169
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:169"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:187
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:187"
 msgid "Returns: `string`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:171
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:171"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:189
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:189"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:183
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:201
 msgid "ptool.ask.confirm"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:185
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:185"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:203
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:203"
 msgid "`v0.5.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:187
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:205
 msgid ""
 "`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:189
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:189"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:207
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:207"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:208
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:208"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:208
 msgid ""
 "`default` (boolean, optional): Default answer used when the user presses "
 "Enter without typing."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:208
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:208"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:194
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:212
 msgid "Returns: `boolean`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:196
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:196"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:214
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:214"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:204
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:222
 msgid "ptool.ask.select"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:206
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:206"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:224
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:224"
 msgid "`v0.5.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:208
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:226
 msgid ""
 "`ptool.ask.select(prompt, items[, options])` asks the user to choose one "
 "item from a list."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:211
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:211"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:229
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:229"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:212
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:230
 msgid "`items` (table, required): Candidate items. Each entry may be:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:212
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:230
 msgid ""
 "A string, which is used as both the display label and the returned value."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:212
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:230
 msgid "A table like `{ label = \"Patch\", value = \"patch\" }`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233"
 msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:233
 msgid ""
 "`default_index` (integer, optional): 1-based index of the initially selected "
 "item."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:220
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:220"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:238
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:238"
 msgid "Returns: `string`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:222
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:222"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:240
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:240"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:234
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:252
 msgid "ptool.ask.multiselect"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:236
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:236"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:254
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:254"
 msgid "`v0.5.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:238
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:256
 msgid ""
 "`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose "
 "zero or more items from a list."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:241
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:241"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:259
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:259"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:242
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:260
 msgid ""
 "`items` (table, required): Candidate items. The format is the same as "
 "`ptool.ask.select`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262"
 msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262
 msgid ""
 "`default_indexes` (table, optional): 1-based indexes selected by default."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262
 msgid ""
 "`min_selected` (integer, optional): Minimum number of items that must be "
 "selected."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:262
 msgid ""
 "`max_selected` (integer, optional): Maximum number of items that may be "
 "selected."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:252
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:270
 msgid "Returns: `table`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:254
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:254"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:272
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:272"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:267
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:285
 msgid "ptool.ask.secret"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:269
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:269"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:287
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:287"
 msgid "`v0.5.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:271
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:289
 msgid ""
 "`ptool.ask.secret(prompt[, options])` asks the user for secret input such as "
 "a token or password."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:274
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:274"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:292
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:292"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293"
 msgid "`required` (boolean, optional): Whether the answer must be non-empty."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
 msgid ""
 "`allow_empty` (boolean, optional): Whether to accept an empty answer. "
 "Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
 msgid ""
 "`confirm` (boolean, optional): Whether to ask the user to type the secret "
 "twice. Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
 msgid ""
 "`confirm_prompt` (string, optional): Custom prompt for the confirmation step."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
 msgid ""
 "`mismatch_message` (string, optional): Custom error message shown when the "
 "two answers do not match."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
 msgid ""
 "`display_toggle` (boolean, optional): Whether to allow temporarily showing "
 "the typed secret."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293"
 msgid "`min_length` (integer, optional): Minimum accepted character length."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293"
 msgid "`max_length` (integer, optional): Maximum accepted character length."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:293"
 msgid "`pattern` (string, optional): Regular expression the answer must match."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:291
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:291"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:309
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:309"
 msgid "Returns: `string`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:311
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:311"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:302
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:320
 msgid "ptool.config"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:304
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:304"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:322
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:322"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:306
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:324
 msgid "`ptool.config` sets runtime configuration for the script."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:308
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:326
 msgid "Currently supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:328
 msgid ""
 "`run` (table, optional): Default configuration for `ptool.run`. Supported "
 "fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:328
 msgid "`echo` (boolean, optional): Default echo switch. Defaults to `true`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:328
 msgid ""
 "`check` (boolean, optional): Whether failures raise an error by default. "
 "Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:328
 msgid ""
 "`confirm` (boolean, optional): Whether to require confirmation before "
 "execution by default. Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:328
 msgid ""
 "`retry` (boolean, optional): Whether to ask the user whether to retry after "
 "a failed execution when `check = true`. Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:320
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:320"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:338
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:338"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:333
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:351
 msgid "ptool.cd"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:335
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:335"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:353
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:353"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:337
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:355
 msgid "`ptool.cd(path)` updates `ptool`'s runtime current directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:339
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:357
 msgid "`path` (string, required): Target directory path, absolute or relative."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:341
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:341"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:359
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:359"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:343
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:361
 msgid "Relative paths are resolved from the current `ptool` runtime directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:344
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:362
 msgid "The target must exist and must be a directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:345
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:363
 msgid ""
 "This updates `ptool` runtime state and affects APIs that use runtime cwd "
 "(such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`)."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:348
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:348"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:366
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:366"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:356
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:374
 msgid "ptool.script_path"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:358
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:358"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:376
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:376"
 msgid "`v0.4.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:360
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:378
 msgid ""
 "`ptool.script_path()` returns the absolute path of the current entry script."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:362
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:380
 msgid "Returns: `string|nil`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:364
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:364"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:382
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:382"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:366
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:384
 msgid ""
 "When running through `ptool run <file>`, this returns the entry script path "
 "as an absolute, normalized path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:368
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:386
 msgid ""
 "The returned path is fixed when the runtime starts and does not change after "
 "`ptool.cd(...)`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:370
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:388
 msgid "In `ptool repl`, this returns `nil`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:372
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:372"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:390
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:390"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:380
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:398
 msgid "ptool.try"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:382
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:382"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:400
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:400"
 msgid "`v0.4.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:384
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:402
 msgid ""
 "`ptool.try(fn)` runs `fn` and converts raised errors into return values."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:386
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:404
 msgid "`fn` (function, required): Callback to execute."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:387
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:405
 msgid "Returns: `ok, value, err`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:389
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:389"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:407
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:407"
 msgid "Return value rules:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:391
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:409
 msgid ""
 "On success, `ok = true`, `err = nil`, and `value` contains the callback "
 "result."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:393
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:411
 msgid "If the callback returns no values, `value` is `nil`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:394
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:412
 msgid "If the callback returns one value, `value` is that value."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:395
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:413
 msgid ""
 "If the callback returns multiple values, `value` is an array-like table."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:396
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:414
 msgid "On failure, `ok = false`, `value = nil`, and `err` is a table."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:398
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:416
 msgid "Structured error fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:400
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:418
 msgid ""
 "`kind` (string): Stable error category such as `io_error`, `command_failed`, "
 "`invalid_argument`, `http_error`, or `lua_error`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:402
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:420
 msgid "`message` (string): Human-readable error message."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:403
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:421
 msgid "`op` (string, optional): API or operation name such as `ptool.fs.read`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:404
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:422
 msgid "`detail` (string, optional): Extra detail for the failure."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:405
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:423
 msgid "`path` (string, optional): Path involved in a filesystem failure."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:406
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:424
 msgid ""
 "`input` (string, optional): Original input that failed to parse or validate."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:407
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:425
 msgid "`cmd` (string, optional): Command name for command failures."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:408
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:426
 msgid ""
 "`status` (integer, optional): Exit status or HTTP status when available."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:409
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:427
 msgid "`stderr` (string, optional): Captured stderr for command failures."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:410
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:428
 msgid "`url` (string, optional): URL involved in an HTTP failure."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:411
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:429
 msgid ""
 "`cwd` (string, optional): Effective working directory for command failures."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:412
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:430
 msgid ""
 "`target` (string, optional): SSH target for SSH-related command failures."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:413
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:431
 msgid ""
 "`retryable` (boolean): Whether retrying may make sense. Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:415
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:415"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:433
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:433"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:417
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:435
 msgid ""
 "`ptool` APIs raise structured errors. `ptool.try` converts them into the "
 "`err` table above so callers can branch on `err.kind` and related fields."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:419
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:437
 msgid ""
 "Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, "
 "and only `message` is guaranteed."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:421
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:439
 msgid ""
 "`ptool.try` is the recommended way to handle errors from APIs such as "
 "`ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, "
 "and `res:assert_ok()`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:425
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:425"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:443
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:443"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:450
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:468
 msgid "ptool.run"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:452
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:452"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:470
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:470"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:454
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:472
 msgid "`ptool.run` executes external commands from Rust."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:456
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:474
 msgid "The following call forms are supported:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:468
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:468"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:486
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:486"
 msgid "Argument rules:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:470
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:488
 msgid ""
 "`ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. "
 "The first item is treated as the command and the rest as arguments."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:472
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:490
 msgid ""
 "`ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and "
 "`argsline` is split into an argument list using shell-style (`shlex`) rules."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:474
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:492
 msgid ""
 "`ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:475
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:493
 msgid ""
 "`ptool.run(cmdline, options)`: `options` overrides settings for this "
 "invocation, such as `echo`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:477
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:495
 msgid ""
 "`ptool.run(cmd, args, options)`: `args` can be either a string or an array "
 "of strings, and `options` overrides settings for this invocation, such as "
 "`echo`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:479
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:497
 msgid "`ptool.run(options)`: `options` is a table."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:480
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:480"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:498
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:498"
 msgid ""
 "When the second argument is a table: if it is an array "
 "(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
 "treated as `options`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:483
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:483"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:501
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:501"
 msgid "Return value rules:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid "A table is always returned with the following fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid "`ok` (boolean): Whether the exit code is `0`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid ""
 "`code` (integer|nil): The process exit code. If the process was terminated "
 "by a signal, this is `nil`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid "`cmd` (string): Command name used for the execution."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid "`cwd` (string): Effective working directory used for the execution."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid "`stdout` (string, optional): Present when `stdout = \"capture\"`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid "`stderr` (string, optional): Present when `stderr = \"capture\"`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:503
 msgid ""
 "`assert_ok(self)` (function): Raises a structured error when `ok = false`. "
 "The error kind is `command_failed`, and the error may include `cmd`, `status`"
 ", `stderr`, and `cwd`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:496
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:514
 msgid ""
 "The default value of `check` comes from `ptool.config"
 "({ run = { check = ... } })`. If not configured, it defaults to `false`. "
@@ -995,73 +1028,73 @@ msgid ""
 "`res:assert_ok()`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:499
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:517
 msgid ""
 "When both `check = true` and `retry = true`, `ptool.run` asks whether the "
 "failed command should be retried before raising the final error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:501
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:519
 msgid ""
 "When `check = true`, `ptool.run` raises the same structured `command_failed` "
 "error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to "
 "catch and inspect it from Lua."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:505
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:505"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:523
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:523"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:526
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:544
 msgid ""
 "`ptool.run(options)` is also supported, where `options` is a table with the "
 "following fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:547
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:547"
 msgid "`cmd` (string, required): The command name or executable path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:530
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:530"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:548
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:548"
 msgid "`args` (string[], optional): The argument list."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:531
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:531"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:549
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:549"
 msgid "`cwd` (string, optional): The child process working directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:550
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:550"
 msgid ""
 "`env` (table, optional): Additional environment variables, where keys are "
 "variable names and values are variable values."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:534
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:552
 msgid ""
 "`stdin` (string, optional): String sent to the child process stdin. When "
 "this is omitted, the child process inherits the current process stdin."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:536
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:554
 msgid ""
 "`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
 "from captured `stdout` and captured `stderr` before returning them. This "
 "only affects streams set to `\"capture\"`. Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:557
 msgid ""
 "`echo` (boolean, optional): Whether to echo command information for this "
 "execution. If omitted, the value from `ptool.config({ run = { echo = ... } })"
 "` is used; if that is also unset, the default is `true`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:560
 msgid ""
 "`check` (boolean, optional): Whether to raise an error immediately when the "
 "exit code is not `0`. If omitted, the value from `ptool.config"
@@ -1069,7 +1102,7 @@ msgid ""
 "`false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:545
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:563
 msgid ""
 "`confirm` (boolean, optional): Whether to ask the user for confirmation "
 "before execution. If omitted, the value from `ptool.config"
@@ -1077,7 +1110,7 @@ msgid ""
 "is `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:548
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:566
 msgid ""
 "`retry` (boolean, optional): Whether to ask the user whether to retry after "
 "a failed execution when `check = true`. If omitted, the value from "
@@ -1085,250 +1118,250 @@ msgid ""
 "the default is `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:570
 msgid ""
 "`stdout` (string, optional): Stdout handling strategy. Supported values:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:570
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:570"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:570
 msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:570
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:570"
 msgid "`\"null\"`: Discard the output."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:574
 msgid ""
 "`stderr` (string, optional): Stderr handling strategy. Supported values:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:574
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:574"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:574
 msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:574
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:574"
 msgid "`\"null\"`: Discard the output."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:560
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:578
 msgid ""
 "When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run"
 "(cmd, args, options)` are used, the per-call `options` table also accepts "
 "`stdin` and `trim` with the same meaning."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:581
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:581"
 msgid "When `confirm = true`:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:581
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:581"
 msgid "If the user refuses the execution, an error is raised immediately."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:581
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:581"
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:567
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:585
 msgid "When `retry = true` and `check = true`:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:567
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:585
 msgid ""
 "If the command fails, `ptool.run` asks whether to retry the same command."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:567
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:585
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately instead of prompting for retry."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:590
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:590"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:620
 msgid "ptool.run_capture"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:604
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:604"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:622
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:622"
 msgid "`Unreleased` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:606
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:624
 msgid ""
 "`ptool.run_capture` executes external commands from Rust with the same call "
 "forms, argument rules, return value rules, and options as `ptool.run`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:609
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:627
 msgid "The difference is only the default stream handling:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:611
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:629
 msgid "`stdout` defaults to `\"capture\"`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:612
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:630
 msgid "`stderr` defaults to `\"capture\"`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:614
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:632
 msgid ""
 "`trim` still defaults to `false`, and you can still override any of these "
 "fields explicitly in `options`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:617
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:617"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:635
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:635"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:636
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:654
 msgid "ptool.exec"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:656
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:656"
 msgid "`Unreleased` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:640
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:658
 msgid ""
 "`ptool.exec` replaces the current `ptool` process with an external command."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:642
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:660
 msgid "It supports the same command argument call forms as `ptool.run`:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:653
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:653"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:671
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:671"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:655
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:673
 msgid ""
 "On success, `ptool.exec` does not return. The current `ptool` process is "
 "replaced by the target command."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:657
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:675
 msgid "Any Lua code after a successful `ptool.exec(...)` call does not run."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:658
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:676
 msgid ""
 "In `ptool repl`, a successful `ptool.exec(...)` also replaces the REPL "
 "process."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:660
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:678
 msgid "On Unix platforms, this uses true process replacement semantics."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:661
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:679
 msgid ""
 "On non-Unix platforms, `ptool.exec` currently raises an `unsupported` error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:663
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:663"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:681
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:681"
 msgid "Argument rules:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:665
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:683
 msgid ""
 "`ptool.exec(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. "
 "The first item is treated as the command and the rest as arguments."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:667
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:685
 msgid ""
 "`ptool.exec(cmd, argsline)`: `cmd` is used directly as the command, and "
 "`argsline` is split into an argument list using shell-style (`shlex`) rules."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:669
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:687
 msgid ""
 "`ptool.exec(cmd, args)`: `cmd` is a string and `args` is an array of strings."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:670
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:688
 msgid ""
 "`ptool.exec(cmdline, options)`: `options` overrides settings for this "
 "invocation, such as `echo`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:672
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:690
 msgid ""
 "`ptool.exec(cmd, args, options)`: `args` can be either a string or an array "
 "of strings, and `options` overrides settings for this invocation, such as "
 "`confirm`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:675
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:693
 msgid "`ptool.exec(options)`: `options` is a table."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:676
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:676"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:694
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:694"
 msgid ""
 "When the second argument is a table: if it is an array "
 "(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
 "treated as `options`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:679
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:697
 msgid ""
 "`ptool.exec(options)` is also supported, where `options` is a table with the "
 "following fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:682
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:682"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:700
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:700"
 msgid "`cmd` (string, required): The command name or executable path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:683
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:683"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:701
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:701"
 msgid "`args` (string[], optional): The argument list."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:684
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:684"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:702
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:702"
 msgid "`cwd` (string, optional): The child process working directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:685
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:685"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:703
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:703"
 msgid ""
 "`env` (table, optional): Additional environment variables, where keys are "
 "variable names and values are variable values."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:687
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:705
 msgid ""
 "`echo` (boolean, optional): Whether to echo command information before "
 "replacement. If omitted, the value from `ptool.config"
@@ -1336,7 +1369,7 @@ msgid ""
 "`true`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:690
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:708
 msgid ""
 "`confirm` (boolean, optional): Whether to ask the user for confirmation "
 "before replacement. If omitted, the value from `ptool.config"
@@ -1344,30 +1377,30 @@ msgid ""
 "is `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:693
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:711
 msgid ""
 "Unlike `ptool.run`, `ptool.exec` does not support `stdin`, `trim`, `stdout`, "
 "`stderr`, `check`, or `retry`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:713
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:713"
 msgid "When `confirm = true`:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:713
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:713"
 msgid "If the user refuses the execution, an error is raised immediately."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:713
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:713"
 msgid ""
 "If the current environment is not interactive (no TTY), an error is raised "
 "immediately."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:700
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:700"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:718
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:718"
 msgid "Example:"
 msgstr ""

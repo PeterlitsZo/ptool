@@ -54,6 +54,23 @@ ptool.use(">= v0.6.0, < 0.7.0")
 - Las expresiones de requisito también aceptan componentes de versión con un prefijo `v` opcional, como `>= v0.6.0, < 0.7.0`.
 - Si la versión actual de `ptool` no satisface la versión o el requisito declarados, el script termina de inmediato con un error.
 
+## ptool.version
+
+> `Unreleased` - Introducido.
+
+`ptool.version()` devuelve la cadena de versión actual de `ptool`.
+
+- Devuelve: `string`.
+- El valor devuelto es una cadena de versión semántica como `0.7.2`.
+- Úsalo cuando un script necesite imprimir, registrar o comparar la versión de `ptool` en tiempo de ejecución.
+
+Ejemplo:
+
+```lua
+print(ptool.version())
+print(p.version())
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introducido.

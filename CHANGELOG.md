@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+
+- Added `ptool.version()` / `p.version()`, which returns the current `ptool`
+  version string to Lua scripts, and documented it across all supported
+  locales.
+
 ### Changed
 
 - Changed `ptool.ssh.Connection:upload(...)` so file uploads now accept a

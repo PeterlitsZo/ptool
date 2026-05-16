@@ -54,6 +54,23 @@ ptool.use(">= v0.6.0, < 0.7.0")
 - バージョン要件式内の各バージョン要素でも、`>= v0.6.0, < 0.7.0` の ように `v` プレフィックスを任意で使えます。
 - 現在の `ptool` バージョンが宣言されたバージョンまたは要件を満たさない 場合、スクリプトは直ちにエラーで終了します。
 
+## ptool.version
+
+> `Unreleased` - 追加。
+
+`ptool.version()` は現在の `ptool` バージョン文字列を返します。
+
+- 戻り値: `string`。
+- 返される値は `0.7.2` のようなセマンティックバージョン文字列です。
+- スクリプトで実行中の `ptool` バージョンを表示、記録、比較したい場合に使います。
+
+例:
+
+```lua
+print(ptool.version())
+print(p.version())
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.
@@ -513,7 +530,7 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 追加。
 
 `ptool.run_capture` は `ptool.run` と同じ呼び出し形式、引数ルール、 戻り値ルール、オプションで、Rust から外部コマンドを実行します。
 
@@ -545,7 +562,7 @@ print(res3.stdout)
 
 ## ptool.exec
 
-> `Unreleased` - Introduced.
+> `Unreleased` - 追加。
 
 `ptool.exec` は現在の `ptool` プロセスを外部コマンドで置き換えます。
 

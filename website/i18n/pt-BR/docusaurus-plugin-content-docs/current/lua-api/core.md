@@ -54,6 +54,23 @@ ptool.use(">= v0.6.0, < 0.7.0")
 - As expressões de requisito também aceitam componentes de versão com prefixo `v` opcional, como `>= v0.6.0, < 0.7.0`.
 - Se a versão atual do `ptool` não satisfizer a versão ou o requisito declarados, o script encerra imediatamente com erro.
 
+## ptool.version
+
+> `Unreleased` - Introduzido.
+
+`ptool.version()` retorna a string da versão atual do `ptool`.
+
+- Retorna: `string`.
+- O valor retornado é uma string de versão semântica como `0.7.2`.
+- Use isso quando um script precisar imprimir, registrar ou comparar a versão de runtime do `ptool`.
+
+Exemplo:
+
+```lua
+print(ptool.version())
+print(p.version())
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.
@@ -513,7 +530,7 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introduzido.
 
 `ptool.run_capture` executa comandos externos a partir de Rust com as mesmas formas de chamada, regras de argumento, regras de valor de retorno e opções de `ptool.run`.
 
@@ -545,7 +562,7 @@ print(res3.stdout)
 
 ## ptool.exec
 
-> `Unreleased` - Introduced.
+> `Unreleased` - Introduzido.
 
 `ptool.exec` substitui o processo atual do `ptool` por um comando externo.
 

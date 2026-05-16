@@ -154,6 +154,10 @@ impl LuaWorld {
         crate::version::ensure_min_ptool_version(&self.engine, &required_version)
     }
 
+    pub(crate) fn version(&self) -> String {
+        crate::version::current_ptool_version(&self.engine).to_string()
+    }
+
     pub(crate) fn unindent(&self, input: String) -> String {
         self.engine.text_unindent(&input)
     }
