@@ -32,6 +32,8 @@ alphabetical order.
 - [TOML API](./toml.md): Parse, stringify, read, update, and remove TOML values.
 - [YAML API](./yaml.md): Parse YAML text, read nested values, and stringify Lua
   values as YAML.
+- [Zip API](./zip.md): Compress and decompress Lua strings with common archive
+  formats.
 
 ## Filesystem & Platform
 

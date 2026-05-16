@@ -25,6 +25,7 @@
 - [Template API](./template.md)：基于 Lua 数据渲染文本模板。
 - [TOML API](./toml.md)：解析、序列化、读取、更新并删除 TOML 值。
 - [YAML API](./yaml.md)：解析 YAML 文本、读取嵌套值，并把 Lua 值序列化为 YAML。
+- [Zip API](./zip.md)：用常见压缩格式压缩和解压 Lua 字符串。
 
 ## 文件系统与平台
 

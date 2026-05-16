@@ -26,6 +26,7 @@ mod toml;
 mod tui;
 mod version;
 mod yaml;
+mod zip;
 
 pub use lua_world::{LuaWorld, LuaWorldConfig, RunConfig};
 pub use runner::{run_repl, run_script};

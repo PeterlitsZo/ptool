@@ -404,6 +404,26 @@ impl LuaWorld {
         self.engine.hash_md5_hex(&input.as_bytes())
     }
 
+    pub(crate) fn zip_compress(
+        &self,
+        lua: &Lua,
+        format: String,
+        input: LuaString,
+        op: &str,
+    ) -> mlua::Result<LuaString> {
+        crate::zip::compress(lua, &self.engine, format, input, op)
+    }
+
+    pub(crate) fn zip_decompress(
+        &self,
+        lua: &Lua,
+        format: String,
+        input: LuaString,
+        op: &str,
+    ) -> mlua::Result<LuaString> {
+        crate::zip::decompress(lua, &self.engine, format, input, op)
+    }
+
     pub(crate) fn db_connect(&self, value: Value) -> mlua::Result<crate::db::LuaDbConnection> {
         crate::db::connect(value, self.current_dir(), &self.engine)
     }

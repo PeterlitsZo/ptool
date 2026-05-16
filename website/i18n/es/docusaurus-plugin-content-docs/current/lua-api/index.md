@@ -25,6 +25,7 @@ Los módulos se agrupan por dominio. Dentro de cada grupo, las entradas se enume
 - [API de plantillas](./template.md): Renderiza plantillas de texto a partir de datos Lua.
 - [API TOML](./toml.md): Analiza, serializa, lee, actualiza y elimina valores TOML.
 - [API YAML](./yaml.md): Analiza texto YAML, lee valores anidados y serializa valores Lua como YAML.
+- [API Zip](./zip.md): Comprime y descomprime cadenas Lua con formatos de compresión comunes.
 
 ## Sistema de archivos y plataforma
 

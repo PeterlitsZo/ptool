@@ -12,6 +12,10 @@
   `stdin`, `stdout`, and `stderr`, while `ptool.exec(...)` now supports file
   redirection for `stdin`, `stdout`, and `stderr` where true process
   replacement semantics allow it.
+- Added the `ptool.zip` / `p.zip` module with `compress` and `decompress`
+  helpers for common single-stream compression formats including gzip, zlib,
+  deflate, bzip2, xz, and zstd, and documented it across all supported
+  locales.
 
 ### Changed
 

@@ -23,6 +23,7 @@ mod text;
 mod toml;
 mod tui;
 mod yaml;
+mod zip;
 
 pub use ansi::{Color, StyleOptions};
 pub use datetime::{
@@ -74,6 +75,7 @@ pub use tui::{
     TuiNodeKind, TuiSession, TuiSessionOptions, TuiStyle, TuiTextAlign,
 };
 pub use yaml::{YamlPathSegment, YamlValue};
+pub use zip::ZipFormat;
 
 pub const PTOOL_VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -271,6 +273,14 @@ impl PtoolEngine {
 
     pub fn hash_md5_hex(&self, bytes: &[u8]) -> String {
         hash::md5_hex(bytes)
+    }
+
+    pub fn zip_compress(&self, bytes: &[u8], format: ZipFormat, op: &str) -> Result<Vec<u8>> {
+        zip::compress(bytes, format, op)
+    }
+
+    pub fn zip_decompress(&self, bytes: &[u8], format: ZipFormat, op: &str) -> Result<Vec<u8>> {
+        zip::decompress(bytes, format, op)
     }
 
     pub fn fs_read(&self, path: &str) -> Result<Vec<u8>> {

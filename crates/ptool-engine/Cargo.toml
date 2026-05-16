@@ -4,8 +4,10 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+bzip2 = "0.6.1"
 clap = { version = "4.6.0", features = ["string"] }
 crossterm = "0.29.0"
+flate2 = "1.1.9"
 git2 = { version = "0.20.4", features = ["https", "ssh", "vendored-libgit2", "vendored-openssl"] }
 glob = "0.3.3"
 inquire = "0.9.4"
@@ -28,3 +30,5 @@ tokio = { version = "1.50.0", features = ["rt-multi-thread", "time", "net"] }
 toml = "1.0.7"
 toml_edit = "0.25.5"
 url = "2.5.8"
+xz2 = "0.1.7"
+zstd = "0.13.3"

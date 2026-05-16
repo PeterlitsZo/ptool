@@ -61,6 +61,7 @@ fn create_ptool_module(
     let args_module = create_ptool_args_module(lua, Rc::clone(&world), script_name, script_args)?;
     let shell_module = create_ptool_shell_module(lua, Rc::clone(&world))?;
     let hash_module = create_ptool_hash_module(lua, Rc::clone(&world))?;
+    let zip_module = create_ptool_zip_module(lua, Rc::clone(&world))?;
     let http_module = create_ptool_http_module(lua, Rc::clone(&world))?;
     let json_module = create_ptool_json_module(lua, Rc::clone(&world))?;
     let net_module = create_ptool_net_module(lua, Rc::clone(&world))?;
@@ -97,6 +98,7 @@ fn create_ptool_module(
     module.set("args", args_module)?;
     module.set("sh", shell_module)?;
     module.set("hash", hash_module)?;
+    module.set("zip", zip_module)?;
     module.set("http", http_module)?;
     module.set("json", json_module)?;
     module.set("net", net_module)?;
@@ -324,6 +326,28 @@ fn create_ptool_hash_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
     hash_module.set("sha1", sha1_fn)?;
     hash_module.set("md5", md5_fn)?;
     Ok(hash_module)
+}
+
+fn create_ptool_zip_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let zip_module = lua.create_table()?;
+
+    let compress_state = Rc::clone(&world);
+    let compress_fn = lua.create_function(move |lua, (format, input): (String, LuaString)| {
+        compress_state
+            .borrow()
+            .zip_compress(lua, format, input, "ptool.zip.compress")
+    })?;
+    zip_module.set("compress", compress_fn)?;
+
+    let decompress_state = Rc::clone(&world);
+    let decompress_fn = lua.create_function(move |lua, (format, input): (String, LuaString)| {
+        decompress_state
+            .borrow()
+            .zip_decompress(lua, format, input, "ptool.zip.decompress")
+    })?;
+    zip_module.set("decompress", decompress_fn)?;
+
+    Ok(zip_module)
 }
 
 fn create_ptool_db_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
