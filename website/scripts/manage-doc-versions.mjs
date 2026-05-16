@@ -96,13 +96,16 @@ function parseKeepCount(args) {
 async function pruneVersions({keep}) {
   const versionNames = await readVersionNames();
   const sortedVersions = [...versionNames].sort(compareVersionsDesc);
-  const keptVersions = sortedVersions.slice(0, keep);
-  const prunedVersions = sortedVersions.slice(keep);
+  const latestPatchVersions = pickLatestPatchVersions(sortedVersions);
+  const keptVersions = latestPatchVersions.slice(0, keep);
+  const keptVersionSet = new Set(keptVersions);
+  const prunedVersions = sortedVersions.filter((versionName) => !keptVersionSet.has(versionName));
 
   for (const versionName of prunedVersions) {
     await removeVersionArtifacts(versionName);
   }
 
+  await syncDocsI18nLockVersions(keptVersions);
   await writeVersionNames(keptVersions);
   return {keptVersions, prunedVersions};
 }
@@ -152,6 +155,32 @@ async function removeVersionArtifacts(versionName) {
   await Promise.all(
     removalPaths.map((targetPath) => rm(targetPath, {recursive: true, force: true})),
   );
+}
+
+async function syncDocsI18nLockVersions(keptVersions) {
+  const lock = await readDocsI18nLock();
+  const keptVersionDirNames = new Set(keptVersions.map((versionName) => `version-${versionName}`));
+  let lockChanged = false;
+
+  for (const versionDirName of Object.keys(lock.templates)) {
+    if (versionDirName !== 'current' && !keptVersionDirNames.has(versionDirName)) {
+      delete lock.templates[versionDirName];
+      lockChanged = true;
+    }
+  }
+
+  for (const locale of Object.keys(lock.locales)) {
+    for (const versionDirName of Object.keys(lock.locales[locale] ?? {})) {
+      if (versionDirName !== 'current' && !keptVersionDirNames.has(versionDirName)) {
+        delete lock.locales[locale][versionDirName];
+        lockChanged = true;
+      }
+    }
+  }
+
+  if (lockChanged) {
+    await writeDocsI18nLock(lock);
+  }
 }
 
 async function readLocaleDirs(rootDir, excludedNames = []) {
@@ -290,6 +319,24 @@ function compareVersionsDesc(left, right) {
   return 0;
 }
 
+function pickLatestPatchVersions(sortedVersions) {
+  const keptVersions = [];
+  const seenMinorLines = new Set();
+
+  for (const versionName of sortedVersions) {
+    const [major, minor] = parseVersion(versionName);
+    const minorLineKey = `${major}.${minor}`;
+    if (seenMinorLines.has(minorLineKey)) {
+      continue;
+    }
+
+    seenMinorLines.add(minorLineKey);
+    keptVersions.push(versionName);
+  }
+
+  return keptVersions;
+}
+
 function parseVersion(versionName) {
   const match = versionName.match(/^(\d+)\.(\d+)\.(\d+)$/u);
   if (!match) {
@@ -305,9 +352,9 @@ function printSummary({keptVersions, prunedVersions}) {
 
 function printHelp() {
   console.log(`manage-doc-versions commands:
-  snapshot <version> [--keep <count>]  Snapshot current docs and keep newest versions.
+  snapshot <version> [--keep <count>]  Snapshot current docs and keep newest major.minor lines.
   sync-metadata [version]              Sync version i18n artifacts for one or all versions.
-  prune [--keep <count>]               Keep only the newest versions.
+  prune [--keep <count>]               Keep only the newest major.minor lines.
   help                                 Show this message.`);
 }
 
