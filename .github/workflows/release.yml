@@ -94,6 +94,14 @@ jobs:
 
       - name: Build release binary
         run: |
+          if [ "${{ matrix.target }}" = 'i686-unknown-linux-musl' ]; then
+            # Vendored OpenSSL can hit missing __atomic_is_lock_free on 32-bit musl
+            # when built through zig cc. Force its pthread fallback path and add
+            # an explicit libatomic link for the final static link.
+            export CFLAGS="${CFLAGS:+$CFLAGS }-DBROKEN_CLANG_ATOMICS"
+            export RUSTFLAGS="${RUSTFLAGS:+$RUSTFLAGS }-Clink-arg=-latomic"
+          fi
+
           if [ "${{ matrix.use_zigbuild }}" = 'true' ]; then
             cargo zigbuild --locked --release --target "${{ matrix.target }}" --bin ptool
           else

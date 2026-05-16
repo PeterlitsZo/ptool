@@ -59,7 +59,7 @@ if is_stable_release then
   p.run(
     "node website/scripts/manage-doc-versions.mjs snapshot "
       .. next_version_str
-      .. " --keep 3"
+      .. " --keep 7"
   )
   p.run("cd website && npm run i18n:refresh-docs")
 end
