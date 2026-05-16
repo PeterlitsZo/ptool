@@ -138,23 +138,6 @@ It is implemented as a Lua userdata.
   - `tostring(v)` が利用できます。
   - `==`, `<`, `<=` の比較をサポートします。
 
-## VersionReq
-
-> `v0.7.0` - Introduced.
-
-`VersionReq` は `ptool.semver.parse_req(...)` が返す、解析済みのセマンティックバージョン要件を表します。
-
-It is implemented as a Lua userdata.
-
-Methods:
-
-- `req:matches(version)` -> `boolean`
-- `req:to_string()` -> `string`
-
-Metamethods:
-
-- `tostring(req)` が利用できます。
-
 ### compare
 
 Canonical API name: `ptool.semver.Version:compare`.
@@ -181,6 +164,23 @@ Canonical API name: `ptool.semver.Version:to_string`.
 `v:to_string()` は、そのバージョンの正規化された文字列表現を返します。
 
 - Returns: `string`.
+
+## VersionReq
+
+> `v0.7.0` - Introduced.
+
+`VersionReq` は `ptool.semver.parse_req(...)` が返す、解析済みのセマンティックバージョン要件を表します。
+
+It is implemented as a Lua userdata.
+
+Methods:
+
+- `req:matches(version)` -> `boolean`
+- `req:to_string()` -> `string`
+
+Metamethods:
+
+- `tostring(req)` が利用できます。
 
 ### matches
 

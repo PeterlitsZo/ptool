@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 13:49+0800\n"
+"POT-Creation-Date: 2026-05-16 10:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,8 +20,7 @@ msgstr "SemVer API"
 msgid ""
 "Version parsing, validation, comparison, version requirement matching, and "
 "bumping helpers live under `ptool.semver` and `p.semver`."
-msgstr ""
-"バージョンの解析、検証、比較、バージョン要件の照合、更新のヘルパーは "
+msgstr "バージョンの解析、検証、比較、バージョン要件の照合、更新のヘルパーは "
 "`ptool.semver` と `p.semver` にあります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:6
@@ -92,8 +91,8 @@ msgid ""
 "`ptool.semver.parse_req(req)` parses a Cargo-style semantic version "
 "requirement string and returns a `VersionReq` object."
 msgstr ""
-"`ptool.semver.parse_req(req)` は Cargo 形式のセマンティックバージョン要件文"
-"字列を解析し、`VersionReq` オブジェクトを返します。"
+"`ptool.semver.parse_req(req)` は Cargo 形式のセマンティックバージョン要件文字"
+"列を解析し、`VersionReq` オブジェクトを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:46
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:46"
@@ -110,9 +109,9 @@ msgid ""
 "`1.2.*`. Version components inside a requirement may also use an optional `v`"
 " prefix, such as `>= v0.6.0, < 0.7.0`."
 msgstr ""
-"サポートされる例には `^1.2.3`、`~1.2.3`、`>=1.2.3, <2.0.0`、`1.*`、`1.2.*` "
-"が含まれます。要件内のバージョン要素では、`>= v0.6.0, < 0.7.0` のように任"
-"意の `v` プレフィックスも使用できます。"
+"サポートされる例には `^1.2.3`、`~1.2.3`、`>=1.2.3, <2.0.0`、`1.*`、`1.2.*` が"
+"含まれます。要件内のバージョン要素では、`>= v0.6.0, < 0.7.0` のように任意の "
+"`v` プレフィックスも使用できます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:58
 msgid "ptool.semver.is_valid_req"
@@ -127,9 +126,8 @@ msgstr "`v0.7.0` - Introduced."
 msgid ""
 "`ptool.semver.is_valid_req(req)` checks whether a version requirement string "
 "is valid."
-msgstr ""
-"`ptool.semver.is_valid_req(req)` はバージョン要件文字列が有効かどうかを確認"
-"します。"
+msgstr "`ptool.semver.is_valid_req(req)` はバージョン要件文字列が有効かどうかを確認し"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:65
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:65"
@@ -181,25 +179,22 @@ msgstr "`v0.7.0` - Introduced."
 msgid ""
 "`ptool.semver.matches(req, version)` checks whether a version satisfies a "
 "version requirement."
-msgstr ""
-"`ptool.semver.matches(req, version)` は、あるバージョンがバージョン要件を満"
-"たすかどうかを確認します。"
+msgstr "`ptool.semver.matches(req, version)` は、あるバージョンがバージョン要件を満た"
+"すかどうかを確認します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:93
 msgid ""
 "`req` (string|VersionReq, required): A version requirement string or a "
 "`VersionReq` object."
-msgstr ""
-"`req` (string|VersionReq, 必須): バージョン要件文字列または `VersionReq` オ"
-"ブジェクト。"
+msgstr "`req` (string|VersionReq, 必須): バージョン要件文字列または `VersionReq` オブ"
+"ジェクト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:95
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:95"
 msgid ""
 "`version` (string|Version, required): A version string or a `Version` object."
-msgstr ""
-"`version` (string|Version, 必須): バージョン文字列または `Version` オブジェ"
-"クト。"
+msgstr "`version` (string|Version, 必須): バージョン文字列または `Version` オブジェク"
+"ト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:96
 #, fuzzy
@@ -339,95 +334,48 @@ msgid "`==`, `<`, and `<=` comparisons are supported."
 msgstr "`==`, `<`, `<=` の比較をサポートします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:154
-msgid "VersionReq"
-msgstr "VersionReq"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156"
-msgid "`v0.7.0` - Introduced."
-msgstr "`v0.7.0` - Introduced."
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:158
-msgid ""
-"`VersionReq` represents a parsed semantic version requirement returned by "
-"`ptool.semver.parse_req(...)`."
-msgstr ""
-"`VersionReq` は `ptool.semver.parse_req(...)` が返す、解析済みのセマンティッ"
-"クバージョン要件を表します。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:161
-#, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:161"
-msgid "It is implemented as a Lua userdata."
-msgstr "これは Lua userdata として実装されています。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:163
-#, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:163"
-msgid "Methods:"
-msgstr "メソッド:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:165
-msgid "`req:matches(version)` -> `boolean`"
-msgstr "`req:matches(version)` -> `boolean`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:166
-msgid "`req:to_string()` -> `string`"
-msgstr "`req:to_string()` -> `string`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168
-#, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168"
-msgid "Metamethods:"
-msgstr "メタメソッド:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:170
-msgid "`tostring(req)` is available."
-msgstr "`tostring(req)` が利用できます。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:172
 msgid "compare"
 msgstr "compare"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:174
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156
 msgid "Canonical API name: `ptool.semver.Version:compare`."
 msgstr "Canonical API name: `ptool.semver.Version:compare`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:176
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:158
 msgid "`v:compare(other)` compares the current version with `other`."
 msgstr "`v:compare(other)` は現在のバージョンと `other` を比較します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:178
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:160
 msgid ""
 "`other` (string|Version, required): A version string or another `Version` "
 "object."
 msgstr "`other` (string|Version, 必須): バージョン文字列または別の `Version` オブジェ"
 "クト。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:162
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:162"
 msgid "Returns: `-1 | 0 | 1`."
 msgstr "戻り値: `-1 | 0 | 1`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:182
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:164
 msgid "bump"
 msgstr "bump"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:184
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:166
 msgid "Canonical API name: `ptool.semver.Version:bump`."
 msgstr "Canonical API name: `ptool.semver.Version:bump`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:186
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168
 msgid ""
 "`v:bump(op[, channel])` returns a new `Version` object after applying the "
 "bump."
 msgstr "`v:bump(op[, channel])` は更新を適用した新しい `Version` オブジェクトを 返し"
 "ます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:170
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:170"
 msgid ""
 "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
 ", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
@@ -435,9 +383,9 @@ msgstr ""
 "`op` (string, 必須): `major`, `minor`, `patch`, `release`, `alpha`, `beta`, "
 "`rc`, `prepatch`, `preminor`, `premajor` のいずれか。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:190
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:172
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:190"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:172"
 msgid ""
 "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
 "`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
@@ -445,31 +393,79 @@ msgstr ""
 "`channel` (string, 任意): `prepatch`, `preminor`, `premajor` でのみ 使用でき"
 "ます。`alpha`, `beta`, `rc` のいずれかで、デフォルトは `alpha` です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:192
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:174
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:192"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:174"
 msgid "Returns: `Version`."
 msgstr "戻り値: `Version`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:194
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:176
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:194"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:176"
 msgid "to_string"
 msgstr "to_string"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:196
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:178
 msgid "Canonical API name: `ptool.semver.Version:to_string`."
 msgstr "Canonical API name: `ptool.semver.Version:to_string`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:198
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180
 msgid "`v:to_string()` returns the canonical string form of the version."
 msgstr "`v:to_string()` は、そのバージョンの正規化された文字列表現を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:200
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:182
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:200"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:182"
 msgid "Returns: `string`."
 msgstr "戻り値: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:184
+msgid "VersionReq"
+msgstr "VersionReq"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:186
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:186"
+msgid "`v0.7.0` - Introduced."
+msgstr "`v0.7.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188
+msgid ""
+"`VersionReq` represents a parsed semantic version requirement returned by "
+"`ptool.semver.parse_req(...)`."
+msgstr ""
+"`VersionReq` は `ptool.semver.parse_req(...)` が返す、解析済みのセマンティッ"
+"クバージョン要件を表します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:191
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:191"
+msgid "It is implemented as a Lua userdata."
+msgstr "これは Lua userdata として実装されています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:193
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:193"
+msgid "Methods:"
+msgstr "メソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:195
+msgid "`req:matches(version)` -> `boolean`"
+msgstr "`req:matches(version)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:196
+msgid "`req:to_string()` -> `string`"
+msgstr "`req:to_string()` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:198
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:198"
+msgid "Metamethods:"
+msgstr "メタメソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:200
+msgid "`tostring(req)` is available."
+msgstr "`tostring(req)` が利用できます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:202
 msgid "matches"
@@ -483,17 +479,15 @@ msgstr "Canonical API name: `ptool.semver.VersionReq:matches`."
 msgid ""
 "`req:matches(version)` checks whether `version` satisfies the current "
 "version requirement."
-msgstr ""
-"`req:matches(version)` は `version` が現在のバージョン要件を満たすかどうか"
-"を確認します。"
+msgstr "`req:matches(version)` は `version` が現在のバージョン要件を満たすかどうかを"
+"確認します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:209
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:209"
 msgid ""
 "`version` (string|Version, required): A version string or a `Version` object."
-msgstr ""
-"`version` (string|Version, 必須): バージョン文字列または `Version` オブジェ"
-"クト。"
+msgstr "`version` (string|Version, 必須): バージョン文字列または `Version` オブジェク"
+"ト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:210
 #, fuzzy
@@ -515,8 +509,7 @@ msgstr "Canonical API name: `ptool.semver.VersionReq:to_string`."
 msgid ""
 "`req:to_string()` returns the canonical string form of the version "
 "requirement."
-msgstr ""
-"`req:to_string()` は、そのバージョン要件の正規化された文字列表現を返します。"
+msgstr "`req:to_string()` は、そのバージョン要件の正規化された文字列表現を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:219
 #, fuzzy
@@ -567,6 +560,53 @@ msgid ""
 msgstr ""
 "チャネルの昇格 (`alpha -> beta -> rc`) は可能ですが、降格はできません。 たと"
 "えば `rc -> beta` はエラーになります。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156"
+#~ msgid "`v0.7.0` - Introduced."
+#~ msgstr "`v0.7.0` - Introduced."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:161"
+#~ msgid "It is implemented as a Lua userdata."
+#~ msgstr "これは Lua userdata として実装されています。"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:163"
+#~ msgid "Methods:"
+#~ msgstr "メソッド:"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168"
+#~ msgid "Metamethods:"
+#~ msgstr "メタメソッド:"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180"
+#~ msgid "Returns: `-1 | 0 | 1`."
+#~ msgstr "戻り値: `-1 | 0 | 1`."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188"
+#~ msgid ""
+#~ "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
+#~ ", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
+#~ msgstr ""
+#~ "`op` (string, 必須): `major`, `minor`, `patch`, `release`, `alpha`, `beta`, "
+#~ "`rc`, `prepatch`, `preminor`, `premajor` のいずれか。"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:190"
+#~ msgid ""
+#~ "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
+#~ "`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
+#~ msgstr ""
+#~ "`channel` (string, 任意): `prepatch`, `preminor`, `premajor` でのみ 使用でき"
+#~ "ます。`alpha`, `beta`, `rc` のいずれかで、デフォルトは `alpha` です。"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:192"
+#~ msgid "Returns: `Version`."
+#~ msgstr "戻り値: `Version`."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:26"
 #~ msgid "`v0.1.0` - Introduced."

@@ -138,23 +138,6 @@ Campos y métodos:
   - `tostring(v)` está disponible.
   - Se admiten las comparaciones `==`, `<` y `<=`.
 
-## VersionReq
-
-> `v0.7.0` - Introducido.
-
-`VersionReq` representa un requisito de versión semántica analizado devuelto por `ptool.semver.parse_req(...)`.
-
-It is implemented as a Lua userdata.
-
-Methods:
-
-- `req:matches(version)` -> `boolean`
-- `req:to_string()` -> `string`
-
-Metamethods:
-
-- `tostring(req)` está disponible.
-
 ### compare
 
 Nombre canónico de API: `ptool.semver.Version:compare`.
@@ -181,6 +164,23 @@ Nombre canónico de API: `ptool.semver.Version:to_string`.
 `v:to_string()` devuelve la forma de cadena canónica de la versión.
 
 - Returns: `string`.
+
+## VersionReq
+
+> `v0.7.0` - Introducido.
+
+`VersionReq` representa un requisito de versión semántica analizado devuelto por `ptool.semver.parse_req(...)`.
+
+It is implemented as a Lua userdata.
+
+Methods:
+
+- `req:matches(version)` -> `boolean`
+- `req:to_string()` -> `string`
+
+Metamethods:
+
+- `tostring(req)` está disponible.
 
 ### matches
 

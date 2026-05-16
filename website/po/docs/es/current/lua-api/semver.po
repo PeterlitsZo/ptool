@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 13:49+0800\n"
+"POT-Creation-Date: 2026-05-16 10:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,8 +194,8 @@ msgid ""
 "`req` (string|VersionReq, required): A version requirement string or a "
 "`VersionReq` object."
 msgstr ""
-"`req` (string|VersionReq, obligatorio): Una cadena de requisito de versión "
-"o un objeto `VersionReq`."
+"`req` (string|VersionReq, obligatorio): Una cadena de requisito de versión o "
+"un objeto `VersionReq`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:95
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:95"
@@ -344,65 +344,18 @@ msgid "`==`, `<`, and `<=` comparisons are supported."
 msgstr "Se admiten las comparaciones `==`, `<` y `<=`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:154
-msgid "VersionReq"
-msgstr "VersionReq"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156"
-msgid "`v0.7.0` - Introduced."
-msgstr "`v0.7.0` - Introducido."
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:158
-msgid ""
-"`VersionReq` represents a parsed semantic version requirement returned by "
-"`ptool.semver.parse_req(...)`."
-msgstr ""
-"`VersionReq` representa un requisito de versión semántica analizado "
-"devuelto por `ptool.semver.parse_req(...)`."
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:161
-#, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:161"
-msgid "It is implemented as a Lua userdata."
-msgstr "Está implementado como userdata de Lua."
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:163
-#, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:163"
-msgid "Methods:"
-msgstr "Métodos:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:165
-msgid "`req:matches(version)` -> `boolean`"
-msgstr "`req:matches(version)` -> `boolean`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:166
-msgid "`req:to_string()` -> `string`"
-msgstr "`req:to_string()` -> `string`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168
-#, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168"
-msgid "Metamethods:"
-msgstr "Metamétodos:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:170
-msgid "`tostring(req)` is available."
-msgstr "`tostring(req)` está disponible."
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:172
 msgid "compare"
 msgstr "compare"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:174
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156
 msgid "Canonical API name: `ptool.semver.Version:compare`."
 msgstr "Nombre canónico de API: `ptool.semver.Version:compare`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:176
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:158
 msgid "`v:compare(other)` compares the current version with `other`."
 msgstr "`v:compare(other)` compara la versión actual con `other`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:178
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:160
 msgid ""
 "`other` (string|Version, required): A version string or another `Version` "
 "object."
@@ -410,21 +363,21 @@ msgstr ""
 "`other` (string|Version, obligatorio): Una cadena de versión u otro objeto "
 "`Version`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:162
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:162"
 msgid "Returns: `-1 | 0 | 1`."
 msgstr "Devuelve: `-1 | 0 | 1`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:182
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:164
 msgid "bump"
 msgstr "bump"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:184
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:166
 msgid "Canonical API name: `ptool.semver.Version:bump`."
 msgstr "Nombre canónico de API: `ptool.semver.Version:bump`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:186
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168
 msgid ""
 "`v:bump(op[, channel])` returns a new `Version` object after applying the "
 "bump."
@@ -432,9 +385,9 @@ msgstr ""
 "`v:bump(op[, channel])` devuelve un nuevo objeto `Version` tras aplicar el "
 "incremento."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:170
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:170"
 msgid ""
 "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
 ", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
@@ -442,9 +395,9 @@ msgstr ""
 "`op` (string, obligatorio): Uno de `major`, `minor`, `patch`, `release`, "
 "`alpha`, `beta`, `rc`, `prepatch`, `preminor` o `premajor`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:190
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:172
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:190"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:172"
 msgid ""
 "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
 "`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
@@ -452,31 +405,79 @@ msgstr ""
 "`channel` (string, opcional): Solo se admite para `prepatch`, `preminor` y "
 "`premajor`. Debe ser `alpha`, `beta` o `rc`. Por defecto es `alpha`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:192
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:174
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:192"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:174"
 msgid "Returns: `Version`."
 msgstr "Devuelve: `Version`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:194
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:176
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:194"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:176"
 msgid "to_string"
 msgstr "to_string"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:196
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:178
 msgid "Canonical API name: `ptool.semver.Version:to_string`."
 msgstr "Nombre canónico de API: `ptool.semver.Version:to_string`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:198
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180
 msgid "`v:to_string()` returns the canonical string form of the version."
 msgstr "`v:to_string()` devuelve la forma de cadena canónica de la versión."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:200
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:182
 #, fuzzy
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:200"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:182"
 msgid "Returns: `string`."
 msgstr "Devuelve: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:184
+msgid "VersionReq"
+msgstr "VersionReq"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:186
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:186"
+msgid "`v0.7.0` - Introduced."
+msgstr "`v0.7.0` - Introducido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188
+msgid ""
+"`VersionReq` represents a parsed semantic version requirement returned by "
+"`ptool.semver.parse_req(...)`."
+msgstr ""
+"`VersionReq` representa un requisito de versión semántica analizado devuelto "
+"por `ptool.semver.parse_req(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:191
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:191"
+msgid "It is implemented as a Lua userdata."
+msgstr "Está implementado como userdata de Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:193
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:193"
+msgid "Methods:"
+msgstr "Métodos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:195
+msgid "`req:matches(version)` -> `boolean`"
+msgstr "`req:matches(version)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:196
+msgid "`req:to_string()` -> `string`"
+msgstr "`req:to_string()` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:198
+#, fuzzy
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:198"
+msgid "Metamethods:"
+msgstr "Metamétodos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:200
+msgid "`tostring(req)` is available."
+msgstr "`tostring(req)` está disponible."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:202
 msgid "matches"
@@ -577,6 +578,53 @@ msgid ""
 msgstr ""
 "Se permite promocionar de canal (`alpha -> beta -> rc`), pero no degradarlo "
 "por ejemplo `rc -> beta` produce un error."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:156"
+#~ msgid "`v0.7.0` - Introduced."
+#~ msgstr "`v0.7.0` - Introducido."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:161"
+#~ msgid "It is implemented as a Lua userdata."
+#~ msgstr "Está implementado como userdata de Lua."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:163"
+#~ msgid "Methods:"
+#~ msgstr "Métodos:"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:168"
+#~ msgid "Metamethods:"
+#~ msgstr "Metamétodos:"
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:180"
+#~ msgid "Returns: `-1 | 0 | 1`."
+#~ msgstr "Devuelve: `-1 | 0 | 1`."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:188"
+#~ msgid ""
+#~ "`op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`"
+#~ ", `beta`, `rc`, `prepatch`, `preminor`, or `premajor`."
+#~ msgstr ""
+#~ "`op` (string, obligatorio): Uno de `major`, `minor`, `patch`, `release`, "
+#~ "`alpha`, `beta`, `rc`, `prepatch`, `preminor` o `premajor`."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:190"
+#~ msgid ""
+#~ "`channel` (string, optional): Supported only for `prepatch`, `preminor`, and "
+#~ "`premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`."
+#~ msgstr ""
+#~ "`channel` (string, opcional): Solo se admite para `prepatch`, `preminor` y "
+#~ "`premajor`. Debe ser `alpha`, `beta` o `rc`. Por defecto es `alpha`."
+
+#, fuzzy
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:192"
+#~ msgid "Returns: `Version`."
+#~ msgstr "Devuelve: `Version`."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/semver.md:26"
 #~ msgid "`v0.1.0` - Introduced."
