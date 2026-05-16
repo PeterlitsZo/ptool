@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-16 17:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,321 +12,392 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:1
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:1
 msgid "Filesystem API"
 msgstr "ファイルシステム API"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:3
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:3
 msgid "Filesystem helpers are available under `ptool.fs` and `p.fs`."
 msgstr "ファイルシステムヘルパーは `ptool.fs` と `p.fs` にあります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:5
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:5
 msgid "ptool.fs.read"
 msgstr "ptool.fs.read"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:7
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:7"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:7"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:9
-msgid ""
-"`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
-msgstr "`ptool.fs.read(path)` はファイルを生のバイト列として読み取り、Lua 文字列を 返"
-"します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:9
+msgid "`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
+msgstr "`ptool.fs.read(path)` はファイルを生のバイト列として読み取り、Lua 文字列を 返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:11
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:11"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:11
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:11"
 msgid "`path` (string, required): The file path."
 msgstr "`path` (string, 必須): ファイルパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:12
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:12
 msgid "Returns: `string`."
 msgstr "戻り値: `string`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:14
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:14"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:14
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:14"
 msgid "Notes:"
 msgstr "注意:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:16
-msgid ""
-"The returned Lua string contains the file bytes exactly as stored on disk."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:16
+msgid "The returned Lua string contains the file bytes exactly as stored on disk."
 msgstr "返される Lua 文字列には、ディスク上のファイルバイトがそのまま入ります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:17
-msgid ""
-"Text files continue to work as before, but binary files are also supported."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:17
+msgid "Text files continue to work as before, but binary files are also supported."
 msgstr "テキストファイルは従来どおり扱えますが、バイナリファイルも読み取れます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:19
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:19"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:19
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:19"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:29
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:29
 msgid "ptool.fs.write"
 msgstr "ptool.fs.write"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:31"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:33
-msgid ""
-"`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, "
-"overwriting existing contents."
-msgstr ""
-"`ptool.fs.write(path, content)` は Lua 文字列を生のバイト列としてファイルへ "
-"書き込み、既存の内容を上書きします。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:33
+msgid "`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, overwriting existing contents."
+msgstr "`ptool.fs.write(path, content)` は Lua 文字列を生のバイト列としてファイルへ 書き込み、既存の内容を上書きします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:36
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:36"
 msgid "`path` (string, required): The file path."
 msgstr "`path` (string, 必須): ファイルパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:37
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:37
 msgid "`content` (string, required): The content to write."
 msgstr "`content` (string, 必須): 書き込む内容。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:39
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:39"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:39
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:39"
 msgid "Notes:"
 msgstr "注意:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:41
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:41
 msgid "`content` is written byte-for-byte."
 msgstr "`content` は 1 バイトずつそのまま書き込まれます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:42
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:42
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:42"
 msgid "Embedded NUL bytes and non-UTF-8 bytes are preserved."
 msgstr "埋め込み NUL バイトや非 UTF-8 バイトも保持されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:44
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:44"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:44
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:44"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:51
+msgid "ptool.fs.append"
+msgstr "ptool.fs.append"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:53
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:53"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:55
+msgid "`ptool.fs.append(path, content)` appends a Lua string to a file as raw bytes. If the file does not exist, it is created."
+msgstr "`ptool.fs.append(path, content)` は Lua 文字列を生のバイト列としてファイルの末尾に追加します。ファイルが存在しない場合は作成されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:58
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:58"
+msgid "`path` (string, required): The file path."
+msgstr "`path` (string, 必須): ファイルパス。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:59
+msgid "`content` (string, required): The content to append."
+msgstr "`content` (string, 必須): 追加する内容。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:61
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:61"
+msgid "Notes:"
+msgstr "注意:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:63
+msgid "`content` is written byte-for-byte at the end of the file."
+msgstr "`content` はファイルの末尾に 1 バイトずつそのまま書き込まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:64
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:64"
+msgid "Embedded NUL bytes and non-UTF-8 bytes are preserved."
+msgstr "埋め込み NUL バイトや非 UTF-8 バイトも保持されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:66
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:66"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:73
 msgid "ptool.fs.mkdir"
 msgstr "ptool.fs.mkdir"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:75
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:75"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:55
-msgid ""
-"`ptool.fs.mkdir(path)` creates a directory. If parent directories do not "
-"exist, they are created recursively."
-msgstr "`ptool.fs.mkdir(path)` はディレクトリを作成します。親ディレクトリが存在 しな"
-"い場合は再帰的に作成されます。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:77
+msgid "`ptool.fs.mkdir(path)` creates a directory. If parent directories do not exist, they are created recursively."
+msgstr "`ptool.fs.mkdir(path)` はディレクトリを作成します。親ディレクトリが存在 しない場合は再帰的に作成されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:58
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:80
 msgid "`path` (string, required): The directory path."
 msgstr "`path` (string, 必須): ディレクトリパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:60
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:60"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:82
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:82"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:66
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:88
 msgid "ptool.fs.exists"
 msgstr "ptool.fs.exists"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:90
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:90"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:70
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:92
 msgid "`ptool.fs.exists(path)` checks whether a path exists."
 msgstr "`ptool.fs.exists(path)` はパスが存在するか確認します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:72
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:94
 msgid "`path` (string, required): A file or directory path."
 msgstr "`path` (string, 必須): ファイルまたはディレクトリのパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:73
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:73"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:95
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:95"
 msgid "Returns: `boolean`."
 msgstr "戻り値: `boolean`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:75
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:75"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:97
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:97"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:83
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:105
 msgid "ptool.fs.is_file"
 msgstr "ptool.fs.is_file"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:85
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:85"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:107
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:107"
 msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:87
-msgid ""
-"`ptool.fs.is_file(path)` checks whether a path exists and is a regular file."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:109
+msgid "`ptool.fs.is_file(path)` checks whether a path exists and is a regular file."
 msgstr "`ptool.fs.is_file(path)` は、パスが存在し通常ファイルかどうかを確認します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:89
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:89"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:111
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:111"
 msgid "`path` (string, required): The path to check."
 msgstr "`path` (string, 必須): 確認するパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:90
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:90"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:112"
 msgid "Returns: `boolean`."
 msgstr "戻り値: `boolean`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:92
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:92"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:114
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:114"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:100
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:122
 msgid "ptool.fs.is_dir"
 msgstr "ptool.fs.is_dir"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:124
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:124"
 msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:104
-msgid ""
-"`ptool.fs.is_dir(path)` checks whether a path exists and is a directory."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:126
+msgid "`ptool.fs.is_dir(path)` checks whether a path exists and is a directory."
 msgstr "`ptool.fs.is_dir(path)` は、パスが存在しディレクトリかどうかを確認します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:106
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:106"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:128
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:128"
 msgid "`path` (string, required): The path to check."
 msgstr "`path` (string, 必須): 確認するパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:107
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:107"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:129
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:129"
 msgid "Returns: `boolean`."
 msgstr "戻り値: `boolean`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:109
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:109"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:131"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:117
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:139
 msgid "ptool.fs.remove"
 msgstr "ptool.fs.remove"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:141
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:141"
 msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:121
-msgid ""
-"`ptool.fs.remove(path[, options])` removes a file, symlink, or directory."
-msgstr "`ptool.fs.remove(path[, options])` は、ファイル、シンボリックリンク、 ディレ"
-"クトリを削除します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:143
+msgid "`ptool.fs.remove(path[, options])` removes a file, symlink, or directory."
+msgstr "`ptool.fs.remove(path[, options])` は、ファイル、シンボリックリンク、 ディレクトリを削除します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:123
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:145
 msgid "`path` (string, required): The path to remove."
 msgstr "`path` (string, 必須): 削除するパス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:146
 msgid "`options` (table, optional): Remove options. Supported fields:"
 msgstr "`options` (table, 任意): 削除オプション。サポートされるフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
-msgid ""
-"`recursive` (boolean, optional): Whether to remove directories recursively. "
-"Defaults to `false`."
-msgstr "`recursive` (boolean, 任意): ディレクトリを再帰的に削除するかどうか。 デフォ"
-"ルトは `false`。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:146
+msgid "`recursive` (boolean, optional): Whether to remove directories recursively. Defaults to `false`."
+msgstr "`recursive` (boolean, 任意): ディレクトリを再帰的に削除するかどうか。 デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
-msgid ""
-"`missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults "
-"to `false`."
-msgstr "`missing_ok` (boolean, 任意): パスが存在しない場合に無視するかどうか。 デフォ"
-"ルトは `false`。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:146
+msgid "`missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults to `false`."
+msgstr "`missing_ok` (boolean, 任意): パスが存在しない場合に無視するかどうか。 デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:130
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:152
 msgid "Behavior:"
 msgstr "動作:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:132
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:154
 msgid "Files and symlinks can be removed without `recursive`."
 msgstr "ファイルとシンボリックリンクは `recursive` なしで削除できます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:133
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:155
 msgid "Directories require `recursive = true` when they are not empty."
 msgstr "空でないディレクトリは `recursive = true` が必要です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:134
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:156
 msgid "Unknown option names or invalid option value types raise an error."
 msgstr "不明なオプション名や不正な値型はエラーになります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:136
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:136"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:158
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:158"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:144
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:166
 msgid "ptool.fs.glob"
 msgstr "ptool.fs.glob"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:146
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:168
 msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr "`v0.2.0` - Introduced. `v0.5.0` - `working_dir` オプションを追加。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:149
-msgid ""
-"`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-"
-"style glob syntax and returns a string array of matched paths sorted "
-"lexicographically."
-msgstr ""
-"`ptool.fs.glob(pattern[, options])` は Unix 風 glob 構文でファイルシステムパ"
-"スを 照合し、辞書順に並んだ一致パスの文字列配列を返します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:171
+msgid "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically."
+msgstr "`ptool.fs.glob(pattern[, options])` は Unix 風 glob 構文でファイルシステムパスを 照合し、辞書順に並んだ一致パスの文字列配列を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:153
-msgid ""
-"`pattern` (string, required): A glob pattern. Relative patterns are resolved "
-"from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr ""
-"`pattern` (string, 必須): glob パターン。相対パターンは現在の `ptool` ランタ"
-"イムディレクトリから解決されるため、 `ptool.cd(...)` に従います。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:175
+msgid "`pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
+msgstr "`pattern` (string, 必須): glob パターン。相対パターンは現在の `ptool` ランタイムディレクトリから解決されるため、 `ptool.cd(...)` に従います。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:177
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr "`options` (table, 任意): glob オプション。サポートされるフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:155
-msgid ""
-"`working_dir` (string, optional): Override the base directory used to "
-"resolve relative patterns. Relative `working_dir` values are resolved from "
-"the current `ptool` runtime directory."
-msgstr ""
-"`working_dir` (string, 任意): 相対パターンの解決に使う基準 ディレクトリを上書"
-"きします。相対 `working_dir` は現在の `ptool` ランタイムディレクトリから解決"
-"されます。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:177
+msgid "`working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory."
+msgstr "`working_dir` (string, 任意): 相対パターンの解決に使う基準 ディレクトリを上書きします。相対 `working_dir` は現在の `ptool` ランタイムディレクトリから解決されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:159
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:181
 msgid "Returns: `string[]`."
 msgstr "戻り値: `string[]`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:160
-msgid ""
-"Hidden files and directories are matched only when the corresponding pattern "
-"component explicitly starts with `.`."
-msgstr "隠しファイルや隠しディレクトリは、対応するパターン要素が明示的に `.` で始まる"
-"場合にだけ一致します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:182
+msgid "Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`."
+msgstr "隠しファイルや隠しディレクトリは、対応するパターン要素が明示的に `.` で始まる場合にだけ一致します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:185
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:185"
 msgid "Example:"
 msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36"
+#~ msgid "`path` (string, required): The file path."
+#~ msgstr "`path` (string, 必須): ファイルパス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:39"
+#~ msgid "Notes:"
+#~ msgstr "注意:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:44"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:60"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:75"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:90"
+#~ msgid "Returns: `boolean`."
+#~ msgstr "戻り値: `boolean`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:92"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:106"
+#~ msgid "`path` (string, required): The path to check."
+#~ msgstr "`path` (string, 必須): 確認するパス。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:107"
+#~ msgid "Returns: `boolean`."
+#~ msgstr "戻り値: `boolean`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:109"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:136"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163"
+#~ msgid "Example:"
+#~ msgstr "例:"

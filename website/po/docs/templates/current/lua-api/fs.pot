@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-16 17:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,306 +12,350 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:1
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:1
 msgid "Filesystem API"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:3
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:3
 msgid "Filesystem helpers are available under `ptool.fs` and `p.fs`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:5
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:5
 msgid "ptool.fs.read"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:7
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:7"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:7"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:9
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:9
 msgid ""
 "`ptool.fs.read(path)` reads a file as raw bytes and returns a Lua string."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:11
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:11"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:11
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:11"
 msgid "`path` (string, required): The file path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:12
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:12
 msgid "Returns: `string`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:14
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:14"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:14
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:14"
 msgid "Notes:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:16
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:16
 msgid ""
 "The returned Lua string contains the file bytes exactly as stored on disk."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:17
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:17
 msgid ""
 "Text files continue to work as before, but binary files are also supported."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:19
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:19"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:19
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:19"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:29
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:29
 msgid "ptool.fs.write"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:31"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:31"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:33
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:33
 msgid ""
 "`ptool.fs.write(path, content)` writes a Lua string to a file as raw bytes, "
 "overwriting existing contents."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:36"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:36
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:36"
 msgid "`path` (string, required): The file path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:37
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:37
 msgid "`content` (string, required): The content to write."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:39
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:39"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:39
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:39"
 msgid "Notes:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:41
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:41
 msgid "`content` is written byte-for-byte."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:42
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:42
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:42"
 msgid "Embedded NUL bytes and non-UTF-8 bytes are preserved."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:44
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:44"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:44
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:44"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:51
+msgid "ptool.fs.append"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:53
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:53"
+msgid "`Unreleased` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:55
+msgid ""
+"`ptool.fs.append(path, content)` appends a Lua string to a file as raw "
+"bytes. If the file does not exist, it is created."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:58
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:58"
+msgid "`path` (string, required): The file path."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:59
+msgid "`content` (string, required): The content to append."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:61
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:61"
+msgid "Notes:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:63
+msgid "`content` is written byte-for-byte at the end of the file."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:64
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:64"
+msgid "Embedded NUL bytes and non-UTF-8 bytes are preserved."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:66
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:66"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:73
 msgid "ptool.fs.mkdir"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:53"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:75
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:75"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:55
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:77
 msgid ""
 "`ptool.fs.mkdir(path)` creates a directory. If parent directories do not "
 "exist, they are created recursively."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:58
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:80
 msgid "`path` (string, required): The directory path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:60
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:60"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:82
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:82"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:66
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:88
 msgid "ptool.fs.exists"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:68"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:90
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:90"
 msgid "`v0.1.0` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:70
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:92
 msgid "`ptool.fs.exists(path)` checks whether a path exists."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:72
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:94
 msgid "`path` (string, required): A file or directory path."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:73
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:73"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:95
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:95"
 msgid "Returns: `boolean`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:75
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:75"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:97
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:97"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:83
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:105
 msgid "ptool.fs.is_file"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:85
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:85"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:107
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:107"
 msgid "`Unreleased` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:87
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:109
 msgid ""
 "`ptool.fs.is_file(path)` checks whether a path exists and is a regular file."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:89
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:89"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:111
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:111"
 msgid "`path` (string, required): The path to check."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:90
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:90"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:112"
 msgid "Returns: `boolean`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:92
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:92"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:114
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:114"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:100
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:122
 msgid "ptool.fs.is_dir"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:102"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:124
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:124"
 msgid "`Unreleased` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:104
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:126
 msgid ""
 "`ptool.fs.is_dir(path)` checks whether a path exists and is a directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:106
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:106"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:128
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:128"
 msgid "`path` (string, required): The path to check."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:107
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:107"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:129
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:129"
 msgid "Returns: `boolean`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:109
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:109"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:131"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:117
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:139
 msgid "ptool.fs.remove"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:119"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:141
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:141"
 msgid "`Unreleased` - Introduced."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:121
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:143
 msgid ""
 "`ptool.fs.remove(path[, options])` removes a file, symlink, or directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:123
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:145
 msgid "`path` (string, required): The path to remove."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:146
 msgid "`options` (table, optional): Remove options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:146
 msgid ""
 "`recursive` (boolean, optional): Whether to remove directories recursively. "
 "Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:124
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:146
 msgid ""
 "`missing_ok` (boolean, optional): Whether to ignore missing paths. Defaults "
 "to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:130
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:152
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:132
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:154
 msgid "Files and symlinks can be removed without `recursive`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:133
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:155
 msgid "Directories require `recursive = true` when they are not empty."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:134
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:156
 msgid "Unknown option names or invalid option value types raise an error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:136
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:136"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:158
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:158"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:144
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:166
 msgid "ptool.fs.glob"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:146
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:168
 msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:149
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:171
 msgid ""
 "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-"
 "style glob syntax and returns a string array of matched paths sorted "
 "lexicographically."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:153
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:175
 msgid ""
 "`pattern` (string, required): A glob pattern. Relative patterns are resolved "
 "from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:177
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:155
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:177
 msgid ""
 "`working_dir` (string, optional): Override the base directory used to "
 "resolve relative patterns. Relative `working_dir` values are resolved from "
 "the current `ptool` runtime directory."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:159
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:181
 msgid "Returns: `string[]`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:160
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:182
 msgid ""
 "Hidden files and directories are matched only when the corresponding pattern "
 "component explicitly starts with `.`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:163"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:185
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:185"
 msgid "Example:"
 msgstr ""

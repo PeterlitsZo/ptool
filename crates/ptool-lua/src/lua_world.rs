@@ -495,6 +495,10 @@ impl LuaWorld {
         crate::fs::write(&self.engine, path, content)
     }
 
+    pub(crate) fn fs_append(&self, path: String, content: mlua::String) -> mlua::Result<()> {
+        crate::fs::append(&self.engine, path, content)
+    }
+
     pub(crate) fn fs_mkdir(&self, path: String, options: Option<Table>) -> mlua::Result<()> {
         crate::fs::mkdir(&self.engine, path, options)
     }

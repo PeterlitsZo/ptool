@@ -395,6 +395,10 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
     let write_fn = lua.create_function(move |_, (path, content): (String, mlua::String)| {
         write_state.borrow().fs_write(path, content)
     })?;
+    let append_state = Rc::clone(&world);
+    let append_fn = lua.create_function(move |_, (path, content): (String, mlua::String)| {
+        append_state.borrow().fs_append(path, content)
+    })?;
     let mkdir_state = Rc::clone(&world);
     let mkdir_fn = lua.create_function(move |_, (path, options): (String, Option<Table>)| {
         mkdir_state.borrow().fs_mkdir(path, options)
@@ -421,6 +425,7 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
         lua.create_function(move |lua, args: Variadic<Value>| world.borrow().fs_copy(lua, args))?;
     fs_module.set("read", read_fn)?;
     fs_module.set("write", write_fn)?;
+    fs_module.set("append", append_fn)?;
     fs_module.set("mkdir", mkdir_fn)?;
     fs_module.set("exists", exists_fn)?;
     fs_module.set("is_file", is_file_fn)?;

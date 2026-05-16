@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added `ptool.fs.append()` / `p.fs.append()`, which appends raw bytes to the
+  end of a file, creates the file when it does not exist, and is documented
+  across all supported locales.
 - Added `ptool.version()` / `p.version()`, which returns the current `ptool`
   version string to Lua scripts, and documented it across all supported
   locales.

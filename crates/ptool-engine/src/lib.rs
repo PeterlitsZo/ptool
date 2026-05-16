@@ -291,6 +291,10 @@ impl PtoolEngine {
         fs::write(path, content)
     }
 
+    pub fn fs_append(&self, path: &str, content: &[u8]) -> Result<()> {
+        fs::append(path, content)
+    }
+
     pub fn fs_mkdir(&self, path: &str, options: FsMkdirOptions) -> Result<()> {
         fs::mkdir(path, options)
     }

@@ -47,6 +47,27 @@ ptool.fs.write("tmp/hello.txt", "hello\n")
 ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 ```
 
+## ptool.fs.append
+
+> `Unreleased` - 引入。
+
+`ptool.fs.append(path, content)` 将 Lua 字符串按原始字节追加到文件末尾。如果文件不存在，则会创建该文件。
+
+- `path`（string，必填）：文件路径。
+- `content`（string，必填）：要追加的内容。
+
+说明：
+
+- `content` 会逐字节写入到文件末尾。
+- 内嵌 NUL 字节和非 UTF-8 字节都会被保留。
+
+示例：
+
+```lua
+ptool.fs.append("tmp/log.txt", "first line\n")
+ptool.fs.append("tmp/log.txt", "second line\n")
+```
+
 ## ptool.fs.mkdir
 
 > `v0.1.0` - 引入。

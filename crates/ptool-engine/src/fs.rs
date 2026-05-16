@@ -1,6 +1,7 @@
 use crate::{Error, ErrorKind, Result};
 use glob::MatchOptions;
 use std::fs;
+use std::io::Write;
 use std::path::{Path, PathBuf};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -57,6 +58,17 @@ pub fn read(path: &str) -> Result<Vec<u8>> {
 pub fn write(path: &str, content: &[u8]) -> Result<()> {
     ensure_non_empty_path(path)?;
     fs::write(path, content).map_err(|err| io_error(err).with_op("ptool.fs.write").with_path(path))
+}
+
+pub fn append(path: &str, content: &[u8]) -> Result<()> {
+    ensure_non_empty_path(path)?;
+    let mut file = fs::OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open(path)
+        .map_err(|err| io_error(err).with_op("ptool.fs.append").with_path(path))?;
+    file.write_all(content)
+        .map_err(|err| io_error(err).with_op("ptool.fs.append").with_path(path))
 }
 
 pub fn mkdir(path: &str, options: FsMkdirOptions) -> Result<()> {

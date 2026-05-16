@@ -23,6 +23,12 @@ pub(crate) fn write(engine: &PtoolEngine, path: String, content: LuaString) -> m
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.fs.write"))
 }
 
+pub(crate) fn append(engine: &PtoolEngine, path: String, content: LuaString) -> mlua::Result<()> {
+    engine
+        .fs_append(&path, content.as_bytes().as_ref())
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.fs.append"))
+}
+
 pub(crate) fn mkdir(
     engine: &PtoolEngine,
     path: String,

@@ -48,6 +48,28 @@ ptool.fs.write("tmp/hello.txt", "hello\n")
 ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 ```
 
+## ptool.fs.append
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.append(path, content)` appends a Lua string to a file as raw bytes.
+If the file does not exist, it is created.
+
+- `path` (string, required): The file path.
+- `content` (string, required): The content to append.
+
+Notes:
+
+- `content` is written byte-for-byte at the end of the file.
+- Embedded NUL bytes and non-UTF-8 bytes are preserved.
+
+Example:
+
+```lua
+ptool.fs.append("tmp/log.txt", "first line\n")
+ptool.fs.append("tmp/log.txt", "second line\n")
+```
+
 ## ptool.fs.mkdir
 
 > `v0.1.0` - Introduced.
