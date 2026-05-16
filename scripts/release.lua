@@ -61,7 +61,7 @@ if is_stable_release then
       .. next_version_str
       .. " --keep 7"
   )
-  p.run("cd website && npm run i18n:refresh-docs")
+  p.run("sh", { "-c", "cd website && npm run i18n:refresh-docs" })
 end
 
 -- Commit, tag, and push.

@@ -4,6 +4,15 @@
 
 TODO...
 
+## v0.7.2 (2026-05-16)
+
+### Fixed
+
+- Fixed the release workflow so maintainers can exercise the full packaging
+  matrix with the `ci-build-test` tag without publishing a GitHub release, and
+  made `linux-x86` musl packaging more reliable by disabling the problematic
+  `aws-lc-sys` jitter entropy source on that target.
+
 ## v0.7.1 (2026-05-16)
 
 ### Fixed

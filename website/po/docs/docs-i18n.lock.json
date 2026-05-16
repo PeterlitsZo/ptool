@@ -86,7 +86,7 @@
       "lua-api/yaml.md": "522847b20196e861e0aa26407affb9eb0dbe302a7a4b496d46c4e2473fb5622d",
       "repl.md": "cb934ef2d183a078bed557568a200c4ef5b81139e81ef670c6d24471518ed6f2"
     },
-    "version-0.7.1": {
+    "version-0.7.2": {
       "intro.md": "10522cdfe03902f62c6fd1f862aa7e09c80a2b5c5f44d0dbeed312a1262cb546",
       "lua-api/ansi.md": "23a3505472a35d877c302ddae47c8bbef69d387503a1a4fa04a5dea88e8d4540",
       "lua-api/args.md": "6d65e91a39149fe74832d8bde6f81ba27ba9d3a0d7d5906aab5c378c162d01b1",
@@ -204,7 +204,7 @@
         "lua-api/yaml.pot": "ff5a2f7d0c8cc5615e060aba3bc1ce47e5e49192159196713cb699ef058f9602",
         "repl.pot": "ab6af9391924ffdbc3c78604cd7775271c143173f1bda2f3ed587795d7b36590"
       },
-      "version-0.7.1": {
+      "version-0.7.2": {
         "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
@@ -321,7 +321,7 @@
         "lua-api/yaml.pot": "ff5a2f7d0c8cc5615e060aba3bc1ce47e5e49192159196713cb699ef058f9602",
         "repl.pot": "ab6af9391924ffdbc3c78604cd7775271c143173f1bda2f3ed587795d7b36590"
       },
-      "version-0.7.1": {
+      "version-0.7.2": {
         "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
@@ -438,7 +438,7 @@
         "lua-api/yaml.pot": "ff5a2f7d0c8cc5615e060aba3bc1ce47e5e49192159196713cb699ef058f9602",
         "repl.pot": "ab6af9391924ffdbc3c78604cd7775271c143173f1bda2f3ed587795d7b36590"
       },
-      "version-0.7.1": {
+      "version-0.7.2": {
         "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
@@ -555,7 +555,7 @@
         "lua-api/yaml.pot": "ff5a2f7d0c8cc5615e060aba3bc1ce47e5e49192159196713cb699ef058f9602",
         "repl.pot": "ab6af9391924ffdbc3c78604cd7775271c143173f1bda2f3ed587795d7b36590"
       },
-      "version-0.7.1": {
+      "version-0.7.2": {
         "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
