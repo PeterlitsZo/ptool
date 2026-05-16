@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+      - 'ci-build-test'
 
 permissions:
   contents: read
@@ -100,6 +101,10 @@ jobs:
             # an explicit libatomic link for the final static link.
             export CFLAGS="${CFLAGS:+$CFLAGS }-DBROKEN_CLANG_ATOMICS"
             export RUSTFLAGS="${RUSTFLAGS:+$RUSTFLAGS }-Clink-arg=-latomic"
+            # aws-lc-sys currently feeds zig cc a jitterentropy preprocessing flag
+            # that fails on this target, so skip building that optional entropy
+            # source for linux-x86 release packaging.
+            export AWS_LC_SYS_NO_JITTER_ENTROPY=1
           fi
 
           if [ "${{ matrix.use_zigbuild }}" = 'true' ]; then
@@ -135,6 +140,7 @@ jobs:
 
   publish:
     name: Publish GitHub release
+    if: startsWith(github.ref_name, 'v')
     runs-on: ubuntu-24.04
     defaults:
       run:
