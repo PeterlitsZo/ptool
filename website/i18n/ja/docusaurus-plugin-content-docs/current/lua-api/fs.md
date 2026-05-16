@@ -68,6 +68,143 @@ ptool.fs.append("tmp/log.txt", "first line\n")
 ptool.fs.append("tmp/log.txt", "second line\n")
 ```
 
+## ptool.fs.open
+
+> `Unreleased` - Introduced.
+
+`ptool.fs.open(path[, mode])` はローカルファイルを開き、`File` オブジェクトを返します。
+
+引数:
+
+- `path` (string, 必須): ファイルパス。
+- `mode` (string, 任意): ファイルモード。デフォルトは `"r"` です。
+
+サポートされるモード:
+
+- `"r"`: 読み込み用に開きます。
+- `"w"`: 書き込み用に開き、既存内容を切り詰め、必要ならファイルを作成します。
+- `"a"`: 追記用に開き、必要ならファイルを作成します。
+- `"r+"`: 切り詰めずに読み書き用で開きます。
+- `"w+"`: 読み書き用に開き、既存内容を切り詰め、必要ならファイルを作成します。
+- `"a+"`: 読み込みと追記用に開き、必要ならファイルを作成します。
+
+注意:
+
+- モードには `"rb"` や `"w+b"` のように `b` を含められます。
+- `a` と `a+` の書き込みは常にファイル末尾に行われます。
+
+例:
+
+```lua
+local file = ptool.fs.open("tmp/log.txt", "a+")
+file:write("hello\n")
+file:flush()
+file:close()
+```
+
+## File
+
+> `Unreleased` - Introduced.
+
+`File` は `ptool.fs.open()` が返す、開かれたローカルファイルハンドルです。
+
+Lua userdata として実装されています。
+
+メソッド:
+
+- `file:read([n])` -> `string`
+- `file:write(content)` -> `nil`
+- `file:flush()` -> `nil`
+- `file:seek([whence[, offset]])` -> `integer`
+- `file:close()` -> `nil`
+
+### read
+
+> `Unreleased` - Introduced.
+
+正規 API 名: `ptool.fs.File:read`。
+
+`file:read([n])` は現在のファイル位置からバイト列を読み取り、Lua 文字列として返します。
+
+- `n` (integer, 任意): 読み取る最大バイト数。省略時は現在位置から EOF まで読み取ります。
+- 戻り値: `string`。
+
+動作:
+
+- EOF では空文字列を返します。
+- 生のバイト列を読むため、バイナリデータはそのまま保持されます。
+
+例:
+
+```lua
+local file = ptool.fs.open("README.md")
+local prefix = file:read(16)
+local rest = file:read()
+file:close()
+```
+
+### write
+
+> `Unreleased` - Introduced.
+
+正規 API 名: `ptool.fs.File:write`。
+
+`file:write(content)` は現在のファイル位置に Lua 文字列を書き込みます。
+
+- `content` (string, 必須): 書き込むバイト列。
+
+動作:
+
+- 指定したとおりの生バイト列を書き込みます。
+- append モードのハンドルでは、書き込みはファイル末尾に追加されます。
+
+### flush
+
+> `Unreleased` - Introduced.
+
+正規 API 名: `ptool.fs.File:flush`。
+
+`file:flush()` はバッファされたファイル書き込みを OS にフラッシュします。
+
+### seek
+
+> `Unreleased` - Introduced.
+
+正規 API 名: `ptool.fs.File:seek`。
+
+`file:seek([whence[, offset]])` は現在のファイル位置を移動します。
+
+- `whence` (string, 任意): `"set"`、`"cur"`、`"end"` のいずれか。デフォルトは `"cur"` です。
+- `offset` (integer, 任意): `whence` からの相対バイトオフセット。デフォルトは `0` です。
+- 戻り値: `integer`。
+
+動作:
+
+- 新しい絶対ファイル位置を返します。
+- `"set"` では `offset` に 0 以上の値が必要です。
+
+例:
+
+```lua
+local file = ptool.fs.open("tmp/data.bin", "w+")
+file:write("abcdef")
+file:seek("set", 2)
+print(file:read(2)) -- cd
+file:close()
+```
+
+### close
+
+> `Unreleased` - Introduced.
+
+正規 API 名: `ptool.fs.File:close`。
+
+`file:close()` はファイルハンドルを閉じます。
+
+動作:
+
+- 閉じた後は、そのファイルハンドルは使えなくなります。
+
 ## ptool.fs.mkdir
 
 > `v0.1.0` - Introduced.

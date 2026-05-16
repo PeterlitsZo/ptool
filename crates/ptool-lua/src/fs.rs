@@ -1,14 +1,24 @@
-use mlua::{Lua, String as LuaString, Table, Value, Variadic};
+use mlua::{Lua, String as LuaString, Table, UserData, UserDataMethods, Value, Variadic};
 use ptool_engine::{
     Error as EngineError, ErrorKind as EngineErrorKind, FsCopyOptions, FsGlobOptions,
-    FsMkdirOptions, FsRemoveOptions, PtoolEngine,
+    FsMkdirOptions, FsOpenOptions, FsRemoveOptions, FsSeekWhence, PtoolEngine,
 };
 use std::path::Path;
 
+const OPEN_SIGNATURE: &str = "ptool.fs.open(path[, mode])";
 const COPY_SIGNATURE: &str = "ptool.fs.copy(src, dst[, options])";
 const GLOB_SIGNATURE: &str = "ptool.fs.glob(pattern[, options])";
 const MKDIR_SIGNATURE: &str = "ptool.fs.mkdir(path[, options])";
 const REMOVE_SIGNATURE: &str = "ptool.fs.remove(path[, options])";
+const FILE_READ_SIGNATURE: &str = "ptool.fs.File:read([n])";
+const FILE_WRITE_SIGNATURE: &str = "ptool.fs.File:write(content)";
+const FILE_FLUSH_SIGNATURE: &str = "ptool.fs.File:flush()";
+const FILE_SEEK_SIGNATURE: &str = "ptool.fs.File:seek([whence[, offset]])";
+const FILE_CLOSE_SIGNATURE: &str = "ptool.fs.File:close()";
+
+pub(crate) struct LuaFsFile {
+    file: ptool_engine::FsFileHandle,
+}
 
 pub(crate) fn read(lua: &Lua, engine: &PtoolEngine, path: String) -> mlua::Result<LuaString> {
     let content = engine
@@ -27,6 +37,20 @@ pub(crate) fn append(engine: &PtoolEngine, path: String, content: LuaString) -> 
     engine
         .fs_append(&path, content.as_bytes().as_ref())
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.fs.append"))
+}
+
+pub(crate) fn open(
+    engine: &PtoolEngine,
+    path: String,
+    mode: Option<String>,
+) -> mlua::Result<LuaFsFile> {
+    let mode = mode.unwrap_or_else(|| "r".to_string());
+    let options = FsOpenOptions::parse(&mode)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, OPEN_SIGNATURE))?;
+    let file = engine
+        .fs_open(&path, options)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, OPEN_SIGNATURE))?;
+    Ok(LuaFsFile { file })
 }
 
 pub(crate) fn mkdir(
@@ -122,6 +146,61 @@ pub(crate) fn copy(engine: &PtoolEngine, lua: &Lua, args: Variadic<Value>) -> ml
     };
 
     crate::ssh::build_transfer_result(lua, result)
+}
+
+impl UserData for LuaFsFile {
+    fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
+        methods.add_method("read", |lua, this, value: Option<Value>| {
+            this.read(lua, value)
+        });
+        methods.add_method("write", |_, this, content: LuaString| this.write(content));
+        methods.add_method("flush", |_, this, ()| this.flush());
+        methods.add_method("seek", |_, this, args: Variadic<Value>| this.seek(args));
+        methods.add_method("close", |_, this, ()| this.close());
+    }
+}
+
+impl LuaFsFile {
+    fn read(&self, lua: &Lua, value: Option<Value>) -> mlua::Result<LuaString> {
+        let len = parse_read_len(value)?;
+        let content = self
+            .file
+            .read(len)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, FILE_READ_SIGNATURE))?;
+        lua.create_string(&content)
+    }
+
+    fn write(&self, content: LuaString) -> mlua::Result<()> {
+        self.file
+            .write(content.as_bytes().as_ref())
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, FILE_WRITE_SIGNATURE))
+    }
+
+    fn flush(&self) -> mlua::Result<()> {
+        self.file
+            .flush()
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, FILE_FLUSH_SIGNATURE))
+    }
+
+    fn seek(&self, args: Variadic<Value>) -> mlua::Result<i64> {
+        let (whence, offset) = parse_seek_args(args)?;
+        let position = self
+            .file
+            .seek(whence, offset)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, FILE_SEEK_SIGNATURE))?;
+        i64::try_from(position).map_err(|_| {
+            crate::lua_error::invalid_argument(
+                FILE_SEEK_SIGNATURE,
+                "result exceeds Lua integer range",
+            )
+        })
+    }
+
+    fn close(&self) -> mlua::Result<()> {
+        self.file
+            .close()
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, FILE_CLOSE_SIGNATURE))
+    }
 }
 
 enum CopyEndpoint {
@@ -307,4 +386,68 @@ fn fs_mkdir_error(path: &str, err: EngineError) -> mlua::Error {
 
 fn fs_copy_error(err: EngineError) -> mlua::Error {
     crate::lua_error::lua_error_from_engine(err, COPY_SIGNATURE)
+}
+
+fn parse_read_len(value: Option<Value>) -> mlua::Result<Option<usize>> {
+    let Some(value) = value else {
+        return Ok(None);
+    };
+
+    match value {
+        Value::Nil => Ok(None),
+        Value::Integer(value) => {
+            let value = usize::try_from(value).map_err(|_| {
+                crate::lua_error::invalid_argument(FILE_READ_SIGNATURE, "`n` must be >= 0")
+            })?;
+            Ok(Some(value))
+        }
+        _ => Err(crate::lua_error::invalid_argument(
+            FILE_READ_SIGNATURE,
+            "`n` must be an integer",
+        )),
+    }
+}
+
+fn parse_seek_args(args: Variadic<Value>) -> mlua::Result<(FsSeekWhence, i64)> {
+    if args.len() > 2 {
+        return Err(crate::lua_error::invalid_argument(
+            FILE_SEEK_SIGNATURE,
+            "expects at most 2 arguments",
+        ));
+    }
+
+    let whence = match args.first() {
+        None => FsSeekWhence::Cur,
+        Some(Value::Nil) => FsSeekWhence::Cur,
+        Some(Value::String(value)) => match value.to_str()?.as_ref() {
+            "set" => FsSeekWhence::Set,
+            "cur" => FsSeekWhence::Cur,
+            "end" => FsSeekWhence::End,
+            _ => {
+                return Err(crate::lua_error::invalid_argument(
+                    FILE_SEEK_SIGNATURE,
+                    "`whence` must be `set`, `cur`, or `end`",
+                ));
+            }
+        },
+        Some(_) => {
+            return Err(crate::lua_error::invalid_argument(
+                FILE_SEEK_SIGNATURE,
+                "`whence` must be a string",
+            ));
+        }
+    };
+
+    let offset = match args.get(1) {
+        None | Some(Value::Nil) => 0,
+        Some(Value::Integer(value)) => *value,
+        Some(_) => {
+            return Err(crate::lua_error::invalid_argument(
+                FILE_SEEK_SIGNATURE,
+                "`offset` must be an integer",
+            ));
+        }
+    };
+
+    Ok((whence, offset))
 }

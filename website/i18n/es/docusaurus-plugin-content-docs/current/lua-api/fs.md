@@ -68,6 +68,143 @@ ptool.fs.append("tmp/log.txt", "first line\n")
 ptool.fs.append("tmp/log.txt", "second line\n")
 ```
 
+## ptool.fs.open
+
+> `Unreleased` - Introducido.
+
+`ptool.fs.open(path[, mode])` abre un archivo local y devuelve un objeto `File`.
+
+Argumentos:
+
+- `path` (string, obligatorio): La ruta del archivo.
+- `mode` (string, opcional): El modo del archivo. Valor predeterminado: `"r"`.
+
+Modos admitidos:
+
+- `"r"`: Abre para lectura.
+- `"w"`: Abre para escritura, trunca el contenido existente y crea el archivo cuando hace falta.
+- `"a"`: Abre para anexar, creando el archivo cuando hace falta.
+- `"r+"`: Abre para lectura y escritura sin truncar.
+- `"w+"`: Abre para lectura y escritura, trunca el contenido existente y crea el archivo cuando hace falta.
+- `"a+"`: Abre para lectura y anexado, creando el archivo cuando hace falta.
+
+Notas:
+
+- Los modos pueden incluir `b`, como `"rb"` o `"w+b"`.
+- Las escrituras con `a` y `a+` siempre van al final del archivo.
+
+Ejemplo:
+
+```lua
+local file = ptool.fs.open("tmp/log.txt", "a+")
+file:write("hello\n")
+file:flush()
+file:close()
+```
+
+## File
+
+> `Unreleased` - Introducido.
+
+`File` representa un manejador de archivo local abierto devuelto por `ptool.fs.open()`.
+
+Está implementado como un userdata de Lua.
+
+Métodos:
+
+- `file:read([n])` -> `string`
+- `file:write(content)` -> `nil`
+- `file:flush()` -> `nil`
+- `file:seek([whence[, offset]])` -> `integer`
+- `file:close()` -> `nil`
+
+### read
+
+> `Unreleased` - Introducido.
+
+Nombre canónico de la API: `ptool.fs.File:read`.
+
+`file:read([n])` lee bytes desde la posición actual del archivo y los devuelve como una cadena Lua.
+
+- `n` (integer, opcional): El número máximo de bytes que se leen. Si se omite, lee desde la posición actual hasta EOF.
+- Devuelve: `string`.
+
+Comportamiento:
+
+- Devuelve una cadena vacía en EOF.
+- Lee bytes sin procesar, por lo que los datos binarios se conservan exactamente.
+
+Ejemplo:
+
+```lua
+local file = ptool.fs.open("README.md")
+local prefix = file:read(16)
+local rest = file:read()
+file:close()
+```
+
+### write
+
+> `Unreleased` - Introducido.
+
+Nombre canónico de la API: `ptool.fs.File:write`.
+
+`file:write(content)` escribe una cadena Lua en la posición actual del archivo.
+
+- `content` (string, obligatorio): Los bytes que se van a escribir.
+
+Comportamiento:
+
+- Escribe bytes sin procesar exactamente como se proporcionan.
+- En los manejadores en modo append, las escrituras se agregan al final del archivo.
+
+### flush
+
+> `Unreleased` - Introducido.
+
+Nombre canónico de la API: `ptool.fs.File:flush`.
+
+`file:flush()` vacía en el SO las escrituras del archivo almacenadas en búfer.
+
+### seek
+
+> `Unreleased` - Introducido.
+
+Nombre canónico de la API: `ptool.fs.File:seek`.
+
+`file:seek([whence[, offset]])` mueve la posición actual del archivo.
+
+- `whence` (string, opcional): Uno de `"set"`, `"cur"` o `"end"`. Valor predeterminado: `"cur"`.
+- `offset` (integer, opcional): El desplazamiento en bytes relativo a `whence`. Valor predeterminado: `0`.
+- Devuelve: `integer`.
+
+Comportamiento:
+
+- Devuelve la nueva posición absoluta del archivo.
+- `"set"` requiere un `offset` no negativo.
+
+Ejemplo:
+
+```lua
+local file = ptool.fs.open("tmp/data.bin", "w+")
+file:write("abcdef")
+file:seek("set", 2)
+print(file:read(2)) -- cd
+file:close()
+```
+
+### close
+
+> `Unreleased` - Introducido.
+
+Nombre canónico de la API: `ptool.fs.File:close`.
+
+`file:close()` cierra el manejador del archivo.
+
+Comportamiento:
+
+- Después de cerrarlo, el manejador ya no puede usarse.
+
 ## ptool.fs.mkdir
 
 > `v0.1.0` - Introducido.

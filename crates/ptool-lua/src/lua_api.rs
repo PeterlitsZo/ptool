@@ -388,6 +388,10 @@ fn create_ptool_ssh_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
 
 fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
     let fs_module = lua.create_table()?;
+    let open_state = Rc::clone(&world);
+    let open_fn = lua.create_function(move |_, (path, mode): (String, Option<String>)| {
+        open_state.borrow().fs_open(path, mode)
+    })?;
     let read_state = Rc::clone(&world);
     let read_fn =
         lua.create_function(move |lua, path: String| read_state.borrow().fs_read(lua, path))?;
@@ -423,6 +427,7 @@ fn create_ptool_fs_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
         })?;
     let copy_fn =
         lua.create_function(move |lua, args: Variadic<Value>| world.borrow().fs_copy(lua, args))?;
+    fs_module.set("open", open_fn)?;
     fs_module.set("read", read_fn)?;
     fs_module.set("write", write_fn)?;
     fs_module.set("append", append_fn)?;

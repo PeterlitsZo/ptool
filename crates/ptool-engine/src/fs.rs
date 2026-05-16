@@ -1,8 +1,9 @@
 use crate::{Error, ErrorKind, Result};
 use glob::MatchOptions;
 use std::fs;
-use std::io::Write;
+use std::io::{Read, Seek, SeekFrom, Write};
 use std::path::{Path, PathBuf};
+use std::sync::Mutex;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct FsMkdirOptions {
@@ -15,6 +16,30 @@ pub struct FsRemoveOptions {
     pub missing_ok: bool,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct FsOpenOptions {
+    pub read: bool,
+    pub write: bool,
+    pub append: bool,
+    pub truncate: bool,
+    pub create: bool,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum FsSeekWhence {
+    Set,
+    Cur,
+    End,
+}
+
+#[derive(Debug)]
+pub struct FsFileHandle {
+    path: String,
+    readable: bool,
+    writable: bool,
+    file: Mutex<Option<fs::File>>,
+}
+
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct FsGlobOptions {
     pub working_dir: Option<String>,
@@ -23,6 +48,18 @@ pub struct FsGlobOptions {
 impl Default for FsMkdirOptions {
     fn default() -> Self {
         Self { exist_ok: true }
+    }
+}
+
+impl Default for FsOpenOptions {
+    fn default() -> Self {
+        Self {
+            read: true,
+            write: false,
+            append: false,
+            truncate: false,
+            create: false,
+        }
     }
 }
 
@@ -69,6 +106,26 @@ pub fn append(path: &str, content: &[u8]) -> Result<()> {
         .map_err(|err| io_error(err).with_op("ptool.fs.append").with_path(path))?;
     file.write_all(content)
         .map_err(|err| io_error(err).with_op("ptool.fs.append").with_path(path))
+}
+
+pub fn open(path: &str, options: FsOpenOptions) -> Result<FsFileHandle> {
+    ensure_non_empty_path(path)?;
+
+    let file = fs::OpenOptions::new()
+        .read(options.read)
+        .write(options.write)
+        .append(options.append)
+        .truncate(options.truncate)
+        .create(options.create)
+        .open(path)
+        .map_err(|err| io_error(err).with_op("ptool.fs.open").with_path(path))?;
+
+    Ok(FsFileHandle {
+        path: path.to_string(),
+        readable: options.read,
+        writable: options.write || options.append,
+        file: Mutex::new(Some(file)),
+    })
 }
 
 pub fn mkdir(path: &str, options: FsMkdirOptions) -> Result<()> {
@@ -227,6 +284,146 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
         from: src.to_string(),
         to: dst.to_string(),
     })
+}
+
+impl FsOpenOptions {
+    pub fn parse(mode: &str) -> Result<Self> {
+        let normalized: String = mode.chars().filter(|ch| *ch != 'b').collect();
+        match normalized.as_str() {
+            "r" => Ok(Self::default()),
+            "w" => Ok(Self {
+                read: false,
+                write: true,
+                append: false,
+                truncate: true,
+                create: true,
+            }),
+            "a" => Ok(Self {
+                read: false,
+                write: false,
+                append: true,
+                truncate: false,
+                create: true,
+            }),
+            "r+" => Ok(Self {
+                read: true,
+                write: true,
+                append: false,
+                truncate: false,
+                create: false,
+            }),
+            "w+" => Ok(Self {
+                read: true,
+                write: true,
+                append: false,
+                truncate: true,
+                create: true,
+            }),
+            "a+" => Ok(Self {
+                read: true,
+                write: false,
+                append: true,
+                truncate: false,
+                create: true,
+            }),
+            _ => Err(Error::new(
+                ErrorKind::InvalidFsOption,
+                format!("invalid file open mode `{mode}`"),
+            )
+            .with_op("ptool.fs.open")),
+        }
+    }
+}
+
+impl FsFileHandle {
+    pub fn read(&self, len: Option<usize>) -> Result<Vec<u8>> {
+        if !self.readable {
+            return Err(Error::new(
+                ErrorKind::Unsupported,
+                "file handle was not opened for reading",
+            )
+            .with_op("ptool.fs.File:read()")
+            .with_path(&self.path));
+        }
+
+        self.with_file("ptool.fs.File:read()", |file| match len {
+            Some(len) => {
+                let mut buffer = vec![0; len];
+                let read = file.read(&mut buffer)?;
+                buffer.truncate(read);
+                Ok(buffer)
+            }
+            None => {
+                let mut buffer = Vec::new();
+                file.read_to_end(&mut buffer)?;
+                Ok(buffer)
+            }
+        })
+    }
+
+    pub fn write(&self, content: &[u8]) -> Result<()> {
+        if !self.writable {
+            return Err(Error::new(
+                ErrorKind::Unsupported,
+                "file handle was not opened for writing",
+            )
+            .with_op("ptool.fs.File:write()")
+            .with_path(&self.path));
+        }
+
+        self.with_file("ptool.fs.File:write()", |file| file.write_all(content))
+    }
+
+    pub fn flush(&self) -> Result<()> {
+        self.with_file("ptool.fs.File:flush()", |file| file.flush())
+    }
+
+    pub fn seek(&self, whence: FsSeekWhence, offset: i64) -> Result<u64> {
+        let whence = match whence {
+            FsSeekWhence::Set => {
+                let offset = u64::try_from(offset).map_err(|_| {
+                    Error::new(
+                        ErrorKind::InvalidArgs,
+                        "`offset` must be >= 0 when `whence` is `set`",
+                    )
+                    .with_op("ptool.fs.File:seek()")
+                    .with_path(&self.path)
+                })?;
+                SeekFrom::Start(offset)
+            }
+            FsSeekWhence::Cur => SeekFrom::Current(offset),
+            FsSeekWhence::End => SeekFrom::End(offset),
+        };
+
+        self.with_file("ptool.fs.File:seek()", |file| file.seek(whence))
+    }
+
+    pub fn close(&self) -> Result<()> {
+        let mut file = self
+            .file
+            .lock()
+            .expect("ptool-engine fs file handle lock poisoned");
+        file.take();
+        Ok(())
+    }
+
+    fn with_file<T>(
+        &self,
+        op: &str,
+        f: impl FnOnce(&mut fs::File) -> std::io::Result<T>,
+    ) -> Result<T> {
+        let mut file = self
+            .file
+            .lock()
+            .expect("ptool-engine fs file handle lock poisoned");
+        let Some(file) = file.as_mut() else {
+            return Err(Error::new(ErrorKind::Io, "file handle is closed")
+                .with_op(op)
+                .with_path(&self.path));
+        };
+
+        f(file).map_err(|err| io_error(err).with_op(op).with_path(&self.path))
+    }
 }
 
 fn ensure_non_empty_path(path: &str) -> Result<()> {

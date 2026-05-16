@@ -68,6 +68,143 @@ ptool.fs.append("tmp/log.txt", "first line\n")
 ptool.fs.append("tmp/log.txt", "second line\n")
 ```
 
+## ptool.fs.open
+
+> `Unreleased` - 引入。
+
+`ptool.fs.open(path[, mode])` 打开一个本地文件，并返回一个 `File` 对象。
+
+参数：
+
+- `path`（string，必填）：文件路径。
+- `mode`（string，选填）：文件模式。默认为 `"r"`。
+
+支持的模式：
+
+- `"r"`：以读取方式打开。
+- `"w"`：以写入方式打开，截断已有内容，并在需要时创建文件。
+- `"a"`：以追加方式打开，并在需要时创建文件。
+- `"r+"`：以读写方式打开，不截断内容。
+- `"w+"`：以读写方式打开，截断已有内容，并在需要时创建文件。
+- `"a+"`：以读取和追加方式打开，并在需要时创建文件。
+
+说明：
+
+- 模式中可以包含 `b`，例如 `"rb"` 或 `"w+b"`。
+- `a` 和 `a+` 的写入始终会落到文件末尾。
+
+示例：
+
+```lua
+local file = ptool.fs.open("tmp/log.txt", "a+")
+file:write("hello\n")
+file:flush()
+file:close()
+```
+
+## File
+
+> `Unreleased` - 引入。
+
+`File` 表示由 `ptool.fs.open()` 返回的一个已打开的本地文件句柄。
+
+它被实现为一个 Lua userdata。
+
+方法：
+
+- `file:read([n])` -> `string`
+- `file:write(content)` -> `nil`
+- `file:flush()` -> `nil`
+- `file:seek([whence[, offset]])` -> `integer`
+- `file:close()` -> `nil`
+
+### read
+
+> `Unreleased` - 引入。
+
+规范 API 名称：`ptool.fs.File:read`。
+
+`file:read([n])` 从当前文件位置读取字节，并将其作为 Lua 字符串返回。
+
+- `n`（integer，选填）：最多读取的字节数。省略时会从当前位置一直读取到 EOF。
+- 返回：`string`。
+
+行为说明：
+
+- 在 EOF 处会返回空字符串。
+- 读取的是原始字节，因此二进制数据会被原样保留。
+
+示例：
+
+```lua
+local file = ptool.fs.open("README.md")
+local prefix = file:read(16)
+local rest = file:read()
+file:close()
+```
+
+### write
+
+> `Unreleased` - 引入。
+
+规范 API 名称：`ptool.fs.File:write`。
+
+`file:write(content)` 会在当前文件位置写入一个 Lua 字符串。
+
+- `content`（string，必填）：要写入的字节。
+
+行为说明：
+
+- 会按提供的内容精确写入原始字节。
+- 对于 append 模式的句柄，写入总是追加到文件末尾。
+
+### flush
+
+> `Unreleased` - 引入。
+
+规范 API 名称：`ptool.fs.File:flush`。
+
+`file:flush()` 会将缓冲的文件写入刷新到操作系统。
+
+### seek
+
+> `Unreleased` - 引入。
+
+规范 API 名称：`ptool.fs.File:seek`。
+
+`file:seek([whence[, offset]])` 会移动当前文件位置。
+
+- `whence`（string，选填）：`"set"`、`"cur"` 或 `"end"` 之一。默认为 `"cur"`。
+- `offset`（integer，选填）：相对于 `whence` 的字节偏移量。默认为 `0`。
+- 返回：`integer`。
+
+行为说明：
+
+- 返回新的绝对文件位置。
+- `"set"` 要求 `offset` 必须为非负数。
+
+示例：
+
+```lua
+local file = ptool.fs.open("tmp/data.bin", "w+")
+file:write("abcdef")
+file:seek("set", 2)
+print(file:read(2)) -- cd
+file:close()
+```
+
+### close
+
+> `Unreleased` - 引入。
+
+规范 API 名称：`ptool.fs.File:close`。
+
+`file:close()` 会关闭该文件句柄。
+
+行为说明：
+
+- 关闭后，这个文件句柄将不能再继续使用。
+
 ## ptool.fs.mkdir
 
 > `v0.1.0` - 引入。
