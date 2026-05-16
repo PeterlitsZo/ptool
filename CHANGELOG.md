@@ -4,6 +4,17 @@
 
 TODO...
 
+## v0.7.1 (2026-05-16)
+
+### Fixed
+
+- Fixed the release snapshot workflow so versioned documentation now preserves
+  the generated POT templates and locale PO catalogs needed for docs i18n,
+  instead of dropping those translation sources during snapshot creation.
+- Fixed `linux-x86` release builds to be more reliable under the musl
+  `cargo-zigbuild` pipeline, reducing 32-bit Linux packaging failures caused
+  by vendored OpenSSL linker issues.
+
 ## v0.7.0 (2026-05-16)
 
 ### Added

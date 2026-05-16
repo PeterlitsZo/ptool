@@ -1,0 +1,1035 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:1
+msgid "Git API"
+msgstr "API Git"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:3
+msgid "Git repository helpers are available under `ptool.git` and `p.git`."
+msgstr ""
+"Os auxiliares do repositório Git estão disponíveis em `ptool.git` e `p.git`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:5
+msgid ""
+"This module is backed by `git2` / `libgit2`, not by invoking the `git` "
+"command-line tool."
+msgstr ""
+"Este módulo é baseado em `git2` / `libgit2`, não na invocação da ferramenta "
+"de linha de comando `git`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:8
+msgid "ptool.git.open"
+msgstr "ptool.git.open"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:12
+msgid ""
+"`ptool.git.open(path?)` opens a repository directly and returns a `Repo` "
+"object."
+msgstr ""
+"`ptool.git.open(path?)` abre um repositório diretamente e retorna um objeto "
+"`Repo`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:15
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:15"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:17
+msgid ""
+"`path` (string, optional): Repository path. If omitted, the current `ptool` "
+"runtime directory is used."
+msgstr ""
+"`path` (string, opcional): Caminho do repositório. Se omitido, o diretório "
+"de tempo de execução atual do `ptool` será usado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:20
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:20"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:22
+msgid ""
+"Relative paths are resolved from the current `ptool` runtime directory, so "
+"they follow `ptool.cd(...)`."
+msgstr ""
+"Os caminhos relativos são resolvidos a partir do diretório de tempo de "
+"execução `ptool` atual, portanto, seguem `ptool.cd(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:24
+msgid ""
+"This does not search parent directories. Use `ptool.git.discover(...)` when "
+"you want repository discovery behavior."
+msgstr ""
+"Isso não pesquisa diretórios pais. Use `ptool.git.discover(...)` quando "
+"desejar um comportamento de descoberta de repositório."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:27
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:27"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:34
+msgid "ptool.git.discover"
+msgstr "ptool.git.discover"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:38
+msgid ""
+"`ptool.git.discover(path?)` finds a repository starting from `path` and "
+"walking up parent directories, then returns a `Repo` object."
+msgstr ""
+"`ptool.git.discover(path?)` encontra um repositório começando em `path` e "
+"subindo nos diretórios pais e, em seguida, retorna um objeto `Repo`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:43
+msgid ""
+"`path` (string, optional): Starting path. If omitted, the current `ptool` "
+"runtime directory is used."
+msgstr ""
+"`path` (string, opcional): Caminho inicial. Se omitido, o diretório de tempo "
+"de execução atual do `ptool` será usado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:48
+msgid "Relative paths are resolved from the current `ptool` runtime directory."
+msgstr ""
+"Caminhos relativos são resolvidos a partir do diretório de runtime atual do "
+"`ptool`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:49
+msgid ""
+"This is useful when a script may run from a subdirectory inside a worktree."
+msgstr ""
+"Isto é útil quando um script pode ser executado a partir de um subdiretório "
+"dentro de uma árvore de trabalho."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:58
+msgid "ptool.git.clone"
+msgstr "ptool.git.clone"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:62
+msgid ""
+"`ptool.git.clone(url, path[, options])` clones a repository and returns a "
+"`Repo` object for the cloned repository."
+msgstr ""
+"`ptool.git.clone(url, path[, options])` clona um repositório e retorna um "
+"objeto `Repo` para o repositório clonado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:67
+msgid "`url` (string, required): Remote repository URL."
+msgstr "`url` (string, obrigatório): URL do repositório remoto."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:68
+msgid "`path` (string, required): Destination path."
+msgstr "`path` (string, obrigatório): Caminho de destino."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
+msgid "`options` (table, optional): Clone options. Supported fields:"
+msgstr "`options` (tabela, opcional): Opções de clonagem. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
+msgid "`branch` (string, optional): Branch name to check out after cloning."
+msgstr ""
+"`branch` (string, opcional): Nome da ramificação a ser verificada após a "
+"clonagem."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
+msgid ""
+"`bare` (boolean, optional): Whether to create a bare repository. Defaults to "
+"`false`."
+msgstr ""
+"`bare` (booleano, opcional): Se deseja criar um repositório bare. O padrão é "
+"`false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:69
+msgid "`auth` (table, optional): Remote authentication settings."
+msgstr "`auth` (tabela, opcional): Configurações de autenticação remota."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:75
+msgid "`auth` fields:"
+msgstr "Campos de `auth`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
+msgid "`kind` (string, required): Authentication mode. Supported values:"
+msgstr "`kind` (string, obrigatório): Modo de autenticação. Valores suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
+msgid "`\"default\"`: Use libgit2 default credentials."
+msgstr "`\"default\"`: Use credenciais padrão da libgit2."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
+msgid "`\"ssh_agent\"`: Authenticate through the local SSH agent."
+msgstr "`\"ssh_agent\"`: Autentique através do agente SSH local."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:77
+msgid "`\"userpass\"`: Use a plaintext username and password."
+msgstr "`\"userpass\"`: Use um nome de usuário e senha em texto simples."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:81
+msgid "`username` (string, optional): Username for `\"ssh_agent\"`."
+msgstr "`username` (string, opcional): Nome de usuário para `\"ssh_agent\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:82
+msgid "`username` (string, required): Username for `\"userpass\"`."
+msgstr "`username` (string, obrigatório): Nome de usuário para `\"userpass\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:83
+msgid "`password` (string, required): Password for `\"userpass\"`."
+msgstr "`password` (string, obrigatório): Senha para `\"userpass\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:85
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:85"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:87
+msgid ""
+"Relative destination paths are resolved from the current `ptool` runtime "
+"directory."
+msgstr ""
+"Os caminhos de destino relativos são resolvidos a partir do diretório de "
+"tempo de execução atual do `ptool`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:89
+msgid ""
+"Authentication options are also used by `repo:fetch(...)` and `repo:push(...)"
+"`."
+msgstr ""
+"As opções de autenticação também são usadas por `repo:fetch(...)` e "
+"`repo:push(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:109
+msgid "Repo"
+msgstr "Repo"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:113
+msgid ""
+"`Repo` represents an open Git repository handle returned by "
+"`ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`."
+msgstr ""
+"`Repo` representa um identificador de repositório Git aberto retornado por "
+"`ptool.git.open()`, `ptool.git.discover()` ou `ptool.git.clone()`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:116
+msgid "It is implemented as a Lua userdata."
+msgstr "Ele é implementado como um userdata de Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:118
+msgid "Methods:"
+msgstr "Métodos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:120
+msgid "`repo:path()` -> `string`"
+msgstr "`repo:path()` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:121
+msgid "`repo:root()` -> `string|nil`"
+msgstr "`repo:root()` -> `string|nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:122
+msgid "`repo:is_bare()` -> `boolean`"
+msgstr "`repo:is_bare()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:123
+msgid "`repo:head()` -> `table`"
+msgstr "`repo:head()` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:124
+msgid "`repo:current_branch()` -> `string|nil`"
+msgstr "`repo:current_branch()` -> `string|nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:125
+msgid "`repo:status([options])` -> `table`"
+msgstr "`repo:status([options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:126
+msgid "`repo:is_clean([options])` -> `boolean`"
+msgstr "`repo:is_clean([options])` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:127
+msgid "`repo:add(paths[, options])` -> `nil`"
+msgstr "`repo:add(paths[, options])` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:128
+msgid "`repo:commit(message[, options])` -> `string`"
+msgstr "`repo:commit(message[, options])` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:129
+msgid "`repo:checkout(rev[, options])` -> `nil`"
+msgstr "`repo:checkout(rev[, options])` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:130
+msgid "`repo:switch(branch[, options])` -> `nil`"
+msgstr "`repo:switch(branch[, options])` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:131
+msgid "`repo:fetch([remote[, options]])` -> `table`"
+msgstr "`repo:fetch([remote[, options]])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:132
+msgid "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
+msgstr "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:134
+msgid "path"
+msgstr "path"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:138
+msgid "Canonical API name: `ptool.git.Repo:path`."
+msgstr "Nome canônico da API: `ptool.git.Repo:path`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:140
+msgid "`repo:path()` returns the repository git directory path."
+msgstr "`repo:path()` retorna o caminho do diretório git do repositório."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:142
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:144
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:144"
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:146
+msgid "For a non-bare repository this is typically the `.git` directory."
+msgstr "Para um repositório não bare, normalmente este é o diretório `.git`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:147
+msgid "For a bare repository this is the repository directory itself."
+msgstr "Para um repositório bare, este é o próprio diretório do repositório."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:149
+msgid "root"
+msgstr "root"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:153
+msgid "Canonical API name: `ptool.git.Repo:root`."
+msgstr "Nome canônico da API: `ptool.git.Repo:root`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:155
+msgid "`repo:root()` returns the worktree root directory."
+msgstr "`repo:root()` retorna o diretório raiz da árvore de trabalho."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:157
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:157"
+msgid "Returns: `string|nil`."
+msgstr "Retorna: `string|nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:159
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:159"
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:161
+msgid "This returns `nil` for bare repositories."
+msgstr "Isso retorna `nil` para repositórios bare."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:163
+msgid "is_bare"
+msgstr "is_bare"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:167
+msgid "Canonical API name: `ptool.git.Repo:is_bare`."
+msgstr "Nome canônico da API: `ptool.git.Repo:is_bare`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:169
+msgid "`repo:is_bare()` reports whether the repository is bare."
+msgstr "`repo:is_bare()` informa se o repositório é bare."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:171
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:171"
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:173
+msgid "head"
+msgstr "head"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:177
+msgid "Canonical API name: `ptool.git.Repo:head`."
+msgstr "Nome canônico da API: `ptool.git.Repo:head`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:179
+msgid "`repo:head()` returns HEAD information as a table with:"
+msgstr "`repo:head()` retorna informações HEAD como uma tabela com:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:181
+msgid "`oid` (string|nil): The current commit OID if available."
+msgstr "`oid` (string|nil): O OID do commit atual, se disponível."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:182
+msgid "`shorthand` (string|nil): A short name for HEAD, such as a branch name."
+msgstr ""
+"`shorthand` (string|nil): Um nome curto para HEAD, como o nome de uma branch."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:183
+msgid "`detached` (boolean): Whether HEAD is detached."
+msgstr "`detached` (booleano): Se HEAD está desanexado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:184
+msgid ""
+"`unborn` (boolean): Whether the repository does not yet have an initial "
+"commit."
+msgstr ""
+"`unborn` (booleano): Se o repositório ainda não possui um commit inicial."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:187
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:187"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:195
+msgid "current_branch"
+msgstr "current_branch"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:199
+msgid "Canonical API name: `ptool.git.Repo:current_branch`."
+msgstr "Nome canônico da API: `ptool.git.Repo:current_branch`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:201
+msgid "`repo:current_branch()` returns the current local branch name."
+msgstr "`repo:current_branch()` retorna o nome da branch local atual."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:203
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:203"
+msgid "Returns: `string|nil`."
+msgstr "Retorna: `string|nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:205
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:205"
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:207
+msgid "This returns `nil` when HEAD is detached."
+msgstr "Isso retorna `nil` quando HEAD é desconectado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:208
+msgid "This also returns `nil` for an unborn branch before the first commit."
+msgstr ""
+"Isso também retorna `nil` para uma branch unborn antes do primeiro commit."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:210
+msgid "status"
+msgstr "status"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:214
+msgid "Canonical API name: `ptool.git.Repo:status`."
+msgstr "Nome canônico da API: `ptool.git.Repo:status`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:216
+msgid ""
+"`repo:status([options])` summarizes repository status and returns a table "
+"with:"
+msgstr ""
+"`repo:status([options])` resume o status do repositório e retorna uma tabela "
+"com:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:218
+msgid "`root` (string|nil): The worktree root directory."
+msgstr "`root` (string|nil): O diretório raiz da árvore de trabalho."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:219
+msgid "`branch` (string|nil): The current local branch name."
+msgstr "`branch` (string|nil): O nome da branch local atual."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:220
+msgid "`head` (table): The same HEAD information returned by `repo:head()`."
+msgstr "`head` (tabela): A mesma informação HEAD retornada por `repo:head()`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:221
+msgid "`upstream` (string|nil): The upstream branch name, when configured."
+msgstr "`upstream` (string|nil): O nome da branch upstream, quando configurada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:222
+msgid "`ahead` (integer): Number of commits ahead of upstream."
+msgstr "`ahead` (inteiro): Número de commits à frente do upstream."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:223
+msgid "`behind` (integer): Number of commits behind upstream."
+msgstr "`behind` (inteiro): Número de commits atrás do upstream."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:224
+msgid ""
+"`clean` (boolean): Whether the repository has no visible status entries."
+msgstr ""
+"`clean` (booleano): Se o repositório não possui entradas de status visíveis."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:225
+msgid "`entries` (table): An array of status entry tables."
+msgstr "`entries` (tabela): Uma matriz de tabelas de entrada de status."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:227
+msgid "`entries[i]` contains:"
+msgstr "`entries[i]` contém:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:229
+msgid "`path` (string): Repository-relative path."
+msgstr "`path` (string): Caminho relativo ao repositório."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:230
+msgid ""
+"`index_status` (string|nil): Index-side status. Supported values currently "
+"include `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"`, and `"
+"\"typechange\"`."
+msgstr ""
+"`index_status` (string|nil): Status do lado do índice. Os valores suportados "
+"atualmente incluem `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"` e "
+"`\"typechange\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:232
+msgid ""
+"`worktree_status` (string|nil): Worktree-side status. Supported values "
+"currently include `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"`, `"
+"\"typechange\"`, and `\"ignored\"`."
+msgstr ""
+"`worktree_status` (string|nil): Status do lado da árvore de trabalho. Os "
+"valores suportados atualmente incluem `\"new\"`, `\"modified\"`, `\"deleted\""
+"`, `\"renamed\"`, `\"typechange\"` e `\"ignored\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:235
+msgid "`conflicted` (boolean): Whether the path is conflicted."
+msgstr "`conflicted` (booleano): Se o caminho está em conflito."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:236
+msgid "`ignored` (boolean): Whether the path is ignored."
+msgstr "`ignored` (booleano): Se o caminho é ignorado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:238
+msgid "`options` fields:"
+msgstr "Campos de `options`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:240
+msgid ""
+"`include_untracked` (boolean, optional): Whether to include untracked files. "
+"Defaults to `true`."
+msgstr ""
+"`include_untracked` (booleano, opcional): Se deseja incluir arquivos não "
+"rastreados. O padrão é `true`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:242
+msgid ""
+"`include_ignored` (boolean, optional): Whether to include ignored files. "
+"Defaults to `false`."
+msgstr ""
+"`include_ignored` (booleano, opcional): Se deseja incluir arquivos "
+"ignorados. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:244
+msgid ""
+"`recurse_untracked_dirs` (boolean, optional): Whether to recurse into "
+"untracked directories. Defaults to `true`."
+msgstr ""
+"`recurse_untracked_dirs` (booleano, opcional): se deve recorrer a diretórios "
+"não rastreados. O padrão é `true`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:247
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:247"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:259
+msgid "is_clean"
+msgstr "is_clean"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:263
+msgid "Canonical API name: `ptool.git.Repo:is_clean`."
+msgstr "Nome canônico da API: `ptool.git.Repo:is_clean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:265
+msgid "`repo:is_clean([options])` returns whether the repository is clean."
+msgstr "`repo:is_clean([options])` retorna se o repositório está limpo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:267
+msgid ""
+"`options` (table, optional): The same options accepted by `repo:status(...)`."
+msgstr ""
+"`options` (tabela, opcional): Mesmas opções aceitas por `repo:status(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268"
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:270
+msgid "add"
+msgstr "add"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:274
+msgid "Canonical API name: `ptool.git.Repo:add`."
+msgstr "Nome canônico da API: `ptool.git.Repo:add`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:276
+msgid "`repo:add(paths[, options])` stages one or more paths in the index."
+msgstr "`repo:add(paths[, options])` adiciona um ou mais caminhos ao índice."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:278
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:278"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:280
+msgid "`paths` (string|string[], required): A path or an array of paths."
+msgstr ""
+"`paths` (string|string[], obrigatório): Um caminho ou uma matriz de caminhos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:281
+msgid "`options` (table, optional): Add options. Supported fields:"
+msgstr "`options` (tabela, opcional): Adicionar opções. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:281
+msgid ""
+"`update` (boolean, optional): Update only paths already known to the index. "
+"Defaults to `false`."
+msgstr ""
+"`update` (booleano, opcional): Atualiza apenas caminhos já conhecidos no "
+"índice. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:287
+msgid "Paths are interpreted relative to the repository worktree."
+msgstr ""
+"Os caminhos são interpretados em relação à árvore de trabalho do repositório."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:289
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:289"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:296
+msgid "commit"
+msgstr "commit"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:300
+msgid "Canonical API name: `ptool.git.Repo:commit`."
+msgstr "Nome canônico da API: `ptool.git.Repo:commit`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:302
+msgid ""
+"`repo:commit(message[, options])` creates a commit from the current index "
+"and returns the new commit OID."
+msgstr ""
+"`repo:commit(message[, options])` cria um commit a partir do índice atual e "
+"retorna o novo OID do commit."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:305
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:305"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:307
+msgid "`message` (string, required): Commit message."
+msgstr "`message` (string, obrigatório): Mensagem do commit."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:308
+msgid "`options` (table, optional): Commit options. Supported fields:"
+msgstr "`options` (tabela, opcional): Opções de confirmação. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:308
+msgid "`author` (table, optional): Author signature."
+msgstr "`author` (tabela, opcional): Assinatura do autor."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:308
+msgid "`committer` (table, optional): Committer signature."
+msgstr "`committer` (tabela, opcional): Assinatura do committer."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:312
+msgid "Signature fields:"
+msgstr "Campos de assinatura:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:314
+msgid "`name` (string, required)"
+msgstr "`name` (string, obrigatório)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:315
+msgid "`email` (string, required)"
+msgstr "`email` (string, obrigatório)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:319
+msgid ""
+"When `author` and `committer` are omitted, `ptool` tries to use the Git "
+"repository identity from configuration."
+msgstr ""
+"Quando `author` e `committer` são omitidos, `ptool` tenta usar a identidade "
+"do repositório Git da configuração."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:321
+msgid ""
+"If no identity is configured and no explicit signature is provided, an error "
+"is raised."
+msgstr ""
+"Se nenhuma identidade for configurada e nenhuma assinatura explícita for "
+"fornecida, um erro será gerado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:324
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:324"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:337
+msgid "checkout"
+msgstr "checkout"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:341
+msgid "Canonical API name: `ptool.git.Repo:checkout`."
+msgstr "Nome canônico da API: `ptool.git.Repo:checkout`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:343
+msgid "`repo:checkout(rev[, options])` checks out a revision."
+msgstr "`repo:checkout(rev[, options])` faz checkout de uma revisão."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:345
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:345"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:347
+msgid ""
+"`rev` (string, required): Revision expression such as a branch name, tag "
+"name, or commit OID."
+msgstr ""
+"`rev` (string, obrigatório): expressão de revisão, como nome de ramificação, "
+"nome de tag ou OID de commit."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:349
+msgid "`options` (table, optional): Checkout options. Supported fields:"
+msgstr "`options` (tabela, opcional): Opções de checkout. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:349
+msgid ""
+"`force` (boolean, optional): Whether to force checkout. Defaults to `false`."
+msgstr ""
+"`force` (booleano, opcional): se deve forçar o checkout. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:353
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:353"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:355
+msgid "This can detach HEAD when `rev` does not resolve to a named reference."
+msgstr ""
+"Isso pode desanexar HEAD quando `rev` não resolve para uma referência "
+"nomeada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:357
+msgid "switch"
+msgstr "switch"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:361
+msgid "Canonical API name: `ptool.git.Repo:switch`."
+msgstr "Nome canônico da API: `ptool.git.Repo:switch`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:363
+msgid "`repo:switch(branch[, options])` switches HEAD to a local branch."
+msgstr "`repo:switch(branch[, options])` alterna HEAD para uma branch local."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:365
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:365"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:367
+msgid "`branch` (string, required): Local branch name."
+msgstr "`branch` (string, obrigatório): Nome da branch local."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
+msgid "`options` (table, optional): Switch options. Supported fields:"
+msgstr "`options` (tabela, opcional): Alternar opções. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
+msgid ""
+"`create` (boolean, optional): Whether to create the branch first. Defaults "
+"to `false`."
+msgstr ""
+"`create` (booleano, opcional): Se a ramificação deve ser criada primeiro. O "
+"padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
+msgid ""
+"`force` (boolean, optional): Whether to force the checkout. Defaults to "
+"`false`."
+msgstr ""
+"`force` (booleano, opcional): Se deve forçar o checkout. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
+msgid ""
+"`start_point` (string, optional): Revision to branch from when `create = "
+"true`. Defaults to `HEAD`."
+msgstr ""
+"`start_point` (string, opcional): Revisão para ramificação a partir de `"
+"create = true`. O padrão é `HEAD`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:376
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:376"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:386
+msgid "fetch"
+msgstr "fetch"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:390
+msgid "Canonical API name: `ptool.git.Repo:fetch`."
+msgstr "Nome canônico da API: `ptool.git.Repo:fetch`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:392
+msgid ""
+"`repo:fetch([remote[, options]])` fetches from a remote and returns transfer "
+"statistics."
+msgstr ""
+"`repo:fetch([remote[, options]])` faz fetch de um remoto e retorna "
+"estatísticas de transferência."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:395
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:395"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:397
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:397"
+msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
+msgstr "`remote` (string, opcional): Nome remoto. O padrão é `\"origin\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398
+msgid "`options` (table, optional): Fetch options. Supported fields:"
+msgstr "`options` (tabela, opcional): Opções de busca. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398"
+msgid ""
+"`refspecs` (string|string[], optional): One refspec or an array of refspecs."
+msgstr ""
+"`refspecs` (string|string[], opcional): Um refspec ou uma matriz de refspecs."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:398"
+msgid ""
+"`auth` (table, optional): Remote authentication settings. Uses the same "
+"structure as `ptool.git.clone(...)`."
+msgstr ""
+"`auth` (tabela, opcional): Configurações de autenticação remota. Usa a mesma "
+"estrutura do `ptool.git.clone(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:404
+msgid "Returns:"
+msgstr "Retorna:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:406
+msgid "`received_objects` (integer)"
+msgstr "`received_objects` (inteiro)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:407
+msgid "`indexed_objects` (integer)"
+msgstr "`indexed_objects` (inteiro)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:408
+msgid "`local_objects` (integer)"
+msgstr "`local_objects` (inteiro)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:409
+msgid "`total_objects` (integer)"
+msgstr "`total_objects` (inteiro)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:410
+msgid "`received_bytes` (integer)"
+msgstr "`received_bytes` (inteiro)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:412
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:412"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:424
+msgid "push"
+msgstr "push"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:428
+msgid "Canonical API name: `ptool.git.Repo:push`."
+msgstr "Nome canônico da API: `ptool.git.Repo:push`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:430
+msgid "`repo:push([remote[, refspecs[, options]]])` pushes refs to a remote."
+msgstr ""
+"`repo:push([remote[, refspecs[, options]]])` faz push de refs para um remoto."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:432
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:432"
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:434
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:434"
+msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
+msgstr "`remote` (string, opcional): Nome remoto. O padrão é `\"origin\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:435
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:435"
+msgid ""
+"`refspecs` (string|string[], optional): One refspec or an array of refspecs."
+msgstr ""
+"`refspecs` (string|string[], opcional): Um refspec ou uma matriz de refspecs."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:436
+msgid "`options` (table, optional): Push options. Supported fields:"
+msgstr "`options` (tabela, opcional): Opções push. Campos suportados:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:436
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:436"
+msgid ""
+"`auth` (table, optional): Remote authentication settings. Uses the same "
+"structure as `ptool.git.clone(...)`."
+msgstr ""
+"`auth` (tabela, opcional): Configurações de autenticação remota. Usa a mesma "
+"estrutura do `ptool.git.clone(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:440
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:440"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:442
+msgid ""
+"When `refspecs` is omitted, `ptool` tries to push the current local branch "
+"to the branch of the same name on the remote."
+msgstr ""
+"Quando `refspecs` é omitido, `ptool` tenta fazer push da branch local atual "
+"para a branch de mesmo nome no remoto."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:444
+msgid "Omitting `refspecs` while HEAD is detached raises an error."
+msgstr "Omitir `refspecs` enquanto HEAD está desconectado gera um erro."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:446
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:446"
+msgid "Example:"
+msgstr "Exemplo:"

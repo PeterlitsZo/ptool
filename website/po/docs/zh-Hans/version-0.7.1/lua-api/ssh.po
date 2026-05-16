@@ -1,0 +1,1731 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-16 10:49+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:1
+msgid "SSH API"
+msgstr "SSH API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:3
+msgid ""
+"SSH connection, remote execution, and file transfer helpers are available "
+"under `ptool.ssh` and `p.ssh`."
+msgstr "SSH 连接、远程执行和文件传输辅助能力位于 `ptool.ssh` 和 `p.ssh` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:5
+msgid "ptool.ssh.connect"
+msgstr "ptool.ssh.connect"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:9
+msgid ""
+"`ptool.ssh.connect(target_or_options)` prepares an SSH connection handle "
+"backed by the system `ssh` command and returns a `Connection` object."
+msgstr ""
+"`ptool.ssh.connect(target_or_options)` 会准备一个由系统 `ssh` 命令驱动的 SSH "
+"连接句柄，并返回一个 `Connection` 对象。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:12
+msgid "`ssh` must be available on `PATH`."
+msgstr "运行环境中必须能在 `PATH` 中找到 `ssh`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:14
+msgid "Arguments:"
+msgstr "参数："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`target_or_options` (string|table, required):"
+msgstr "`target_or_options`（string|table，必填）："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "When a string is provided, it is treated as an SSH target."
+msgstr "传入字符串时，会被视为 SSH target。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "When a table is provided, it currently supports:"
+msgstr "传入 table 时，目前支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid ""
+"`target` (string, optional): SSH target string such as `"
+"\"deploy@example.com\"` or `\"deploy@example.com:2222\"`."
+msgstr ""
+"`target`（string，可选）：SSH target 字符串，例如 `\"deploy@example.com\"` 或"
+" `\"deploy@example.com:2222\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`host` (string, optional): Hostname or IP address."
+msgstr "`host`（string，可选）：主机名或 IP 地址。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid ""
+"`user` (string, optional): SSH username. Defaults to `$USER`, or `\"root\"` "
+"if `$USER` is unavailable."
+msgstr "`user`（string，可选）：SSH 用户名。默认取 `$USER`；如果 `$USER` 不可用，则默"
+"认为 `\"root\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`port` (integer, optional): SSH port. Defaults to `22`."
+msgstr "`port`（integer，可选）：SSH 端口。默认值为 `22`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`auth` (table, optional): Authentication settings."
+msgstr "`auth`（table，可选）：认证设置。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid "`host_key` (table, optional): Host key verification settings."
+msgstr "`host_key`（table，可选）：主机密钥校验设置。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid ""
+"`connect_timeout_ms` (integer, optional): Timeout in milliseconds. Defaults "
+"to `10000`."
+msgstr "`connect_timeout_ms`（integer，可选）：超时时间（毫秒）。默认值为 `10000`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:16
+msgid ""
+"`keepalive_interval_ms` (integer, optional): Keepalive interval in "
+"milliseconds."
+msgstr "`keepalive_interval_ms`（integer，可选）：keepalive 间隔（毫秒）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:32
+msgid "Supported target string examples:"
+msgstr "支持的 target 字符串示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:40
+msgid "`auth` fields:"
+msgstr "`auth` 字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:42
+msgid "`private_key_file` (string, optional): Path to a private key file."
+msgstr "`private_key_file`（string，可选）：私钥文件路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:43
+msgid ""
+"`private_key_passphrase` (string, optional): Passphrase for the private key. "
+"This is currently not supported."
+msgstr "`private_key_passphrase`（string，可选）：私钥口令。目前不支持。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:45
+msgid ""
+"`password` (string, optional): Password-based authentication. This is "
+"currently not supported."
+msgstr "`password`（string，可选）：密码认证所用的密码。目前不支持。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:48
+msgid "Authentication behavior:"
+msgstr "认证行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:50
+msgid ""
+"If `auth.private_key_file` is provided, `ptool` invokes `ssh` with that key "
+"via `-i` and also sets `IdentitiesOnly=yes`."
+msgstr ""
+"如果提供了 `auth.private_key_file`，`ptool` 会通过 `-i` 将该私钥传给 `ssh`，"
+"并同时设置 `IdentitiesOnly=yes`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:52
+msgid ""
+"If `auth.private_key_passphrase` or `auth.password` is provided, "
+"`ptool.ssh.connect(...)` fails because this API does not pass those secrets "
+"to the system `ssh` command."
+msgstr ""
+"如果提供了 `auth.private_key_passphrase` 或 `auth.password`， "
+"`ptool.ssh.connect(...)` 会失败，因为该 API 不会把这些密钥材料直接传给 系统 "
+"`ssh` 命令。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:55
+msgid ""
+"Otherwise, authentication is delegated to the local OpenSSH setup, including "
+"settings and mechanisms such as `IdentityFile`, `ProxyJump`, `ProxyCommand`, "
+"`ssh-agent`, and certificates."
+msgstr ""
+"否则，认证完全交给本机 OpenSSH 配置处理，包括 `IdentityFile`、 `ProxyJump`、"
+"`ProxyCommand`、`ssh-agent` 和证书等机制。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:58
+msgid ""
+"Relative key paths are resolved from the current `ptool` runtime directory, "
+"so they follow `ptool.cd(...)`."
+msgstr "相对私钥路径会从当前 `ptool` 运行时目录解析，因此会受到 `ptool.cd(...)` 的影"
+"响。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:60
+msgid "`~` and `~/...` are expanded in key paths."
+msgstr "私钥路径中的 `~` 和 `~/...` 会被展开。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:62
+msgid "`host_key` fields:"
+msgstr "`host_key` 字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
+msgid ""
+"`verify` (string, optional): Host key verification mode. Supported values:"
+msgstr "`verify`（string，可选）：主机密钥校验模式。支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
+msgid "`\"known_hosts\"`: Verify against a known_hosts file (default)."
+msgstr "`\"known_hosts\"`：根据 known_hosts 文件校验（默认）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:64
+msgid "`\"ignore\"`: Skip host key verification."
+msgstr "`\"ignore\"`：跳过主机密钥校验。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:67
+msgid ""
+"`known_hosts_file` (string, optional): Path to a known_hosts file. Used only "
+"when `verify = \"known_hosts\"`."
+msgstr ""
+"`known_hosts_file`（string，可选）：known_hosts 文件路径。仅在 `verify = "
+"\"known_hosts\"` 时使用。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:70
+msgid "Host key behavior:"
+msgstr "主机密钥行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:72
+msgid ""
+"If `verify = \"ignore\"`, `ptool` invokes `ssh` with "
+"`StrictHostKeyChecking=no` and `UserKnownHostsFile=/dev/null`."
+msgstr ""
+"如果 `verify = \"ignore\"`，`ptool` 会给 `ssh` 传入 "
+"`StrictHostKeyChecking=no` 和 `UserKnownHostsFile=/dev/null`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:74
+msgid ""
+"If `verify = \"known_hosts\"` and `known_hosts_file` is provided, `ptool` "
+"invokes `ssh` with `StrictHostKeyChecking=yes` and that `UserKnownHostsFile`."
+msgstr ""
+"如果 `verify = \"known_hosts\"` 且提供了 `known_hosts_file`，`ptool` 会给 "
+"`ssh` 传入 `StrictHostKeyChecking=yes`，并设置对应的 `UserKnownHostsFile`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:77
+msgid ""
+"If `verify = \"known_hosts\"` and `known_hosts_file` is omitted, or when "
+"`host_key` is omitted entirely, host key handling is delegated to the local "
+"OpenSSH configuration and defaults."
+msgstr ""
+"如果 `verify = \"known_hosts\"` 但省略了 `known_hosts_file`，或者整个 "
+"`host_key` 都被省略，则主机密钥处理交给本机 OpenSSH 配置和默认行为。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:80
+msgid ""
+"Relative `known_hosts_file` paths are resolved from the current `ptool` "
+"runtime directory."
+msgstr "相对 `known_hosts_file` 路径会从当前 `ptool` 运行时目录解析。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:82
+msgid "`~` and `~/...` are expanded in `known_hosts_file`."
+msgstr "`known_hosts_file` 中的 `~` 和 `~/...` 会被展开。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:83
+msgid ""
+"When `known_hosts_file` is provided explicitly, it overrides the default "
+"`UserKnownHostsFile` used by the local `ssh` command for this connection."
+msgstr ""
+"当显式提供 `known_hosts_file` 时，它会覆盖本次连接中本机 `ssh` 命令默认 使用"
+"的 `UserKnownHostsFile`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:86
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:86"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:102
+msgid "Connection"
+msgstr "Connection"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:104
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:104"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:106
+msgid ""
+"`Connection` represents an OpenSSH-backed connection handle returned by "
+"`ptool.ssh.connect()`."
+msgstr "`Connection` 表示由 `ptool.ssh.connect()` 返回的、基于 OpenSSH 的连接句柄。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:109
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:109"
+msgid "It is implemented as a Lua userdata."
+msgstr "它实现为 Lua 用户数据（userdata）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:111
+msgid "Fields and methods:"
+msgstr "字段和方法："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "Fields:"
+msgstr "字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.host` (string)"
+msgstr "`conn.host`（string）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.user` (string)"
+msgstr "`conn.user`（string）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.port` (integer)"
+msgstr "`conn.port`（integer）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:113
+msgid "`conn.target` (string)"
+msgstr "`conn.target`（string）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118"
+msgid "Methods:"
+msgstr "方法："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:run(...)` -> `table`"
+msgstr "`conn:run(...)` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:run_capture(...)` -> `table`"
+msgstr "`conn:run_capture(...)` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:http_request(options)` -> `Response`"
+msgstr "`conn:http_request(options)` -> `Response`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:path(path)` -> `RemotePath`"
+msgstr "`conn:path(path)` -> `RemotePath`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:exists(path)` -> `boolean`"
+msgstr "`conn:exists(path)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:is_file(path)` -> `boolean`"
+msgstr "`conn:is_file(path)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:is_dir(path)` -> `boolean`"
+msgstr "`conn:is_dir(path)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:upload(local_path, remote_path[, options])` -> `table`"
+msgstr "`conn:upload(local_path, remote_path[, options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:download(remote_path, local_path[, options])` -> `table`"
+msgstr "`conn:download(remote_path, local_path[, options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:118
+msgid "`conn:close()` -> `nil`"
+msgstr "`conn:close()` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:130
+msgid "run"
+msgstr "run"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:132
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:132"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:134
+msgid "Canonical API name: `ptool.ssh.Connection:run`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:run`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:136
+msgid ""
+"`conn:run(...)` executes a remote command through the current SSH connection."
+msgstr "`conn:run(...)` 通过当前 SSH 连接执行远程命令。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:138
+msgid "The following call forms are supported:"
+msgstr "支持以下调用形式："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:149
+msgid "Argument rules:"
+msgstr "参数规则："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:151
+msgid "`conn:run(cmdline)`: `cmdline` is sent as the remote command string."
+msgstr "`conn:run(cmdline)`：`cmdline` 会作为远程命令字符串直接发送。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:152
+msgid ""
+"`conn:run(cmd, argsline)`: `cmd` is treated as the command, and `argsline` "
+"is split using shell-style (`shlex`) rules."
+msgstr ""
+"`conn:run(cmd, argsline)`：`cmd` 会被视为命令，`argsline` 会按 shell 风格 （`"
+"shlex`）规则拆分。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:154
+msgid ""
+"`conn:run(cmd, args)`: `cmd` is a string and `args` is an array of strings. "
+"Arguments are shell-quoted before remote execution."
+msgstr ""
+"`conn:run(cmd, args)`：`cmd` 是字符串，`args` 是字符串数组。参数会在远程执行"
+"前 做 shell quoting。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:156
+msgid "`conn:run(cmdline, options)`: `options` overrides this invocation."
+msgstr "`conn:run(cmdline, options)`：`options` 会覆盖本次调用的行为。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:157
+msgid "`conn:run(cmd, args, options)`: `options` overrides this invocation."
+msgstr "`conn:run(cmd, args, options)`：`options` 会覆盖本次调用的行为。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:158
+msgid "`conn:run(options)`: `options` is a table."
+msgstr "`conn:run(options)`：`options` 是一个 table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:159
+msgid ""
+"When the second argument is a table: if it is an array "
+"(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
+"treated as `options`."
+msgstr "当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； "
+"否则视为 `options`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:162
+msgid "When `conn:run(options)` is used, `options` currently supports:"
+msgstr "使用 `conn:run(options)` 时，`options` 目前支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:164
+msgid "`cmd` (string, required): The command name or executable path."
+msgstr "`cmd`（string，必填）：命令名或可执行文件路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:165
+msgid "`args` (string[], optional): The argument list."
+msgstr "`args`（string[]，可选）：参数列表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:166
+msgid ""
+"`cwd` (string, optional): Remote working directory. This is applied by "
+"prepending `cd ... &&` to the generated remote shell command."
+msgstr "`cwd`（string，可选）：远程工作目录。会通过在生成的远程 shell 命令前追加 `cd "
+"... &&` 实现。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:168
+msgid ""
+"`env` (table, optional): Remote environment variables, where keys and values "
+"are strings. This is applied by prepending `export ... &&` to the generated "
+"remote shell command."
+msgstr ""
+"`env`（table，可选）：远程环境变量，键和值都必须是字符串。会通过在生成的 远程"
+" shell 命令前追加 `export ... &&` 实现。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:171
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:171"
+msgid "`stdin` (string, optional): String sent to the remote process stdin."
+msgstr "`stdin`（string，可选）：发送给远程进程 stdin 的字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:172
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:172"
+msgid ""
+"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+"from captured `stdout` and captured `stderr` before returning them. This "
+"only affects streams set to `\"capture\"`. Defaults to `false`."
+msgstr ""
+"`trim`（boolean，可选）：返回前是否裁掉已捕获 `stdout` 和已捕获 `stderr` 两端"
+"的空白字符。只影响设置为 `\"capture\"` 的流。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:175"
+msgid ""
+"`echo` (boolean, optional): Whether to echo the remote command before "
+"execution. Defaults to `true`."
+msgstr "`echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `true`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:177
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:177"
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"exit status is not `0`. Defaults to `false`."
+msgstr "`check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid ""
+"`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr "`stdout`（string，可选）：stdout 处理策略。支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`\"capture\"`: Capture into `res.stdout`."
+msgstr "`\"capture\"`：捕获到 `res.stdout`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:179"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`：丢弃输出。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183"
+msgid ""
+"`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr "`stderr`（string，可选）：stderr 处理策略。支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183"
+msgid "`\"capture\"`: Capture into `res.stderr`."
+msgstr "`\"capture\"`：捕获到 `res.stderr`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:183"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`：丢弃输出。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:188
+msgid "When the shortcut forms are used, the `options` table supports only:"
+msgstr "使用快捷调用形式时，`options` 仅支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:190
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:190"
+msgid "`stdin` (string, optional): String sent to the remote process stdin."
+msgstr "`stdin`（string，可选）：发送给远程进程 stdin 的字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+msgid ""
+"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+"from captured `stdout` and captured `stderr` before returning them. This "
+"only affects streams set to `\"capture\"`. Defaults to `false`."
+msgstr ""
+"`trim`（boolean，可选）：返回前是否裁掉已捕获 `stdout` 和已捕获 `stderr` 两端"
+"的空白字符。只影响设置为 `\"capture\"` 的流。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:194
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:194"
+msgid ""
+"`echo` (boolean, optional): Whether to echo the remote command before "
+"execution. Defaults to `true`."
+msgstr "`echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `true`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:196
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:196"
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"exit status is not `0`. Defaults to `false`."
+msgstr "`check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198"
+msgid ""
+"`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr "`stdout`（string，可选）：stdout 处理策略。支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198"
+msgid "`\"capture\"`: Capture into `res.stdout`."
+msgstr "`\"capture\"`：捕获到 `res.stdout`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:198"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`：丢弃输出。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202"
+msgid ""
+"`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr "`stderr`（string，可选）：stderr 处理策略。支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202"
+msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202"
+msgid "`\"capture\"`: Capture into `res.stderr`."
+msgstr "`\"capture\"`：捕获到 `res.stderr`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:202"
+msgid "`\"null\"`: Discard the output."
+msgstr "`\"null\"`：丢弃输出。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:207
+msgid "Return value rules:"
+msgstr "返回值规则："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid "A table is always returned with the following fields:"
+msgstr "总是返回一个 table，包含以下字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid "`ok` (boolean): Whether the remote exit status is `0`."
+msgstr "`ok`（boolean）：远程退出状态是否为 `0`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid ""
+"`code` (integer|nil): The remote exit status. If the remote process exits by "
+"signal, this is `nil`."
+msgstr "`code`（integer|nil）：远程退出状态。如果远程进程因信号退出，则为 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid "`target` (string): The SSH target string in the form `user@host:port`."
+msgstr "`target`（string）：形如 `user@host:port` 的 SSH target 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid "`stdout` (string, optional): Present when `stdout = \"capture\"`."
+msgstr "`stdout`（string，可选）：当 `stdout = \"capture\"` 时提供。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid "`stderr` (string, optional): Present when `stderr = \"capture\"`."
+msgstr "`stderr`（string，可选）：当 `stderr = \"capture\"` 时提供。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:209
+msgid "`assert_ok(self)` (function): Raises an error when `ok = false`."
+msgstr "`assert_ok(self)`（function）：当 `ok = false` 时抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:218
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:218"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:241
+msgid "run_capture"
+msgstr "run_capture"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:243
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:243"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:245
+msgid "Canonical API name: `ptool.ssh.Connection:run_capture`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:run_capture`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:247
+msgid ""
+"`conn:run_capture(...)` executes a remote command through the current SSH "
+"connection."
+msgstr "`conn:run_capture(...)` 通过当前 SSH 连接执行远程命令。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:250
+msgid ""
+"It accepts the same call forms, argument rules, return value rules, and "
+"options as `conn:run(...)`."
+msgstr "它接受与 `conn:run(...)` 相同的调用形式、参数规则、返回值规则和选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:253
+msgid "The difference is only the default stream handling:"
+msgstr "唯一差异是默认流处理方式："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:255
+msgid "`stdout` defaults to `\"capture\"`."
+msgstr "`stdout` 默认是 `\"capture\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:256
+msgid "`stderr` defaults to `\"capture\"`."
+msgstr "`stderr` 默认是 `\"capture\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:258
+msgid ""
+"`trim` still defaults to `false`, and you can still override any of these "
+"fields explicitly in `options`."
+msgstr "`trim` 仍然默认是 `false`，并且这些字段都仍然可以在 `options` 中显式覆盖。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:261
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:261"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:283
+msgid "http_request"
+msgstr "http_request"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:285
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:285"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287
+msgid "Canonical API name: `ptool.ssh.Connection:http_request`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:http_request`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:289
+msgid ""
+"`conn:http_request(options)` sends an HTTP request from the remote SSH host "
+"and returns the same `Response` object shape as `ptool.http.request(...)`."
+msgstr ""
+"`conn:http_request(options)` 从远程 SSH 主机发出 HTTP 请求，并返回与 "
+"`ptool.http.request(...)` 相同形状的 `Response` 对象。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:292
+msgid ""
+"`options` supports the same fields and validation rules as "
+"`ptool.http.request(options)`."
+msgstr "`options` 支持与 `ptool.http.request(options)` 相同的字段和校验规则。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:295
+msgid ""
+"This is useful when the target endpoint is reachable only from the remote "
+"host, for example a service bound to `127.0.0.1`, a private VPC address, or "
+"a metadata endpoint."
+msgstr ""
+"当目标端点只能从远程主机访问时，这很有用，例如绑定到 `127.0.0.1` 的服务、私"
+"有 VPC 地址或元数据端点。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:299
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:301
+msgid ""
+"The request is executed on the remote host, so DNS resolution, outbound "
+"network access, proxy settings, TLS trust, and firewall rules come from that "
+"host rather than the local machine."
+msgstr ""
+"请求是在远程主机上执行的，因此 DNS 解析、出站网络访问、代理设置、TLS 信任链"
+"和防火墙规则都来自该主机，而不是本地机器。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:304
+msgid "The remote host must have `curl` available on `PATH`."
+msgstr "远程主机必须能在 `PATH` 中找到 `curl`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:305
+msgid "Request bodies are sent to the remote `curl` process over SSH."
+msgstr "请求体会通过 SSH 发送给远程 `curl` 进程。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:306
+msgid ""
+"Response headers and body are streamed back over SSH and then consumed "
+"through the normal `Response` methods documented in the HTTP API."
+msgstr ""
+"响应头和响应体会通过 SSH 流式传回，然后通过 HTTP API 文档中说明的常规 "
+"`Response` 方法来读取。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308
+msgid "`basic_auth` and `bearer_token` remain mutually exclusive."
+msgstr "`basic_auth` 和 `bearer_token` 仍然互斥。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:309
+msgid ""
+"`fail_on_http_error`, redirect handling, timeout handling, and response body "
+"caching behave the same as `ptool.http.request(...)`."
+msgstr ""
+"`fail_on_http_error`、重定向处理、超时处理和响应体缓存的行为，与 "
+"`ptool.http.request(...)` 保持一致。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:312
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:312"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:331
+msgid "path"
+msgstr "path"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:333
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:333"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:335
+msgid "Canonical API name: `ptool.ssh.Connection:path`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:path`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:337
+msgid ""
+"`conn:path(path)` creates a reusable `RemotePath` object bound to the "
+"current SSH connection."
+msgstr "`conn:path(path)` 创建一个绑定到当前 SSH 连接的可复用 `RemotePath` 对象。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:340
+msgid "`path` (string, required): The remote path."
+msgstr "`path`（string，必填）：远程路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:341
+msgid ""
+"Returns: A `RemotePath` object that can be passed to `conn:upload(...)`, "
+"`conn:download(...)`, and `ptool.fs.copy(...)`."
+msgstr ""
+"返回：一个 `RemotePath` 对象，可传给 `conn:upload(...)`、"
+"`conn:download(...)` 和 `ptool.fs.copy(...)`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:344
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:344"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:353
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:353"
+msgid "exists"
+msgstr "exists"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:355
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:355"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:357
+msgid "Canonical API name: `ptool.ssh.Connection:exists`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:exists`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:359
+msgid "`conn:exists(path)` checks whether a remote path exists."
+msgstr "`conn:exists(path)` 检查远程路径是否存在。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:361
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:361"
+msgid ""
+"`path` (string|remote path, required): The remote path to check. It can be a "
+"string or a value created by `conn:path(...)`."
+msgstr ""
+"`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+"`conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:363
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:363"
+msgid "Returns: `true` when the remote path exists, otherwise `false`."
+msgstr "返回：如果远程路径存在，则为 `true`；否则为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:365
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:365"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:374
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:374"
+msgid "is_file"
+msgstr "is_file"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:376"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:378
+msgid "Canonical API name: `ptool.ssh.Connection:is_file`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:is_file`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:380
+msgid ""
+"`conn:is_file(path)` checks whether a remote path exists and is a regular "
+"file."
+msgstr "`conn:is_file(path)` 检查远程路径是否存在且为普通文件。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:382
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:382"
+msgid ""
+"`path` (string|remote path, required): The remote path to check. It can be a "
+"string or a value created by `conn:path(...)`."
+msgstr ""
+"`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+"`conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:384
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:384"
+msgid "Returns: `true` when the remote path is a file, otherwise `false`."
+msgstr "返回：如果远程路径是文件，则为 `true`；否则为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:386
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:386"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:397
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:397"
+msgid "is_dir"
+msgstr "is_dir"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:399"
+msgid "`v0.2.0` - Introduced."
+msgstr "`v0.2.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:401
+msgid "Canonical API name: `ptool.ssh.Connection:is_dir`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:is_dir`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:403
+msgid ""
+"`conn:is_dir(path)` checks whether a remote path exists and is a directory."
+msgstr "`conn:is_dir(path)` 检查远程路径是否存在且为目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:405
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:405"
+msgid ""
+"`path` (string|remote path, required): The remote path to check. It can be a "
+"string or a value created by `conn:path(...)`."
+msgstr ""
+"`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+"`conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:407
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:407"
+msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
+msgstr "返回：如果远程路径是目录，则为 `true`；否则为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:409
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:409"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:420
+msgid "upload"
+msgstr "upload"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:422
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:422"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:424
+msgid "Canonical API name: `ptool.ssh.Connection:upload`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:upload`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:426
+msgid ""
+"`conn:upload(local_path, remote_path[, options])` uploads a local file or "
+"directory to the remote host."
+msgstr "`conn:upload(local_path, remote_path[, options])` 将本地文件或目录上传到远程"
+"主机。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:429
+msgid "`local_path` (string, required): The local file or directory to upload."
+msgstr "`local_path`（string，必填）：要上传的本地文件或目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:430
+msgid ""
+"`remote_path` (string|remote path, required): The destination path on the "
+"remote host. It can be a string or a value created by `conn:path(...)`."
+msgstr ""
+"`remote_path`（string|remote path，必填）：远程目标路径。可以是字符串，也可以"
+"是 `conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:432
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:432"
+msgid "`options` (table, optional): Transfer options."
+msgstr "`options`（table，可选）：传输选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:433
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:433"
+msgid "Returns: A table with the following fields:"
+msgstr "返回：一个包含以下字段的 table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:433
+msgid ""
+"`bytes` (integer): The number of regular-file bytes uploaded. When a "
+"directory is uploaded, this is the sum of the uploaded file sizes."
+msgstr "`bytes`（integer）：已上传的普通文件字节数。上传目录时，它等于目录内所有已上"
+"传 文件大小之和。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:433
+msgid "`from` (string): The local source path."
+msgstr "`from`（string）：本地源路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:433
+msgid "`to` (string): The remote destination path."
+msgstr "`to`（string）：远程目标路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:439
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:439"
+msgid "Supported transfer options:"
+msgstr "支持的传输选项："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:441
+msgid ""
+"`parents` (boolean, optional): Create the parent directory of `remote_path` "
+"before uploading. Defaults to `false`."
+msgstr "`parents`（boolean，可选）：上传前是否创建 `remote_path` 的父目录。默认值为 "
+"`false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:443
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:443"
+msgid ""
+"`overwrite` (boolean, optional): Whether an existing destination file may be "
+"replaced. Defaults to `true`."
+msgstr "`overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:445
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:445"
+msgid ""
+"`echo` (boolean, optional): Whether to print the transfer before executing "
+"it. Defaults to `false`."
+msgstr "`echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:448
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:448"
+msgid "Directory behavior:"
+msgstr "目录行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:450
+msgid "When `local_path` is a file, the behavior is unchanged."
+msgstr "当 `local_path` 是文件时，行为保持不变。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:451
+msgid ""
+"When `local_path` is a directory and `remote_path` does not exist, "
+"`remote_path` becomes the destination directory root."
+msgstr "当 `local_path` 是目录且 `remote_path` 不存在时，`remote_path` 会成为目标目录"
+"根。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:453
+msgid ""
+"When `local_path` is a directory and `remote_path` already exists as a "
+"directory, the source directory is created under it using the source "
+"directory basename."
+msgstr "当 `local_path` 是目录且 `remote_path` 已存在并且是目录时，会在其下按源目录的"
+" basename 创建目标目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:456
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:456"
+msgid ""
+"`overwrite = false` rejects an already-existing destination directory for "
+"the final directory root."
+msgstr "`overwrite = false` 时，如果最终目标目录已存在，则会报错。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:458
+msgid "Directory uploads require `tar` to be available on the remote host."
+msgstr "上传目录时，远程主机需要提供 `tar`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:460
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:460"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:476
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:476"
+msgid "Directory example:"
+msgstr "目录示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:491
+msgid "download"
+msgstr "download"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:493
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:493"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:495
+msgid "Canonical API name: `ptool.ssh.Connection:download`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:download`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:497
+msgid ""
+"`conn:download(remote_path, local_path[, options])` downloads a remote file "
+"or directory to a local path."
+msgstr "`conn:download(remote_path, local_path[, options])` 将远程文件或目录下载到本"
+"地路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:500
+msgid ""
+"`remote_path` (string|remote path, required): The source path on the remote "
+"host. It can be a string or a value created by `conn:path(...)`."
+msgstr ""
+"`remote_path`（string|remote path，必填）：远程源路径。可以是字符串，也可以是"
+" `conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:502
+msgid "`local_path` (string, required): The local destination path."
+msgstr "`local_path`（string，必填）：本地目标路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:503
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:503"
+msgid "`options` (table, optional): Transfer options."
+msgstr "`options`（table，可选）：传输选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:504
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:504"
+msgid "Returns: A table with the following fields:"
+msgstr "返回：一个包含以下字段的 table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:504
+msgid ""
+"`bytes` (integer): The number of regular-file bytes downloaded. When a "
+"directory is downloaded, this is the sum of the downloaded file sizes."
+msgstr "`bytes`（integer）：已下载的普通文件字节数。下载目录时，它等于目录内所有已下"
+"载 文件大小之和。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:504
+msgid "`from` (string): The remote source path."
+msgstr "`from`（string）：远程源路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:504
+msgid "`to` (string): The local destination path."
+msgstr "`to`（string）：本地目标路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:510
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:510"
+msgid "Supported transfer options:"
+msgstr "支持的传输选项："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:512
+msgid ""
+"`parents` (boolean, optional): Create the parent directory of `local_path` "
+"before downloading. Defaults to `false`."
+msgstr "`parents`（boolean，可选）：下载前是否创建 `local_path` 的父目录。默认值为 "
+"`false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:514
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:514"
+msgid ""
+"`overwrite` (boolean, optional): Whether an existing destination file may be "
+"replaced. Defaults to `true`."
+msgstr "`overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:516
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:516"
+msgid ""
+"`echo` (boolean, optional): Whether to print the transfer before executing "
+"it. Defaults to `false`."
+msgstr "`echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:519
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:519"
+msgid "Directory behavior:"
+msgstr "目录行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:521
+msgid "When `remote_path` is a file, the behavior is unchanged."
+msgstr "当 `remote_path` 是文件时，行为保持不变。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:522
+msgid ""
+"When `remote_path` is a directory and `local_path` does not exist, "
+"`local_path` becomes the destination directory root."
+msgstr "当 `remote_path` 是目录且 `local_path` 不存在时，`local_path` 会成为目标目录"
+"根。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:524
+msgid ""
+"When `remote_path` is a directory and `local_path` already exists as a "
+"directory, the remote source directory is created under it using the remote "
+"directory basename."
+msgstr ""
+"当 `remote_path` 是目录且 `local_path` 已存在并且是目录时，会在其下按远程源目"
+"录的 basename 创建目标目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:527
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:527"
+msgid ""
+"`overwrite = false` rejects an already-existing destination directory for "
+"the final directory root."
+msgstr "`overwrite = false` 时，如果最终目标目录已存在，则会报错。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:529
+msgid "Directory downloads require `tar` to be available on the remote host."
+msgstr "下载目录时，远程主机需要提供 `tar`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:546
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:546"
+msgid "Directory example:"
+msgstr "目录示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:561
+msgid "close"
+msgstr "close"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:563
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:563"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:565
+msgid "Canonical API name: `ptool.ssh.Connection:close`."
+msgstr "规范 API 名称：`ptool.ssh.Connection:close`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:567
+msgid "`conn:close()` closes the SSH connection handle."
+msgstr "`conn:close()` 关闭 SSH 连接句柄。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:569
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:571
+msgid "After closing, the connection can no longer be used."
+msgstr "关闭后，连接不能再继续使用。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:572
+msgid "Closing an already-closed connection is allowed and has no effect."
+msgstr "对已经关闭的连接再次关闭是允许的，并且不会产生效果。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:574
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:574"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:581
+msgid "RemotePath"
+msgstr "RemotePath"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:583
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:583"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:585
+msgid ""
+"`RemotePath` represents a remote path bound to a `Connection` and returned "
+"by `conn:path(path)`."
+msgstr "`RemotePath` 表示一个绑定到 `Connection` 的远程路径，由 `conn:path(path)` 返"
+"回。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:588
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:588"
+msgid "It is implemented as a Lua userdata."
+msgstr "它实现为 Lua 用户数据（userdata）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:590
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:590"
+msgid "Methods:"
+msgstr "方法："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:592
+msgid "`remote:exists()` -> `boolean`"
+msgstr "`remote:exists()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:593
+msgid "`remote:is_file()` -> `boolean`"
+msgstr "`remote:is_file()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:594
+msgid "`remote:is_dir()` -> `boolean`"
+msgstr "`remote:is_dir()` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:596
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:596"
+msgid "exists"
+msgstr "exists"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:598
+msgid "`remote:exists()` checks whether the remote path exists."
+msgstr "`remote:exists()` 检查远程路径是否存在。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:600
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:600"
+msgid "Returns: `true` when the remote path exists, otherwise `false`."
+msgstr "返回：如果远程路径存在，则为 `true`；否则为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:602
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:602"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:611
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:611"
+msgid "is_file"
+msgstr "is_file"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:613
+msgid ""
+"`remote:is_file()` checks whether the remote path exists and is a regular "
+"file."
+msgstr "`remote:is_file()` 检查远程路径是否存在且为普通文件。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:615
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:615"
+msgid "Returns: `true` when the remote path is a file, otherwise `false`."
+msgstr "返回：如果远程路径是文件，则为 `true`；否则为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:617
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:617"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:628
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:628"
+msgid "is_dir"
+msgstr "is_dir"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:630
+msgid ""
+"`remote:is_dir()` checks whether the remote path exists and is a directory."
+msgstr "`remote:is_dir()` 检查远程路径是否存在且为目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:632
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:632"
+msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
+msgstr "返回：如果远程路径是目录，则为 `true`；否则为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:634
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:634"
+msgid "Example:"
+msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:131"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:182"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189"
+#~ msgid "`stdin` (string, optional): String sent to the remote process stdin."
+#~ msgstr "`stdin`（string，可选）：发送给远程进程 stdin 的字符串。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:190"
+#~ msgid ""
+#~ "`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+#~ "from captured `stdout` and captured `stderr` before returning them. This "
+#~ "only affects streams set to `\"capture\"`. Defaults to `false`."
+#~ msgstr ""
+#~ "`trim`（boolean，可选）：返回前是否裁掉已捕获 `stdout` 和已捕获 `stderr` 两端"
+#~ "的空白字符。只影响设置为 `\"capture\"` 的流。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:193"
+#~ msgid ""
+#~ "`echo` (boolean, optional): Whether to echo the remote command before "
+#~ "execution. Defaults to `true`."
+#~ msgstr "`echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+#~ msgid ""
+#~ "`check` (boolean, optional): Whether to raise an error immediately when the "
+#~ "exit status is not `0`. Defaults to `false`."
+#~ msgstr "`check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
+#~ msgid ""
+#~ "`stdout` (string, optional): Stdout handling strategy. Supported values:"
+#~ msgstr "`stdout`（string，可选）：stdout 处理策略。支持："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
+#~ msgid "`\"capture\"`: Capture into `res.stdout`."
+#~ msgstr "`\"capture\"`：捕获到 `res.stdout`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:197"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
+#~ msgid ""
+#~ "`stderr` (string, optional): Stderr handling strategy. Supported values:"
+#~ msgstr "`stderr`（string，可选）：stderr 处理策略。支持："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
+#~ msgid "`\"capture\"`: Capture into `res.stderr`."
+#~ msgstr "`\"capture\"`：捕获到 `res.stderr`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:201"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:217"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:260"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:284"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:295"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:316"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:327"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:333"
+#~ msgid ""
+#~ "`path` (string|remote path, required): The remote path to check. It can be a "
+#~ "string or a value created by `conn:path(...)`."
+#~ msgstr ""
+#~ "`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+#~ "`conn:path(...)` 创建的值。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:337"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:350"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:356"
+#~ msgid ""
+#~ "`path` (string|remote path, required): The remote path to check. It can be a "
+#~ "string or a value created by `conn:path(...)`."
+#~ msgstr ""
+#~ "`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+#~ "`conn:path(...)` 创建的值。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:360"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:373"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:411"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:444"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:454"
+#~ msgid "`options` (table, optional): Transfer options."
+#~ msgstr "`options`（table，可选）：传输选项。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:455"
+#~ msgid "Returns: A table with the following fields:"
+#~ msgstr "返回：A table with the following fields:。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:461"
+#~ msgid "Supported transfer options:"
+#~ msgstr "支持的传输选项："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:465"
+#~ msgid ""
+#~ "`overwrite` (boolean, optional): Whether an existing destination file may be "
+#~ "replaced. Defaults to `true`."
+#~ msgstr "`overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:467"
+#~ msgid ""
+#~ "`echo` (boolean, optional): Whether to print the transfer before executing "
+#~ "it. Defaults to `false`."
+#~ msgstr "`echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470"
+#~ msgid "Directory behavior:"
+#~ msgstr "目录行为："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:478"
+#~ msgid ""
+#~ "`overwrite = false` rejects an already-existing destination directory for "
+#~ "the final directory root."
+#~ msgstr "`overwrite = false` 时，如果最终目标目录已存在，则会报错。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:482"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:497"
+#~ msgid "Directory example:"
+#~ msgstr "目录示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:514"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:525"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:534"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:539"
+#~ msgid "It is implemented as a Lua userdata."
+#~ msgstr "它实现为 Lua userdata。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:541"
+#~ msgid "Methods:"
+#~ msgstr "方法："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:547"
+#~ msgid "exists"
+#~ msgstr "exists"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:551"
+#~ msgid "Returns: `true` when the remote path exists, otherwise `false`."
+#~ msgstr "返回：`true` when the remote path exists, otherwise `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:553"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:562"
+#~ msgid "is_file"
+#~ msgstr "is_file"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:566"
+#~ msgid "Returns: `true` when the remote path is a file, otherwise `false`."
+#~ msgstr "返回：`true` when the remote path is a file, otherwise `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:568"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:579"
+#~ msgid "is_dir"
+#~ msgstr "is_dir"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:583"
+#~ msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
+#~ msgstr "返回：`true` when the remote path is a directory, otherwise `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:585"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:186"
+#~ msgid "`stdin` (string, optional): String sent to the remote process stdin."
+#~ msgstr "`stdin`（string，可选）：发送给远程进程 stdin 的字符串。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:187"
+#~ msgid ""
+#~ "`echo` (boolean, optional): Whether to echo the remote command before "
+#~ "execution. Defaults to `true`."
+#~ msgstr "`echo`（boolean，可选）：执行前是否回显远程命令。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:189"
+#~ msgid ""
+#~ "`check` (boolean, optional): Whether to raise an error immediately when the "
+#~ "exit status is not `0`. Defaults to `false`."
+#~ msgstr "`check`（boolean，可选）：退出状态不为 `0` 时是否立即抛错。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+#~ msgid ""
+#~ "`stdout` (string, optional): Stdout handling strategy. Supported values:"
+#~ msgstr "`stdout`（string，可选）：stdout 处理策略。支持："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+#~ msgid "`\"capture\"`: Capture into `res.stdout`."
+#~ msgstr "`\"capture\"`：捕获到 `res.stdout`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:191"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+#~ msgid ""
+#~ "`stderr` (string, optional): Stderr handling strategy. Supported values:"
+#~ msgstr "`stderr`（string，可选）：stderr 处理策略。支持："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+#~ msgid "`\"capture\"`: Capture into `res.stderr`."
+#~ msgstr "`\"capture\"`：捕获到 `res.stderr`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:195"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:211"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgid "You can still override either field explicitly in `options`."
+#~ msgstr "你仍然可以在 `options` 中显式覆盖任意一个字段。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:252"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:276"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:308"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:319"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:325"
+#~ msgid ""
+#~ "`path` (string|remote path, required): The remote path to check. It can be a "
+#~ "string or a value created by `conn:path(...)`."
+#~ msgstr ""
+#~ "`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+#~ "`conn:path(...)` 创建的值。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:329"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:342"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:348"
+#~ msgid ""
+#~ "`path` (string|remote path, required): The remote path to check. It can be a "
+#~ "string or a value created by `conn:path(...)`."
+#~ msgstr ""
+#~ "`path`（string|remote path，必填）：要检查的远程路径。可以是字符串，也可以是 "
+#~ "`conn:path(...)` 创建的值。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:352"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:365"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:403"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:436"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:446"
+#~ msgid "`options` (table, optional): Transfer options."
+#~ msgstr "`options`（table，可选）：传输选项。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:447"
+#~ msgid "Returns: A table with the following fields:"
+#~ msgstr "返回：A table with the following fields:。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:453"
+#~ msgid "Supported transfer options:"
+#~ msgstr "支持的传输选项："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:457"
+#~ msgid ""
+#~ "`overwrite` (boolean, optional): Whether an existing destination file may be "
+#~ "replaced. Defaults to `true`."
+#~ msgstr "`overwrite`（boolean，可选）：是否允许覆盖已有目标文件。默认值为 `true`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:459"
+#~ msgid ""
+#~ "`echo` (boolean, optional): Whether to print the transfer before executing "
+#~ "it. Defaults to `false`."
+#~ msgstr "`echo`（boolean，可选）：执行前是否打印传输信息。默认值为 `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:462"
+#~ msgid "Directory behavior:"
+#~ msgstr "目录行为："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:470"
+#~ msgid ""
+#~ "`overwrite = false` rejects an already-existing destination directory for "
+#~ "the final directory root."
+#~ msgstr "`overwrite = false` 时，如果最终目标目录已存在，则会报错。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:474"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:489"
+#~ msgid "Directory example:"
+#~ msgstr "目录示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:506"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:517"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:526"
+#~ msgid "`v0.1.0` - Introduced."
+#~ msgstr "`v0.1.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:531"
+#~ msgid "It is implemented as a Lua userdata."
+#~ msgstr "它实现为 Lua userdata。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:533"
+#~ msgid "Methods:"
+#~ msgstr "方法："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:539"
+#~ msgid "exists"
+#~ msgstr "exists"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:543"
+#~ msgid "Returns: `true` when the remote path exists, otherwise `false`."
+#~ msgstr "返回：`true` when the remote path exists, otherwise `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:545"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:554"
+#~ msgid "is_file"
+#~ msgstr "is_file"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:558"
+#~ msgid "Returns: `true` when the remote path is a file, otherwise `false`."
+#~ msgstr "返回：`true` when the remote path is a file, otherwise `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:560"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:571"
+#~ msgid "is_dir"
+#~ msgstr "is_dir"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:575"
+#~ msgid "Returns: `true` when the remote path is a directory, otherwise `false`."
+#~ msgstr "返回：`true` when the remote path is a directory, otherwise `false`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:577"
+#~ msgid "Example:"
+#~ msgstr "示例："
