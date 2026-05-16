@@ -47,6 +47,19 @@ struct RunCallOverrides {
     retry: Option<bool>,
 }
 
+struct ExecOptions {
+    inner: ptool_engine::ExecOptions,
+    echo: bool,
+    confirm: bool,
+}
+
+struct ExecCallOverrides {
+    cwd: Option<String>,
+    env: Option<Vec<(String, String)>>,
+    echo: Option<bool>,
+    confirm: Option<bool>,
+}
+
 pub(crate) fn run_command(
     lua: &Lua,
     args: Variadic<Value>,
@@ -79,6 +92,71 @@ pub(crate) fn run_capture_command(
         defaults,
         RUN_CAPTURE_STREAM_DEFAULTS,
     )
+}
+
+pub(crate) fn exec_command(
+    _lua: &Lua,
+    args: Variadic<Value>,
+    current_dir: &Path,
+    engine: &PtoolEngine,
+    defaults: RunConfig,
+) -> mlua::Result<Value> {
+    let options = parse_exec_options(args, defaults)?;
+    let cmd_for_error = options.inner.cmd.clone();
+    let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
+    let local_user_host = options.echo.then(|| engine.current_user_host());
+
+    let display = if options.echo || options.confirm {
+        let command = format_command_for_display(&options.inner.cmd, &options.inner.args);
+        Some((resolved_cwd.clone(), command))
+    } else {
+        None
+    };
+
+    if options.echo {
+        let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.exec internal error: missing display info",
+                )
+                .with_op("ptool.exec"),
+            )
+        })?;
+        let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.exec internal error: missing local user/host info",
+                )
+                .with_op("ptool.exec"),
+            )
+        })?;
+        print_local_command_echo(
+            &local_user_host.user,
+            &local_user_host.host,
+            display_cwd,
+            display_command,
+        );
+    }
+
+    if options.confirm {
+        let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.exec internal error: missing display info",
+                )
+                .with_op("ptool.exec"),
+            )
+        })?;
+        confirm_before_exec(display_cwd, display_command, &cmd_for_error)?;
+    }
+
+    engine
+        .exec_replace(&options.inner, current_dir)
+        .map_err(|err| engine_error(err, "ptool.exec", &cmd_for_error, &resolved_cwd))?;
+    Ok(Value::Nil)
 }
 
 fn run_command_with_stream_defaults(
@@ -172,7 +250,7 @@ fn run_command_with_stream_defaults(
 
         let result = engine
             .run_command(&options.inner, current_dir)
-            .map_err(|err| engine_error(err, &cmd_for_error, &resolved_cwd))?;
+            .map_err(|err| engine_error(err, "ptool.run", &cmd_for_error, &resolved_cwd))?;
         if options.check && !result.ok {
             if options.retry {
                 let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
@@ -210,6 +288,115 @@ fn run_command_with_stream_defaults(
             cmd_for_error,
             resolved_cwd.display().to_string(),
         );
+    }
+}
+
+fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result<ExecOptions> {
+    match args.len() {
+        0 => Err(lua_error::invalid_argument(
+            "ptool.exec",
+            "requires arguments",
+        )),
+        1 => match args.first() {
+            Some(Value::String(cmdline)) => {
+                let (cmd, args) = parse_cmdline_to_cmd_and_args(&cmdline.to_str()?)?;
+                Ok(ExecOptions {
+                    inner: ptool_engine::ExecOptions {
+                        cmd,
+                        args,
+                        cwd: None,
+                        env: Vec::new(),
+                        env_remove: Vec::new(),
+                    },
+                    echo: defaults.echo,
+                    confirm: defaults.confirm,
+                })
+            }
+            Some(Value::Table(options)) => parse_exec_full_options_table(options.clone(), defaults),
+            _ => Err(lua_error::invalid_argument(
+                "ptool.exec",
+                "expects a command string or an options table",
+            )),
+        },
+        2 => match (args.first(), args.get(1)) {
+            (Some(Value::String(cmd)), Some(Value::String(argsline))) => Ok(ExecOptions {
+                inner: ptool_engine::ExecOptions {
+                    cmd: cmd.to_str()?.to_owned(),
+                    args: parse_argsline(&argsline.to_str()?)?,
+                    cwd: None,
+                    env: Vec::new(),
+                    env_remove: Vec::new(),
+                },
+                echo: defaults.echo,
+                confirm: defaults.confirm,
+            }),
+            (Some(Value::String(cmd_or_cmdline)), Some(Value::Table(second_table))) => {
+                if looks_like_options_table(second_table)? {
+                    let (cmd, args) = parse_cmdline_to_cmd_and_args(&cmd_or_cmdline.to_str()?)?;
+                    let overrides = parse_exec_overrides_table(
+                        second_table.clone(),
+                        "ptool.exec(cmdline, options)",
+                    )?;
+                    Ok(apply_exec_overrides(cmd, args, overrides, defaults))
+                } else {
+                    Ok(ExecOptions {
+                        inner: ptool_engine::ExecOptions {
+                            cmd: cmd_or_cmdline.to_str()?.to_owned(),
+                            args: parse_string_list(second_table)?,
+                            cwd: None,
+                            env: Vec::new(),
+                            env_remove: Vec::new(),
+                        },
+                        echo: defaults.echo,
+                        confirm: defaults.confirm,
+                    })
+                }
+            }
+            _ => Err(lua_error::invalid_argument(
+                "ptool.exec(cmd, args)",
+                "expects (string, table|string)",
+            )),
+        },
+        3 => match (args.first(), args.get(1), args.get(2)) {
+            (
+                Some(Value::String(cmd)),
+                Some(Value::String(argsline)),
+                Some(Value::Table(options)),
+            ) => {
+                let overrides = parse_exec_overrides_table(
+                    options.clone(),
+                    "ptool.exec(cmd, argsline, options)",
+                )?;
+                Ok(apply_exec_overrides(
+                    cmd.to_str()?.to_owned(),
+                    parse_argsline(&argsline.to_str()?)?,
+                    overrides,
+                    defaults,
+                ))
+            }
+            (
+                Some(Value::String(cmd)),
+                Some(Value::Table(args_table)),
+                Some(Value::Table(options)),
+            ) => {
+                let overrides =
+                    parse_exec_overrides_table(options.clone(), "ptool.exec(cmd, args, options)")?;
+                Ok(apply_exec_overrides(
+                    cmd.to_str()?.to_owned(),
+                    parse_string_list(args_table)?,
+                    overrides,
+                    defaults,
+                ))
+            }
+            _ => Err(lua_error::invalid_argument(
+                "ptool.exec(cmd, args, options)",
+                "expects (string, table|string, table)",
+            )),
+        },
+        _ => Err(lua_error::invalid_argument(
+            "ptool.exec",
+            "accepts at most 3 arguments",
+        )),
     }
 }
 
@@ -411,6 +598,33 @@ fn parse_full_options_table(
     })
 }
 
+fn parse_exec_full_options_table(options: Table, defaults: RunConfig) -> mlua::Result<ExecOptions> {
+    reject_exec_only_invalid_fields(&options, "ptool.exec(options)")?;
+
+    let Some(cmd) = options.get::<Option<String>>("cmd")? else {
+        return Err(lua_error::invalid_argument(
+            "ptool.exec(options)",
+            "requires `cmd`",
+        ));
+    };
+
+    Ok(ExecOptions {
+        inner: ptool_engine::ExecOptions {
+            cmd,
+            args: parse_named_args(&options)?,
+            cwd: options.get("cwd")?,
+            env: parse_env_table(options.get::<Option<Table>>("env")?)?,
+            env_remove: Vec::new(),
+        },
+        echo: options
+            .get::<Option<bool>>("echo")?
+            .unwrap_or(defaults.echo),
+        confirm: options
+            .get::<Option<bool>>("confirm")?
+            .unwrap_or(defaults.confirm),
+    })
+}
+
 fn parse_named_args(options: &Table) -> mlua::Result<Vec<String>> {
     let Some(args_table) = options.get::<Option<Table>>("args")? else {
         return Ok(Vec::new());
@@ -479,6 +693,35 @@ fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallO
     })
 }
 
+fn parse_exec_overrides_table(options: Table, context: &str) -> mlua::Result<ExecCallOverrides> {
+    if has_key(&options, "cmd")? || has_key(&options, "args")? {
+        return Err(lua_error::invalid_option(
+            context,
+            "options table does not allow `cmd` or `args`",
+        ));
+    }
+    reject_exec_only_invalid_fields(&options, context)?;
+
+    Ok(ExecCallOverrides {
+        cwd: options.get("cwd")?,
+        env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
+        echo: options.get::<Option<bool>>("echo")?,
+        confirm: options.get::<Option<bool>>("confirm")?,
+    })
+}
+
+fn reject_exec_only_invalid_fields(options: &Table, context: &str) -> mlua::Result<()> {
+    for key in ["stdin", "trim", "stdout", "stderr", "check", "retry"] {
+        if has_key(options, key)? {
+            return Err(lua_error::invalid_option(
+                context,
+                format!("`{key}` is not supported by ptool.exec"),
+            ));
+        }
+    }
+    Ok(())
+}
+
 fn apply_overrides(
     cmd: String,
     args: Vec<String>,
@@ -502,6 +745,25 @@ fn apply_overrides(
         check: overrides.check.unwrap_or(defaults.check),
         confirm: overrides.confirm.unwrap_or(defaults.confirm),
         retry: overrides.retry.unwrap_or(defaults.retry),
+    }
+}
+
+fn apply_exec_overrides(
+    cmd: String,
+    args: Vec<String>,
+    overrides: ExecCallOverrides,
+    defaults: RunConfig,
+) -> ExecOptions {
+    ExecOptions {
+        inner: ptool_engine::ExecOptions {
+            cmd,
+            args,
+            cwd: overrides.cwd,
+            env: overrides.env.unwrap_or_default(),
+            env_remove: Vec::new(),
+        },
+        echo: overrides.echo.unwrap_or(defaults.echo),
+        confirm: overrides.confirm.unwrap_or(defaults.confirm),
     }
 }
 
@@ -603,6 +865,33 @@ fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::R
         .with_cwd(cwd.display().to_string())
         .into_mlua_error()),
         Err(err) => Err(crate::lua_error::LuaError::from_engine(err, "ptool.run")
+            .with_cmd(cmd_for_error)
+            .with_cwd(cwd.display().to_string())
+            .into_mlua_error()),
+    }
+}
+
+fn confirm_before_exec(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::Result<()> {
+    let prompt = format!("Exec command -- {command}?");
+    let help_msg = format!("The cwd is {}", cwd.display());
+    let engine = PtoolEngine::new();
+    match engine.prompt_confirm(
+        "ptool.exec",
+        &prompt,
+        PromptConfirmOptions {
+            default: Some(true),
+            help: Some(help_msg),
+        },
+    ) {
+        Ok(true) => Ok(()),
+        Ok(false) => Err(LuaError::cancelled(
+            "ptool.exec",
+            format!("command `{cmd_for_error}` cancelled by user"),
+        )
+        .with_cmd(cmd_for_error)
+        .with_cwd(cwd.display().to_string())
+        .into_mlua_error()),
+        Err(err) => Err(crate::lua_error::LuaError::from_engine(err, "ptool.exec")
             .with_cmd(cmd_for_error)
             .with_cwd(cwd.display().to_string())
             .into_mlua_error()),
@@ -717,8 +1006,8 @@ fn parse_stdin(value: Option<Value>, context: &str) -> mlua::Result<Option<Vec<u
     }
 }
 
-fn engine_error(err: ptool_engine::Error, cmd: &str, cwd: &Path) -> mlua::Error {
-    let mut err = LuaError::from_engine(err, "ptool.run");
+fn engine_error(err: ptool_engine::Error, op: &str, cmd: &str, cwd: &Path) -> mlua::Error {
+    let mut err = LuaError::from_engine(err, op);
     if err.cmd.is_none() {
         err = err.with_cmd(cmd);
     }

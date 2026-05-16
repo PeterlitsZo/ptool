@@ -301,6 +301,7 @@ fn engine_kind_name(kind: EngineErrorKind) -> &'static str {
         | EngineErrorKind::InvalidFsOption => "invalid_argument",
         EngineErrorKind::AlreadyExists => "already_exists",
         EngineErrorKind::NotAFile => "not_a_file",
+        EngineErrorKind::Unsupported => "unsupported",
         EngineErrorKind::NotInteractive => "not_interactive",
         EngineErrorKind::Cancelled => "cancelled",
         EngineErrorKind::Prompt => "prompt_failed",

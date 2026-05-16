@@ -542,3 +542,68 @@ local res3 = ptool.run_capture("echo hello", {
 })
 print(res3.stdout)
 ```
+
+## ptool.exec
+
+> `Unreleased` - 引入。
+
+`ptool.exec` 会用外部命令替换当前 `ptool` 进程。
+
+它支持与 `ptool.run` 相同的命令参数调用形式：
+
+```lua
+ptool.exec("echo hello world")
+ptool.exec("echo", "hello world")
+ptool.exec("echo", {"hello", "world"})
+ptool.exec("echo hello world", { echo = true })
+ptool.exec("echo", {"hello", "world"}, { confirm = true })
+ptool.exec({ cmd = "echo", args = {"hello", "world"} })
+```
+
+行为说明：
+
+- 成功时，`ptool.exec` 不会返回。当前 `ptool` 进程会被目标命令替换。
+- 一旦 `ptool.exec(...)` 成功调用，后续的 Lua 代码都不会再执行。
+- 在 `ptool repl` 中，成功的 `ptool.exec(...)` 同样会替换掉整个 REPL 进程。
+- 在 Unix 平台上，这会使用真正的进程替换语义。
+- 在非 Unix 平台上，`ptool.exec` 当前会抛出 `unsupported` 错误。
+
+参数规则：
+
+- `ptool.exec(cmdline)`：`cmdline` 会按 shell 风格（`shlex`）规则拆分。第一项作为命令，其余项作为参数。
+- `ptool.exec(cmd, argsline)`：`cmd` 直接作为命令，`argsline` 会按 shell 风格（`shlex`）规则拆分成参数列表。
+- `ptool.exec(cmd, args)`：`cmd` 是字符串，`args` 是字符串数组。
+- `ptool.exec(cmdline, options)`：`options` 会覆盖本次调用的配置，例如 `echo`。
+- `ptool.exec(cmd, args, options)`：`args` 可以是字符串，也可以是字符串数组；`options` 会覆盖本次调用的配置，例如 `confirm`。
+- `ptool.exec(options)`：`options` 是一个 table。
+- 当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； 否则视为 `options`。
+
+也支持 `ptool.exec(options)` 形式，其中 `options` 是一个包含以下字段的 table：
+
+- `cmd`（string，必填）：命令名或可执行文件路径。
+- `args`（string[]，可选）：参数列表。
+- `cwd`（string，可选）：子进程工作目录。
+- `env`（table，可选）：附加环境变量，键和值都应为字符串。
+- `echo`（boolean，可选）：替换前是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
+- `confirm`（boolean，可选）：替换前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。
+- 与 `ptool.run` 不同，`ptool.exec` 不支持 `stdin`、`trim`、`stdout`、`stderr`、`check` 或 `retry`。
+- 当 `confirm = true` 时：
+  - 如果用户拒绝执行，会立即抛出错误。
+  - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
+
+示例：
+
+```lua
+ptool.config({ run = { echo = false } })
+
+ptool.exec("echo from ptool")
+ptool.exec("echo", "from ptool")
+ptool.exec("echo", {"from", "ptool"})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
+  cwd = "crates",
+  env = { FOO = "bar" },
+})
+```

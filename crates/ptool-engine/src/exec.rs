@@ -1,5 +1,7 @@
 use crate::{Error, ErrorKind, Result};
 use std::io::{Read, Write};
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
 use std::path::{Path, PathBuf};
 use std::process::Command as ProcessCommand;
 use std::process::Stdio;
@@ -33,20 +35,27 @@ pub struct RunResult {
     pub stderr: Option<String>,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct ExecOptions {
+    pub cmd: String,
+    pub args: Vec<String>,
+    pub cwd: Option<String>,
+    pub env: Vec<(String, String)>,
+    pub env_remove: Vec<String>,
+}
+
 pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
 
     let mut command = ProcessCommand::new(&options.cmd);
-    command.args(&options.args);
-    command.current_dir(&resolved_cwd);
-
-    for key in &options.env_remove {
-        command.env_remove(key);
-    }
-
-    for (key, value) in &options.env {
-        command.env(key, value);
-    }
+    configure_command(
+        &mut command,
+        &options.cmd,
+        &options.args,
+        &resolved_cwd,
+        &options.env,
+        &options.env_remove,
+    );
 
     configure_stdio(
         &mut command,
@@ -102,6 +111,21 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
         stdout: bytes_to_captured_string(&stdout, options.stdout, options.trim),
         stderr: bytes_to_captured_string(&stderr, options.stderr, options.trim),
     })
+}
+
+pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
+    let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
+    let mut command = ProcessCommand::new(&options.cmd);
+    configure_command(
+        &mut command,
+        &options.cmd,
+        &options.args,
+        &resolved_cwd,
+        &options.env,
+        &options.env_remove,
+    );
+
+    exec_current_process(command, &options.cmd, &resolved_cwd)
 }
 
 pub fn resolve_run_cwd(current_dir: &Path, cwd: Option<&str>) -> PathBuf {
@@ -168,6 +192,26 @@ fn configure_stdio(
         RunStreamMode::Capture => Stdio::piped(),
         RunStreamMode::Null => Stdio::null(),
     });
+}
+
+fn configure_command(
+    command: &mut ProcessCommand,
+    _cmd: &str,
+    args: &[String],
+    cwd: &Path,
+    env: &[(String, String)],
+    env_remove: &[String],
+) {
+    command.args(args);
+    command.current_dir(cwd);
+
+    for key in env_remove {
+        command.env_remove(key);
+    }
+
+    for (key, value) in env {
+        command.env(key, value);
+    }
 }
 
 fn bytes_to_captured_string(bytes: &[u8], mode: RunStreamMode, trim: bool) -> Option<String> {
@@ -259,6 +303,72 @@ fn shell_quote(value: &str) -> String {
 
     let escaped = value.replace('\'', "'\"'\"'");
     format!("'{escaped}'")
+}
+
+#[cfg(unix)]
+fn exec_current_process(mut command: ProcessCommand, cmd: &str, cwd: &Path) -> Result<()> {
+    let err = command.exec();
+    Err(build_exec_io_error(cmd, cwd, err))
+}
+
+#[cfg(not(unix))]
+fn exec_current_process(command: ProcessCommand, cmd: &str, cwd: &Path) -> Result<()> {
+    let _ = (command, cmd, cwd);
+    Err(Error::new(
+        ErrorKind::Unsupported,
+        "ptool.exec is not supported on this platform",
+    )
+    .with_op("ptool.exec"))
+}
+
+#[cfg(unix)]
+fn build_exec_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {
+    let path = lookup_executable_path(cmd, cwd)
+        .map(|path| path.display().to_string())
+        .unwrap_or_else(|| cmd.to_string());
+    Error::new(
+        ErrorKind::Io,
+        format!(
+            "failed to exec command `{cmd}` in `{}`: {err}",
+            cwd.display()
+        ),
+    )
+    .with_op("ptool.exec")
+    .with_cmd(cmd)
+    .with_path(path)
+    .with_detail(format!("cwd: {}", cwd.display()))
+}
+
+#[cfg(unix)]
+fn lookup_executable_path(cmd: &str, cwd: &Path) -> Option<PathBuf> {
+    let candidate = PathBuf::from(cmd);
+    if candidate.components().count() > 1 || candidate.is_absolute() {
+        return Some(if candidate.is_absolute() {
+            candidate
+        } else {
+            cwd.join(candidate)
+        });
+    }
+
+    let path = std::env::var_os("PATH")?;
+    for dir in std::env::split_paths(&path) {
+        let candidate = dir.join(cmd);
+        if is_executable_file(&candidate) {
+            return Some(candidate);
+        }
+    }
+
+    None
+}
+
+#[cfg(unix)]
+fn is_executable_file(path: &Path) -> bool {
+    use std::os::unix::fs::PermissionsExt;
+
+    let Ok(metadata) = std::fs::metadata(path) else {
+        return false;
+    };
+    metadata.is_file() && metadata.permissions().mode() & 0o111 != 0
 }
 
 fn build_run_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {

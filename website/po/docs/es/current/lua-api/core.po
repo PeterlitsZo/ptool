@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 13:49+0800\n"
+"POT-Creation-Date: 2026-05-16 11:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,16 @@ msgid "Core Lua API"
 msgstr "API principal de Lua"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:3
-msgid ""
-"`ptool` exposes these core runtime helpers directly under `ptool` and `p`."
-msgstr ""
-"`ptool` expone estos helpers principales del runtime directamente bajo "
-"`ptool` y `p`."
+msgid "`ptool` exposes these core runtime helpers directly under `ptool` and `p`."
+msgstr "`ptool` expone estos helpers principales del runtime directamente bajo `ptool` y `p`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:5
-msgid ""
-"`ptool run <lua_file>` runs a Lua script and injects the global variable "
-"`ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`)"
-". For files ending in `.lua`, `ptool <lua_file>` is a CLI shortcut with the "
-"same behavior."
-msgstr ""
-"`ptool run <lua_file>` ejecuta un script Lua e inyecta la variable global "
-"`ptool` (o su alias `p`; por ejemplo, `p.run` es equivalente a `ptool.run`). "
-"Para archivos que terminan en `.lua`, `ptool <lua_file>` es un atajo de CLI "
-"con el mismo comportamiento."
+msgid "`ptool run <lua_file>` runs a Lua script and injects the global variable `ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`). For files ending in `.lua`, `ptool <lua_file>` is a CLI shortcut with the same behavior."
+msgstr "`ptool run <lua_file>` ejecuta un script Lua e inyecta la variable global `ptool` (o su alias `p`; por ejemplo, `p.run` es equivalente a `ptool.run`). Para archivos que terminan en `.lua`, `ptool <lua_file>` es un atajo de CLI con el mismo comportamiento."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:10
-msgid ""
-"The embedded Lua runtime keeps the base Lua globals and exposes only these "
-"standard libraries by default:"
-msgstr ""
-"El runtime Lua embebido conserva los globales básicos de Lua y, por defecto, "
-"solo expone estas bibliotecas estándar:"
+msgid "The embedded Lua runtime keeps the base Lua globals and exposes only these standard libraries by default:"
+msgstr "El runtime Lua embebido conserva los globales básicos de Lua y, por defecto, solo expone estas bibliotecas estándar:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:13
 msgid "`table`"
@@ -60,16 +45,8 @@ msgid "`utf8`"
 msgstr "`utf8`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:18
-msgid ""
-"Host-facing built-in modules such as `io`, `os`, and `package` are "
-"intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`"
-", `ptool.path`, and `ptool.run` for filesystem, environment, process, "
-"network, and other runtime operations instead."
-msgstr ""
-"Los módulos integrados orientados al host, como `io`, `os` y `package`, no "
-"están disponibles intencionadamente. Usa APIs de `ptool` como `ptool.fs`, "
-"`ptool.os`, `ptool.path` y `ptool.run` para operaciones de sistema de "
-"archivos, entorno, procesos, red y demás tareas de runtime."
+msgid "Host-facing built-in modules such as `io`, `os`, and `package` are intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`, `ptool.path`, and `ptool.run` for filesystem, environment, process, network, and other runtime operations instead."
+msgstr "Los módulos integrados orientados al host, como `io`, `os` y `package`, no están disponibles intencionadamente. Usa APIs de `ptool` como `ptool.fs`, `ptool.os`, `ptool.path` y `ptool.run` para operaciones de sistema de archivos, entorno, procesos, red y demás tareas de runtime."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:23
 msgid "If you want to pass arguments to a Lua script, you can do it like this:"
@@ -92,82 +69,45 @@ msgid "ptool.use"
 msgstr "ptool.use"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:48
-msgid ""
-"`v0.1.0` - Introduced. `v0.7.0` - Added Cargo-style version requirement "
-"expressions."
-msgstr ""
-"`v0.1.0` - Introducido. `v0.7.0` - Se añadieron expresiones de requisito "
-"de versión al estilo Cargo."
+msgid "`v0.1.0` - Introduced. `v0.7.0` - Added Cargo-style version requirement expressions."
+msgstr "`v0.1.0` - Introducido. `v0.7.0` - Se añadieron expresiones de requisito de versión al estilo Cargo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:51
-msgid ""
-"`ptool.use` declares the required `ptool` version or version requirement for "
-"a script."
-msgstr ""
-"`ptool.use` declara la versión o el requisito de versión de `ptool` que "
-"necesita un script."
+msgid "`ptool.use` declares the required `ptool` version or version requirement for a script."
+msgstr "`ptool.use` declara la versión o el requisito de versión de `ptool` que necesita un script."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:60
-msgid ""
-"The argument accepts either a plain semantic version string or a Cargo-style "
-"version requirement expression."
-msgstr ""
-"El argumento acepta una cadena de versión semántica simple o una expresión "
-"de requisito de versión al estilo Cargo."
+msgid "The argument accepts either a plain semantic version string or a Cargo-style version requirement expression."
+msgstr "El argumento acepta una cadena de versión semántica simple o una expresión de requisito de versión al estilo Cargo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:62
-msgid ""
-"A plain version string supports an optional `v` prefix, such as `v0.1.0` or "
-"`0.1.0`, and keeps the historical behavior of declaring the minimum required "
-"`ptool` version."
-msgstr ""
-"Una cadena de versión simple admite un prefijo `v` opcional, como `v0.1.0` "
-"o `0.1.0`, y mantiene el comportamiento histórico de declarar la versión "
-"mínima requerida de `ptool`."
+msgid "A plain version string supports an optional `v` prefix, such as `v0.1.0` or `0.1.0`, and keeps the historical behavior of declaring the minimum required `ptool` version."
+msgstr "Una cadena de versión simple admite un prefijo `v` opcional, como `v0.1.0` o `0.1.0`, y mantiene el comportamiento histórico de declarar la versión mínima requerida de `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:65
-msgid ""
-"Requirement expressions support operators and patterns such as `^0.6.0`, "
-"`~0.6.0`, `>=0.6.0, <0.7.0`, `1.*`, and `1.2.*`."
-msgstr ""
-"Las expresiones de requisito admiten operadores y patrones como `^0.6.0`, "
-"`~0.6.0`, `>=0.6.0, <0.7.0`, `1.*` y `1.2.*`."
+msgid "Requirement expressions support operators and patterns such as `^0.6.0`, `~0.6.0`, `>=0.6.0, <0.7.0`, `1.*`, and `1.2.*`."
+msgstr "Las expresiones de requisito admiten operadores y patrones como `^0.6.0`, `~0.6.0`, `>=0.6.0, <0.7.0`, `1.*` y `1.2.*`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:67
-msgid ""
-"Requirement expressions also accept version components with an optional `v` "
-"prefix, such as `>= v0.6.0, < 0.7.0`."
-msgstr ""
-"Las expresiones de requisito también aceptan componentes de versión con un "
-"prefijo `v` opcional, como `>= v0.6.0, < 0.7.0`."
+msgid "Requirement expressions also accept version components with an optional `v` prefix, such as `>= v0.6.0, < 0.7.0`."
+msgstr "Las expresiones de requisito también aceptan componentes de versión con un prefijo `v` opcional, como `>= v0.6.0, < 0.7.0`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:69
-msgid ""
-"If the current `ptool` version does not satisfy the declared version or "
-"requirement, the script exits immediately with an error."
-msgstr ""
-"Si la versión actual de `ptool` no satisface la versión o el requisito "
-"declarados, el script termina de inmediato con un error."
+msgid "If the current `ptool` version does not satisfy the declared version or requirement, the script exits immediately with an error."
+msgstr "Si la versión actual de `ptool` no satisface la versión o el requisito declarados, el script termina de inmediato con un error."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:72
 msgid "ptool.unindent"
 msgstr "ptool.unindent"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:76
-msgid ""
-"`ptool.unindent` processes multi-line strings by removing the `| ` prefix "
-"after leading indentation on each line and trimming leading and trailing "
-"blank lines."
-msgstr ""
-"`ptool.unindent` procesa cadenas multilínea eliminando el prefijo `| ` "
-"después de la indentación inicial en cada línea y recortando las líneas en "
-"blanco del principio y del final."
+msgid "`ptool.unindent` processes multi-line strings by removing the `| ` prefix after leading indentation on each line and trimming leading and trailing blank lines."
+msgstr "`ptool.unindent` procesa cadenas multilínea eliminando el prefijo `| ` después de la indentación inicial en cada línea y recortando las líneas en blanco del principio y del final."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:86
 msgid "This is equivalent to:"
@@ -178,20 +118,13 @@ msgid "ptool.inspect"
 msgstr "ptool.inspect"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:95
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:95"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:97
-msgid ""
-"`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-"
-"style string. It is primarily intended for debugging and displaying table "
-"contents."
-msgstr ""
-"`ptool.inspect(value[, options])` representa un valor Lua como una cadena "
-"legible al estilo Lua. Su objetivo principal es depurar y mostrar el "
-"contenido de tablas."
+msgid "`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-style string. It is primarily intended for debugging and displaying table contents."
+msgstr "`ptool.inspect(value[, options])` representa un valor Lua como una cadena legible al estilo Lua. Su objetivo principal es depurar y mostrar el contenido de tablas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:100
 msgid "`value` (any, required): The Lua value to inspect."
@@ -202,37 +135,23 @@ msgid "`options` (table, optional): Rendering options. Supported fields:"
 msgstr "`options` (table, opcional): Opciones de renderizado. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
-msgid ""
-"`indent` (string, optional): Indentation used for each nesting level. "
-"Defaults to two spaces."
-msgstr ""
-"`indent` (string, opcional): Indentación usada en cada nivel de anidación. "
-"Por defecto son dos espacios."
+msgid "`indent` (string, optional): Indentation used for each nesting level. Defaults to two spaces."
+msgstr "`indent` (string, opcional): Indentación usada en cada nivel de anidación. Por defecto son dos espacios."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
-msgid ""
-"`multiline` (boolean, optional): Whether tables are rendered across multiple "
-"lines. Defaults to `true`."
-msgstr ""
-"`multiline` (boolean, opcional): Si las tablas se representan en varias "
-"líneas. Por defecto es `true`."
+msgid "`multiline` (boolean, optional): Whether tables are rendered across multiple lines. Defaults to `true`."
+msgstr "`multiline` (boolean, opcional): Si las tablas se representan en varias líneas. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:101
-msgid ""
-"`max_depth` (integer, optional): Maximum nesting depth to render. Deeper "
-"values are replaced with `<max-depth>`."
-msgstr ""
-"`max_depth` (integer, opcional): Profundidad máxima de anidación que se "
-"representará. Los valores más profundos se reemplazan por `<max-depth>`."
+msgid "`max_depth` (integer, optional): Maximum nesting depth to render. Deeper values are replaced with `<max-depth>`."
+msgstr "`max_depth` (integer, opcional): Profundidad máxima de anidación que se representará. Los valores más profundos se reemplazan por `<max-depth>`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:108
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:108"
 msgid "Returns: `string`."
 msgstr "Devuelve: `string`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:110
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:110"
 msgid "Behavior:"
 msgstr "Comportamiento:"
@@ -242,73 +161,46 @@ msgid "Array-like entries (`1..n`) are rendered first."
 msgstr "Las entradas tipo arreglo (`1..n`) se representan primero."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:113
-msgid ""
-"Remaining table fields are rendered after the array part in stable key order."
-msgstr ""
-"Los demás campos de la tabla se representan después de la parte tipo "
-"arreglo, con un orden estable por clave."
+msgid "Remaining table fields are rendered after the array part in stable key order."
+msgstr "Los demás campos de la tabla se representan después de la parte tipo arreglo, con un orden estable por clave."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:114
-msgid ""
-"Identifier-like string keys are rendered as `key = value`; other keys are "
-"rendered as `[key] = value`."
-msgstr ""
-"Las claves de cadena con forma de identificador se representan como `key = "
-"value`; las demás se representan como `[key] = value`."
+msgid "Identifier-like string keys are rendered as `key = value`; other keys are rendered as `[key] = value`."
+msgstr "Las claves de cadena con forma de identificador se representan como `key = value`; las demás se representan como `[key] = value`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:116
 msgid "Recursive table references are rendered as `<cycle>`."
 msgstr "Las referencias recursivas a tablas se representan como `<cycle>`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:117
-msgid ""
-"Functions, threads, and userdata are rendered as placeholder values such as "
-"`<function>` and `<userdata>`."
-msgstr ""
-"Las funciones, threads y userdata se representan con valores marcadores como "
-"`<function>` y `<userdata>`."
+msgid "Functions, threads, and userdata are rendered as placeholder values such as `<function>` and `<userdata>`."
+msgstr "Las funciones, threads y userdata se representan con valores marcadores como `<function>` y `<userdata>`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:120
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:120"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:133
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:133"
 msgid "ptool.ask"
 msgstr "ptool.ask"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:135
-msgid ""
-"`v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt "
-"subcommands."
-msgstr ""
-"`v0.1.0` - Introduced. `v0.5.0` - Added validation options and prompt "
-"subcommands."
+msgid "`v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt subcommands."
+msgstr "`v0.1.0` - Introduced. `v0.5.0` - Added validation options and prompt subcommands."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:138
-msgid ""
-"`ptool.ask` provides interactive prompts. You can call it directly for text "
-"input, or use its prompt subcommands for confirmation, selection, multi-"
-"select, and secret input."
-msgstr ""
-"`ptool.ask` ofrece prompts interactivos. Puedes llamarlo directamente para "
-"pedir texto, o usar sus subprompts para confirmación, selección simple, "
-"selección múltiple y entrada secreta."
+msgid "`ptool.ask` provides interactive prompts. You can call it directly for text input, or use its prompt subcommands for confirmation, selection, multi-select, and secret input."
+msgstr "`ptool.ask` ofrece prompts interactivos. Puedes llamarlo directamente para pedir texto, o usar sus subprompts para confirmación, selección simple, selección múltiple y entrada secreta."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:142
 msgid "Common behavior:"
 msgstr "Comportamiento común:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:144
-msgid ""
-"All `ptool.ask` prompts require an interactive TTY. Running them in a non-"
-"interactive environment raises an error."
-msgstr ""
-"Todos los prompts de `ptool.ask` requieren un TTY interactivo. Ejecutarlos "
-"en un entorno no interactivo produce un error."
+msgid "All `ptool.ask` prompts require an interactive TTY. Running them in a non-interactive environment raises an error."
+msgstr "Todos los prompts de `ptool.ask` requieren un TTY interactivo. Ejecutarlos en un entorno no interactivo produce un error."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:146
 msgid "If the user cancels a prompt, the script raises an error."
@@ -316,109 +208,74 @@ msgstr "Si el usuario cancela un prompt, el script produce un error."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:147
 msgid "Unknown option names or invalid option value types raise an error."
-msgstr ""
-"Los nombres de opción desconocidos o los tipos de valor no válidos producen "
-"un error."
+msgstr "Los nombres de opción desconocidos o los tipos de valor no válidos producen un error."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:149
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:149"
 msgid "ptool.ask"
 msgstr "ptool.ask"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:151
-msgid ""
-"`ptool.ask(prompt[, options])` asks the user for a line of text and returns "
-"the answer."
-msgstr ""
-"`ptool.ask(prompt[, options])` pide al usuario una línea de texto y devuelve "
-"la respuesta."
+msgid "`ptool.ask(prompt[, options])` asks the user for a line of text and returns the answer."
+msgstr "`ptool.ask(prompt[, options])` pide al usuario una línea de texto y devuelve la respuesta."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:154
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:154"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr "`prompt` (string, obligatorio): El prompt que se muestra al usuario."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, opcional): Opciones del prompt. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgid ""
-"`default` (string, optional): Default value used when the user submits an "
-"empty answer."
-msgstr ""
-"`default` (string, opcional): Valor por defecto usado cuando el usuario "
-"envía una respuesta vacía."
+msgid "`default` (string, optional): Default value used when the user submits an empty answer."
+msgstr "`default` (string, opcional): Valor por defecto usado cuando el usuario envía una respuesta vacía."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
-msgstr ""
-"`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgid ""
-"`placeholder` (string, optional): Placeholder text shown before the user "
-"starts typing."
-msgstr ""
-"`placeholder` (string, opcional): Texto placeholder mostrado antes de que el "
-"usuario empiece a escribir."
+msgid "`placeholder` (string, optional): Placeholder text shown before the user starts typing."
+msgstr "`placeholder` (string, opcional): Texto placeholder mostrado antes de que el usuario empiece a escribir."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
 msgid "`required` (boolean, optional): Whether the answer must be non-empty."
 msgstr "`required` (boolean, opcional): Si la respuesta debe ser no vacía."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgid ""
-"`allow_empty` (boolean, optional): Whether to accept an empty answer. "
-"Defaults to `true`."
-msgstr ""
-"`allow_empty` (boolean, opcional): Si se acepta una respuesta vacía. El "
-"valor por defecto es `true`."
+msgid "`allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `true`."
+msgstr "`allow_empty` (boolean, opcional): Si se acepta una respuesta vacía. El valor por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-msgid ""
-"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
-"from the answer before returning it."
-msgstr ""
-"`trim` (boolean, opcional): Si se deben recortar los espacios al inicio y al "
-"final antes de devolver la respuesta."
+msgid "`trim` (boolean, optional): Whether to trim leading and trailing whitespace from the answer before returning it."
+msgstr "`trim` (boolean, opcional): Si se deben recortar los espacios al inicio y al final antes de devolver la respuesta."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
 msgid "`min_length` (integer, optional): Minimum accepted character length."
 msgstr "`min_length` (integer, opcional): Longitud mínima aceptada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
 msgid "`max_length` (integer, optional): Maximum accepted character length."
 msgstr "`max_length` (integer, opcional): Longitud máxima aceptada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:155"
 msgid "`pattern` (string, optional): Regular expression the answer must match."
-msgstr ""
-"`pattern` (string, opcional): Expresión regular que la respuesta debe "
-"cumplir."
+msgstr "`pattern` (string, opcional): Expresión regular que la respuesta debe cumplir."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:169
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:169"
 msgid "Returns: `string`."
 msgstr "Devuelve: `string`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:171
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:171"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -428,51 +285,38 @@ msgid "ptool.ask.confirm"
 msgstr "ptool.ask.confirm"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:185
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:185"
 msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:187
-msgid ""
-"`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer."
-msgstr ""
-"`ptool.ask.confirm(prompt[, options])` pide al usuario una respuesta de "
-"sí/no."
+msgid "`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer."
+msgstr "`ptool.ask.confirm(prompt[, options])` pide al usuario una respuesta de sí/no."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:189
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:189"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr "`prompt` (string, obligatorio): El prompt que se muestra al usuario."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, opcional): Opciones del prompt. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190
-msgid ""
-"`default` (boolean, optional): Default answer used when the user presses "
-"Enter without typing."
-msgstr ""
-"`default` (boolean, opcional): Respuesta por defecto cuando el usuario pulsa "
-"Enter sin escribir."
+msgid "`default` (boolean, optional): Default answer used when the user presses Enter without typing."
+msgstr "`default` (boolean, opcional): Respuesta por defecto cuando el usuario pulsa Enter sin escribir."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:190"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
-msgstr ""
-"`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:194
 msgid "Returns: `boolean`."
 msgstr "Devuelve: `boolean`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:196
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:196"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -482,33 +326,25 @@ msgid "ptool.ask.select"
 msgstr "ptool.ask.select"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:206
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:206"
 msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:208
-msgid ""
-"`ptool.ask.select(prompt, items[, options])` asks the user to choose one "
-"item from a list."
-msgstr ""
-"`ptool.ask.select(prompt, items[, options])` pide al usuario elegir un "
-"elemento de una lista."
+msgid "`ptool.ask.select(prompt, items[, options])` asks the user to choose one item from a list."
+msgstr "`ptool.ask.select(prompt, items[, options])` pide al usuario elegir un elemento de una lista."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:211
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:211"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr "`prompt` (string, obligatorio): El prompt que se muestra al usuario."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:212
 msgid "`items` (table, required): Candidate items. Each entry may be:"
-msgstr ""
-"`items` (table, obligatorio): Elementos candidatos. Cada entrada puede ser:"
+msgstr "`items` (table, obligatorio): Elementos candidatos. Cada entrada puede ser:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:212
-msgid ""
-"A string, which is used as both the display label and the returned value."
+msgid "A string, which is used as both the display label and the returned value."
 msgstr "Un string, usado como etiqueta mostrada y como valor devuelto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:212
@@ -516,41 +352,30 @@ msgid "A table like `{ label = \"Patch\", value = \"patch\" }`."
 msgstr "Un table como `{ label = \"Patch\", value = \"patch\" }`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, opcional): Opciones del prompt. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
-msgstr ""
-"`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215"
 msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
-msgstr ""
-"`page_size` (integer, opcional): Número máximo de filas mostradas a la vez."
+msgstr "`page_size` (integer, opcional): Número máximo de filas mostradas a la vez."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:215
-msgid ""
-"`default_index` (integer, optional): 1-based index of the initially selected "
-"item."
-msgstr ""
-"`default_index` (integer, opcional): Índice 1-based del elemento "
-"inicialmente seleccionado."
+msgid "`default_index` (integer, optional): 1-based index of the initially selected item."
+msgstr "`default_index` (integer, opcional): Índice 1-based del elemento inicialmente seleccionado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:220
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:220"
 msgid "Returns: `string`."
 msgstr "Devuelve: `string`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:222
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:222"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -560,82 +385,55 @@ msgid "ptool.ask.multiselect"
 msgstr "ptool.ask.multiselect"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:236
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:236"
 msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:238
-msgid ""
-"`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose "
-"zero or more items from a list."
-msgstr ""
-"`ptool.ask.multiselect(prompt, items[, options])` pide al usuario elegir "
-"cero o más elementos de una lista."
+msgid "`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose zero or more items from a list."
+msgstr "`ptool.ask.multiselect(prompt, items[, options])` pide al usuario elegir cero o más elementos de una lista."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:241
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:241"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr "`prompt` (string, obligatorio): El prompt que se muestra al usuario."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:242
-msgid ""
-"`items` (table, required): Candidate items. The format is the same as "
-"`ptool.ask.select`."
-msgstr ""
-"`items` (table, obligatorio): Elementos candidatos. El formato es el mismo "
-"que `ptool.ask.select`."
+msgid "`items` (table, required): Candidate items. The format is the same as `ptool.ask.select`."
+msgstr "`items` (table, obligatorio): Elementos candidatos. El formato es el mismo que `ptool.ask.select`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, opcional): Opciones del prompt. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
-msgstr ""
-"`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
 msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
-msgstr ""
-"`page_size` (integer, opcional): Número máximo de filas mostradas a la vez."
+msgstr "`page_size` (integer, opcional): Número máximo de filas mostradas a la vez."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-msgid ""
-"`default_indexes` (table, optional): 1-based indexes selected by default."
-msgstr ""
-"`default_indexes` (table, opcional): Índices 1-based seleccionados por "
-"defecto."
+msgid "`default_indexes` (table, optional): 1-based indexes selected by default."
+msgstr "`default_indexes` (table, opcional): Índices 1-based seleccionados por defecto."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-msgid ""
-"`min_selected` (integer, optional): Minimum number of items that must be "
-"selected."
-msgstr ""
-"`min_selected` (integer, opcional): Cantidad mínima de elementos que deben "
-"seleccionarse."
+msgid "`min_selected` (integer, optional): Minimum number of items that must be selected."
+msgstr "`min_selected` (integer, opcional): Cantidad mínima de elementos que deben seleccionarse."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244
-msgid ""
-"`max_selected` (integer, optional): Maximum number of items that may be "
-"selected."
-msgstr ""
-"`max_selected` (integer, opcional): Cantidad máxima de elementos que pueden "
-"seleccionarse."
+msgid "`max_selected` (integer, optional): Maximum number of items that may be selected."
+msgstr "`max_selected` (integer, opcional): Cantidad máxima de elementos que pueden seleccionarse."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:252
 msgid "Returns: `table`."
 msgstr "Devuelve: `table`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:254
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:254"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -645,111 +443,75 @@ msgid "ptool.ask.secret"
 msgstr "ptool.ask.secret"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:269
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:269"
 msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:271
-msgid ""
-"`ptool.ask.secret(prompt[, options])` asks the user for secret input such as "
-"a token or password."
-msgstr ""
-"`ptool.ask.secret(prompt[, options])` pide al usuario una entrada secreta, "
-"como un token o una contraseña."
+msgid "`ptool.ask.secret(prompt[, options])` asks the user for secret input such as a token or password."
+msgstr "`ptool.ask.secret(prompt[, options])` pide al usuario una entrada secreta, como un token o una contraseña."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:274
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:274"
 msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr "`prompt` (string, obligatorio): El prompt que se muestra al usuario."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
 msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, opcional): Opciones del prompt. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
 msgid "`help` (string, optional): Extra help text shown below the prompt."
-msgstr ""
-"`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
 msgid "`required` (boolean, optional): Whether the answer must be non-empty."
 msgstr "`required` (boolean, opcional): Si la respuesta debe ser no vacía."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgid ""
-"`allow_empty` (boolean, optional): Whether to accept an empty answer. "
-"Defaults to `false`."
-msgstr ""
-"`allow_empty` (boolean, opcional): Si se acepta una respuesta vacía. El "
-"valor por defecto es `false`."
+msgid "`allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `false`."
+msgstr "`allow_empty` (boolean, opcional): Si se acepta una respuesta vacía. El valor por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgid ""
-"`confirm` (boolean, optional): Whether to ask the user to type the secret "
-"twice. Defaults to `false`."
-msgstr ""
-"`confirm` (boolean, opcional): Si se debe pedir al usuario que escriba el "
-"secreto dos veces. El valor por defecto es `false`."
+msgid "`confirm` (boolean, optional): Whether to ask the user to type the secret twice. Defaults to `false`."
+msgstr "`confirm` (boolean, opcional): Si se debe pedir al usuario que escriba el secreto dos veces. El valor por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgid ""
-"`confirm_prompt` (string, optional): Custom prompt for the confirmation step."
-msgstr ""
-"`confirm_prompt` (string, opcional): Prompt personalizado para el paso de "
-"confirmación."
+msgid "`confirm_prompt` (string, optional): Custom prompt for the confirmation step."
+msgstr "`confirm_prompt` (string, opcional): Prompt personalizado para el paso de confirmación."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgid ""
-"`mismatch_message` (string, optional): Custom error message shown when the "
-"two answers do not match."
-msgstr ""
-"`mismatch_message` (string, opcional): Mensaje de error personalizado cuando "
-"las dos respuestas no coinciden."
+msgid "`mismatch_message` (string, optional): Custom error message shown when the two answers do not match."
+msgstr "`mismatch_message` (string, opcional): Mensaje de error personalizado cuando las dos respuestas no coinciden."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-msgid ""
-"`display_toggle` (boolean, optional): Whether to allow temporarily showing "
-"the typed secret."
-msgstr ""
-"`display_toggle` (boolean, opcional): Si se permite mostrar temporalmente el "
-"secreto escrito."
+msgid "`display_toggle` (boolean, optional): Whether to allow temporarily showing the typed secret."
+msgstr "`display_toggle` (boolean, opcional): Si se permite mostrar temporalmente el secreto escrito."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
 msgid "`min_length` (integer, optional): Minimum accepted character length."
 msgstr "`min_length` (integer, opcional): Longitud mínima aceptada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
 msgid "`max_length` (integer, optional): Maximum accepted character length."
 msgstr "`max_length` (integer, opcional): Longitud máxima aceptada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:275"
 msgid "`pattern` (string, optional): Regular expression the answer must match."
-msgstr ""
-"`pattern` (string, opcional): Expresión regular que la respuesta debe "
-"cumplir."
+msgstr "`pattern` (string, opcional): Expresión regular que la respuesta debe cumplir."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:291
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:291"
 msgid "Returns: `string`."
 msgstr "Devuelve: `string`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -759,7 +521,6 @@ msgid "ptool.config"
 msgstr "ptool.config"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:304
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:304"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introducido."
@@ -773,46 +534,26 @@ msgid "Currently supported fields:"
 msgstr "Campos admitidos actualmente:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
-msgid ""
-"`run` (table, optional): Default configuration for `ptool.run`. Supported "
-"fields:"
-msgstr ""
-"`run` (table, opcional): Configuración por defecto de `ptool.run`. Campos "
-"admitidos:"
+msgid "`run` (table, optional): Default configuration for `ptool.run`. Supported fields:"
+msgstr "`run` (table, opcional): Configuración por defecto de `ptool.run`. Campos admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
 msgid "`echo` (boolean, optional): Default echo switch. Defaults to `true`."
-msgstr ""
-"`echo` (boolean, opcional): Interruptor echo por defecto. Por defecto es "
-"`true`."
+msgstr "`echo` (boolean, opcional): Interruptor echo por defecto. Por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
-msgid ""
-"`check` (boolean, optional): Whether failures raise an error by default. "
-"Defaults to `false`."
-msgstr ""
-"`check` (boolean, opcional): Si los fallos deben producir error por defecto. "
-"Por defecto es `false`."
+msgid "`check` (boolean, optional): Whether failures raise an error by default. Defaults to `false`."
+msgstr "`check` (boolean, opcional): Si los fallos deben producir error por defecto. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
-msgid ""
-"`confirm` (boolean, optional): Whether to require confirmation before "
-"execution by default. Defaults to `false`."
-msgstr ""
-"`confirm` (boolean, opcional): Si por defecto debe requerirse confirmación "
-"antes de ejecutar. Por defecto es `false`."
+msgid "`confirm` (boolean, optional): Whether to require confirmation before execution by default. Defaults to `false`."
+msgstr "`confirm` (boolean, opcional): Si por defecto debe requerirse confirmación antes de ejecutar. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:310
-msgid ""
-"`retry` (boolean, optional): Whether to ask the user whether to retry after "
-"a failed execution when `check = true`. Defaults to `false`."
-msgstr ""
-"`retry` (boolean, opcional): Si debe preguntarse al usuario si quiere "
-"reintentar después de una ejecución fallida cuando `check = true`. Por "
-"defecto es `false`."
+msgid "`retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. Defaults to `false`."
+msgstr "`retry` (boolean, opcional): Si debe preguntarse al usuario si quiere reintentar después de una ejecución fallida cuando `check = true`. Por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:320
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:320"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -822,7 +563,6 @@ msgid "ptool.cd"
 msgstr "ptool.cd"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:335
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:335"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introducido."
@@ -833,37 +573,26 @@ msgstr "`ptool.cd(path)` actualiza el directorio actual de runtime de `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:339
 msgid "`path` (string, required): Target directory path, absolute or relative."
-msgstr ""
-"`path` (string, obligatorio): Ruta del directorio destino, absoluta o "
-"relativa."
+msgstr "`path` (string, obligatorio): Ruta del directorio destino, absoluta o relativa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:341
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:341"
 msgid "Behavior:"
 msgstr "Comportamiento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:343
 msgid "Relative paths are resolved from the current `ptool` runtime directory."
-msgstr ""
-"Las rutas relativas se resuelven desde el directorio de runtime actual de "
-"`ptool`."
+msgstr "Las rutas relativas se resuelven desde el directorio de runtime actual de `ptool`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:344
 msgid "The target must exist and must be a directory."
 msgstr "El destino debe existir y debe ser un directorio."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:345
-msgid ""
-"This updates `ptool` runtime state and affects APIs that use runtime cwd "
-"(such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`)."
-msgstr ""
-"Esto actualiza el estado interno de runtime de `ptool` y afecta a las APIs "
-"que usan ese cwd de runtime "
-"(como `ptool.run`, `ptool.path.abspath` y `ptool.path.relpath`)."
+msgid "This updates `ptool` runtime state and affects APIs that use runtime cwd (such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`)."
+msgstr "Esto actualiza el estado interno de runtime de `ptool` y afecta a las APIs que usan ese cwd de runtime (como `ptool.run`, `ptool.path.abspath` y `ptool.path.relpath`)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:348
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:348"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -873,49 +602,36 @@ msgid "ptool.script_path"
 msgstr "ptool.script_path"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:358
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:358"
 msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:360
-msgid ""
-"`ptool.script_path()` returns the absolute path of the current entry script."
-msgstr ""
-"`ptool.script_path()` devuelve la ruta absoluta del script de entrada actual."
+msgid "`ptool.script_path()` returns the absolute path of the current entry script."
+msgstr "`ptool.script_path()` devuelve la ruta absoluta del script de entrada actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:362
 msgid "Returns: `string|nil`."
 msgstr "Devuelve: `string|nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:364
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:364"
 msgid "Behavior:"
 msgstr "Comportamiento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:366
-msgid ""
-"When running through `ptool run <file>`, this returns the entry script path "
-"as an absolute, normalized path."
-msgstr ""
-"Al ejecutar con `ptool run <file>`, devuelve la ruta del script de entrada "
-"como una ruta absoluta y normalizada."
+msgid "When running through `ptool run <file>`, this returns the entry script path as an absolute, normalized path."
+msgstr "Al ejecutar con `ptool run <file>`, devuelve la ruta del script de entrada como una ruta absoluta y normalizada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:368
-msgid ""
-"The returned path is fixed when the runtime starts and does not change after "
-"`ptool.cd(...)`."
-msgstr ""
-"La ruta devuelta queda fijada cuando se inicia el runtime y no cambia "
-"después de `ptool.cd(...)`."
+msgid "The returned path is fixed when the runtime starts and does not change after `ptool.cd(...)`."
+msgstr "La ruta devuelta queda fijada cuando se inicia el runtime y no cambia después de `ptool.cd(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:370
 msgid "In `ptool repl`, this returns `nil`."
 msgstr "En `ptool repl`, devuelve `nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:372
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:372"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -925,17 +641,13 @@ msgid "ptool.try"
 msgstr "ptool.try"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:382
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:382"
 msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:384
-msgid ""
-"`ptool.try(fn)` runs `fn` and converts raised errors into return values."
-msgstr ""
-"`ptool.try(fn)` ejecuta `fn` y convierte los errores lanzados en valores de "
-"retorno."
+msgid "`ptool.try(fn)` runs `fn` and converts raised errors into return values."
+msgstr "`ptool.try(fn)` ejecuta `fn` y convierte los errores lanzados en valores de retorno."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:386
 msgid "`fn` (function, required): Callback to execute."
@@ -946,18 +658,13 @@ msgid "Returns: `ok, value, err`."
 msgstr "Devuelve: `ok, value, err`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:389
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:389"
 msgid "Return value rules:"
 msgstr "Reglas del valor devuelto:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:391
-msgid ""
-"On success, `ok = true`, `err = nil`, and `value` contains the callback "
-"result."
-msgstr ""
-"En caso de éxito, `ok = true`, `err = nil` y `value` contiene el resultado "
-"del callback."
+msgid "On success, `ok = true`, `err = nil`, and `value` contains the callback result."
+msgstr "En caso de éxito, `ok = true`, `err = nil` y `value` contiene el resultado del callback."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:393
 msgid "If the callback returns no values, `value` is `nil`."
@@ -968,10 +675,8 @@ msgid "If the callback returns one value, `value` is that value."
 msgstr "Si el callback devuelve un solo valor, `value` es ese valor."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:395
-msgid ""
-"If the callback returns multiple values, `value` is an array-like table."
-msgstr ""
-"Si el callback devuelve varios valores, `value` es una tabla tipo arreglo."
+msgid "If the callback returns multiple values, `value` is an array-like table."
+msgstr "Si el callback devuelve varios valores, `value` es una tabla tipo arreglo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:396
 msgid "On failure, `ok = false`, `value = nil`, and `err` is a table."
@@ -982,12 +687,8 @@ msgid "Structured error fields:"
 msgstr "Campos de error estructurado:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:400
-msgid ""
-"`kind` (string): Stable error category such as `io_error`, `command_failed`, "
-"`invalid_argument`, `http_error`, or `lua_error`."
-msgstr ""
-"`kind` (string): Categoría estable del error, como `io_error`, "
-"`command_failed`, `invalid_argument`, `http_error` o `lua_error`."
+msgid "`kind` (string): Stable error category such as `io_error`, `command_failed`, `invalid_argument`, `http_error`, or `lua_error`."
+msgstr "`kind` (string): Categoría estable del error, como `io_error`, `command_failed`, `invalid_argument`, `http_error` o `lua_error`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:402
 msgid "`message` (string): Human-readable error message."
@@ -995,8 +696,7 @@ msgstr "`message` (string): Mensaje de error legible para humanos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:403
 msgid "`op` (string, optional): API or operation name such as `ptool.fs.read`."
-msgstr ""
-"`op` (string, opcional): Nombre de la API u operación, como `ptool.fs.read`."
+msgstr "`op` (string, opcional): Nombre de la API u operación, como `ptool.fs.read`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:404
 msgid "`detail` (string, optional): Extra detail for the failure."
@@ -1004,27 +704,19 @@ msgstr "`detail` (string, opcional): Detalle adicional del fallo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:405
 msgid "`path` (string, optional): Path involved in a filesystem failure."
-msgstr ""
-"`path` (string, opcional): Ruta implicada en un fallo del sistema de "
-"archivos."
+msgstr "`path` (string, opcional): Ruta implicada en un fallo del sistema de archivos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:406
-msgid ""
-"`input` (string, optional): Original input that failed to parse or validate."
-msgstr ""
-"`input` (string, opcional): Entrada original que no pudo analizarse o "
-"validarse."
+msgid "`input` (string, optional): Original input that failed to parse or validate."
+msgstr "`input` (string, opcional): Entrada original que no pudo analizarse o validarse."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:407
 msgid "`cmd` (string, optional): Command name for command failures."
 msgstr "`cmd` (string, opcional): Nombre del comando en fallos de comandos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:408
-msgid ""
-"`status` (integer, optional): Exit status or HTTP status when available."
-msgstr ""
-"`status` (integer, opcional): Código de salida o código HTTP cuando esté "
-"disponible."
+msgid "`status` (integer, optional): Exit status or HTTP status when available."
+msgstr "`status` (integer, opcional): Código de salida o código HTTP cuando esté disponible."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:409
 msgid "`stderr` (string, optional): Captured stderr for command failures."
@@ -1035,61 +727,35 @@ msgid "`url` (string, optional): URL involved in an HTTP failure."
 msgstr "`url` (string, opcional): URL implicada en un fallo HTTP."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:411
-msgid ""
-"`cwd` (string, optional): Effective working directory for command failures."
-msgstr ""
-"`cwd` (string, opcional): Directorio de trabajo efectivo en fallos de "
-"comandos."
+msgid "`cwd` (string, optional): Effective working directory for command failures."
+msgstr "`cwd` (string, opcional): Directorio de trabajo efectivo en fallos de comandos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:412
-msgid ""
-"`target` (string, optional): SSH target for SSH-related command failures."
-msgstr ""
-"`target` (string, opcional): Objetivo SSH en fallos de comandos relacionados "
-"con SSH."
+msgid "`target` (string, optional): SSH target for SSH-related command failures."
+msgstr "`target` (string, opcional): Objetivo SSH en fallos de comandos relacionados con SSH."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:413
-msgid ""
-"`retryable` (boolean): Whether retrying may make sense. Defaults to `false`."
-msgstr ""
-"`retryable` (boolean): Si tiene sentido reintentar. El valor por defecto es "
-"`false`."
+msgid "`retryable` (boolean): Whether retrying may make sense. Defaults to `false`."
+msgstr "`retryable` (boolean): Si tiene sentido reintentar. El valor por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:415
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:415"
 msgid "Behavior:"
 msgstr "Comportamiento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:417
-msgid ""
-"`ptool` APIs raise structured errors. `ptool.try` converts them into the "
-"`err` table above so callers can branch on `err.kind` and related fields."
-msgstr ""
-"Las APIs de `ptool` lanzan errores estructurados. `ptool.try` los convierte "
-"en la tabla `err` anterior para que quien llama pueda ramificar según "
-"`err.kind` y otros campos."
+msgid "`ptool` APIs raise structured errors. `ptool.try` converts them into the `err` table above so callers can branch on `err.kind` and related fields."
+msgstr "Las APIs de `ptool` lanzan errores estructurados. `ptool.try` los convierte en la tabla `err` anterior para que quien llama pueda ramificar según `err.kind` y otros campos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:419
-msgid ""
-"Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, "
-"and only `message` is guaranteed."
-msgstr ""
-"Los errores Lua normales también se capturan. En ese caso, `err.kind` es "
-"`lua_error` y solo se garantiza `message`."
+msgid "Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, and only `message` is guaranteed."
+msgstr "Los errores Lua normales también se capturan. En ese caso, `err.kind` es `lua_error` y solo se garantiza `message`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:421
-msgid ""
-"`ptool.try` is the recommended way to handle errors from APIs such as "
-"`ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, "
-"and `res:assert_ok()`."
-msgstr ""
-"`ptool.try` es la forma recomendada de manejar errores de APIs como "
-"`ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })` y "
-"`res:assert_ok()`."
+msgid "`ptool.try` is the recommended way to handle errors from APIs such as `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, and `res:assert_ok()`."
+msgstr "`ptool.try` es la forma recomendada de manejar errores de APIs como `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })` y `res:assert_ok()`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:425
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:425"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -1099,7 +765,6 @@ msgid "ptool.run"
 msgstr "ptool.run"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:452
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:452"
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introducido."
@@ -1113,68 +778,40 @@ msgid "The following call forms are supported:"
 msgstr "Se admiten las siguientes formas de llamada:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:468
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:468"
 msgid "Argument rules:"
 msgstr "Reglas de argumentos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:470
-msgid ""
-"`ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. "
-"The first item is treated as the command and the rest as arguments."
-msgstr ""
-"`ptool.run(cmdline)`: `cmdline` se divide usando reglas estilo shell "
-"(`shlex`). El primer elemento se trata como comando y el resto como "
-"argumentos."
+msgid "`ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments."
+msgstr "`ptool.run(cmdline)`: `cmdline` se divide usando reglas estilo shell (`shlex`). El primer elemento se trata como comando y el resto como argumentos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:472
-msgid ""
-"`ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and "
-"`argsline` is split into an argument list using shell-style (`shlex`) rules."
-msgstr ""
-"`ptool.run(cmd, argsline)`: `cmd` se usa directamente como comando y "
-"`argsline` se divide en una lista de argumentos con reglas estilo shell "
-"(`shlex`)."
+msgid "`ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules."
+msgstr "`ptool.run(cmd, argsline)`: `cmd` se usa directamente como comando y `argsline` se divide en una lista de argumentos con reglas estilo shell (`shlex`)."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:474
-msgid ""
-"`ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings."
-msgstr ""
-"`ptool.run(cmd, args)`: `cmd` es una cadena y `args` es un arreglo de "
-"cadenas."
+msgid "`ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings."
+msgstr "`ptool.run(cmd, args)`: `cmd` es una cadena y `args` es un arreglo de cadenas."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:475
-msgid ""
-"`ptool.run(cmdline, options)`: `options` overrides settings for this "
-"invocation, such as `echo`."
-msgstr ""
-"`ptool.run(cmdline, options)`: `options` sobrescribe la configuración de "
-"esta invocación, como `echo`."
+msgid "`ptool.run(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`."
+msgstr "`ptool.run(cmdline, options)`: `options` sobrescribe la configuración de esta invocación, como `echo`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:477
-msgid ""
-"`ptool.run(cmd, args, options)`: `args` can be either a string or an array "
-"of strings, and `options` overrides settings for this invocation, such as "
-"`echo`."
-msgstr ""
-"`ptool.run(cmd, args, options)`: `args` puede ser una cadena o un arreglo de "
-"cadenas, y `options` sobrescribe la configuración de esta invocación, como "
-"`echo`."
+msgid "`ptool.run(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `echo`."
+msgstr "`ptool.run(cmd, args, options)`: `args` puede ser una cadena o un arreglo de cadenas, y `options` sobrescribe la configuración de esta invocación, como `echo`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:479
 msgid "`ptool.run(options)`: `options` is a table."
 msgstr "`ptool.run(options)`: `options` es una tabla."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:480
-msgid ""
-"When the second argument is a table: if it is an array "
-"(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
-"treated as `options`."
-msgstr ""
-"Cuando el segundo argumento es una tabla: si es un arreglo "
-"(claves enteras consecutivas `1..n`), se trata como `args`; en caso "
-"contrario se trata como `options`."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:480"
+msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
+msgstr "Cuando el segundo argumento es una tabla: si es un arreglo (claves enteras consecutivas `1..n`), se trata como `args`; en caso contrario se trata como `options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:483
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:483"
 msgid "Return value rules:"
 msgstr "Reglas del valor devuelto:"
@@ -1188,12 +825,8 @@ msgid "`ok` (boolean): Whether the exit code is `0`."
 msgstr "`ok` (boolean): Si el código de salida es `0`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
-msgid ""
-"`code` (integer|nil): The process exit code. If the process was terminated "
-"by a signal, this is `nil`."
-msgstr ""
-"`code` (integer|nil): El código de salida del proceso. Si el proceso fue "
-"terminado por una señal, esto es `nil`."
+msgid "`code` (integer|nil): The process exit code. If the process was terminated by a signal, this is `nil`."
+msgstr "`code` (integer|nil): El código de salida del proceso. Si el proceso fue terminado por una señal, esto es `nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
 msgid "`cmd` (string): Command name used for the execution."
@@ -1212,156 +845,79 @@ msgid "`stderr` (string, optional): Present when `stderr = \"capture\"`."
 msgstr "`stderr` (string, opcional): Presente cuando `stderr = \"capture\"`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:485
-msgid ""
-"`assert_ok(self)` (function): Raises a structured error when `ok = false`. "
-"The error kind is `command_failed`, and the error may include `cmd`, `status`"
-", `stderr`, and `cwd`."
-msgstr ""
-"`assert_ok(self)` (function): Produce un error estructurado cuando `ok = "
-"false`. El tipo de error es `command_failed` y puede incluir `cmd`, `status`"
-", `stderr` y `cwd`."
+msgid "`assert_ok(self)` (function): Raises a structured error when `ok = false`. The error kind is `command_failed`, and the error may include `cmd`, `status`, `stderr`, and `cwd`."
+msgstr "`assert_ok(self)` (function): Produce un error estructurado cuando `ok = false`. El tipo de error es `command_failed` y puede incluir `cmd`, `status`, `stderr` y `cwd`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:496
-msgid ""
-"The default value of `check` comes from `ptool.config"
-"({ run = { check = ... } })`. If not configured, it defaults to `false`. "
-"When `check = false`, callers can inspect `ok` themselves or call "
-"`res:assert_ok()`."
-msgstr ""
-"El valor por defecto de `check` proviene de `ptool.config"
-"({ run = { check = ... } })`. Si no se configura, el valor por defecto es "
-"`false`. Cuando `check = false`, quien llama puede inspeccionar `ok` por su "
-"cuenta o llamar a `res:assert_ok()`."
+msgid "The default value of `check` comes from `ptool.config({ run = { check = ... } })`. If not configured, it defaults to `false`. When `check = false`, callers can inspect `ok` themselves or call `res:assert_ok()`."
+msgstr "El valor por defecto de `check` proviene de `ptool.config({ run = { check = ... } })`. Si no se configura, el valor por defecto es `false`. Cuando `check = false`, quien llama puede inspeccionar `ok` por su cuenta o llamar a `res:assert_ok()`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:499
-msgid ""
-"When both `check = true` and `retry = true`, `ptool.run` asks whether the "
-"failed command should be retried before raising the final error."
-msgstr ""
-"Cuando `check = true` y `retry = true`, `ptool.run` pregunta si debe "
-"reintentarse el comando fallido antes de producir el error final."
+msgid "When both `check = true` and `retry = true`, `ptool.run` asks whether the failed command should be retried before raising the final error."
+msgstr "Cuando `check = true` y `retry = true`, `ptool.run` pregunta si debe reintentarse el comando fallido antes de producir el error final."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:501
-msgid ""
-"When `check = true`, `ptool.run` raises the same structured `command_failed` "
-"error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to "
-"catch and inspect it from Lua."
-msgstr ""
-"Cuando `check = true`, `ptool.run` produce el mismo error estructurado "
-"`command_failed` que `res:assert_ok()`. Usa `ptool.try(...)` si quieres "
-"capturarlo e inspeccionarlo desde Lua."
+msgid "When `check = true`, `ptool.run` raises the same structured `command_failed` error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to catch and inspect it from Lua."
+msgstr "Cuando `check = true`, `ptool.run` produce el mismo error estructurado `command_failed` que `res:assert_ok()`. Usa `ptool.try(...)` si quieres capturarlo e inspeccionarlo desde Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:505
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:505"
 msgid "Example:"
 msgstr "Ejemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:526
-msgid ""
-"`ptool.run(options)` is also supported, where `options` is a table with the "
-"following fields:"
-msgstr ""
-"También se admite `ptool.run(options)`, donde `options` es una tabla con los "
-"siguientes campos:"
+msgid "`ptool.run(options)` is also supported, where `options` is a table with the following fields:"
+msgstr "También se admite `ptool.run(options)`, donde `options` es una tabla con los siguientes campos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:529"
 msgid "`cmd` (string, required): The command name or executable path."
-msgstr ""
-"`cmd` (string, obligatorio): El nombre del comando o la ruta del ejecutable."
+msgstr "`cmd` (string, obligatorio): El nombre del comando o la ruta del ejecutable."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:530
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:530"
 msgid "`args` (string[], optional): The argument list."
 msgstr "`args` (string[], opcional): La lista de argumentos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:531
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:531"
 msgid "`cwd` (string, optional): The child process working directory."
 msgstr "`cwd` (string, opcional): El directorio de trabajo del proceso hijo."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532
-msgid ""
-"`env` (table, optional): Additional environment variables, where keys are "
-"variable names and values are variable values."
-msgstr ""
-"`env` (table, opcional): Variables de entorno adicionales, donde claves y "
-"valores son nombres y valores de variable."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:532"
+msgid "`env` (table, optional): Additional environment variables, where keys are variable names and values are variable values."
+msgstr "`env` (table, opcional): Variables de entorno adicionales, donde claves y valores son nombres y valores de variable."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:534
-msgid ""
-"`stdin` (string, optional): String sent to the child process stdin. When "
-"this is omitted, the child process inherits the current process stdin."
-msgstr ""
-"`stdin` (cadena, opcional): cadena enviada a la entrada estándar del proceso "
-"secundario. Cuando se omite, el proceso hijo hereda la entrada estándar del "
-"proceso actual."
+msgid "`stdin` (string, optional): String sent to the child process stdin. When this is omitted, the child process inherits the current process stdin."
+msgstr "`stdin` (cadena, opcional): cadena enviada a la entrada estándar del proceso secundario. Cuando se omite, el proceso hijo hereda la entrada estándar del proceso actual."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:536
-msgid ""
-"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
-"from captured `stdout` and captured `stderr` before returning them. This "
-"only affects streams set to `\"capture\"`. Defaults to `false`."
-msgstr ""
-"`trim` (booleano, opcional): si se deben recortar los espacios en blanco "
-"iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. "
-"Esto solo afecta a las transmisiones configuradas en `\"capture\"`. El valor "
-"predeterminado es `false`."
+msgid "`trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `\"capture\"`. Defaults to `false`."
+msgstr "`trim` (booleano, opcional): si se deben recortar los espacios en blanco iniciales y finales de `stdout` y `stderr` capturados antes de devolverlos. Esto solo afecta a las transmisiones configuradas en `\"capture\"`. El valor predeterminado es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:539
-msgid ""
-"`echo` (boolean, optional): Whether to echo command information for this "
-"execution. If omitted, the value from `ptool.config({ run = { echo = ... } })"
-"` is used; if that is also unset, the default is `true`."
-msgstr ""
-"`echo` (boolean, opcional): Si debe imprimirse información del comando para "
-"esta ejecución. Si se omite, se usa el valor de `ptool.config"
-"({ run = { echo = ... } })`; si también falta, el valor por defecto es "
-"`true`."
+msgid "`echo` (boolean, optional): Whether to echo command information for this execution. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`."
+msgstr "`echo` (boolean, opcional): Si debe imprimirse información del comando para esta ejecución. Si se omite, se usa el valor de `ptool.config({ run = { echo = ... } })`; si también falta, el valor por defecto es `true`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:542
-msgid ""
-"`check` (boolean, optional): Whether to raise an error immediately when the "
-"exit code is not `0`. If omitted, the value from `ptool.config"
-"({ run = { check = ... } })` is used; if that is also unset, the default is "
-"`false`."
-msgstr ""
-"`check` (boolean, opcional): Si debe producirse un error inmediatamente "
-"cuando el código de salida no es `0`. Si se omite, se usa el valor de "
-"`ptool.config({ run = { check = ... } })`; si también falta, el valor por "
-"defecto es `false`."
+msgid "`check` (boolean, optional): Whether to raise an error immediately when the exit code is not `0`. If omitted, the value from `ptool.config({ run = { check = ... } })` is used; if that is also unset, the default is `false`."
+msgstr "`check` (boolean, opcional): Si debe producirse un error inmediatamente cuando el código de salida no es `0`. Si se omite, se usa el valor de `ptool.config({ run = { check = ... } })`; si también falta, el valor por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:545
-msgid ""
-"`confirm` (boolean, optional): Whether to ask the user for confirmation "
-"before execution. If omitted, the value from `ptool.config"
-"({ run = { confirm = ... } })` is used; if that is also unset, the default "
-"is `false`."
-msgstr ""
-"`confirm` (boolean, opcional): Si debe pedirse confirmación al usuario antes "
-"de ejecutar. Si se omite, se usa el valor de `ptool.config"
-"({ run = { confirm = ... } })`; si también falta, el valor por defecto es "
-"`false`."
+msgid "`confirm` (boolean, optional): Whether to ask the user for confirmation before execution. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`."
+msgstr "`confirm` (boolean, opcional): Si debe pedirse confirmación al usuario antes de ejecutar. Si se omite, se usa el valor de `ptool.config({ run = { confirm = ... } })`; si también falta, el valor por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:548
-msgid ""
-"`retry` (boolean, optional): Whether to ask the user whether to retry after "
-"a failed execution when `check = true`. If omitted, the value from "
-"`ptool.config({ run = { retry = ... } })` is used; if that is also unset, "
-"the default is `false`."
-msgstr ""
-"`retry` (boolean, opcional): Si debe preguntarse al usuario si quiere "
-"reintentar después de un fallo cuando `check = true`. Si se omite, se usa el "
-"valor de `ptool.config({ run = { retry = ... } })`; si también falta, el "
-"valor por defecto es `false`."
+msgid "`retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. If omitted, the value from `ptool.config({ run = { retry = ... } })` is used; if that is also unset, the default is `false`."
+msgstr "`retry` (boolean, opcional): Si debe preguntarse al usuario si quiere reintentar después de un fallo cuando `check = true`. Si se omite, se usa el valor de `ptool.config({ run = { retry = ... } })`; si también falta, el valor por defecto es `false`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
-msgid ""
-"`stdout` (string, optional): Stdout handling strategy. Supported values:"
-msgstr ""
-"`stdout` (string, opcional): Estrategia de manejo de stdout. Valores "
-"admitidos:"
+msgid "`stdout` (string, optional): Stdout handling strategy. Supported values:"
+msgstr "`stdout` (string, opcional): Estrategia de manejo de stdout. Valores admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: hereda del terminal actual (predeterminado)."
@@ -1371,20 +927,15 @@ msgid "`\"capture\"`: Capture into `res.stdout`."
 msgstr "`\"capture\"`: Capturar en `res.stdout`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
-msgid ""
-"`stderr` (string, optional): Stderr handling strategy. Supported values:"
-msgstr ""
-"`stderr` (string, opcional): Estrategia de manejo de stderr. Valores "
-"admitidos:"
+msgid "`stderr` (string, optional): Stderr handling strategy. Supported values:"
+msgstr "`stderr` (string, opcional): Estrategia de manejo de stderr. Valores admitidos:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`: hereda del terminal actual (predeterminado)."
@@ -1394,58 +945,42 @@ msgid "`\"capture\"`: Capture into `res.stderr`."
 msgstr "`\"capture\"`: Capturar en `res.stderr`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`: Descarta la salida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:560
-msgid ""
-"When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run"
-"(cmd, args, options)` are used, the per-call `options` table also accepts "
-"`stdin` and `trim` with the same meaning."
-msgstr ""
-"Cuando se utilizan formularios de llamadas abreviadas como `ptool.run"
-"(cmdline, options)` o `ptool.run(cmd, args, options)`, la tabla `options` "
-"por llamada también acepta `stdin` y `trim` con el mismo significado."
+msgid "When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning."
+msgstr "Cuando se utilizan formularios de llamadas abreviadas como `ptool.run(cmdline, options)` o `ptool.run(cmd, args, options)`, la tabla `options` por llamada también acepta `stdin` y `trim` con el mismo significado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563"
 msgid "When `confirm = true`:"
 msgstr "Cuando `confirm = true`:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563"
 msgid "If the user refuses the execution, an error is raised immediately."
 msgstr "Si el usuario rechaza la ejecución, se produce un error de inmediato."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563
-msgid ""
-"If the current environment is not interactive (no TTY), an error is raised "
-"immediately."
-msgstr ""
-"Si el entorno actual no es interactivo (sin TTY), se produce un error de "
-"inmediato."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:563"
+msgid "If the current environment is not interactive (no TTY), an error is raised immediately."
+msgstr "Si el entorno actual no es interactivo (sin TTY), se produce un error de inmediato."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:567
 msgid "When `retry = true` and `check = true`:"
 msgstr "Cuando `retry = true` y `check = true`:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:567
-msgid ""
-"If the command fails, `ptool.run` asks whether to retry the same command."
-msgstr ""
-"Si el comando falla, `ptool.run` pregunta si debe reintentarse el mismo "
-"comando."
+msgid "If the command fails, `ptool.run` asks whether to retry the same command."
+msgstr "Si el comando falla, `ptool.run` pregunta si debe reintentarse el mismo comando."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:567
-msgid ""
-"If the current environment is not interactive (no TTY), an error is raised "
-"immediately instead of prompting for retry."
-msgstr ""
-"Si el entorno actual no es interactivo (sin TTY), se produce un error de "
-"inmediato en lugar de pedir reintento."
+msgid "If the current environment is not interactive (no TTY), an error is raised immediately instead of prompting for retry."
+msgstr "Si el entorno actual no es interactivo (sin TTY), se produce un error de inmediato en lugar de pedir reintento."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572"
 msgid "Example:"
 msgstr "Ejemplo:"
@@ -1455,17 +990,13 @@ msgid "ptool.run_capture"
 msgstr "ptool.run_capture"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:604
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:604"
 msgid "`Unreleased` - Introduced."
 msgstr "`Unreleased` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:606
-msgid ""
-"`ptool.run_capture` executes external commands from Rust with the same call "
-"forms, argument rules, return value rules, and options as `ptool.run`."
-msgstr ""
-"`ptool.run_capture` ejecuta comandos externos desde Rust con las mismas "
-"formas de llamada, reglas de argumentos, reglas de valor devuelto y opciones "
-"que `ptool.run`."
+msgid "`ptool.run_capture` executes external commands from Rust with the same call forms, argument rules, return value rules, and options as `ptool.run`."
+msgstr "`ptool.run_capture` ejecuta comandos externos desde Rust con las mismas formas de llamada, reglas de argumentos, reglas de valor devuelto y opciones que `ptool.run`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:609
 msgid "The difference is only the default stream handling:"
@@ -1480,38 +1011,154 @@ msgid "`stderr` defaults to `\"capture\"`."
 msgstr "`stderr` por defecto es `\"capture\"`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:614
-msgid ""
-"`trim` still defaults to `false`, and you can still override any of these "
-"fields explicitly in `options`."
-msgstr ""
-"`trim` todavía tiene como valor predeterminado `false` y aún puede anular "
-"cualquiera de estos campos explícitamente en `options`."
+msgid "`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`."
+msgstr "`trim` todavía tiene como valor predeterminado `false` y aún puede anular cualquiera de estos campos explícitamente en `options`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:617
-#, fuzzy
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:617"
 msgid "Example:"
 msgstr "Ejemplo:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:636
+msgid "ptool.exec"
+msgstr "ptool.exec"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introducido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:640
+msgid "`ptool.exec` replaces the current `ptool` process with an external command."
+msgstr "`ptool.exec` reemplaza el proceso actual de `ptool` por un comando externo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:642
+msgid "It supports the same command argument call forms as `ptool.run`:"
+msgstr "Admite las mismas formas de llamada de argumentos de comando que `ptool.run`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:653
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:653"
+msgid "Behavior:"
+msgstr "Comportamiento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:655
+msgid "On success, `ptool.exec` does not return. The current `ptool` process is replaced by the target command."
+msgstr "Si tiene éxito, `ptool.exec` no devuelve. El proceso actual de `ptool` es reemplazado por el comando de destino."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:657
+msgid "Any Lua code after a successful `ptool.exec(...)` call does not run."
+msgstr "No se ejecuta ningún código Lua después de una llamada exitosa a `ptool.exec(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:658
+msgid "In `ptool repl`, a successful `ptool.exec(...)` also replaces the REPL process."
+msgstr "En `ptool repl`, una llamada exitosa a `ptool.exec(...)` también reemplaza el proceso del REPL."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:660
+msgid "On Unix platforms, this uses true process replacement semantics."
+msgstr "En plataformas Unix, esto usa semántica real de reemplazo de proceso."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:661
+msgid "On non-Unix platforms, `ptool.exec` currently raises an `unsupported` error."
+msgstr "En plataformas no Unix, `ptool.exec` actualmente produce un error `unsupported`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:663
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:663"
+msgid "Argument rules:"
+msgstr "Reglas de argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:665
+msgid "`ptool.exec(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments."
+msgstr "`ptool.exec(cmdline)`: `cmdline` se divide usando reglas de estilo shell (`shlex`). El primer elemento se trata como comando y el resto como argumentos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:667
+msgid "`ptool.exec(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules."
+msgstr "`ptool.exec(cmd, argsline)`: `cmd` se usa directamente como comando y `argsline` se divide en una lista de argumentos con reglas de estilo shell (`shlex`)."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:669
+msgid "`ptool.exec(cmd, args)`: `cmd` is a string and `args` is an array of strings."
+msgstr "`ptool.exec(cmd, args)`: `cmd` es una cadena y `args` es un arreglo de cadenas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:670
+msgid "`ptool.exec(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`."
+msgstr "`ptool.exec(cmdline, options)`: `options` sobrescribe la configuración de esta invocación, por ejemplo `echo`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:672
+msgid "`ptool.exec(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `confirm`."
+msgstr "`ptool.exec(cmd, args, options)`: `args` puede ser una cadena o un arreglo de cadenas, y `options` sobrescribe la configuración de esta invocación, por ejemplo `confirm`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:675
+msgid "`ptool.exec(options)`: `options` is a table."
+msgstr "`ptool.exec(options)`: `options` es una tabla."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:676
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:676"
+msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
+msgstr "Cuando el segundo argumento es una tabla: si es un arreglo (claves enteras consecutivas `1..n`), se trata como `args`; en caso contrario se trata como `options`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:679
+msgid "`ptool.exec(options)` is also supported, where `options` is a table with the following fields:"
+msgstr "También se admite `ptool.exec(options)`, donde `options` es una tabla con los siguientes campos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:682
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:682"
+msgid "`cmd` (string, required): The command name or executable path."
+msgstr "`cmd` (string, obligatorio): El nombre del comando o la ruta del ejecutable."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:683
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:683"
+msgid "`args` (string[], optional): The argument list."
+msgstr "`args` (string[], opcional): La lista de argumentos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:684
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:684"
+msgid "`cwd` (string, optional): The child process working directory."
+msgstr "`cwd` (string, opcional): El directorio de trabajo del proceso hijo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:685
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:685"
+msgid "`env` (table, optional): Additional environment variables, where keys are variable names and values are variable values."
+msgstr "`env` (table, opcional): Variables de entorno adicionales, donde claves y valores son nombres y valores de variable."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:687
+msgid "`echo` (boolean, optional): Whether to echo command information before replacement. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`."
+msgstr "`echo` (boolean, opcional): Si debe mostrarse información del comando antes del reemplazo. Si se omite, se usa el valor de `ptool.config({ run = { echo = ... } })`; si tampoco está definido, el valor predeterminado es `true`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:690
+msgid "`confirm` (boolean, optional): Whether to ask the user for confirmation before replacement. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`."
+msgstr "`confirm` (boolean, opcional): Si debe pedirse confirmación al usuario antes del reemplazo. Si se omite, se usa el valor de `ptool.config({ run = { confirm = ... } })`; si tampoco está definido, el valor predeterminado es `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:693
+msgid "Unlike `ptool.run`, `ptool.exec` does not support `stdin`, `trim`, `stdout`, `stderr`, `check`, or `retry`."
+msgstr "A diferencia de `ptool.run`, `ptool.exec` no admite `stdin`, `trim`, `stdout`, `stderr`, `check` ni `retry`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695"
+msgid "When `confirm = true`:"
+msgstr "Cuando `confirm = true`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695"
+msgid "If the user refuses the execution, an error is raised immediately."
+msgstr "Si el usuario rechaza la ejecución, se produce un error de inmediato."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695"
+msgid "If the current environment is not interactive (no TTY), an error is raised immediately."
+msgstr "Si el entorno actual no es interactivo (sin TTY), se produce un error de inmediato."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:700
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:700"
+msgid "Example:"
+msgstr "Ejemplo:"
+
 #~ msgid "`ptool.use` declares the minimum required `ptool` version for a script."
-#~ msgstr ""
-#~ "`ptool.use` declara la versión mínima de `ptool` requerida por un script."
+#~ msgstr "`ptool.use` declara la versión mínima de `ptool` requerida por un script."
 
-#~ msgid ""
-#~ "The argument is a semantic version string (SemVer) and supports an optional "
-#~ "`v` prefix, such as `v0.1.0` or `0.1.0`."
-#~ msgstr ""
-#~ "El argumento es una cadena de versión semántica (SemVer) y admite un prefijo "
-#~ "`v` opcional, como `v0.1.0` o `0.1.0`."
+#~ msgid "The argument is a semantic version string (SemVer) and supports an optional `v` prefix, such as `v0.1.0` or `0.1.0`."
+#~ msgstr "El argumento es una cadena de versión semántica (SemVer) y admite un prefijo `v` opcional, como `v0.1.0` o `0.1.0`."
 
-#~ msgid ""
-#~ "If the required version is higher than the current `ptool` version, the "
-#~ "script exits immediately with an error saying that the current `ptool` "
-#~ "version is too old."
-#~ msgstr ""
-#~ "Si la versión requerida es superior a la versión actual de `ptool`, el "
-#~ "script sale de inmediato con un error indicando que la versión actual es "
-#~ "demasiado antigua."
+#~ msgid "If the required version is higher than the current `ptool` version, the script exits immediately with an error saying that the current `ptool` version is too old."
+#~ msgstr "Si la versión requerida es superior a la versión actual de `ptool`, el script sale de inmediato con un error indicando que la versión actual es demasiado antigua."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:64"
 #~ msgid "`v0.1.0` - Introduced."
@@ -1543,8 +1190,7 @@ msgstr "Ejemplo:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:180"
 #~ msgid "`help` (string, optional): Extra help text shown below the prompt."
-#~ msgstr ""
-#~ "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+#~ msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:186"
 #~ msgid "Example:"
@@ -1564,8 +1210,7 @@ msgstr "Ejemplo:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:205"
 #~ msgid "`help` (string, optional): Extra help text shown below the prompt."
-#~ msgstr ""
-#~ "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+#~ msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:210"
 #~ msgid "Returns: `string`."
@@ -1589,13 +1234,11 @@ msgstr "Ejemplo:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:234"
 #~ msgid "`help` (string, optional): Extra help text shown below the prompt."
-#~ msgstr ""
-#~ "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+#~ msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:234"
 #~ msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
-#~ msgstr ""
-#~ "`page_size` (integer, opcional): Número máximo de filas mostradas a la vez."
+#~ msgstr "`page_size` (integer, opcional): Número máximo de filas mostradas a la vez."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:244"
 #~ msgid "Example:"
@@ -1615,8 +1258,7 @@ msgstr "Ejemplo:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:265"
 #~ msgid "`help` (string, optional): Extra help text shown below the prompt."
-#~ msgstr ""
-#~ "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
+#~ msgstr "`help` (string, opcional): Texto de ayuda adicional mostrado bajo el prompt."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:265"
 #~ msgid "`required` (boolean, optional): Whether the answer must be non-empty."
@@ -1632,9 +1274,7 @@ msgstr "Ejemplo:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:265"
 #~ msgid "`pattern` (string, optional): Regular expression the answer must match."
-#~ msgstr ""
-#~ "`pattern` (string, opcional): Expresión regular que la respuesta debe "
-#~ "cumplir."
+#~ msgstr "`pattern` (string, opcional): Expresión regular que la respuesta debe cumplir."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:281"
 #~ msgid "Returns: `string`."
@@ -1725,9 +1365,7 @@ msgstr "Ejemplo:"
 #~ msgstr "Ejemplo:"
 
 #~ msgid "You can still override either field explicitly in `options`."
-#~ msgstr ""
-#~ "Puedes seguir sobrescribiendo cualquiera de los dos campos explícitamente en "
-#~ "`options`."
+#~ msgstr "Puedes seguir sobrescribiendo cualquiera de los dos campos explícitamente en `options`."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:602"
 #~ msgid "Example:"

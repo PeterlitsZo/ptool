@@ -45,6 +45,11 @@ interpreter and injects a large set of utility functions (registered under the
   regenerate the localized docs under `website/i18n/` using the docs i18n
   workflow (`node website/scripts/docs-i18n.mjs sync`, `compile`, or
   `refresh`) so localized docs stay in sync.
+- When new or changed source doc strings have not yet been translated for a
+  locale, you MUST NOT regenerate that locale's files under `website/i18n/`
+  from empty or fuzzy PO entries. Fill in or explicitly resolve the relevant PO
+  entries first so generated localized docs do not silently fall back to mixed
+  English content.
 - You MUST NOT hand-edit generated localized docs under `website/i18n/` when
   the change should be represented in `website/po/docs/`. Update the source
   docs and catalogs first, then regenerate the localized Markdown.

@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `ptool.exec(...)`, which replaces the current `ptool` process with an
+  external command, and documented it across all supported locales.
 - Added `ptool.ssh.Connection:http_request(...)`, which sends HTTP requests
   from the remote SSH host and returns the same response shape as
   `ptool.http.request(...)`, and documented the new SSH/HTTP workflow across

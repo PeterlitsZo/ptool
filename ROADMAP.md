@@ -24,8 +24,8 @@
 - [x] Enhance `p.use` and semvar module. Like `p.use("<= 0.10.0")`, etc?
 - [x] Add a helper for SSH connection to send HTTP request?
 - [x] Let `ptool --help` print the website's URL.
-- [ ] How about let `run_capture` have a `trim` option?
-- [ ] Support `p.exec`.
+- [x] How about let `run_capture` have a `trim` option?
+- [x] Support `p.exec`.
 - [x] Let the API document have groups.
 
 # v0.6.0

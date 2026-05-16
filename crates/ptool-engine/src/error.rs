@@ -19,6 +19,7 @@ pub enum ErrorKind {
     InvalidPort,
     InvalidHostPort,
     InvalidFsOption,
+    Unsupported,
     AlreadyExists,
     NotAFile,
     NotInteractive,

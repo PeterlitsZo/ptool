@@ -85,9 +85,9 @@ line 2]]
   - `indent` (string, opcional): Indentação usada em cada nível de aninhamento. O padrão é dois espaços.
   - `multiline` (boolean, opcional): Se tabelas são renderizadas em várias linhas. O padrão é `true`.
   - `max_depth` (integer, opcional): Profundidade máxima de aninhamento a ser renderizada. Valores mais profundos são substituídos por `<max-depth>`.
-- Returns: `string`.
+- Retorna: `string`.
 
-Behavior:
+Comportamento:
 
 - Entradas em formato array (`1..n`) são renderizadas primeiro.
 - Os campos restantes da tabela são renderizados após a parte de array, em ordem estável por chave.
@@ -95,7 +95,7 @@ Behavior:
 - Referências recursivas a tabelas são renderizadas como `<cycle>`.
 - Functions, threads e userdata são renderizados como valores marcador, como `<function>` e `<userdata>`.
 
-Example:
+Exemplo:
 
 ```lua
 local value = {
@@ -124,20 +124,20 @@ Comportamento comum:
 
 `ptool.ask(prompt[, options])` solicita ao usuário uma linha de texto e retorna a resposta.
 
-- `prompt` (string, required): The prompt shown to the user.
-- `options` (table, optional): Prompt options. Supported fields:
+- `prompt` (string, obrigatório): O prompt mostrado ao usuário.
+- `options` (table, opcional): Opções do prompt. Campos suportados:
   - `default` (string, opcional): Valor padrão usado quando o usuário envia uma resposta vazia.
-  - `help` (string, optional): Extra help text shown below the prompt.
+  - `help` (string, opcional): Texto de ajuda extra exibido abaixo do prompt.
   - `placeholder` (string, opcional): Texto placeholder mostrado antes de o usuário começar a digitar.
-  - `required` (boolean, optional): Whether the answer must be non-empty.
+  - `required` (boolean, opcional): Se a resposta deve ser não vazia.
   - `allow_empty` (boolean, opcional): Se uma resposta vazia é aceita. O padrão é `true`.
   - `trim` (boolean, opcional): Se os espaços no início e no fim devem ser removidos antes de retornar a resposta.
-  - `min_length` (integer, optional): Minimum accepted character length.
-  - `max_length` (integer, optional): Maximum accepted character length.
-  - `pattern` (string, optional): Regular expression the answer must match.
-- Returns: `string`.
+  - `min_length` (integer, opcional): Comprimento mínimo aceito.
+  - `max_length` (integer, opcional): Comprimento máximo aceito.
+  - `pattern` (string, opcional): Expressão regular que a resposta deve corresponder.
+- Retorna: `string`.
 
-Example:
+Exemplo:
 
 ```lua
 local project = ptool.ask("Project name?", {
@@ -155,13 +155,13 @@ local project = ptool.ask("Project name?", {
 
 `ptool.ask.confirm(prompt[, options])` solicita ao usuário uma resposta de sim/não.
 
-- `prompt` (string, required): The prompt shown to the user.
-- `options` (table, optional): Prompt options. Supported fields:
+- `prompt` (string, obrigatório): O prompt mostrado ao usuário.
+- `options` (table, opcional): Opções do prompt. Campos suportados:
   - `default` (boolean, opcional): Resposta padrão quando o usuário pressiona Enter sem digitar.
-  - `help` (string, optional): Extra help text shown below the prompt.
+  - `help` (string, opcional): Texto de ajuda extra exibido abaixo do prompt.
 - Retorna: `boolean`.
 
-Example:
+Exemplo:
 
 ```lua
 local confirmed = ptool.ask.confirm("Continue?", {
@@ -175,17 +175,17 @@ local confirmed = ptool.ask.confirm("Continue?", {
 
 `ptool.ask.select(prompt, items[, options])` solicita ao usuário que escolha um item de uma lista.
 
-- `prompt` (string, required): The prompt shown to the user.
+- `prompt` (string, obrigatório): O prompt mostrado ao usuário.
 - `items` (table, obrigatório): Itens candidatos. Cada entrada pode ser:
   - Um string, usado tanto como rótulo exibido quanto como valor retornado.
   - Um table como `{ label = "Patch", value = "patch" }`.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `page_size` (integer, optional): Maximum number of rows shown at once.
+- `options` (table, opcional): Opções do prompt. Campos suportados:
+  - `help` (string, opcional): Texto de ajuda extra exibido abaixo do prompt.
+  - `page_size` (integer, opcional): Número máximo de linhas mostradas por vez.
   - `default_index` (integer, opcional): Índice 1-based do item inicialmente selecionado.
-- Returns: `string`.
+- Retorna: `string`.
 
-Example:
+Exemplo:
 
 ```lua
 local bump = ptool.ask.select("Select bump type", {
@@ -203,17 +203,17 @@ local bump = ptool.ask.select("Select bump type", {
 
 `ptool.ask.multiselect(prompt, items[, options])` solicita ao usuário que escolha zero ou mais itens de uma lista.
 
-- `prompt` (string, required): The prompt shown to the user.
+- `prompt` (string, obrigatório): O prompt mostrado ao usuário.
 - `items` (table, obrigatório): Itens candidatos. O formato é o mesmo de `ptool.ask.select`.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `page_size` (integer, optional): Maximum number of rows shown at once.
+- `options` (table, opcional): Opções do prompt. Campos suportados:
+  - `help` (string, opcional): Texto de ajuda extra exibido abaixo do prompt.
+  - `page_size` (integer, opcional): Número máximo de linhas mostradas por vez.
   - `default_indexes` (table, opcional): Índices 1-based selecionados por padrão.
   - `min_selected` (integer, opcional): Quantidade mínima de itens que devem ser selecionados.
   - `max_selected` (integer, opcional): Quantidade máxima de itens que podem ser selecionados.
 - Retorna: `table`.
 
-Example:
+Exemplo:
 
 ```lua
 local targets = ptool.ask.multiselect("Select targets", {
@@ -232,21 +232,21 @@ local targets = ptool.ask.multiselect("Select targets", {
 
 `ptool.ask.secret(prompt[, options])` solicita ao usuário uma entrada secreta, como um token ou senha.
 
-- `prompt` (string, required): The prompt shown to the user.
-- `options` (table, optional): Prompt options. Supported fields:
-  - `help` (string, optional): Extra help text shown below the prompt.
-  - `required` (boolean, optional): Whether the answer must be non-empty.
+- `prompt` (string, obrigatório): O prompt mostrado ao usuário.
+- `options` (table, opcional): Opções do prompt. Campos suportados:
+  - `help` (string, opcional): Texto de ajuda extra exibido abaixo do prompt.
+  - `required` (boolean, opcional): Se a resposta deve ser não vazia.
   - `allow_empty` (boolean, opcional): Se uma resposta vazia é aceita. O padrão é `false`.
   - `confirm` (boolean, opcional): Se deve pedir que o usuário digite o segredo duas vezes. O padrão é `false`.
   - `confirm_prompt` (string, opcional): Prompt personalizado para a etapa de confirmação.
   - `mismatch_message` (string, opcional): Mensagem de erro personalizada mostrada quando as duas respostas não coincidem.
   - `display_toggle` (boolean, opcional): Se deve permitir mostrar temporariamente o segredo digitado.
-  - `min_length` (integer, optional): Minimum accepted character length.
-  - `max_length` (integer, optional): Maximum accepted character length.
-  - `pattern` (string, optional): Regular expression the answer must match.
-- Returns: `string`.
+  - `min_length` (integer, opcional): Comprimento mínimo aceito.
+  - `max_length` (integer, opcional): Comprimento máximo aceito.
+  - `pattern` (string, opcional): Expressão regular que a resposta deve corresponder.
+- Retorna: `string`.
 
-Example:
+Exemplo:
 
 ```lua
 local token = ptool.ask.secret("API token?", {
@@ -269,7 +269,7 @@ Campos atualmente suportados:
   - `confirm` (boolean, opcional): Se deve exigir confirmação antes da execução por padrão. O padrão é `false`.
   - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma execução com falha quando `check = true`. O padrão é `false`.
 
-Example:
+Exemplo:
 
 ```lua
 ptool.config({
@@ -290,13 +290,13 @@ ptool.config({
 
 - `path` (string, obrigatório): Caminho do diretório de destino, absoluto ou relativo.
 
-Behavior:
+Comportamento:
 
 - Caminhos relativos são resolvidos a partir do diretório de runtime atual do `ptool`.
 - O destino precisa existir e precisa ser um diretório.
 - Isso atualiza o estado de runtime do `ptool` e afeta APIs que usam o cwd de runtime (como `ptool.run`, `ptool.path.abspath` e `ptool.path.relpath`).
 
-Example:
+Exemplo:
 
 ```lua
 ptool.cd("foobar")
@@ -312,13 +312,13 @@ print(res.stdout)
 
 - Retorna: `string|nil`.
 
-Behavior:
+Comportamento:
 
 - Ao executar com `ptool run <file>`, retorna o caminho do script de entrada como um caminho absoluto e normalizado.
 - O caminho retornado é fixado quando o runtime inicia e não muda após `ptool.cd(...)`.
 - Em `ptool repl`, retorna `nil`.
 
-Example:
+Exemplo:
 
 ```lua
 local script_path = ptool.script_path()
@@ -335,7 +335,7 @@ local project_root = ptool.path.dirname(script_dir)
 - `fn` (function, obrigatório): Callback a ser executado.
 - Retorna: `ok, value, err`.
 
-Return value rules:
+Regras do valor de retorno:
 
 - Em caso de sucesso, `ok = true`, `err = nil` e `value` contém o resultado do callback.
 - Se o callback não retornar valores, `value` será `nil`.
@@ -359,13 +359,13 @@ Campos de erro estruturado:
 - `target` (string, opcional): Alvo SSH em falhas de comando relacionadas a SSH.
 - `retryable` (boolean): Se faz sentido tentar novamente. O padrão é `false`.
 
-Behavior:
+Comportamento:
 
 - As APIs de `ptool` lançam erros estruturados. `ptool.try` os converte na tabela `err` acima para que quem chama possa fazer branching por `err.kind` e campos relacionados.
 - Erros Lua comuns também são capturados. Nesse caso, `err.kind` será `lua_error` e apenas `message` é garantido.
 - `ptool.try` é a forma recomendada de tratar erros de APIs como `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })` e `res:assert_ok()`.
 
-Example:
+Exemplo:
 
 ```lua
 local ok, content, err = ptool.try(function()
@@ -418,7 +418,7 @@ Regras de argumento:
 - `ptool.run(options)`: `options` é uma tabela.
 - Quando o segundo argumento é uma tabela: se for um array (chaves inteiras consecutivas `1..n`), é tratado como `args`; caso contrário, é tratado como `options`.
 
-Return value rules:
+Regras do valor de retorno:
 
 - Uma tabela é sempre retornada com os seguintes campos:
   - `ok` (boolean): Se o código de saída é `0`.
@@ -432,7 +432,7 @@ Return value rules:
 - Quando `check = true` e `retry = true`, `ptool.run` pergunta se o comando com falha deve ser tentado novamente antes de gerar o erro final.
 - Quando `check = true`, `ptool.run` gera o mesmo erro estruturado `command_failed` que `res:assert_ok()` gera. Use `ptool.try(...)` se quiser capturá-lo e inspecioná-lo em Lua.
 
-Example:
+Exemplo:
 
 ```lua
 ptool.config({ run = { echo = false } })
@@ -466,13 +466,13 @@ res:assert_ok()
 - `confirm` (boolean, opcional): Se deve pedir confirmação ao usuário antes da execução. Se omitido, é usado o valor de `ptool.config({ run = { confirm = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma falha quando `check = true`. Se omitido, é usado o valor de `ptool.config({ run = { retry = ... } })`; se ele também estiver ausente, o padrão é `false`.
 - `stdout` (string, opcional): Estratégia de tratamento de stdout. Valores suportados:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: Herda para o terminal atual (padrão).
   - `"capture"`: Captura em `res.stdout`.
-  - `"null"`: Discard the output.
+  - `"null"`: Descarta a saída.
 - `stderr` (string, opcional): Estratégia de tratamento de stderr. Valores suportados:
-  - `"inherit"`: Inherit to the current terminal (default).
+  - `"inherit"`: Herda para o terminal atual (padrão).
   - `"capture"`: Captura em `res.stderr`.
-  - `"null"`: Discard the output.
+  - `"null"`: Descarta a saída.
 - Quando formulários de chamada de atalho como `ptool.run(cmdline, options)` ou `ptool.run(cmd, args, options)` são usados, a tabela `options` por chamada também aceita `stdin` e `trim` com o mesmo significado.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
@@ -481,7 +481,7 @@ res:assert_ok()
   - Se o comando falhar, `ptool.run` pergunta se o mesmo comando deve ser executado novamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente em vez de perguntar sobre retry.
 
-Example:
+Exemplo:
 
 ```lua
 ptool.run({
@@ -524,7 +524,7 @@ A única diferença é o tratamento padrão de streams:
 
 `trim` ainda tem como padrão `false` e você ainda pode substituir qualquer um desses campos explicitamente em `options`.
 
-Example:
+Exemplo:
 
 ```lua
 local res = ptool.run_capture("echo hello world")
@@ -541,4 +541,69 @@ local res3 = ptool.run_capture("echo hello", {
   stderr = "inherit",
 })
 print(res3.stdout)
+```
+
+## ptool.exec
+
+> `Unreleased` - Introduced.
+
+`ptool.exec` substitui o processo atual do `ptool` por um comando externo.
+
+Ele suporta as mesmas formas de chamada de argumentos de comando que `ptool.run`:
+
+```lua
+ptool.exec("echo hello world")
+ptool.exec("echo", "hello world")
+ptool.exec("echo", {"hello", "world"})
+ptool.exec("echo hello world", { echo = true })
+ptool.exec("echo", {"hello", "world"}, { confirm = true })
+ptool.exec({ cmd = "echo", args = {"hello", "world"} })
+```
+
+Comportamento:
+
+- Em caso de sucesso, `ptool.exec` não retorna. O processo atual do `ptool` é substituído pelo comando de destino.
+- Nenhum código Lua após uma chamada bem-sucedida de `ptool.exec(...)` é executado.
+- No `ptool repl`, uma chamada bem-sucedida de `ptool.exec(...)` também substitui o próprio processo do REPL.
+- Em plataformas Unix, isso usa semântica real de substituição de processo.
+- Em plataformas não Unix, `ptool.exec` atualmente gera um erro `unsupported`.
+
+Regras de argumento:
+
+- `ptool.exec(cmdline)`: `cmdline` é dividido usando regras no estilo shell (`shlex`). O primeiro item é tratado como comando e o restante como argumentos.
+- `ptool.exec(cmd, argsline)`: `cmd` é usado diretamente como comando e `argsline` é dividido em uma lista de argumentos usando regras no estilo shell (`shlex`).
+- `ptool.exec(cmd, args)`: `cmd` é uma string e `args` é um array de strings.
+- `ptool.exec(cmdline, options)`: `options` sobrescreve configurações desta invocação, como `echo`.
+- `ptool.exec(cmd, args, options)`: `args` pode ser uma string ou um array de strings, e `options` sobrescreve configurações desta invocação, como `confirm`.
+- `ptool.exec(options)`: `options` é uma tabela.
+- Quando o segundo argumento é uma tabela: se for um array (chaves inteiras consecutivas `1..n`), é tratado como `args`; caso contrário, é tratado como `options`.
+
+`ptool.exec(options)` também é suportado, em que `options` é uma tabela com os seguintes campos:
+
+- `cmd` (string, obrigatório): O nome do comando ou caminho do executável.
+- `args` (string[], opcional): A lista de argumentos.
+- `cwd` (string, opcional): O diretório de trabalho do processo filho.
+- `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
+- `echo` (boolean, opcional): Se informações do comando devem ser exibidas antes da substituição. Se omitido, é usado o valor de `ptool.config({ run = { echo = ... } })`; se ele também estiver ausente, o padrão é `true`.
+- `confirm` (boolean, opcional): Se deve pedir confirmação ao usuário antes da substituição. Se omitido, é usado o valor de `ptool.config({ run = { confirm = ... } })`; se ele também estiver ausente, o padrão é `false`.
+- Ao contrário de `ptool.run`, `ptool.exec` não oferece suporte a `stdin`, `trim`, `stdout`, `stderr`, `check` nem `retry`.
+- Quando `confirm = true`:
+  - Se o usuário recusar a execução, um erro é gerado imediatamente.
+  - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
+
+Exemplo:
+
+```lua
+ptool.config({ run = { echo = false } })
+
+ptool.exec("echo from ptool")
+ptool.exec("echo", "from ptool")
+ptool.exec("echo", {"from", "ptool"})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
+  cwd = "crates",
+  env = { FOO = "bar" },
+})
 ```

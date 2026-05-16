@@ -108,6 +108,10 @@ impl LuaWorld {
         )
     }
 
+    pub(crate) fn exec(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Value> {
+        crate::exec::exec_command(lua, args, self.current_dir(), &self.engine, self.config.run)
+    }
+
     pub(crate) fn configure(&mut self, options: Table) -> mlua::Result<()> {
         let mut next_run = self.config.run;
 

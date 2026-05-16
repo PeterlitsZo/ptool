@@ -632,3 +632,84 @@ local res3 = ptool.run_capture("echo hello", {
 })
 print(res3.stdout)
 ```
+
+## ptool.exec
+
+> `Unreleased` - Introduced.
+
+`ptool.exec` replaces the current `ptool` process with an external command.
+
+It supports the same command argument call forms as `ptool.run`:
+
+```lua
+ptool.exec("echo hello world")
+ptool.exec("echo", "hello world")
+ptool.exec("echo", {"hello", "world"})
+ptool.exec("echo hello world", { echo = true })
+ptool.exec("echo", {"hello", "world"}, { confirm = true })
+ptool.exec({ cmd = "echo", args = {"hello", "world"} })
+```
+
+Behavior:
+
+- On success, `ptool.exec` does not return. The current `ptool` process is
+  replaced by the target command.
+- Any Lua code after a successful `ptool.exec(...)` call does not run.
+- In `ptool repl`, a successful `ptool.exec(...)` also replaces the REPL
+  process.
+- On Unix platforms, this uses true process replacement semantics.
+- On non-Unix platforms, `ptool.exec` currently raises an `unsupported` error.
+
+Argument rules:
+
+- `ptool.exec(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules.
+  The first item is treated as the command and the rest as arguments.
+- `ptool.exec(cmd, argsline)`: `cmd` is used directly as the command, and
+  `argsline` is split into an argument list using shell-style (`shlex`) rules.
+- `ptool.exec(cmd, args)`: `cmd` is a string and `args` is an array of strings.
+- `ptool.exec(cmdline, options)`: `options` overrides settings for this
+  invocation, such as `echo`.
+- `ptool.exec(cmd, args, options)`: `args` can be either a string or an array
+  of strings, and `options` overrides settings for this invocation, such as
+  `confirm`.
+- `ptool.exec(options)`: `options` is a table.
+- When the second argument is a table: if it is an array (consecutive integer
+  keys `1..n`), it is treated as `args`; otherwise it is treated as `options`.
+
+`ptool.exec(options)` is also supported, where `options` is a table with the
+following fields:
+
+- `cmd` (string, required): The command name or executable path.
+- `args` (string[], optional): The argument list.
+- `cwd` (string, optional): The child process working directory.
+- `env` (table, optional): Additional environment variables, where keys are
+  variable names and values are variable values.
+- `echo` (boolean, optional): Whether to echo command information before
+  replacement. If omitted, the value from `ptool.config({ run = { echo = ... }
+  })` is used; if that is also unset, the default is `true`.
+- `confirm` (boolean, optional): Whether to ask the user for confirmation
+  before replacement. If omitted, the value from `ptool.config({ run = {
+  confirm = ... } })` is used; if that is also unset, the default is `false`.
+- Unlike `ptool.run`, `ptool.exec` does not support `stdin`, `trim`, `stdout`,
+  `stderr`, `check`, or `retry`.
+- When `confirm = true`:
+  - If the user refuses the execution, an error is raised immediately.
+  - If the current environment is not interactive (no TTY), an error is raised
+    immediately.
+
+Example:
+
+```lua
+ptool.config({ run = { echo = false } })
+
+ptool.exec("echo from ptool")
+ptool.exec("echo", "from ptool")
+ptool.exec("echo", {"from", "ptool"})
+
+ptool.exec({
+  cmd = "sh",
+  args = {"-c", "printf '%s|%s' \"$FOO\" \"$PWD\""},
+  cwd = "crates",
+  env = { FOO = "bar" },
+})
+```

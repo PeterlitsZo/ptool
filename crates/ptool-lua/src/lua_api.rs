@@ -28,6 +28,9 @@ fn create_ptool_module(
     let run_capture_fn = lua.create_function(move |lua, args: Variadic<Value>| {
         run_capture_state.borrow().run_capture(lua, args)
     })?;
+    let exec_state = Rc::clone(&world);
+    let exec_fn =
+        lua.create_function(move |lua, args: Variadic<Value>| exec_state.borrow().exec(lua, args))?;
     let config_state = Rc::clone(&world);
     let config_fn =
         lua.create_function(move |_, options: Table| config_state.borrow_mut().configure(options))?;
@@ -78,6 +81,7 @@ fn create_ptool_module(
     let yaml_module = create_ptool_yaml_module(lua, Rc::clone(&world))?;
     module.set("run", run_fn)?;
     module.set("run_capture", run_capture_fn)?;
+    module.set("exec", exec_fn)?;
     module.set("config", config_fn)?;
     module.set("use", use_fn)?;
     module.set("cd", cd_fn)?;

@@ -31,8 +31,8 @@ pub use datetime::{
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
 pub use exec::{
-    RunOptions, RunResult, RunStreamMode, format_command_for_display, format_run_failed_message,
-    resolve_run_cwd, run_command,
+    ExecOptions, RunOptions, RunResult, RunStreamMode, exec_replace, format_command_for_display,
+    format_run_failed_message, resolve_run_cwd, run_command,
 };
 pub use fs::{FsCopyOptions, FsCopyResult, FsGlobOptions, FsMkdirOptions, FsRemoveOptions};
 pub use git::{
@@ -610,6 +610,11 @@ impl PtoolEngine {
         exec::run_command(&options, current_dir)
     }
 
+    pub fn exec_replace(&self, options: &ExecOptions, current_dir: &Path) -> Result<()> {
+        let options = self.apply_env_overrides_to_exec_options(options);
+        exec::exec_replace(&options, current_dir)
+    }
+
     pub fn ssh_connect(
         &self,
         request: SshConnectRequest,
@@ -626,8 +631,19 @@ impl PtoolEngine {
 impl PtoolEngine {
     fn apply_env_overrides_to_run_options(&self, options: &RunOptions) -> RunOptions {
         let mut next = options.clone();
+        self.apply_env_overrides(&mut next.env, &mut next.env_remove);
+        next
+    }
+
+    fn apply_env_overrides_to_exec_options(&self, options: &ExecOptions) -> ExecOptions {
+        let mut next = options.clone();
+        self.apply_env_overrides(&mut next.env, &mut next.env_remove);
+        next
+    }
+
+    fn apply_env_overrides(&self, env: &mut Vec<(String, String)>, env_remove: &mut Vec<String>) {
         let mut env_map = BTreeMap::new();
-        let mut env_remove = BTreeSet::new();
+        let mut env_remove_set = BTreeSet::new();
 
         let overrides = self
             .env_overrides
@@ -640,24 +656,23 @@ impl PtoolEngine {
                     env_map.insert(key, value);
                 }
                 None => {
-                    env_remove.insert(key);
+                    env_remove_set.insert(key);
                 }
             }
         }
 
-        for key in &next.env_remove {
+        for key in env_remove.iter() {
             env_map.remove(key);
-            env_remove.insert(key.clone());
+            env_remove_set.insert(key.clone());
         }
 
-        for (key, value) in &next.env {
+        for (key, value) in env.iter() {
             env_map.insert(key.clone(), value.clone());
-            env_remove.remove(key);
+            env_remove_set.remove(key);
         }
 
-        next.env = env_map.into_iter().collect();
-        next.env_remove = env_remove.into_iter().collect();
-        next
+        *env = env_map.into_iter().collect();
+        *env_remove = env_remove_set.into_iter().collect();
     }
 }
 
