@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+TODO...
+
+## v0.7.0 (2026-05-16)
+
 ### Added
 
 - Added `ptool.exec(...)`, which replaces the current `ptool` process with an

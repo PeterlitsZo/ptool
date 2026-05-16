@@ -1,6 +1,6 @@
 #!/usr/bin/env ptool
 
-p.use("v0.5.0")
+p.use("v0.6.0")
 p.config { run = { check = true } }
 
 -- Parse arguments.
@@ -67,11 +67,10 @@ end
 -- Commit, tag, and push.
 local tag_name = "v" .. next_version_str
 p.run("cargo build")
-local update_changelog = p.ask(
-  "Do you update the CHANGELOG.md file (Enter 'Yes' to continue)?",
-  { default = "No" }
-)
-if update_changelog ~= "Yes" then
+local update_changelog = p.ask.confirm("Have you updated CHANGELOG.md?", {
+  default = false,
+})
+if not update_changelog then
   error("Please update the CHANGELOG.md file before releasing.", 0)
 end
 if is_stable_release then
@@ -96,9 +95,9 @@ p.run("git push origin HEAD", { confirm = true })
 p.run("git push origin " .. tag_name, { confirm = true })
 
 -- Show related information.
-print(("Release method: %s"):format(args.method))
+p.log.info(("Release method: %s"):format(args.method))
 if is_pre_method then
-  print(("Prerelease channel: %s"):format(args.channel or "alpha"))
+  p.log.info(("Prerelease channel: %s"):format(args.channel or "alpha"))
 end
-print(("Version: %s -> %s"):format(current_version, next_version))
-print(("Tag: %s"):format(tag_name))
+p.log.info(("Version: %s -> %s"):format(current_version, next_version))
+p.log.info(("Tag: %s"):format(tag_name))

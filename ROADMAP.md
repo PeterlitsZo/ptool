@@ -3,6 +3,7 @@
 - [ ] Support `ptool.fs.copy`?
 - [ ] Support `p.redis`.
 - [ ] Support the pipe -- `p.run("foo | bar")`.
+- [ ] Let `p.git` module support `confirm` option.
 
 # v0.8.0
 

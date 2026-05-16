@@ -1,0 +1,154 @@
+# API de sistema operativo
+
+`ptool.os` expone utilidades para leer el entorno actual del runtime y consultar detalles básicos del proceso anfitrión.
+
+## ptool.os.getenv
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.getenv(name)` devuelve el valor actual de una variable de entorno.
+
+- `name` (string, obligatorio): Nombre de la variable de entorno.
+- Devuelve: `string|nil`.
+
+Comportamiento:
+
+- Devuelve `nil` cuando la variable no está definida.
+- Lee el entorno actual del runtime de `ptool`, incluidos los valores cambiados por `ptool.os.setenv(...)` y `ptool.os.unsetenv(...)`.
+- Lanza un error cuando `name` está vacío o contiene caracteres inválidos como `=`.
+
+Ejemplo:
+
+```lua
+local home = p.os.getenv("HOME")
+print(home)
+```
+
+## ptool.os.env
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.env()` devuelve una tabla instantánea del entorno actual del runtime.
+
+- Devuelve: `table`.
+
+Comportamiento:
+
+- La tabla devuelta asigna nombres de variables a valores de cadena.
+- Los valores cambiados a través de `ptool.os.setenv(...)` y `ptool.os.unsetenv(...)` se reflejan en la instantánea.
+
+Ejemplo:
+
+```lua
+local env = p.os.env()
+print(env.HOME)
+```
+
+## ptool.os.setenv
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.setenv(name, value)` define una variable de entorno en el runtime actual de `ptool`.
+
+- `name` (string, obligatorio): Nombre de la variable de entorno.
+- `value` (string, obligatorio): Valor de la variable.
+
+Comportamiento:
+
+- Esto actualiza el entorno del runtime actual de `ptool`, no el shell padre.
+- Los valores establecidos aquí son visibles para `ptool.os.getenv(...)`, `ptool.os.env()` y los procesos secundarios lanzados posteriormente a través de `ptool.run(...)`.
+- Los valores definidos aquí son visibles para `ptool.os.getenv(...)`, `ptool.os.env()` y los procesos hijos lanzados después mediante `ptool.run(...)`.
+
+Ejemplo:
+
+```lua
+p.os.setenv("APP_ENV", "dev")
+print(p.os.getenv("APP_ENV"))
+```
+
+## ptool.os.unsetenv
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.unsetenv(name)` elimina una variable de entorno del runtime actual de `ptool`.
+
+- `name` (string, obligatorio): Nombre de la variable de entorno.
+
+Comportamiento:
+
+- Esto afecta a las llamadas posteriores a `ptool.os.getenv(...)`, `ptool.os.env()` y a los procesos secundarios iniciados por `ptool.run(...)`.
+- Lanza un error cuando `name` está vacío o contiene caracteres inválidos como `=`.
+
+Ejemplo:
+
+```lua
+p.os.unsetenv("APP_ENV")
+assert(p.os.getenv("APP_ENV") == nil)
+```
+
+## ptool.os.homedir
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.homedir()` devuelve el directorio personal del usuario actual.
+
+- Devuelve: `string|nil`.
+
+Ejemplo:
+
+```lua
+local home = p.os.homedir()
+```
+
+## ptool.os.tmpdir
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.tmpdir()` devuelve el directorio temporal del sistema.
+
+- Devuelve: `string`.
+
+Ejemplo:
+
+```lua
+local tmp = p.os.tmpdir()
+```
+
+## ptool.os.hostname
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.hostname()` devuelve el nombre del host actual.
+
+- Devuelve: `string|nil`.
+
+## ptool.os.username
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.username()` devuelve el nombre del usuario actual.
+
+- Devuelve: `string|nil`.
+
+## ptool.os.pid
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.pid()` devuelve el PID del proceso actual de `ptool`.
+
+- Devuelve: `integer`.
+
+## ptool.os.exepath
+
+> `v0.4.0` - Introducido.
+
+`ptool.os.exepath()` devuelve la ruta resuelta del ejecutable `ptool` en ejecución.
+
+- Devuelve: `string|nil`.
+
+Ejemplo:
+
+```lua
+print(p.os.hostname(), p.os.username(), p.os.pid())
+print(p.os.exepath())
+```
