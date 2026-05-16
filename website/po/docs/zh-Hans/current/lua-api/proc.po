@@ -1,0 +1,562 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-16 17:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:1
+msgid "Process API"
+msgstr "进程 API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:3
+msgid "Local process helpers are available under `ptool.proc` and `p.proc`."
+msgstr "`ptool.proc` 和 `p.proc` 下提供了一组本地进程辅助能力。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:5
+msgid ""
+"This module is for inspecting and managing already-running local processes. "
+"Use `ptool.run(...)` when you want to launch a new command."
+msgstr ""
+"这个模块用于检查和管理已经在本机运行的进程。要启动新命令时，请使用 "
+"`ptool.run(...)`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:8
+msgid "ptool.proc.self"
+msgstr "ptool.proc.self"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:10
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:10"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:12
+msgid ""
+"`ptool.proc.self()` returns a snapshot table for the current `ptool` process."
+msgstr "`ptool.proc.self()` 返回当前 `ptool` 进程的快照表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:14
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:14"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:16
+msgid ""
+"The returned table uses the same shape as `ptool.proc.get(...)` and "
+"`ptool.proc.find(...)`."
+msgstr ""
+"返回的 table 与 `ptool.proc.get(...)` 和 `ptool.proc.find(...)` 的返回结构"
+"相同。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:19
+msgid "ptool.proc.get"
+msgstr "ptool.proc.get"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:21
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:21"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:23
+msgid ""
+"`ptool.proc.get(pid)` returns a snapshot table for the given process ID, or "
+"`nil` if the process does not exist."
+msgstr ""
+"`ptool.proc.get(pid)` 返回指定进程 ID 的快照表；如果进程不存在，则返回 "
+"`nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:26
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:26"
+msgid "`pid` (integer, required): Process ID."
+msgstr "`pid`（integer，必填）：进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:27
+msgid "Returns: `table|nil`."
+msgstr "返回：`table|nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:29
+msgid "ptool.proc.exists"
+msgstr "ptool.proc.exists"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:31"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:33
+msgid "`ptool.proc.exists(pid)` reports whether a process ID currently exists."
+msgstr "`ptool.proc.exists(pid)` 用于报告某个进程 ID 当前是否存在。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:35
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:35"
+msgid "`pid` (integer, required): Process ID."
+msgstr "`pid`（integer，必填）：进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:36
+msgid "Returns: `boolean`."
+msgstr "返回：`boolean`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:38
+msgid "ptool.proc.find"
+msgstr "ptool.proc.find"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:40
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:40"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:42
+msgid ""
+"`ptool.proc.find([options])` lists local processes and returns an array of "
+"snapshot tables."
+msgstr "`ptool.proc.find([options])` 列出本地进程，并返回一个由快照表组成的数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:45
+msgid "`options` (table, optional): Filter and sorting options."
+msgstr "`options`（table，可选）：过滤与排序选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:46"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:48
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:48"
+msgid "Supported `options` fields:"
+msgstr "支持的 `options` 字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:50
+msgid "`pid` (integer, optional): Match one exact process ID."
+msgstr "`pid`（integer，可选）：匹配一个精确的进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:51
+msgid "`pids` (integer[], optional): Match a set of process IDs."
+msgstr "`pids`（integer[]，可选）：匹配一组进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:52
+msgid "`ppid` (integer, optional): Match an exact parent process ID."
+msgstr "`ppid`（integer，可选）：匹配一个精确的父进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:53
+msgid "`name` (string, optional): Match an exact process name."
+msgstr "`name`（string，可选）：匹配一个精确的进程名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:54
+msgid ""
+"`name_contains` (string, optional): Match a substring in the process name."
+msgstr "`name_contains`（string，可选）：匹配进程名中的子串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:55
+msgid "`exe` (string, optional): Match an exact executable path."
+msgstr "`exe`（string，可选）：匹配一个精确的可执行文件路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:56
+msgid ""
+"`exe_contains` (string, optional): Match a substring in the executable path."
+msgstr "`exe_contains`（string，可选）：匹配可执行文件路径中的子串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:57
+msgid ""
+"`cmdline_contains` (string, optional): Match a substring in the joined "
+"command line."
+msgstr "`cmdline_contains`（string，可选）：匹配拼接后命令行中的子串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:59
+msgid "`user` (string, optional): Match an exact user name."
+msgstr "`user`（string，可选）：匹配一个精确的用户名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:60
+msgid "`cwd` (string, optional): Match an exact current working directory."
+msgstr "`cwd`（string，可选）：匹配一个精确的当前工作目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:61
+msgid ""
+"`include_self` (boolean, optional): Whether to include the current `ptool` "
+"process. Defaults to `false`."
+msgstr ""
+"`include_self`（boolean，可选）：是否包含当前 `ptool` 进程。默认值为 "
+"`false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:63
+msgid ""
+"`limit` (integer, optional): Maximum number of returned entries after "
+"filtering and sorting."
+msgstr "`limit`（integer，可选）：过滤和排序完成后，返回条目的最大数量。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:65
+msgid "`sort_by` (string, optional): Sort key. Supported values:"
+msgstr "`sort_by`（string，可选）：排序键。支持的值："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:65
+msgid "`\"pid\"` (default)"
+msgstr "`\"pid\"`（默认）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:65
+msgid "`\"start_time\"`"
+msgstr "`\"start_time\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:68
+msgid ""
+"`reverse` (boolean, optional): Whether to reverse the final sort order. "
+"Defaults to `false`."
+msgstr ""
+"`reverse`（boolean，可选）：是否反转最终排序顺序。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:71
+msgid "Each returned process snapshot may contain:"
+msgstr "每个返回的进程快照可能包含："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:73
+msgid "`pid` (integer): Process ID."
+msgstr "`pid`（integer）：进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:74
+msgid "`ppid` (integer|nil): Parent process ID."
+msgstr "`ppid`（integer|nil）：父进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:75
+msgid "`name` (string): Process name."
+msgstr "`name`（string）：进程名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:76
+msgid "`exe` (string|nil): Executable path, when available."
+msgstr "`exe`（string|nil）：可执行文件路径（如果可用）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:77
+msgid "`cwd` (string|nil): Current working directory, when available."
+msgstr "`cwd`（string|nil）：当前工作目录（如果可用）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:78
+msgid "`user` (string|nil): Owning user name, when available."
+msgstr "`user`（string|nil）：所属用户名（如果可用）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:79
+msgid "`cmdline` (string|nil): Joined command line, when available."
+msgstr "`cmdline`（string|nil）：拼接后的命令行（如果可用）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:80
+msgid "`argv` (string[]): Command-line argument array."
+msgstr "`argv`（string[]）：命令行参数数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:81
+msgid ""
+"`state` (string): Process state label such as `\"running\"` or `\"sleeping\""
+"`."
+msgstr "`state`（string）：进程状态标签，例如 `\"running\"` 或 `\"sleeping\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:82
+msgid ""
+"`start_time_unix_ms` (integer): Process start time in Unix milliseconds."
+msgstr "`start_time_unix_ms`（integer）：进程启动时间的 Unix 毫秒时间戳。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:84
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:86
+msgid ""
+"Some fields may be `nil` when the current platform or permission level does "
+"not expose them."
+msgstr "某些字段在当前平台或权限级别未暴露时，可能为 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:88
+msgid ""
+"Process snapshots are point-in-time values. They do not update themselves."
+msgstr "进程快照是某一时刻的值，不会自行更新。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:90
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:90"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:104
+msgid "ptool.proc.kill"
+msgstr "ptool.proc.kill"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:106
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:106"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:108
+msgid ""
+"`ptool.proc.kill(targets[, options])` sends a signal to one or more local "
+"processes and returns a structured result table."
+msgstr ""
+"`ptool.proc.kill(targets[, options])` 向一个或多个本地进程发送信号，并返"
+"回结构化结果表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:111
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:111"
+msgid ""
+"`targets` (integer|table, required): A pid, a process snapshot table, or an "
+"array of them."
+msgstr ""
+"`targets`（integer|table，必填）：可以是一个 pid、一个进程快照表，或它们组"
+"成的数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:113
+msgid "`options` (table, optional): Kill options."
+msgstr "`options`（table，可选）：终止选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:114
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:114"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:116
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:116"
+msgid "Supported `options` fields:"
+msgstr "支持的 `options` 字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`signal` (string, optional): Signal name. Supported values:"
+msgstr "`signal`（string，可选）：信号名。支持的值："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"hup\"`"
+msgstr "`\"hup\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"term\"` (default)"
+msgstr "`\"term\"`（默认）"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"kill\"`"
+msgstr "`\"kill\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"int\"`"
+msgstr "`\"int\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"quit\"`"
+msgstr "`\"quit\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"stop\"`"
+msgstr "`\"stop\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"cont\"`"
+msgstr "`\"cont\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"user1\"`"
+msgstr "`\"user1\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:118
+msgid "`\"user2\"`"
+msgstr "`\"user2\"`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:128
+msgid ""
+"`missing_ok` (boolean, optional): Whether missing processes count as "
+"success. Defaults to `true`."
+msgstr "`missing_ok`（boolean，可选）：缺失的进程是否也算成功。默认值为 `true`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:130
+msgid ""
+"`allow_self` (boolean, optional): Whether the current `ptool` process may be "
+"signaled. Defaults to `false`."
+msgstr ""
+"`allow_self`（boolean，可选）：当前 `ptool` 进程是否允许被发送信号。默认值"
+"为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:132
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"final result is not ok. Defaults to `false`."
+msgstr ""
+"`check`（boolean，可选）：当最终结果不是 ok 时，是否立即抛出错误。默认值为 "
+"`false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:134
+msgid ""
+"`confirm` (boolean, optional): Whether to ask for confirmation before "
+"sending the signal. Defaults to `false`."
+msgstr "`confirm`（boolean，可选）：发送信号前是否请求确认。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:137
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:137"
+msgid "The returned result table contains:"
+msgstr "返回的结果表包含："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:139
+msgid ""
+"`ok` (boolean): Whether the whole operation succeeded under the current "
+"options."
+msgstr "`ok`（boolean）：整个操作在当前选项下是否成功。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:141
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:141"
+msgid "`signal` (string): The signal label that was requested."
+msgstr "`signal`（string）：请求发送的信号标签。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:142
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:142"
+msgid "`total` (integer): Total number of normalized targets."
+msgstr "`total`（integer）：归一化后的目标总数。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:143
+msgid "`sent` (integer): Number of targets for which the signal was sent."
+msgstr "`sent`（integer）：已发送信号的目标数量。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:144
+msgid "`missing` (integer): Number of targets that no longer existed."
+msgstr "`missing`（integer）：已经不存在的目标数量。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:145
+msgid "`failed` (integer): Number of targets that failed overall."
+msgstr "`failed`（integer）：最终失败的目标数量。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:146
+msgid "`entries` (table): Per-target result entries."
+msgstr "`entries`（table）：每个目标对应的结果条目。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:147
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:147"
+msgid ""
+"`assert_ok(self)` (function): Raises a structured Lua error when `ok = "
+"false`."
+msgstr "`assert_ok(self)`（function）：当 `ok = false` 时，抛出结构化 Lua 错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:149
+msgid "Each `entries[i]` table contains:"
+msgstr "每个 `entries[i]` table 包含："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:151
+msgid "`pid` (integer): Target process ID."
+msgstr "`pid`（integer）：目标进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:152
+msgid "`ok` (boolean): Whether this target succeeded."
+msgstr "`ok`（boolean）：该目标是否成功。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:153
+msgid ""
+"`existed` (boolean): Whether the target process existed and still matched."
+msgstr "`existed`（boolean）：目标进程是否存在且仍然匹配。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:154
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:154"
+msgid "`signal` (string): The signal label that was requested."
+msgstr "`signal`（string）：请求发送的信号标签。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:155
+msgid "`message` (string|nil): Additional status detail."
+msgstr "`message`（string|nil）：额外的状态说明。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:157
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:157"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:172
+msgid "ptool.proc.wait_gone"
+msgstr "ptool.proc.wait_gone"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:174
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:174"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:176
+msgid ""
+"`ptool.proc.wait_gone(targets[, options])` waits until one or more target "
+"processes no longer exist, then returns a structured result table."
+msgstr ""
+"`ptool.proc.wait_gone(targets[, options])` 会等待一个或多个目标进程不再存"
+"在，然后返回结构化结果表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:179"
+msgid ""
+"`targets` (integer|table, required): A pid, a process snapshot table, or an "
+"array of them."
+msgstr ""
+"`targets`（integer|table，必填）：可以是一个 pid、一个进程快照表，或它们组"
+"成的数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:181
+msgid "`options` (table, optional): Wait options."
+msgstr "`options`（table，可选）：等待选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:182
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:182"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:184
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:184"
+msgid "Supported `options` fields:"
+msgstr "支持的 `options` 字段："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:186
+msgid ""
+"`timeout_ms` (integer, optional): Maximum wait time in milliseconds. If "
+"omitted, this waits indefinitely."
+msgstr "`timeout_ms`（integer，可选）：最长等待时间，单位毫秒。省略时会一直等待。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:188
+msgid ""
+"`interval_ms` (integer, optional): Polling interval in milliseconds. "
+"Defaults to `100`."
+msgstr "`interval_ms`（integer，可选）：轮询间隔，单位毫秒。默认值为 `100`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:190
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"wait times out. Defaults to `false`."
+msgstr "`check`（boolean，可选）：等待超时时，是否立即抛出错误。默认值为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:193
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:193"
+msgid "The returned result table contains:"
+msgstr "返回的结果表包含："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:195
+msgid ""
+"`ok` (boolean): Whether all target processes disappeared before timing out."
+msgstr "`ok`（boolean）：是否所有目标进程都在超时前消失。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:196
+msgid "`timed_out` (boolean): Whether the timeout was reached."
+msgstr "`timed_out`（boolean）：是否触达超时。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:197
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:197"
+msgid "`total` (integer): Total number of normalized targets."
+msgstr "`total`（integer）：归一化后的目标总数。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:198
+msgid "`gone` (integer[]): Process IDs that were gone by the end of the wait."
+msgstr "`gone`（integer[]）：等待结束时已经消失的进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:199
+msgid ""
+"`remaining` (integer[]): Process IDs still present when the wait finished."
+msgstr "`remaining`（integer[]）：等待结束时仍然存在的进程 ID。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:200
+msgid "`elapsed_ms` (integer): Total elapsed wait time in milliseconds."
+msgstr "`elapsed_ms`（integer）：总等待耗时，单位毫秒。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:201
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:201"
+msgid ""
+"`assert_ok(self)` (function): Raises a structured Lua error when `ok = "
+"false`."
+msgstr "`assert_ok(self)`（function）：当 `ok = false` 时，抛出结构化 Lua 错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:203
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:203"
+msgid "Example:"
+msgstr "示例："

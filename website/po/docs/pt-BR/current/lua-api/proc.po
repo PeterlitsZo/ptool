@@ -1,0 +1,493 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-16 17:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+msgid "Process API"
+msgstr "API de processos"
+
+msgid "Local process helpers are available under `ptool.proc` and `p.proc`."
+msgstr "Os utilitários de processos locais estão disponíveis em `ptool.proc` e `p.proc`."
+
+msgid ""
+"This module is for inspecting and managing already-running local processes. "
+"Use `ptool.run(...)` when you want to launch a new command."
+msgstr ""
+"Este módulo serve para inspecionar e gerenciar processos locais que já estão "
+"em execução. Use `ptool.run(...)` quando quiser iniciar um novo comando."
+
+msgid "ptool.proc.self"
+msgstr "ptool.proc.self"
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:10"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+msgid ""
+"`ptool.proc.self()` returns a snapshot table for the current `ptool` process."
+msgstr "`ptool.proc.self()` retorna uma tabela de snapshot do processo `ptool` atual."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:14"
+msgid "Returns: `table`."
+msgstr "Retorna: `table`."
+
+msgid ""
+"The returned table uses the same shape as `ptool.proc.get(...)` and "
+"`ptool.proc.find(...)`."
+msgstr ""
+"A tabela retornada usa o mesmo formato de `ptool.proc.get(...)` e "
+"`ptool.proc.find(...)`."
+
+msgid "ptool.proc.get"
+msgstr "ptool.proc.get"
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:21"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+msgid ""
+"`ptool.proc.get(pid)` returns a snapshot table for the given process ID, or "
+"`nil` if the process does not exist."
+msgstr ""
+"`ptool.proc.get(pid)` retorna uma tabela de snapshot para o ID de processo "
+"informado, ou `nil` se o processo não existir."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:26"
+msgid "`pid` (integer, required): Process ID."
+msgstr "`pid` (integer, obrigatório): ID do processo."
+
+msgid "Returns: `table|nil`."
+msgstr "Retorna: `table|nil`."
+
+msgid "ptool.proc.exists"
+msgstr "ptool.proc.exists"
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:31"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+msgid "`ptool.proc.exists(pid)` reports whether a process ID currently exists."
+msgstr "`ptool.proc.exists(pid)` informa se um ID de processo existe no momento."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:35"
+msgid "`pid` (integer, required): Process ID."
+msgstr "`pid` (integer, obrigatório): ID do processo."
+
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+msgid "ptool.proc.find"
+msgstr "ptool.proc.find"
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:40"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+msgid ""
+"`ptool.proc.find([options])` lists local processes and returns an array of "
+"snapshot tables."
+msgstr ""
+"`ptool.proc.find([options])` lista processos locais e retorna um array de "
+"tabelas de snapshot."
+
+msgid "`options` (table, optional): Filter and sorting options."
+msgstr "`options` (table, opcional): Opções de filtragem e ordenação."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:46"
+msgid "Returns: `table`."
+msgstr "Retorna: `table`."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:48"
+msgid "Supported `options` fields:"
+msgstr "Campos `options` suportados:"
+
+msgid "`pid` (integer, optional): Match one exact process ID."
+msgstr "`pid` (integer, opcional): Corresponde a um único ID de processo exato."
+
+msgid "`pids` (integer[], optional): Match a set of process IDs."
+msgstr "`pids` (integer[], opcional): Corresponde a um conjunto de IDs de processo."
+
+msgid "`ppid` (integer, optional): Match an exact parent process ID."
+msgstr "`ppid` (integer, opcional): Corresponde a um ID exato do processo pai."
+
+msgid "`name` (string, optional): Match an exact process name."
+msgstr "`name` (string, opcional): Corresponde a um nome de processo exato."
+
+msgid ""
+"`name_contains` (string, optional): Match a substring in the process name."
+msgstr ""
+"`name_contains` (string, opcional): Corresponde a uma substring no nome do "
+"processo."
+
+msgid "`exe` (string, optional): Match an exact executable path."
+msgstr "`exe` (string, opcional): Corresponde a um caminho exato do executável."
+
+msgid ""
+"`exe_contains` (string, optional): Match a substring in the executable path."
+msgstr ""
+"`exe_contains` (string, opcional): Corresponde a uma substring no caminho do "
+"executável."
+
+msgid ""
+"`cmdline_contains` (string, optional): Match a substring in the joined "
+"command line."
+msgstr ""
+"`cmdline_contains` (string, opcional): Corresponde a uma substring na linha "
+"de comando concatenada."
+
+msgid "`user` (string, optional): Match an exact user name."
+msgstr "`user` (string, opcional): Corresponde a um nome de usuário exato."
+
+msgid "`cwd` (string, optional): Match an exact current working directory."
+msgstr ""
+"`cwd` (string, opcional): Corresponde a um diretório de trabalho atual "
+"exato."
+
+msgid ""
+"`include_self` (boolean, optional): Whether to include the current `ptool` "
+"process. Defaults to `false`."
+msgstr ""
+"`include_self` (boolean, opcional): Se deve incluir o processo `ptool` "
+"atual. O padrão é `false`."
+
+msgid ""
+"`limit` (integer, optional): Maximum number of returned entries after "
+"filtering and sorting."
+msgstr ""
+"`limit` (integer, opcional): Número máximo de entradas retornadas após a "
+"filtragem e a ordenação."
+
+msgid "`sort_by` (string, optional): Sort key. Supported values:"
+msgstr "`sort_by` (string, opcional): Chave de ordenação. Valores suportados:"
+
+msgid "`\"pid\"` (default)"
+msgstr "`\"pid\"` (padrão)"
+
+msgid "`\"start_time\"`"
+msgstr "`\"start_time\"`"
+
+msgid ""
+"`reverse` (boolean, optional): Whether to reverse the final sort order. "
+"Defaults to `false`."
+msgstr ""
+"`reverse` (boolean, opcional): Se deve inverter a ordem final de ordenação. "
+"O padrão é `false`."
+
+msgid "Each returned process snapshot may contain:"
+msgstr "Cada snapshot de processo retornado pode conter:"
+
+msgid "`pid` (integer): Process ID."
+msgstr "`pid` (integer): ID do processo."
+
+msgid "`ppid` (integer|nil): Parent process ID."
+msgstr "`ppid` (integer|nil): ID do processo pai."
+
+msgid "`name` (string): Process name."
+msgstr "`name` (string): Nome do processo."
+
+msgid "`exe` (string|nil): Executable path, when available."
+msgstr "`exe` (string|nil): Caminho do executável, quando disponível."
+
+msgid "`cwd` (string|nil): Current working directory, when available."
+msgstr "`cwd` (string|nil): Diretório de trabalho atual, quando disponível."
+
+msgid "`user` (string|nil): Owning user name, when available."
+msgstr "`user` (string|nil): Nome do usuário proprietário, quando disponível."
+
+msgid "`cmdline` (string|nil): Joined command line, when available."
+msgstr "`cmdline` (string|nil): Linha de comando concatenada, quando disponível."
+
+msgid "`argv` (string[]): Command-line argument array."
+msgstr "`argv` (string[]): Array de argumentos da linha de comando."
+
+msgid ""
+"`state` (string): Process state label such as `\"running\"` or "
+"`\"sleeping\"`."
+msgstr ""
+"`state` (string): Rótulo do estado do processo, como `\"running\"` ou "
+"`\"sleeping\"`."
+
+msgid ""
+"`start_time_unix_ms` (integer): Process start time in Unix milliseconds."
+msgstr ""
+"`start_time_unix_ms` (integer): Horário de início do processo em "
+"milissegundos Unix."
+
+msgid "Notes:"
+msgstr "Notas:"
+
+msgid ""
+"Some fields may be `nil` when the current platform or permission level does "
+"not expose them."
+msgstr ""
+"Alguns campos podem ser `nil` quando a plataforma atual ou o nível de "
+"permissão não os expõe."
+
+msgid ""
+"Process snapshots are point-in-time values. They do not update themselves."
+msgstr ""
+"Snapshots de processo são valores de um ponto específico no tempo. Eles não "
+"se atualizam sozinhos."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:90"
+msgid "Example:"
+msgstr "Exemplo:"
+
+msgid "ptool.proc.kill"
+msgstr "ptool.proc.kill"
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:106"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+msgid ""
+"`ptool.proc.kill(targets[, options])` sends a signal to one or more local "
+"processes and returns a structured result table."
+msgstr ""
+"`ptool.proc.kill(targets[, options])` envia um sinal para um ou mais "
+"processos locais e retorna uma tabela de resultado estruturada."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:111"
+msgid ""
+"`targets` (integer|table, required): A pid, a process snapshot table, or an "
+"array of them."
+msgstr ""
+"`targets` (integer|table, obrigatório): Um pid, uma tabela de snapshot de "
+"processo ou um array deles."
+
+msgid "`options` (table, optional): Kill options."
+msgstr "`options` (table, opcional): Opções de sinal."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:114"
+msgid "Returns: `table`."
+msgstr "Retorna: `table`."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:116"
+msgid "Supported `options` fields:"
+msgstr "Campos `options` suportados:"
+
+msgid "`signal` (string, optional): Signal name. Supported values:"
+msgstr "`signal` (string, opcional): Nome do sinal. Valores suportados:"
+
+msgid "`\"hup\"`"
+msgstr "`\"hup\"`"
+
+msgid "`\"term\"` (default)"
+msgstr "`\"term\"` (padrão)"
+
+msgid "`\"kill\"`"
+msgstr "`\"kill\"`"
+
+msgid "`\"int\"`"
+msgstr "`\"int\"`"
+
+msgid "`\"quit\"`"
+msgstr "`\"quit\"`"
+
+msgid "`\"stop\"`"
+msgstr "`\"stop\"`"
+
+msgid "`\"cont\"`"
+msgstr "`\"cont\"`"
+
+msgid "`\"user1\"`"
+msgstr "`\"user1\"`"
+
+msgid "`\"user2\"`"
+msgstr "`\"user2\"`"
+
+msgid ""
+"`missing_ok` (boolean, optional): Whether missing processes count as "
+"success. Defaults to `true`."
+msgstr ""
+"`missing_ok` (boolean, opcional): Se processos ausentes contam como sucesso. "
+"O padrão é `true`."
+
+msgid ""
+"`allow_self` (boolean, optional): Whether the current `ptool` process may be "
+"signaled. Defaults to `false`."
+msgstr ""
+"`allow_self` (boolean, opcional): Se o processo `ptool` atual pode receber o "
+"sinal. O padrão é `false`."
+
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"final result is not ok. Defaults to `false`."
+msgstr ""
+"`check` (boolean, opcional): Se deve gerar um erro imediatamente quando o "
+"resultado final não for ok. O padrão é `false`."
+
+msgid ""
+"`confirm` (boolean, optional): Whether to ask for confirmation before "
+"sending the signal. Defaults to `false`."
+msgstr ""
+"`confirm` (boolean, opcional): Se deve pedir confirmação antes de enviar o "
+"sinal. O padrão é `false`."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:137"
+msgid "The returned result table contains:"
+msgstr "A tabela de resultado retornada contém:"
+
+msgid ""
+"`ok` (boolean): Whether the whole operation succeeded under the current "
+"options."
+msgstr ""
+"`ok` (boolean): Se toda a operação foi bem-sucedida sob as opções atuais."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:141"
+msgid "`signal` (string): The signal label that was requested."
+msgstr "`signal` (string): O rótulo de sinal solicitado."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:142"
+msgid "`total` (integer): Total number of normalized targets."
+msgstr "`total` (integer): Número total de alvos normalizados."
+
+msgid "`sent` (integer): Number of targets for which the signal was sent."
+msgstr "`sent` (integer): Número de alvos para os quais o sinal foi enviado."
+
+msgid "`missing` (integer): Number of targets that no longer existed."
+msgstr "`missing` (integer): Número de alvos que já não existiam."
+
+msgid "`failed` (integer): Number of targets that failed overall."
+msgstr "`failed` (integer): Número de alvos que falharam no total."
+
+msgid "`entries` (table): Per-target result entries."
+msgstr "`entries` (table): Entradas de resultado por alvo."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:147"
+msgid ""
+"`assert_ok(self)` (function): Raises a structured Lua error when `ok = "
+"false`."
+msgstr ""
+"`assert_ok(self)` (function): Gera um erro Lua estruturado quando "
+"`ok = false`."
+
+msgid "Each `entries[i]` table contains:"
+msgstr "Cada tabela `entries[i]` contém:"
+
+msgid "`pid` (integer): Target process ID."
+msgstr "`pid` (integer): ID do processo alvo."
+
+msgid "`ok` (boolean): Whether this target succeeded."
+msgstr "`ok` (boolean): Se este alvo foi bem-sucedido."
+
+msgid ""
+"`existed` (boolean): Whether the target process existed and still matched."
+msgstr ""
+"`existed` (boolean): Se o processo alvo existia e ainda correspondia."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:154"
+msgid "`signal` (string): The signal label that was requested."
+msgstr "`signal` (string): O rótulo de sinal solicitado."
+
+msgid "`message` (string|nil): Additional status detail."
+msgstr "`message` (string|nil): Detalhe de status adicional."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:157"
+msgid "Example:"
+msgstr "Exemplo:"
+
+msgid "ptool.proc.wait_gone"
+msgstr "ptool.proc.wait_gone"
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:174"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - Introduzido."
+
+msgid ""
+"`ptool.proc.wait_gone(targets[, options])` waits until one or more target "
+"processes no longer exist, then returns a structured result table."
+msgstr ""
+"`ptool.proc.wait_gone(targets[, options])` espera até que um ou mais "
+"processos alvo deixem de existir e então retorna uma tabela de resultado "
+"estruturada."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:179"
+msgid ""
+"`targets` (integer|table, required): A pid, a process snapshot table, or an "
+"array of them."
+msgstr ""
+"`targets` (integer|table, obrigatório): Um pid, uma tabela de snapshot de "
+"processo ou um array deles."
+
+msgid "`options` (table, optional): Wait options."
+msgstr "`options` (table, opcional): Opções de espera."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:182"
+msgid "Returns: `table`."
+msgstr "Retorna: `table`."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:184"
+msgid "Supported `options` fields:"
+msgstr "Campos `options` suportados:"
+
+msgid ""
+"`timeout_ms` (integer, optional): Maximum wait time in milliseconds. If "
+"omitted, this waits indefinitely."
+msgstr ""
+"`timeout_ms` (integer, opcional): Tempo máximo de espera em milissegundos. "
+"Se omitido, a espera é indefinida."
+
+msgid ""
+"`interval_ms` (integer, optional): Polling interval in milliseconds. "
+"Defaults to `100`."
+msgstr ""
+"`interval_ms` (integer, opcional): Intervalo de polling em milissegundos. O "
+"padrão é `100`."
+
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"wait times out. Defaults to `false`."
+msgstr ""
+"`check` (boolean, opcional): Se deve gerar um erro imediatamente quando a "
+"espera atingir o tempo limite. O padrão é `false`."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:193"
+msgid "The returned result table contains:"
+msgstr "A tabela de resultado retornada contém:"
+
+msgid ""
+"`ok` (boolean): Whether all target processes disappeared before timing out."
+msgstr ""
+"`ok` (boolean): Se todos os processos alvo desapareceram antes do tempo "
+"limite."
+
+msgid "`timed_out` (boolean): Whether the timeout was reached."
+msgstr "`timed_out` (boolean): Se o tempo limite foi atingido."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:197"
+msgid "`total` (integer): Total number of normalized targets."
+msgstr "`total` (integer): Número total de alvos normalizados."
+
+msgid "`gone` (integer[]): Process IDs that were gone by the end of the wait."
+msgstr "`gone` (integer[]): IDs de processo que já tinham desaparecido ao fim da espera."
+
+msgid ""
+"`remaining` (integer[]): Process IDs still present when the wait finished."
+msgstr ""
+"`remaining` (integer[]): IDs de processo ainda presentes quando a espera "
+"terminou."
+
+msgid "`elapsed_ms` (integer): Total elapsed wait time in milliseconds."
+msgstr "`elapsed_ms` (integer): Tempo total de espera decorrido em milissegundos."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:201"
+msgid ""
+"`assert_ok(self)` (function): Raises a structured Lua error when `ok = "
+"false`."
+msgstr ""
+"`assert_ok(self)` (function): Gera um erro Lua estruturado quando "
+"`ok = false`."
+
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:203"
+msgid "Example:"
+msgstr "Exemplo:"

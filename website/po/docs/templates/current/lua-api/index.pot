@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 16:59+0800\n"
+"POT-Creation-Date: 2026-05-16 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,39 +137,45 @@ msgid ""
 "[Platform API]{1}: Detect the current OS, architecture, and target triple."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:48
-msgid "Networking & Remote"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:47
+msgid ""
+"[Process API]{1}: Inspect local processes, send signals, and wait for "
+"processes to disappear."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
-msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
-msgstr ""
-
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:51
-msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
+msgid "Networking & Remote"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
+msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:53
+msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:54
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, send HTTP requests from "
 "the remote host, and transfer files."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:55
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
 msgid "Development & Storage"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:59
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:58
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:60
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:61
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:63
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

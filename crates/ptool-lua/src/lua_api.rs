@@ -74,6 +74,7 @@ fn create_ptool_module(
     let os_module = create_ptool_os_module(lua, Rc::clone(&world))?;
     let path_module = create_ptool_path_module(lua, Rc::clone(&world))?;
     let platform_module = create_ptool_platform_module(lua, Rc::clone(&world))?;
+    let proc_module = create_ptool_proc_module(lua, Rc::clone(&world))?;
     let re_module = create_ptool_re_module(lua, Rc::clone(&world))?;
     let str_module = create_ptool_str_module(lua, Rc::clone(&world))?;
     let tbl_module = create_ptool_tbl_module(lua, Rc::clone(&world))?;
@@ -111,6 +112,7 @@ fn create_ptool_module(
     module.set("os", os_module)?;
     module.set("path", path_module)?;
     module.set("platform", platform_module)?;
+    module.set("proc", proc_module)?;
     module.set("re", re_module)?;
     module.set("str", str_module)?;
     module.set("tbl", tbl_module)?;
@@ -515,6 +517,44 @@ fn create_ptool_platform_module(
     platform_module.set("arch", arch_fn)?;
     platform_module.set("target", target_fn)?;
     Ok(platform_module)
+}
+
+fn create_ptool_proc_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let proc_module = lua.create_table()?;
+
+    let self_state = Rc::clone(&world);
+    let self_fn = lua.create_function(move |lua, ()| self_state.borrow().proc_self(lua))?;
+
+    let get_state = Rc::clone(&world);
+    let get_fn =
+        lua.create_function(move |lua, pid: Value| get_state.borrow().proc_get(lua, pid))?;
+
+    let exists_state = Rc::clone(&world);
+    let exists_fn =
+        lua.create_function(move |_, pid: Value| exists_state.borrow().proc_exists(pid))?;
+
+    let find_state = Rc::clone(&world);
+    let find_fn = lua.create_function(move |lua, options: Option<Table>| {
+        find_state.borrow().proc_find(lua, options)
+    })?;
+
+    let kill_state = Rc::clone(&world);
+    let kill_fn = lua.create_function(move |lua, (targets, options): (Value, Option<Table>)| {
+        kill_state.borrow().proc_kill(lua, targets, options)
+    })?;
+
+    let wait_state = world;
+    let wait_fn = lua.create_function(move |lua, (targets, options): (Value, Option<Table>)| {
+        wait_state.borrow().proc_wait_gone(lua, targets, options)
+    })?;
+
+    proc_module.set("self", self_fn)?;
+    proc_module.set("get", get_fn)?;
+    proc_module.set("exists", exists_fn)?;
+    proc_module.set("find", find_fn)?;
+    proc_module.set("kill", kill_fn)?;
+    proc_module.set("wait_gone", wait_fn)?;
+    Ok(proc_module)
 }
 
 fn create_ptool_toml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

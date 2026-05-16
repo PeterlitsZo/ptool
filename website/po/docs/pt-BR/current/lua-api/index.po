@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 16:59+0800\n"
+"POT-Creation-Date: 2026-05-16 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,8 +135,8 @@ msgid ""
 "[Zip API]{1}: Compress and decompress Lua strings with common archive "
 "formats."
 msgstr ""
-"[API Zip]{1}: Comprime e descomprime strings Lua com formatos de "
-"compressão comuns."
+"[API Zip]{1}: Comprime e descomprime strings Lua com formatos de compressão "
+"comuns."
 
 #: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:38
 msgid "Filesystem & Platform"
@@ -169,19 +169,27 @@ msgid ""
 msgstr ""
 "[API de plataforma]{1}: Detecta o SO, a arquitetura e o target triple atuais."
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:48
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:47
+msgid ""
+"[Process API]{1}: Inspect local processes, send signals, and wait for "
+"processes to disappear."
+msgstr ""
+"[API de processos]{1}: Inspecione processos locais, envie sinais e "
+"aguarde o desaparecimento dos processos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
 msgid "Networking & Remote"
 msgstr "Rede e remoto"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
 msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
 msgstr "[API HTTP]{1}: Envia requisições HTTP e consome corpos de resposta."
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:53
 msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
 msgstr "[API de rede]{1}: Faz parse de URLs, endereços IP e pares host-porta."
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:54
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, send HTTP requests from "
 "the remote host, and transfer files."
@@ -189,17 +197,17 @@ msgstr ""
 "[SSH API]{1}: Conecte-se a hosts remotos, execute comandos, envie "
 "requisições HTTP a partir do host remoto e transfira arquivos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:55
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
 msgid "Development & Storage"
 msgstr "Desenvolvimento e armazenamento"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:59
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr ""
 "[API de banco de dados]{1}: Abre conexões de banco de dados e executa "
 "consultas SQL."
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:58
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:60
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
@@ -207,7 +215,7 @@ msgstr ""
 "[API Git]{1}: Abra repositórios, inspecione o status e clone, busque ou "
 "envie por meio de identificadores apoiados por libgit2."
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:61
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:63
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

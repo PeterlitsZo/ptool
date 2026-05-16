@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 16:59+0800\n"
+"POT-Creation-Date: 2026-05-16 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,40 +137,46 @@ msgid ""
 "[Platform API]{1}: Detect the current OS, architecture, and target triple."
 msgstr "[Platform API]{1}：检测当前操作系统、CPU 架构和目标三元组。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:48
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:47
+msgid ""
+"[Process API]{1}: Inspect local processes, send signals, and wait for "
+"processes to disappear."
+msgstr "[进程 API]{1}：检查本地进程、发送信号，并等待进程消失。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
 msgid "Networking & Remote"
 msgstr "网络与远程"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
 msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
 msgstr "[HTTP API]{1}：发送 HTTP 请求并读取响应体。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:53
 msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
 msgstr "[Network API]{1}：解析 URL、IP 地址以及 host-port 组合。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:54
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, send HTTP requests from "
 "the remote host, and transfer files."
 msgstr "[SSH API]{1}：连接远程主机、运行命令、从远程主机发出 HTTP 请求并传输文件。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:55
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
 msgid "Development & Storage"
 msgstr "开发与存储"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:59
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr "[Database API]{1}：打开数据库连接并执行 SQL 查询。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:58
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:60
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
 msgstr "[Git API]{1}：打开仓库、查看状态，并通过 libgit2 驱动的句柄执行 clone、fetch "
 "或 push。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:61
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:63
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

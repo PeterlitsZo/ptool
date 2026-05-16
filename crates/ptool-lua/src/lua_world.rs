@@ -308,6 +308,40 @@ impl LuaWorld {
         self.engine.current_exe()
     }
 
+    pub(crate) fn proc_self(&self, lua: &Lua) -> mlua::Result<Table> {
+        crate::proc::self_process(lua, &self.engine)
+    }
+
+    pub(crate) fn proc_get(&self, lua: &Lua, pid: Value) -> mlua::Result<Value> {
+        crate::proc::get_process(lua, &self.engine, pid)
+    }
+
+    pub(crate) fn proc_exists(&self, pid: Value) -> mlua::Result<bool> {
+        crate::proc::exists(&self.engine, pid)
+    }
+
+    pub(crate) fn proc_find(&self, lua: &Lua, options: Option<Table>) -> mlua::Result<Table> {
+        crate::proc::find_processes(lua, &self.engine, options)
+    }
+
+    pub(crate) fn proc_kill(
+        &self,
+        lua: &Lua,
+        targets: Value,
+        options: Option<Table>,
+    ) -> mlua::Result<Table> {
+        crate::proc::kill_processes(lua, &self.engine, targets, options)
+    }
+
+    pub(crate) fn proc_wait_gone(
+        &self,
+        lua: &Lua,
+        targets: Value,
+        options: Option<Table>,
+    ) -> mlua::Result<Table> {
+        crate::proc::wait_gone(lua, &self.engine, targets, options)
+    }
+
     pub(crate) fn os_setenv(&mut self, name: String, value: String) -> mlua::Result<()> {
         self.engine
             .env_set(&name, &value)

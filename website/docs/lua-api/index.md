@@ -44,6 +44,8 @@ alphabetical order.
   filesystem.
 - [Platform API](./platform.md): Detect the current OS, architecture, and target
   triple.
+- [Process API](./proc.md): Inspect local processes, send signals, and wait for
+  processes to disappear.
 
 ## Networking & Remote
 

@@ -17,12 +17,12 @@
   - The custom `prompt_prefix`? The background color?
 - [x] Let the `ssh:upload`'s `remote_path` can be a directory.
 - [x] Support to get the ptool's version.
-- [ ] Support `p.zip.<algo-like-gzip>`.
-- [ ] Let `p.run` and `p.exec` support redirecting stdin, stdout and stderr to a
+- [x] Support `p.zip`.
+- [x] Let `p.run` and `p.exec` support redirecting stdin, stdout and stderr to a
       file.
-- [ ] Let `p.fs.write` support appending to a file (or support `p.fs.append`?).
-- [ ] Support `p.fs.open`? It returns a file userdata and support many methods.
-- [ ] Support `p.proc` module. Like (?):
+- [x] Let `p.fs.write` support appending to a file (or support `p.fs.append`?).
+- [x] Support `p.fs.open`? It returns a file userdata and support many methods.
+- [x] Support `p.proc` module. Like (?):
       ```lua
       local pids = p.proc.find({ cmdline_contains = "user-service" })
       p.proc.kill(pids)

@@ -13,6 +13,7 @@ mod lua_error;
 mod lua_world;
 mod net;
 mod path;
+mod proc;
 mod prompt;
 mod re;
 mod runner;

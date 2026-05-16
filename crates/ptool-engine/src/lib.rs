@@ -12,6 +12,7 @@ mod log;
 mod net;
 mod path;
 mod platform;
+mod proc;
 mod prompt;
 mod re;
 mod script_args;
@@ -50,6 +51,10 @@ pub use json::{JsonStringifyOptions, JsonValue};
 pub use log::LogLevel;
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS, UserHost};
+pub use proc::{
+    ProcInfo, ProcKillEntry, ProcKillOptions, ProcKillResult, ProcQuery, ProcSignal, ProcSortBy,
+    ProcTarget, ProcWaitGoneOptions, ProcWaitGoneResult,
+};
 pub use prompt::{
     PromptConfirmOptions, PromptItem, PromptMultiSelectOptions, PromptSecretOptions,
     PromptSelectOptions, PromptTextOptions, prompt_confirm, prompt_multiselect, prompt_secret,
@@ -206,6 +211,38 @@ impl PtoolEngine {
 
     pub fn current_exe(&self) -> Option<String> {
         platform::current_exe()
+    }
+
+    pub fn proc_self(&self) -> Result<ProcInfo> {
+        proc::self_process()
+    }
+
+    pub fn proc_get(&self, pid: u32) -> Result<Option<ProcInfo>> {
+        proc::get_process(pid)
+    }
+
+    pub fn proc_exists(&self, pid: u32) -> Result<bool> {
+        proc::process_exists(pid)
+    }
+
+    pub fn proc_find(&self, query: &ProcQuery) -> Result<Vec<ProcInfo>> {
+        proc::find_processes(query)
+    }
+
+    pub fn proc_kill(
+        &self,
+        targets: &[ProcTarget],
+        options: &ProcKillOptions,
+    ) -> Result<ProcKillResult> {
+        proc::kill_processes(targets, options)
+    }
+
+    pub fn proc_wait_gone(
+        &self,
+        targets: &[ProcTarget],
+        options: &ProcWaitGoneOptions,
+    ) -> Result<ProcWaitGoneResult> {
+        proc::wait_processes_gone(targets, options)
     }
 
     pub fn shell_split(&self, input: &str) -> Result<Vec<String>> {

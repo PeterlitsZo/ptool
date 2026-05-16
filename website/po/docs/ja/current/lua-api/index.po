@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 16:59+0800\n"
+"POT-Creation-Date: 2026-05-16 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,34 +146,42 @@ msgid ""
 msgstr "[プラットフォーム API]{1}: 現在の OS、アーキテクチャ、 target triple を検出す"
 "る。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:48
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:47
+msgid ""
+"[Process API]{1}: Inspect local processes, send signals, and wait for "
+"processes to disappear."
+msgstr ""
+"[プロセス API]{1}: ローカルプロセスを調べ、シグナルを送り、プロセスが消える"
+"のを待ちます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
 msgid "Networking & Remote"
 msgstr "ネットワークとリモート"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
 msgid "[HTTP API]{1}: Send HTTP requests and consume response bodies."
 msgstr "[HTTP API]{1}: HTTP リクエストを送り、レスポンス本文を扱う。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:53
 msgid "[Network API]{1}: Parse URLs, IP addresses, and host-port pairs."
 msgstr "[ネットワーク API]{1}: URL、IP アドレス、host-port ペアを解析する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:52
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:54
 msgid ""
 "[SSH API]{1}: Connect to remote hosts, run commands, send HTTP requests from "
 "the remote host, and transfer files."
 msgstr "[SSH API]{1}: リモートホストに接続し、コマンドを実行し、リモートホストから "
 "HTTP リクエストを送り、ファイルを転送します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:55
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
 msgid "Development & Storage"
 msgstr "開発とストレージ"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:57
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:59
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr "[データベース API]{1}: データベース接続を開き、SQL クエリを実行する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:58
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:60
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
@@ -181,7 +189,7 @@ msgstr ""
 "[Git API]{1}: リポジトリを開いてステータスを検査し、libgit2 でサポートされる"
 "ハンドルを介してクローン、フェッチ、またはプッシュします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:61
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:63
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

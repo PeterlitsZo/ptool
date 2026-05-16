@@ -18,6 +18,10 @@
   `stdin`, `stdout`, and `stderr`, while `ptool.exec(...)` now supports file
   redirection for `stdin`, `stdout`, and `stderr` where true process
   replacement semantics allow it.
+- Added the `ptool.proc` / `p.proc` module with local process inspection,
+  lookup, filtering, signaling, and wait helpers such as `self`, `get`,
+  `exists`, `find`, `kill`, and `wait_gone`, and documented it across all
+  supported locales.
 - Added the `ptool.zip` / `p.zip` module with `compress` and `decompress`
   helpers for common single-stream compression formats including gzip, zlib,
   deflate, bzip2, xz, and zstd, and documented it across all supported

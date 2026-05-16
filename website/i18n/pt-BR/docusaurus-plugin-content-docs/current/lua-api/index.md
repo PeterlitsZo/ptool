@@ -33,6 +33,7 @@ Os módulos são agrupados por domínio. Dentro de cada grupo, as entradas são 
 - [API de sistema operacional](./os.md): Lê variáveis de ambiente do runtime e inspeciona detalhes do processo hospedeiro.
 - [API de caminhos](./path.md): Manipula caminhos lexicalmente sem tocar no sistema de arquivos.
 - [API de plataforma](./platform.md): Detecta o SO, a arquitetura e o target triple atuais.
+- [API de processos](./proc.md): Inspecione processos locais, envie sinais e aguarde o desaparecimento dos processos.
 
 ## Rede e remoto
 
