@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 17:16+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -672,9 +672,8 @@ msgid "run_capture"
 msgstr "run_capture"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:243
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:243"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.3.0` - Introduced."
+msgstr "`v0.3.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:245
 msgid "Canonical API name: `ptool.ssh.Connection:run_capture`."
@@ -726,9 +725,8 @@ msgid "http_request"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:285
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:285"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.7.0` - Introduced."
+msgstr "`v0.7.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:287
 msgid "Canonical API name: `ptool.ssh.Connection:http_request`."
@@ -1422,6 +1420,14 @@ msgstr ""
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:641"
 msgid "Example:"
 msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:243"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/ssh.md:285"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
 
 #~ msgid "When `local_path` is a file, the behavior is unchanged."
 #~ msgstr "Cuando `local_path` es un archivo, el comportamiento no cambia."

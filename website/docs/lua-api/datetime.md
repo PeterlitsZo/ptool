@@ -7,7 +7,7 @@ timezone or numeric offset.
 
 ## ptool.datetime.now
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.datetime.now([tz])` returns the current time as a `DateTime`.
 
@@ -26,7 +26,7 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 
 ## ptool.datetime.parse
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.datetime.parse(input[, options])` parses a datetime string and returns a
 `DateTime`.
@@ -63,7 +63,7 @@ print(b.timezone) -- America/New_York
 
 ## ptool.datetime.from_unix
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.datetime.from_unix(value[, options])` constructs a `DateTime` from a
 Unix timestamp.
@@ -88,7 +88,7 @@ print(b)
 
 ## ptool.datetime.compare
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.datetime.compare(a, b)` compares two instants.
 
@@ -109,7 +109,7 @@ print(ptool.datetime.compare(
 
 ## ptool.datetime.is_valid
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.datetime.is_valid(input[, options])` checks whether a datetime string can
 be parsed.
@@ -128,7 +128,7 @@ print(ptool.datetime.is_valid("2024-07-15 16:24:59", {
 
 ## DateTime
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `DateTime` represents a concrete instant returned by `ptool.datetime.now(...)`,
 `parse(...)`, or `from_unix(...)`.

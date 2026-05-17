@@ -56,7 +56,7 @@ ptool.use(">= v0.6.0, < 0.7.0")
 
 ## ptool.version
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.version()` 会返回当前 `ptool` 的版本字符串。
 
@@ -546,7 +546,7 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.run_capture` 从 Rust 执行外部命令，调用形式、参数规则、返回值规则和选项 都与 `ptool.run` 相同。
 
@@ -585,7 +585,7 @@ print(res3.stdout)
 
 ## ptool.exec
 
-> `Unreleased` - 引入。
+> `v0.7.0` - 引入。
 
 `ptool.exec` 会用外部命令替换当前 `ptool` 进程。
 

@@ -6,7 +6,7 @@ A primeira versão se concentra em telas interativas pequenas dirigidas por um l
 
 ## ptool.tui.run
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tui.run(options)` inicia uma sessão TUI, executa os callbacks do ciclo de vida em Lua e retorna o valor passado para `app:quit(value)`. Se `app:quit()` for chamado sem valor, a função retorna `nil`.
 
@@ -78,7 +78,7 @@ print("selected:", result)
 
 ## App
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `app` é passado para `update(...)` e `view(...)`.
 
@@ -92,7 +92,7 @@ Canonical API name: `ptool.tui.App:quit`.
 
 ## Construtores de nó
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 Os construtores abaixo retornam tabelas de nó comuns. `view(...)` deve retornar um desses nós como a árvore de visualização raiz.
 
@@ -108,7 +108,7 @@ Campos comuns de nó:
 
 ## ptool.tui.text
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tui.text(text[, options])` cria um nó de texto.
 
@@ -117,7 +117,7 @@ Campos comuns de nó:
 
 ## ptool.tui.list
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tui.list(items[, options])` cria um nó de lista vertical.
 
@@ -131,7 +131,7 @@ Notas:
 
 ## ptool.tui.row
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tui.row(options)` cria um contêiner horizontal.
 
@@ -139,7 +139,7 @@ Notas:
 
 ## ptool.tui.column
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tui.column(options)` cria um contêiner vertical.
 

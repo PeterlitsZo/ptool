@@ -6,7 +6,7 @@
 
 ## ptool.proc.self
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.proc.self()` は現在の `ptool` プロセスのスナップショット table を返します。
 
@@ -16,7 +16,7 @@
 
 ## ptool.proc.get
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.proc.get(pid)` は指定したプロセス ID のスナップショット table を返します。プロセスが存在しない場合は `nil` を返します。
 
@@ -25,7 +25,7 @@
 
 ## ptool.proc.exists
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.proc.exists(pid)` は、そのプロセス ID が現在存在するかどうかを返します。
 
@@ -34,7 +34,7 @@
 
 ## ptool.proc.find
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.proc.find([options])` はローカルプロセスを列挙し、スナップショット table の配列を返します。
 
@@ -94,7 +94,7 @@ end
 
 ## ptool.proc.kill
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.proc.kill(targets[, options])` は 1 つ以上のローカルプロセスにシグナルを送り、構造化された結果 table を返します。
 
@@ -155,7 +155,7 @@ res:assert_ok()
 
 ## ptool.proc.wait_gone
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.proc.wait_gone(targets[, options])` は 1 つ以上の対象プロセスが存在しなくなるまで待機し、その後で構造化された結果 table を返します。
 

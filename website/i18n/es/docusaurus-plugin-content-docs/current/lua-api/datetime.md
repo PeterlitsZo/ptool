@@ -6,7 +6,7 @@ Los ayudantes de fecha y hora están disponibles en `ptool.datetime` y `p.dateti
 
 ## ptool.datetime.now
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.datetime.now([tz])` devuelve la hora actual como `DateTime`.
 
@@ -23,7 +23,7 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 
 ## ptool.datetime.parse
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.datetime.parse(input[, options])` analiza una cadena de fecha y hora y devuelve un `DateTime`.
 
@@ -55,7 +55,7 @@ print(b.timezone) -- America/New_York
 
 ## ptool.datetime.from_unix
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.datetime.from_unix(value[, options])` construye un `DateTime` a partir de una marca de tiempo de Unix.
 
@@ -77,7 +77,7 @@ print(b)
 
 ## ptool.datetime.compare
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.datetime.compare(a, b)` compara dos instantes.
 
@@ -95,7 +95,7 @@ print(ptool.datetime.compare(
 
 ## ptool.datetime.is_valid
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.datetime.is_valid(input[, options])` comprueba si se puede analizar una cadena de fecha y hora.
 
@@ -113,7 +113,7 @@ print(ptool.datetime.is_valid("2024-07-15 16:24:59", {
 
 ## DateTime
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `DateTime` representa un instante concreto devuelto por `ptool.datetime.now(...)`, `parse(...)` o `from_unix(...)`.
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,8 +36,8 @@ msgstr "ptool.tui.run"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:10
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:10"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:12
 msgid ""
@@ -144,8 +144,8 @@ msgstr "App"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:91
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:91"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:93
 msgid "`app` is passed to `update(...)` and `view(...)`."
@@ -179,8 +179,8 @@ msgstr "Construtores de nó"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:106
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:106"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:108
 msgid ""
@@ -243,8 +243,8 @@ msgstr "ptool.tui.text"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:126
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:126"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:128
 msgid "`ptool.tui.text(text[, options])` creates a text node."
@@ -268,8 +268,8 @@ msgstr "ptool.tui.list"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:136
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:136"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:138
 msgid "`ptool.tui.list(items[, options])` creates a vertical list node."
@@ -318,8 +318,8 @@ msgstr "ptool.tui.row"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:154
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:154"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:156
 msgid "`ptool.tui.row(options)` creates a horizontal container."
@@ -339,8 +339,8 @@ msgstr "ptool.tui.column"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:162
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:162"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:164
 msgid "`ptool.tui.column(options)` creates a vertical container."
@@ -381,3 +381,31 @@ msgid ""
 msgstr ""
 "Ainda não oferece campos de texto, popups, tabelas, widgets dirigidos por "
 "mouse nem bindings arbitrários de widgets do ratatui."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:10"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:91"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:106"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:126"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:136"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:154"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tui.md:162"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."

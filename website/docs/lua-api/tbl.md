@@ -7,7 +7,7 @@ starting at `1`.
 
 ## ptool.tbl.map
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tbl.map(list, fn)` transforms each item in a list table and returns a
 new list.
@@ -34,7 +34,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 ## ptool.tbl.filter
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and
 returns them in a new dense list.
@@ -59,7 +59,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.concat
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tbl.concat(...)` concatenates one or more dense list tables into a new
 list.
@@ -81,7 +81,7 @@ print(ptool.inspect(out)) -- { 1, 2, 3 }
 
 ## ptool.tbl.join
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tbl.join(...)` is an alias of `ptool.tbl.concat(...)`.
 

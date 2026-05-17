@@ -174,8 +174,8 @@ msgid ""
 "[Process API]{1}: Inspect local processes, send signals, and wait for "
 "processes to disappear."
 msgstr ""
-"[API de processos]{1}: Inspecione processos locais, envie sinais e "
-"aguarde o desaparecimento dos processos."
+"[API de processos]{1}: Inspecione processos locais, envie sinais e aguarde o "
+"desaparecimento dos processos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/index.md:50
 msgid "Networking & Remote"

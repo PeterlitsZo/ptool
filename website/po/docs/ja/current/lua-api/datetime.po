@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,8 +34,8 @@ msgstr "ptool.datetime.now"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 導入されました。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:12
 msgid "`ptool.datetime.now([tz])` returns the current time as a `DateTime`."
@@ -61,8 +61,8 @@ msgstr "ptool.datetime.parse"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 導入されました。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:31
 msgid ""
@@ -136,8 +136,8 @@ msgstr "ptool.datetime.from_unix"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 導入されました。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:68
 msgid ""
@@ -177,8 +177,8 @@ msgstr "ptool.datetime.compare"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 導入されました。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:93
 msgid "`ptool.datetime.compare(a, b)` compares two instants."
@@ -210,8 +210,8 @@ msgstr "ptool.datetime.is_valid"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 導入されました。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:114
 msgid ""
@@ -240,8 +240,8 @@ msgstr "DateTime"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 導入されました。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:133
 msgid ""
@@ -475,3 +475,27 @@ msgstr "タイムゾーン名は、`UTC`、`Asia/Tokyo`、`America/New_York` な
 msgid ""
 "Comparisons operate on the instant, not on the displayed wall-clock fields."
 msgstr "比較は、表示されている実時間フィールドではなく、瞬間に基づいて行われます。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 導入されました。"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 17:30+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,462 +12,550 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:1
 msgid "Process API"
 msgstr "プロセス API"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:3
 msgid "Local process helpers are available under `ptool.proc` and `p.proc`."
 msgstr "`ptool.proc` と `p.proc` でローカルプロセス用の補助機能を利用できます。"
 
-msgid ""
-"This module is for inspecting and managing already-running local processes. "
-"Use `ptool.run(...)` when you want to launch a new command."
-msgstr ""
-"このモジュールは、すでにローカルで実行中のプロセスを調べたり管理したりするた"
-"めのものです。新しいコマンドを起動したい場合は `ptool.run(...)` を使ってくだ"
-"さい。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:5
+msgid "This module is for inspecting and managing already-running local processes. Use `ptool.run(...)` when you want to launch a new command."
+msgstr "このモジュールは、すでにローカルで実行中のプロセスを調べたり管理したりするためのものです。新しいコマンドを起動したい場合は `ptool.run(...)` を使ってください。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:8
 msgid "ptool.proc.self"
 msgstr "ptool.proc.self"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:10"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:10
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:10"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
-msgid ""
-"`ptool.proc.self()` returns a snapshot table for the current `ptool` process."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:12
+msgid "`ptool.proc.self()` returns a snapshot table for the current `ptool` process."
 msgstr "`ptool.proc.self()` は現在の `ptool` プロセスのスナップショット table を返します。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:14"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:14
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:14"
 msgid "Returns: `table`."
 msgstr "戻り値：`table`。"
 
-msgid ""
-"The returned table uses the same shape as `ptool.proc.get(...)` and "
-"`ptool.proc.find(...)`."
-msgstr ""
-"返される table は `ptool.proc.get(...)` と `ptool.proc.find(...)` と同じ構造"
-"です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:16
+msgid "The returned table uses the same shape as `ptool.proc.get(...)` and `ptool.proc.find(...)`."
+msgstr "返される table は `ptool.proc.get(...)` と `ptool.proc.find(...)` と同じ構造です。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:19
 msgid "ptool.proc.get"
 msgstr "ptool.proc.get"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:21"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:21
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:21"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
-msgid ""
-"`ptool.proc.get(pid)` returns a snapshot table for the given process ID, or "
-"`nil` if the process does not exist."
-msgstr ""
-"`ptool.proc.get(pid)` は指定したプロセス ID のスナップショット table を返し"
-"ます。プロセスが存在しない場合は `nil` を返します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:23
+msgid "`ptool.proc.get(pid)` returns a snapshot table for the given process ID, or `nil` if the process does not exist."
+msgstr "`ptool.proc.get(pid)` は指定したプロセス ID のスナップショット table を返します。プロセスが存在しない場合は `nil` を返します。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:26"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:26
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:26"
 msgid "`pid` (integer, required): Process ID."
 msgstr "`pid` (integer, 必須): プロセス ID。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:27
 msgid "Returns: `table|nil`."
 msgstr "戻り値：`table|nil`。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:29
 msgid "ptool.proc.exists"
 msgstr "ptool.proc.exists"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:31"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:31"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:33
 msgid "`ptool.proc.exists(pid)` reports whether a process ID currently exists."
 msgstr "`ptool.proc.exists(pid)` は、そのプロセス ID が現在存在するかどうかを返します。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:35"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:35
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:35"
 msgid "`pid` (integer, required): Process ID."
 msgstr "`pid` (integer, 必須): プロセス ID。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:36
 msgid "Returns: `boolean`."
 msgstr "戻り値：`boolean`。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:38
 msgid "ptool.proc.find"
 msgstr "ptool.proc.find"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:40"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:40
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:40"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
-msgid ""
-"`ptool.proc.find([options])` lists local processes and returns an array of "
-"snapshot tables."
-msgstr ""
-"`ptool.proc.find([options])` はローカルプロセスを列挙し、スナップショット "
-"table の配列を返します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:42
+msgid "`ptool.proc.find([options])` lists local processes and returns an array of snapshot tables."
+msgstr "`ptool.proc.find([options])` はローカルプロセスを列挙し、スナップショット table の配列を返します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:45
 msgid "`options` (table, optional): Filter and sorting options."
 msgstr "`options` (table, 任意): フィルターとソートのオプション。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:46"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:46"
 msgid "Returns: `table`."
 msgstr "戻り値：`table`。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:48"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:48
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:48"
 msgid "Supported `options` fields:"
 msgstr "サポートされる `options` フィールド:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:50
 msgid "`pid` (integer, optional): Match one exact process ID."
 msgstr "`pid` (integer, 任意): 1 つの正確なプロセス ID に一致します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:51
 msgid "`pids` (integer[], optional): Match a set of process IDs."
 msgstr "`pids` (integer[], 任意): 複数のプロセス ID の集合に一致します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:52
 msgid "`ppid` (integer, optional): Match an exact parent process ID."
 msgstr "`ppid` (integer, 任意): 正確な親プロセス ID に一致します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:53
 msgid "`name` (string, optional): Match an exact process name."
 msgstr "`name` (string, 任意): 正確なプロセス名に一致します。"
 
-msgid ""
-"`name_contains` (string, optional): Match a substring in the process name."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:54
+msgid "`name_contains` (string, optional): Match a substring in the process name."
 msgstr "`name_contains` (string, 任意): プロセス名に含まれる部分文字列に一致します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:55
 msgid "`exe` (string, optional): Match an exact executable path."
 msgstr "`exe` (string, 任意): 正確な実行ファイルパスに一致します。"
 
-msgid ""
-"`exe_contains` (string, optional): Match a substring in the executable path."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:56
+msgid "`exe_contains` (string, optional): Match a substring in the executable path."
 msgstr "`exe_contains` (string, 任意): 実行ファイルパスに含まれる部分文字列に一致します。"
 
-msgid ""
-"`cmdline_contains` (string, optional): Match a substring in the joined "
-"command line."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:57
+msgid "`cmdline_contains` (string, optional): Match a substring in the joined command line."
 msgstr "`cmdline_contains` (string, 任意): 連結されたコマンドラインに含まれる部分文字列に一致します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:59
 msgid "`user` (string, optional): Match an exact user name."
 msgstr "`user` (string, 任意): 正確なユーザー名に一致します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:60
 msgid "`cwd` (string, optional): Match an exact current working directory."
 msgstr "`cwd` (string, 任意): 正確な現在の作業ディレクトリに一致します。"
 
-msgid ""
-"`include_self` (boolean, optional): Whether to include the current `ptool` "
-"process. Defaults to `false`."
-msgstr ""
-"`include_self` (boolean, 任意): 現在の `ptool` プロセスを含めるかどうか。デ"
-"フォルトは `false` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:61
+msgid "`include_self` (boolean, optional): Whether to include the current `ptool` process. Defaults to `false`."
+msgstr "`include_self` (boolean, 任意): 現在の `ptool` プロセスを含めるかどうか。デフォルトは `false` です。"
 
-msgid ""
-"`limit` (integer, optional): Maximum number of returned entries after "
-"filtering and sorting."
-msgstr ""
-"`limit` (integer, 任意): フィルターとソートの後に返されるエントリーの最大数。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:63
+msgid "`limit` (integer, optional): Maximum number of returned entries after filtering and sorting."
+msgstr "`limit` (integer, 任意): フィルターとソートの後に返されるエントリーの最大数。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:65
 msgid "`sort_by` (string, optional): Sort key. Supported values:"
 msgstr "`sort_by` (string, 任意): ソートキー。サポートされる値:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:65
 msgid "`\"pid\"` (default)"
 msgstr "`\"pid\"` (デフォルト)"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:65
 msgid "`\"start_time\"`"
 msgstr "`\"start_time\"`"
 
-msgid ""
-"`reverse` (boolean, optional): Whether to reverse the final sort order. "
-"Defaults to `false`."
-msgstr ""
-"`reverse` (boolean, 任意): 最終的な並び順を反転するかどうか。デフォルトは "
-"`false` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:68
+msgid "`reverse` (boolean, optional): Whether to reverse the final sort order. Defaults to `false`."
+msgstr "`reverse` (boolean, 任意): 最終的な並び順を反転するかどうか。デフォルトは `false` です。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:71
 msgid "Each returned process snapshot may contain:"
 msgstr "返される各プロセススナップショットには次の項目が含まれることがあります:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:73
 msgid "`pid` (integer): Process ID."
 msgstr "`pid` (integer): プロセス ID。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:74
 msgid "`ppid` (integer|nil): Parent process ID."
 msgstr "`ppid` (integer|nil): 親プロセス ID。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:75
 msgid "`name` (string): Process name."
 msgstr "`name` (string): プロセス名。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:76
 msgid "`exe` (string|nil): Executable path, when available."
 msgstr "`exe` (string|nil): 実行ファイルパス。利用できる場合のみ設定されます。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:77
 msgid "`cwd` (string|nil): Current working directory, when available."
 msgstr "`cwd` (string|nil): 現在の作業ディレクトリ。利用できる場合のみ設定されます。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:78
 msgid "`user` (string|nil): Owning user name, when available."
 msgstr "`user` (string|nil): 所有ユーザー名。利用できる場合のみ設定されます。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:79
 msgid "`cmdline` (string|nil): Joined command line, when available."
 msgstr "`cmdline` (string|nil): 連結されたコマンドライン。利用できる場合のみ設定されます。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:80
 msgid "`argv` (string[]): Command-line argument array."
 msgstr "`argv` (string[]): コマンドライン引数の配列。"
 
-msgid ""
-"`state` (string): Process state label such as `\"running\"` or "
-"`\"sleeping\"`."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:81
+msgid "`state` (string): Process state label such as `\"running\"` or `\"sleeping\"`."
 msgstr "`state` (string): `\"running\"` や `\"sleeping\"` のようなプロセス状態ラベル。"
 
-msgid ""
-"`start_time_unix_ms` (integer): Process start time in Unix milliseconds."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:82
+msgid "`start_time_unix_ms` (integer): Process start time in Unix milliseconds."
 msgstr "`start_time_unix_ms` (integer): Unix ミリ秒で表したプロセス開始時刻。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:84
 msgid "Notes:"
 msgstr "注意:"
 
-msgid ""
-"Some fields may be `nil` when the current platform or permission level does "
-"not expose them."
-msgstr ""
-"現在のプラットフォームや権限レベルで公開されていない場合、一部のフィールドは "
-"`nil` になることがあります。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:86
+msgid "Some fields may be `nil` when the current platform or permission level does not expose them."
+msgstr "現在のプラットフォームや権限レベルで公開されていない場合、一部のフィールドは `nil` になることがあります。"
 
-msgid ""
-"Process snapshots are point-in-time values. They do not update themselves."
-msgstr ""
-"プロセススナップショットはある時点の値です。自動では更新されません。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:88
+msgid "Process snapshots are point-in-time values. They do not update themselves."
+msgstr "プロセススナップショットはある時点の値です。自動では更新されません。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:90"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:90
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:90"
 msgid "Example:"
 msgstr "例:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:104
 msgid "ptool.proc.kill"
 msgstr "ptool.proc.kill"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:106"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:106
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:106"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
-msgid ""
-"`ptool.proc.kill(targets[, options])` sends a signal to one or more local "
-"processes and returns a structured result table."
-msgstr ""
-"`ptool.proc.kill(targets[, options])` は 1 つ以上のローカルプロセスにシグナ"
-"ルを送り、構造化された結果 table を返します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:108
+msgid "`ptool.proc.kill(targets[, options])` sends a signal to one or more local processes and returns a structured result table."
+msgstr "`ptool.proc.kill(targets[, options])` は 1 つ以上のローカルプロセスにシグナルを送り、構造化された結果 table を返します。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:111"
-msgid ""
-"`targets` (integer|table, required): A pid, a process snapshot table, or an "
-"array of them."
-msgstr ""
-"`targets` (integer|table, 必須): 1 つの pid、1 つのプロセススナップショット "
-"table、またはそれらの配列。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:111
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:111"
+msgid "`targets` (integer|table, required): A pid, a process snapshot table, or an array of them."
+msgstr "`targets` (integer|table, 必須): 1 つの pid、1 つのプロセススナップショット table、またはそれらの配列。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:113
 msgid "`options` (table, optional): Kill options."
 msgstr "`options` (table, 任意): シグナル送信オプション。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:114"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:114
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:114"
 msgid "Returns: `table`."
 msgstr "戻り値：`table`。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:116"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:116
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:116"
 msgid "Supported `options` fields:"
 msgstr "サポートされる `options` フィールド:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`signal` (string, optional): Signal name. Supported values:"
 msgstr "`signal` (string, 任意): シグナル名。サポートされる値:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"hup\"`"
 msgstr "`\"hup\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"term\"` (default)"
 msgstr "`\"term\"` (デフォルト)"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"kill\"`"
 msgstr "`\"kill\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"int\"`"
 msgstr "`\"int\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"quit\"`"
 msgstr "`\"quit\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"stop\"`"
 msgstr "`\"stop\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"cont\"`"
 msgstr "`\"cont\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"user1\"`"
 msgstr "`\"user1\"`"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:118
 msgid "`\"user2\"`"
 msgstr "`\"user2\"`"
 
-msgid ""
-"`missing_ok` (boolean, optional): Whether missing processes count as "
-"success. Defaults to `true`."
-msgstr ""
-"`missing_ok` (boolean, 任意): 存在しないプロセスも成功として扱うかどうか。デ"
-"フォルトは `true` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:128
+msgid "`missing_ok` (boolean, optional): Whether missing processes count as success. Defaults to `true`."
+msgstr "`missing_ok` (boolean, 任意): 存在しないプロセスも成功として扱うかどうか。デフォルトは `true` です。"
 
-msgid ""
-"`allow_self` (boolean, optional): Whether the current `ptool` process may be "
-"signaled. Defaults to `false`."
-msgstr ""
-"`allow_self` (boolean, 任意): 現在の `ptool` プロセスにシグナルを送ってよい"
-"かどうか。デフォルトは `false` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:130
+msgid "`allow_self` (boolean, optional): Whether the current `ptool` process may be signaled. Defaults to `false`."
+msgstr "`allow_self` (boolean, 任意): 現在の `ptool` プロセスにシグナルを送ってよいかどうか。デフォルトは `false` です。"
 
-msgid ""
-"`check` (boolean, optional): Whether to raise an error immediately when the "
-"final result is not ok. Defaults to `false`."
-msgstr ""
-"`check` (boolean, 任意): 最終結果が ok でない場合に直ちにエラーを送出するか"
-"どうか。デフォルトは `false` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:132
+msgid "`check` (boolean, optional): Whether to raise an error immediately when the final result is not ok. Defaults to `false`."
+msgstr "`check` (boolean, 任意): 最終結果が ok でない場合に直ちにエラーを送出するかどうか。デフォルトは `false` です。"
 
-msgid ""
-"`confirm` (boolean, optional): Whether to ask for confirmation before "
-"sending the signal. Defaults to `false`."
-msgstr ""
-"`confirm` (boolean, 任意): シグナルを送る前に確認を求めるかどうか。デフォルト"
-"は `false` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:134
+msgid "`confirm` (boolean, optional): Whether to ask for confirmation before sending the signal. Defaults to `false`."
+msgstr "`confirm` (boolean, 任意): シグナルを送る前に確認を求めるかどうか。デフォルトは `false` です。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:137"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:137
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:137"
 msgid "The returned result table contains:"
 msgstr "返される結果 table には次の項目が含まれます:"
 
-msgid ""
-"`ok` (boolean): Whether the whole operation succeeded under the current "
-"options."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:139
+msgid "`ok` (boolean): Whether the whole operation succeeded under the current options."
 msgstr "`ok` (boolean): 現在の options の下で操作全体が成功したかどうか。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:141"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:141
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:141"
 msgid "`signal` (string): The signal label that was requested."
 msgstr "`signal` (string): 要求されたシグナルラベル。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:142"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:142
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:142"
 msgid "`total` (integer): Total number of normalized targets."
 msgstr "`total` (integer): 正規化された対象の総数。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:143
 msgid "`sent` (integer): Number of targets for which the signal was sent."
 msgstr "`sent` (integer): シグナルが送られた対象の数。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:144
 msgid "`missing` (integer): Number of targets that no longer existed."
 msgstr "`missing` (integer): すでに存在しなかった対象の数。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:145
 msgid "`failed` (integer): Number of targets that failed overall."
 msgstr "`failed` (integer): 最終的に失敗した対象の数。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:146
 msgid "`entries` (table): Per-target result entries."
 msgstr "`entries` (table): 対象ごとの結果エントリー。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:147"
-msgid ""
-"`assert_ok(self)` (function): Raises a structured Lua error when `ok = "
-"false`."
-msgstr ""
-"`assert_ok(self)` (function): `ok = false` のときに構造化された Lua エラー"
-"を送出します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:147
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:147"
+msgid "`assert_ok(self)` (function): Raises a structured Lua error when `ok = false`."
+msgstr "`assert_ok(self)` (function): `ok = false` のときに構造化された Lua エラーを送出します。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:149
 msgid "Each `entries[i]` table contains:"
 msgstr "各 `entries[i]` table には次の項目が含まれます:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:151
 msgid "`pid` (integer): Target process ID."
 msgstr "`pid` (integer): 対象プロセス ID。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:152
 msgid "`ok` (boolean): Whether this target succeeded."
 msgstr "`ok` (boolean): この対象が成功したかどうか。"
 
-msgid ""
-"`existed` (boolean): Whether the target process existed and still matched."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:153
+msgid "`existed` (boolean): Whether the target process existed and still matched."
 msgstr "`existed` (boolean): 対象プロセスが存在し、かつ引き続き一致していたかどうか。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:154"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:154
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:154"
 msgid "`signal` (string): The signal label that was requested."
 msgstr "`signal` (string): 要求されたシグナルラベル。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:155
 msgid "`message` (string|nil): Additional status detail."
 msgstr "`message` (string|nil): 追加の状態詳細。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:157"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:157
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:157"
 msgid "Example:"
 msgstr "例:"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:172
 msgid "ptool.proc.wait_gone"
 msgstr "ptool.proc.wait_gone"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:174"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:174
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:174"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
-msgid ""
-"`ptool.proc.wait_gone(targets[, options])` waits until one or more target "
-"processes no longer exist, then returns a structured result table."
-msgstr ""
-"`ptool.proc.wait_gone(targets[, options])` は 1 つ以上の対象プロセスが存在"
-"しなくなるまで待機し、その後で構造化された結果 table を返します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:176
+msgid "`ptool.proc.wait_gone(targets[, options])` waits until one or more target processes no longer exist, then returns a structured result table."
+msgstr "`ptool.proc.wait_gone(targets[, options])` は 1 つ以上の対象プロセスが存在しなくなるまで待機し、その後で構造化された結果 table を返します。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:179"
-msgid ""
-"`targets` (integer|table, required): A pid, a process snapshot table, or an "
-"array of them."
-msgstr ""
-"`targets` (integer|table, 必須): 1 つの pid、1 つのプロセススナップショット "
-"table、またはそれらの配列。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:179
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:179"
+msgid "`targets` (integer|table, required): A pid, a process snapshot table, or an array of them."
+msgstr "`targets` (integer|table, 必須): 1 つの pid、1 つのプロセススナップショット table、またはそれらの配列。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:181
 msgid "`options` (table, optional): Wait options."
 msgstr "`options` (table, 任意): 待機オプション。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:182"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:182
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:182"
 msgid "Returns: `table`."
 msgstr "戻り値：`table`。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:184"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:184
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:184"
 msgid "Supported `options` fields:"
 msgstr "サポートされる `options` フィールド:"
 
-msgid ""
-"`timeout_ms` (integer, optional): Maximum wait time in milliseconds. If "
-"omitted, this waits indefinitely."
-msgstr ""
-"`timeout_ms` (integer, 任意): 最大待機時間をミリ秒で指定します。省略した場"
-"合は無期限に待機します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:186
+msgid "`timeout_ms` (integer, optional): Maximum wait time in milliseconds. If omitted, this waits indefinitely."
+msgstr "`timeout_ms` (integer, 任意): 最大待機時間をミリ秒で指定します。省略した場合は無期限に待機します。"
 
-msgid ""
-"`interval_ms` (integer, optional): Polling interval in milliseconds. "
-"Defaults to `100`."
-msgstr ""
-"`interval_ms` (integer, 任意): ポーリング間隔をミリ秒で指定します。デフォル"
-"トは `100` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:188
+msgid "`interval_ms` (integer, optional): Polling interval in milliseconds. Defaults to `100`."
+msgstr "`interval_ms` (integer, 任意): ポーリング間隔をミリ秒で指定します。デフォルトは `100` です。"
 
-msgid ""
-"`check` (boolean, optional): Whether to raise an error immediately when the "
-"wait times out. Defaults to `false`."
-msgstr ""
-"`check` (boolean, 任意): 待機がタイムアウトしたときに直ちにエラーを送出する"
-"かどうか。デフォルトは `false` です。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:190
+msgid "`check` (boolean, optional): Whether to raise an error immediately when the wait times out. Defaults to `false`."
+msgstr "`check` (boolean, 任意): 待機がタイムアウトしたときに直ちにエラーを送出するかどうか。デフォルトは `false` です。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:193"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:193
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:193"
 msgid "The returned result table contains:"
 msgstr "返される結果 table には次の項目が含まれます:"
 
-msgid ""
-"`ok` (boolean): Whether all target processes disappeared before timing out."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:195
+msgid "`ok` (boolean): Whether all target processes disappeared before timing out."
 msgstr "`ok` (boolean): すべての対象プロセスがタイムアウト前に消えたかどうか。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:196
 msgid "`timed_out` (boolean): Whether the timeout was reached."
 msgstr "`timed_out` (boolean): タイムアウトに達したかどうか。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:197"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:197
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:197"
 msgid "`total` (integer): Total number of normalized targets."
 msgstr "`total` (integer): 正規化された対象の総数。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:198
 msgid "`gone` (integer[]): Process IDs that were gone by the end of the wait."
 msgstr "`gone` (integer[]): 待機終了時点までに消えていたプロセス ID。"
 
-msgid ""
-"`remaining` (integer[]): Process IDs still present when the wait finished."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:199
+msgid "`remaining` (integer[]): Process IDs still present when the wait finished."
 msgstr "`remaining` (integer[]): 待機終了時点でまだ存在していたプロセス ID。"
 
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:200
 msgid "`elapsed_ms` (integer): Total elapsed wait time in milliseconds."
 msgstr "`elapsed_ms` (integer): 待機にかかった合計時間（ミリ秒）。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:201"
-msgid ""
-"`assert_ok(self)` (function): Raises a structured Lua error when `ok = "
-"false`."
-msgstr ""
-"`assert_ok(self)` (function): `ok = false` のときに構造化された Lua エラー"
-"を送出します。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:201
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:201"
+msgid "`assert_ok(self)` (function): Raises a structured Lua error when `ok = false`."
+msgstr "`assert_ok(self)` (function): `ok = false` のときに構造化された Lua エラーを送出します。"
 
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:203"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:203
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/proc.md:203"
 msgid "Example:"
 msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:10"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:21"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:31"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:35"
+#~ msgid "`pid` (integer, required): Process ID."
+#~ msgstr "`pid` (integer, 必須): プロセス ID。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:40"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:46"
+#~ msgid "Returns: `table`."
+#~ msgstr "戻り値：`table`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:106"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:114"
+#~ msgid "Returns: `table`."
+#~ msgstr "戻り値：`table`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:116"
+#~ msgid "Supported `options` fields:"
+#~ msgstr "サポートされる `options` フィールド:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:154"
+#~ msgid "`signal` (string): The signal label that was requested."
+#~ msgstr "`signal` (string): 要求されたシグナルラベル。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:157"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:174"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:179"
+#~ msgid "`targets` (integer|table, required): A pid, a process snapshot table, or an array of them."
+#~ msgstr "`targets` (integer|table, 必須): 1 つの pid、1 つのプロセススナップショット table、またはそれらの配列。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:182"
+#~ msgid "Returns: `table`."
+#~ msgstr "戻り値：`table`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:184"
+#~ msgid "Supported `options` fields:"
+#~ msgstr "サポートされる `options` フィールド:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:193"
+#~ msgid "The returned result table contains:"
+#~ msgstr "返される結果 table には次の項目が含まれます:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:197"
+#~ msgid "`total` (integer): Total number of normalized targets."
+#~ msgstr "`total` (integer): 正規化された対象の総数。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:201"
+#~ msgid "`assert_ok(self)` (function): Raises a structured Lua error when `ok = false`."
+#~ msgstr "`assert_ok(self)` (function): `ok = false` のときに構造化された Lua エラーを送出します。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/proc.md:203"
+#~ msgid "Example:"
+#~ msgstr "例:"

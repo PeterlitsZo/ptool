@@ -49,7 +49,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 ## ptool.fs.append
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 `ptool.fs.append(path, content)` は Lua 文字列を生のバイト列としてファイルの末尾に追加します。ファイルが存在しない場合は作成されます。
 
@@ -70,7 +70,7 @@ ptool.fs.append("tmp/log.txt", "second line\n")
 
 ## ptool.fs.open
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 `ptool.fs.open(path[, mode])` はローカルファイルを開き、`File` オブジェクトを返します。
 
@@ -104,7 +104,7 @@ file:close()
 
 ## File
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 `File` は `ptool.fs.open()` が返す、開かれたローカルファイルハンドルです。
 
@@ -120,7 +120,7 @@ Lua userdata として実装されています。
 
 ### read
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 正規 API 名: `ptool.fs.File:read`。
 
@@ -145,7 +145,7 @@ file:close()
 
 ### write
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 正規 API 名: `ptool.fs.File:write`。
 
@@ -160,7 +160,7 @@ file:close()
 
 ### flush
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 正規 API 名: `ptool.fs.File:flush`。
 
@@ -168,7 +168,7 @@ file:close()
 
 ### seek
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 正規 API 名: `ptool.fs.File:seek`。
 
@@ -195,7 +195,7 @@ file:close()
 
 ### close
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - 導入されました。
 
 正規 API 名: `ptool.fs.File:close`。
 
@@ -238,7 +238,7 @@ end
 
 ## ptool.fs.is_file
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.fs.is_file(path)` は、パスが存在し通常ファイルかどうかを確認します。
 
@@ -255,7 +255,7 @@ end
 
 ## ptool.fs.is_dir
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.fs.is_dir(path)` は、パスが存在しディレクトリかどうかを確認します。
 
@@ -272,7 +272,7 @@ end
 
 ## ptool.fs.remove
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.fs.remove(path[, options])` は、ファイル、シンボリックリンク、 ディレクトリを削除します。
 

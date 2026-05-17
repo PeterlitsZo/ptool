@@ -49,7 +49,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 ## ptool.fs.append
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 `ptool.fs.append(path, content)` acrescenta uma string Lua ao final de um arquivo como bytes brutos. Se o arquivo não existir, ele será criado.
 
@@ -70,7 +70,7 @@ ptool.fs.append("tmp/log.txt", "second line\n")
 
 ## ptool.fs.open
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 `ptool.fs.open(path[, mode])` abre um arquivo local e retorna um objeto `File`.
 
@@ -104,7 +104,7 @@ file:close()
 
 ## File
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 `File` representa um identificador de arquivo local aberto retornado por `ptool.fs.open()`.
 
@@ -120,7 +120,7 @@ Métodos:
 
 ### read
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 Nome canônico da API: `ptool.fs.File:read`.
 
@@ -145,7 +145,7 @@ file:close()
 
 ### write
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 Nome canônico da API: `ptool.fs.File:write`.
 
@@ -160,7 +160,7 @@ Comportamento:
 
 ### flush
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 Nome canônico da API: `ptool.fs.File:flush`.
 
@@ -168,7 +168,7 @@ Nome canônico da API: `ptool.fs.File:flush`.
 
 ### seek
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 Nome canônico da API: `ptool.fs.File:seek`.
 
@@ -195,7 +195,7 @@ file:close()
 
 ### close
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduzido.
 
 Nome canônico da API: `ptool.fs.File:close`.
 
@@ -238,7 +238,7 @@ end
 
 ## ptool.fs.is_file
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.fs.is_file(path)` verifica se um caminho existe e é um arquivo regular.
 
@@ -255,7 +255,7 @@ end
 
 ## ptool.fs.is_dir
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.fs.is_dir(path)` verifica se um caminho existe e é um diretório.
 
@@ -272,7 +272,7 @@ end
 
 ## ptool.fs.remove
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.fs.remove(path[, options])` remove um arquivo, link simbólico ou diretório.
 

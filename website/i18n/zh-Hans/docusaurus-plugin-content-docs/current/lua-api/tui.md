@@ -6,7 +6,7 @@
 
 ## ptool.tui.run
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tui.run(options)` 启动一个 TUI 会话，运行 Lua 生命周期回调，并返回 `app:quit(value)` 传入的值。如果调用的是 `app:quit()`，则返回 `nil`。
 
@@ -78,7 +78,7 @@ print("selected:", result)
 
 ## App
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `app` 会传给 `update(...)` 和 `view(...)`。
 
@@ -92,7 +92,7 @@ print("selected:", result)
 
 ## 节点构造器
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 下面这些构造器返回普通的节点 table。`view(...)` 必须返回其中一个节点作为根视图树。
 
@@ -108,7 +108,7 @@ print("selected:", result)
 
 ## ptool.tui.text
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tui.text(text[, options])` 创建一个文本节点。
 
@@ -117,7 +117,7 @@ print("selected:", result)
 
 ## ptool.tui.list
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tui.list(items[, options])` 创建一个垂直列表节点。
 
@@ -131,7 +131,7 @@ print("selected:", result)
 
 ## ptool.tui.row
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tui.row(options)` 创建一个水平容器。
 
@@ -139,7 +139,7 @@ print("selected:", result)
 
 ## ptool.tui.column
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tui.column(options)` 创建一个垂直容器。
 

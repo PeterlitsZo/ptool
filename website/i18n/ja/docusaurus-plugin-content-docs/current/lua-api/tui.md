@@ -6,7 +6,7 @@
 
 ## ptool.tui.run
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tui.run(options)` は TUI セッションを開始し、Lua のライフサイクルコールバックを実行し、`app:quit(value)` に渡した値を返します。`app:quit()` を値なしで呼んだ場合は `nil` を返します。
 
@@ -78,7 +78,7 @@ print("selected:", result)
 
 ## App
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `app` は `update(...)` と `view(...)` に渡されます。
 
@@ -92,7 +92,7 @@ Canonical API name: `ptool.tui.App:quit`.
 
 ## ノードコンストラクタ
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 以下のコンストラクタは通常のノードテーブルを返します。`view(...)` は、ルートのビュー木としてこれらのノードのいずれかを返す必要があります。
 
@@ -108,7 +108,7 @@ Canonical API name: `ptool.tui.App:quit`.
 
 ## ptool.tui.text
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tui.text(text[, options])` はテキストノードを作成します。
 
@@ -117,7 +117,7 @@ Canonical API name: `ptool.tui.App:quit`.
 
 ## ptool.tui.list
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tui.list(items[, options])` は縦方向のリストノードを作成します。
 
@@ -131,7 +131,7 @@ Canonical API name: `ptool.tui.App:quit`.
 
 ## ptool.tui.row
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tui.row(options)` は横方向コンテナを作成します。
 
@@ -139,7 +139,7 @@ Canonical API name: `ptool.tui.App:quit`.
 
 ## ptool.tui.column
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tui.column(options)` は縦方向コンテナを作成します。
 

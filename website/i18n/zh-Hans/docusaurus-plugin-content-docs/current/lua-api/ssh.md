@@ -203,7 +203,7 @@ print(res2.stdout)
 
 ### run_capture
 
-> `Unreleased` - 引入。
+> `v0.3.0` - 引入。
 
 规范 API 名称：`ptool.ssh.Connection:run_capture`。
 
@@ -242,7 +242,7 @@ print(res3.stdout)
 
 ### http_request
 
-> `Unreleased` - 引入。
+> `v0.7.0` - 引入。
 
 规范 API 名称：`ptool.ssh.Connection:http_request`。
 

@@ -6,7 +6,7 @@
 
 ## ptool.tbl.map
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tbl.map(list, fn)` はリストテーブルの各要素を変換し、新しいリストを 返します。
 
@@ -30,7 +30,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 ## ptool.tbl.filter
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tbl.filter(list, fn)` はコールバック結果が truthy の要素だけを残し、 新しい密なリストとして返します。
 
@@ -54,7 +54,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.concat
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tbl.concat(...)` は 1 個以上の密なリストテーブルを結合して新しい リストを返します。
 
@@ -75,7 +75,7 @@ print(ptool.inspect(out)) -- { 1, 2, 3 }
 
 ## ptool.tbl.join
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - 導入されました。
 
 `ptool.tbl.join(...)` は `ptool.tbl.concat(...)` の別名です。
 

@@ -49,7 +49,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 ## ptool.fs.append
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.fs.append(path, content)` 将 Lua 字符串按原始字节追加到文件末尾。如果文件不存在，则会创建该文件。
 
@@ -70,7 +70,7 @@ ptool.fs.append("tmp/log.txt", "second line\n")
 
 ## ptool.fs.open
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.fs.open(path[, mode])` 打开一个本地文件，并返回一个 `File` 对象。
 
@@ -104,7 +104,7 @@ file:close()
 
 ## File
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `File` 表示由 `ptool.fs.open()` 返回的一个已打开的本地文件句柄。
 
@@ -120,7 +120,7 @@ file:close()
 
 ### read
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 规范 API 名称：`ptool.fs.File:read`。
 
@@ -145,7 +145,7 @@ file:close()
 
 ### write
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 规范 API 名称：`ptool.fs.File:write`。
 
@@ -160,7 +160,7 @@ file:close()
 
 ### flush
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 规范 API 名称：`ptool.fs.File:flush`。
 
@@ -168,7 +168,7 @@ file:close()
 
 ### seek
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 规范 API 名称：`ptool.fs.File:seek`。
 
@@ -195,7 +195,7 @@ file:close()
 
 ### close
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 规范 API 名称：`ptool.fs.File:close`。
 
@@ -238,7 +238,7 @@ end
 
 ## ptool.fs.is_file
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.fs.is_file(path)` 检查路径是否存在且是否为普通文件。
 
@@ -255,7 +255,7 @@ end
 
 ## ptool.fs.is_dir
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.fs.is_dir(path)` 检查路径是否存在且是否为目录。
 
@@ -272,7 +272,7 @@ end
 
 ## ptool.fs.remove
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.fs.remove(path[, options])` 删除文件、符号链接或目录。
 

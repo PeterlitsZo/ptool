@@ -6,7 +6,7 @@
 
 ## ptool.proc.self
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.proc.self()` 返回当前 `ptool` 进程的快照表。
 
@@ -16,7 +16,7 @@
 
 ## ptool.proc.get
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.proc.get(pid)` 返回指定进程 ID 的快照表；如果进程不存在，则返回 `nil`。
 
@@ -25,7 +25,7 @@
 
 ## ptool.proc.exists
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.proc.exists(pid)` 用于报告某个进程 ID 当前是否存在。
 
@@ -34,7 +34,7 @@
 
 ## ptool.proc.find
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.proc.find([options])` 列出本地进程，并返回一个由快照表组成的数组。
 
@@ -94,7 +94,7 @@ end
 
 ## ptool.proc.kill
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.proc.kill(targets[, options])` 向一个或多个本地进程发送信号，并返回结构化结果表。
 
@@ -155,7 +155,7 @@ res:assert_ok()
 
 ## ptool.proc.wait_gone
 
-> `Unreleased` - 引入。
+> `v0.8.0` - 引入。
 
 `ptool.proc.wait_gone(targets[, options])` 会等待一个或多个目标进程不再存在，然后返回结构化结果表。
 

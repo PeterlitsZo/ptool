@@ -6,7 +6,7 @@
 
 ## ptool.datetime.now
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.datetime.now([tz])` 返回当前时间，并以 `DateTime` 表示。
 
@@ -23,7 +23,7 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 
 ## ptool.datetime.parse
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.datetime.parse(input[, options])` 解析一个日期时间字符串，并返回 `DateTime`。
 
@@ -55,7 +55,7 @@ print(b.timezone) -- America/New_York
 
 ## ptool.datetime.from_unix
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.datetime.from_unix(value[, options])` 从 Unix 时间戳构造一个 `DateTime`。
 
@@ -77,7 +77,7 @@ print(b)
 
 ## ptool.datetime.compare
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.datetime.compare(a, b)` 比较两个时间点。
 
@@ -95,7 +95,7 @@ print(ptool.datetime.compare(
 
 ## ptool.datetime.is_valid
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.datetime.is_valid(input[, options])` 检查某个日期时间字符串是否可被解析。
 
@@ -113,7 +113,7 @@ print(ptool.datetime.is_valid("2024-07-15 16:24:59", {
 
 ## DateTime
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `DateTime` 表示一个由 `ptool.datetime.now(...)`、`parse(...)` 或 `from_unix(...)` 返回的具体时间点。
 

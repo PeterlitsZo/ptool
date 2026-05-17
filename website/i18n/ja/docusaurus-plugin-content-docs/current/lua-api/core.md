@@ -56,7 +56,7 @@ ptool.use(">= v0.6.0, < 0.7.0")
 
 ## ptool.version
 
-> `Unreleased` - 追加。
+> `v0.8.0` - 導入されました。
 
 `ptool.version()` は現在の `ptool` バージョン文字列を返します。
 
@@ -546,7 +546,7 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - 追加。
+> `v0.6.0` - 導入されました。
 
 `ptool.run_capture` は `ptool.run` と同じ呼び出し形式、引数ルール、 戻り値ルール、オプションで、Rust から外部コマンドを実行します。
 
@@ -585,7 +585,7 @@ print(res3.stdout)
 
 ## ptool.exec
 
-> `Unreleased` - 追加。
+> `v0.7.0` - 導入されました。
 
 `ptool.exec` は現在の `ptool` プロセスを外部コマンドで置き換えます。
 

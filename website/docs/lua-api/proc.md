@@ -7,7 +7,7 @@ Use `ptool.run(...)` when you want to launch a new command.
 
 ## ptool.proc.self
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.proc.self()` returns a snapshot table for the current `ptool` process.
 
@@ -18,7 +18,7 @@ The returned table uses the same shape as `ptool.proc.get(...)` and
 
 ## ptool.proc.get
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.proc.get(pid)` returns a snapshot table for the given process ID, or
 `nil` if the process does not exist.
@@ -28,7 +28,7 @@ The returned table uses the same shape as `ptool.proc.get(...)` and
 
 ## ptool.proc.exists
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.proc.exists(pid)` reports whether a process ID currently exists.
 
@@ -37,7 +37,7 @@ The returned table uses the same shape as `ptool.proc.get(...)` and
 
 ## ptool.proc.find
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.proc.find([options])` lists local processes and returns an array of
 snapshot tables.
@@ -103,7 +103,7 @@ end
 
 ## ptool.proc.kill
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.proc.kill(targets[, options])` sends a signal to one or more local
 processes and returns a structured result table.
@@ -171,7 +171,7 @@ res:assert_ok()
 
 ## ptool.proc.wait_gone
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.proc.wait_gone(targets[, options])` waits until one or more target
 processes no longer exist, then returns a structured result table.

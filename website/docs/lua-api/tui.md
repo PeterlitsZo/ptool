@@ -7,7 +7,7 @@ event loop.
 
 ## ptool.tui.run
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tui.run(options)` starts a TUI session, runs the Lua lifecycle
 callbacks, and returns the value passed to `app:quit(value)`. If `app:quit()`
@@ -88,7 +88,7 @@ print("selected:", result)
 
 ## App
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `app` is passed to `update(...)` and `view(...)`.
 
@@ -103,7 +103,7 @@ callback completes.
 
 ## Node Constructors
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 The constructor helpers below return plain node tables. `view(...)` must return
 one of these nodes as the root widget tree.
@@ -123,7 +123,7 @@ Common node fields:
 
 ## ptool.tui.text
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tui.text(text[, options])` creates a text node.
 
@@ -133,7 +133,7 @@ Common node fields:
 
 ## ptool.tui.list
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tui.list(items[, options])` creates a vertical list node.
 
@@ -151,7 +151,7 @@ Notes:
 
 ## ptool.tui.row
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tui.row(options)` creates a horizontal container.
 
@@ -159,7 +159,7 @@ Notes:
 
 ## ptool.tui.column
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.tui.column(options)` creates a vertical container.
 

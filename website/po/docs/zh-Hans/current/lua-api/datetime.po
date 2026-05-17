@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,8 @@ msgstr "ptool.datetime.now"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:12
 msgid "`ptool.datetime.now([tz])` returns the current time as a `DateTime`."
@@ -59,8 +59,8 @@ msgstr "ptool.datetime.parse"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:31
 msgid ""
@@ -131,8 +131,8 @@ msgstr "ptool.datetime.from_unix"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:68
 msgid ""
@@ -169,8 +169,8 @@ msgstr "ptool.datetime.compare"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:93
 msgid "`ptool.datetime.compare(a, b)` compares two instants."
@@ -201,8 +201,8 @@ msgstr "ptool.datetime.is_valid"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:114
 msgid ""
@@ -231,8 +231,8 @@ msgstr "DateTime"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:133
 msgid ""
@@ -460,3 +460,27 @@ msgstr "时区名称应使用 IANA 标识符，例如 `UTC`、`Asia/Tokyo` 或 `
 msgid ""
 "Comparisons operate on the instant, not on the displayed wall-clock fields."
 msgstr "比较针对的是时间点本身，而不是显示出来的本地时间字段。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:10"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:29"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:66"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:91"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:112"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/datetime.md:131"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"

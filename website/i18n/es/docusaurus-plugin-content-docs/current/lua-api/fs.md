@@ -49,7 +49,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 ## ptool.fs.append
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 `ptool.fs.append(path, content)` añade una cadena Lua a un archivo como bytes sin procesar. Si el archivo no existe, se crea.
 
@@ -70,7 +70,7 @@ ptool.fs.append("tmp/log.txt", "second line\n")
 
 ## ptool.fs.open
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 `ptool.fs.open(path[, mode])` abre un archivo local y devuelve un objeto `File`.
 
@@ -104,7 +104,7 @@ file:close()
 
 ## File
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 `File` representa un manejador de archivo local abierto devuelto por `ptool.fs.open()`.
 
@@ -120,7 +120,7 @@ Métodos:
 
 ### read
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 Nombre canónico de la API: `ptool.fs.File:read`.
 
@@ -145,7 +145,7 @@ file:close()
 
 ### write
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 Nombre canónico de la API: `ptool.fs.File:write`.
 
@@ -160,7 +160,7 @@ Comportamiento:
 
 ### flush
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 Nombre canónico de la API: `ptool.fs.File:flush`.
 
@@ -168,7 +168,7 @@ Nombre canónico de la API: `ptool.fs.File:flush`.
 
 ### seek
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 Nombre canónico de la API: `ptool.fs.File:seek`.
 
@@ -195,7 +195,7 @@ file:close()
 
 ### close
 
-> `Unreleased` - Introducido.
+> `v0.8.0` - Introducido.
 
 Nombre canónico de la API: `ptool.fs.File:close`.
 
@@ -238,7 +238,7 @@ end
 
 ## ptool.fs.is_file
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.fs.is_file(path)` comprueba si una ruta existe y es un archivo normal.
 
@@ -255,7 +255,7 @@ end
 
 ## ptool.fs.is_dir
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.fs.is_dir(path)` comprueba si una ruta existe y es un directorio.
 
@@ -272,7 +272,7 @@ end
 
 ## ptool.fs.remove
 
-> `Unreleased` - Introducido.
+> `v0.6.0` - Introducido.
 
 `ptool.fs.remove(path[, options])` elimina un archivo, enlace simbólico o directorio.
 

@@ -6,7 +6,7 @@
 
 ## ptool.datetime.now
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.datetime.now([tz])` は現在時刻を `DateTime` として返します。
 
@@ -23,7 +23,7 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 
 ## ptool.datetime.parse
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.datetime.parse(input[, options])` は日時文字列を解析し、`DateTime` を返します。
 
@@ -55,7 +55,7 @@ print(b.timezone) -- America/New_York
 
 ## ptool.datetime.from_unix
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.datetime.from_unix(value[, options])` は、Unix タイムスタンプから `DateTime` を構築します。
 
@@ -77,7 +77,7 @@ print(b)
 
 ## ptool.datetime.compare
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.datetime.compare(a, b)` は 2 つの瞬間を比較します。
 
@@ -95,7 +95,7 @@ print(ptool.datetime.compare(
 
 ## ptool.datetime.is_valid
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.datetime.is_valid(input[, options])` は、日時文字列を解析できるかどうかをチェックします。
 
@@ -113,7 +113,7 @@ print(ptool.datetime.is_valid("2024-07-15 16:24:59", {
 
 ## DateTime
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `DateTime` は、`ptool.datetime.now(...)`、`parse(...)`、または `from_unix(...)` によって返される具体的なインスタントを表します。
 

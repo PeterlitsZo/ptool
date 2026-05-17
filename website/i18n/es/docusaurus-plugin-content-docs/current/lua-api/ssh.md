@@ -203,7 +203,7 @@ print(res2.stdout)
 
 ### run_capture
 
-> `Unreleased` - Introduced.
+> `v0.3.0` - Introducido.
 
 Canonical API name: `ptool.ssh.Connection:run_capture`.
 
@@ -242,7 +242,7 @@ print(res3.stdout)
 
 ### http_request
 
-> `Unreleased` - Introduced.
+> `v0.7.0` - Introducido.
 
 Canonical API name: `ptool.ssh.Connection:http_request`.
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 17:16+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,29 @@ msgid "Core Lua API"
 msgstr "コア Lua API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:3
-msgid "`ptool` exposes these core runtime helpers directly under `ptool` and `p`."
-msgstr "`ptool` は、これらのコアランタイムヘルパーを `ptool` と `p` の直下に 公開します。"
+msgid ""
+"`ptool` exposes these core runtime helpers directly under `ptool` and `p`."
+msgstr "`ptool` は、これらのコアランタイムヘルパーを `ptool` と `p` の直下に 公開しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:5
-msgid "`ptool run <lua_file>` runs a Lua script and injects the global variable `ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`). For files ending in `.lua`, `ptool <lua_file>` is a CLI shortcut with the same behavior."
-msgstr "`ptool run <lua_file>` は Lua スクリプトを実行し、グローバル変数 `ptool` (またはその別名 `p`; たとえば `p.run` は `ptool.run` と同等) を注入します。`.lua` で終わるファイルでは、`ptool <lua_file>` も同じ 挙動の CLI 短縮形として使えます。"
+msgid ""
+"`ptool run <lua_file>` runs a Lua script and injects the global variable "
+"`ptool` (or its alias `p`; for example, `p.run` is equivalent to `ptool.run`)"
+". For files ending in `.lua`, `ptool <lua_file>` is a CLI shortcut with the "
+"same behavior."
+msgstr ""
+"`ptool run <lua_file>` は Lua スクリプトを実行し、グローバル変数 `ptool` (ま"
+"たはその別名 `p`; たとえば `p.run` は `ptool.run` と同等) を注入します。"
+"`.lua` で終わるファイルでは、`ptool <lua_file>` も同じ 挙動の CLI 短縮形とし"
+"て使えます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:10
-msgid "The embedded Lua runtime keeps the base Lua globals and exposes only these standard libraries by default:"
-msgstr "組み込み Lua ランタイムは Lua の基本グローバルを維持しつつ、標準ライブラリ としてはデフォルトで次だけを公開します。"
+msgid ""
+"The embedded Lua runtime keeps the base Lua globals and exposes only these "
+"standard libraries by default:"
+msgstr "組み込み Lua ランタイムは Lua の基本グローバルを維持しつつ、標準ライブラリ と"
+"してはデフォルトで次だけを公開します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:13
 msgid "`table`"
@@ -45,8 +58,16 @@ msgid "`utf8`"
 msgstr "`utf8`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:18
-msgid "Host-facing built-in modules such as `io`, `os`, and `package` are intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`, `ptool.path`, and `ptool.run` for filesystem, environment, process, network, and other runtime operations instead."
-msgstr "`io`、`os`、`package` のようなホスト側に近い組み込みモジュールは意図的に 利用できません。ファイルシステム、環境変数、プロセス、ネットワークなどの ランタイム操作には `ptool.fs`、`ptool.os`、`ptool.path`、 `ptool.run` などの API を使ってください。"
+msgid ""
+"Host-facing built-in modules such as `io`, `os`, and `package` are "
+"intentionally not available. Use `ptool` APIs such as `ptool.fs`, `ptool.os`"
+", `ptool.path`, and `ptool.run` for filesystem, environment, process, "
+"network, and other runtime operations instead."
+msgstr ""
+"`io`、`os`、`package` のようなホスト側に近い組み込みモジュールは意図的に 利用"
+"できません。ファイルシステム、環境変数、プロセス、ネットワークなどの ランタイ"
+"ム操作には `ptool.fs`、`ptool.os`、`ptool.path`、 `ptool.run` などの API を使"
+"ってください。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:23
 msgid "If you want to pass arguments to a Lua script, you can do it like this:"
@@ -69,41 +90,63 @@ msgid "ptool.use"
 msgstr "ptool.use"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:48
-msgid "`v0.1.0` - Introduced. `v0.7.0` - Added Cargo-style version requirement expressions."
+msgid ""
+"`v0.1.0` - Introduced. `v0.7.0` - Added Cargo-style version requirement "
+"expressions."
 msgstr "`v0.1.0` - Introduced. `v0.7.0` - Cargo 形式のバージョン要件式を追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:51
-msgid "`ptool.use` declares the required `ptool` version or version requirement for a script."
-msgstr "`ptool.use` は、スクリプトに必要な `ptool` のバージョンまたは バージョン要件を宣言します。"
+msgid ""
+"`ptool.use` declares the required `ptool` version or version requirement for "
+"a script."
+msgstr "`ptool.use` は、スクリプトに必要な `ptool` のバージョンまたは バージョン要件"
+"を宣言します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:60
-msgid "The argument accepts either a plain semantic version string or a Cargo-style version requirement expression."
-msgstr "引数には、通常のセマンティックバージョン文字列または Cargo 形式の バージョン要件式を指定できます。"
+msgid ""
+"The argument accepts either a plain semantic version string or a Cargo-style "
+"version requirement expression."
+msgstr "引数には、通常のセマンティックバージョン文字列または Cargo 形式の バージョン"
+"要件式を指定できます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:62
-msgid "A plain version string supports an optional `v` prefix, such as `v0.1.0` or `0.1.0`, and keeps the historical behavior of declaring the minimum required `ptool` version."
-msgstr "通常のバージョン文字列は `v0.1.0` や `0.1.0` のように先頭の `v` を 省略可能で、最低限必要な `ptool` バージョンを宣言する従来の 挙動を保ちます。"
+msgid ""
+"A plain version string supports an optional `v` prefix, such as `v0.1.0` or "
+"`0.1.0`, and keeps the historical behavior of declaring the minimum required "
+"`ptool` version."
+msgstr ""
+"通常のバージョン文字列は `v0.1.0` や `0.1.0` のように先頭の `v` を 省略可能で"
+"、最低限必要な `ptool` バージョンを宣言する従来の 挙動を保ちます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:65
-msgid "Requirement expressions support operators and patterns such as `^0.6.0`, `~0.6.0`, `>=0.6.0, <0.7.0`, `1.*`, and `1.2.*`."
-msgstr "バージョン要件式は `^0.6.0`、`~0.6.0`、`>=0.6.0, <0.7.0`、 `1.*`、`1.2.*` などの演算子やパターンをサポートします。"
+msgid ""
+"Requirement expressions support operators and patterns such as `^0.6.0`, "
+"`~0.6.0`, `>=0.6.0, <0.7.0`, `1.*`, and `1.2.*`."
+msgstr ""
+"バージョン要件式は `^0.6.0`、`~0.6.0`、`>=0.6.0, <0.7.0`、 `1.*`、`1.2.*` な"
+"どの演算子やパターンをサポートします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:67
-msgid "Requirement expressions also accept version components with an optional `v` prefix, such as `>= v0.6.0, < 0.7.0`."
-msgstr "バージョン要件式内の各バージョン要素でも、`>= v0.6.0, < 0.7.0` の ように `v` プレフィックスを任意で使えます。"
+msgid ""
+"Requirement expressions also accept version components with an optional `v` "
+"prefix, such as `>= v0.6.0, < 0.7.0`."
+msgstr "バージョン要件式内の各バージョン要素でも、`>= v0.6.0, < 0.7.0` の ように `v` "
+"プレフィックスを任意で使えます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:69
-msgid "If the current `ptool` version does not satisfy the declared version or requirement, the script exits immediately with an error."
-msgstr "現在の `ptool` バージョンが宣言されたバージョンまたは要件を満たさない 場合、スクリプトは直ちにエラーで終了します。"
+msgid ""
+"If the current `ptool` version does not satisfy the declared version or "
+"requirement, the script exits immediately with an error."
+msgstr "現在の `ptool` バージョンが宣言されたバージョンまたは要件を満たさない 場合、"
+"スクリプトは直ちにエラーで終了します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:72
 msgid "ptool.version"
 msgstr "ptool.version"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:76
 msgid "`ptool.version()` returns the current `ptool` version string."
@@ -119,8 +162,11 @@ msgid "The returned value is a semantic version string such as `0.7.2`."
 msgstr "返される値は `0.7.2` のようなセマンティックバージョン文字列です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:80
-msgid "Use this when a script needs to print, record, or compare the runtime `ptool` version."
-msgstr "スクリプトで実行中の `ptool` バージョンを表示、記録、比較したい場合に使います。"
+msgid ""
+"Use this when a script needs to print, record, or compare the runtime `ptool`"
+" version."
+msgstr "スクリプトで実行中の `ptool` バージョンを表示、記録、比較したい場合に使います"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:83
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:83"
@@ -137,8 +183,13 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:94
-msgid "`ptool.unindent` processes multi-line strings by removing the `| ` prefix after leading indentation on each line and trimming leading and trailing blank lines."
-msgstr "`ptool.unindent` は複数行文字列を処理し、各行の先頭インデントのあとにある `| ` プレフィックスを除去し、先頭と末尾の空行を取り除きます。"
+msgid ""
+"`ptool.unindent` processes multi-line strings by removing the `| ` prefix "
+"after leading indentation on each line and trimming leading and trailing "
+"blank lines."
+msgstr ""
+"`ptool.unindent` は複数行文字列を処理し、各行の先頭インデントのあとにある `| "
+"` プレフィックスを除去し、先頭と末尾の空行を取り除きます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:104
 msgid "This is equivalent to:"
@@ -154,8 +205,13 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:115
-msgid "`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-style string. It is primarily intended for debugging and displaying table contents."
-msgstr "`ptool.inspect(value[, options])` は Lua 値を読みやすい Lua 風の文字列へ レンダリングします。主な用途はデバッグとテーブル内容の表示です。"
+msgid ""
+"`ptool.inspect(value[, options])` renders a Lua value as a readable Lua-"
+"style string. It is primarily intended for debugging and displaying table "
+"contents."
+msgstr ""
+"`ptool.inspect(value[, options])` は Lua 値を読みやすい Lua 風の文字列へ レン"
+"ダリングします。主な用途はデバッグとテーブル内容の表示です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:118
 msgid "`value` (any, required): The Lua value to inspect."
@@ -166,16 +222,26 @@ msgid "`options` (table, optional): Rendering options. Supported fields:"
 msgstr "`options` (table, 任意): レンダリングオプション。サポートされる フィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:119
-msgid "`indent` (string, optional): Indentation used for each nesting level. Defaults to two spaces."
-msgstr "`indent` (string, 任意): ネストごとに使うインデント。デフォルトは 2 つのスペースです。"
+msgid ""
+"`indent` (string, optional): Indentation used for each nesting level. "
+"Defaults to two spaces."
+msgstr "`indent` (string, 任意): ネストごとに使うインデント。デフォルトは 2 つのスペ"
+"ースです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:119
-msgid "`multiline` (boolean, optional): Whether tables are rendered across multiple lines. Defaults to `true`."
-msgstr "`multiline` (boolean, 任意): テーブルを複数行で描画するかどうか。 デフォルトは `true`。"
+msgid ""
+"`multiline` (boolean, optional): Whether tables are rendered across multiple "
+"lines. Defaults to `true`."
+msgstr "`multiline` (boolean, 任意): テーブルを複数行で描画するかどうか。 デフォルト"
+"は `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:119
-msgid "`max_depth` (integer, optional): Maximum nesting depth to render. Deeper values are replaced with `<max-depth>`."
-msgstr "`max_depth` (integer, 任意): 描画する最大ネスト深さ。それより深い値は `<max-depth>` に置き換えられます。"
+msgid ""
+"`max_depth` (integer, optional): Maximum nesting depth to render. Deeper "
+"values are replaced with `<max-depth>`."
+msgstr ""
+"`max_depth` (integer, 任意): 描画する最大ネスト深さ。それより深い値は `<max-"
+"depth>` に置き換えられます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:126
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:126"
@@ -192,20 +258,27 @@ msgid "Array-like entries (`1..n`) are rendered first."
 msgstr "配列風の要素 (`1..n`) が最初に描画されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:131
-msgid "Remaining table fields are rendered after the array part in stable key order."
+msgid ""
+"Remaining table fields are rendered after the array part in stable key order."
 msgstr "残りのテーブルフィールドは、そのあとに安定したキー順で描画されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:132
-msgid "Identifier-like string keys are rendered as `key = value`; other keys are rendered as `[key] = value`."
-msgstr "識別子風の文字列キーは `key = value`、それ以外のキーは `[key] = value` の形式で描画されます。"
+msgid ""
+"Identifier-like string keys are rendered as `key = value`; other keys are "
+"rendered as `[key] = value`."
+msgstr "識別子風の文字列キーは `key = value`、それ以外のキーは `[key] = value` の形式"
+"で描画されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:134
 msgid "Recursive table references are rendered as `<cycle>`."
 msgstr "再帰的なテーブル参照は `<cycle>` として描画されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:135
-msgid "Functions, threads, and userdata are rendered as placeholder values such as `<function>` and `<userdata>`."
-msgstr "関数、thread、userdata は `<function>` や `<userdata>` のような プレースホルダー値で描画されます。"
+msgid ""
+"Functions, threads, and userdata are rendered as placeholder values such as "
+"`<function>` and `<userdata>`."
+msgstr "関数、thread、userdata は `<function>` や `<userdata>` のような プレースホル"
+"ダー値で描画されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:138
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:138"
@@ -218,20 +291,32 @@ msgid "ptool.ask"
 msgstr "ptool.ask"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:153
-msgid "`v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt subcommands."
-msgstr "`v0.1.0` - Introduced. `v0.5.0` - バリデーションオプションと prompt サブコマンドを追加。"
+msgid ""
+"`v0.1.0` - Introduced. `v0.5.0` - Added prompt validation options and prompt "
+"subcommands."
+msgstr "`v0.1.0` - Introduced. `v0.5.0` - バリデーションオプションと prompt サブコマ"
+"ンドを追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:156
-msgid "`ptool.ask` provides interactive prompts. You can call it directly for text input, or use its prompt subcommands for confirmation, selection, multi-select, and secret input."
-msgstr "`ptool.ask` は対話型プロンプトを提供します。直接呼び出してテキスト入力を 受け取ることもでき、確認、単一選択、複数選択、シークレット入力用の サブプロンプトも使えます。"
+msgid ""
+"`ptool.ask` provides interactive prompts. You can call it directly for text "
+"input, or use its prompt subcommands for confirmation, selection, multi-"
+"select, and secret input."
+msgstr ""
+"`ptool.ask` は対話型プロンプトを提供します。直接呼び出してテキスト入力を 受け"
+"取ることもでき、確認、単一選択、複数選択、シークレット入力用の サブプロンプト"
+"も使えます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:160
 msgid "Common behavior:"
 msgstr "共通の挙動:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:162
-msgid "All `ptool.ask` prompts require an interactive TTY. Running them in a non-interactive environment raises an error."
-msgstr "すべての `ptool.ask` プロンプトは対話型 TTY を必要とします。 非対話環境で実行するとエラーになります。"
+msgid ""
+"All `ptool.ask` prompts require an interactive TTY. Running them in a non-"
+"interactive environment raises an error."
+msgstr "すべての `ptool.ask` プロンプトは対話型 TTY を必要とします。 非対話環境で実行"
+"するとエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:164
 msgid "If the user cancels a prompt, the script raises an error."
@@ -247,8 +332,11 @@ msgid "ptool.ask"
 msgstr "ptool.ask"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:169
-msgid "`ptool.ask(prompt[, options])` asks the user for a line of text and returns the answer."
-msgstr "`ptool.ask(prompt[, options])` はユーザーに 1 行のテキスト入力を求め、 その回答を返します。"
+msgid ""
+"`ptool.ask(prompt[, options])` asks the user for a line of text and returns "
+"the answer."
+msgstr "`ptool.ask(prompt[, options])` はユーザーに 1 行のテキスト入力を求め、 その回"
+"答を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:172
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:172"
@@ -261,8 +349,11 @@ msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, 任意): プロンプトオプション。サポートされる フィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
-msgid "`default` (string, optional): Default value used when the user submits an empty answer."
-msgstr "`default` (string, 任意): ユーザーが空の回答を送信したときに使う デフォルト値。"
+msgid ""
+"`default` (string, optional): Default value used when the user submits an "
+"empty answer."
+msgstr "`default` (string, 任意): ユーザーが空の回答を送信したときに使う デフォルト値"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173"
@@ -270,8 +361,11 @@ msgid "`help` (string, optional): Extra help text shown below the prompt."
 msgstr "`help` (string, 任意): プロンプトの下に表示する補助テキスト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
-msgid "`placeholder` (string, optional): Placeholder text shown before the user starts typing."
-msgstr "`placeholder` (string, 任意): ユーザーが入力を始める前に表示する プレースホルダー。"
+msgid ""
+"`placeholder` (string, optional): Placeholder text shown before the user "
+"starts typing."
+msgstr "`placeholder` (string, 任意): ユーザーが入力を始める前に表示する プレースホル"
+"ダー。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173"
@@ -279,11 +373,16 @@ msgid "`required` (boolean, optional): Whether the answer must be non-empty."
 msgstr "`required` (boolean, 任意): 回答を空にできないようにするかどうか。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
-msgid "`allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `true`."
-msgstr "`allow_empty` (boolean, 任意): 空の回答を許可するかどうか。 デフォルトは `true`。"
+msgid ""
+"`allow_empty` (boolean, optional): Whether to accept an empty answer. "
+"Defaults to `true`."
+msgstr "`allow_empty` (boolean, 任意): 空の回答を許可するかどうか。 デフォルトは "
+"`true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
-msgid "`trim` (boolean, optional): Whether to trim leading and trailing whitespace from the answer before returning it."
+msgid ""
+"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+"from the answer before returning it."
 msgstr "`trim` (boolean, 任意): 返す前に前後の空白を削除するかどうか。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:173
@@ -321,7 +420,8 @@ msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:205
-msgid "`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer."
+msgid ""
+"`ptool.ask.confirm(prompt[, options])` asks the user for a yes/no answer."
 msgstr "`ptool.ask.confirm(prompt[, options])` は yes/no の回答を求めます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:207
@@ -335,8 +435,11 @@ msgid "`options` (table, optional): Prompt options. Supported fields:"
 msgstr "`options` (table, 任意): プロンプトオプション。サポートされる フィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:208
-msgid "`default` (boolean, optional): Default answer used when the user presses Enter without typing."
-msgstr "`default` (boolean, 任意): ユーザーが Enter を押したときに使う デフォルト回答。"
+msgid ""
+"`default` (boolean, optional): Default answer used when the user presses "
+"Enter without typing."
+msgstr "`default` (boolean, 任意): ユーザーが Enter を押したときに使う デフォルト回答"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:208
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:208"
@@ -362,7 +465,9 @@ msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:226
-msgid "`ptool.ask.select(prompt, items[, options])` asks the user to choose one item from a list."
+msgid ""
+"`ptool.ask.select(prompt, items[, options])` asks the user to choose one "
+"item from a list."
 msgstr "`ptool.ask.select(prompt, items[, options])` は一覧から 1 つ選ばせます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:229
@@ -375,7 +480,8 @@ msgid "`items` (table, required): Candidate items. Each entry may be:"
 msgstr "`items` (table, 必須): 候補項目。各要素は次のいずれかです:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:230
-msgid "A string, which is used as both the display label and the returned value."
+msgid ""
+"A string, which is used as both the display label and the returned value."
 msgstr "string: 表示ラベルと戻り値の両方に使われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:230
@@ -398,7 +504,9 @@ msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
 msgstr "`page_size` (integer, 任意): 一度に表示する最大行数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:233
-msgid "`default_index` (integer, optional): 1-based index of the initially selected item."
+msgid ""
+"`default_index` (integer, optional): 1-based index of the initially selected "
+"item."
 msgstr "`default_index` (integer, 任意): 初期選択位置の 1-based インデックス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:238
@@ -421,8 +529,12 @@ msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:256
-msgid "`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose zero or more items from a list."
-msgstr "`ptool.ask.multiselect(prompt, items[, options])` は一覧から 0 個以上の項目を 選ばせます。"
+msgid ""
+"`ptool.ask.multiselect(prompt, items[, options])` asks the user to choose "
+"zero or more items from a list."
+msgstr ""
+"`ptool.ask.multiselect(prompt, items[, options])` は一覧から 0 個以上の項目を"
+" 選ばせます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:259
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:259"
@@ -430,7 +542,9 @@ msgid "`prompt` (string, required): The prompt shown to the user."
 msgstr "`prompt` (string, 必須): ユーザーに表示するプロンプト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:260
-msgid "`items` (table, required): Candidate items. The format is the same as `ptool.ask.select`."
+msgid ""
+"`items` (table, required): Candidate items. The format is the same as "
+"`ptool.ask.select`."
 msgstr "`items` (table, 必須): 候補項目。形式は `ptool.ask.select` と同じです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:262
@@ -449,15 +563,21 @@ msgid "`page_size` (integer, optional): Maximum number of rows shown at once."
 msgstr "`page_size` (integer, 任意): 一度に表示する最大行数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:262
-msgid "`default_indexes` (table, optional): 1-based indexes selected by default."
-msgstr "`default_indexes` (table, 任意): デフォルトで選択される 1-based インデックス配列。"
+msgid ""
+"`default_indexes` (table, optional): 1-based indexes selected by default."
+msgstr "`default_indexes` (table, 任意): デフォルトで選択される 1-based インデックス"
+"配列。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:262
-msgid "`min_selected` (integer, optional): Minimum number of items that must be selected."
+msgid ""
+"`min_selected` (integer, optional): Minimum number of items that must be "
+"selected."
 msgstr "`min_selected` (integer, 任意): 必須の最小選択数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:262
-msgid "`max_selected` (integer, optional): Maximum number of items that may be selected."
+msgid ""
+"`max_selected` (integer, optional): Maximum number of items that may be "
+"selected."
 msgstr "`max_selected` (integer, 任意): 許可される最大選択数。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:270
@@ -479,8 +599,11 @@ msgid "`v0.5.0` - Introduced."
 msgstr "`v0.5.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:289
-msgid "`ptool.ask.secret(prompt[, options])` asks the user for secret input such as a token or password."
-msgstr "`ptool.ask.secret(prompt[, options])` はトークンやパスワードのような シークレット入力を求めます。"
+msgid ""
+"`ptool.ask.secret(prompt[, options])` asks the user for secret input such as "
+"a token or password."
+msgstr "`ptool.ask.secret(prompt[, options])` はトークンやパスワードのような シークレ"
+"ット入力を求めます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:292
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:292"
@@ -503,24 +626,37 @@ msgid "`required` (boolean, optional): Whether the answer must be non-empty."
 msgstr "`required` (boolean, 任意): 回答を空にできないようにするかどうか。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-msgid "`allow_empty` (boolean, optional): Whether to accept an empty answer. Defaults to `false`."
-msgstr "`allow_empty` (boolean, 任意): 空の回答を許可するかどうか。 デフォルトは `false`。"
+msgid ""
+"`allow_empty` (boolean, optional): Whether to accept an empty answer. "
+"Defaults to `false`."
+msgstr "`allow_empty` (boolean, 任意): 空の回答を許可するかどうか。 デフォルトは "
+"`false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-msgid "`confirm` (boolean, optional): Whether to ask the user to type the secret twice. Defaults to `false`."
-msgstr "`confirm` (boolean, 任意): 2 回入力して確認させるかどうか。 デフォルトは `false`。"
+msgid ""
+"`confirm` (boolean, optional): Whether to ask the user to type the secret "
+"twice. Defaults to `false`."
+msgstr "`confirm` (boolean, 任意): 2 回入力して確認させるかどうか。 デフォルトは "
+"`false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-msgid "`confirm_prompt` (string, optional): Custom prompt for the confirmation step."
+msgid ""
+"`confirm_prompt` (string, optional): Custom prompt for the confirmation step."
 msgstr "`confirm_prompt` (string, 任意): 確認ステップ用のカスタムプロンプト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-msgid "`mismatch_message` (string, optional): Custom error message shown when the two answers do not match."
-msgstr "`mismatch_message` (string, 任意): 2 回の入力が一致しないときの カスタムエラーメッセージ。"
+msgid ""
+"`mismatch_message` (string, optional): Custom error message shown when the "
+"two answers do not match."
+msgstr "`mismatch_message` (string, 任意): 2 回の入力が一致しないときの カスタムエラ"
+"ーメッセージ。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
-msgid "`display_toggle` (boolean, optional): Whether to allow temporarily showing the typed secret."
-msgstr "`display_toggle` (boolean, 任意): 入力した値を一時的に表示できるように するかどうか。"
+msgid ""
+"`display_toggle` (boolean, optional): Whether to allow temporarily showing "
+"the typed secret."
+msgstr "`display_toggle` (boolean, 任意): 入力した値を一時的に表示できるように するか"
+"どうか。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:293"
@@ -565,7 +701,9 @@ msgid "Currently supported fields:"
 msgstr "現在サポートされているフィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
-msgid "`run` (table, optional): Default configuration for `ptool.run`. Supported fields:"
+msgid ""
+"`run` (table, optional): Default configuration for `ptool.run`. Supported "
+"fields:"
 msgstr "`run` (table, 任意): `ptool.run` のデフォルト設定。サポートされる フィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
@@ -573,16 +711,26 @@ msgid "`echo` (boolean, optional): Default echo switch. Defaults to `true`."
 msgstr "`echo` (boolean, 任意): デフォルトの echo スイッチ。デフォルトは `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
-msgid "`check` (boolean, optional): Whether failures raise an error by default. Defaults to `false`."
-msgstr "`check` (boolean, 任意): 失敗時にデフォルトでエラーにするかどうか。 デフォルトは `false`。"
+msgid ""
+"`check` (boolean, optional): Whether failures raise an error by default. "
+"Defaults to `false`."
+msgstr "`check` (boolean, 任意): 失敗時にデフォルトでエラーにするかどうか。 デフォル"
+"トは `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
-msgid "`confirm` (boolean, optional): Whether to require confirmation before execution by default. Defaults to `false`."
-msgstr "`confirm` (boolean, 任意): 実行前にデフォルトで確認を要求するかどうか。 デフォルトは `false`。"
+msgid ""
+"`confirm` (boolean, optional): Whether to require confirmation before "
+"execution by default. Defaults to `false`."
+msgstr "`confirm` (boolean, 任意): 実行前にデフォルトで確認を要求するかどうか。 デフ"
+"ォルトは `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
-msgid "`retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. Defaults to `false`."
-msgstr "`retry` (boolean, 任意): `check = true` のとき、実行失敗後に再試行するか どうかをユーザーへ尋ねるかどうか。デフォルトは `false`。"
+msgid ""
+"`retry` (boolean, optional): Whether to ask the user whether to retry after "
+"a failed execution when `check = true`. Defaults to `false`."
+msgstr ""
+"`retry` (boolean, 任意): `check = true` のとき、実行失敗後に再試行するか どう"
+"かをユーザーへ尋ねるかどうか。デフォルトは `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:338
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:338"
@@ -620,8 +768,13 @@ msgid "The target must exist and must be a directory."
 msgstr "対象は存在していて、かつディレクトリでなければなりません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:363
-msgid "This updates `ptool` runtime state and affects APIs that use runtime cwd (such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`)."
-msgstr "これにより `ptool` のランタイム状態が更新され、そのランタイム cwd を 使用する API (`ptool.run`, `ptool.path.abspath`, `ptool.path.relpath` など) に影響します。"
+msgid ""
+"This updates `ptool` runtime state and affects APIs that use runtime cwd "
+"(such as `ptool.run`, `ptool.path.abspath`, and `ptool.path.relpath`)."
+msgstr ""
+"これにより `ptool` のランタイム状態が更新され、そのランタイム cwd を 使用する"
+" API (`ptool.run`, `ptool.path.abspath`, `ptool.path.relpath` など) に影響し"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:366
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:366"
@@ -638,7 +791,8 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:378
-msgid "`ptool.script_path()` returns the absolute path of the current entry script."
+msgid ""
+"`ptool.script_path()` returns the absolute path of the current entry script."
 msgstr "`ptool.script_path()` は現在のエントリスクリプトの絶対パスを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:380
@@ -651,12 +805,18 @@ msgid "Behavior:"
 msgstr "挙動:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:384
-msgid "When running through `ptool run <file>`, this returns the entry script path as an absolute, normalized path."
-msgstr "`ptool run <file>` で実行した場合、エントリスクリプトのパスを絶対かつ 正規化されたパスとして返します。"
+msgid ""
+"When running through `ptool run <file>`, this returns the entry script path "
+"as an absolute, normalized path."
+msgstr "`ptool run <file>` で実行した場合、エントリスクリプトのパスを絶対かつ 正規化"
+"されたパスとして返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:386
-msgid "The returned path is fixed when the runtime starts and does not change after `ptool.cd(...)`."
-msgstr "返されるパスはランタイム開始時に固定され、その後 `ptool.cd(...)` を 呼んでも変化しません。"
+msgid ""
+"The returned path is fixed when the runtime starts and does not change after "
+"`ptool.cd(...)`."
+msgstr "返されるパスはランタイム開始時に固定され、その後 `ptool.cd(...)` を 呼んでも"
+"変化しません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:388
 msgid "In `ptool repl`, this returns `nil`."
@@ -677,7 +837,8 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:402
-msgid "`ptool.try(fn)` runs `fn` and converts raised errors into return values."
+msgid ""
+"`ptool.try(fn)` runs `fn` and converts raised errors into return values."
 msgstr "`ptool.try(fn)` は `fn` を実行し、送出されたエラーを戻り値に変換します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:404
@@ -694,8 +855,11 @@ msgid "Return value rules:"
 msgstr "戻り値ルール:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:409
-msgid "On success, `ok = true`, `err = nil`, and `value` contains the callback result."
-msgstr "成功時は `ok = true`、`err = nil` で、`value` にコールバックの戻り値が 入ります。"
+msgid ""
+"On success, `ok = true`, `err = nil`, and `value` contains the callback "
+"result."
+msgstr "成功時は `ok = true`、`err = nil` で、`value` にコールバックの戻り値が 入りま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:411
 msgid "If the callback returns no values, `value` is `nil`."
@@ -706,7 +870,8 @@ msgid "If the callback returns one value, `value` is that value."
 msgstr "コールバックが 1 つだけ値を返す場合、`value` はその値自体です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:413
-msgid "If the callback returns multiple values, `value` is an array-like table."
+msgid ""
+"If the callback returns multiple values, `value` is an array-like table."
 msgstr "コールバックが複数の値を返す場合、`value` は配列風のテーブルです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:414
@@ -718,8 +883,12 @@ msgid "Structured error fields:"
 msgstr "構造化エラーフィールド:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:418
-msgid "`kind` (string): Stable error category such as `io_error`, `command_failed`, `invalid_argument`, `http_error`, or `lua_error`."
-msgstr "`kind` (string): `io_error`、`command_failed`、`invalid_argument`、 `http_error`、`lua_error` などの安定したエラーカテゴリ。"
+msgid ""
+"`kind` (string): Stable error category such as `io_error`, `command_failed`, "
+"`invalid_argument`, `http_error`, or `lua_error`."
+msgstr ""
+"`kind` (string): `io_error`、`command_failed`、`invalid_argument`、 "
+"`http_error`、`lua_error` などの安定したエラーカテゴリ。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:420
 msgid "`message` (string): Human-readable error message."
@@ -738,7 +907,8 @@ msgid "`path` (string, optional): Path involved in a filesystem failure."
 msgstr "`path` (string, 任意): ファイルシステム失敗に関係するパス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:424
-msgid "`input` (string, optional): Original input that failed to parse or validate."
+msgid ""
+"`input` (string, optional): Original input that failed to parse or validate."
 msgstr "`input` (string, 任意): 解析や検証に失敗した元の入力。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:425
@@ -746,8 +916,10 @@ msgid "`cmd` (string, optional): Command name for command failures."
 msgstr "`cmd` (string, 任意): コマンド失敗時のコマンド名。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:426
-msgid "`status` (integer, optional): Exit status or HTTP status when available."
-msgstr "`status` (integer, 任意): 利用可能な場合の終了ステータスまたは HTTP ステータス。"
+msgid ""
+"`status` (integer, optional): Exit status or HTTP status when available."
+msgstr "`status` (integer, 任意): 利用可能な場合の終了ステータスまたは HTTP ステータ"
+"ス。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:427
 msgid "`stderr` (string, optional): Captured stderr for command failures."
@@ -758,16 +930,20 @@ msgid "`url` (string, optional): URL involved in an HTTP failure."
 msgstr "`url` (string, 任意): HTTP 失敗に関係する URL。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:429
-msgid "`cwd` (string, optional): Effective working directory for command failures."
+msgid ""
+"`cwd` (string, optional): Effective working directory for command failures."
 msgstr "`cwd` (string, 任意): コマンド失敗時に実際に使われた作業ディレクトリ。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:430
-msgid "`target` (string, optional): SSH target for SSH-related command failures."
+msgid ""
+"`target` (string, optional): SSH target for SSH-related command failures."
 msgstr "`target` (string, 任意): SSH 関連のコマンド失敗時の SSH ターゲット。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:431
-msgid "`retryable` (boolean): Whether retrying may make sense. Defaults to `false`."
-msgstr "`retryable` (boolean): 再試行に意味があるかどうか。デフォルトは `false` です。"
+msgid ""
+"`retryable` (boolean): Whether retrying may make sense. Defaults to `false`."
+msgstr "`retryable` (boolean): 再試行に意味があるかどうか。デフォルトは `false` です"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:433
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:433"
@@ -775,16 +951,31 @@ msgid "Behavior:"
 msgstr "挙動:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:435
-msgid "`ptool` APIs raise structured errors. `ptool.try` converts them into the `err` table above so callers can branch on `err.kind` and related fields."
-msgstr "`ptool` の API は構造化エラーを送出します。`ptool.try` はそれらを上記の `err` テーブルへ変換するため、呼び出し側は `err.kind` や関連フィールドで 分岐できます。"
+msgid ""
+"`ptool` APIs raise structured errors. `ptool.try` converts them into the "
+"`err` table above so callers can branch on `err.kind` and related fields."
+msgstr ""
+"`ptool` の API は構造化エラーを送出します。`ptool.try` はそれらを上記の `err`"
+" テーブルへ変換するため、呼び出し側は `err.kind` や関連フィールドで 分岐でき"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:437
-msgid "Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, and only `message` is guaranteed."
-msgstr "通常の Lua エラーも捕捉されます。その場合 `err.kind` は `lua_error` で、 `message` だけが保証されます。"
+msgid ""
+"Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`, "
+"and only `message` is guaranteed."
+msgstr ""
+"通常の Lua エラーも捕捉されます。その場合 `err.kind` は `lua_error` で、 "
+"`message` だけが保証されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:439
-msgid "`ptool.try` is the recommended way to handle errors from APIs such as `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, and `res:assert_ok()`."
-msgstr "`ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、 `res:assert_ok()` のような API のエラー処理には `ptool.try` の使用を推奨 します。"
+msgid ""
+"`ptool.try` is the recommended way to handle errors from APIs such as "
+"`ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, "
+"and `res:assert_ok()`."
+msgstr ""
+"`ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、 "
+"`res:assert_ok()` のような API のエラー処理には `ptool.try` の使用を推奨 しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:443
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:443"
@@ -814,24 +1005,42 @@ msgid "Argument rules:"
 msgstr "引数ルール:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:488
-msgid "`ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments."
-msgstr "`ptool.run(cmdline)`: `cmdline` はシェル風 (`shlex`) ルールで分割され、 最初の項目がコマンド、残りが引数として扱われます。"
+msgid ""
+"`ptool.run(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. "
+"The first item is treated as the command and the rest as arguments."
+msgstr ""
+"`ptool.run(cmdline)`: `cmdline` はシェル風 (`shlex`) ルールで分割され、 最初"
+"の項目がコマンド、残りが引数として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:490
-msgid "`ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules."
-msgstr "`ptool.run(cmd, argsline)`: `cmd` はそのままコマンドとして使われ、 `argsline` はシェル風 (`shlex`) ルールで引数リストへ分割されます。"
+msgid ""
+"`ptool.run(cmd, argsline)`: `cmd` is used directly as the command, and "
+"`argsline` is split into an argument list using shell-style (`shlex`) rules."
+msgstr ""
+"`ptool.run(cmd, argsline)`: `cmd` はそのままコマンドとして使われ、 `argsline`"
+" はシェル風 (`shlex`) ルールで引数リストへ分割されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:492
-msgid "`ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings."
+msgid ""
+"`ptool.run(cmd, args)`: `cmd` is a string and `args` is an array of strings."
 msgstr "`ptool.run(cmd, args)`: `cmd` は文字列、`args` は文字列配列です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:493
-msgid "`ptool.run(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`."
-msgstr "`ptool.run(cmdline, options)`: `options` は `echo` など、この呼び出し用の 設定を上書きします。"
+msgid ""
+"`ptool.run(cmdline, options)`: `options` overrides settings for this "
+"invocation, such as `echo`."
+msgstr ""
+"`ptool.run(cmdline, options)`: `options` は `echo` など、この呼び出し用の 設"
+"定を上書きします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:495
-msgid "`ptool.run(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `echo`."
-msgstr "`ptool.run(cmd, args, options)`: `args` は文字列または文字列配列で、 `options` は `echo` など、この呼び出し用の設定を上書きします。"
+msgid ""
+"`ptool.run(cmd, args, options)`: `args` can be either a string or an array "
+"of strings, and `options` overrides settings for this invocation, such as "
+"`echo`."
+msgstr ""
+"`ptool.run(cmd, args, options)`: `args` は文字列または文字列配列で、 "
+"`options` は `echo` など、この呼び出し用の設定を上書きします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:497
 msgid "`ptool.run(options)`: `options` is a table."
@@ -839,8 +1048,13 @@ msgstr "`ptool.run(options)`: `options` はテーブルです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:498
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:498"
-msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
-msgstr "第 2 引数がテーブルの場合: それが配列 (連続する整数キー `1..n`) なら `args` として、それ以外なら `options` として扱われます。"
+msgid ""
+"When the second argument is a table: if it is an array "
+"(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
+"treated as `options`."
+msgstr ""
+"第 2 引数がテーブルの場合: それが配列 (連続する整数キー `1..n`) なら `args` "
+"として、それ以外なら `options` として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:501
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:501"
@@ -856,8 +1070,11 @@ msgid "`ok` (boolean): Whether the exit code is `0`."
 msgstr "`ok` (boolean): 終了コードが `0` かどうか。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:503
-msgid "`code` (integer|nil): The process exit code. If the process was terminated by a signal, this is `nil`."
-msgstr "`code` (integer|nil): プロセス終了コード。シグナルで終了した場合は `nil` です。"
+msgid ""
+"`code` (integer|nil): The process exit code. If the process was terminated "
+"by a signal, this is `nil`."
+msgstr "`code` (integer|nil): プロセス終了コード。シグナルで終了した場合は `nil` です"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:503
 msgid "`cmd` (string): Command name used for the execution."
@@ -876,20 +1093,43 @@ msgid "`stderr` (string, optional): Present when `stderr = \"capture\"`."
 msgstr "`stderr` (string, 任意): `stderr = \"capture\"` のとき存在します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:503
-msgid "`assert_ok(self)` (function): Raises a structured error when `ok = false`. The error kind is `command_failed`, and the error may include `cmd`, `status`, `stderr`, and `cwd`."
-msgstr "`assert_ok(self)` (function): `ok = false` のとき構造化エラーを発生 させます。エラー種別は `command_failed` で、`cmd`、`status`、 `stderr`、`cwd` を含むことがあります。"
+msgid ""
+"`assert_ok(self)` (function): Raises a structured error when `ok = false`. "
+"The error kind is `command_failed`, and the error may include `cmd`, `status`"
+", `stderr`, and `cwd`."
+msgstr ""
+"`assert_ok(self)` (function): `ok = false` のとき構造化エラーを発生 させます"
+"。エラー種別は `command_failed` で、`cmd`、`status`、 `stderr`、`cwd` を含む"
+"ことがあります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:514
-msgid "The default value of `check` comes from `ptool.config({ run = { check = ... } })`. If not configured, it defaults to `false`. When `check = false`, callers can inspect `ok` themselves or call `res:assert_ok()`."
-msgstr "`check` のデフォルト値は `ptool.config({ run = { check = ... } })` から取得されます。 未設定ならデフォルトは `false` です。`check = false` のときは、 呼び出し側が自分で `ok` を確認するか `res:assert_ok()` を呼べます。"
+msgid ""
+"The default value of `check` comes from `ptool.config"
+"({ run = { check = ... } })`. If not configured, it defaults to `false`. "
+"When `check = false`, callers can inspect `ok` themselves or call "
+"`res:assert_ok()`."
+msgstr ""
+"`check` のデフォルト値は `ptool.config({ run = { check = ... } })` から取得さ"
+"れます。 未設定ならデフォルトは `false` です。`check = false` のときは、 呼び"
+"出し側が自分で `ok` を確認するか `res:assert_ok()` を呼べます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:517
-msgid "When both `check = true` and `retry = true`, `ptool.run` asks whether the failed command should be retried before raising the final error."
-msgstr "`check = true` かつ `retry = true` の場合、`ptool.run` は失敗した コマンドを再試行するかどうかを最終エラー前に尋ねます。"
+msgid ""
+"When both `check = true` and `retry = true`, `ptool.run` asks whether the "
+"failed command should be retried before raising the final error."
+msgstr ""
+"`check = true` かつ `retry = true` の場合、`ptool.run` は失敗した コマンドを"
+"再試行するかどうかを最終エラー前に尋ねます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:519
-msgid "When `check = true`, `ptool.run` raises the same structured `command_failed` error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to catch and inspect it from Lua."
-msgstr "`check = true` の場合、`ptool.run` は `res:assert_ok()` と同じ `command_failed` 構造化エラーを送出します。Lua 側で捕捉して調べたいなら `ptool.try(...)` を使ってください。"
+msgid ""
+"When `check = true`, `ptool.run` raises the same structured `command_failed` "
+"error that `res:assert_ok()` raises. Use `ptool.try(...)` if you want to "
+"catch and inspect it from Lua."
+msgstr ""
+"`check = true` の場合、`ptool.run` は `res:assert_ok()` と同じ "
+"`command_failed` 構造化エラーを送出します。Lua 側で捕捉して調べたいなら "
+"`ptool.try(...)` を使ってください。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:523
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:523"
@@ -897,8 +1137,11 @@ msgid "Example:"
 msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:544
-msgid "`ptool.run(options)` is also supported, where `options` is a table with the following fields:"
-msgstr "`ptool.run(options)` もサポートされます。ここで `options` は次のフィールド を持つテーブルです:"
+msgid ""
+"`ptool.run(options)` is also supported, where `options` is a table with the "
+"following fields:"
+msgstr "`ptool.run(options)` もサポートされます。ここで `options` は次のフィールド を"
+"持つテーブルです:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:547
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:547"
@@ -917,7 +1160,9 @@ msgstr "`cwd` (string, 任意): 子プロセスの作業ディレクトリ。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:550"
-msgid "`env` (table, optional): Additional environment variables, where keys are variable names and values are variable values."
+msgid ""
+"`env` (table, optional): Additional environment variables, where keys are "
+"variable names and values are variable values."
 msgstr "`env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
@@ -930,31 +1175,66 @@ msgstr "文字列を指定すると、その文字列が子プロセスの stdin
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
 msgid "A table `{ file = \"path\" }` reads stdin from a file."
-msgstr "テーブル `{ file = \"path\" }` を指定すると、ファイルから stdin を読み込みます。"
+msgstr "テーブル `{ file = \"path\" }` を指定すると、ファイルから stdin を読み込みま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:552
 msgid "When omitted, the child process inherits the current process stdin."
 msgstr "省略時は、子プロセスが現在のプロセスの stdin を継承します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:556
-msgid "`trim` (boolean, optional): Whether to trim leading and trailing whitespace from captured `stdout` and captured `stderr` before returning them. This only affects streams set to `\"capture\"`. Defaults to `false`."
-msgstr "`trim` (ブール値、オプション): キャプチャされた `stdout` とキャプチャされた `stderr` を返す前に、それらから先頭と末尾の空白をトリミングするかどうか。これは、`\"capture\"` に設定されたストリームにのみ影響します。デフォルトは`false`です。"
+msgid ""
+"`trim` (boolean, optional): Whether to trim leading and trailing whitespace "
+"from captured `stdout` and captured `stderr` before returning them. This "
+"only affects streams set to `\"capture\"`. Defaults to `false`."
+msgstr ""
+"`trim` (ブール値、オプション): キャプチャされた `stdout` とキャプチャされた "
+"`stderr` を返す前に、それらから先頭と末尾の空白をトリミングするかどうか。これ"
+"は、`\"capture\"` に設定されたストリームにのみ影響します。デフォルトは`false`"
+"です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:559
-msgid "`echo` (boolean, optional): Whether to echo command information for this execution. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`."
-msgstr "`echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフォルトは `true` です。"
+msgid ""
+"`echo` (boolean, optional): Whether to echo command information for this "
+"execution. If omitted, the value from `ptool.config({ run = { echo = ... } })"
+"` is used; if that is also unset, the default is `true`."
+msgstr ""
+"`echo` (boolean, 任意): この実行でコマンド情報を表示するかどうか。 省略時は "
+"`ptool.config({ run = { echo = ... } })` の値が使われ、 それも未設定ならデフ"
+"ォルトは `true` です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:562
-msgid "`check` (boolean, optional): Whether to raise an error immediately when the exit code is not `0`. If omitted, the value from `ptool.config({ run = { check = ... } })` is used; if that is also unset, the default is `false`."
-msgstr "`check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかどうか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それも未設定ならデフォルトは `false` です。"
+msgid ""
+"`check` (boolean, optional): Whether to raise an error immediately when the "
+"exit code is not `0`. If omitted, the value from `ptool.config"
+"({ run = { check = ... } })` is used; if that is also unset, the default is "
+"`false`."
+msgstr ""
+"`check` (boolean, 任意): 終了コードが `0` 以外のときに即座にエラーに するかど"
+"うか。省略時は `ptool.config({ run = { check = ... } })` の 値が使われ、それ"
+"も未設定ならデフォルトは `false` です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:565
-msgid "`confirm` (boolean, optional): Whether to ask the user for confirmation before execution. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`."
-msgstr "`confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデフォルトは `false` です。"
+msgid ""
+"`confirm` (boolean, optional): Whether to ask the user for confirmation "
+"before execution. If omitted, the value from `ptool.config"
+"({ run = { confirm = ... } })` is used; if that is also unset, the default "
+"is `false`."
+msgstr ""
+"`confirm` (boolean, 任意): 実行前にユーザー確認を行うかどうか。 省略時は "
+"`ptool.config({ run = { confirm = ... } })` の値が使われ、 それも未設定ならデ"
+"フォルトは `false` です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:568
-msgid "`retry` (boolean, optional): Whether to ask the user whether to retry after a failed execution when `check = true`. If omitted, the value from `ptool.config({ run = { retry = ... } })` is used; if that is also unset, the default is `false`."
-msgstr "`retry` (boolean, 任意): `check = true` のとき、失敗後に再試行するか ユーザーへ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使われ、それも未設定なら デフォルトは `false` です。"
+msgid ""
+"`retry` (boolean, optional): Whether to ask the user whether to retry after "
+"a failed execution when `check = true`. If omitted, the value from "
+"`ptool.config({ run = { retry = ... } })` is used; if that is also unset, "
+"the default is `false`."
+msgstr ""
+"`retry` (boolean, 任意): `check = true` のとき、失敗後に再試行するか ユーザー"
+"へ尋ねるかどうか。省略時は `ptool.config({ run = { retry = ... } })` の値が使"
+"われ、それも未設定なら デフォルトは `false` です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572"
@@ -978,7 +1258,8 @@ msgstr "`\"null\"`: 出力を破棄します。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572"
 msgid "`{ file = \"path\" }`: Write stdout to a file, truncating it first."
-msgstr "`{ file = \"path\" }`: stdout をファイルへ書き込み、最初に内容を切り詰めます。"
+msgstr "`{ file = \"path\" }`: stdout をファイルへ書き込み、最初に内容を切り詰めます"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:572"
@@ -1007,7 +1288,8 @@ msgstr "`\"null\"`: 出力を破棄します。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:578
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:578"
 msgid "`{ file = \"path\" }`: Write stderr to a file, truncating it first."
-msgstr "`{ file = \"path\" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます。"
+msgstr "`{ file = \"path\" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:578
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:578"
@@ -1015,13 +1297,22 @@ msgid "`{ file = \"path\", append = true }`: Append stderr to a file."
 msgstr "`{ file = \"path\", append = true }`: stderr をファイルへ追記します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:584
-msgid "When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run(cmd, args, options)` are used, the per-call `options` table also accepts `stdin` and `trim` with the same meaning."
-msgstr "`ptool.run(cmdline, options)` や `ptool.run(cmd, args, options)` などのショートカット呼び出し形式が使用される場合、呼び出しごとの `options` テーブルは同じ意味の `stdin` および `trim` も受け入れます。"
+msgid ""
+"When shortcut call forms such as `ptool.run(cmdline, options)` or `ptool.run"
+"(cmd, args, options)` are used, the per-call `options` table also accepts "
+"`stdin` and `trim` with the same meaning."
+msgstr ""
+"`ptool.run(cmdline, options)` や `ptool.run(cmd, args, options)` などのショー"
+"トカット呼び出し形式が使用される場合、呼び出しごとの `options` テーブルは同じ"
+"意味の `stdin` および `trim` も受け入れます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:587
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:587"
-msgid "File redirect paths are resolved relative to the effective child-process `cwd`, unless an absolute path is provided."
-msgstr "ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス `cwd` からの相対パスとして解決されます。"
+msgid ""
+"File redirect paths are resolved relative to the effective child-process "
+"`cwd`, unless an absolute path is provided."
+msgstr "ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス "
+"`cwd` からの相対パスとして解決されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:589
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:589"
@@ -1035,7 +1326,9 @@ msgstr "ユーザーが実行を拒否すると即座にエラーになります
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:589
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:589"
-msgid "If the current environment is not interactive (no TTY), an error is raised immediately."
+msgid ""
+"If the current environment is not interactive (no TTY), an error is raised "
+"immediately."
 msgstr "現在の環境が非対話 (TTY なし) なら即座にエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:593
@@ -1043,12 +1336,16 @@ msgid "When `retry = true` and `check = true`:"
 msgstr "`retry = true` かつ `check = true` の場合:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:593
-msgid "If the command fails, `ptool.run` asks whether to retry the same command."
+msgid ""
+"If the command fails, `ptool.run` asks whether to retry the same command."
 msgstr "コマンドが失敗すると、`ptool.run` は同じコマンドを再試行するか 尋ねます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:593
-msgid "If the current environment is not interactive (no TTY), an error is raised immediately instead of prompting for retry."
-msgstr "現在の環境が非対話 (TTY なし) なら、再試行を尋ねる代わりに即座に エラーになります。"
+msgid ""
+"If the current environment is not interactive (no TTY), an error is raised "
+"immediately instead of prompting for retry."
+msgstr "現在の環境が非対話 (TTY なし) なら、再試行を尋ねる代わりに即座に エラーになり"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:598
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:598"
@@ -1060,13 +1357,16 @@ msgid "ptool.run_capture"
 msgstr "ptool.run_capture"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:640
-msgid "`ptool.run_capture` executes external commands from Rust with the same call forms, argument rules, return value rules, and options as `ptool.run`."
-msgstr "`ptool.run_capture` は `ptool.run` と同じ呼び出し形式、引数ルール、 戻り値ルール、オプションで、Rust から外部コマンドを実行します。"
+msgid ""
+"`ptool.run_capture` executes external commands from Rust with the same call "
+"forms, argument rules, return value rules, and options as `ptool.run`."
+msgstr ""
+"`ptool.run_capture` は `ptool.run` と同じ呼び出し形式、引数ルール、 戻り値ル"
+"ール、オプションで、Rust から外部コマンドを実行します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:643
 msgid "The difference is only the default stream handling:"
@@ -1081,8 +1381,12 @@ msgid "`stderr` defaults to `\"capture\"`."
 msgstr "`stderr` のデフォルトは `\"capture\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:648
-msgid "`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`."
-msgstr "`trim` のデフォルトは引き続き `false` であり、これらのフィールドのいずれかを `options` で明示的にオーバーライドできます。"
+msgid ""
+"`trim` still defaults to `false`, and you can still override any of these "
+"fields explicitly in `options`."
+msgstr ""
+"`trim` のデフォルトは引き続き `false` であり、これらのフィールドのいずれかを "
+"`options` で明示的にオーバーライドできます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:651
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:651"
@@ -1094,12 +1398,12 @@ msgid "ptool.exec"
 msgstr "ptool.exec"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:679
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:679"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.7.0` - Introduced."
+msgstr "`v0.7.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:681
-msgid "`ptool.exec` replaces the current `ptool` process with an external command."
+msgid ""
+"`ptool.exec` replaces the current `ptool` process with an external command."
 msgstr "`ptool.exec` は現在の `ptool` プロセスを外部コマンドで置き換えます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:683
@@ -1112,24 +1416,32 @@ msgid "Behavior:"
 msgstr "挙動:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:696
-msgid "On success, `ptool.exec` does not return. The current `ptool` process is replaced by the target command."
-msgstr "成功すると `ptool.exec` は戻りません。現在の `ptool` プロセスは対象コマンドで置き換えられます。"
+msgid ""
+"On success, `ptool.exec` does not return. The current `ptool` process is "
+"replaced by the target command."
+msgstr "成功すると `ptool.exec` は戻りません。現在の `ptool` プロセスは対象コマンドで"
+"置き換えられます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:698
 msgid "Any Lua code after a successful `ptool.exec(...)` call does not run."
 msgstr "`ptool.exec(...)` が成功した後の Lua コードは一切実行されません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:699
-msgid "In `ptool repl`, a successful `ptool.exec(...)` also replaces the REPL process."
-msgstr "`ptool repl` でも、成功した `ptool.exec(...)` は REPL プロセス自体を置き換えます。"
+msgid ""
+"In `ptool repl`, a successful `ptool.exec(...)` also replaces the REPL "
+"process."
+msgstr "`ptool repl` でも、成功した `ptool.exec(...)` は REPL プロセス自体を置き換え"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:701
 msgid "On Unix platforms, this uses true process replacement semantics."
 msgstr "Unix プラットフォームでは、これは本物のプロセス置換セマンティクスを使います。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:702
-msgid "On non-Unix platforms, `ptool.exec` currently raises an `unsupported` error."
-msgstr "非 Unix プラットフォームでは、`ptool.exec` は現在 `unsupported` エラーを返します。"
+msgid ""
+"On non-Unix platforms, `ptool.exec` currently raises an `unsupported` error."
+msgstr "非 Unix プラットフォームでは、`ptool.exec` は現在 `unsupported` エラーを返し"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:704
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:704"
@@ -1137,24 +1449,42 @@ msgid "Argument rules:"
 msgstr "引数ルール:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:706
-msgid "`ptool.exec(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments."
-msgstr "`ptool.exec(cmdline)`: `cmdline` はシェル風 (`shlex`) ルールで分割され、最初の項目がコマンド、残りが引数として扱われます。"
+msgid ""
+"`ptool.exec(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. "
+"The first item is treated as the command and the rest as arguments."
+msgstr ""
+"`ptool.exec(cmdline)`: `cmdline` はシェル風 (`shlex`) ルールで分割され、最初"
+"の項目がコマンド、残りが引数として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:708
-msgid "`ptool.exec(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules."
-msgstr "`ptool.exec(cmd, argsline)`: `cmd` はそのままコマンドとして使われ、`argsline` はシェル風 (`shlex`) ルールで引数リストへ分割されます。"
+msgid ""
+"`ptool.exec(cmd, argsline)`: `cmd` is used directly as the command, and "
+"`argsline` is split into an argument list using shell-style (`shlex`) rules."
+msgstr ""
+"`ptool.exec(cmd, argsline)`: `cmd` はそのままコマンドとして使われ、`argsline`"
+" はシェル風 (`shlex`) ルールで引数リストへ分割されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:710
-msgid "`ptool.exec(cmd, args)`: `cmd` is a string and `args` is an array of strings."
+msgid ""
+"`ptool.exec(cmd, args)`: `cmd` is a string and `args` is an array of strings."
 msgstr "`ptool.exec(cmd, args)`: `cmd` は文字列、`args` は文字列配列です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:711
-msgid "`ptool.exec(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`."
-msgstr "`ptool.exec(cmdline, options)`: `options` は `echo` など、この呼び出し用の設定を上書きします。"
+msgid ""
+"`ptool.exec(cmdline, options)`: `options` overrides settings for this "
+"invocation, such as `echo`."
+msgstr ""
+"`ptool.exec(cmdline, options)`: `options` は `echo` など、この呼び出し用の設"
+"定を上書きします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:713
-msgid "`ptool.exec(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `confirm`."
-msgstr "`ptool.exec(cmd, args, options)`: `args` は文字列または文字列配列で、`options` は `confirm` など、この呼び出し用の設定を上書きします。"
+msgid ""
+"`ptool.exec(cmd, args, options)`: `args` can be either a string or an array "
+"of strings, and `options` overrides settings for this invocation, such as "
+"`confirm`."
+msgstr ""
+"`ptool.exec(cmd, args, options)`: `args` は文字列または文字列配列で、"
+"`options` は `confirm` など、この呼び出し用の設定を上書きします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:716
 msgid "`ptool.exec(options)`: `options` is a table."
@@ -1162,12 +1492,20 @@ msgstr "`ptool.exec(options)`: `options` はテーブルです。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:717
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:717"
-msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
-msgstr "第 2 引数がテーブルの場合: それが配列 (連続する整数キー `1..n`) なら `args` として、それ以外なら `options` として扱われます。"
+msgid ""
+"When the second argument is a table: if it is an array "
+"(consecutive integer keys `1..n`), it is treated as `args`; otherwise it is "
+"treated as `options`."
+msgstr ""
+"第 2 引数がテーブルの場合: それが配列 (連続する整数キー `1..n`) なら `args` "
+"として、それ以外なら `options` として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:720
-msgid "`ptool.exec(options)` is also supported, where `options` is a table with the following fields:"
-msgstr "`ptool.exec(options)` もサポートされます。ここで `options` は次のフィールドを持つテーブルです:"
+msgid ""
+"`ptool.exec(options)` is also supported, where `options` is a table with the "
+"following fields:"
+msgstr "`ptool.exec(options)` もサポートされます。ここで `options` は次のフィールドを"
+"持つテーブルです:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:723
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:723"
@@ -1186,7 +1524,9 @@ msgstr "`cwd` (string, 任意): 子プロセスの作業ディレクトリ。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:726
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:726"
-msgid "`env` (table, optional): Additional environment variables, where keys are variable names and values are variable values."
+msgid ""
+"`env` (table, optional): Additional environment variables, where keys are "
+"variable names and values are variable values."
 msgstr "`env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:728
@@ -1198,12 +1538,26 @@ msgid "`{ file = \"path\" }`: Read stdin from a file."
 msgstr "`{ file = \"path\" }`: ファイルから stdin を読み込みます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:730
-msgid "`echo` (boolean, optional): Whether to echo command information before replacement. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`."
-msgstr "`echo` (boolean, 任意): 置換前にコマンド情報を表示するかどうか。省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、それも未設定ならデフォルトは `true` です。"
+msgid ""
+"`echo` (boolean, optional): Whether to echo command information before "
+"replacement. If omitted, the value from `ptool.config"
+"({ run = { echo = ... } })` is used; if that is also unset, the default is "
+"`true`."
+msgstr ""
+"`echo` (boolean, 任意): 置換前にコマンド情報を表示するかどうか。省略時は "
+"`ptool.config({ run = { echo = ... } })` の値が使われ、それも未設定ならデフォ"
+"ルトは `true` です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:733
-msgid "`confirm` (boolean, optional): Whether to ask the user for confirmation before replacement. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`."
-msgstr "`confirm` (boolean, 任意): 置換前にユーザー確認を行うかどうか。省略時は `ptool.config({ run = { confirm = ... } })` の値が使われ、それも未設定ならデフォルトは `false` です。"
+msgid ""
+"`confirm` (boolean, optional): Whether to ask the user for confirmation "
+"before replacement. If omitted, the value from `ptool.config"
+"({ run = { confirm = ... } })` is used; if that is also unset, the default "
+"is `false`."
+msgstr ""
+"`confirm` (boolean, 任意): 置換前にユーザー確認を行うかどうか。省略時は "
+"`ptool.config({ run = { confirm = ... } })` の値が使われ、それも未設定ならデ"
+"フォルトは `false` です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736"
@@ -1223,7 +1577,8 @@ msgstr "`\"null\"`: 出力を破棄します。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736"
 msgid "`{ file = \"path\" }`: Write stdout to a file, truncating it first."
-msgstr "`{ file = \"path\" }`: stdout をファイルへ書き込み、最初に内容を切り詰めます。"
+msgstr "`{ file = \"path\" }`: stdout をファイルへ書き込み、最初に内容を切り詰めます"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736"
@@ -1248,7 +1603,8 @@ msgstr "`\"null\"`: 出力を破棄します。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:741
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:741"
 msgid "`{ file = \"path\" }`: Write stderr to a file, truncating it first."
-msgstr "`{ file = \"path\" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます。"
+msgstr "`{ file = \"path\" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:741
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:741"
@@ -1256,13 +1612,20 @@ msgid "`{ file = \"path\", append = true }`: Append stderr to a file."
 msgstr "`{ file = \"path\", append = true }`: stderr をファイルへ追記します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:746
-msgid "Unlike `ptool.run`, `ptool.exec` does not support string `stdin`, `stdout = \"capture\"`, `stderr = \"capture\"`, `trim`, `check`, or `retry`."
-msgstr "`ptool.run` と異なり、`ptool.exec` は文字列 `stdin`、`stdout = \"capture\"`、`stderr = \"capture\"`、`trim`、`check`、`retry` をサポートしません。"
+msgid ""
+"Unlike `ptool.run`, `ptool.exec` does not support string `stdin`, `stdout = "
+"\"capture\"`, `stderr = \"capture\"`, `trim`, `check`, or `retry`."
+msgstr ""
+"`ptool.run` と異なり、`ptool.exec` は文字列 `stdin`、`stdout = \"capture\"`、"
+"`stderr = \"capture\"`、`trim`、`check`、`retry` をサポートしません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:748
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:748"
-msgid "File redirect paths are resolved relative to the effective child-process `cwd`, unless an absolute path is provided."
-msgstr "ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス `cwd` からの相対パスとして解決されます。"
+msgid ""
+"File redirect paths are resolved relative to the effective child-process "
+"`cwd`, unless an absolute path is provided."
+msgstr "ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス "
+"`cwd` からの相対パスとして解決されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:750
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:750"
@@ -1276,13 +1639,27 @@ msgstr "ユーザーが実行を拒否すると即座にエラーになります
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:750
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:750"
-msgid "If the current environment is not interactive (no TTY), an error is raised immediately."
+msgid ""
+"If the current environment is not interactive (no TTY), an error is raised "
+"immediately."
 msgstr "現在の環境が非対話 (TTY なし) なら即座にエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:755
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:755"
 msgid "Example:"
 msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:74"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:638"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:679"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/core.md:113"
 #~ msgid "`v0.1.0` - Introduced."

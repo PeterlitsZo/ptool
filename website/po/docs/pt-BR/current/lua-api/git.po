@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,8 +34,8 @@ msgstr "ptool.git.open"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:12
 msgid ""
@@ -90,8 +90,8 @@ msgstr "ptool.git.discover"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:38
 msgid ""
@@ -143,8 +143,8 @@ msgstr "ptool.git.clone"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:62
 msgid ""
@@ -253,8 +253,8 @@ msgstr "Repo"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:113
 msgid ""
@@ -330,8 +330,8 @@ msgstr "path"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:138
 msgid "Canonical API name: `ptool.git.Repo:path`."
@@ -364,8 +364,8 @@ msgstr "root"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:153
 msgid "Canonical API name: `ptool.git.Repo:root`."
@@ -395,8 +395,8 @@ msgstr "is_bare"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:167
 msgid "Canonical API name: `ptool.git.Repo:is_bare`."
@@ -417,8 +417,8 @@ msgstr "head"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:177
 msgid "Canonical API name: `ptool.git.Repo:head`."
@@ -459,8 +459,8 @@ msgstr "current_branch"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:199
 msgid "Canonical API name: `ptool.git.Repo:current_branch`."
@@ -495,8 +495,8 @@ msgstr "status"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:214
 msgid "Canonical API name: `ptool.git.Repo:status`."
@@ -619,8 +619,8 @@ msgstr "is_clean"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:263
 msgid "Canonical API name: `ptool.git.Repo:is_clean`."
@@ -647,8 +647,8 @@ msgstr "add"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:274
 msgid "Canonical API name: `ptool.git.Repo:add`."
@@ -701,8 +701,8 @@ msgstr "commit"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:300
 msgid "Canonical API name: `ptool.git.Repo:commit`."
@@ -781,8 +781,8 @@ msgstr "checkout"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:341
 msgid "Canonical API name: `ptool.git.Repo:checkout`."
@@ -832,8 +832,8 @@ msgstr "switch"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:361
 msgid "Canonical API name: `ptool.git.Repo:switch`."
@@ -890,8 +890,8 @@ msgstr "fetch"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:390
 msgid "Canonical API name: `ptool.git.Repo:fetch`."
@@ -970,8 +970,8 @@ msgstr "push"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:428
 msgid "Canonical API name: `ptool.git.Repo:push`."
@@ -1033,3 +1033,71 @@ msgstr "Omitir `refspecs` enquanto HEAD está desconectado gera um erro."
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:446"
 msgid "Example:"
 msgstr "Exemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:60"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:111"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:165"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:175"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:197"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:261"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:339"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:359"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:388"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."

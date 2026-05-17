@@ -6,7 +6,7 @@ Este módulo serve para inspecionar e gerenciar processos locais que já estão 
 
 ## ptool.proc.self
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.proc.self()` retorna uma tabela de snapshot do processo `ptool` atual.
 
@@ -16,7 +16,7 @@ A tabela retornada usa o mesmo formato de `ptool.proc.get(...)` e `ptool.proc.fi
 
 ## ptool.proc.get
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.proc.get(pid)` retorna uma tabela de snapshot para o ID de processo informado, ou `nil` se o processo não existir.
 
@@ -25,7 +25,7 @@ A tabela retornada usa o mesmo formato de `ptool.proc.get(...)` e `ptool.proc.fi
 
 ## ptool.proc.exists
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.proc.exists(pid)` informa se um ID de processo existe no momento.
 
@@ -34,7 +34,7 @@ A tabela retornada usa o mesmo formato de `ptool.proc.get(...)` e `ptool.proc.fi
 
 ## ptool.proc.find
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.proc.find([options])` lista processos locais e retorna um array de tabelas de snapshot.
 
@@ -94,7 +94,7 @@ end
 
 ## ptool.proc.kill
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.proc.kill(targets[, options])` envia um sinal para um ou mais processos locais e retorna uma tabela de resultado estruturada.
 
@@ -155,7 +155,7 @@ res:assert_ok()
 
 ## ptool.proc.wait_gone
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.proc.wait_gone(targets[, options])` espera até que um ou mais processos alvo deixem de existir e então retorna uma tabela de resultado estruturada.
 

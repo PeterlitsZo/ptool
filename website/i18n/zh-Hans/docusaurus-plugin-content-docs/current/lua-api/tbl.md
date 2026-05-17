@@ -6,7 +6,7 @@
 
 ## ptool.tbl.map
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tbl.map(list, fn)` 对顺序表中的每一项做映射，并返回一个新的顺序表。
 
@@ -30,7 +30,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 ## ptool.tbl.filter
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tbl.filter(list, fn)` 保留回调结果为 truthy 的项，并返回新的致密顺序表。
 
@@ -54,7 +54,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.concat
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tbl.concat(...)` 将一个或多个致密顺序表按顺序拼接成新的顺序表。
 
@@ -75,7 +75,7 @@ print(ptool.inspect(out)) -- { 1, 2, 3 }
 
 ## ptool.tbl.join
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.tbl.join(...)` 是 `ptool.tbl.concat(...)` 的别名。
 

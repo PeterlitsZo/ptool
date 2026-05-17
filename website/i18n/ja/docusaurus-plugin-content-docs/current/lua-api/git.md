@@ -6,7 +6,7 @@ Git リポジトリ ヘルパーは、`ptool.git` および `p.git` で利用で
 
 ## ptool.git.open
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.git.open(path?)` はリポジトリを直接開き、`Repo` オブジェクトを返します。
 
@@ -28,7 +28,7 @@ print(repo:path())
 
 ## ptool.git.discover
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.git.discover(path?)` は、`path` から開始して親ディレクトリをたどってリポジトリを検索し、`Repo` オブジェクトを返します。
 
@@ -50,7 +50,7 @@ print(repo:root())
 
 ## ptool.git.clone
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `ptool.git.clone(url, path[, options])` はリポジトリのクローンを作成し、クローンされたリポジトリの `Repo` オブジェクトを返します。
 
@@ -97,7 +97,7 @@ print(repo:root())
 
 ## Repo
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 `Repo` は、`ptool.git.open()`、`ptool.git.discover()`、または `ptool.git.clone()` によって返される、開いている Git リポジトリ ハンドルを表します。
 
@@ -121,7 +121,7 @@ print(repo:root())
 
 ### path
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:path`。
 
@@ -136,7 +136,7 @@ print(repo:root())
 
 ### root
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:root`。
 
@@ -150,7 +150,7 @@ print(repo:root())
 
 ### is_bare
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:is_bare`。
 
@@ -160,7 +160,7 @@ print(repo:root())
 
 ### head
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:head`。
 
@@ -181,7 +181,7 @@ print(head.detached)
 
 ### current_branch
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:current_branch`。
 
@@ -196,7 +196,7 @@ print(head.detached)
 
 ### status
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:status`。
 
@@ -239,7 +239,7 @@ end
 
 ### is_clean
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:is_clean`。
 
@@ -250,7 +250,7 @@ end
 
 ### add
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:add`。
 
@@ -275,7 +275,7 @@ repo:add({"src", "Cargo.toml"})
 
 ### commit
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:commit`。
 
@@ -313,7 +313,7 @@ print(oid)
 
 ### チェックアウト
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:checkout`。
 
@@ -331,7 +331,7 @@ print(oid)
 
 ### switch
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:switch`。
 
@@ -357,7 +357,7 @@ repo:switch("release-next", {
 
 ### fetch
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:fetch`。
 
@@ -392,7 +392,7 @@ print(stats.received_objects, stats.received_bytes)
 
 ### push
 
-> `Unreleased` - 導入されました。
+> `v0.6.0` - 導入されました。
 
 正規 API 名: `ptool.git.Repo:push`。
 

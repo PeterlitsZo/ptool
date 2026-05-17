@@ -6,7 +6,7 @@ Essas APIs foram projetadas para tabelas de lista densas, com chaves inteiras co
 
 ## ptool.tbl.map
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e retorna uma nova lista.
 
@@ -30,7 +30,7 @@ print(ptool.inspect(out)) -- { 11, 22, 33 }
 
 ## ptool.tbl.filter
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja truthy e os retorna em uma nova lista densa.
 
@@ -54,7 +54,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.concat
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma nova lista.
 
@@ -75,7 +75,7 @@ print(ptool.inspect(out)) -- { 1, 2, 3 }
 
 ## ptool.tbl.join
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduzido.
 
 `ptool.tbl.join(...)` é um alias de `ptool.tbl.concat(...)`.
 

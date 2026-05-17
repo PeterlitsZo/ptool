@@ -6,7 +6,7 @@ Git 仓库辅助能力位于 `ptool.git` 和 `p.git` 下。
 
 ## ptool.git.open
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.git.open(path?)` 直接打开一个仓库，并返回 `Repo` 对象。
 
@@ -28,7 +28,7 @@ print(repo:path())
 
 ## ptool.git.discover
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.git.discover(path?)` 从 `path` 开始向上遍历父目录查找仓库，然后返回一个 `Repo` 对象。
 
@@ -50,7 +50,7 @@ print(repo:root())
 
 ## ptool.git.clone
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `ptool.git.clone(url, path[, options])` 克隆一个仓库，并返回该克隆仓库对应的 `Repo` 对象。
 
@@ -97,7 +97,7 @@ print(repo:root())
 
 ## Repo
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 `Repo` 表示一个打开中的 Git 仓库句柄，由 `ptool.git.open()`、`ptool.git.discover()` 或 `ptool.git.clone()` 返回。
 
@@ -121,7 +121,7 @@ print(repo:root())
 
 ### path
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:path`。
 
@@ -136,7 +136,7 @@ print(repo:root())
 
 ### root
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:root`。
 
@@ -150,7 +150,7 @@ print(repo:root())
 
 ### is_bare
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:is_bare`。
 
@@ -160,7 +160,7 @@ print(repo:root())
 
 ### head
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:head`。
 
@@ -181,7 +181,7 @@ print(head.detached)
 
 ### current_branch
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:current_branch`。
 
@@ -196,7 +196,7 @@ print(head.detached)
 
 ### status
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:status`。
 
@@ -239,7 +239,7 @@ end
 
 ### is_clean
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:is_clean`。
 
@@ -250,7 +250,7 @@ end
 
 ### add
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:add`。
 
@@ -275,7 +275,7 @@ repo:add({"src", "Cargo.toml"})
 
 ### commit
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:commit`。
 
@@ -313,7 +313,7 @@ print(oid)
 
 ### checkout
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:checkout`。
 
@@ -331,7 +331,7 @@ print(oid)
 
 ### switch
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:switch`。
 
@@ -357,7 +357,7 @@ repo:switch("release-next", {
 
 ### fetch
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:fetch`。
 
@@ -392,7 +392,7 @@ print(stats.received_objects, stats.received_bytes)
 
 ### push
 
-> `Unreleased` - 引入。
+> `v0.6.0` - 引入。
 
 规范 API 名称：`ptool.git.Repo:push`。
 

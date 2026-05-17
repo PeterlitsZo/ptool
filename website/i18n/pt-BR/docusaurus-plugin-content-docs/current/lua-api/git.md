@@ -6,7 +6,7 @@ Este módulo é baseado em `git2` / `libgit2`, não na invocação da ferramenta
 
 ## ptool.git.open
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 `ptool.git.open(path?)` abre um repositório diretamente e retorna um objeto `Repo`.
 
@@ -28,7 +28,7 @@ print(repo:path())
 
 ## ptool.git.discover
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 `ptool.git.discover(path?)` encontra um repositório começando em `path` e subindo nos diretórios pais e, em seguida, retorna um objeto `Repo`.
 
@@ -50,7 +50,7 @@ print(repo:root())
 
 ## ptool.git.clone
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 `ptool.git.clone(url, path[, options])` clona um repositório e retorna um objeto `Repo` para o repositório clonado.
 
@@ -97,7 +97,7 @@ print(repo:root())
 
 ## Repo
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 `Repo` representa um identificador de repositório Git aberto retornado por `ptool.git.open()`, `ptool.git.discover()` ou `ptool.git.clone()`.
 
@@ -121,7 +121,7 @@ Métodos:
 
 ### path
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:path`.
 
@@ -136,7 +136,7 @@ Notas:
 
 ### root
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:root`.
 
@@ -150,7 +150,7 @@ Notas:
 
 ### is_bare
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:is_bare`.
 
@@ -160,7 +160,7 @@ Nome canônico da API: `ptool.git.Repo:is_bare`.
 
 ### head
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:head`.
 
@@ -181,7 +181,7 @@ print(head.detached)
 
 ### current_branch
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:current_branch`.
 
@@ -196,7 +196,7 @@ Notas:
 
 ### status
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:status`.
 
@@ -239,7 +239,7 @@ end
 
 ### is_clean
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:is_clean`.
 
@@ -250,7 +250,7 @@ Nome canônico da API: `ptool.git.Repo:is_clean`.
 
 ### add
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:add`.
 
@@ -275,7 +275,7 @@ repo:add({"src", "Cargo.toml"})
 
 ### commit
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:commit`.
 
@@ -313,7 +313,7 @@ print(oid)
 
 ### checkout
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:checkout`.
 
@@ -331,7 +331,7 @@ Comportamento:
 
 ### switch
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:switch`.
 
@@ -357,7 +357,7 @@ repo:switch("release-next", {
 
 ### fetch
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:fetch`.
 
@@ -392,7 +392,7 @@ print(stats.received_objects, stats.received_bytes)
 
 ### push
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 Nome canônico da API: `ptool.git.Repo:push`.
 

@@ -56,7 +56,7 @@ ptool.use(">= v0.6.0, < 0.7.0")
 
 ## ptool.version
 
-> `Unreleased` - Introduzido.
+> `v0.8.0` - Introduzido.
 
 `ptool.version()` retorna a string da versão atual do `ptool`.
 
@@ -546,7 +546,7 @@ res:assert_ok()
 
 ## ptool.run_capture
 
-> `Unreleased` - Introduzido.
+> `v0.6.0` - Introduzido.
 
 `ptool.run_capture` executa comandos externos a partir de Rust com as mesmas formas de chamada, regras de argumento, regras de valor de retorno e opções de `ptool.run`.
 
@@ -585,7 +585,7 @@ print(res3.stdout)
 
 ## ptool.exec
 
-> `Unreleased` - Introduzido.
+> `v0.7.0` - Introduzido.
 
 `ptool.exec` substitui o processo atual do `ptool` por um comando externo.
 

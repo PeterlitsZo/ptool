@@ -50,7 +50,7 @@ ptool.fs.write("tmp/blob.bin", "\x00\xffABC")
 
 ## ptool.fs.append
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.fs.append(path, content)` appends a Lua string to a file as raw bytes.
 If the file does not exist, it is created.
@@ -72,7 +72,7 @@ ptool.fs.append("tmp/log.txt", "second line\n")
 
 ## ptool.fs.open
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `ptool.fs.open(path[, mode])` opens a local file and returns a `File` object.
 
@@ -108,7 +108,7 @@ file:close()
 
 ## File
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 `File` represents an open local file handle returned by `ptool.fs.open()`.
 
@@ -124,7 +124,7 @@ Methods:
 
 ### read
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 Canonical API name: `ptool.fs.File:read`.
 
@@ -151,7 +151,7 @@ file:close()
 
 ### write
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 Canonical API name: `ptool.fs.File:write`.
 
@@ -166,7 +166,7 @@ Behavior:
 
 ### flush
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 Canonical API name: `ptool.fs.File:flush`.
 
@@ -174,7 +174,7 @@ Canonical API name: `ptool.fs.File:flush`.
 
 ### seek
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 Canonical API name: `ptool.fs.File:seek`.
 
@@ -203,7 +203,7 @@ file:close()
 
 ### close
 
-> `Unreleased` - Introduced.
+> `v0.8.0` - Introduced.
 
 Canonical API name: `ptool.fs.File:close`.
 
@@ -247,7 +247,7 @@ end
 
 ## ptool.fs.is_file
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.fs.is_file(path)` checks whether a path exists and is a regular file.
 
@@ -264,7 +264,7 @@ end
 
 ## ptool.fs.is_dir
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.fs.is_dir(path)` checks whether a path exists and is a directory.
 
@@ -281,7 +281,7 @@ end
 
 ## ptool.fs.remove
 
-> `Unreleased` - Introduced.
+> `v0.6.0` - Introduced.
 
 `ptool.fs.remove(path[, options])` removes a file, symlink, or directory.
 
