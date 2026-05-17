@@ -1,0 +1,76 @@
+{
+  "docsSidebar": [
+    {
+      "type": "category",
+      "label": "Guide",
+      "items": [
+        "intro",
+        "repl"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Lua API",
+      "items": [
+        "lua-api/index",
+        {
+          "type": "category",
+          "label": "Runtime & Interaction",
+          "items": [
+            "lua-api/ansi",
+            "lua-api/args",
+            "lua-api/core",
+            "lua-api/log",
+            "lua-api/sh",
+            "lua-api/tui"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Data & Text",
+          "items": [
+            "lua-api/datetime",
+            "lua-api/hash",
+            "lua-api/json",
+            "lua-api/re",
+            "lua-api/semver",
+            "lua-api/str",
+            "lua-api/tbl",
+            "lua-api/template",
+            "lua-api/toml",
+            "lua-api/yaml",
+            "lua-api/zip"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Filesystem & Platform",
+          "items": [
+            "lua-api/fs",
+            "lua-api/os",
+            "lua-api/path",
+            "lua-api/platform",
+            "lua-api/proc"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Networking & Remote",
+          "items": [
+            "lua-api/http",
+            "lua-api/net",
+            "lua-api/ssh"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Development & Storage",
+          "items": [
+            "lua-api/db",
+            "lua-api/git"
+          ]
+        }
+      ]
+    }
+  ]
+}

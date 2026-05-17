@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.8.0 (2026-05-17)
+
 ### Added
 
 - Added `ptool.fs.append()` / `p.fs.append()`, which appends raw bytes to the
