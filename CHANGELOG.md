@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Fixed
+
+- Pinned `sysinfo` to `0.38.4` so the project remains buildable with
+  `rustc 1.93.1`, avoiding the MSRV bump introduced by `sysinfo 0.39.x`.
+
 ## v0.8.0 (2026-05-17)
 
 ### Added
