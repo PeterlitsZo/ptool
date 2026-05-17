@@ -12,7 +12,7 @@ use std::borrow::Cow;
 use std::cell::RefCell;
 use std::env;
 use std::fs::File;
-use std::io::{Read, Write};
+use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Command as ProcessCommand, Output, Stdio};
 use std::rc::Rc;
@@ -178,6 +178,11 @@ enum ProcessOutputMode {
     Capture,
     Inherit,
     Null,
+}
+
+enum ProcessOutputHandle {
+    Capture(thread::JoinHandle<io::Result<Vec<u8>>>),
+    Inherit(thread::JoinHandle<io::Result<()>>),
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -1244,8 +1249,14 @@ fn run_ssh_command(
         })
     });
 
-    let stdout_handle = child.stdout.take().map(spawn_reader_thread);
-    let stderr_handle = child.stderr.take().map(spawn_reader_thread);
+    let stdout_handle = child
+        .stdout
+        .take()
+        .map(|reader| spawn_process_output_thread(reader, &stdout_mode, false));
+    let stderr_handle = child
+        .stderr
+        .take()
+        .map(|reader| spawn_process_output_thread(reader, &stderr_mode, true));
 
     let status = child
         .wait()
@@ -1278,12 +1289,12 @@ fn configure_stdio(
     });
     command.stdout(match stdout_mode {
         ProcessOutputMode::Capture => Stdio::piped(),
-        ProcessOutputMode::Inherit => Stdio::inherit(),
+        ProcessOutputMode::Inherit => Stdio::piped(),
         ProcessOutputMode::Null => Stdio::null(),
     });
     command.stderr(match stderr_mode {
         ProcessOutputMode::Capture => Stdio::piped(),
-        ProcessOutputMode::Inherit => Stdio::inherit(),
+        ProcessOutputMode::Inherit => Stdio::piped(),
         ProcessOutputMode::Null => Stdio::null(),
     });
 }
@@ -1297,6 +1308,78 @@ where
         reader.read_to_end(&mut buffer)?;
         Ok(buffer)
     })
+}
+
+fn spawn_process_output_thread<R>(
+    reader: R,
+    mode: &ProcessOutputMode,
+    use_stderr: bool,
+) -> ProcessOutputHandle
+where
+    R: Read + Send + 'static,
+{
+    match mode {
+        ProcessOutputMode::Capture => ProcessOutputHandle::Capture(spawn_reader_thread(reader)),
+        ProcessOutputMode::Inherit => {
+            ProcessOutputHandle::Inherit(spawn_prefixed_output_thread(reader, use_stderr))
+        }
+        ProcessOutputMode::Null => unreachable!("null stream mode must not spawn output threads"),
+    }
+}
+
+fn spawn_prefixed_output_thread<R>(
+    mut reader: R,
+    use_stderr: bool,
+) -> thread::JoinHandle<io::Result<()>>
+where
+    R: Read + Send + 'static,
+{
+    thread::spawn(move || {
+        if use_stderr {
+            let stderr = io::stderr();
+            let mut writer = stderr.lock();
+            forward_prefixed_stream(&mut reader, &mut writer)
+        } else {
+            let stdout = io::stdout();
+            let mut writer = stdout.lock();
+            forward_prefixed_stream(&mut reader, &mut writer)
+        }
+    })
+}
+
+fn forward_prefixed_stream<R, W>(reader: &mut R, writer: &mut W) -> io::Result<()>
+where
+    R: Read,
+    W: Write,
+{
+    let mut buffer = [0_u8; 8192];
+    let mut at_line_start = true;
+    loop {
+        let read = reader.read(&mut buffer)?;
+        if read == 0 {
+            writer.flush()?;
+            return Ok(());
+        }
+        write_prefixed_chunk(writer, &buffer[..read], &mut at_line_start)?;
+        writer.flush()?;
+    }
+}
+
+fn write_prefixed_chunk<W>(writer: &mut W, chunk: &[u8], at_line_start: &mut bool) -> io::Result<()>
+where
+    W: Write,
+{
+    for &byte in chunk {
+        if *at_line_start {
+            writer.write_all(crate::DISPLAY_STREAM_PREFIX.as_bytes())?;
+            *at_line_start = false;
+        }
+        writer.write_all(&[byte])?;
+        if byte == b'\n' {
+            *at_line_start = true;
+        }
+    }
+    Ok(())
 }
 
 fn finish_io_thread(
@@ -1315,13 +1398,13 @@ fn finish_io_thread(
 }
 
 fn collect_process_output(
-    handle: Option<thread::JoinHandle<std::io::Result<Vec<u8>>>>,
+    handle: Option<ProcessOutputHandle>,
     mode: &ProcessOutputMode,
     stream_name: &str,
 ) -> Result<Vec<u8>> {
     match mode {
         ProcessOutputMode::Capture => match handle {
-            Some(handle) => match handle.join() {
+            Some(ProcessOutputHandle::Capture(handle)) => match handle.join() {
                 Ok(Ok(buffer)) => Ok(buffer),
                 Ok(Err(err)) => Err(ssh_error(format!(
                     "failed to read {stream_name} from `ssh`: {err}"
@@ -1330,9 +1413,22 @@ fn collect_process_output(
                     "failed to join {stream_name} reader thread for `ssh`"
                 ))),
             },
+            Some(ProcessOutputHandle::Inherit(_)) => Err(ssh_error(format!(
+                "failed to read {stream_name} from `ssh`: worker mode mismatch"
+            ))),
             None => Ok(Vec::new()),
         },
-        ProcessOutputMode::Inherit | ProcessOutputMode::Null => Ok(Vec::new()),
+        ProcessOutputMode::Inherit => match handle {
+            Some(ProcessOutputHandle::Inherit(handle)) => {
+                finish_io_thread(handle, stream_name)?;
+                Ok(Vec::new())
+            }
+            Some(ProcessOutputHandle::Capture(_)) => Err(ssh_error(format!(
+                "failed to read {stream_name} from `ssh`: worker mode mismatch"
+            ))),
+            None => Ok(Vec::new()),
+        },
+        ProcessOutputMode::Null => Ok(Vec::new()),
     }
 }
 

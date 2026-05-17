@@ -86,6 +86,8 @@ pub use yaml::{YamlPathSegment, YamlValue};
 pub use zip::ZipFormat;
 
 pub const PTOOL_VERSION: &str = env!("CARGO_PKG_VERSION");
+pub(crate) const DISPLAY_PREFIX: &str = "· ";
+pub(crate) const DISPLAY_STREAM_PREFIX: &str = "  | ";
 
 #[derive(Clone, Debug)]
 pub struct PtoolEngine {

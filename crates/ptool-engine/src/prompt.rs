@@ -1,4 +1,5 @@
 use crate::{Error, ErrorKind, Result};
+use inquire::ui::{Color, RenderConfig, Styled};
 use inquire::validator::Validation;
 use inquire::{Confirm, InquireError, MultiSelect, Password, PasswordDisplayMode, Select, Text};
 use regex::Regex;
@@ -80,7 +81,7 @@ pub fn prompt_text(op: &str, prompt: &str, options: PromptTextOptions) -> Result
     let min_length = options.min_length;
     let max_length = options.max_length;
 
-    let mut text = Text::new(prompt);
+    let mut text = Text::new(prompt).with_render_config(prompt_render_config());
     if let Some(default) = options.default.as_deref() {
         text = text.with_default(default);
     }
@@ -112,7 +113,7 @@ pub fn prompt_text(op: &str, prompt: &str, options: PromptTextOptions) -> Result
 
 pub fn prompt_confirm(op: &str, prompt: &str, options: PromptConfirmOptions) -> Result<bool> {
     ensure_non_empty_prompt(op, prompt)?;
-    let mut confirm = Confirm::new(prompt);
+    let mut confirm = Confirm::new(prompt).with_render_config(prompt_render_config());
     if let Some(default) = options.default {
         confirm = confirm.with_default(default);
     }
@@ -132,7 +133,7 @@ pub fn prompt_select(
     validate_select_options(op, &items, &options)?;
 
     let default_index = options.default_index;
-    let mut select = Select::new(prompt, items);
+    let mut select = Select::new(prompt, items).with_render_config(prompt_render_config());
     if let Some(help) = options.help.as_deref() {
         select = select.with_help_message(help);
     }
@@ -159,7 +160,7 @@ pub fn prompt_multiselect(
     let min_selected = options.min_selected;
     let max_selected = options.max_selected;
 
-    let mut select = MultiSelect::new(prompt, items);
+    let mut select = MultiSelect::new(prompt, items).with_render_config(prompt_render_config());
     if let Some(help) = options.help.as_deref() {
         select = select.with_help_message(help);
     }
@@ -205,20 +206,31 @@ pub fn prompt_secret(op: &str, prompt: &str, options: PromptSecretOptions) -> Re
     let allow_empty = options.allow_empty;
     let min_length = options.min_length;
     let max_length = options.max_length;
+    let rendered_confirm_prompt = options.confirm.then(|| {
+        options
+            .confirm_prompt
+            .clone()
+            .unwrap_or_else(|| "Confirmation:".to_string())
+    });
 
     let mut password = Password::new(prompt)
+        .with_render_config(prompt_render_config())
         .with_display_mode(PasswordDisplayMode::Masked)
         .without_confirmation();
     if let Some(help) = options.help.as_deref() {
         password = password.with_help_message(help);
     }
     if options.confirm {
-        password = Password::new(prompt).with_display_mode(PasswordDisplayMode::Masked);
+        password = Password::new(prompt)
+            .with_render_config(prompt_render_config())
+            .with_display_mode(PasswordDisplayMode::Masked)
+            .with_custom_confirmation_message(
+                rendered_confirm_prompt
+                    .as_deref()
+                    .expect("confirmation prompt must exist when confirm is enabled"),
+            );
         if let Some(help) = options.help.as_deref() {
             password = password.with_help_message(help);
-        }
-        if let Some(confirm_prompt) = options.confirm_prompt.as_deref() {
-            password = password.with_custom_confirmation_message(confirm_prompt);
         }
         if let Some(mismatch_message) = options.mismatch_message.as_deref() {
             password = password.with_custom_confirmation_error_message(mismatch_message);
@@ -277,6 +289,12 @@ fn ensure_non_empty_prompt(op: &str, prompt: &str) -> Result<()> {
         .with_detail("`prompt` must not be empty"));
     }
     Ok(())
+}
+
+fn prompt_render_config() -> RenderConfig<'static> {
+    RenderConfig::default()
+        .with_prompt_prefix(Styled::new("· ?").with_fg(Color::LightGreen))
+        .with_answered_prompt_prefix(Styled::new("· >").with_fg(Color::LightGreen))
 }
 
 fn validate_text_options(op: &str, options: &PromptTextOptions) -> Result<()> {

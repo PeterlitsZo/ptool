@@ -37,12 +37,14 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
     let (lua, world) = create_lua_runtime(REPL_SCRIPT_NAME, &[])?;
     let repl_env = create_repl_environment(&lua)?;
     let mut editor = DefaultEditor::new()?;
-    let mut stdout = io::stdout().lock();
     let mut chunk = String::new();
     let mut prompt = REPL_PROMPT;
 
-    writeln!(stdout, "ptool repl ({})", env!("CARGO_PKG_VERSION"))?;
-    writeln!(stdout, "Press Ctrl-D to exit.")?;
+    with_stdout_lock(|stdout| {
+        writeln!(stdout, "ptool repl ({})", env!("CARGO_PKG_VERSION"))?;
+        writeln!(stdout, "Press Ctrl-D to exit.")?;
+        Ok(())
+    })?;
 
     loop {
         let line = match editor.readline(prompt) {
@@ -53,7 +55,10 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
                 continue;
             }
             Err(ReadlineError::Eof) => {
-                writeln!(stdout)?;
+                with_stdout_lock(|stdout| {
+                    writeln!(stdout)?;
+                    Ok(())
+                })?;
                 break;
             }
             Err(err) => return Err(err.into()),
@@ -77,7 +82,12 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
             .eval::<MultiValue>()
         {
             Ok(values) => {
-                print_repl_values(&mut stdout, &world, values)?;
+                if let Some(rendered) = render_repl_values(&world, values)? {
+                    with_stdout_lock(|stdout| {
+                        writeln!(stdout, "{rendered}")?;
+                        Ok(())
+                    })?;
+                }
                 chunk.clear();
                 prompt = REPL_PROMPT;
             }
@@ -88,11 +98,14 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
                 prompt = REPL_CONTINUATION_PROMPT;
             }
             Err(err) => {
-                writeln!(
-                    stdout,
-                    "error: {}",
-                    crate::lua_error::render_error_report(&err)
-                )?;
+                with_stdout_lock(|stdout| {
+                    writeln!(
+                        stdout,
+                        "error: {}",
+                        crate::lua_error::render_error_report(&err)
+                    )?;
+                    Ok(())
+                })?;
                 chunk.clear();
                 prompt = REPL_PROMPT;
             }
@@ -109,6 +122,12 @@ fn create_repl_environment(lua: &Lua) -> mlua::Result<Table> {
     env.set_metatable(Some(mt))?;
     env.set("_G", env.clone())?;
     Ok(env)
+}
+
+fn with_stdout_lock<T>(f: impl FnOnce(&mut io::StdoutLock<'_>) -> io::Result<T>) -> io::Result<T> {
+    let stdout = io::stdout();
+    let mut stdout = stdout.lock();
+    f(&mut stdout)
 }
 
 fn preprocess_repl_chunk(chunk: &str) -> String {
@@ -275,13 +294,12 @@ fn create_lua_runtime(
     Ok((lua, world))
 }
 
-fn print_repl_values(
-    stdout: &mut impl Write,
+fn render_repl_values(
     world: &SharedLuaWorld,
     values: MultiValue,
-) -> Result<(), Box<dyn std::error::Error>> {
+) -> Result<Option<String>, Box<dyn std::error::Error>> {
     if values.is_empty() {
-        return Ok(());
+        return Ok(None);
     }
 
     let rendered = {
@@ -291,8 +309,7 @@ fn print_repl_values(
             .map(|value| world.inspect(value.clone(), None))
             .collect::<mlua::Result<Vec<_>>>()?
     };
-    writeln!(stdout, "{}", rendered.join("\t"))?;
-    Ok(())
+    Ok(Some(rendered.join("\t")))
 }
 
 fn strip_shebang_preserve_lines(script: String) -> String {

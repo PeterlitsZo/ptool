@@ -58,9 +58,9 @@ pub(crate) fn format_line(level: LogLevel, message: &str, color_enabled: bool) -
     );
 
     if message.is_empty() {
-        format!("{timestamp} {level}")
+        format!("{}{timestamp} {level}", crate::DISPLAY_PREFIX)
     } else {
-        format!("{timestamp} {level} {message}")
+        format!("{}{timestamp} {level} {message}", crate::DISPLAY_PREFIX)
     }
 }
 

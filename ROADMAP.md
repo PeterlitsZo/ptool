@@ -7,13 +7,13 @@
 - [ ] Support `p.s3`.
 - [ ] Support `ptool.fs.copy`?
 - [ ] Support `p.redis`.
-- [ ] Support the pipe -- `p.run("foo | bar")`.
+- [ ] Support the pipe -- `p.run("foo | bar")` (is it a good idea?).
 - [ ] Let `p.git` module support `confirm` option.
 - [ ] How about `p.run_shell`?
 
 # v0.8.0
 
-- [ ] Enhance `p.log` and `p.run`, `p.ask` to have better style?
+- [x] Enhance `p.log` and `p.run`, `p.ask` to have better style?
   - The custom `prompt_prefix`? The background color?
 - [x] Let the `ssh:upload`'s `remote_path` can be a directory.
 - [x] Support to get the ptool's version.

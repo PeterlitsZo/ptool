@@ -1,6 +1,6 @@
 use crate::{Error, ErrorKind, Result};
 use std::fs::{File, OpenOptions};
-use std::io::{Read, Write};
+use std::io::{self, Read, Write};
 #[cfg(unix)]
 use std::os::unix::process::CommandExt;
 use std::path::{Path, PathBuf};
@@ -56,6 +56,11 @@ pub struct ExecOptions {
     pub stderr: RunStreamMode,
 }
 
+enum OutputHandle {
+    Capture(thread::JoinHandle<io::Result<Vec<u8>>>),
+    Inherit(thread::JoinHandle<io::Result<()>>),
+}
+
 pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
 
@@ -94,8 +99,14 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
         RunStdin::Inherit | RunStdin::File { .. } => None,
     };
 
-    let stdout_handle = child.stdout.take().map(spawn_reader_thread);
-    let stderr_handle = child.stderr.take().map(spawn_reader_thread);
+    let stdout_handle = child
+        .stdout
+        .take()
+        .map(|reader| spawn_output_thread(reader, &options.stdout, false));
+    let stderr_handle = child
+        .stderr
+        .take()
+        .map(|reader| spawn_output_thread(reader, &options.stderr, true));
 
     let status = child
         .wait()
@@ -258,6 +269,76 @@ where
     })
 }
 
+fn spawn_output_thread<R>(reader: R, mode: &RunStreamMode, use_stderr: bool) -> OutputHandle
+where
+    R: Read + Send + 'static,
+{
+    match mode {
+        RunStreamMode::Capture => OutputHandle::Capture(spawn_reader_thread(reader)),
+        RunStreamMode::Inherit => {
+            OutputHandle::Inherit(spawn_prefixed_output_thread(reader, use_stderr))
+        }
+        RunStreamMode::Null | RunStreamMode::File { .. } => {
+            unreachable!("non-piped stream modes must not spawn output threads")
+        }
+    }
+}
+
+fn spawn_prefixed_output_thread<R>(
+    mut reader: R,
+    use_stderr: bool,
+) -> thread::JoinHandle<io::Result<()>>
+where
+    R: Read + Send + 'static,
+{
+    thread::spawn(move || {
+        if use_stderr {
+            let stderr = io::stderr();
+            let mut writer = stderr.lock();
+            forward_prefixed_stream(&mut reader, &mut writer)
+        } else {
+            let stdout = io::stdout();
+            let mut writer = stdout.lock();
+            forward_prefixed_stream(&mut reader, &mut writer)
+        }
+    })
+}
+
+fn forward_prefixed_stream<R, W>(reader: &mut R, writer: &mut W) -> io::Result<()>
+where
+    R: Read,
+    W: Write,
+{
+    let mut buffer = [0_u8; 8192];
+    let mut at_line_start = true;
+    loop {
+        let read = reader.read(&mut buffer)?;
+        if read == 0 {
+            writer.flush()?;
+            return Ok(());
+        }
+        write_prefixed_chunk(writer, &buffer[..read], &mut at_line_start)?;
+        writer.flush()?;
+    }
+}
+
+fn write_prefixed_chunk<W>(writer: &mut W, chunk: &[u8], at_line_start: &mut bool) -> io::Result<()>
+where
+    W: Write,
+{
+    for &byte in chunk {
+        if *at_line_start {
+            writer.write_all(crate::DISPLAY_STREAM_PREFIX.as_bytes())?;
+            *at_line_start = false;
+        }
+        writer.write_all(&[byte])?;
+        if byte == b'\n' {
+            *at_line_start = true;
+        }
+    }
+    Ok(())
+}
+
 fn finish_io_thread(
     handle: thread::JoinHandle<std::io::Result<()>>,
     stream_name: &str,
@@ -283,7 +364,7 @@ fn finish_io_thread(
 }
 
 fn collect_process_output(
-    handle: Option<thread::JoinHandle<std::io::Result<Vec<u8>>>>,
+    handle: Option<OutputHandle>,
     mode: &RunStreamMode,
     stream_name: &str,
     cmd: &str,
@@ -291,7 +372,7 @@ fn collect_process_output(
 ) -> Result<Vec<u8>> {
     match mode {
         RunStreamMode::Capture => match handle {
-            Some(handle) => match handle.join() {
+            Some(OutputHandle::Capture(handle)) => match handle.join() {
                 Ok(Ok(bytes)) => Ok(bytes),
                 Ok(Err(err)) => Err(build_run_io_error(
                     cmd,
@@ -307,9 +388,30 @@ fn collect_process_output(
                     std::io::Error::other(format!("child {stream_name} worker panicked")),
                 )),
             },
+            Some(OutputHandle::Inherit(_)) => Err(build_run_io_error(
+                cmd,
+                cwd,
+                std::io::Error::other(format!(
+                    "child {stream_name} worker mode mismatch for `{cmd}`"
+                )),
+            )),
             None => Ok(Vec::new()),
         },
-        RunStreamMode::Inherit | RunStreamMode::Null | RunStreamMode::File { .. } => Ok(Vec::new()),
+        RunStreamMode::Inherit => match handle {
+            Some(OutputHandle::Inherit(handle)) => {
+                finish_io_thread(handle, stream_name, cmd, cwd)?;
+                Ok(Vec::new())
+            }
+            Some(OutputHandle::Capture(_)) => Err(build_run_io_error(
+                cmd,
+                cwd,
+                std::io::Error::other(format!(
+                    "child {stream_name} worker mode mismatch for `{cmd}`"
+                )),
+            )),
+            None => Ok(Vec::new()),
+        },
+        RunStreamMode::Null | RunStreamMode::File { .. } => Ok(Vec::new()),
     }
 }
 
@@ -320,7 +422,7 @@ fn configure_output_stdio(
     cmd: &str,
 ) -> Result<Stdio> {
     match mode {
-        RunStreamMode::Inherit => Ok(Stdio::inherit()),
+        RunStreamMode::Inherit => Ok(Stdio::piped()),
         RunStreamMode::Capture => Ok(Stdio::piped()),
         RunStreamMode::Null => Ok(Stdio::null()),
         RunStreamMode::File { path, append } => Ok(Stdio::from(open_output_redirect_file(

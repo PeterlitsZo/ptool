@@ -33,6 +33,11 @@
   directory-style `remote_path`, either by targeting an existing remote
   directory or by using a trailing `/`, and documented the updated behavior
   across all supported locales.
+- Changed terminal-facing helpers so `ptool.log(...)` uses a leading `· `
+  prefix, `ptool.ask(...)` and related interactive prompts render with `· ?`
+  / `· >` prompt prefixes, and inherited `stdout` / `stderr` from local and
+  SSH command helpers now stream back with a leading `  | ` prefix on each
+  line.
 
 ## v0.7.2 (2026-05-16)
 
