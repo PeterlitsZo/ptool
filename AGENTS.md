@@ -45,6 +45,10 @@ interpreter and injects a large set of utility functions (registered under the
   regenerate the localized docs under `website/i18n/` using the docs i18n
   workflow (`node website/scripts/docs-i18n.mjs sync`, `compile`, or
   `refresh`) so localized docs stay in sync.
+- When adding, removing, renaming, or regrouping docs pages in `website/docs/`,
+  you MUST also verify whether `website/sidebars.ts` or
+  `website/versioned_sidebars/` needs a matching update so the pages remain
+  reachable from the docs sidebar.
 - When new or changed source doc strings have not yet been translated for a
   locale, you MUST NOT regenerate that locale's files under `website/i18n/`
   from empty or fuzzy PO entries. Fill in or explicitly resolve the relevant PO

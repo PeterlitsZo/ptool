@@ -38,6 +38,7 @@ const sidebars: SidebarsConfig = {
             'lua-api/template',
             'lua-api/toml',
             'lua-api/yaml',
+            'lua-api/zip',
           ],
         },
         {
@@ -48,6 +49,7 @@ const sidebars: SidebarsConfig = {
             'lua-api/os',
             'lua-api/path',
             'lua-api/platform',
+            'lua-api/proc',
           ],
         },
         {
