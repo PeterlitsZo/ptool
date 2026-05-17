@@ -1,10 +1,10 @@
 {
   "version.label": {
-    "message": "v0.8.0",
-    "description": "The label for version 0.8.0"
+    "message": "v0.8.1",
+    "description": "The label for version 0.8.1"
   },
   "sidebar.docsSidebar.category.Guide": {
-    "message": "ガイド",
+    "message": "指南",
     "description": "The label for category 'Guide' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Lua API": {
@@ -12,23 +12,23 @@
     "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Runtime & Interaction": {
-    "message": "ランタイムと対話",
+    "message": "运行时与交互",
     "description": "The label for category 'Runtime & Interaction' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Data & Text": {
-    "message": "データとテキスト",
+    "message": "数据与文本",
     "description": "The label for category 'Data & Text' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Filesystem & Platform": {
-    "message": "ファイルシステムとプラットフォーム",
+    "message": "文件系统与平台",
     "description": "The label for category 'Filesystem & Platform' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Networking & Remote": {
-    "message": "ネットワークとリモート",
+    "message": "网络与远程",
     "description": "The label for category 'Networking & Remote' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Development & Storage": {
-    "message": "開発とストレージ",
+    "message": "开发与存储",
     "description": "The label for category 'Development & Storage' in sidebar 'docsSidebar'"
   }
 }

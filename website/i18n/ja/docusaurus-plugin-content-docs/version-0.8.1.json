@@ -1,34 +1,34 @@
 {
   "version.label": {
-    "message": "v0.8.0",
-    "description": "The label for version 0.8.0"
+    "message": "v0.8.1",
+    "description": "The label for version 0.8.1"
   },
   "sidebar.docsSidebar.category.Guide": {
-    "message": "Guía",
+    "message": "ガイド",
     "description": "The label for category 'Guide' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Lua API": {
-    "message": "API de Lua",
+    "message": "Lua API",
     "description": "The label for category 'Lua API' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Runtime & Interaction": {
-    "message": "Ejecución e interacción",
+    "message": "ランタイムと対話",
     "description": "The label for category 'Runtime & Interaction' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Data & Text": {
-    "message": "Datos y texto",
+    "message": "データとテキスト",
     "description": "The label for category 'Data & Text' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Filesystem & Platform": {
-    "message": "Sistema de archivos y plataforma",
+    "message": "ファイルシステムとプラットフォーム",
     "description": "The label for category 'Filesystem & Platform' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Networking & Remote": {
-    "message": "Red y remoto",
+    "message": "ネットワークとリモート",
     "description": "The label for category 'Networking & Remote' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Development & Storage": {
-    "message": "Desarrollo y almacenamiento",
+    "message": "開発とストレージ",
     "description": "The label for category 'Development & Storage' in sidebar 'docsSidebar'"
   }
 }

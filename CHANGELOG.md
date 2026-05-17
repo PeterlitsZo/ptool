@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+TODO...
+
+## v0.8.1 (2026-05-17)
+
 ### Fixed
 
 - Pinned `sysinfo` to `0.38.4` so the project remains buildable with
