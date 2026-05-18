@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 11:32+0800\n"
+"POT-Creation-Date: 2026-05-18 16:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,7 +218,11 @@ msgstr ""
 "[Git API]{1}: abre repositorios, inspecciona el estado y clona, recupera o "
 "introduce identificadores respaldados por libgit2."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:63
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:62
+msgid "[Redis API]{1}: Open Redis connections and send raw Redis commands."
+msgstr "[API de Redis]{1}: Abre conexiones Redis y envía comandos Redis sin procesar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:64
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

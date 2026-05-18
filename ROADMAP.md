@@ -15,6 +15,9 @@
         !     status: 101
         !     cwd: /Users/peterlits/Proj/ft/ft-user-service
       ```
+- [ ] Support `p.consul` module.
+- [ ] Support `p.etcd` module.
+- [ ] Let `p.tbl` have `any` and `all` methods, etc.
 
 # v0.9.0
 
@@ -22,8 +25,8 @@
   - Support `Version:is_release` and `Version:is_prerelease`.
   - Support `Version:bump` method.
 - [x] Let ptool support more hash functions.
-- [ ] Support `ptool.fs.copy`?
-- [ ] Support `p.redis`.
+- [x] Support `ptool.fs.copy`?
+- [x] Support `p.redis`.
 - [ ] Support the pipe -- `p.run("foo | bar")` (is it a good idea?).
 - [ ] Let `p.git` module support `confirm` option.
 - [x] How about `p.run_shell`?

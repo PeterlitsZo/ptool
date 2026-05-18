@@ -15,6 +15,7 @@ mod platform;
 mod proc;
 mod prompt;
 mod re;
+mod redis;
 mod script_args;
 mod semver;
 mod ssh;
@@ -61,6 +62,7 @@ pub use prompt::{
     prompt_select, prompt_text,
 };
 pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
+pub use redis::{RedisArg, RedisConnection, RedisReply};
 pub use script_args::{
     ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
     ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,
@@ -415,6 +417,10 @@ impl PtoolEngine {
 
     pub fn zip_decompress(&self, bytes: &[u8], format: ZipFormat, op: &str) -> Result<Vec<u8>> {
         zip::decompress(bytes, format, op)
+    }
+
+    pub fn redis_connect(&self, url: &str) -> Result<RedisConnection> {
+        redis::connect(Arc::clone(&self.runtime), url)
     }
 
     pub fn fs_read(&self, path: &str) -> Result<Vec<u8>> {

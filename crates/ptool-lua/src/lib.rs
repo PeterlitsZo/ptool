@@ -16,6 +16,7 @@ mod path;
 mod proc;
 mod prompt;
 mod re;
+mod redis;
 mod runner;
 mod script_args;
 mod semver;

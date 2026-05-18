@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added the `ptool.redis` / `p.redis` module with Redis connection helpers for
+  opening connections, sending raw commands, and closing sessions, and
+  documented it across all supported current locales.
 - Added `ptool.run_shell(...)` / `p.run_shell(...)` for shell-driven local
   command execution, plus `ptool.config({ shell = ... })` to set the default
   shell, and documented the new workflow across all supported locales.

@@ -581,6 +581,13 @@ impl LuaWorld {
         crate::db::connect(value, self.current_dir(), &self.engine)
     }
 
+    pub(crate) fn redis_connect(
+        &self,
+        value: Value,
+    ) -> mlua::Result<crate::redis::LuaRedisConnection> {
+        crate::redis::connect(value, &self.engine)
+    }
+
     pub(crate) fn git_open(&self, path: Option<String>) -> mlua::Result<crate::git::LuaGitRepo> {
         crate::git::open(path, self.current_dir(), &self.engine)
     }

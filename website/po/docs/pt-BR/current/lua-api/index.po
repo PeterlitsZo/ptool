@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 11:32+0800\n"
+"POT-Creation-Date: 2026-05-18 16:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,8 +87,8 @@ msgid ""
 "[Hash API]{1}: Compute cryptographic digests, checksums, and fast non-"
 "cryptographic hashes."
 msgstr ""
-"[API de hash]{1}: Calcula digests criptográficos, checksums e hashes "
-"rápidos não criptográficos."
+"[API de hash]{1}: Calcula digests criptográficos, checksums e hashes rápidos "
+"não criptográficos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:25
 msgid "[JSON API]{1}: Parse JSON text and stringify Lua values as JSON."
@@ -219,7 +219,11 @@ msgstr ""
 "[API Git]{1}: Abra repositórios, inspecione o status e clone, busque ou "
 "envie por meio de identificadores apoiados por libgit2."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:63
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:62
+msgid "[Redis API]{1}: Open Redis connections and send raw Redis commands."
+msgstr "[API de Redis]{1}: Abre conexões Redis e envia comandos Redis brutos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:64
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

@@ -59,6 +59,7 @@ alphabetical order.
 - [Database API](./db.md): Open database connections and run SQL queries.
 - [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or
   push through libgit2-backed handles.
+- [Redis API](./redis.md): Open Redis connections and send raw Redis commands.
 
 Use this page as the entrypoint, then jump to the module page you need for the
 full function reference.
