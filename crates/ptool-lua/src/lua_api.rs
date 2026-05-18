@@ -321,17 +321,43 @@ fn create_ptool_datetime_module(
 
 fn create_ptool_hash_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
     let hash_module = lua.create_table()?;
-    let sha256_state = Rc::clone(&world);
-    let sha256_fn = lua
-        .create_function(move |_, input: LuaString| Ok(sha256_state.borrow().hash_sha256(input)))?;
-    let sha1_state = Rc::clone(&world);
-    let sha1_fn =
-        lua.create_function(move |_, input: LuaString| Ok(sha1_state.borrow().hash_sha1(input)))?;
-    let md5_fn =
-        lua.create_function(move |_, input: LuaString| Ok(world.borrow().hash_md5(input)))?;
-    hash_module.set("sha256", sha256_fn)?;
-    hash_module.set("sha1", sha1_fn)?;
-    hash_module.set("md5", md5_fn)?;
+
+    macro_rules! set_hash_fn {
+        ($name:literal, $method:ident) => {{
+            let state = Rc::clone(&world);
+            let function =
+                lua.create_function(move |_, input: LuaString| Ok(state.borrow().$method(input)))?;
+            hash_module.set($name, function)?;
+        }};
+    }
+
+    set_hash_fn!("sha224", hash_sha224);
+    set_hash_fn!("sha256", hash_sha256);
+    set_hash_fn!("sha384", hash_sha384);
+    set_hash_fn!("sha512", hash_sha512);
+    set_hash_fn!("sha512_224", hash_sha512_224);
+    set_hash_fn!("sha512_256", hash_sha512_256);
+    set_hash_fn!("sha1", hash_sha1);
+    set_hash_fn!("sha3_224", hash_sha3_224);
+    set_hash_fn!("sha3_256", hash_sha3_256);
+    set_hash_fn!("sha3_384", hash_sha3_384);
+    set_hash_fn!("sha3_512", hash_sha3_512);
+    set_hash_fn!("blake2s256", hash_blake2s256);
+    set_hash_fn!("blake2b512", hash_blake2b512);
+    set_hash_fn!("blake3", hash_blake3);
+    set_hash_fn!("md5", hash_md5);
+    set_hash_fn!("crc32", hash_crc32);
+    set_hash_fn!("crc64", hash_crc64);
+    set_hash_fn!("adler32", hash_adler32);
+    set_hash_fn!("xxh32", hash_xxh32);
+    set_hash_fn!("xxh64", hash_xxh64);
+    set_hash_fn!("xxh3_64", hash_xxh3_64);
+    set_hash_fn!("xxh3_128", hash_xxh3_128);
+    set_hash_fn!("murmur3_32", hash_murmur3_32);
+    set_hash_fn!("murmur3_128", hash_murmur3_128);
+    set_hash_fn!("fnv1a32", hash_fnv1a32);
+    set_hash_fn!("fnv1a64", hash_fnv1a64);
+
     Ok(hash_module)
 }
 

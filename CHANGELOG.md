@@ -11,6 +11,9 @@
   `ptool.semver` / `p.semver`, so Lua scripts can distinguish stable releases
   from prerelease versions directly on parsed semantic-version objects, and
   documented the new methods across all supported locales.
+- Added many more `ptool.hash` / `p.hash` helpers covering SHA-2, SHA-3,
+  BLAKE2, BLAKE3, CRC, Adler-32, xxHash, MurmurHash3, and FNV-1a variants,
+  and documented the expanded API across all supported current locales.
 
 ## v0.8.1 (2026-05-17)
 

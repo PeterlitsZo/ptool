@@ -21,7 +21,7 @@ alphabetical order.
 
 - [DateTime API](./datetime.md): Parse, compare, format, and convert concrete
   datetimes with timezone support.
-- [Hash API](./hash.md): Compute SHA-256, SHA-1, and MD5 digests.
+- [Hash API](./hash.md): Compute cryptographic digests, checksums, and fast non-cryptographic hashes.
 - [JSON API](./json.md): Parse JSON text and stringify Lua values as JSON.
 - [Regex API](./re.md): Compile regexes and search, capture, replace, or split
   text.

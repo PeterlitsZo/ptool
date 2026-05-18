@@ -305,16 +305,108 @@ impl PtoolEngine {
         path::extname(path)
     }
 
+    pub fn hash_sha224_hex(&self, bytes: &[u8]) -> String {
+        hash::sha224_hex(bytes)
+    }
+
     pub fn hash_sha256_hex(&self, bytes: &[u8]) -> String {
         hash::sha256_hex(bytes)
+    }
+
+    pub fn hash_sha384_hex(&self, bytes: &[u8]) -> String {
+        hash::sha384_hex(bytes)
+    }
+
+    pub fn hash_sha512_hex(&self, bytes: &[u8]) -> String {
+        hash::sha512_hex(bytes)
+    }
+
+    pub fn hash_sha512_224_hex(&self, bytes: &[u8]) -> String {
+        hash::sha512_224_hex(bytes)
+    }
+
+    pub fn hash_sha512_256_hex(&self, bytes: &[u8]) -> String {
+        hash::sha512_256_hex(bytes)
     }
 
     pub fn hash_sha1_hex(&self, bytes: &[u8]) -> String {
         hash::sha1_hex(bytes)
     }
 
+    pub fn hash_sha3_224_hex(&self, bytes: &[u8]) -> String {
+        hash::sha3_224_hex(bytes)
+    }
+
+    pub fn hash_sha3_256_hex(&self, bytes: &[u8]) -> String {
+        hash::sha3_256_hex(bytes)
+    }
+
+    pub fn hash_sha3_384_hex(&self, bytes: &[u8]) -> String {
+        hash::sha3_384_hex(bytes)
+    }
+
+    pub fn hash_sha3_512_hex(&self, bytes: &[u8]) -> String {
+        hash::sha3_512_hex(bytes)
+    }
+
+    pub fn hash_blake2s256_hex(&self, bytes: &[u8]) -> String {
+        hash::blake2s256_hex(bytes)
+    }
+
+    pub fn hash_blake2b512_hex(&self, bytes: &[u8]) -> String {
+        hash::blake2b512_hex(bytes)
+    }
+
+    pub fn hash_blake3_hex(&self, bytes: &[u8]) -> String {
+        hash::blake3_hex(bytes)
+    }
+
     pub fn hash_md5_hex(&self, bytes: &[u8]) -> String {
         hash::md5_hex(bytes)
+    }
+
+    pub fn hash_crc32_hex(&self, bytes: &[u8]) -> String {
+        hash::crc32_hex(bytes)
+    }
+
+    pub fn hash_crc64_hex(&self, bytes: &[u8]) -> String {
+        hash::crc64_hex(bytes)
+    }
+
+    pub fn hash_adler32_hex(&self, bytes: &[u8]) -> String {
+        hash::adler32_hex(bytes)
+    }
+
+    pub fn hash_xxh32_hex(&self, bytes: &[u8]) -> String {
+        hash::xxh32_hex(bytes)
+    }
+
+    pub fn hash_xxh64_hex(&self, bytes: &[u8]) -> String {
+        hash::xxh64_hex(bytes)
+    }
+
+    pub fn hash_xxh3_64_hex(&self, bytes: &[u8]) -> String {
+        hash::xxh3_64_hex(bytes)
+    }
+
+    pub fn hash_xxh3_128_hex(&self, bytes: &[u8]) -> String {
+        hash::xxh3_128_hex(bytes)
+    }
+
+    pub fn hash_murmur3_32_hex(&self, bytes: &[u8]) -> String {
+        hash::murmur3_32_hex(bytes)
+    }
+
+    pub fn hash_murmur3_128_hex(&self, bytes: &[u8]) -> String {
+        hash::murmur3_128_hex(bytes)
+    }
+
+    pub fn hash_fnv1a32_hex(&self, bytes: &[u8]) -> String {
+        hash::fnv1a32_hex(bytes)
+    }
+
+    pub fn hash_fnv1a64_hex(&self, bytes: &[u8]) -> String {
+        hash::fnv1a64_hex(bytes)
     }
 
     pub fn zip_compress(&self, bytes: &[u8], format: ZipFormat, op: &str) -> Result<Vec<u8>> {

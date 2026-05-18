@@ -16,7 +16,7 @@ Los módulos se agrupan por dominio. Dentro de cada grupo, las entradas se enume
 ## Datos y texto
 
 - [DateTime API](./datetime.md): analiza, compara, formatea y convierte fechas concretas con soporte de zona horaria.
-- [API de hash](./hash.md): Calcula resúmenes SHA-256, SHA-1 y MD5.
+- [Hash API](./hash.md): Calcula digests criptográficos, sumas de comprobación y hashes rápidos no criptográficos.
 - [API JSON](./json.md): Analiza texto JSON y serializa valores Lua como JSON.
 - [API de regex](./re.md): Compila regex y busca, captura, reemplaza o divide texto.
 - [API de SemVer](./semver.md): Analiza, compara y actualiza versiones semánticas.

@@ -1,22 +1,24 @@
 # v0.10.0
 
+- [ ] Support `p.s3`.
 - [ ] Support `p.log.fatal` -- log fatal message and exit.
-- [ ] If the ptool is running in a interactive shell, let `p.run` (and more)
-      only show the last line of stdout / stderr.
+- [ ] Let the `p.run` (and more) show colored output.
+- [ ] For `p.run_shell`, do not show the `bash -c`.
 
 # v0.9.0
 
 - [x] Enhance the `p.semvar`:
   - Support `Version:is_release` and `Version:is_prerelease`.
   - Support `Version:bump` method.
-- [ ] Let ptool support more hash functions.
-- [ ] Support `p.s3`.
+- [x] Let ptool support more hash functions.
 - [ ] Support `ptool.fs.copy`?
 - [ ] Support `p.redis`.
 - [ ] Support the pipe -- `p.run("foo | bar")` (is it a good idea?).
 - [ ] Let `p.git` module support `confirm` option.
 - [x] How about `p.run_shell`?
 - [ ] Enhance `p.sh` module.
+- [ ] If the ptool is running in a interactive shell, let `p.run` (and more)
+      only show the last line of stdout / stderr.
 
 # v0.8.0
 

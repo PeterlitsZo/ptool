@@ -453,16 +453,108 @@ impl LuaWorld {
         crate::net::parse_host_port(lua, &self.engine, input)
     }
 
+    pub(crate) fn hash_sha224(&self, input: LuaString) -> String {
+        self.engine.hash_sha224_hex(&input.as_bytes())
+    }
+
     pub(crate) fn hash_sha256(&self, input: LuaString) -> String {
         self.engine.hash_sha256_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha384(&self, input: LuaString) -> String {
+        self.engine.hash_sha384_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha512(&self, input: LuaString) -> String {
+        self.engine.hash_sha512_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha512_224(&self, input: LuaString) -> String {
+        self.engine.hash_sha512_224_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha512_256(&self, input: LuaString) -> String {
+        self.engine.hash_sha512_256_hex(&input.as_bytes())
     }
 
     pub(crate) fn hash_sha1(&self, input: LuaString) -> String {
         self.engine.hash_sha1_hex(&input.as_bytes())
     }
 
+    pub(crate) fn hash_sha3_224(&self, input: LuaString) -> String {
+        self.engine.hash_sha3_224_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha3_256(&self, input: LuaString) -> String {
+        self.engine.hash_sha3_256_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha3_384(&self, input: LuaString) -> String {
+        self.engine.hash_sha3_384_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_sha3_512(&self, input: LuaString) -> String {
+        self.engine.hash_sha3_512_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_blake2s256(&self, input: LuaString) -> String {
+        self.engine.hash_blake2s256_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_blake2b512(&self, input: LuaString) -> String {
+        self.engine.hash_blake2b512_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_blake3(&self, input: LuaString) -> String {
+        self.engine.hash_blake3_hex(&input.as_bytes())
+    }
+
     pub(crate) fn hash_md5(&self, input: LuaString) -> String {
         self.engine.hash_md5_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_crc32(&self, input: LuaString) -> String {
+        self.engine.hash_crc32_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_crc64(&self, input: LuaString) -> String {
+        self.engine.hash_crc64_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_adler32(&self, input: LuaString) -> String {
+        self.engine.hash_adler32_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_xxh32(&self, input: LuaString) -> String {
+        self.engine.hash_xxh32_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_xxh64(&self, input: LuaString) -> String {
+        self.engine.hash_xxh64_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_xxh3_64(&self, input: LuaString) -> String {
+        self.engine.hash_xxh3_64_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_xxh3_128(&self, input: LuaString) -> String {
+        self.engine.hash_xxh3_128_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_murmur3_32(&self, input: LuaString) -> String {
+        self.engine.hash_murmur3_32_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_murmur3_128(&self, input: LuaString) -> String {
+        self.engine.hash_murmur3_128_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_fnv1a32(&self, input: LuaString) -> String {
+        self.engine.hash_fnv1a32_hex(&input.as_bytes())
+    }
+
+    pub(crate) fn hash_fnv1a64(&self, input: LuaString) -> String {
+        self.engine.hash_fnv1a64_hex(&input.as_bytes())
     }
 
     pub(crate) fn zip_compress(

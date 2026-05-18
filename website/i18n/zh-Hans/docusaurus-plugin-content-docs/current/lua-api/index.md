@@ -16,7 +16,7 @@
 ## 数据与文本
 
 - [DateTime API](./datetime.md)：解析、比较、格式化并转换带时区支持的具体时间点。
-- [Hash API](./hash.md)：计算 SHA-256、SHA-1 和 MD5 摘要。
+- [Hash API](./hash.md)：计算加密哈希摘要、校验和与快速非加密哈希。
 - [JSON API](./json.md)：解析 JSON 文本，并把 Lua 值序列化为 JSON。
 - [Regex API](./re.md)：编译正则，并对文本进行搜索、捕获、替换或切分。
 - [SemVer API](./semver.md)：解析、比较并提升语义化版本。
