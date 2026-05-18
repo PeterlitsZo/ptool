@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 21:53+0800\n"
+"POT-Creation-Date: 2026-05-18 13:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -581,41 +581,163 @@ msgid "Example:"
 msgstr "Exemplo:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:309
+msgid "ptool.fs.copy"
+msgstr "ptool.fs.copy"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:311
+msgid "`v0.1.0-alpha.4` - Introduced. `v0.9.0` - Local-to-local copies now support directories and destination-directory behavior for files."
+msgstr "`v0.1.0-alpha.4` - Introduced. `v0.9.0` - Cópias locais agora suportam diretórios e o comportamento de diretório de destino para arquivos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:315
+msgid "`ptool.fs.copy(src, dst[, options])` copies files or directories between local paths, or between a local path and an SSH remote path."
+msgstr "`ptool.fs.copy(src, dst[, options])` copia arquivos ou diretórios entre caminhos locais, ou entre um caminho local e um caminho remoto via SSH."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:318
+msgid "`src` (string|remote path, required): The source path. Local paths use strings. Remote paths use values created by `conn:path(...)`."
+msgstr "`src` (string|remote path, obrigatório): O caminho de origem. Caminhos locais usam strings. Caminhos remotos usam valores criados por `conn:path(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:320
+msgid "`dst` (string|remote path, required): The destination path. Local paths use strings. Remote paths use values created by `conn:path(...)`."
+msgstr "`dst` (string|remote path, obrigatório): O caminho de destino. Caminhos locais usam strings. Caminhos remotos usam valores criados por `conn:path(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:322
+msgid "`options` (table, optional): Transfer options."
+msgstr "`options` (table, opcional): Opções de transferência."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "Returns: A table with the following fields:"
+msgstr "Retorna: Uma tabela com os seguintes campos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "`bytes` (integer): The number of regular-file bytes copied. When a directory is copied, this is the sum of the copied file sizes."
+msgstr "`bytes` (integer): O número de bytes de arquivos regulares copiados. Quando um diretório é copiado, isso é a soma dos tamanhos dos arquivos copiados."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "`from` (string): The source path."
+msgstr "`from` (string): O caminho de origem."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "`to` (string): The destination path."
+msgstr "`to` (string): O caminho de destino."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:329
+msgid "Supported transfer options:"
+msgstr "Opções de transferência suportadas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:331
+msgid "`parents` (boolean, optional): Create parent directories for the final local or remote destination path when needed. Defaults to `false`."
+msgstr "`parents` (boolean, opcional): Cria os diretórios-pai do caminho de destino local ou remoto final quando necessário. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:333
+msgid "`overwrite` (boolean, optional): Whether an existing destination file or final destination directory may be replaced or reused. Defaults to `true`."
+msgstr "`overwrite` (boolean, opcional): Indica se um arquivo de destino existente ou o diretório de destino final pode ser substituído ou reutilizado. O padrão é `true`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:335
+msgid "`echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`."
+msgstr "`echo` (boolean, opcional): Indica se a transferência deve ser exibida antes da execução. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:338
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:338"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:340
+msgid "Local-to-local copies support both files and directories."
+msgstr "Cópias locais suportam tanto arquivos quanto diretórios."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:341
+msgid "When `src` is a file and `dst` is a file path, the file is copied to that exact path."
+msgstr "Quando `src` é um arquivo e `dst` é um caminho de arquivo, o arquivo é copiado para esse caminho exato."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:343
+msgid "When `src` is a file and `dst` already exists as a directory, the file is copied under that directory using the source file basename."
+msgstr "Quando `src` é um arquivo e `dst` já existe como diretório, o arquivo é copiado para dentro desse diretório usando o basename do arquivo de origem."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:345
+msgid "When `src` is a file and `dst` ends with `/` or `\\\\`, `dst` is treated as a destination directory path and the copied file keeps the source file basename. If that directory does not exist yet, `parents = true` can create it."
+msgstr "Quando `src` é um arquivo e `dst` termina com `/` ou `\\\\`, `dst` é tratado como um caminho de diretório de destino e o arquivo copiado mantém o basename do arquivo de origem. Se esse diretório ainda não existir, `parents = true` pode criá-lo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:349
+msgid "When `src` is a directory and `dst` does not exist, `dst` becomes the destination directory root."
+msgstr "Quando `src` é um diretório e `dst` não existe, `dst` se torna a raiz do diretório de destino."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:351
+msgid "When `src` is a directory and `dst` already exists as a directory, the source directory is created under it using the source directory basename."
+msgstr "Quando `src` é um diretório e `dst` já existe como diretório, o diretório de origem é criado dentro dele usando o basename do diretório de origem."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:353
+msgid "`overwrite = false` rejects an already-existing destination file or final destination directory."
+msgstr "`overwrite = false` rejeita um arquivo de destino já existente ou o diretório de destino final."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:355
+msgid "Local directory copies reject destinations inside the source directory."
+msgstr "Cópias de diretórios locais rejeitam destinos dentro do diretório de origem."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:356
+msgid "Local-to-remote copies follow the same destination rules as `conn:upload(...)`."
+msgstr "Cópias de local para remoto seguem as mesmas regras de destino de `conn:upload(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:358
+msgid "Remote-to-local copies follow the same destination rules as `conn:download(...)`."
+msgstr "Cópias de remoto para local seguem as mesmas regras de destino de `conn:download(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:360
+msgid "Remote-to-remote copies are not supported."
+msgstr "Cópias de remoto para remoto não são suportadas."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:362
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:362"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:375
+msgid "Directory example:"
+msgstr "Exemplo de diretório:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:387
+msgid "Remote example:"
+msgstr "Exemplo remoto:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:402
 msgid "ptool.fs.glob"
 msgstr "ptool.fs.glob"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:311
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:404
 msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:314
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:407
 msgid "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically."
 msgstr "`ptool.fs.glob(pattern[, options])` corresponde caminhos do sistema de arquivos usando sintaxe glob no estilo Unix e retorna um array de strings com os caminhos correspondentes, ordenados lexicograficamente."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:318
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:411
 msgid "`pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
 msgstr "`pattern` (string, obrigatório): Um padrão glob. Padrões relativos são resolvidos a partir do diretório de runtime atual do `ptool`, portanto seguem `ptool.cd(...)`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:320
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:413
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr "`options` (table, opcional): Opções de glob. Campos suportados:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:320
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:413
 msgid "`working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory."
 msgstr "`working_dir` (string, opcional): Sobrescreve o diretório base usado para resolver padrões relativos. Valores relativos de `working_dir` são resolvidos a partir do diretório de runtime atual do `ptool`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:324
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:417
 msgid "Returns: `string[]`."
 msgstr "Retorna: `string[]`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:325
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:418
 msgid "Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`."
 msgstr "Arquivos e diretórios ocultos só correspondem quando o componente de padrão correspondente começa explicitamente com `.`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:328
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:328"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:421
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:421"
 msgid "Example:"
 msgstr "Exemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:328"
+#~ msgid "Example:"
+#~ msgstr "Exemplo:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:31"
 #~ msgid "`v0.1.0` - Introduced."

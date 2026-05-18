@@ -295,6 +295,80 @@ ptool.fs.remove("tmp/cache", { recursive = true })
 ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 ```
 
+## ptool.fs.copy
+
+> `v0.1.0-alpha.4` - 引入。 `v0.9.0` - 本地到本地复制现已支持目录，以及文件复制时的目标目录语义。
+
+`ptool.fs.copy(src, dst[, options])` 在本地路径之间，或在本地路径与 SSH 远程路径之间复制文件或目录。
+
+- `src`（string|remote path，必填）：源路径。本地路径使用字符串。远程路径使用由 `conn:path(...)` 创建的值。
+- `dst`（string|remote path，必填）：目标路径。本地路径使用字符串。远程路径使用由 `conn:path(...)` 创建的值。
+- `options`（table，选填）：传输选项。
+- 返回：包含以下字段的表：
+  - `bytes`（integer）：复制的常规文件字节数。复制目录时，这是所有已复制文件大小之和。
+  - `from`（string）：源路径。
+  - `to`（string）：目标路径。
+
+支持的传输选项：
+
+- `parents`（boolean，选填）：在需要时为最终的本地或远程目标路径创建父目录。默认为 `false`。
+- `overwrite`（boolean，选填）：是否允许替换或复用已存在的目标文件或最终目标目录。默认为 `true`。
+- `echo`（boolean，选填）：是否在执行前打印这次传输。默认为 `false`。
+
+行为说明：
+
+- 本地到本地复制同时支持文件和目录。
+- 当 `src` 是文件且 `dst` 是文件路径时，文件会被复制到该精确路径。
+- 当 `src` 是文件且 `dst` 已存在并且是目录时，文件会以源文件 basename 复制到该目录下。
+- 当 `src` 是文件且 `dst` 以 `/` 或 `\\` 结尾时，`dst` 会被视为目标目录路径，复制后的文件会保留源文件 basename。如果该目录尚不存在，可通过 `parents = true` 创建。
+- 当 `src` 是目录且 `dst` 不存在时，`dst` 会成为目标目录根路径。
+- 当 `src` 是目录且 `dst` 已存在并且是目录时，会在其下使用源目录 basename 创建该源目录。
+- `overwrite = false` 会拒绝已存在的目标文件或最终目标目录。
+- 本地目录复制会拒绝位于源目录内部的目标路径。
+- 本地到远程复制遵循与 `conn:upload(...)` 相同的目标路径规则。
+- 远程到本地复制遵循与 `conn:download(...)` 相同的目标路径规则。
+- 不支持远程到远程复制。
+
+示例：
+
+```lua
+local res = ptool.fs.copy("./dist/app.tar.gz", "./tmp/releases/", {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+目录示例：
+
+```lua
+local res = ptool.fs.copy("./dist/assets", "./tmp/releases", {
+  parents = true,
+  overwrite = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+远程示例：
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ptool.fs.copy("./dist/assets", ssh:path("/srv/app/releases"), {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - 引入。 `v0.5.0` - 新增 `working_dir` 选项。

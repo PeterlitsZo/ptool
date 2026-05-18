@@ -306,6 +306,99 @@ ptool.fs.remove("tmp/cache", { recursive = true })
 ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 ```
 
+## ptool.fs.copy
+
+> `v0.1.0-alpha.4` - Introduced.
+> `v0.9.0` - Local-to-local copies now support directories and
+> destination-directory behavior for files.
+
+`ptool.fs.copy(src, dst[, options])` copies files or directories between local
+paths, or between a local path and an SSH remote path.
+
+- `src` (string|remote path, required): The source path. Local paths use
+  strings. Remote paths use values created by `conn:path(...)`.
+- `dst` (string|remote path, required): The destination path. Local paths use
+  strings. Remote paths use values created by `conn:path(...)`.
+- `options` (table, optional): Transfer options.
+- Returns: A table with the following fields:
+  - `bytes` (integer): The number of regular-file bytes copied. When a
+    directory is copied, this is the sum of the copied file sizes.
+  - `from` (string): The source path.
+  - `to` (string): The destination path.
+
+Supported transfer options:
+
+- `parents` (boolean, optional): Create parent directories for the final local
+  or remote destination path when needed. Defaults to `false`.
+- `overwrite` (boolean, optional): Whether an existing destination file or
+  final destination directory may be replaced or reused. Defaults to `true`.
+- `echo` (boolean, optional): Whether to print the transfer before executing
+  it. Defaults to `false`.
+
+Behavior:
+
+- Local-to-local copies support both files and directories.
+- When `src` is a file and `dst` is a file path, the file is copied to that
+  exact path.
+- When `src` is a file and `dst` already exists as a directory, the file is
+  copied under that directory using the source file basename.
+- When `src` is a file and `dst` ends with `/` or `\\`, `dst` is treated as a
+  destination directory path and the copied file keeps the source file
+  basename. If that directory does not exist yet, `parents = true` can create
+  it.
+- When `src` is a directory and `dst` does not exist, `dst` becomes the
+  destination directory root.
+- When `src` is a directory and `dst` already exists as a directory, the
+  source directory is created under it using the source directory basename.
+- `overwrite = false` rejects an already-existing destination file or final
+  destination directory.
+- Local directory copies reject destinations inside the source directory.
+- Local-to-remote copies follow the same destination rules as
+  `conn:upload(...)`.
+- Remote-to-local copies follow the same destination rules as
+  `conn:download(...)`.
+- Remote-to-remote copies are not supported.
+
+Example:
+
+```lua
+local res = ptool.fs.copy("./dist/app.tar.gz", "./tmp/releases/", {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+Directory example:
+
+```lua
+local res = ptool.fs.copy("./dist/assets", "./tmp/releases", {
+  parents = true,
+  overwrite = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+Remote example:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ptool.fs.copy("./dist/assets", ssh:path("/srv/app/releases"), {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced.

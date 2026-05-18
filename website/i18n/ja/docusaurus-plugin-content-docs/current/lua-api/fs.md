@@ -295,6 +295,80 @@ ptool.fs.remove("tmp/cache", { recursive = true })
 ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 ```
 
+## ptool.fs.copy
+
+> `v0.1.0-alpha.4` - Introduced. `v0.9.0` - ローカル間コピーでディレクトリと、ファイルコピー時の宛先ディレクトリ動作をサポート。
+
+`ptool.fs.copy(src, dst[, options])` は、ローカルパス間、またはローカルパスと SSH リモートパスの間でファイルやディレクトリをコピーします。
+
+- `src` (string|remote path, required): コピー元パス。ローカルパスには文字列を使います。リモートパスには `conn:path(...)` で作成した値を使います。
+- `dst` (string|remote path, required): コピー先パス。ローカルパスには文字列を使います。リモートパスには `conn:path(...)` で作成した値を使います。
+- `options` (table, optional): 転送オプション。
+- 戻り値: 次のフィールドを持つテーブル。
+  - `bytes` (integer): コピーされた通常ファイルのバイト数。ディレクトリをコピーする場合は、コピーされた各ファイルサイズの合計です。
+  - `from` (string): コピー元パス。
+  - `to` (string): コピー先パス。
+
+サポートされる転送オプション:
+
+- `parents` (boolean, optional): 必要に応じて最終的なローカルまたはリモートのコピー先パスの親ディレクトリを作成します。デフォルトは `false` です。
+- `overwrite` (boolean, optional): 既存のコピー先ファイルや最終コピー先ディレクトリを置き換えたり再利用したりできるかどうか。デフォルトは `true` です。
+- `echo` (boolean, optional): 実行前に転送内容を表示するかどうか。デフォルトは `false` です。
+
+動作:
+
+- ローカル間コピーはファイルとディレクトリの両方をサポートします。
+- `src` がファイルで `dst` がファイルパスの場合、その正確なパスにコピーされます。
+- `src` がファイルで `dst` がすでにディレクトリとして存在する場合、コピー元ファイルの basename を使ってそのディレクトリ配下にコピーされます。
+- `src` がファイルで `dst` が `/` または `\\` で終わる場合、`dst` はコピー先ディレクトリパスとして扱われ、コピー後のファイルはコピー元ファイルの basename を保持します。そのディレクトリがまだ存在しない場合は、`parents = true` で作成できます。
+- `src` がディレクトリで `dst` が存在しない場合、`dst` がコピー先ディレクトリのルートになります。
+- `src` がディレクトリで `dst` がすでにディレクトリとして存在する場合、コピー元ディレクトリの basename を使ってその配下にコピー元ディレクトリが作成されます。
+- `overwrite = false` の場合、すでに存在するコピー先ファイルや最終コピー先ディレクトリは拒否されます。
+- ローカルディレクトリのコピーでは、コピー元ディレクトリの内側にあるコピー先は拒否されます。
+- ローカルからリモートへのコピーは `conn:upload(...)` と同じコピー先ルールに従います。
+- リモートからローカルへのコピーは `conn:download(...)` と同じコピー先ルールに従います。
+- リモート間コピーはサポートされません。
+
+例:
+
+```lua
+local res = ptool.fs.copy("./dist/app.tar.gz", "./tmp/releases/", {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+ディレクトリ例:
+
+```lua
+local res = ptool.fs.copy("./dist/assets", "./tmp/releases", {
+  parents = true,
+  overwrite = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+リモート例:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ptool.fs.copy("./dist/assets", ssh:path("/srv/app/releases"), {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - Introduced. `v0.5.0` - `working_dir` オプションを追加。

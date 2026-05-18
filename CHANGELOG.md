@@ -15,6 +15,12 @@
   BLAKE2, BLAKE3, CRC, Adler-32, xxHash, MurmurHash3, and FNV-1a variants,
   and documented the expanded API across all supported current locales.
 
+### Changed
+
+- Changed `ptool.fs.copy(...)` so local-to-local copies now support
+  directories, directory-style file destinations, and synchronized the
+  filesystem docs across all supported current locales.
+
 ## v0.8.1 (2026-05-17)
 
 ### Fixed

@@ -87,6 +87,12 @@ pub struct FsCopyResult {
     pub to: String,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum FsCopySourceKind {
+    File,
+    Directory,
+}
+
 pub fn read(path: &str) -> Result<Vec<u8>> {
     ensure_non_empty_path(path)?;
     fs::read(path).map_err(|err| io_error(err).with_op("ptool.fs.read").with_path(path))
@@ -224,60 +230,30 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
     ensure_non_empty_named_path(dst, "dst")?;
 
     let src_path = Path::new(src);
-    let metadata = fs::metadata(src_path).map_err(|err| {
-        Error::new(ErrorKind::Io, format!("failed to access `{src}`: {err}"))
-            .with_op("ptool.fs.copy")
-            .with_path(src)
-    })?;
-    if !metadata.is_file() {
-        return Err(Error::new(
-            ErrorKind::NotAFile,
-            format!("`src` must be a file: `{src}`"),
-        )
-        .with_op("ptool.fs.copy")
-        .with_path(src));
-    }
+    let bytes = match classify_copy_source(src_path, src)? {
+        FsCopySourceKind::File => {
+            let dst_path = resolve_file_copy_destination(src_path, dst)?;
+            prepare_file_copy_destination(&dst_path, options)?;
+            let resolved_dst = dst_path.display().to_string();
 
-    let dst_path = Path::new(dst);
-    if options.parents
-        && let Some(parent) = dst_path
-            .parent()
-            .filter(|parent| !parent.as_os_str().is_empty())
-    {
-        fs::create_dir_all(parent).map_err(|err| {
-            Error::new(
-                ErrorKind::Io,
-                format!(
-                    "failed to create parent directory `{}`: {err}",
-                    parent.display()
-                ),
-            )
-            .with_op("ptool.fs.copy")
-            .with_path(parent.display().to_string())
-        })?;
-    }
+            if options.echo {
+                println!("[copy] {src} -> {dst}");
+            }
 
-    if !options.overwrite && dst_path.exists() {
-        return Err(Error::new(
-            ErrorKind::AlreadyExists,
-            format!("`dst` already exists: `{dst}`"),
-        )
-        .with_op("ptool.fs.copy")
-        .with_path(dst));
-    }
+            copy_file(src_path, &dst_path, src, &resolved_dst)?
+        }
+        FsCopySourceKind::Directory => {
+            let destination_root = resolve_directory_copy_destination(src_path, dst)?;
+            ensure_copy_destination_is_outside_source(src_path, &destination_root)?;
+            prepare_directory_copy_destination(&destination_root, options)?;
 
-    if options.echo {
-        println!("[copy] {src} -> {dst}");
-    }
+            if options.echo {
+                println!("[copy] {src} -> {dst}");
+            }
 
-    let bytes = fs::copy(src_path, dst_path).map_err(|err| {
-        Error::new(
-            ErrorKind::Io,
-            format!("failed to copy `{src}` to `{dst}`: {err}"),
-        )
-        .with_op("ptool.fs.copy")
-        .with_path(dst)
-    })?;
+            copy_directory(src_path, &destination_root, options)?
+        }
+    };
 
     Ok(FsCopyResult {
         bytes,
@@ -441,6 +417,274 @@ fn ensure_non_empty_named_path(path: &str, field: &str) -> Result<()> {
         ));
     }
     Ok(())
+}
+
+fn classify_copy_source(path: &Path, original: &str) -> Result<FsCopySourceKind> {
+    let metadata = fs::metadata(path).map_err(|err| {
+        Error::new(
+            ErrorKind::Io,
+            format!("failed to access `{original}`: {err}"),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(original)
+    })?;
+    if metadata.is_file() {
+        return Ok(FsCopySourceKind::File);
+    }
+    if metadata.is_dir() {
+        return Ok(FsCopySourceKind::Directory);
+    }
+    Err(Error::new(
+        ErrorKind::Unsupported,
+        format!("`src` must be a file or directory: `{original}`"),
+    )
+    .with_op("ptool.fs.copy")
+    .with_path(original))
+}
+
+fn resolve_file_copy_destination(src_path: &Path, dst: &str) -> Result<PathBuf> {
+    let is_directory_hint = ends_with_path_separator(dst);
+    let dst_path = Path::new(dst);
+
+    if dst_path.exists() {
+        if dst_path.is_dir() {
+            return Ok(dst_path.join(path_basename(src_path, "src")?));
+        }
+        if is_directory_hint {
+            return Err(Error::new(
+                ErrorKind::Io,
+                format!("`dst` must be a directory for file copy: `{dst}`"),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(dst));
+        }
+        return Ok(dst_path.to_path_buf());
+    }
+
+    if is_directory_hint {
+        return Ok(dst_path.join(path_basename(src_path, "src")?));
+    }
+
+    Ok(dst_path.to_path_buf())
+}
+
+fn resolve_directory_copy_destination(src_path: &Path, dst: &str) -> Result<PathBuf> {
+    let dst_path = Path::new(dst);
+    if dst_path.exists() {
+        if !dst_path.is_dir() {
+            return Err(Error::new(
+                ErrorKind::Io,
+                format!("`dst` must be a directory for directory copy: `{dst}`"),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(dst));
+        }
+        return Ok(dst_path.join(path_basename(src_path, "src")?));
+    }
+    Ok(dst_path.to_path_buf())
+}
+
+fn prepare_file_copy_destination(path: &Path, options: FsCopyOptions) -> Result<()> {
+    if options.parents
+        && let Some(parent) = path
+            .parent()
+            .filter(|parent| !parent.as_os_str().is_empty())
+    {
+        fs::create_dir_all(parent).map_err(|err| {
+            Error::new(
+                ErrorKind::Io,
+                format!(
+                    "failed to create parent directory `{}`: {err}",
+                    parent.display()
+                ),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(parent.display().to_string())
+        })?;
+    }
+
+    if !options.overwrite && path.exists() {
+        return Err(Error::new(
+            ErrorKind::AlreadyExists,
+            format!("destination already exists: `{}`", path.display()),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(path.display().to_string()));
+    }
+
+    Ok(())
+}
+
+fn prepare_directory_copy_destination(path: &Path, options: FsCopyOptions) -> Result<()> {
+    if path.exists() {
+        if !path.is_dir() {
+            return Err(Error::new(
+                ErrorKind::Io,
+                format!(
+                    "directory destination must not be a file: `{}`",
+                    path.display()
+                ),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(path.display().to_string()));
+        }
+        if !options.overwrite {
+            return Err(Error::new(
+                ErrorKind::AlreadyExists,
+                format!("directory destination already exists: `{}`", path.display()),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(path.display().to_string()));
+        }
+        return Ok(());
+    }
+
+    let create_result = if options.parents {
+        fs::create_dir_all(path)
+    } else {
+        fs::create_dir(path)
+    };
+    create_result.map_err(|err| {
+        Error::new(
+            ErrorKind::Io,
+            format!(
+                "failed to create destination directory `{}`: {err}",
+                path.display()
+            ),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(path.display().to_string())
+    })?;
+    Ok(())
+}
+
+fn copy_file(src_path: &Path, dst_path: &Path, src: &str, dst: &str) -> Result<u64> {
+    fs::copy(src_path, dst_path).map_err(|err| {
+        Error::new(
+            ErrorKind::Io,
+            format!("failed to copy `{src}` to `{dst}`: {err}"),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(dst)
+    })
+}
+
+fn copy_directory(src_dir: &Path, dst_dir: &Path, options: FsCopyOptions) -> Result<u64> {
+    let mut entries = fs::read_dir(src_dir)
+        .map_err(|err| {
+            Error::new(
+                ErrorKind::Io,
+                format!("failed to read directory `{}`: {err}", src_dir.display()),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(src_dir.display().to_string())
+        })?
+        .collect::<std::result::Result<Vec<_>, _>>()
+        .map_err(|err| {
+            Error::new(
+                ErrorKind::Io,
+                format!("failed to read directory `{}`: {err}", src_dir.display()),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(src_dir.display().to_string())
+        })?;
+    entries.sort_by_key(|entry| entry.file_name());
+
+    let mut total_bytes = 0u64;
+    for entry in entries {
+        let entry_path = entry.path();
+        let destination_path = dst_dir.join(entry.file_name());
+        let source_display = entry_path.display().to_string();
+        match classify_copy_source(&entry_path, &source_display)? {
+            FsCopySourceKind::File => {
+                prepare_file_copy_destination(&destination_path, options)?;
+                let destination_display = destination_path.display().to_string();
+                total_bytes = total_bytes.saturating_add(copy_file(
+                    &entry_path,
+                    &destination_path,
+                    &source_display,
+                    &destination_display,
+                )?);
+            }
+            FsCopySourceKind::Directory => {
+                prepare_directory_copy_destination(&destination_path, options)?;
+                total_bytes = total_bytes.saturating_add(copy_directory(
+                    &entry_path,
+                    &destination_path,
+                    options,
+                )?);
+            }
+        }
+    }
+
+    Ok(total_bytes)
+}
+
+fn ensure_copy_destination_is_outside_source(src_dir: &Path, dst_dir: &Path) -> Result<()> {
+    let canonical_src = fs::canonicalize(src_dir).map_err(|err| {
+        Error::new(
+            ErrorKind::Io,
+            format!("failed to access `{}`: {err}", src_dir.display()),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(src_dir.display().to_string())
+    })?;
+    let canonical_dst = canonicalize_destination_path(dst_dir)?;
+
+    if canonical_dst == canonical_src || canonical_dst.starts_with(&canonical_src) {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!(
+                "directory destination must not be inside source: `{}`",
+                dst_dir.display()
+            ),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(dst_dir.display().to_string()));
+    }
+
+    Ok(())
+}
+
+fn canonicalize_destination_path(path: &Path) -> Result<PathBuf> {
+    if path.exists() {
+        return fs::canonicalize(path).map_err(|err| {
+            Error::new(
+                ErrorKind::Io,
+                format!("failed to access `{}`: {err}", path.display()),
+            )
+            .with_op("ptool.fs.copy")
+            .with_path(path.display().to_string())
+        });
+    }
+
+    let parent = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty())
+        .unwrap_or_else(|| Path::new("."));
+    let canonical_parent = canonicalize_destination_path(parent)?;
+    let Some(name) = path.file_name() else {
+        return Ok(canonical_parent);
+    };
+    Ok(canonical_parent.join(name))
+}
+
+fn path_basename<'a>(path: &'a Path, field: &str) -> Result<&'a std::ffi::OsStr> {
+    path.file_name().ok_or_else(|| {
+        Error::new(
+            ErrorKind::InvalidArgs,
+            format!(
+                "`{field}` must have a final path component: `{}`",
+                path.display()
+            ),
+        )
+        .with_op("ptool.fs.copy")
+        .with_path(path.display().to_string())
+    })
+}
+
+fn ends_with_path_separator(path: &str) -> bool {
+    path.ends_with('/') || path.ends_with('\\')
 }
 
 fn resolve_glob_pattern(pattern: &str, base_dir: &Path) -> String {

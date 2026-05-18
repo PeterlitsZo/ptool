@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 21:53+0800\n"
+"POT-Creation-Date: 2026-05-18 13:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -581,41 +581,163 @@ msgid "Example:"
 msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:309
+msgid "ptool.fs.copy"
+msgstr "ptool.fs.copy"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:311
+msgid "`v0.1.0-alpha.4` - Introduced. `v0.9.0` - Local-to-local copies now support directories and destination-directory behavior for files."
+msgstr "`v0.1.0-alpha.4` - 引入。 `v0.9.0` - 本地到本地复制现已支持目录，以及文件复制时的目标目录语义。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:315
+msgid "`ptool.fs.copy(src, dst[, options])` copies files or directories between local paths, or between a local path and an SSH remote path."
+msgstr "`ptool.fs.copy(src, dst[, options])` 在本地路径之间，或在本地路径与 SSH 远程路径之间复制文件或目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:318
+msgid "`src` (string|remote path, required): The source path. Local paths use strings. Remote paths use values created by `conn:path(...)`."
+msgstr "`src`（string|remote path，必填）：源路径。本地路径使用字符串。远程路径使用由 `conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:320
+msgid "`dst` (string|remote path, required): The destination path. Local paths use strings. Remote paths use values created by `conn:path(...)`."
+msgstr "`dst`（string|remote path，必填）：目标路径。本地路径使用字符串。远程路径使用由 `conn:path(...)` 创建的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:322
+msgid "`options` (table, optional): Transfer options."
+msgstr "`options`（table，选填）：传输选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "Returns: A table with the following fields:"
+msgstr "返回：包含以下字段的表："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "`bytes` (integer): The number of regular-file bytes copied. When a directory is copied, this is the sum of the copied file sizes."
+msgstr "`bytes`（integer）：复制的常规文件字节数。复制目录时，这是所有已复制文件大小之和。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "`from` (string): The source path."
+msgstr "`from`（string）：源路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:323
+msgid "`to` (string): The destination path."
+msgstr "`to`（string）：目标路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:329
+msgid "Supported transfer options:"
+msgstr "支持的传输选项："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:331
+msgid "`parents` (boolean, optional): Create parent directories for the final local or remote destination path when needed. Defaults to `false`."
+msgstr "`parents`（boolean，选填）：在需要时为最终的本地或远程目标路径创建父目录。默认为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:333
+msgid "`overwrite` (boolean, optional): Whether an existing destination file or final destination directory may be replaced or reused. Defaults to `true`."
+msgstr "`overwrite`（boolean，选填）：是否允许替换或复用已存在的目标文件或最终目标目录。默认为 `true`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:335
+msgid "`echo` (boolean, optional): Whether to print the transfer before executing it. Defaults to `false`."
+msgstr "`echo`（boolean，选填）：是否在执行前打印这次传输。默认为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:338
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:338"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:340
+msgid "Local-to-local copies support both files and directories."
+msgstr "本地到本地复制同时支持文件和目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:341
+msgid "When `src` is a file and `dst` is a file path, the file is copied to that exact path."
+msgstr "当 `src` 是文件且 `dst` 是文件路径时，文件会被复制到该精确路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:343
+msgid "When `src` is a file and `dst` already exists as a directory, the file is copied under that directory using the source file basename."
+msgstr "当 `src` 是文件且 `dst` 已存在并且是目录时，文件会以源文件 basename 复制到该目录下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:345
+msgid "When `src` is a file and `dst` ends with `/` or `\\\\`, `dst` is treated as a destination directory path and the copied file keeps the source file basename. If that directory does not exist yet, `parents = true` can create it."
+msgstr "当 `src` 是文件且 `dst` 以 `/` 或 `\\\\` 结尾时，`dst` 会被视为目标目录路径，复制后的文件会保留源文件 basename。如果该目录尚不存在，可通过 `parents = true` 创建。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:349
+msgid "When `src` is a directory and `dst` does not exist, `dst` becomes the destination directory root."
+msgstr "当 `src` 是目录且 `dst` 不存在时，`dst` 会成为目标目录根路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:351
+msgid "When `src` is a directory and `dst` already exists as a directory, the source directory is created under it using the source directory basename."
+msgstr "当 `src` 是目录且 `dst` 已存在并且是目录时，会在其下使用源目录 basename 创建该源目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:353
+msgid "`overwrite = false` rejects an already-existing destination file or final destination directory."
+msgstr "`overwrite = false` 会拒绝已存在的目标文件或最终目标目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:355
+msgid "Local directory copies reject destinations inside the source directory."
+msgstr "本地目录复制会拒绝位于源目录内部的目标路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:356
+msgid "Local-to-remote copies follow the same destination rules as `conn:upload(...)`."
+msgstr "本地到远程复制遵循与 `conn:upload(...)` 相同的目标路径规则。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:358
+msgid "Remote-to-local copies follow the same destination rules as `conn:download(...)`."
+msgstr "远程到本地复制遵循与 `conn:download(...)` 相同的目标路径规则。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:360
+msgid "Remote-to-remote copies are not supported."
+msgstr "不支持远程到远程复制。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:362
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:362"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:375
+msgid "Directory example:"
+msgstr "目录示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:387
+msgid "Remote example:"
+msgstr "远程示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:402
 msgid "ptool.fs.glob"
 msgstr "ptool.fs.glob"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:311
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:404
 msgid "`v0.2.0` - Introduced. `v0.5.0` - Added the `working_dir` option."
 msgstr "`v0.2.0` - 引入。 `v0.5.0` - 新增 `working_dir` 选项。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:314
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:407
 msgid "`ptool.fs.glob(pattern[, options])` matches filesystem paths using Unix-style glob syntax and returns a string array of matched paths sorted lexicographically."
 msgstr "`ptool.fs.glob(pattern[, options])` 使用 Unix 风格 glob 语法匹配文件系统 路径，并按字典序返回命中的路径字符串数组。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:318
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:411
 msgid "`pattern` (string, required): A glob pattern. Relative patterns are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
 msgstr "`pattern`（string，必填）：glob 模式。相对模式会从当前 `ptool` 运行时目录 解析，因此会受到 `ptool.cd(...)` 的影响。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:320
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:413
 msgid "`options` (table, optional): Glob options. Supported fields:"
 msgstr "`options`（table，可选）：glob 选项。支持："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:320
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:413
 msgid "`working_dir` (string, optional): Override the base directory used to resolve relative patterns. Relative `working_dir` values are resolved from the current `ptool` runtime directory."
 msgstr "`working_dir`（string，可选）：覆盖相对模式解析时使用的基准目录。 相对 `working_dir` 会从当前 `ptool` 运行时目录解析。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:324
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:417
 msgid "Returns: `string[]`."
 msgstr "返回：`string[]`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:325
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:418
 msgid "Hidden files and directories are matched only when the corresponding pattern component explicitly starts with `.`."
 msgstr "隐藏文件和目录只有在对应模式片段显式以 `.` 开头时才会被匹配。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:328
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:328"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:421
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:421"
 msgid "Example:"
 msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/fs.md:328"
+#~ msgid "Example:"
+#~ msgstr "示例："
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/fresh-vale/ptool/website/docs/lua-api/fs.md:31"
 #~ msgid "`v0.1.0` - Introduced."

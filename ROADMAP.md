@@ -4,6 +4,17 @@
 - [ ] Support `p.log.fatal` -- log fatal message and exit.
 - [ ] Let the `p.run` (and more) show colored output.
 - [ ] For `p.run_shell`, do not show the `bash -c`.
+- [ ] Structured and colorful error reported:
+      ```
+        ! Failed to run Lua script `./scripts/build.lua`:
+        !   ptool.run command `cargo` failed with status 101
+        !     kind: command_failed
+        !     op: ptool.run
+        !     detail: status: 101
+        !     cmd: cargo
+        !     status: 101
+        !     cwd: /Users/peterlits/Proj/ft/ft-user-service
+      ```
 
 # v0.9.0
 

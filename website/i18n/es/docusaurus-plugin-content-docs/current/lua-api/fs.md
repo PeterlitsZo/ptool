@@ -295,6 +295,80 @@ ptool.fs.remove("tmp/cache", { recursive = true })
 ptool.fs.remove("tmp/missing.txt", { missing_ok = true })
 ```
 
+## ptool.fs.copy
+
+> `v0.1.0-alpha.4` - Introducido. `v0.9.0` - Las copias locales ahora admiten directorios y el comportamiento de directorio de destino para archivos.
+
+`ptool.fs.copy(src, dst[, options])` copia archivos o directorios entre rutas locales, o entre una ruta local y una ruta remota SSH.
+
+- `src` (string|remote path, obligatorio): La ruta de origen. Las rutas locales usan cadenas. Las rutas remotas usan valores creados con `conn:path(...)`.
+- `dst` (string|remote path, obligatorio): La ruta de destino. Las rutas locales usan cadenas. Las rutas remotas usan valores creados con `conn:path(...)`.
+- `options` (table, opcional): Opciones de transferencia.
+- Devuelve: Una tabla con los siguientes campos:
+  - `bytes` (integer): El número de bytes de archivos regulares copiados. Cuando se copia un directorio, es la suma de los tamaños de los archivos copiados.
+  - `from` (string): La ruta de origen.
+  - `to` (string): La ruta de destino.
+
+Opciones de transferencia admitidas:
+
+- `parents` (boolean, opcional): Crea los directorios padre de la ruta de destino local o remota final cuando haga falta. Valor predeterminado: `false`.
+- `overwrite` (boolean, opcional): Indica si se puede reemplazar o reutilizar un archivo de destino existente o el directorio de destino final. Valor predeterminado: `true`.
+- `echo` (boolean, opcional): Indica si se imprime la transferencia antes de ejecutarla. Valor predeterminado: `false`.
+
+Comportamiento:
+
+- Las copias de local a local admiten tanto archivos como directorios.
+- Cuando `src` es un archivo y `dst` es una ruta de archivo, el archivo se copia exactamente en esa ruta.
+- Cuando `src` es un archivo y `dst` ya existe como directorio, el archivo se copia dentro de ese directorio usando el nombre base del archivo de origen.
+- Cuando `src` es un archivo y `dst` termina con `/` o `\\`, `dst` se trata como una ruta de directorio de destino y el archivo copiado conserva el nombre base del archivo de origen. Si ese directorio todavía no existe, `parents = true` puede crearlo.
+- Cuando `src` es un directorio y `dst` no existe, `dst` pasa a ser la raíz del directorio de destino.
+- Cuando `src` es un directorio y `dst` ya existe como directorio, el directorio de origen se crea dentro de él usando el nombre base del directorio de origen.
+- `overwrite = false` rechaza un archivo de destino ya existente o el directorio de destino final.
+- Las copias de directorios locales rechazan destinos dentro del directorio de origen.
+- Las copias de local a remoto siguen las mismas reglas de destino que `conn:upload(...)`.
+- Las copias de remoto a local siguen las mismas reglas de destino que `conn:download(...)`.
+- Las copias de remoto a remoto no están admitidas.
+
+Ejemplo:
+
+```lua
+local res = ptool.fs.copy("./dist/app.tar.gz", "./tmp/releases/", {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+Ejemplo de directorio:
+
+```lua
+local res = ptool.fs.copy("./dist/assets", "./tmp/releases", {
+  parents = true,
+  overwrite = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
+Ejemplo remoto:
+
+```lua
+local ssh = ptool.ssh.connect("deploy@example.com")
+
+local res = ptool.fs.copy("./dist/assets", ssh:path("/srv/app/releases"), {
+  parents = true,
+  overwrite = true,
+  echo = true,
+})
+
+print(res.bytes)
+print(res.to)
+```
+
 ## ptool.fs.glob
 
 > `v0.2.0` - Introducido. `v0.5.0` - Se ha añadido la opción `working_dir`.
