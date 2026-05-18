@@ -1,6 +1,12 @@
+# v0.10.0
+
+- [ ] Support `p.log.fatal` -- log fatal message and exit.
+- [ ] If the ptool is running in a interactive shell, let `p.run` (and more)
+      only show the last line of stdout / stderr.
+
 # v0.9.0
 
-- [ ] Enhance the `p.semvar`:
+- [x] Enhance the `p.semvar`:
   - Support `Version:is_release` and `Version:is_prerelease`.
   - Support `Version:bump` method.
 - [ ] Let ptool support more hash functions.

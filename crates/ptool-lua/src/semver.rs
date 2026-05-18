@@ -112,6 +112,14 @@ impl UserData for LuaSemVer {
             ))
         });
 
+        methods.add_method("is_release", |_, this, ()| {
+            Ok(this.engine.semver_is_release(&this.version))
+        });
+
+        methods.add_method("is_prerelease", |_, this, ()| {
+            Ok(this.engine.semver_is_prerelease(&this.version))
+        });
+
         methods.add_method(
             "bump",
             |_, this, (op, channel): (String, Option<String>)| {

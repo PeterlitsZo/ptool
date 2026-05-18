@@ -26,7 +26,7 @@ print(tostring(v))
 `ptool.semver.is_valid(version)` はバージョン文字列が有効かどうかを 確認します。
 
 - `version` (string, 必須): セマンティックバージョン文字列。
-- Returns: `boolean`.
+- 戻り値: `boolean`.
 
 ```lua
 print(ptool.semver.is_valid("1.2.3")) -- true
@@ -56,7 +56,7 @@ print(tostring(req)) -- >=0.6.0, <0.7.0
 `ptool.semver.is_valid_req(req)` はバージョン要件文字列が有効かどうかを確認します。
 
 - `req` (string, 必須): バージョン要件文字列。
-- Returns: `boolean`.
+- 戻り値: `boolean`.
 
 ```lua
 print(ptool.semver.is_valid_req("^1.2.3")) -- true
@@ -70,7 +70,7 @@ print(ptool.semver.is_valid_req(">= 1.2.3, <")) -- false
 `ptool.semver.compare(a, b)` は 2 つのバージョンを比較します。
 
 - `a` / `b` (string|Version, 必須): バージョン文字列または `Version` オブジェクト。
-- Returns: `-1 | 0 | 1`.
+- 戻り値: `-1 | 0 | 1`.
 
 ```lua
 print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
@@ -84,7 +84,7 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 
 - `req` (string|VersionReq, 必須): バージョン要件文字列または `VersionReq` オブジェクト。
 - `version` (string|Version, 必須): バージョン文字列または `Version` オブジェクト。
-- Returns: `boolean`.
+- 戻り値: `boolean`.
 
 ```lua
 local req = ptool.semver.parse_req("^0.6.0")
@@ -99,9 +99,9 @@ print(ptool.semver.matches(">=0.6.0, <0.7.0", "0.7.0")) -- false
 `ptool.semver.bump(v, op[, channel])` は、更新を適用した新しい バージョンオブジェクトを返します。
 
 - `v` (string|Version, 必須): 元のバージョン。
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `op` (string, 必須): `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, `premajor` のいずれか。
+- `channel` (string, 任意): `prepatch`, `preminor`, `premajor` でのみ 使用できます。`alpha`, `beta`, `rc` のいずれかで、デフォルトは `alpha` です。
+- 戻り値: `Version`.
 
 ```lua
 local v = ptool.semver.bump("1.2.3", "alpha")
@@ -120,7 +120,7 @@ print(tostring(stable)) -- 1.2.4
 
 `Version` は `ptool.semver.parse(...)` または `ptool.semver.bump(...)` が返す、解析済みのセマンティックバージョンを表します。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
 フィールドとメソッド:
 
@@ -130,11 +130,13 @@ It is implemented as a Lua userdata.
   - `patch` (integer)
   - `pre` (string|nil)
   - `build` (string|nil)
-- Methods:
+- メソッド:
   - `v:compare(other)` -> `-1|0|1`
+  - `v:is_release()` -> `boolean`
+  - `v:is_prerelease()` -> `boolean`
   - `v:bump(op[, channel])` -> `Version`
   - `v:to_string()` -> `string`
-- Metamethods:
+- メタメソッド:
   - `tostring(v)` が利用できます。
   - `==`, `<`, `<=` の比較をサポートします。
 
@@ -145,7 +147,27 @@ Canonical API name: `ptool.semver.Version:compare`.
 `v:compare(other)` は現在のバージョンと `other` を比較します。
 
 - `other` (string|Version, 必須): バージョン文字列または別の `Version` オブジェクト。
-- Returns: `-1 | 0 | 1`.
+- 戻り値: `-1 | 0 | 1`.
+
+### is_release
+
+> `v0.8.2` - 導入。
+
+Canonical API name: `ptool.semver.Version:is_release`.
+
+`v:is_release()` は、現在のバージョンにプレリリース要素がないかどうかを確認します。
+
+- 戻り値: `boolean`.
+
+### is_prerelease
+
+> `v0.8.2` - 導入。
+
+Canonical API name: `ptool.semver.Version:is_prerelease`.
+
+`v:is_prerelease()` は、現在のバージョンにプレリリース要素があるかどうかを確認します。
+
+- 戻り値: `boolean`.
 
 ### bump
 
@@ -153,9 +175,9 @@ Canonical API name: `ptool.semver.Version:bump`.
 
 `v:bump(op[, channel])` は更新を適用した新しい `Version` オブジェクトを 返します。
 
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `op` (string, 必須): `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, `premajor` のいずれか。
+- `channel` (string, 任意): `prepatch`, `preminor`, `premajor` でのみ 使用できます。`alpha`, `beta`, `rc` のいずれかで、デフォルトは `alpha` です。
+- 戻り値: `Version`.
 
 ### to_string
 
@@ -163,7 +185,7 @@ Canonical API name: `ptool.semver.Version:to_string`.
 
 `v:to_string()` は、そのバージョンの正規化された文字列表現を返します。
 
-- Returns: `string`.
+- 戻り値: `string`.
 
 ## VersionReq
 
@@ -171,14 +193,14 @@ Canonical API name: `ptool.semver.Version:to_string`.
 
 `VersionReq` は `ptool.semver.parse_req(...)` が返す、解析済みのセマンティックバージョン要件を表します。
 
-It is implemented as a Lua userdata.
+これは Lua userdata として実装されています。
 
-Methods:
+メソッド:
 
 - `req:matches(version)` -> `boolean`
 - `req:to_string()` -> `string`
 
-Metamethods:
+メタメソッド:
 
 - `tostring(req)` が利用できます。
 
@@ -189,7 +211,7 @@ Canonical API name: `ptool.semver.VersionReq:matches`.
 `req:matches(version)` は `version` が現在のバージョン要件を満たすかどうかを確認します。
 
 - `version` (string|Version, 必須): バージョン文字列または `Version` オブジェクト。
-- Returns: `boolean`.
+- 戻り値: `boolean`.
 
 ### to_string
 
@@ -197,7 +219,7 @@ Canonical API name: `ptool.semver.VersionReq:to_string`.
 
 `req:to_string()` は、そのバージョン要件の正規化された文字列表現を返します。
 
-- Returns: `string`.
+- 戻り値: `string`.
 
 プレリリース更新ルール:
 

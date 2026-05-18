@@ -7,6 +7,10 @@
 - Added `ptool.run_shell(...)` / `p.run_shell(...)` for shell-driven local
   command execution, plus `ptool.config({ shell = ... })` to set the default
   shell, and documented the new workflow across all supported locales.
+- Added `Version:is_release()` and `Version:is_prerelease()` to
+  `ptool.semver` / `p.semver`, so Lua scripts can distinguish stable releases
+  from prerelease versions directly on parsed semantic-version objects, and
+  documented the new methods across all supported locales.
 
 ## v0.8.1 (2026-05-17)
 

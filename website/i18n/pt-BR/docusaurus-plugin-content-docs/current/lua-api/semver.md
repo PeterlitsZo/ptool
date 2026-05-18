@@ -26,7 +26,7 @@ print(tostring(v))
 `ptool.semver.is_valid(version)` verifica se uma string de versão é válida.
 
 - `version` (string, obrigatório): Uma string de versão semântica.
-- Returns: `boolean`.
+- Retorna: `boolean`.
 
 ```lua
 print(ptool.semver.is_valid("1.2.3")) -- true
@@ -56,7 +56,7 @@ print(tostring(req)) -- >=0.6.0, <0.7.0
 `ptool.semver.is_valid_req(req)` verifica se uma string de requisito de versão é válida.
 
 - `req` (string, obrigatório): Uma string de requisito de versão.
-- Returns: `boolean`.
+- Retorna: `boolean`.
 
 ```lua
 print(ptool.semver.is_valid_req("^1.2.3")) -- true
@@ -70,7 +70,7 @@ print(ptool.semver.is_valid_req(">= 1.2.3, <")) -- false
 `ptool.semver.compare(a, b)` compara duas versões.
 
 - `a` / `b` (string|Version, obrigatório): Uma string de versão ou um objeto `Version`.
-- Returns: `-1 | 0 | 1`.
+- Retorna: `-1 | 0 | 1`.
 
 ```lua
 print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
@@ -84,7 +84,7 @@ print(ptool.semver.compare("1.2.3", "1.2.4")) -- -1
 
 - `req` (string|VersionReq, obrigatório): Uma string de requisito de versão ou um objeto `VersionReq`.
 - `version` (string|Version, obrigatório): Uma string de versão ou um objeto `Version`.
-- Returns: `boolean`.
+- Retorna: `boolean`.
 
 ```lua
 local req = ptool.semver.parse_req("^0.6.0")
@@ -99,9 +99,9 @@ print(ptool.semver.matches(">=0.6.0, <0.7.0", "0.7.0")) -- false
 `ptool.semver.bump(v, op[, channel])` retorna um novo objeto de versão depois de aplicar o incremento.
 
 - `v` (string|Version, obrigatório): A versão original.
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `op` (string, obrigatório): Um entre `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor` ou `premajor`.
+- `channel` (string, opcional): Suportado apenas para `prepatch`, `preminor` e `premajor`. Deve ser um entre `alpha`, `beta` ou `rc`. O padrão é `alpha`.
+- Retorna: `Version`.
 
 ```lua
 local v = ptool.semver.bump("1.2.3", "alpha")
@@ -120,7 +120,7 @@ print(tostring(stable)) -- 1.2.4
 
 `Version` representa uma versão semântica analisada retornada por `ptool.semver.parse(...)` ou `ptool.semver.bump(...)`.
 
-It is implemented as a Lua userdata.
+Ela é implementada como userdata Lua.
 
 Campos e métodos:
 
@@ -130,11 +130,13 @@ Campos e métodos:
   - `patch` (integer)
   - `pre` (string|nil)
   - `build` (string|nil)
-- Methods:
+- Métodos:
   - `v:compare(other)` -> `-1|0|1`
+  - `v:is_release()` -> `boolean`
+  - `v:is_prerelease()` -> `boolean`
   - `v:bump(op[, channel])` -> `Version`
   - `v:to_string()` -> `string`
-- Metamethods:
+- Metamétodos:
   - `tostring(v)` está disponível.
   - Comparações `==`, `<` e `<=` são suportadas.
 
@@ -145,7 +147,27 @@ Nome canônico da API: `ptool.semver.Version:compare`.
 `v:compare(other)` compara a versão atual com `other`.
 
 - `other` (string|Version, obrigatório): Uma string de versão ou outro objeto `Version`.
-- Returns: `-1 | 0 | 1`.
+- Retorna: `-1 | 0 | 1`.
+
+### is_release
+
+> `v0.8.2` - Introduzido.
+
+Nome canônico da API: `ptool.semver.Version:is_release`.
+
+`v:is_release()` verifica se a versão atual não tem componente de pré-lançamento.
+
+- Retorna: `boolean`.
+
+### is_prerelease
+
+> `v0.8.2` - Introduzido.
+
+Nome canônico da API: `ptool.semver.Version:is_prerelease`.
+
+`v:is_prerelease()` verifica se a versão atual tem um componente de pré-lançamento.
+
+- Retorna: `boolean`.
 
 ### bump
 
@@ -153,9 +175,9 @@ Nome canônico da API: `ptool.semver.Version:bump`.
 
 `v:bump(op[, channel])` retorna um novo objeto `Version` depois de aplicar o incremento.
 
-- `op` (string, required): One of `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor`, or `premajor`.
-- `channel` (string, optional): Supported only for `prepatch`, `preminor`, and `premajor`. Must be one of `alpha`, `beta`, or `rc`. Defaults to `alpha`.
-- Returns: `Version`.
+- `op` (string, obrigatório): Um entre `major`, `minor`, `patch`, `release`, `alpha`, `beta`, `rc`, `prepatch`, `preminor` ou `premajor`.
+- `channel` (string, opcional): Suportado apenas para `prepatch`, `preminor` e `premajor`. Deve ser um entre `alpha`, `beta` ou `rc`. O padrão é `alpha`.
+- Retorna: `Version`.
 
 ### to_string
 
@@ -163,7 +185,7 @@ Nome canônico da API: `ptool.semver.Version:to_string`.
 
 `v:to_string()` retorna a forma canônica da versão em string.
 
-- Returns: `string`.
+- Retorna: `string`.
 
 ## VersionReq
 
@@ -171,14 +193,14 @@ Nome canônico da API: `ptool.semver.Version:to_string`.
 
 `VersionReq` representa um requisito de versão semântica analisado retornado por `ptool.semver.parse_req(...)`.
 
-It is implemented as a Lua userdata.
+Ela é implementada como userdata Lua.
 
-Methods:
+Métodos:
 
 - `req:matches(version)` -> `boolean`
 - `req:to_string()` -> `string`
 
-Metamethods:
+Metamétodos:
 
 - `tostring(req)` está disponível.
 
@@ -189,7 +211,7 @@ Nome canônico da API: `ptool.semver.VersionReq:matches`.
 `req:matches(version)` verifica se `version` satisfaz o requisito de versão atual.
 
 - `version` (string|Version, obrigatório): Uma string de versão ou um objeto `Version`.
-- Returns: `boolean`.
+- Retorna: `boolean`.
 
 ### to_string
 
@@ -197,7 +219,7 @@ Nome canônico da API: `ptool.semver.VersionReq:to_string`.
 
 `req:to_string()` retorna a forma canônica em string do requisito de versão.
 
-- Returns: `string`.
+- Retorna: `string`.
 
 Regras de incremento de prerelease:
 

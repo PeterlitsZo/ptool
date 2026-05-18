@@ -145,6 +145,8 @@ Fields and methods:
   - `build` (string|nil)
 - Methods:
   - `v:compare(other)` -> `-1|0|1`
+  - `v:is_release()` -> `boolean`
+  - `v:is_prerelease()` -> `boolean`
   - `v:bump(op[, channel])` -> `Version`
   - `v:to_string()` -> `string`
 - Metamethods:
@@ -160,6 +162,28 @@ Canonical API name: `ptool.semver.Version:compare`.
 - `other` (string|Version, required): A version string or another `Version`
   object.
 - Returns: `-1 | 0 | 1`.
+
+### is_release
+
+> `v0.8.2` - Introduced.
+
+Canonical API name: `ptool.semver.Version:is_release`.
+
+`v:is_release()` checks whether the current version has no prerelease
+component.
+
+- Returns: `boolean`.
+
+### is_prerelease
+
+> `v0.8.2` - Introduced.
+
+Canonical API name: `ptool.semver.Version:is_prerelease`.
+
+`v:is_prerelease()` checks whether the current version has a prerelease
+component.
+
+- Returns: `boolean`.
 
 ### bump
 

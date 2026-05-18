@@ -132,6 +132,8 @@ print(tostring(stable)) -- 1.2.4
   - `build`（string|nil）
 - 方法：
   - `v:compare(other)` -> `-1|0|1`
+  - `v:is_release()` -> `boolean`
+  - `v:is_prerelease()` -> `boolean`
   - `v:bump(op[, channel])` -> `Version`
   - `v:to_string()` -> `string`
 - 元方法：
@@ -146,6 +148,26 @@ print(tostring(stable)) -- 1.2.4
 
 - `other`（string|Version，必填）：版本字符串或另一个 `Version` 对象。
 - 返回：`-1 | 0 | 1`。
+
+### is_release
+
+> `v0.8.2` - 引入。
+
+规范 API 名称：`ptool.semver.Version:is_release`。
+
+`v:is_release()` 检查当前版本是否不包含预发布组件。
+
+- 返回：`boolean`。
+
+### is_prerelease
+
+> `v0.8.2` - 引入。
+
+规范 API 名称：`ptool.semver.Version:is_prerelease`。
+
+`v:is_prerelease()` 检查当前版本是否包含预发布组件。
+
+- 返回：`boolean`。
 
 ### bump
 

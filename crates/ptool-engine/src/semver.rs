@@ -39,6 +39,14 @@ pub(crate) fn strip_prerelease(version: SemverVersion) -> SemverVersion {
     SemverVersion::new(version.major, version.minor, version.patch)
 }
 
+pub(crate) fn is_release(version: &SemverVersion) -> bool {
+    version.pre.is_empty()
+}
+
+pub(crate) fn is_prerelease(version: &SemverVersion) -> bool {
+    !is_release(version)
+}
+
 pub(crate) fn bump(
     version: SemverVersion,
     op: &str,

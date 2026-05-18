@@ -451,6 +451,14 @@ impl PtoolEngine {
         semver::compare(a, b)
     }
 
+    pub fn semver_is_release(&self, version: &SemverVersion) -> bool {
+        semver::is_release(version)
+    }
+
+    pub fn semver_is_prerelease(&self, version: &SemverVersion) -> bool {
+        semver::is_prerelease(version)
+    }
+
     pub fn semver_req_matches(
         &self,
         requirement: &SemverVersionReq,
