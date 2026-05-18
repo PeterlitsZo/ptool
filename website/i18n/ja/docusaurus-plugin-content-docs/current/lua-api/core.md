@@ -280,16 +280,18 @@ local token = ptool.ask.secret("API token?", {
 
 現在サポートされているフィールド:
 
-- `run` (table, 任意): `ptool.run` のデフォルト設定。サポートされる フィールド:
+- `run` (table, 任意): `ptool.run`、`ptool.run_capture`、`ptool.run_shell` のデフォルト設定。サポートされるフィールド:
   - `echo` (boolean, 任意): デフォルトの echo スイッチ。デフォルトは `true`。
   - `check` (boolean, 任意): 失敗時にデフォルトでエラーにするかどうか。 デフォルトは `false`。
   - `confirm` (boolean, 任意): 実行前にデフォルトで確認を要求するかどうか。 デフォルトは `false`。
   - `retry` (boolean, 任意): `check = true` のとき、実行失敗後に再試行するか どうかをユーザーへ尋ねるかどうか。デフォルトは `false`。
+- `shell` (string, 任意): `ptool.run_shell` で使うデフォルトのシェルコマンド。デフォルトは `"bash"`。
 
 例:
 
 ```lua
 ptool.config({
+  shell = "bash",
   run = {
     echo = false,
     check = true,
@@ -541,6 +543,43 @@ local res = ptool.run({
 print(res.ok, res.code)
 print(res.stdout)
 print(res.stderr)
+res:assert_ok()
+```
+
+## ptool.run_shell
+
+> `v0.9.0` - 導入されました。
+
+`ptool.run_shell(command)` は設定されたシェルを通して `command` を実行します。
+
+- `command` (string, 必須): シェルスクリプトまたはシェルコマンドのテキスト。
+- 戻り値: `ptool.run(...)` と同じ結果テーブル。
+
+挙動:
+
+- シェルコマンドは `ptool.config({ shell = ... })` から取得されます。
+- `shell` が設定されていない場合、`ptool.run_shell(...)` は `"bash"` を使います。
+- `ptool.run_shell(command)` は次と等価です:
+
+```lua
+ptool.run(shell, {"-c", command})
+```
+
+- `echo`、`check`、`confirm`、`retry` のデフォルト値は引き続き `ptool.config({ run = { ... } })` から取得されます。
+- `cwd`、`env`、`stdin`、`stdout = "capture"` のような呼び出しごとの `options` が必要なら、シェルと `-c` を指定して `ptool.run(...)` を直接呼んでください。
+
+例:
+
+```lua
+ptool.config({
+  shell = "sh",
+  run = {
+    check = false,
+  },
+})
+
+local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
+print(res.ok, res.code)
 res:assert_ok()
 ```
 

@@ -9,7 +9,8 @@
 - [ ] Support `p.redis`.
 - [ ] Support the pipe -- `p.run("foo | bar")` (is it a good idea?).
 - [ ] Let `p.git` module support `confirm` option.
-- [ ] How about `p.run_shell`?
+- [x] How about `p.run_shell`?
+- [ ] Enhance `p.sh` module.
 
 # v0.8.0
 

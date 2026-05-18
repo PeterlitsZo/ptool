@@ -280,16 +280,18 @@ local token = ptool.ask.secret("API token?", {
 
 当前支持的字段：
 
-- `run`（table，可选）：`ptool.run` 的默认配置。支持：
+- `run`（table，可选）：`ptool.run`、`ptool.run_capture` 和 `ptool.run_shell` 的默认配置。支持以下字段：
   - `echo`（boolean，可选）：默认是否回显。默认值为 `true`。
   - `check`（boolean，可选）：默认在失败时是否抛错。默认值为 `false`。
   - `confirm`（boolean，可选）：默认执行前是否要求确认。默认值为 `false`。
   - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 默认值为 `false`。
+- `shell`（string，可选）：`ptool.run_shell` 使用的默认 shell 命令。默认值为 `"bash"`。
 
 示例：
 
 ```lua
 ptool.config({
+  shell = "bash",
   run = {
     echo = false,
     check = true,
@@ -541,6 +543,43 @@ local res = ptool.run({
 print(res.ok, res.code)
 print(res.stdout)
 print(res.stderr)
+res:assert_ok()
+```
+
+## ptool.run_shell
+
+> `v0.9.0` - 引入。
+
+`ptool.run_shell(command)` 会通过已配置的 shell 执行 `command`。
+
+- `command`（string，必填）：shell 脚本文本或 shell 命令文本。
+- 返回：与 `ptool.run(...)` 相同的结果 table。
+
+行为说明：
+
+- shell 命令来自 `ptool.config({ shell = ... })`。
+- 如果没有配置 `shell`，`ptool.run_shell(...)` 会使用 `"bash"`。
+- `ptool.run_shell(command)` 等价于：
+
+```lua
+ptool.run(shell, {"-c", command})
+```
+
+- `echo`、`check`、`confirm` 和 `retry` 的默认值仍然来自 `ptool.config({ run = { ... } })`。
+- 如果你需要单次调用级别的 `options`，例如 `cwd`、`env`、`stdin` 或 `stdout = "capture"`，请直接用 shell 和 `-c` 调用 `ptool.run(...)`。
+
+示例：
+
+```lua
+ptool.config({
+  shell = "sh",
+  run = {
+    check = false,
+  },
+})
+
+local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
+print(res.ok, res.code)
 res:assert_ok()
 ```
 

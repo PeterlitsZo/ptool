@@ -98,6 +98,39 @@ pub(crate) fn run_capture_command(
     )
 }
 
+pub(crate) fn run_shell_command(
+    lua: &Lua,
+    command: String,
+    current_dir: &Path,
+    engine: &PtoolEngine,
+    defaults: RunConfig,
+    shell: &str,
+) -> mlua::Result<Value> {
+    execute_run_options(
+        lua,
+        current_dir,
+        engine,
+        RunOptions {
+            inner: ptool_engine::RunOptions {
+                cmd: shell.to_owned(),
+                args: vec!["-c".to_string(), command],
+                cwd: None,
+                env: Vec::new(),
+                env_remove: Vec::new(),
+                stdin: StdinMode::Inherit,
+                trim: false,
+                stdout: RUN_STREAM_DEFAULTS.stdout.clone(),
+                stderr: RUN_STREAM_DEFAULTS.stderr.clone(),
+            },
+            echo: defaults.echo,
+            check: defaults.check,
+            confirm: defaults.confirm,
+            retry: defaults.retry,
+        },
+        "ptool.run_shell",
+    )
+}
+
 pub(crate) fn exec_command(
     _lua: &Lua,
     args: Variadic<Value>,
@@ -172,10 +205,19 @@ fn run_command_with_stream_defaults(
     stream_defaults: StreamDefaults,
 ) -> mlua::Result<Value> {
     let options = parse_run_options(args, defaults, stream_defaults)?;
+    execute_run_options(lua, current_dir, engine, options, "ptool.run")
+}
+
+fn execute_run_options(
+    lua: &Lua,
+    current_dir: &Path,
+    engine: &PtoolEngine,
+    options: RunOptions,
+    op: &'static str,
+) -> mlua::Result<Value> {
     let cmd_for_error = options.inner.cmd.clone();
     let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
     let local_user_host = options.echo.then(|| engine.current_user_host());
-
     let display = if options.echo || options.confirm || (options.check && options.retry) {
         let command = format_command_for_display(&options.inner.cmd, &options.inner.args);
         Some((resolved_cwd.clone(), command))
@@ -188,18 +230,18 @@ fn run_command_with_stream_defaults(
             lua_error::to_mlua_error(
                 LuaError::new(
                     "internal_error",
-                    "ptool.run internal error: missing display info",
+                    format!("{op} internal error: missing display info"),
                 )
-                .with_op("ptool.run"),
+                .with_op(op),
             )
         })?;
         let local_user_host = local_user_host.as_ref().ok_or_else(|| {
             lua_error::to_mlua_error(
                 LuaError::new(
                     "internal_error",
-                    "ptool.run internal error: missing local user/host info",
+                    format!("{op} internal error: missing local user/host info"),
                 )
-                .with_op("ptool.run"),
+                .with_op(op),
             )
         })?;
         print_local_command_echo(
@@ -215,12 +257,12 @@ fn run_command_with_stream_defaults(
             lua_error::to_mlua_error(
                 LuaError::new(
                     "internal_error",
-                    "ptool.run internal error: missing display info",
+                    format!("{op} internal error: missing display info"),
                 )
-                .with_op("ptool.run"),
+                .with_op(op),
             )
         })?;
-        confirm_before_run(display_cwd, display_command, &cmd_for_error)?;
+        confirm_before_run(op, display_cwd, display_command, &cmd_for_error)?;
     }
 
     let mut is_retry = false;
@@ -230,18 +272,18 @@ fn run_command_with_stream_defaults(
                 lua_error::to_mlua_error(
                     LuaError::new(
                         "internal_error",
-                        "ptool.run internal error: missing display info",
+                        format!("{op} internal error: missing display info"),
                     )
-                    .with_op("ptool.run"),
+                    .with_op(op),
                 )
             })?;
             let local_user_host = local_user_host.as_ref().ok_or_else(|| {
                 lua_error::to_mlua_error(
                     LuaError::new(
                         "internal_error",
-                        "ptool.run internal error: missing local user/host info",
+                        format!("{op} internal error: missing local user/host info"),
                     )
-                    .with_op("ptool.run"),
+                    .with_op(op),
                 )
             })?;
             print_local_command_echo(
@@ -254,19 +296,20 @@ fn run_command_with_stream_defaults(
 
         let result = engine
             .run_command(&options.inner, current_dir)
-            .map_err(|err| engine_error(err, "ptool.run", &cmd_for_error, &resolved_cwd))?;
+            .map_err(|err| engine_error(err, op, &cmd_for_error, &resolved_cwd))?;
         if options.check && !result.ok {
             if options.retry {
                 let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
                     lua_error::to_mlua_error(
                         LuaError::new(
                             "internal_error",
-                            "ptool.run internal error: missing display info",
+                            format!("{op} internal error: missing display info"),
                         )
-                        .with_op("ptool.run"),
+                        .with_op(op),
                     )
                 })?;
                 if prompt_retry_after_failure(
+                    op,
                     display_cwd,
                     display_command,
                     result.code,
@@ -279,6 +322,7 @@ fn run_command_with_stream_defaults(
             }
 
             return Err(build_run_failed_error(
+                op,
                 &cmd_for_error,
                 result.code,
                 result.stderr.as_deref(),
@@ -289,6 +333,7 @@ fn run_command_with_stream_defaults(
         return build_run_result(
             lua,
             result,
+            op,
             cmd_for_error,
             resolved_cwd.display().to_string(),
         );
@@ -809,6 +854,7 @@ fn apply_exec_overrides(
 fn build_run_result(
     lua: &Lua,
     run_result: RunResult,
+    op: &'static str,
     cmd_for_error: String,
     cwd_for_error: String,
 ) -> mlua::Result<Value> {
@@ -836,6 +882,7 @@ fn build_run_result(
             .and_then(|value| i32::try_from(value).ok());
         let stderr = this.get::<Option<String>>("stderr")?;
         Err(build_run_failed_error(
+            op,
             &assert_cmd_for_error,
             code,
             stderr.as_deref(),
@@ -884,24 +931,30 @@ fn parse_stream_mode(
 }
 
 fn build_run_failed_error(
+    op: &'static str,
     cmd_for_error: &str,
     code: Option<i32>,
     stderr: Option<&str>,
     cwd_for_error: Option<&str>,
 ) -> mlua::Error {
-    let mut err = LuaError::command_failed("ptool.run", cmd_for_error, code, stderr);
+    let mut err = LuaError::command_failed(op, cmd_for_error, code, stderr);
     if let Some(cwd) = cwd_for_error {
         err = err.with_cwd(cwd);
     }
     lua_error::to_mlua_error(err)
 }
 
-fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::Result<()> {
+fn confirm_before_run(
+    op: &'static str,
+    cwd: &Path,
+    command: &str,
+    cmd_for_error: &str,
+) -> mlua::Result<()> {
     let prompt = format!("Run command -- {}?", command);
     let help_msg = format!("The cwd is {}", cwd.display());
     let engine = PtoolEngine::new();
     match engine.prompt_confirm(
-        "ptool.run",
+        op,
         &prompt,
         PromptConfirmOptions {
             default: Some(true),
@@ -910,13 +963,13 @@ fn confirm_before_run(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::R
     ) {
         Ok(true) => Ok(()),
         Ok(false) => Err(LuaError::cancelled(
-            "ptool.run",
+            op,
             format!("command `{cmd_for_error}` cancelled by user"),
         )
         .with_cmd(cmd_for_error)
         .with_cwd(cwd.display().to_string())
         .into_mlua_error()),
-        Err(err) => Err(crate::lua_error::LuaError::from_engine(err, "ptool.run")
+        Err(err) => Err(crate::lua_error::LuaError::from_engine(err, op)
             .with_cmd(cmd_for_error)
             .with_cwd(cwd.display().to_string())
             .into_mlua_error()),
@@ -951,6 +1004,7 @@ fn confirm_before_exec(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::
 }
 
 fn prompt_retry_after_failure(
+    op: &'static str,
     cwd: &Path,
     command: &str,
     code: Option<i32>,
@@ -965,7 +1019,7 @@ fn prompt_retry_after_failure(
     let engine = PtoolEngine::new();
     engine
         .prompt_confirm(
-            "ptool.run",
+            op,
             &prompt,
             PromptConfirmOptions {
                 default: Some(true),
@@ -973,7 +1027,7 @@ fn prompt_retry_after_failure(
             },
         )
         .map_err(|err| {
-            crate::lua_error::LuaError::from_engine(err, "ptool.run")
+            crate::lua_error::LuaError::from_engine(err, op)
                 .with_cmd(cmd_for_error)
                 .with_cwd(cwd.display().to_string())
                 .into_mlua_error()

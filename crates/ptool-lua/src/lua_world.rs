@@ -21,9 +21,19 @@ impl Default for RunConfig {
     }
 }
 
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Debug)]
 pub struct LuaWorldConfig {
     pub run: RunConfig,
+    pub shell: String,
+}
+
+impl Default for LuaWorldConfig {
+    fn default() -> Self {
+        Self {
+            run: RunConfig::default(),
+            shell: "bash".to_string(),
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -108,12 +118,24 @@ impl LuaWorld {
         )
     }
 
+    pub(crate) fn run_shell(&self, lua: &Lua, command: String) -> mlua::Result<Value> {
+        crate::exec::run_shell_command(
+            lua,
+            command,
+            self.current_dir(),
+            &self.engine,
+            self.config.run,
+            &self.config.shell,
+        )
+    }
+
     pub(crate) fn exec(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Value> {
         crate::exec::exec_command(lua, args, self.current_dir(), &self.engine, self.config.run)
     }
 
     pub(crate) fn configure(&mut self, options: Table) -> mlua::Result<()> {
         let mut next_run = self.config.run;
+        let mut next_shell = self.config.shell.clone();
 
         for pair in options.pairs::<Value, Value>() {
             let (key, value) = pair?;
@@ -137,6 +159,10 @@ impl LuaWorld {
                     };
                     apply_run_config(&mut next_run, run_options)?;
                 }
+                "shell" => {
+                    next_shell =
+                        parse_config_non_empty_string(value, "ptool.config(options)", "shell")?;
+                }
                 _ => {
                     return Err(crate::lua_error::invalid_option(
                         "ptool.config(options)",
@@ -147,6 +173,7 @@ impl LuaWorld {
         }
 
         self.config.run = next_run;
+        self.config.shell = next_shell;
         Ok(())
     }
 
@@ -825,6 +852,27 @@ fn parse_config_bool(value: Value, context: &str, key: &str) -> mlua::Result<boo
             format!("`{key}` must be a boolean"),
         )),
     }
+}
+
+fn parse_config_non_empty_string(value: Value, context: &str, key: &str) -> mlua::Result<String> {
+    let value = match value {
+        Value::String(value) => value.to_str()?.to_string(),
+        _ => {
+            return Err(crate::lua_error::invalid_option(
+                context,
+                format!("`{key}` must be a string"),
+            ));
+        }
+    };
+
+    if value.is_empty() {
+        return Err(crate::lua_error::invalid_option(
+            context,
+            format!("`{key}` must not be empty"),
+        ));
+    }
+
+    Ok(value)
 }
 
 fn ensure_non_empty(input: &str, context: &str) -> mlua::Result<()> {

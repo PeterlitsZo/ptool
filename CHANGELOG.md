@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-TODO...
+### Added
+
+- Added `ptool.run_shell(...)` / `p.run_shell(...)` for shell-driven local
+  command execution, plus `ptool.config({ shell = ... })` to set the default
+  shell, and documented the new workflow across all supported locales.
 
 ## v0.8.1 (2026-05-17)
 

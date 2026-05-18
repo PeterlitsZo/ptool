@@ -280,16 +280,18 @@ local token = ptool.ask.secret("API token?", {
 
 Campos atualmente suportados:
 
-- `run` (table, opcional): Configuração padrão para `ptool.run`. Campos suportados:
+- `run` (table, opcional): Configuração padrão para `ptool.run`, `ptool.run_capture` e `ptool.run_shell`. Campos suportados:
   - `echo` (boolean, opcional): Chave de echo padrão. O padrão é `true`.
   - `check` (boolean, opcional): Se falhas devem gerar erro por padrão. O padrão é `false`.
   - `confirm` (boolean, opcional): Se deve exigir confirmação antes da execução por padrão. O padrão é `false`.
   - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma execução com falha quando `check = true`. O padrão é `false`.
+- `shell` (string, opcional): Comando de shell padrão usado por `ptool.run_shell`. O padrão é `"bash"`.
 
 Exemplo:
 
 ```lua
 ptool.config({
+  shell = "bash",
   run = {
     echo = false,
     check = true,
@@ -541,6 +543,43 @@ local res = ptool.run({
 print(res.ok, res.code)
 print(res.stdout)
 print(res.stderr)
+res:assert_ok()
+```
+
+## ptool.run_shell
+
+> `v0.9.0` - Introduzido.
+
+`ptool.run_shell(command)` executa `command` por meio do shell configurado.
+
+- `command` (string, obrigatório): Script de shell ou texto de comando de shell.
+- Retorna: A mesma tabela de resultado que `ptool.run(...)`.
+
+Comportamento:
+
+- O comando de shell vem de `ptool.config({ shell = ... })`.
+- Se `shell` não estiver configurado, `ptool.run_shell(...)` usa `"bash"`.
+- `ptool.run_shell(command)` é equivalente a:
+
+```lua
+ptool.run(shell, {"-c", command})
+```
+
+- Os valores padrão de `echo`, `check`, `confirm` e `retry` continuam vindo de `ptool.config({ run = { ... } })`.
+- Se você precisar de `options` por chamada, como `cwd`, `env`, `stdin` ou `stdout = "capture"`, chame `ptool.run(...)` diretamente com o shell e `-c`.
+
+Exemplo:
+
+```lua
+ptool.config({
+  shell = "sh",
+  run = {
+    check = false,
+  },
+})
+
+local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
+print(res.ok, res.code)
 res:assert_ok()
 ```
 

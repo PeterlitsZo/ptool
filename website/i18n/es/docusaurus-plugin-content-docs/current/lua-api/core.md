@@ -280,16 +280,18 @@ local token = ptool.ask.secret("API token?", {
 
 Campos admitidos actualmente:
 
-- `run` (table, opcional): Configuración por defecto de `ptool.run`. Campos admitidos:
+- `run` (table, opcional): Configuración por defecto de `ptool.run`, `ptool.run_capture` y `ptool.run_shell`. Campos admitidos:
   - `echo` (boolean, opcional): Interruptor echo por defecto. Por defecto es `true`.
   - `check` (boolean, opcional): Si los fallos deben producir error por defecto. Por defecto es `false`.
   - `confirm` (boolean, opcional): Si por defecto debe requerirse confirmación antes de ejecutar. Por defecto es `false`.
   - `retry` (boolean, opcional): Si debe preguntarse al usuario si quiere reintentar después de una ejecución fallida cuando `check = true`. Por defecto es `false`.
+- `shell` (string, opcional): Comando de shell por defecto usado por `ptool.run_shell`. El valor por defecto es `"bash"`.
 
 Ejemplo:
 
 ```lua
 ptool.config({
+  shell = "bash",
   run = {
     echo = false,
     check = true,
@@ -541,6 +543,43 @@ local res = ptool.run({
 print(res.ok, res.code)
 print(res.stdout)
 print(res.stderr)
+res:assert_ok()
+```
+
+## ptool.run_shell
+
+> `v0.9.0` - Introducido.
+
+`ptool.run_shell(command)` ejecuta `command` a través del shell configurado.
+
+- `command` (string, obligatorio): Script de shell o texto de comando de shell.
+- Devuelve: La misma tabla de resultado que `ptool.run(...)`.
+
+Comportamiento:
+
+- El comando de shell proviene de `ptool.config({ shell = ... })`.
+- Si `shell` no está configurado, `ptool.run_shell(...)` usa `"bash"`.
+- `ptool.run_shell(command)` equivale a:
+
+```lua
+ptool.run(shell, {"-c", command})
+```
+
+- Los valores por defecto de `echo`, `check`, `confirm` y `retry` siguen viniendo de `ptool.config({ run = { ... } })`.
+- Si necesitas `options` por invocación, como `cwd`, `env`, `stdin` o `stdout = "capture"`, llama a `ptool.run(...)` directamente con el shell y `-c`.
+
+Ejemplo:
+
+```lua
+ptool.config({
+  shell = "sh",
+  run = {
+    check = false,
+  },
+})
+
+local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
+print(res.ok, res.code)
 res:assert_ok()
 ```
 

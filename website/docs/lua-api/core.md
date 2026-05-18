@@ -325,8 +325,8 @@ local token = ptool.ask.secret("API token?", {
 
 Currently supported fields:
 
-- `run` (table, optional): Default configuration for `ptool.run`. Supported
-  fields:
+- `run` (table, optional): Default configuration for `ptool.run`,
+  `ptool.run_capture`, and `ptool.run_shell`. Supported fields:
   - `echo` (boolean, optional): Default echo switch. Defaults to `true`.
   - `check` (boolean, optional): Whether failures raise an error by default.
     Defaults to `false`.
@@ -334,11 +334,14 @@ Currently supported fields:
     execution by default. Defaults to `false`.
   - `retry` (boolean, optional): Whether to ask the user whether to retry after
     a failed execution when `check = true`. Defaults to `false`.
+- `shell` (string, optional): Default shell command used by
+  `ptool.run_shell`. Defaults to `"bash"`.
 
 Example:
 
 ```lua
 ptool.config({
+  shell = "bash",
   run = {
     echo = false,
     check = true,
@@ -630,6 +633,45 @@ local res = ptool.run({
 print(res.ok, res.code)
 print(res.stdout)
 print(res.stderr)
+res:assert_ok()
+```
+
+## ptool.run_shell
+
+> `v0.9.0` - Introduced.
+
+`ptool.run_shell(command)` executes `command` through the configured shell.
+
+- `command` (string, required): Shell script or shell command text.
+- Returns: The same result table as `ptool.run(...)`.
+
+Behavior:
+
+- The shell command comes from `ptool.config({ shell = ... })`.
+- If `shell` is not configured, `ptool.run_shell(...)` uses `"bash"`.
+- `ptool.run_shell(command)` is equivalent to:
+
+```lua
+ptool.run(shell, {"-c", command})
+```
+
+- The default `echo`, `check`, `confirm`, and `retry` values still come from
+  `ptool.config({ run = { ... } })`.
+- If you need per-call `options` such as `cwd`, `env`, `stdin`, or
+  `stdout = "capture"`, call `ptool.run(...)` directly with the shell and `-c`.
+
+Example:
+
+```lua
+ptool.config({
+  shell = "sh",
+  run = {
+    check = false,
+  },
+})
+
+local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
+print(res.ok, res.code)
 res:assert_ok()
 ```
 

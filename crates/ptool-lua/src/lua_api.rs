@@ -24,6 +24,10 @@ fn create_ptool_module(
     let run_state = Rc::clone(&world);
     let run_fn =
         lua.create_function(move |lua, args: Variadic<Value>| run_state.borrow().run(lua, args))?;
+    let run_shell_state = Rc::clone(&world);
+    let run_shell_fn = lua.create_function(move |lua, command: String| {
+        run_shell_state.borrow().run_shell(lua, command)
+    })?;
     let run_capture_state = Rc::clone(&world);
     let run_capture_fn = lua.create_function(move |lua, args: Variadic<Value>| {
         run_capture_state.borrow().run_capture(lua, args)
@@ -84,6 +88,7 @@ fn create_ptool_module(
     let tui_module = create_ptool_tui_module(lua, Rc::clone(&world))?;
     let yaml_module = create_ptool_yaml_module(lua, Rc::clone(&world))?;
     module.set("run", run_fn)?;
+    module.set("run_shell", run_shell_fn)?;
     module.set("run_capture", run_capture_fn)?;
     module.set("exec", exec_fn)?;
     module.set("config", config_fn)?;
