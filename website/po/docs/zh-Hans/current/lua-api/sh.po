@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-05-19 10:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,31 +21,131 @@ msgid "Shell parsing helpers are available under `ptool.sh` and `p.sh`."
 msgstr "Shell 解析辅助能力位于 `ptool.sh` 和 `p.sh` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:5
+msgid "These helpers work at the shell-word level. They are intended for splitting, quoting, and joining argument strings using POSIX shell-style rules, not for parsing full shell syntax such as pipelines, redirections, command substitution, or variable expansion."
+msgstr "这些辅助能力工作在 shell word 这一层级。它们用于按照 POSIX shell 风格规则拆分、引用和拼接参数字符串，而不是用于解析完整的 shell 语法，例如管道、重定向、命令替换或变量展开。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:10
 msgid "ptool.sh.split"
 msgstr "ptool.sh.split"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:7
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:12
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:9
-msgid ""
-"`ptool.sh.split(command)` parses a command string using shell-style rules "
-"and returns an argument array."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:14
+msgid "`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array."
 msgstr "`ptool.sh.split(command)` 使用 shell 风格规则解析命令字符串，并返回参数数组。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:12
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:17
 msgid "`command` (string, required): The command string to split."
 msgstr "`command`（string，必填）：要拆分的命令字符串。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:13
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:18
 msgid "Returns: `string[]`."
 msgstr "返回：`string[]`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:15
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:20
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:20"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:22
+msgid "This parses shell words only. It does not interpret shell operators or execute expansions."
+msgstr "这里只解析 shell words。本 API 不会解释 shell 操作符，也不会执行展开。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:25
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:25"
 msgid "Example:"
 msgstr "示例："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:21
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:31
 msgid "The `args` above is equivalent to:"
 msgstr "上面的 `args` 等价于："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:37
+msgid "ptool.sh.quote"
+msgstr "ptool.sh.quote"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:41
+msgid "`ptool.sh.quote(word)` quotes a single shell word so it can be embedded safely into a shell command string."
+msgstr "`ptool.sh.quote(word)` 会对单个 shell word 进行引用，使其可以安全地嵌入到 shell 命令字符串中。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:44
+msgid "`word` (string, required): The shell word to quote."
+msgstr "`word`（string，必填）：要引用的 shell word。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:45
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:45"
+msgid "Returns: `string`."
+msgstr "返回：`string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:47
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:47"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:49
+msgid "The returned string is shell-safe and semantically equivalent to the input word."
+msgstr "返回的字符串对 shell 是安全的，并且在语义上等价于输入的 word。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:51
+msgid "This preserves shell-word meaning, not the original textual spelling."
+msgstr "这里保留的是 shell word 的语义，而不是原始文本的书写形式。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:53
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:53"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:60
+msgid "ptool.sh.join"
+msgstr "ptool.sh.join"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:64
+msgid "`ptool.sh.join(words)` joins an argument array into a shell command string, quoting words when needed."
+msgstr "`ptool.sh.join(words)` 会把参数数组拼成一个 shell 命令字符串，并在需要时对其中的 word 进行引用。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:67
+msgid "`words` (string[], required): The shell words to join."
+msgstr "`words`（string[]，必填）：要拼接的 shell words。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:68
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:68"
+msgid "Returns: `string`."
+msgstr "返回：`string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:70
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:70"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:72
+msgid "Consecutive words are joined with a single space."
+msgstr "相邻 words 会使用单个空格连接。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:73
+msgid "The output is suitable for passing to a POSIX-style shell."
+msgstr "输出结果适合传递给 POSIX 风格的 shell。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:74
+msgid "This aims for shell-word round-tripping, so `ptool.sh.split(ptool.sh.join(words))` is equivalent to `words`."
+msgstr "这里追求 shell word 级别的往返一致性，因此 `ptool.sh.split(ptool.sh.join(words))` 与 `words` 等价。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:76
+msgid "`ptool.sh.join(ptool.sh.split(command))` may normalize quoting and spacing instead of preserving the original command text."
+msgstr "`ptool.sh.join(ptool.sh.split(command))` 可能会规范化引用方式和空格，而不是保留原始命令文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:79"
+msgid "Example:"
+msgstr "示例："

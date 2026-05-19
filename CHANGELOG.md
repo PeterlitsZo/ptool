@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added `ptool.sh.quote()` / `p.sh.quote()` and `ptool.sh.join()` /
+  `p.sh.join()` for POSIX-style shell word quoting and joining, and
+  documented the expanded `ptool.sh` API across all supported current
+  locales.
 - Added `ptool.pipe(...)` / `p.pipe(...)` for shell-free local command
   pipelines with per-stage status reporting, shared `run` options, and docs
   across all supported current locales.

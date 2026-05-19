@@ -27,10 +27,10 @@
 - [x] Let ptool support more hash functions.
 - [x] Support `ptool.fs.copy`?
 - [x] Support `p.redis`.
-- [ ] Support the pipe -- `p.run("foo | bar")` (is it a good idea?).
+- [x] Support the pipe -- `p.run("foo | bar")` (is it a good idea?).
 - [x] Let `p.git` module support `confirm` option.
 - [x] How about `p.run_shell`?
-- [ ] Enhance `p.sh` module.
+- [x] Enhance `p.sh` module.
 - [ ] If the ptool is running in a interactive shell, let `p.run` (and more)
       only show the last line of stdout / stderr.
 
