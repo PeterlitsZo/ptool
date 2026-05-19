@@ -41,3 +41,6 @@ url = "2.5.8"
 xxhash-rust = { version = "0.8.15", features = ["xxh32", "xxh64", "xxh3"] }
 xz2 = "0.1.7"
 zstd = "0.13.3"
+
+[target.'cfg(all(target_arch = "x86", target_os = "linux", target_env = "musl"))'.dependencies]
+blake3 = { version = "1.8.5", features = ["pure"] }
