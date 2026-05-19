@@ -515,6 +515,12 @@ fn create_ptool_log_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
         log_module.set(name, log_fn)?;
     }
 
+    let fatal_state = world;
+    let fatal_fn = lua.create_function(move |lua, args: Variadic<Value>| {
+        fatal_state.borrow().log_fatal(lua, args)
+    })?;
+    log_module.set("fatal", fatal_fn)?;
+
     Ok(log_module)
 }
 

@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-TODO...
+### Added
+
+- Added `ptool.log.fatal(...)` / `p.log.fatal(...)`, which writes a fatal log
+  line to `stderr` and exits the current `ptool` process immediately with
+  status code `1`, and documented it across all supported current locales.
 
 ## v0.9.1 (2026-05-19)
 

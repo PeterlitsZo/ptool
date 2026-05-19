@@ -1,6 +1,7 @@
 use mlua::{Function, Lua, MultiValue, String as LuaString, Table, Value, Variadic};
 use ptool_engine::PtoolEngine;
 use std::path::{Path, PathBuf};
+use std::process;
 
 #[derive(Clone, Copy, Debug)]
 pub struct RunConfig {
@@ -283,6 +284,14 @@ impl LuaWorld {
         self.engine
             .log(level, &message)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, op))
+    }
+
+    pub(crate) fn log_fatal(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<()> {
+        let message = render_log_message(lua, args)?;
+        self.engine
+            .log(ptool_engine::LogLevel::Fatal, &message)
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.log.fatal"))?;
+        process::exit(1);
     }
 
     pub(crate) fn platform_os(&self) -> String {

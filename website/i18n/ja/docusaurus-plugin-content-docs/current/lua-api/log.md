@@ -11,9 +11,10 @@
 動作:
 
 - タイムスタンプはローカル時刻の `YYYY-MM-DD HH:MM:SS` 形式です。
-- レベル名は `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR` の完全表記を 使います。
+- レベル名は `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`、`FATAL` の完全表記を使います。
 - `ptool` が端末へ書き込んでいる場合は、自動的に色付き出力になります。
-- `ptool.log.error(...)` は `stderr` に書き込み、それ以外のレベルは `stdout` に書き込みます。
+- `ptool.log.error(...)` と `ptool.log.fatal(...)` は `stderr` に書き込み、それ以外のレベルは `stdout` に書き込みます。
+- `ptool.log.fatal(...)` はログ行を出力した直後に、終了ステータス `1` で現在の `ptool` プロセスを終了します。
 - 複数引数は空白で連結されます。文字列以外の値は単一行の inspect 形式で レンダリングされます。
 
 ## ptool.log.trace
@@ -66,12 +67,23 @@ ptool.log.error(...)
 
 error レベルのログ行を `stderr` に書き出します。
 
+## ptool.log.fatal
+
+> `v0.10.0` - Introduced.
+
+```lua
+ptool.log.fatal(...)
+```
+
+`stderr` に fatal レベルのログ行を書き出し、その後、終了ステータス `1` で現在の `ptool` プロセスを終了します。
+
 例:
 
 ```lua
 p.log.info("hello", { answer = 42 })
 p.log.warn("careful")
 p.log.error("boom")
+p.log.fatal("goodbye")
 ```
 
 出力例:
@@ -80,4 +92,5 @@ p.log.error("boom")
 [2026-04-30 14:54:56] INFO hello { answer = 42 }
 [2026-04-30 14:54:56] WARN careful
 [2026-04-30 14:54:56] ERROR boom
+[2026-04-30 14:54:56] FATAL goodbye
 ```

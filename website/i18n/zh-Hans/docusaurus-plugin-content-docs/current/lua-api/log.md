@@ -11,9 +11,10 @@
 行为：
 
 - 时间戳使用本地时间，格式为 `YYYY-MM-DD HH:MM:SS`。
-- level 标签使用完整名称：`TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`。
+- level 标签使用完整名称：`TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`、`FATAL`。
 - 当 `ptool` 正在向终端写入时，会自动启用彩色输出。
-- `ptool.log.error(...)` 写入 `stderr`，其余 level 写入 `stdout`。
+- `ptool.log.error(...)` 和 `ptool.log.fatal(...)` 写入 `stderr`，其余 level 写入 `stdout`。
+- `ptool.log.fatal(...)` 在输出日志行后会立即以状态码 `1` 退出当前 `ptool` 进程。
 - 多个参数会用空格连接；非字符串值会以单行 inspect 形式渲染。
 
 ## ptool.log.trace
@@ -66,12 +67,23 @@ ptool.log.error(...)
 
 向 `stderr` 输出一条 error 级别日志。
 
+## ptool.log.fatal
+
+> `v0.10.0` - 引入。
+
+```lua
+ptool.log.fatal(...)
+```
+
+向 `stderr` 输出一条 fatal 级别日志，然后以状态码 `1` 退出当前 `ptool` 进程。
+
 示例：
 
 ```lua
 p.log.info("hello", { answer = 42 })
 p.log.warn("careful")
 p.log.error("boom")
+p.log.fatal("goodbye")
 ```
 
 示例输出：
@@ -80,4 +92,5 @@ p.log.error("boom")
 [2026-04-30 14:54:56] INFO hello { answer = 42 }
 [2026-04-30 14:54:56] WARN careful
 [2026-04-30 14:54:56] ERROR boom
+[2026-04-30 14:54:56] FATAL goodbye
 ```

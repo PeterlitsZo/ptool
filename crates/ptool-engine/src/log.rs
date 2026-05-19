@@ -9,6 +9,7 @@ pub enum LogLevel {
     Info,
     Warn,
     Error,
+    Fatal,
 }
 
 impl LogLevel {
@@ -19,6 +20,7 @@ impl LogLevel {
             Self::Info => "INFO",
             Self::Warn => "WARN",
             Self::Error => "ERROR",
+            Self::Fatal => "FATAL",
         }
     }
 
@@ -29,11 +31,12 @@ impl LogLevel {
             Self::Info => Color::Green,
             Self::Warn => Color::Yellow,
             Self::Error => Color::Red,
+            Self::Fatal => Color::Red,
         }
     }
 
     fn use_stderr(self) -> bool {
-        matches!(self, Self::Error)
+        matches!(self, Self::Error | Self::Fatal)
     }
 }
 

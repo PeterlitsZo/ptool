@@ -11,9 +11,10 @@ Cada llamada de log genera una línea con este formato:
 Comportamiento:
 
 - La marca de tiempo usa la hora local con el formato `YYYY-MM-DD HH:MM:SS`.
-- La etiqueta de nivel usa los nombres completos `TRACE`, `DEBUG`, `INFO`, `WARN` y `ERROR`.
+- La etiqueta de nivel usa los nombres completos `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` y `FATAL`.
 - La salida coloreada se habilita automáticamente cuando `ptool` escribe en una terminal.
-- `ptool.log.error(...)` escribe en `stderr`. Los demás niveles escriben en `stdout`.
+- `ptool.log.error(...)` y `ptool.log.fatal(...)` escriben en `stderr`. Los demás niveles escriben en `stdout`.
+- `ptool.log.fatal(...)` sale del proceso actual de `ptool` con el código de estado `1` inmediatamente después de imprimir la línea de log.
 - Varios argumentos se unen con espacios. Los valores no string se renderizan en una forma inspect de una sola línea.
 
 ## ptool.log.trace
@@ -66,12 +67,23 @@ ptool.log.error(...)
 
 Escribe una línea de log de nivel error en `stderr`.
 
+## ptool.log.fatal
+
+> `v0.10.0` - Introducido.
+
+```lua
+ptool.log.fatal(...)
+```
+
+Escribe una línea de log de nivel fatal en `stderr` y luego sale del proceso actual de `ptool` con el código de estado `1`.
+
 Ejemplo:
 
 ```lua
 p.log.info("hello", { answer = 42 })
 p.log.warn("careful")
 p.log.error("boom")
+p.log.fatal("goodbye")
 ```
 
 Salida de ejemplo:
@@ -80,4 +92,5 @@ Salida de ejemplo:
 [2026-04-30 14:54:56] INFO hello { answer = 42 }
 [2026-04-30 14:54:56] WARN careful
 [2026-04-30 14:54:56] ERROR boom
+[2026-04-30 14:54:56] FATAL goodbye
 ```
