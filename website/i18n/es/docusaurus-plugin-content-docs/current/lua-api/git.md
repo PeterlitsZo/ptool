@@ -4,6 +4,8 @@ Los ayudantes de repositorio de Git están disponibles en `ptool.git` y `p.git`.
 
 Este módulo se basa en `git2` / `libgit2`, no en invocar la herramienta de línea de comandos `git`.
 
+Las operaciones con cambios como `ptool.git.clone(...)`, `repo:add(...)`, `repo:commit(...)`, `repo:checkout(...)`, `repo:switch(...)`, `repo:fetch(...)` y `repo:push(...)` aceptan `confirm = true` en su tabla de opciones para pedir confirmación al usuario antes de ejecutar la acción.
+
 ## ptool.git.open
 
 > `v0.6.0` - Introducido.
@@ -61,6 +63,7 @@ Argumentos:
 - `options` (tabla, opcional): Opciones de clonación. Campos admitidos:
   - `branch` (cadena, opcional): Nombre de la rama a hacer checkout después de clonar.
   - `bare` (booleano, opcional): Si se debe crear un repositorio bare. El valor predeterminado es `false`.
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de clonar. El valor predeterminado es `false`.
   - `auth` (tabla, opcional): Configuración de autenticación remota.
 
 Campos `auth`:
@@ -261,6 +264,7 @@ Argumentos:
 - `paths` (string|string[], requerido): Una ruta o una matriz de rutas.
 - `options` (tabla, opcional): Añadir opciones. Campos admitidos:
   - `update` (booleano, opcional): Actualiza solo las rutas ya conocidas por el índice. El valor predeterminado es `false`.
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de añadir rutas al área de preparación. El valor predeterminado es `false`.
 
 Comportamiento:
 
@@ -287,6 +291,7 @@ Argumentos:
 - `options` (tabla, opcional): Opciones de confirmación. Campos admitidos:
   - `author` (tabla, opcional): Firma del autor.
   - `committer` (tabla, opcional): Firma del comitente.
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de crear el commit. El valor predeterminado es `false`.
 
 Campos de firma:
 
@@ -324,6 +329,7 @@ Argumentos:
 - `rev` (string, required): expresión de revisión como un nombre de rama, nombre de etiqueta u Oid de confirmación.
 - `options` (tabla, opcional): Opciones de checkout. Campos admitidos:
   - `force` (booleano, opcional): Si se debe forzar el checkout. El valor predeterminado es `false`.
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de hacer checkout de la revisión. El valor predeterminado es `false`.
 
 Comportamiento:
 
@@ -344,6 +350,7 @@ Argumentos:
   - `create` (booleano, opcional): Si se crea primero la rama. El valor predeterminado es `false`.
   - `force` (booleano, opcional): Si forzar el pago. El valor predeterminado es `false`.
   - `start_point` (cadena, opcional): Revisión para ramificar desde cuando `create = true`. El valor predeterminado es `HEAD`.
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de cambiar de rama. El valor predeterminado es `false`.
 
 Ejemplo:
 
@@ -368,6 +375,7 @@ Argumentos:
 - `remote` (cadena, opcional): Nombre remoto. El valor predeterminado es `"origin"`.
 - `options` (tabla, opcional): Opciones de fetch. Campos admitidos:
   - `refspecs` (string|string[], opcional): Una refspec o una matriz de refspecs.
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de hacer fetch. El valor predeterminado es `false`.
   - `auth` (tabla, opcional): Configuración de autenticación remota. Utiliza la misma estructura que `ptool.git.clone(...)`.
 
 Devuelve:
@@ -403,6 +411,7 @@ Argumentos:
 - `remote` (cadena, opcional): Nombre remoto. El valor predeterminado es `"origin"`.
 - `refspecs` (string|string[], opcional): Una refspec o una matriz de refspecs.
 - `options` (tabla, opcional): Opciones de push. Campos admitidos:
+  - `confirm` (booleano, opcional): Si se debe pedir confirmación antes de hacer push. El valor predeterminado es `false`.
   - `auth` (tabla, opcional): Configuración de autenticación remota. Utiliza la misma estructura que `ptool.git.clone(...)`.
 
 Comportamiento:

@@ -5,6 +5,11 @@ Git repository helpers are available under `ptool.git` and `p.git`.
 This module is backed by `git2` / `libgit2`, not by invoking the `git`
 command-line tool.
 
+Mutating operations such as `ptool.git.clone(...)`, `repo:add(...)`,
+`repo:commit(...)`, `repo:checkout(...)`, `repo:switch(...)`,
+`repo:fetch(...)`, and `repo:push(...)` accept `confirm = true` in their
+options table to ask the user for confirmation before the action runs.
+
 ## ptool.git.open
 
 > `v0.6.0` - Introduced.
@@ -70,6 +75,8 @@ Arguments:
   - `branch` (string, optional): Branch name to check out after cloning.
   - `bare` (boolean, optional): Whether to create a bare repository. Defaults
     to `false`.
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    cloning. Defaults to `false`.
   - `auth` (table, optional): Remote authentication settings.
 
 `auth` fields:
@@ -281,6 +288,8 @@ Arguments:
 - `options` (table, optional): Add options. Supported fields:
   - `update` (boolean, optional): Update only paths already known to the
     index. Defaults to `false`.
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    staging paths. Defaults to `false`.
 
 Behavior:
 
@@ -308,6 +317,8 @@ Arguments:
 - `options` (table, optional): Commit options. Supported fields:
   - `author` (table, optional): Author signature.
   - `committer` (table, optional): Committer signature.
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    creating the commit. Defaults to `false`.
 
 Signature fields:
 
@@ -349,6 +360,8 @@ Arguments:
 - `options` (table, optional): Checkout options. Supported fields:
   - `force` (boolean, optional): Whether to force checkout. Defaults to
     `false`.
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    checking out the revision. Defaults to `false`.
 
 Behavior:
 
@@ -372,6 +385,8 @@ Arguments:
     `false`.
   - `start_point` (string, optional): Revision to branch from when
     `create = true`. Defaults to `HEAD`.
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    switching branches. Defaults to `false`.
 
 Example:
 
@@ -398,6 +413,8 @@ Arguments:
 - `options` (table, optional): Fetch options. Supported fields:
   - `refspecs` (string|string[], optional): One refspec or an array of
     refspecs.
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    fetching. Defaults to `false`.
   - `auth` (table, optional): Remote authentication settings. Uses the same
     structure as `ptool.git.clone(...)`.
 
@@ -434,6 +451,8 @@ Arguments:
 - `remote` (string, optional): Remote name. Defaults to `"origin"`.
 - `refspecs` (string|string[], optional): One refspec or an array of refspecs.
 - `options` (table, optional): Push options. Supported fields:
+  - `confirm` (boolean, optional): Whether to ask for confirmation before
+    pushing. Defaults to `false`.
   - `auth` (table, optional): Remote authentication settings. Uses the same
     structure as `ptool.git.clone(...)`.
 

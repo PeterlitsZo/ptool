@@ -23,6 +23,10 @@
 - Changed `ptool.fs.copy(...)` so local-to-local copies now support
   directories, directory-style file destinations, and synchronized the
   filesystem docs across all supported current locales.
+- Changed mutating `ptool.git` / `p.git` helpers so `clone`, `add`, `commit`,
+  `checkout`, `switch`, `fetch`, and `push` now accept `confirm = true` to
+  require interactive confirmation before running, and documented the new
+  option across all supported current locales.
 
 ## v0.8.1 (2026-05-17)
 

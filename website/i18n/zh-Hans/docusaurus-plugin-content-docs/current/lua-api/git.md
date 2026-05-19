@@ -4,6 +4,8 @@ Git 仓库辅助能力位于 `ptool.git` 和 `p.git` 下。
 
 这个模块基于 `git2` / `libgit2`，而不是通过调用 `git` 命令行工具实现。
 
+像 `ptool.git.clone(...)`、`repo:add(...)`、`repo:commit(...)`、`repo:checkout(...)`、`repo:switch(...)`、`repo:fetch(...)` 和 `repo:push(...)` 这样的修改型操作都支持在其 options table 中传入 `confirm = true`，以便在执行动作前向用户请求确认。
+
 ## ptool.git.open
 
 > `v0.6.0` - 引入。
@@ -61,6 +63,7 @@ print(repo:root())
 - `options`（table，可选）：克隆选项。支持的字段：
   - `branch`（string，可选）：克隆完成后要检出的分支名。
   - `bare`（boolean，可选）：是否创建裸仓库。默认值为 `false`。
+  - `confirm`（boolean，可选）：克隆前是否请求确认。默认值为 `false`。
   - `auth`（table，可选）：远端认证设置。
 
 `auth` 字段：
@@ -261,6 +264,7 @@ end
 - `paths`（string|string[]，必填）：单个路径或路径数组。
 - `options`（table，可选）：add 选项。支持的字段：
   - `update`（boolean，可选）：只更新 index 中已知的路径。默认值为 `false`。
+  - `confirm`（boolean，可选）：暂存路径前是否请求确认。默认值为 `false`。
 
 行为说明：
 
@@ -287,6 +291,7 @@ repo:add({"src", "Cargo.toml"})
 - `options`（table，可选）：commit 选项。支持的字段：
   - `author`（table，可选）：作者签名。
   - `committer`（table，可选）：提交者签名。
+  - `confirm`（boolean，可选）：创建提交前是否请求确认。默认值为 `false`。
 
 签名字段：
 
@@ -324,6 +329,7 @@ print(oid)
 - `rev`（string，必填）：修订表达式，例如分支名、标签名或提交 OID。
 - `options`（table，可选）：checkout 选项。支持的字段：
   - `force`（boolean，可选）：是否强制检出。默认值为 `false`。
+  - `confirm`（boolean，可选）：检出该修订前是否请求确认。默认值为 `false`。
 
 行为说明：
 
@@ -344,6 +350,7 @@ print(oid)
   - `create`（boolean，可选）：是否先创建分支。默认值为 `false`。
   - `force`（boolean，可选）：是否强制检出。默认值为 `false`。
   - `start_point`（string，可选）：当 `create = true` 时作为建分支起点的修订。默认值为 `HEAD`。
+  - `confirm`（boolean，可选）：切换分支前是否请求确认。默认值为 `false`。
 
 示例：
 
@@ -368,6 +375,7 @@ repo:switch("release-next", {
 - `remote`（string，可选）：远端名称。默认值为 `"origin"`。
 - `options`（table，可选）：fetch 选项。支持的字段：
   - `refspecs`（string|string[]，可选）：单个 refspec 或 refspec 数组。
+  - `confirm`（boolean，可选）：抓取前是否请求确认。默认值为 `false`。
   - `auth`（table，可选）：远端认证设置。结构与 `ptool.git.clone(...)` 相同。
 
 返回：
@@ -403,6 +411,7 @@ print(stats.received_objects, stats.received_bytes)
 - `remote`（string，可选）：远端名称。默认值为 `"origin"`。
 - `refspecs`（string|string[]，可选）：单个 refspec 或 refspec 数组。
 - `options`（table，可选）：push 选项。支持的字段：
+  - `confirm`（boolean，可选）：推送前是否请求确认。默认值为 `false`。
   - `auth`（table，可选）：远端认证设置。结构与 `ptool.git.clone(...)` 相同。
 
 行为说明：

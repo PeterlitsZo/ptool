@@ -2,7 +2,7 @@ use mlua::{Lua, Table, UserData, UserDataMethods, Value, Variadic};
 use ptool_engine::{
     GitAddOptions, GitCheckoutOptions, GitCloneOptions, GitCommitOptions, GitFetchOptions,
     GitFetchStats, GitPushOptions, GitRemoteAuth, GitRepository, GitSignature, GitStatusEntry,
-    GitStatusOptions, GitStatusSummary, GitSwitchOptions, PtoolEngine,
+    GitStatusOptions, GitStatusSummary, GitSwitchOptions, PromptConfirmOptions, PtoolEngine,
 };
 use std::path::Path;
 
@@ -21,7 +21,13 @@ const FETCH_SIGNATURE: &str = "ptool.git.Repo:fetch(remote?, options?)";
 const PUSH_SIGNATURE: &str = "ptool.git.Repo:push(remote?, refspecs?, options?)";
 
 pub(crate) struct LuaGitRepo {
+    engine: PtoolEngine,
     repo: GitRepository,
+}
+
+struct ConfirmableOptions<T> {
+    inner: T,
+    confirm: bool,
 }
 
 pub(crate) fn open(
@@ -32,7 +38,10 @@ pub(crate) fn open(
     let repo = engine
         .git_open(path.as_deref(), current_dir)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, OPEN_SIGNATURE))?;
-    Ok(LuaGitRepo { repo })
+    Ok(LuaGitRepo {
+        engine: engine.clone(),
+        repo,
+    })
 }
 
 pub(crate) fn discover(
@@ -43,7 +52,10 @@ pub(crate) fn discover(
     let repo = engine
         .git_discover(path.as_deref(), current_dir)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, DISCOVER_SIGNATURE))?;
-    Ok(LuaGitRepo { repo })
+    Ok(LuaGitRepo {
+        engine: engine.clone(),
+        repo,
+    })
 }
 
 pub(crate) fn clone_repo(
@@ -54,10 +66,23 @@ pub(crate) fn clone_repo(
     engine: &PtoolEngine,
 ) -> mlua::Result<LuaGitRepo> {
     let options = parse_clone_options(options)?;
+    let target_path = resolve_repo_path(current_dir, &path);
+    if options.confirm {
+        confirm_git_action(
+            engine,
+            CLONE_SIGNATURE,
+            format!("Clone repository -- {url} -> {}?", target_path.display()),
+            Some(format!("The destination path is {}", target_path.display())),
+            format!("clone into `{}` cancelled by user", target_path.display()),
+        )?;
+    }
     let repo = engine
-        .git_clone(&url, &path, current_dir, options)
+        .git_clone(&url, &path, current_dir, options.inner)
         .map_err(|err| crate::lua_error::lua_error_from_engine(err, CLONE_SIGNATURE))?;
-    Ok(LuaGitRepo { repo })
+    Ok(LuaGitRepo {
+        engine: engine.clone(),
+        repo,
+    })
 }
 
 impl UserData for LuaGitRepo {
@@ -130,53 +155,125 @@ impl LuaGitRepo {
     fn add(&self, paths: Value, options: Option<Table>) -> mlua::Result<()> {
         let paths = parse_paths(paths, ADD_SIGNATURE)?;
         let options = parse_add_options(options)?;
+        if options.confirm {
+            let preview = preview_items(&paths);
+            confirm_git_action(
+                &self.engine,
+                ADD_SIGNATURE,
+                format!("Stage Git path(s) -- {preview}?"),
+                Some(format!("The repository is {}", self.repo_label())),
+                "git add cancelled by user".to_string(),
+            )?;
+        }
         self.repo
-            .add(&paths, options)
+            .add(&paths, options.inner)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, ADD_SIGNATURE))
     }
 
     fn commit(&self, message: String, options: Option<Table>) -> mlua::Result<String> {
         let options = parse_commit_options(options)?;
+        if options.confirm {
+            confirm_git_action(
+                &self.engine,
+                COMMIT_SIGNATURE,
+                format!("Create Git commit -- {message}?"),
+                Some(format!("The repository is {}", self.repo_label())),
+                "git commit cancelled by user".to_string(),
+            )?;
+        }
         self.repo
-            .commit(&message, options)
+            .commit(&message, options.inner)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, COMMIT_SIGNATURE))
     }
 
     fn checkout(&self, rev: String, options: Option<Table>) -> mlua::Result<()> {
         let options = parse_checkout_options(options)?;
+        if options.confirm {
+            confirm_git_action(
+                &self.engine,
+                CHECKOUT_SIGNATURE,
+                format!("Checkout Git revision -- {rev}?"),
+                Some(format!("The repository is {}", self.repo_label())),
+                "git checkout cancelled by user".to_string(),
+            )?;
+        }
         self.repo
-            .checkout(&rev, options)
+            .checkout(&rev, options.inner)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, CHECKOUT_SIGNATURE))
     }
 
     fn switch(&self, branch: String, options: Option<Table>) -> mlua::Result<()> {
         let options = parse_switch_options(options)?;
+        if options.confirm {
+            confirm_git_action(
+                &self.engine,
+                SWITCH_SIGNATURE,
+                format!("Switch Git branch -- {branch}?"),
+                Some(format!("The repository is {}", self.repo_label())),
+                "git switch cancelled by user".to_string(),
+            )?;
+        }
         self.repo
-            .switch(&branch, options)
+            .switch(&branch, options.inner)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, SWITCH_SIGNATURE))
     }
 
     fn fetch(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
         let (remote, options) = parse_fetch_call(args)?;
+        let remote_name = remote.as_deref().unwrap_or("origin");
+        if options.confirm {
+            confirm_git_action(
+                &self.engine,
+                FETCH_SIGNATURE,
+                format!("Fetch Git remote -- {remote_name}?"),
+                Some(format!("The repository is {}", self.repo_label())),
+                "git fetch cancelled by user".to_string(),
+            )?;
+        }
         let stats = self
             .repo
-            .fetch(remote.as_deref(), options)
+            .fetch(remote.as_deref(), options.inner)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, FETCH_SIGNATURE))?;
         git_fetch_stats_to_lua(lua, stats)
     }
 
     fn push(&self, args: Variadic<Value>) -> mlua::Result<()> {
         let (remote, refspecs, options) = parse_push_call(args)?;
+        let remote_name = remote.as_deref().unwrap_or("origin");
+        if options.confirm {
+            let refspec_preview = if refspecs.is_empty() {
+                "default refspec".to_string()
+            } else {
+                preview_items(&refspecs)
+            };
+            confirm_git_action(
+                &self.engine,
+                PUSH_SIGNATURE,
+                format!("Push Git remote -- {remote_name} ({refspec_preview})?"),
+                Some(format!("The repository is {}", self.repo_label())),
+                "git push cancelled by user".to_string(),
+            )?;
+        }
         self.repo
-            .push(remote.as_deref(), &refspecs, options)
+            .push(remote.as_deref(), &refspecs, options.inner)
             .map_err(|err| crate::lua_error::lua_error_from_engine(err, PUSH_SIGNATURE))
+    }
+
+    fn repo_label(&self) -> String {
+        self.repo.root().unwrap_or_else(|| self.repo.path())
     }
 }
 
-fn parse_clone_options(options: Option<Table>) -> mlua::Result<GitCloneOptions> {
+fn parse_clone_options(
+    options: Option<Table>,
+) -> mlua::Result<ConfirmableOptions<GitCloneOptions>> {
     let mut parsed = GitCloneOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -201,6 +298,7 @@ fn parse_clone_options(options: Option<Table>) -> mlua::Result<GitCloneOptions> 
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, CLONE_SIGNATURE, "confirm")?,
             "auth" => match value {
                 Value::Table(value) => parsed.auth = parse_auth_options(value, CLONE_SIGNATURE)?,
                 _ => {
@@ -219,7 +317,10 @@ fn parse_clone_options(options: Option<Table>) -> mlua::Result<GitCloneOptions> 
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
 fn parse_status_options(options: Option<Table>) -> mlua::Result<GitStatusOptions> {
@@ -271,10 +372,14 @@ fn parse_status_options(options: Option<Table>) -> mlua::Result<GitStatusOptions
     Ok(parsed)
 }
 
-fn parse_add_options(options: Option<Table>) -> mlua::Result<GitAddOptions> {
+fn parse_add_options(options: Option<Table>) -> mlua::Result<ConfirmableOptions<GitAddOptions>> {
     let mut parsed = GitAddOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -290,6 +395,7 @@ fn parse_add_options(options: Option<Table>) -> mlua::Result<GitAddOptions> {
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, ADD_SIGNATURE, "confirm")?,
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     ADD_SIGNATURE,
@@ -299,13 +405,22 @@ fn parse_add_options(options: Option<Table>) -> mlua::Result<GitAddOptions> {
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
-fn parse_commit_options(options: Option<Table>) -> mlua::Result<GitCommitOptions> {
+fn parse_commit_options(
+    options: Option<Table>,
+) -> mlua::Result<ConfirmableOptions<GitCommitOptions>> {
     let mut parsed = GitCommitOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -334,6 +449,7 @@ fn parse_commit_options(options: Option<Table>) -> mlua::Result<GitCommitOptions
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, COMMIT_SIGNATURE, "confirm")?,
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     COMMIT_SIGNATURE,
@@ -343,13 +459,22 @@ fn parse_commit_options(options: Option<Table>) -> mlua::Result<GitCommitOptions
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
-fn parse_checkout_options(options: Option<Table>) -> mlua::Result<GitCheckoutOptions> {
+fn parse_checkout_options(
+    options: Option<Table>,
+) -> mlua::Result<ConfirmableOptions<GitCheckoutOptions>> {
     let mut parsed = GitCheckoutOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -365,6 +490,7 @@ fn parse_checkout_options(options: Option<Table>) -> mlua::Result<GitCheckoutOpt
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, CHECKOUT_SIGNATURE, "confirm")?,
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     CHECKOUT_SIGNATURE,
@@ -374,13 +500,22 @@ fn parse_checkout_options(options: Option<Table>) -> mlua::Result<GitCheckoutOpt
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
-fn parse_switch_options(options: Option<Table>) -> mlua::Result<GitSwitchOptions> {
+fn parse_switch_options(
+    options: Option<Table>,
+) -> mlua::Result<ConfirmableOptions<GitSwitchOptions>> {
     let mut parsed = GitSwitchOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -414,6 +549,7 @@ fn parse_switch_options(options: Option<Table>) -> mlua::Result<GitSwitchOptions
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, SWITCH_SIGNATURE, "confirm")?,
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     SWITCH_SIGNATURE,
@@ -423,16 +559,30 @@ fn parse_switch_options(options: Option<Table>) -> mlua::Result<GitSwitchOptions
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
-fn parse_fetch_call(args: Variadic<Value>) -> mlua::Result<(Option<String>, GitFetchOptions)> {
+fn parse_fetch_call(
+    args: Variadic<Value>,
+) -> mlua::Result<(Option<String>, ConfirmableOptions<GitFetchOptions>)> {
     match args.len() {
-        0 => Ok((None, GitFetchOptions::default())),
+        0 => Ok((
+            None,
+            ConfirmableOptions {
+                inner: GitFetchOptions::default(),
+                confirm: false,
+            },
+        )),
         1 => match args.first() {
             Some(Value::String(value)) => Ok((
                 Some(value.to_str()?.to_string()),
-                GitFetchOptions::default(),
+                ConfirmableOptions {
+                    inner: GitFetchOptions::default(),
+                    confirm: false,
+                },
             )),
             Some(Value::Table(value)) => Ok((
                 None,
@@ -460,10 +610,17 @@ fn parse_fetch_call(args: Variadic<Value>) -> mlua::Result<(Option<String>, GitF
     }
 }
 
-fn parse_fetch_options(options: Option<Table>, op: &str) -> mlua::Result<GitFetchOptions> {
+fn parse_fetch_options(
+    options: Option<Table>,
+    op: &str,
+) -> mlua::Result<ConfirmableOptions<GitFetchOptions>> {
     let mut parsed = GitFetchOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -480,6 +637,7 @@ fn parse_fetch_options(options: Option<Table>, op: &str) -> mlua::Result<GitFetc
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, op, "confirm")?,
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     op,
@@ -489,19 +647,36 @@ fn parse_fetch_options(options: Option<Table>, op: &str) -> mlua::Result<GitFetc
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
 fn parse_push_call(
     args: Variadic<Value>,
-) -> mlua::Result<(Option<String>, Vec<String>, GitPushOptions)> {
+) -> mlua::Result<(
+    Option<String>,
+    Vec<String>,
+    ConfirmableOptions<GitPushOptions>,
+)> {
     match args.len() {
-        0 => Ok((None, Vec::new(), GitPushOptions::default())),
+        0 => Ok((
+            None,
+            Vec::new(),
+            ConfirmableOptions {
+                inner: GitPushOptions::default(),
+                confirm: false,
+            },
+        )),
         1 => match args.first() {
             Some(Value::String(value)) => Ok((
                 Some(value.to_str()?.to_string()),
                 Vec::new(),
-                GitPushOptions::default(),
+                ConfirmableOptions {
+                    inner: GitPushOptions::default(),
+                    confirm: false,
+                },
             )),
             Some(Value::Table(value)) => Ok((
                 None,
@@ -522,7 +697,10 @@ fn parse_push_call(
             (Some(Value::String(remote)), Some(value)) => Ok((
                 Some(remote.to_str()?.to_string()),
                 parse_string_list_from_value(value.clone(), PUSH_SIGNATURE, "refspecs")?,
-                GitPushOptions::default(),
+                ConfirmableOptions {
+                    inner: GitPushOptions::default(),
+                    confirm: false,
+                },
             )),
             _ => Err(crate::lua_error::invalid_argument(
                 PUSH_SIGNATURE,
@@ -547,10 +725,17 @@ fn parse_push_call(
     }
 }
 
-fn parse_push_options(options: Option<Table>, op: &str) -> mlua::Result<GitPushOptions> {
+fn parse_push_options(
+    options: Option<Table>,
+    op: &str,
+) -> mlua::Result<ConfirmableOptions<GitPushOptions>> {
     let mut parsed = GitPushOptions::default();
+    let mut confirm = false;
     let Some(options) = options else {
-        return Ok(parsed);
+        return Ok(ConfirmableOptions {
+            inner: parsed,
+            confirm,
+        });
     };
 
     for pair in options.pairs::<Value, Value>() {
@@ -566,6 +751,7 @@ fn parse_push_options(options: Option<Table>, op: &str) -> mlua::Result<GitPushO
                     ));
                 }
             },
+            "confirm" => confirm = parse_bool_option(value, op, "confirm")?,
             _ => {
                 return Err(crate::lua_error::invalid_option(
                     op,
@@ -575,7 +761,10 @@ fn parse_push_options(options: Option<Table>, op: &str) -> mlua::Result<GitPushO
         }
     }
 
-    Ok(parsed)
+    Ok(ConfirmableOptions {
+        inner: parsed,
+        confirm,
+    })
 }
 
 fn parse_auth_options(options: Table, op: &str) -> mlua::Result<GitRemoteAuth> {
@@ -680,6 +869,57 @@ fn parse_option_key(key: Value, op: &str) -> mlua::Result<String> {
             op,
             "option keys must be strings",
         )),
+    }
+}
+
+fn parse_bool_option(value: Value, op: &str, field: &str) -> mlua::Result<bool> {
+    match value {
+        Value::Boolean(value) => Ok(value),
+        _ => Err(crate::lua_error::invalid_option(
+            op,
+            format!("`{field}` must be a boolean"),
+        )),
+    }
+}
+
+fn confirm_git_action(
+    engine: &PtoolEngine,
+    op: &'static str,
+    prompt: String,
+    help: Option<String>,
+    cancelled_detail: String,
+) -> mlua::Result<()> {
+    match engine.prompt_confirm(
+        op,
+        &prompt,
+        PromptConfirmOptions {
+            default: Some(true),
+            help,
+        },
+    ) {
+        Ok(true) => Ok(()),
+        Ok(false) => {
+            Err(crate::lua_error::LuaError::cancelled(op, cancelled_detail).into_mlua_error())
+        }
+        Err(err) => Err(crate::lua_error::lua_error_from_engine(err, op)),
+    }
+}
+
+fn resolve_repo_path(current_dir: &Path, path: &str) -> std::path::PathBuf {
+    let path = Path::new(path);
+    if path.is_absolute() {
+        path.to_path_buf()
+    } else {
+        current_dir.join(path)
+    }
+}
+
+fn preview_items(items: &[String]) -> String {
+    let preview = items.iter().take(3).cloned().collect::<Vec<_>>().join(", ");
+    if items.len() > 3 {
+        format!("{preview}, ...")
+    } else {
+        preview
     }
 }
 

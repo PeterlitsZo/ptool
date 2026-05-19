@@ -4,6 +4,8 @@ Git リポジトリ ヘルパーは、`ptool.git` および `p.git` で利用で
 
 このモジュールは、`git` コマンド ライン ツールの呼び出しではなく、`git2` / `libgit2` によってサポートされます。
 
+`ptool.git.clone(...)`、`repo:add(...)`、`repo:commit(...)`、`repo:checkout(...)`、`repo:switch(...)`、`repo:fetch(...)`、`repo:push(...)` のような変更系操作では、実行前にユーザー確認を求めるため、options テーブルで `confirm = true` を受け付けます。
+
 ## ptool.git.open
 
 > `v0.6.0` - 導入されました。
@@ -61,6 +63,7 @@ print(repo:root())
 - `options` (テーブル、オプション): クローン オプション。サポートされているフィールド:
   - `branch` (文字列、オプション): クローン作成後にチェックアウトするブランチ名。
   - `bare` (ブール値、オプション): ベア リポジトリを作成するかどうか。デフォルトは`false`です。
+  - `confirm` (boolean, 任意): クローン前に確認を求めるかどうか。デフォルトは `false`。
   - `auth` (テーブル、オプション): リモート認証設定。
 
 `auth` のフィールド:
@@ -261,6 +264,7 @@ end
 - `paths` (文字列|文字列[]、必須): パスまたはパスの配列。
 - `options` (テーブル、オプション): 追加オプション。サポートされているフィールド:
   - `update` (ブール値、オプション): インデックスにすでに認識されているパスのみを更新します。デフォルトは`false`です。
+  - `confirm` (boolean, 任意): パスをステージする前に確認を求めるかどうか。デフォルトは `false`。
 
 挙動:
 
@@ -287,6 +291,7 @@ repo:add({"src", "Cargo.toml"})
 - `options` (テーブル、オプション): コミットオプション。サポートされているフィールド:
   - `author` (テーブル、オプション): 著者の署名。
   - `committer` (テーブル、オプション): コミッターの署名。
+  - `confirm` (boolean, 任意): コミットを作成する前に確認を求めるかどうか。デフォルトは `false`。
 
 署名フィールド:
 
@@ -324,6 +329,7 @@ print(oid)
 - `rev` (文字列、必須): ブランチ名、タグ名、コミット OID などのリビジョン式。
 - `options` (テーブル、オプション): チェックアウト オプション。サポートされているフィールド:
   - `force` (ブール値、オプション): チェックアウトを強制するかどうか。デフォルトは`false`です。
+  - `confirm` (boolean, 任意): リビジョンをチェックアウトする前に確認を求めるかどうか。デフォルトは `false`。
 
 挙動:
 
@@ -344,6 +350,7 @@ print(oid)
   - `create` (ブール値、オプション): ブランチを最初に作成するかどうか。デフォルトは`false`です。
   - `force` (ブール値、オプション): チェックアウトを強制するかどうか。デフォルトは`false`です。
   - `start_point` (文字列、オプション): `create = true` の時点から分岐するリビジョン。デフォルトは`HEAD`です。
+  - `confirm` (boolean, 任意): ブランチを切り替える前に確認を求めるかどうか。デフォルトは `false`。
 
 例:
 
@@ -368,6 +375,7 @@ repo:switch("release-next", {
 - `remote` (文字列、オプション): リモート名。デフォルトは`"origin"`です。
 - `options` (テーブル、オプション): Fetch オプション。サポートされているフィールド:
   - `refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。
+  - `confirm` (boolean, 任意): fetch 前に確認を求めるかどうか。デフォルトは `false`。
   - `auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。
 
 戻り値:
@@ -403,6 +411,7 @@ print(stats.received_objects, stats.received_bytes)
 - `remote` (文字列、オプション): リモート名。デフォルトは`"origin"`です。
 - `refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。
 - `options` (テーブル、オプション): Push オプション。サポートされているフィールド:
+  - `confirm` (boolean, 任意): push 前に確認を求めるかどうか。デフォルトは `false`。
   - `auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。
 
 挙動:
