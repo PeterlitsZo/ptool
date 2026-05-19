@@ -4,6 +4,9 @@ use crate::http::{
     invalid_http_options_for, is_http_error, parse_headers, parse_method,
     parse_nonnegative_usize_for, parse_timeout_ms, parse_timeout_value,
 };
+use crate::interactive_output::{
+    InteractiveOutputSink, InteractiveOutputViewport, spawn_interactive_output_thread,
+};
 use crate::{Error, ErrorKind, Result};
 use reqwest::StatusCode;
 use reqwest::header::AUTHORIZATION;
@@ -1238,6 +1241,13 @@ fn run_ssh_command(
     let mut child = command
         .spawn()
         .map_err(|err| ssh_error(format!("failed to spawn `ssh`: {err}")))?;
+    let interactive_output = InteractiveOutputViewport::maybe_new(
+        matches!(stdout_mode, ProcessOutputMode::Inherit),
+        matches!(stderr_mode, ProcessOutputMode::Inherit),
+    );
+    let interactive_sink = interactive_output
+        .as_ref()
+        .map(InteractiveOutputViewport::sink);
 
     let stdin_handle = stdin.and_then(|bytes| {
         child.stdin.take().map(|mut pipe| {
@@ -1249,14 +1259,13 @@ fn run_ssh_command(
         })
     });
 
-    let stdout_handle = child
-        .stdout
-        .take()
-        .map(|reader| spawn_process_output_thread(reader, &stdout_mode, false));
+    let stdout_handle = child.stdout.take().map(|reader| {
+        spawn_process_output_thread(reader, &stdout_mode, false, interactive_sink.clone())
+    });
     let stderr_handle = child
         .stderr
         .take()
-        .map(|reader| spawn_process_output_thread(reader, &stderr_mode, true));
+        .map(|reader| spawn_process_output_thread(reader, &stderr_mode, true, interactive_sink));
 
     let status = child
         .wait()
@@ -1266,8 +1275,16 @@ fn run_ssh_command(
         finish_io_thread(handle, "stdin")?;
     }
 
-    let stdout = collect_process_output(stdout_handle, &stdout_mode, "stdout")?;
-    let stderr = collect_process_output(stderr_handle, &stderr_mode, "stderr")?;
+    let stdout_result = collect_process_output(stdout_handle, &stdout_mode, "stdout");
+    let stderr_result = collect_process_output(stderr_handle, &stderr_mode, "stderr");
+    let interactive_result = if let Some(viewport) = interactive_output {
+        finish_interactive_output(viewport)
+    } else {
+        Ok(())
+    };
+    let stdout = stdout_result?;
+    let stderr = stderr_result?;
+    interactive_result?;
 
     Ok(BinaryExecResult {
         code: status.code().map(i64::from),
@@ -1314,15 +1331,17 @@ fn spawn_process_output_thread<R>(
     reader: R,
     mode: &ProcessOutputMode,
     use_stderr: bool,
+    interactive_sink: Option<InteractiveOutputSink>,
 ) -> ProcessOutputHandle
 where
     R: Read + Send + 'static,
 {
     match mode {
         ProcessOutputMode::Capture => ProcessOutputHandle::Capture(spawn_reader_thread(reader)),
-        ProcessOutputMode::Inherit => {
-            ProcessOutputHandle::Inherit(spawn_prefixed_output_thread(reader, use_stderr))
-        }
+        ProcessOutputMode::Inherit => ProcessOutputHandle::Inherit(match interactive_sink {
+            Some(sink) => spawn_interactive_output_thread(reader, sink),
+            None => spawn_prefixed_output_thread(reader, use_stderr),
+        }),
         ProcessOutputMode::Null => unreachable!("null stream mode must not spawn output threads"),
     }
 }
@@ -1395,6 +1414,14 @@ fn finish_io_thread(
             "failed to join {stream_name} writer thread for `ssh`"
         ))),
     }
+}
+
+fn finish_interactive_output(viewport: InteractiveOutputViewport) -> Result<()> {
+    viewport.finish().map_err(|err| {
+        ssh_error(format!(
+            "failed to render interactive command output: {err}"
+        ))
+    })
 }
 
 fn collect_process_output(

@@ -27,6 +27,10 @@
 
 ### Changed
 
+- Changed interactive inherited command output for `ptool.run(...)`,
+  `ptool.run_shell(...)`, and `ptool.ssh.Connection:run(...)` so terminal
+  streaming now uses a scrolling viewport that starts smaller and gradually
+  expands up to 50 visible lines as more output arrives.
 - Changed `ptool.fs.copy(...)` so local-to-local copies now support
   directories, directory-style file destinations, and synchronized the
   filesystem docs across all supported current locales.

@@ -31,7 +31,7 @@
 - [x] Let `p.git` module support `confirm` option.
 - [x] How about `p.run_shell`?
 - [x] Enhance `p.sh` module.
-- [ ] If the ptool is running in a interactive shell, let `p.run` (and more)
+- [x] If the ptool is running in a interactive shell, let `p.run` (and more)
       only show the last line of stdout / stderr.
 
 # v0.8.0
