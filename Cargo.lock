@@ -2368,7 +2368,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-cli"
-version = "0.9.0"
+version = "0.9.1"
 dependencies = [
  "clap_lex",
  "indoc",
@@ -2378,7 +2378,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-engine"
-version = "0.9.0"
+version = "0.9.1"
 dependencies = [
  "adler2",
  "blake2",
@@ -2421,7 +2421,7 @@ dependencies = [
 
 [[package]]
 name = "ptool-lua"
-version = "0.9.0"
+version = "0.9.1"
 dependencies = [
  "jiff",
  "mlua",

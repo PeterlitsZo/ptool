@@ -4,7 +4,14 @@
 
 TODO...
 
-## v0.9.0 (2025-05-19)
+## v0.9.1 (2026-05-19)
+
+### Fixed
+
+- Fixed `linux-x86` musl release builds so `blake3` now avoids the broken
+  AVX-512 code path on that target under the `cargo-zigbuild` pipeline.
+
+## v0.9.0 (2026-05-19)
 
 ### Added
 
