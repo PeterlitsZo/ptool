@@ -1,0 +1,230 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-17 21:53+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:1
+msgid "Table API"
+msgstr "Table API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:3
+msgid "Table helpers are available under `ptool.tbl` and `p.tbl`."
+msgstr "表辅助能力位于 `ptool.tbl` 和 `p.tbl` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:5
+msgid ""
+"These APIs are designed for dense list tables with contiguous integer keys "
+"starting at `1`."
+msgstr "这些 API 只面向从 `1` 开始、整数键连续且无空洞的顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:8
+msgid "ptool.tbl.map"
+msgstr "ptool.tbl.map"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:10
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:10"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:12
+msgid ""
+"`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a "
+"new list."
+msgstr "`ptool.tbl.map(list, fn)` 对顺序表中的每一项做映射，并返回一个新的顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15"
+msgid "`list` (table, required): A dense list table."
+msgstr "`list`（table，必填）：一个致密的顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:16
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a non-`nil` value."
+msgstr "`fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回非 `nil`"
+" 的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:20
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:20"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:22
+msgid "`fn` is called once for each item in order."
+msgstr "`fn` 会按顺序对每一项调用一次。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:23
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of creating holes in "
+"the result."
+msgstr "如果 `fn` 返回 `nil`，会直接抛错，而不是在结果里制造空洞。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:25
+msgid "The input table is not modified."
+msgstr "输入表不会被修改。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:35
+msgid "ptool.tbl.filter"
+msgstr "ptool.tbl.filter"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:37
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:37"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:39
+msgid ""
+"`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and "
+"returns them in a new dense list."
+msgstr "`ptool.tbl.filter(list, fn)` 保留回调结果为 truthy 的项，并返回新的致密顺序表"
+"。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42"
+msgid "`list` (table, required): A dense list table."
+msgstr "`list`（table，必填）：一个致密的顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:43
+msgid "`fn` (function, required): A callback that receives `(value, index)`."
+msgstr "`fn`（function，必填）：回调函数，接收 `(value, index)`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:44
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:44"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:46"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:48
+msgid "`nil` and `false` remove the current item."
+msgstr "返回 `nil` 或 `false` 会移除当前项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:49
+msgid "Any other Lua value keeps the current item."
+msgstr "返回其他任意 Lua 值都会保留当前项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:50
+msgid "The returned table is reindexed from `1`."
+msgstr "返回值会从 `1` 开始重新编号。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:60
+msgid "ptool.tbl.concat"
+msgstr "ptool.tbl.concat"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:64
+msgid ""
+"`ptool.tbl.concat(...)` concatenates one or more dense list tables into a "
+"new list."
+msgstr "`ptool.tbl.concat(...)` 将一个或多个致密顺序表按顺序拼接成新的顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67"
+msgid "`...` (table, required): One or more dense list tables."
+msgstr "`...`（table，必填）：一个或多个致密顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:68
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:68"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:70
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:70"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:72
+msgid "Arguments are appended from left to right."
+msgstr "参数会从左到右依次追加。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73
+msgid "Empty lists are allowed."
+msgstr "允许传入空表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:74
+msgid "The input tables are not modified."
+msgstr "输入表不会被修改。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:82
+msgid "ptool.tbl.join"
+msgstr "ptool.tbl.join"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:84
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:84"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:86
+msgid "`ptool.tbl.join(...)` is an alias of `ptool.tbl.concat(...)`."
+msgstr "`ptool.tbl.join(...)` 是 `ptool.tbl.concat(...)` 的别名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
+msgid "`...` (table, required): One or more dense list tables."
+msgstr "`...`（table，必填）：一个或多个致密顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:89
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:89"
+msgid "Returns: `table`."
+msgstr "返回：`table`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:97
+msgid "List Rules"
+msgstr "顺序表规则"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99
+msgid "`ptool.tbl` currently supports only dense list tables."
+msgstr "`ptool.tbl` 当前只支持致密顺序表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:101
+msgid "Keys must be integers."
+msgstr "键必须是整数。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:102
+msgid "Keys must start at `1`."
+msgstr "键必须从 `1` 开始。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:103
+msgid "Keys must be contiguous without gaps."
+msgstr "键必须连续，不能有空洞。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:104
+msgid "Sparse tables and dictionary-style tables raise errors."
+msgstr "稀疏表和字典风格的表都会抛错。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:10"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:37"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:84"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"

@@ -1,0 +1,266 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 16:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:1
+msgid "Redis API"
+msgstr "API de Redis"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:3
+msgid ""
+"Redis connection helpers are available under `ptool.redis` and `p.redis`."
+msgstr ""
+"Os utilitários de conexão Redis estão disponíveis em `ptool.redis` e "
+"`p.redis`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:5
+msgid "ptool.redis.connect"
+msgstr "ptool.redis.connect"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:7"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:9
+msgid ""
+"`ptool.redis.connect(url_or_options)` opens a Redis connection and returns a "
+"`Connection` object."
+msgstr ""
+"`ptool.redis.connect(url_or_options)` abre uma conexão Redis e retorna um "
+"objeto `Connection`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:12
+msgid "Arguments:"
+msgstr "Argumentos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "`url_or_options` (string|table, required):"
+msgstr "`url_or_options` (string|table, obrigatório):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "When a string is provided, it is treated as the Redis URL."
+msgstr "Quando uma string é fornecida, ela é tratada como a URL Redis."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "When a table is provided, it currently supports:"
+msgstr "Quando uma tabela é fornecida, atualmente ela suporta:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "`url` (string, required): The Redis URL."
+msgstr "`url` (string, obrigatório): A URL Redis."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:19
+msgid "Common URL examples:"
+msgstr "Exemplos comuns de URL:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:29
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:31
+msgid ""
+"The connection is intended for direct command execution through `conn:call"
+"(...)`."
+msgstr ""
+"A conexão foi pensada para execução direta de comandos por meio de `conn:"
+"call(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:33
+msgid ""
+"This API does not currently provide dedicated pub/sub, pipeline, or "
+"transaction helpers."
+msgstr ""
+"Atualmente esta API não oferece helpers dedicados para pub/sub, pipeline ou "
+"transações."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:36
+msgid "Connection"
+msgstr "Connection"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:38"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:40
+msgid ""
+"`Connection` represents an open Redis connection returned by "
+"`ptool.redis.connect()`."
+msgstr ""
+"`Connection` representa uma conexão Redis aberta retornada por `ptool.redis."
+"connect()`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:43
+msgid "It is implemented as a Lua userdata."
+msgstr "Ela é implementada como um userdata Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:45
+msgid "Methods:"
+msgstr "Métodos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:47
+msgid "`conn:call(command, ...)` -> `any`"
+msgstr "`conn:call(command, ...)` -> `any`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:48
+msgid "`conn:close()` -> `nil`"
+msgstr "`conn:close()` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:50
+msgid "Command argument rules:"
+msgstr "Regras dos argumentos de comando:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:52
+msgid "`command` must be a non-empty string."
+msgstr "`command` deve ser uma string não vazia."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:53
+msgid "Remaining arguments are passed to Redis as a flat argument list."
+msgstr ""
+"Os argumentos restantes são passados ao Redis como uma lista plana de "
+"argumentos."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "Supported argument value types are:"
+msgstr "Os tipos de valor suportados para argumentos são:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`boolean`"
+msgstr "`boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`integer`"
+msgstr "`integer`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`number`"
+msgstr "`number`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`string`"
+msgstr "`string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:59
+msgid ""
+"`nil`, tables, functions, threads, and userdata are not supported as Redis "
+"command arguments."
+msgstr ""
+"`nil`, tabelas, funções, threads e userdata não são suportados como "
+"argumentos de comandos Redis."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:61
+msgid ""
+"Lua strings are passed as raw bytes, so binary-safe Redis values are "
+"supported."
+msgstr ""
+"Strings Lua são passadas como bytes brutos, então valores Redis binary-safe "
+"são suportados."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:64
+msgid "Reply conversion rules:"
+msgstr "Regras de conversão de respostas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:66
+msgid "Null replies become `nil`."
+msgstr "Respostas nulas se tornam `nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:67
+msgid "Integer replies become Lua integers."
+msgstr "Respostas inteiras se tornam inteiros Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:68
+msgid "Bulk strings, simple strings, and verbatim strings become Lua strings."
+msgstr ""
+"Bulk strings, simple strings e verbatim strings se tornam strings Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:69
+msgid "Array and set replies become dense Lua array tables."
+msgstr "Respostas de array e set se tornam tabelas array densas do Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:70
+msgid ""
+"Map replies become Lua tables when the map keys can be represented as Lua "
+"strings, integers, numbers, or booleans."
+msgstr ""
+"Respostas de mapa se tornam tabelas Lua quando as chaves do mapa podem ser "
+"representadas como strings, inteiros, números ou booleanos do Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:72
+msgid "Double replies become Lua numbers."
+msgstr "Respostas double se tornam números Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:73
+msgid "Boolean replies become Lua booleans."
+msgstr "Respostas booleanas se tornam booleanos Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:74
+msgid "Big number replies become Lua strings."
+msgstr "Respostas de números grandes se tornam strings Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:75
+msgid ""
+"Push replies become tables shaped like `{ kind = \"...\", data = {...} }`."
+msgstr ""
+"Respostas push se tornam tabelas no formato `{ kind = \"...\", data = "
+"{...} }`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:77
+msgid "call"
+msgstr "call"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:79"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:81
+msgid "Canonical API name: `ptool.redis.Connection:call`."
+msgstr "Nome canônico da API: `ptool.redis.Connection:call`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:83
+msgid ""
+"`conn:call(command, ...)` sends a Redis command and returns the converted "
+"reply."
+msgstr ""
+"`conn:call(command, ...)` envia um comando Redis e retorna a resposta "
+"convertida."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:86
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:102
+msgid "close"
+msgstr "close"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:104
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:104"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:106
+msgid "Canonical API name: `ptool.redis.Connection:close`."
+msgstr "Nome canônico da API: `ptool.redis.Connection:close`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:108
+msgid "`conn:close()` closes the connection."
+msgstr "`conn:close()` fecha a conexão."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:110
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:112
+msgid "After closing, the connection can no longer be used."
+msgstr "Depois de fechada, a conexão não pode mais ser usada."
