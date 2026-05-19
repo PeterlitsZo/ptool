@@ -118,6 +118,16 @@ impl LuaWorld {
         )
     }
 
+    pub(crate) fn pipe(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Value> {
+        crate::exec::run_pipeline_command(
+            lua,
+            args,
+            self.current_dir(),
+            &self.engine,
+            self.config.run,
+        )
+    }
+
     pub(crate) fn run_shell(&self, lua: &Lua, command: String) -> mlua::Result<Value> {
         crate::exec::run_shell_command(
             lua,
@@ -401,11 +411,15 @@ impl LuaWorld {
     }
 
     pub(crate) fn shell_split(&self, lua: &Lua, input: String) -> mlua::Result<Table> {
-        let parts = self
-            .engine
-            .shell_split(&input)
-            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.sh.split"))?;
-        lua.create_sequence_from(parts)
+        crate::sh::split(lua, &self.engine, input)
+    }
+
+    pub(crate) fn shell_quote(&self, input: String) -> mlua::Result<String> {
+        crate::sh::quote(&self.engine, input)
+    }
+
+    pub(crate) fn shell_join(&self, words: Table) -> mlua::Result<String> {
+        crate::sh::join(&self.engine, words)
     }
 
     pub(crate) fn http_request(

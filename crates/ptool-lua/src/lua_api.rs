@@ -24,6 +24,9 @@ fn create_ptool_module(
     let run_state = Rc::clone(&world);
     let run_fn =
         lua.create_function(move |lua, args: Variadic<Value>| run_state.borrow().run(lua, args))?;
+    let pipe_state = Rc::clone(&world);
+    let pipe_fn =
+        lua.create_function(move |lua, args: Variadic<Value>| pipe_state.borrow().pipe(lua, args))?;
     let run_shell_state = Rc::clone(&world);
     let run_shell_fn = lua.create_function(move |lua, command: String| {
         run_shell_state.borrow().run_shell(lua, command)
@@ -89,6 +92,7 @@ fn create_ptool_module(
     let tui_module = create_ptool_tui_module(lua, Rc::clone(&world))?;
     let yaml_module = create_ptool_yaml_module(lua, Rc::clone(&world))?;
     module.set("run", run_fn)?;
+    module.set("pipe", pipe_fn)?;
     module.set("run_shell", run_shell_fn)?;
     module.set("run_capture", run_capture_fn)?;
     module.set("exec", exec_fn)?;
@@ -211,9 +215,16 @@ fn create_ptool_shell_module(
     world: Rc<RefCell<crate::LuaWorld>>,
 ) -> mlua::Result<Table> {
     let shell_module = lua.create_table()?;
-    let split_fn =
-        lua.create_function(move |lua, input: String| world.borrow().shell_split(lua, input))?;
+    let split_state = Rc::clone(&world);
+    let split_fn = lua
+        .create_function(move |lua, input: String| split_state.borrow().shell_split(lua, input))?;
+    let quote_state = Rc::clone(&world);
+    let quote_fn =
+        lua.create_function(move |_, input: String| quote_state.borrow().shell_quote(input))?;
+    let join_fn = lua.create_function(move |_, words: Table| world.borrow().shell_join(words))?;
     shell_module.set("split", split_fn)?;
+    shell_module.set("quote", quote_fn)?;
+    shell_module.set("join", join_fn)?;
     Ok(shell_module)
 }
 

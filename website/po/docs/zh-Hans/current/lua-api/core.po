@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 09:57+0800\n"
+"POT-Creation-Date: 2026-05-19 09:45+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -564,8 +564,8 @@ msgid "Currently supported fields:"
 msgstr "当前支持的字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
-msgid "`run` (table, optional): Default configuration for `ptool.run`, `ptool.run_capture`, and `ptool.run_shell`. Supported fields:"
-msgstr "`run`（table，可选）：`ptool.run`、`ptool.run_capture` 和 `ptool.run_shell` 的默认配置。支持以下字段："
+msgid "`run` (table, optional): Default configuration for `ptool.run`, `ptool.run_capture`, `ptool.pipe`, and `ptool.run_shell`. Supported fields:"
+msgstr "`run`（table，可选）：`ptool.run`、`ptool.run_capture`、`ptool.pipe` 和 `ptool.run_shell` 的默认配置。支持以下字段："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:328
 msgid "`echo` (boolean, optional): Default echo switch. Defaults to `true`."
@@ -786,8 +786,8 @@ msgid "Plain Lua errors are also caught. In that case, `err.kind` is `lua_error`
 msgstr "普通 Lua 错误也会被捕获。这种情况下，`err.kind` 为 `lua_error`，并且只保证 `message` 一定存在。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:442
-msgid "`ptool.try` is the recommended way to handle errors from APIs such as `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, and `res:assert_ok()`."
-msgstr "对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })` 和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。"
+msgid "`ptool.try` is the recommended way to handle errors from APIs such as `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, `ptool.pipe(..., { check = true })`, and `res:assert_ok()`."
+msgstr "对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、`ptool.pipe(..., { check = true })` 和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:446
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:446"
@@ -1063,6 +1063,7 @@ msgid "ptool.run_shell"
 msgstr "ptool.run_shell"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:641
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:641"
 msgid "`v0.9.0` - Introduced."
 msgstr "`v0.9.0` - 引入。"
 
@@ -1096,6 +1097,7 @@ msgid "`ptool.run_shell(command)` is equivalent to:"
 msgstr "`ptool.run_shell(command)` 等价于："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:658
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:658"
 msgid "The default `echo`, `check`, `confirm`, and `retry` values still come from `ptool.config({ run = { ... } })`."
 msgstr "`echo`、`check`、`confirm` 和 `retry` 的默认值仍然来自 `ptool.config({ run = { ... } })`。"
 
@@ -1109,231 +1111,440 @@ msgid "Example:"
 msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:678
-msgid "ptool.run_capture"
-msgstr "ptool.run_capture"
+msgid "ptool.pipe"
+msgstr "ptool.pipe"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:680
-msgid "`v0.6.0` - Introduced."
-msgstr "`v0.6.0` - 引入。"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:680"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:682
-msgid "`ptool.run_capture` executes external commands from Rust with the same call forms, argument rules, return value rules, and options as `ptool.run`."
-msgstr "`ptool.run_capture` 从 Rust 执行外部命令，调用形式、参数规则、返回值规则和选项 都与 `ptool.run` 相同。"
+msgid "`ptool.pipe(stages[, options])` executes a local pipeline without invoking a shell."
+msgstr "`ptool.pipe(stages[, options])` 会在不调用 shell 的情况下执行本地管道。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:685
-msgid "The difference is only the default stream handling:"
-msgstr "唯一差异是默认流处理方式："
+msgid "`stages` (table, required): Pipeline stage list. At least two stages are required."
+msgstr "`stages`（table，必填）：管道阶段列表。至少需要两个阶段。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:687
-msgid "`stdout` defaults to `\"capture\"`."
-msgstr "`stdout` 默认是 `\"capture\"`。"
+msgid "`options` (table, optional): Per-call overrides."
+msgstr "`options`（table，可选）：单次调用覆盖项。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:688
-msgid "`stderr` defaults to `\"capture\"`."
-msgstr "`stderr` 默认是 `\"capture\"`。"
+msgid "Returns: A result table similar to `ptool.run(...)`."
+msgstr "返回：一个与 `ptool.run(...)` 类似的结果 table。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:690
-msgid "`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`."
-msgstr "`trim` 仍然默认是 `false`，并且这些字段都仍然可以在 `options` 中显式覆盖。"
+msgid "Stage rules:"
+msgstr "阶段规则："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:692
+msgid "Each stage can be a command string such as `\"printf hello\"`."
+msgstr "每个阶段都可以是一个命令字符串，例如 `\"printf hello\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:693
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:693"
-msgid "Example:"
-msgstr "示例："
+msgid "Each stage can be an array such as `{\"tr\", \"a-z\", \"A-Z\"}` where the first item is the command and the rest are arguments."
+msgstr "每个阶段也可以是一个数组，例如 `{\"tr\", \"a-z\", \"A-Z\"}`，其中第一项是命令，其余项是参数。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:719
-msgid "ptool.exec"
-msgstr "ptool.exec"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:695
+msgid "Each stage can be a table such as `{ cmd = \"tr\", args = {\"a-z\", \"A-Z\"} }`."
+msgstr "每个阶段也可以是一个 table，例如 `{ cmd = \"tr\", args = {\"a-z\", \"A-Z\"} }`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:721
-msgid "`v0.7.0` - Introduced."
-msgstr "`v0.7.0` - 引入。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:696
+msgid "Stage command strings and string argslines are split using shell-style (`shlex`) rules, just like `ptool.run(...)`."
+msgstr "阶段命令字符串和字符串形式的参数行会像 `ptool.run(...)` 一样，按 shell 风格（`shlex`）规则拆分。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:723
-msgid "`ptool.exec` replaces the current `ptool` process with an external command."
-msgstr "`ptool.exec` 会用外部命令替换当前 `ptool` 进程。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:699
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:699"
+msgid "Return value rules:"
+msgstr "返回值规则："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:725
-msgid "It supports the same command argument call forms as `ptool.run`:"
-msgstr "它支持与 `ptool.run` 相同的命令参数调用形式："
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:701
+msgid "`ok` (boolean): Whether every stage exited with status `0`."
+msgstr "`ok`（boolean）：是否每个阶段都以状态码 `0` 退出。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:702
+msgid "`code` (integer|nil): Summary status for the pipeline. On success this is the last stage status. On failure this is the last non-zero stage status, or `nil` if the relevant stage was terminated by a signal."
+msgstr "`code`（integer|nil）：整个管道的汇总状态。成功时，它是最后一个阶段的状态码；失败时，它是最后一个非零状态码；如果相关阶段被信号终止，则为 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:705
+msgid "`codes` (integer|nil)[]: Per-stage exit statuses in stage order."
+msgstr "`codes`（integer|nil）[]：按阶段顺序返回每个阶段的退出状态。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:706
+msgid "`cmd` (string): Display form of the whole pipeline, such as ``printf hello | tr a-z A-Z``."
+msgstr "`cmd`（string）：整个管道的展示形式，例如 ``printf hello | tr a-z A-Z``。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:708
+msgid "`cwd` (string): Effective working directory used for the pipeline."
+msgstr "`cwd`（string）：该管道实际使用的工作目录。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:709
+msgid "`stdout` (string, optional): Present when `stdout = \"capture\"`. This captures the stdout of the last stage."
+msgstr "`stdout`（string，可选）：当 `stdout = \"capture\"` 时存在。它会捕获最后一个阶段的 stdout。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:711
+msgid "`stderr` (string, optional): Present when `stderr = \"capture\"`. This combines stderr from all stages in stage order."
+msgstr "`stderr`（string，可选）：当 `stderr = \"capture\"` 时存在。它会按阶段顺序合并所有阶段的 stderr。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:713
+msgid "`assert_ok(self)` (function): Raises the same structured `command_failed` error shape as `ptool.run(...)` when any stage fails."
+msgstr "`assert_ok(self)`（function）：当任意阶段失败时，抛出与 `ptool.run(...)` 相同结构的 `command_failed` 错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:716
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:716"
 msgid "Behavior:"
 msgstr "行为说明："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:738
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:718
+msgid "`options` supports the same per-call fields as `ptool.run(options)` except that `cmd` and `args` are replaced by the positional `stages` table."
+msgstr "`options` 支持与 `ptool.run(options)` 相同的单次调用字段，只是 `cmd` 和 `args` 被位置参数 `stages` table 取代。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:720
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:720"
+msgid "The default `echo`, `check`, `confirm`, and `retry` values still come from `ptool.config({ run = { ... } })`."
+msgstr "`echo`、`check`、`confirm` 和 `retry` 的默认值仍然来自 `ptool.config({ run = { ... } })`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:722
+msgid "`stdin` is connected to the first stage."
+msgstr "`stdin` 会连接到第一个阶段。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:723
+msgid "`stdout` refers to the last stage output."
+msgstr "`stdout` 指的是最后一个阶段的输出。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:724
+msgid "`stderr` applies to all stages."
+msgstr "`stderr` 会应用到所有阶段。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:725
+msgid "When `check = true`, any failed stage raises a structured `command_failed` error, and `retry = true` prompts to rerun the whole pipeline."
+msgstr "当 `check = true` 时，只要任一阶段失败，就会抛出结构化的 `command_failed` 错误；而 `retry = true` 则会提示是否重跑整个管道。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:728
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:728"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:748
+msgid "ptool.run_capture"
+msgstr "ptool.run_capture"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:750
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:752
+msgid "`ptool.run_capture` executes external commands from Rust with the same call forms, argument rules, return value rules, and options as `ptool.run`."
+msgstr "`ptool.run_capture` 从 Rust 执行外部命令，调用形式、参数规则、返回值规则和选项 都与 `ptool.run` 相同。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:755
+msgid "The difference is only the default stream handling:"
+msgstr "唯一差异是默认流处理方式："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:757
+msgid "`stdout` defaults to `\"capture\"`."
+msgstr "`stdout` 默认是 `\"capture\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:758
+msgid "`stderr` defaults to `\"capture\"`."
+msgstr "`stderr` 默认是 `\"capture\"`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:760
+msgid "`trim` still defaults to `false`, and you can still override any of these fields explicitly in `options`."
+msgstr "`trim` 仍然默认是 `false`，并且这些字段都仍然可以在 `options` 中显式覆盖。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:763
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:763"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:789
+msgid "ptool.exec"
+msgstr "ptool.exec"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:791
+msgid "`v0.7.0` - Introduced."
+msgstr "`v0.7.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:793
+msgid "`ptool.exec` replaces the current `ptool` process with an external command."
+msgstr "`ptool.exec` 会用外部命令替换当前 `ptool` 进程。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:795
+msgid "It supports the same command argument call forms as `ptool.run`:"
+msgstr "它支持与 `ptool.run` 相同的命令参数调用形式："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:806
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:806"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:808
 msgid "On success, `ptool.exec` does not return. The current `ptool` process is replaced by the target command."
 msgstr "成功时，`ptool.exec` 不会返回。当前 `ptool` 进程会被目标命令替换。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:740
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:810
 msgid "Any Lua code after a successful `ptool.exec(...)` call does not run."
 msgstr "一旦 `ptool.exec(...)` 成功调用，后续的 Lua 代码都不会再执行。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:741
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:811
 msgid "In `ptool repl`, a successful `ptool.exec(...)` also replaces the REPL process."
 msgstr "在 `ptool repl` 中，成功的 `ptool.exec(...)` 同样会替换掉整个 REPL 进程。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:743
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:813
 msgid "On Unix platforms, this uses true process replacement semantics."
 msgstr "在 Unix 平台上，这会使用真正的进程替换语义。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:744
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:814
 msgid "On non-Unix platforms, `ptool.exec` currently raises an `unsupported` error."
 msgstr "在非 Unix 平台上，`ptool.exec` 当前会抛出 `unsupported` 错误。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:746
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:746"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:816
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:816"
 msgid "Argument rules:"
 msgstr "参数规则："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:748
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:818
 msgid "`ptool.exec(cmdline)`: `cmdline` is split using shell-style (`shlex`) rules. The first item is treated as the command and the rest as arguments."
 msgstr "`ptool.exec(cmdline)`：`cmdline` 会按 shell 风格（`shlex`）规则拆分。第一项作为命令，其余项作为参数。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:750
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:820
 msgid "`ptool.exec(cmd, argsline)`: `cmd` is used directly as the command, and `argsline` is split into an argument list using shell-style (`shlex`) rules."
 msgstr "`ptool.exec(cmd, argsline)`：`cmd` 直接作为命令，`argsline` 会按 shell 风格（`shlex`）规则拆分成参数列表。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:752
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:822
 msgid "`ptool.exec(cmd, args)`: `cmd` is a string and `args` is an array of strings."
 msgstr "`ptool.exec(cmd, args)`：`cmd` 是字符串，`args` 是字符串数组。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:753
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:823
 msgid "`ptool.exec(cmdline, options)`: `options` overrides settings for this invocation, such as `echo`."
 msgstr "`ptool.exec(cmdline, options)`：`options` 会覆盖本次调用的配置，例如 `echo`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:755
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:825
 msgid "`ptool.exec(cmd, args, options)`: `args` can be either a string or an array of strings, and `options` overrides settings for this invocation, such as `confirm`."
 msgstr "`ptool.exec(cmd, args, options)`：`args` 可以是字符串，也可以是字符串数组；`options` 会覆盖本次调用的配置，例如 `confirm`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:758
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:828
 msgid "`ptool.exec(options)`: `options` is a table."
 msgstr "`ptool.exec(options)`：`options` 是一个 table。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:759
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:759"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:829
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:829"
 msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
 msgstr "当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； 否则视为 `options`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:762
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:832
 msgid "`ptool.exec(options)` is also supported, where `options` is a table with the following fields:"
 msgstr "也支持 `ptool.exec(options)` 形式，其中 `options` 是一个包含以下字段的 table："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:765
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:765"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:835
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:835"
 msgid "`cmd` (string, required): The command name or executable path."
 msgstr "`cmd`（string，必填）：命令名或可执行文件路径。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:766
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:766"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:836
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:836"
 msgid "`args` (string[], optional): The argument list."
 msgstr "`args`（string[]，可选）：参数列表。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:767
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:767"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:837
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:837"
 msgid "`cwd` (string, optional): The child process working directory."
 msgstr "`cwd`（string，可选）：子进程工作目录。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:768
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:768"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:838
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:838"
 msgid "`env` (table, optional): Additional environment variables, where keys are variable names and values are variable values."
 msgstr "`env`（table，可选）：附加环境变量，键和值都应为字符串。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:770
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:840
 msgid "`stdin` (table, optional): Child process stdin source."
 msgstr "`stdin`（table，可选）：子进程 stdin 的输入来源。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:770
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:840
 msgid "`{ file = \"path\" }`: Read stdin from a file."
 msgstr "`{ file = \"path\" }`：从文件读取 stdin。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:772
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:842
 msgid "`echo` (boolean, optional): Whether to echo command information before replacement. If omitted, the value from `ptool.config({ run = { echo = ... } })` is used; if that is also unset, the default is `true`."
 msgstr "`echo`（boolean，可选）：替换前是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:775
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:845
 msgid "`confirm` (boolean, optional): Whether to ask the user for confirmation before replacement. If omitted, the value from `ptool.config({ run = { confirm = ... } })` is used; if that is also unset, the default is `false`."
 msgstr "`confirm`（boolean，可选）：替换前是否询问用户确认。如果省略，则使用 `ptool.config({ run = { confirm = ... } })` 中的值；若仍未设置，则默认是 `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848"
 msgid "`stdout` (string|table, optional): Stdout handling strategy."
 msgstr "`stdout`（string|table，可选）：stdout 处理策略。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`：继承到当前终端（默认）。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`：丢弃输出。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848"
 msgid "`{ file = \"path\" }`: Write stdout to a file, truncating it first."
 msgstr "`{ file = \"path\" }`：将 stdout 写入文件，并先清空文件原有内容。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:848"
 msgid "`{ file = \"path\", append = true }`: Append stdout to a file."
 msgstr "`{ file = \"path\", append = true }`：将 stdout 追加到文件末尾。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853"
 msgid "`stderr` (string|table, optional): Stderr handling strategy."
 msgstr "`stderr`（string|table，可选）：stderr 处理策略。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853"
 msgid "`\"inherit\"`: Inherit to the current terminal (default)."
 msgstr "`\"inherit\"`：继承到当前终端（默认）。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853"
 msgid "`\"null\"`: Discard the output."
 msgstr "`\"null\"`：丢弃输出。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853"
 msgid "`{ file = \"path\" }`: Write stderr to a file, truncating it first."
 msgstr "`{ file = \"path\" }`：将 stderr 写入文件，并先清空文件原有内容。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:853"
 msgid "`{ file = \"path\", append = true }`: Append stderr to a file."
 msgstr "`{ file = \"path\", append = true }`：将 stderr 追加到文件末尾。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:788
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:858
 msgid "Unlike `ptool.run`, `ptool.exec` does not support string `stdin`, `stdout = \"capture\"`, `stderr = \"capture\"`, `trim`, `check`, or `retry`."
 msgstr "与 `ptool.run` 不同，`ptool.exec` 不支持字符串形式的 `stdin`、`stdout = \"capture\"`、`stderr = \"capture\"`、`trim`、`check` 或 `retry`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:790
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:790"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:860
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:860"
 msgid "File redirect paths are resolved relative to the effective child-process `cwd`, unless an absolute path is provided."
 msgstr "文件重定向路径会相对于实际子进程 `cwd` 解析；如果提供的是绝对路径，则直接使用该绝对路径。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:862
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:862"
 msgid "When `confirm = true`:"
 msgstr "当 `confirm = true` 时："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:862
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:862"
 msgid "If the user refuses the execution, an error is raised immediately."
 msgstr "如果用户拒绝执行，会立即抛出错误。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:862
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:862"
 msgid "If the current environment is not interactive (no TTY), an error is raised immediately."
 msgstr "如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:797
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:797"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:867
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:867"
 msgid "Example:"
 msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:693"
+#~ msgid "Example:"
+#~ msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:736"
+#~ msgid "Behavior:"
+#~ msgstr "行为说明："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:746"
+#~ msgid "Argument rules:"
+#~ msgstr "参数规则："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:759"
+#~ msgid "When the second argument is a table: if it is an array (consecutive integer keys `1..n`), it is treated as `args`; otherwise it is treated as `options`."
+#~ msgstr "当第二个参数是 table 时：如果它是数组（连续整数键 `1..n`），则视为 `args`； 否则视为 `options`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:765"
+#~ msgid "`cmd` (string, required): The command name or executable path."
+#~ msgstr "`cmd`（string，必填）：命令名或可执行文件路径。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:766"
+#~ msgid "`args` (string[], optional): The argument list."
+#~ msgstr "`args`（string[]，可选）：参数列表。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:767"
+#~ msgid "`cwd` (string, optional): The child process working directory."
+#~ msgstr "`cwd`（string，可选）：子进程工作目录。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:768"
+#~ msgid "`env` (table, optional): Additional environment variables, where keys are variable names and values are variable values."
+#~ msgstr "`env`（table，可选）：附加环境变量，键和值都应为字符串。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#~ msgid "`stdout` (string|table, optional): Stdout handling strategy."
+#~ msgstr "`stdout`（string|table，可选）：stdout 处理策略。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#~ msgid "`{ file = \"path\" }`: Write stdout to a file, truncating it first."
+#~ msgstr "`{ file = \"path\" }`：将 stdout 写入文件，并先清空文件原有内容。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:778"
+#~ msgid "`{ file = \"path\", append = true }`: Append stdout to a file."
+#~ msgstr "`{ file = \"path\", append = true }`：将 stdout 追加到文件末尾。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#~ msgid "`stderr` (string|table, optional): Stderr handling strategy."
+#~ msgstr "`stderr`（string|table，可选）：stderr 处理策略。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#~ msgid "`\"inherit\"`: Inherit to the current terminal (default)."
+#~ msgstr "`\"inherit\"`：继承到当前终端（默认）。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#~ msgid "`\"null\"`: Discard the output."
+#~ msgstr "`\"null\"`：丢弃输出。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#~ msgid "`{ file = \"path\" }`: Write stderr to a file, truncating it first."
+#~ msgstr "`{ file = \"path\" }`：将 stderr 写入文件，并先清空文件原有内容。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:783"
+#~ msgid "`{ file = \"path\", append = true }`: Append stderr to a file."
+#~ msgstr "`{ file = \"path\", append = true }`：将 stderr 追加到文件末尾。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:790"
+#~ msgid "File redirect paths are resolved relative to the effective child-process `cwd`, unless an absolute path is provided."
+#~ msgstr "文件重定向路径会相对于实际子进程 `cwd` 解析；如果提供的是绝对路径，则直接使用该绝对路径。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792"
+#~ msgid "When `confirm = true`:"
+#~ msgstr "当 `confirm = true` 时："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792"
+#~ msgid "If the user refuses the execution, an error is raised immediately."
+#~ msgstr "如果用户拒绝执行，会立即抛出错误。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:792"
+#~ msgid "If the current environment is not interactive (no TTY), an error is raised immediately."
+#~ msgstr "如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/core.md:797"
+#~ msgid "Example:"
+#~ msgstr "示例："
 
 #~ msgid "`run` (table, optional): Default configuration for `ptool.run`. Supported fields:"
 #~ msgstr "`run`（table，可选）：`ptool.run` 的默认配置。支持："

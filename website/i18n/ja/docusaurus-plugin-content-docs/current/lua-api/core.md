@@ -280,7 +280,7 @@ local token = ptool.ask.secret("API token?", {
 
 現在サポートされているフィールド:
 
-- `run` (table, 任意): `ptool.run`、`ptool.run_capture`、`ptool.run_shell` のデフォルト設定。サポートされるフィールド:
+- `run` (table, 任意): `ptool.run`、`ptool.run_capture`、`ptool.pipe`、`ptool.run_shell` のデフォルト設定。サポートされるフィールド:
   - `echo` (boolean, 任意): デフォルトの echo スイッチ。デフォルトは `true`。
   - `check` (boolean, 任意): 失敗時にデフォルトでエラーにするかどうか。 デフォルトは `false`。
   - `confirm` (boolean, 任意): 実行前にデフォルトで確認を要求するかどうか。 デフォルトは `false`。
@@ -382,7 +382,7 @@ local project_root = ptool.path.dirname(script_dir)
 
 - `ptool` の API は構造化エラーを送出します。`ptool.try` はそれらを上記の `err` テーブルへ変換するため、呼び出し側は `err.kind` や関連フィールドで 分岐できます。
 - 通常の Lua エラーも捕捉されます。その場合 `err.kind` は `lua_error` で、 `message` だけが保証されます。
-- `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、 `res:assert_ok()` のような API のエラー処理には `ptool.try` の使用を推奨 します。
+- `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、`ptool.pipe(..., { check = true })`、`res:assert_ok()` のような API のエラー処理には `ptool.try` の使用を推奨します。
 
 例:
 
@@ -580,6 +580,63 @@ ptool.config({
 
 local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
 print(res.ok, res.code)
+res:assert_ok()
+```
+
+## ptool.pipe
+
+> `v0.9.0` - 導入されました。
+
+`ptool.pipe(stages[, options])` はシェルを起動せずにローカルパイプラインを実行します。
+
+- `stages` (table, 必須): パイプラインのステージ一覧。少なくとも 2 つのステージが必要です。
+- `options` (table, 任意): 呼び出しごとの上書き設定。
+- 戻り値: `ptool.run(...)` に似た結果テーブル。
+
+ステージのルール:
+
+- 各ステージには `"printf hello"` のようなコマンド文字列を指定できます。
+- 各ステージには `{"tr", "a-z", "A-Z"}` のような配列も指定でき、最初の要素がコマンド、残りが引数になります。
+- 各ステージには `{ cmd = "tr", args = {"a-z", "A-Z"} }` のようなテーブルも指定できます。
+- ステージのコマンド文字列と文字列形式の引数行は、`ptool.run(...)` と同じくシェル風 (`shlex`) ルールで分割されます。
+
+戻り値ルール:
+
+- `ok` (boolean): すべてのステージがステータス `0` で終了したかどうか。
+- `code` (integer|nil): パイプラインの要約ステータス。成功時は最後のステージのステータスです。失敗時は最後の非ゼロステータスで、該当ステージがシグナル終了した場合は `nil` です。
+- `codes` (integer|nil)[]: ステージ順の各ステージの終了ステータス。
+- `cmd` (string): ``printf hello | tr a-z A-Z`` のような、パイプライン全体の表示形式。
+- `cwd` (string): パイプラインに使われた実際の作業ディレクトリ。
+- `stdout` (string, 任意): `stdout = "capture"` のときに存在します。最後のステージの stdout をキャプチャします。
+- `stderr` (string, 任意): `stderr = "capture"` のときに存在します。全ステージの stderr をステージ順に結合します。
+- `assert_ok(self)` (function): いずれかのステージが失敗したとき、`ptool.run(...)` と同じ構造化 `command_failed` エラーを送出します。
+
+挙動:
+
+- `options` は `ptool.run(options)` と同じ呼び出しごとのフィールドをサポートしますが、`cmd` と `args` は位置引数の `stages` テーブルに置き換わります。
+- `echo`、`check`、`confirm`、`retry` のデフォルト値は引き続き `ptool.config({ run = { ... } })` から取得されます。
+- `stdin` は最初のステージに接続されます。
+- `stdout` は最後のステージの出力を指します。
+- `stderr` はすべてのステージに適用されます。
+- `check = true` のときは、どれか 1 つでも失敗したステージがあると構造化 `command_failed` エラーが送出され、`retry = true` ならパイプライン全体を再実行するか確認します。
+
+例:
+
+```lua
+local res = ptool.pipe(
+  {
+    "printf hello",
+    {"tr", "a-z", "A-Z"},
+  },
+  {
+    stdout = "capture",
+    trim = true,
+  }
+)
+
+print(res.ok, res.code)
+print(res.codes[1], res.codes[2])
+print(res.stdout)
 res:assert_ok()
 ```
 

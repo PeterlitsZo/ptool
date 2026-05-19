@@ -280,7 +280,7 @@ local token = ptool.ask.secret("API token?", {
 
 Campos admitidos actualmente:
 
-- `run` (table, opcional): Configuración por defecto de `ptool.run`, `ptool.run_capture` y `ptool.run_shell`. Campos admitidos:
+- `run` (table, opcional): Configuración por defecto de `ptool.run`, `ptool.run_capture`, `ptool.pipe` y `ptool.run_shell`. Campos admitidos:
   - `echo` (boolean, opcional): Interruptor echo por defecto. Por defecto es `true`.
   - `check` (boolean, opcional): Si los fallos deben producir error por defecto. Por defecto es `false`.
   - `confirm` (boolean, opcional): Si por defecto debe requerirse confirmación antes de ejecutar. Por defecto es `false`.
@@ -382,7 +382,7 @@ Comportamiento:
 
 - Las APIs de `ptool` lanzan errores estructurados. `ptool.try` los convierte en la tabla `err` anterior para que quien llama pueda ramificar según `err.kind` y otros campos.
 - Los errores Lua normales también se capturan. En ese caso, `err.kind` es `lua_error` y solo se garantiza `message`.
-- `ptool.try` es la forma recomendada de manejar errores de APIs como `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })` y `res:assert_ok()`.
+- `ptool.try` es la forma recomendada de manejar errores de APIs como `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`, `ptool.pipe(..., { check = true })` y `res:assert_ok()`.
 
 Ejemplo:
 
@@ -580,6 +580,63 @@ ptool.config({
 
 local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
 print(res.ok, res.code)
+res:assert_ok()
+```
+
+## ptool.pipe
+
+> `v0.9.0` - Introducido.
+
+`ptool.pipe(stages[, options])` ejecuta un pipeline local sin invocar un shell.
+
+- `stages` (table, obligatorio): Lista de etapas del pipeline. Se requieren al menos dos etapas.
+- `options` (table, opcional): Sobrescrituras por invocación.
+- Devuelve: Una tabla de resultado similar a `ptool.run(...)`.
+
+Reglas de las etapas:
+
+- Cada etapa puede ser una cadena de comando como `"printf hello"`.
+- Cada etapa puede ser un arreglo como `{"tr", "a-z", "A-Z"}`, donde el primer elemento es el comando y el resto son argumentos.
+- Cada etapa puede ser una tabla como `{ cmd = "tr", args = {"a-z", "A-Z"} }`.
+- Las cadenas de comando de las etapas y las cadenas de argumentos se dividen usando reglas de estilo shell (`shlex`), igual que en `ptool.run(...)`.
+
+Reglas del valor devuelto:
+
+- `ok` (boolean): Si todas las etapas salieron con estado `0`.
+- `code` (integer|nil): Estado resumido del pipeline. Si tiene éxito, este es el estado de la última etapa. Si falla, es el último estado distinto de cero, o `nil` si la etapa relevante terminó por una señal.
+- `codes` (integer|nil)[]: Estados de salida por etapa en el orden de las etapas.
+- `cmd` (string): Forma visible del pipeline completo, como ``printf hello | tr a-z A-Z``.
+- `cwd` (string): Directorio de trabajo efectivo usado para el pipeline.
+- `stdout` (string, opcional): Presente cuando `stdout = "capture"`. Captura la salida estándar de la última etapa.
+- `stderr` (string, opcional): Presente cuando `stderr = "capture"`. Combina la salida de error de todas las etapas en el orden de las etapas.
+- `assert_ok(self)` (function): Lanza la misma forma de error estructurado `command_failed` que `ptool.run(...)` cuando falla cualquier etapa.
+
+Comportamiento:
+
+- `options` admite los mismos campos por invocación que `ptool.run(options)`, salvo que `cmd` y `args` se sustituyen por la tabla posicional `stages`.
+- Los valores por defecto de `echo`, `check`, `confirm` y `retry` siguen viniendo de `ptool.config({ run = { ... } })`.
+- `stdin` se conecta a la primera etapa.
+- `stdout` se refiere a la salida de la última etapa.
+- `stderr` se aplica a todas las etapas.
+- Cuando `check = true`, cualquier etapa fallida produce un error estructurado `command_failed`, y `retry = true` pregunta si debe volver a ejecutarse todo el pipeline.
+
+Ejemplo:
+
+```lua
+local res = ptool.pipe(
+  {
+    "printf hello",
+    {"tr", "a-z", "A-Z"},
+  },
+  {
+    stdout = "capture",
+    trim = true,
+  }
+)
+
+print(res.ok, res.code)
+print(res.codes[1], res.codes[2])
+print(res.stdout)
 res:assert_ok()
 ```
 

@@ -326,7 +326,7 @@ local token = ptool.ask.secret("API token?", {
 Currently supported fields:
 
 - `run` (table, optional): Default configuration for `ptool.run`,
-  `ptool.run_capture`, and `ptool.run_shell`. Supported fields:
+  `ptool.run_capture`, `ptool.pipe`, and `ptool.run_shell`. Supported fields:
   - `echo` (boolean, optional): Default echo switch. Defaults to `true`.
   - `check` (boolean, optional): Whether failures raise an error by default.
     Defaults to `false`.
@@ -441,7 +441,7 @@ Behavior:
   and only `message` is guaranteed.
 - `ptool.try` is the recommended way to handle errors from APIs such as
   `ptool.fs.read`, `ptool.http.request`, `ptool.run(..., { check = true })`,
-  and `res:assert_ok()`.
+  `ptool.pipe(..., { check = true })`, and `res:assert_ok()`.
 
 Example:
 
@@ -672,6 +672,76 @@ ptool.config({
 
 local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
 print(res.ok, res.code)
+res:assert_ok()
+```
+
+## ptool.pipe
+
+> `v0.9.0` - Introduced.
+
+`ptool.pipe(stages[, options])` executes a local pipeline without invoking a
+shell.
+
+- `stages` (table, required): Pipeline stage list. At least two stages are
+  required.
+- `options` (table, optional): Per-call overrides.
+- Returns: A result table similar to `ptool.run(...)`.
+
+Stage rules:
+
+- Each stage can be a command string such as `"printf hello"`.
+- Each stage can be an array such as `{"tr", "a-z", "A-Z"}` where the first
+  item is the command and the rest are arguments.
+- Each stage can be a table such as `{ cmd = "tr", args = {"a-z", "A-Z"} }`.
+- Stage command strings and string argslines are split using shell-style
+  (`shlex`) rules, just like `ptool.run(...)`.
+
+Return value rules:
+
+- `ok` (boolean): Whether every stage exited with status `0`.
+- `code` (integer|nil): Summary status for the pipeline. On success this is the
+  last stage status. On failure this is the last non-zero stage status, or
+  `nil` if the relevant stage was terminated by a signal.
+- `codes` (integer|nil)[]: Per-stage exit statuses in stage order.
+- `cmd` (string): Display form of the whole pipeline, such as
+  ``printf hello | tr a-z A-Z``.
+- `cwd` (string): Effective working directory used for the pipeline.
+- `stdout` (string, optional): Present when `stdout = "capture"`. This captures
+  the stdout of the last stage.
+- `stderr` (string, optional): Present when `stderr = "capture"`. This combines
+  stderr from all stages in stage order.
+- `assert_ok(self)` (function): Raises the same structured `command_failed`
+  error shape as `ptool.run(...)` when any stage fails.
+
+Behavior:
+
+- `options` supports the same per-call fields as `ptool.run(options)` except
+  that `cmd` and `args` are replaced by the positional `stages` table.
+- The default `echo`, `check`, `confirm`, and `retry` values still come from
+  `ptool.config({ run = { ... } })`.
+- `stdin` is connected to the first stage.
+- `stdout` refers to the last stage output.
+- `stderr` applies to all stages.
+- When `check = true`, any failed stage raises a structured `command_failed`
+  error, and `retry = true` prompts to rerun the whole pipeline.
+
+Example:
+
+```lua
+local res = ptool.pipe(
+  {
+    "printf hello",
+    {"tr", "a-z", "A-Z"},
+  },
+  {
+    stdout = "capture",
+    trim = true,
+  }
+)
+
+print(res.ok, res.code)
+print(res.codes[1], res.codes[2])
+print(res.stdout)
 res:assert_ok()
 ```
 

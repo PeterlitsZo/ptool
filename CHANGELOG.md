@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added `ptool.pipe(...)` / `p.pipe(...)` for shell-free local command
+  pipelines with per-stage status reporting, shared `run` options, and docs
+  across all supported current locales.
 - Added the `ptool.redis` / `p.redis` module with Redis connection helpers for
   opening connections, sending raw commands, and closing sessions, and
   documented it across all supported current locales.

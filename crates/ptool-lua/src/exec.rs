@@ -3,8 +3,8 @@ use crate::lua_error::{self, LuaError};
 use crate::lua_world::RunConfig;
 use mlua::{Lua, Table, Value, Variadic};
 use ptool_engine::{
-    PromptConfirmOptions, PtoolEngine, RunResult, RunStdin, RunStreamMode,
-    format_command_for_display, resolve_run_cwd,
+    PipeCommand, PipeResult, PromptConfirmOptions, PtoolEngine, RunResult, RunStdin, RunStreamMode,
+    format_command_for_display, format_pipeline_for_display, resolve_run_cwd,
 };
 use std::path::Path;
 
@@ -62,6 +62,14 @@ struct ExecCallOverrides {
     stderr: Option<StreamMode>,
     echo: Option<bool>,
     confirm: Option<bool>,
+}
+
+struct PipeOptions {
+    inner: ptool_engine::PipeOptions,
+    echo: bool,
+    check: bool,
+    confirm: bool,
+    retry: bool,
 }
 
 pub(crate) fn run_command(
@@ -129,6 +137,135 @@ pub(crate) fn run_shell_command(
         },
         "ptool.run_shell",
     )
+}
+
+pub(crate) fn run_pipeline_command(
+    lua: &Lua,
+    args: Variadic<Value>,
+    current_dir: &Path,
+    engine: &PtoolEngine,
+    defaults: RunConfig,
+) -> mlua::Result<Value> {
+    let options = parse_pipe_options(args, defaults)?;
+    let cmd_for_error = format_pipeline_for_display(&options.inner.commands);
+    let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
+    let local_user_host = options.echo.then(|| engine.current_user_host());
+    let display = if options.echo || options.confirm || (options.check && options.retry) {
+        Some((resolved_cwd.clone(), cmd_for_error.clone()))
+    } else {
+        None
+    };
+
+    if options.echo {
+        let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.pipe internal error: missing display info",
+                )
+                .with_op("ptool.pipe"),
+            )
+        })?;
+        let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.pipe internal error: missing local user/host info",
+                )
+                .with_op("ptool.pipe"),
+            )
+        })?;
+        print_local_command_echo(
+            &local_user_host.user,
+            &local_user_host.host,
+            display_cwd,
+            display_command,
+        );
+    }
+
+    if options.confirm {
+        let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.pipe internal error: missing display info",
+                )
+                .with_op("ptool.pipe"),
+            )
+        })?;
+        confirm_before_run("ptool.pipe", display_cwd, display_command, &cmd_for_error)?;
+    }
+
+    let mut is_retry = false;
+    loop {
+        if is_retry && options.echo {
+            let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+                lua_error::to_mlua_error(
+                    LuaError::new(
+                        "internal_error",
+                        "ptool.pipe internal error: missing display info",
+                    )
+                    .with_op("ptool.pipe"),
+                )
+            })?;
+            let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+                lua_error::to_mlua_error(
+                    LuaError::new(
+                        "internal_error",
+                        "ptool.pipe internal error: missing local user/host info",
+                    )
+                    .with_op("ptool.pipe"),
+                )
+            })?;
+            print_local_command_echo(
+                &local_user_host.user,
+                &local_user_host.host,
+                display_cwd,
+                display_command,
+            );
+        }
+
+        let result = engine
+            .run_pipeline(&options.inner, current_dir)
+            .map_err(|err| engine_error(err, "ptool.pipe", &cmd_for_error, &resolved_cwd))?;
+        if options.check && !result.ok {
+            if options.retry {
+                let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+                    lua_error::to_mlua_error(
+                        LuaError::new(
+                            "internal_error",
+                            "ptool.pipe internal error: missing display info",
+                        )
+                        .with_op("ptool.pipe"),
+                    )
+                })?;
+                if prompt_retry_after_pipeline_failure(
+                    display_cwd,
+                    display_command,
+                    &result.codes,
+                    result.stderr.as_deref(),
+                    &cmd_for_error,
+                )? {
+                    is_retry = true;
+                    continue;
+                }
+            }
+
+            return Err(build_pipe_failed_error(
+                &cmd_for_error,
+                &result.codes,
+                result.stderr.as_deref(),
+                Some(&resolved_cwd.display().to_string()),
+            ));
+        }
+
+        return build_pipe_result(
+            lua,
+            result,
+            cmd_for_error,
+            resolved_cwd.display().to_string(),
+        );
+    }
 }
 
 pub(crate) fn exec_command(
@@ -595,6 +732,195 @@ fn parse_run_options(
     }
 }
 
+fn parse_pipe_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Result<PipeOptions> {
+    match args.len() {
+        0 => Err(lua_error::invalid_argument(
+            "ptool.pipe",
+            "requires a stages array",
+        )),
+        1 => match args.first() {
+            Some(Value::Table(stages)) => build_pipe_options(stages.clone(), None, defaults),
+            _ => Err(lua_error::invalid_argument(
+                "ptool.pipe",
+                "expects (table[, options])",
+            )),
+        },
+        2 => match (args.first(), args.get(1)) {
+            (Some(Value::Table(stages)), Some(Value::Table(options))) => {
+                build_pipe_options(stages.clone(), Some(options.clone()), defaults)
+            }
+            _ => Err(lua_error::invalid_argument(
+                "ptool.pipe",
+                "expects (table[, options])",
+            )),
+        },
+        _ => Err(lua_error::invalid_argument(
+            "ptool.pipe",
+            "accepts at most 2 arguments",
+        )),
+    }
+}
+
+fn build_pipe_options(
+    stages: Table,
+    options: Option<Table>,
+    defaults: RunConfig,
+) -> mlua::Result<PipeOptions> {
+    let commands = parse_pipe_commands(stages)?;
+    let cwd = options
+        .as_ref()
+        .map(|value| value.get("cwd"))
+        .transpose()?
+        .flatten();
+    let env = parse_env_table(
+        options
+            .as_ref()
+            .map(|value| value.get::<Option<Table>>("env"))
+            .transpose()?
+            .flatten(),
+    )?;
+    let stdin = parse_stdin(
+        options
+            .as_ref()
+            .map(|value| value.get::<Option<Value>>("stdin"))
+            .transpose()?
+            .flatten(),
+        "ptool.pipe(stages, options)",
+    )?;
+    let trim = options
+        .as_ref()
+        .map(|value| value.get::<Option<bool>>("trim"))
+        .transpose()?
+        .flatten()
+        .unwrap_or(false);
+    let stdout = parse_stream_mode(
+        options
+            .as_ref()
+            .map(|value| value.get::<Option<Value>>("stdout"))
+            .transpose()?
+            .flatten(),
+        "stdout",
+        "ptool.pipe(stages, options)",
+    )?
+    .unwrap_or(StreamMode::Inherit);
+    let stderr = parse_stream_mode(
+        options
+            .as_ref()
+            .map(|value| value.get::<Option<Value>>("stderr"))
+            .transpose()?
+            .flatten(),
+        "stderr",
+        "ptool.pipe(stages, options)",
+    )?
+    .unwrap_or(StreamMode::Inherit);
+    let echo = options
+        .as_ref()
+        .map(|value| value.get::<Option<bool>>("echo"))
+        .transpose()?
+        .flatten()
+        .unwrap_or(defaults.echo);
+    let check = options
+        .as_ref()
+        .map(|value| value.get::<Option<bool>>("check"))
+        .transpose()?
+        .flatten()
+        .unwrap_or(defaults.check);
+    let confirm = options
+        .as_ref()
+        .map(|value| value.get::<Option<bool>>("confirm"))
+        .transpose()?
+        .flatten()
+        .unwrap_or(defaults.confirm);
+    let retry = options
+        .as_ref()
+        .map(|value| value.get::<Option<bool>>("retry"))
+        .transpose()?
+        .flatten()
+        .unwrap_or(defaults.retry);
+
+    if let Some(options) = &options
+        && (has_key(options, "cmd")? || has_key(options, "args")?)
+    {
+        return Err(lua_error::invalid_option(
+            "ptool.pipe(stages, options)",
+            "options table does not allow `cmd` or `args`",
+        ));
+    }
+
+    Ok(PipeOptions {
+        inner: ptool_engine::PipeOptions {
+            commands,
+            cwd,
+            env,
+            env_remove: Vec::new(),
+            stdin,
+            trim,
+            stdout,
+            stderr,
+        },
+        echo,
+        check,
+        confirm,
+        retry,
+    })
+}
+
+fn parse_pipe_commands(stages: Table) -> mlua::Result<Vec<PipeCommand>> {
+    let mut commands = Vec::new();
+    for value in stages.sequence_values::<Value>() {
+        commands.push(parse_pipe_command(value?)?);
+    }
+
+    if commands.len() < 2 {
+        return Err(lua_error::invalid_argument(
+            "ptool.pipe(stages)",
+            "requires at least two pipeline stages",
+        ));
+    }
+
+    Ok(commands)
+}
+
+fn parse_pipe_command(value: Value) -> mlua::Result<PipeCommand> {
+    match value {
+        Value::String(cmdline) => {
+            let (cmd, args) = parse_cmdline_to_cmd_and_args(&cmdline.to_str()?)?;
+            Ok(PipeCommand { cmd, args })
+        }
+        Value::Table(stage) => {
+            if looks_like_options_table(&stage)? {
+                let Some(cmd) = stage.get::<Option<String>>("cmd")? else {
+                    return Err(lua_error::invalid_argument(
+                        "ptool.pipe(stages)",
+                        "stage options table requires `cmd`",
+                    ));
+                };
+                Ok(PipeCommand {
+                    cmd,
+                    args: parse_named_args(&stage)?,
+                })
+            } else {
+                let parts = parse_string_list(&stage)?;
+                let mut iter = parts.into_iter();
+                let Some(cmd) = iter.next() else {
+                    return Err(lua_error::invalid_argument(
+                        "ptool.pipe(stages)",
+                        "stage array must not be empty",
+                    ));
+                };
+                Ok(PipeCommand {
+                    cmd,
+                    args: iter.collect(),
+                })
+            }
+        }
+        _ => Err(lua_error::invalid_argument(
+            "ptool.pipe(stages)",
+            "each stage must be a string or table",
+        )),
+    }
+}
+
 fn parse_full_options_table(
     options: Table,
     defaults: RunConfig,
@@ -894,6 +1220,54 @@ fn build_run_result(
     Ok(Value::Table(result))
 }
 
+fn build_pipe_result(
+    lua: &Lua,
+    pipe_result: PipeResult,
+    cmd_for_error: String,
+    cwd_for_error: String,
+) -> mlua::Result<Value> {
+    let result = lua.create_table()?;
+    result.set("ok", pipe_result.ok)?;
+    result.set("code", pipe_result.code.map(i64::from))?;
+    result.set("cmd", cmd_for_error.clone())?;
+    result.set("cwd", cwd_for_error.clone())?;
+    let codes = lua.create_table()?;
+    for (index, code) in pipe_result.codes.iter().enumerate() {
+        codes.set(index + 1, code.map(i64::from))?;
+    }
+    result.set("codes", codes)?;
+    if let Some(stdout) = pipe_result.stdout {
+        result.set("stdout", stdout)?;
+    }
+    if let Some(stderr) = pipe_result.stderr {
+        result.set("stderr", stderr)?;
+    }
+
+    let assert_cmd_for_error = cmd_for_error.clone();
+    let assert_cwd_for_error = cwd_for_error.clone();
+    let assert_ok_fn = lua.create_function(move |_, this: Table| {
+        let ok = this.get::<bool>("ok")?;
+        if ok {
+            return Ok(());
+        }
+        let codes = this
+            .get::<Table>("codes")?
+            .sequence_values::<Option<i64>>()
+            .map(|value| value.map(|code| code.and_then(|value| i32::try_from(value).ok())))
+            .collect::<mlua::Result<Vec<_>>>()?;
+        let stderr = this.get::<Option<String>>("stderr")?;
+        Err(build_pipe_failed_error(
+            &assert_cmd_for_error,
+            &codes,
+            stderr.as_deref(),
+            Some(&assert_cwd_for_error),
+        ))
+    })?;
+    result.set("assert_ok", assert_ok_fn)?;
+
+    Ok(Value::Table(result))
+}
+
 fn parse_stream_mode(
     mode: Option<Value>,
     field_name: &str,
@@ -938,6 +1312,34 @@ fn build_run_failed_error(
     cwd_for_error: Option<&str>,
 ) -> mlua::Error {
     let mut err = LuaError::command_failed(op, cmd_for_error, code, stderr);
+    if let Some(cwd) = cwd_for_error {
+        err = err.with_cwd(cwd);
+    }
+    lua_error::to_mlua_error(err)
+}
+
+fn build_pipe_failed_error(
+    cmd_for_error: &str,
+    codes: &[Option<i32>],
+    stderr: Option<&str>,
+    cwd_for_error: Option<&str>,
+) -> mlua::Error {
+    let codes_summary = summarize_pipeline_codes(codes);
+    let mut err = LuaError::new(
+        "command_failed",
+        format!(
+            "ptool.pipe pipeline `{cmd_for_error}` failed with stage statuses [{codes_summary}]"
+        ),
+    )
+    .with_op("ptool.pipe")
+    .with_cmd(cmd_for_error)
+    .with_detail(format!("statuses: [{codes_summary}]"));
+    if let Some(code) = summarize_pipeline_status(codes) {
+        err = err.with_status(code);
+    }
+    if let Some(stderr) = stderr.map(str::trim).filter(|value| !value.is_empty()) {
+        err = err.with_stderr(stderr);
+    }
     if let Some(cwd) = cwd_for_error {
         err = err.with_cwd(cwd);
     }
@@ -1034,6 +1436,41 @@ fn prompt_retry_after_failure(
         })
 }
 
+fn prompt_retry_after_pipeline_failure(
+    cwd: &Path,
+    command: &str,
+    codes: &[Option<i32>],
+    stderr: Option<&str>,
+    cmd_for_error: &str,
+) -> mlua::Result<bool> {
+    let prompt = format!("Pipeline failed. Retry -- {command}?");
+    let mut help_msg = format!("The cwd is {}", cwd.display());
+    help_msg.push_str("\nStage statuses: [");
+    help_msg.push_str(&summarize_pipeline_codes(codes));
+    help_msg.push(']');
+    if let Some(stderr_summary) = summarize_stderr_for_prompt(stderr) {
+        help_msg.push_str("\nStderr: ");
+        help_msg.push_str(&stderr_summary);
+    }
+
+    let engine = PtoolEngine::new();
+    engine
+        .prompt_confirm(
+            "ptool.pipe",
+            &prompt,
+            PromptConfirmOptions {
+                default: Some(true),
+                help: Some(help_msg),
+            },
+        )
+        .map_err(|err| {
+            crate::lua_error::LuaError::from_engine(err, "ptool.pipe")
+                .with_cmd(cmd_for_error)
+                .with_cwd(cwd.display().to_string())
+                .into_mlua_error()
+        })
+}
+
 fn build_retry_help_message(cwd: &Path, stderr: Option<&str>) -> String {
     let mut help_msg = format!("The cwd is {}", cwd.display());
     if let Some(stderr_summary) = summarize_stderr_for_prompt(stderr) {
@@ -1059,6 +1496,28 @@ fn summarize_stderr_for_prompt(stderr: Option<&str>) -> Option<String> {
         truncated.push(ch);
     }
     Some(truncated)
+}
+
+fn summarize_pipeline_codes(codes: &[Option<i32>]) -> String {
+    codes
+        .iter()
+        .map(|code| {
+            code.map(|value| value.to_string())
+                .unwrap_or_else(|| "signal".to_string())
+        })
+        .collect::<Vec<_>>()
+        .join(", ")
+}
+
+fn summarize_pipeline_status(codes: &[Option<i32>]) -> Option<i32> {
+    for code in codes.iter().rev() {
+        match code {
+            Some(0) => continue,
+            Some(code) => return Some(*code),
+            None => return None,
+        }
+    }
+    codes.last().copied().flatten()
 }
 
 fn parse_cmdline_to_cmd_and_args(input: &str) -> mlua::Result<(String, Vec<String>)> {

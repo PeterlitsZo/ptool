@@ -280,7 +280,7 @@ local token = ptool.ask.secret("API token?", {
 
 当前支持的字段：
 
-- `run`（table，可选）：`ptool.run`、`ptool.run_capture` 和 `ptool.run_shell` 的默认配置。支持以下字段：
+- `run`（table，可选）：`ptool.run`、`ptool.run_capture`、`ptool.pipe` 和 `ptool.run_shell` 的默认配置。支持以下字段：
   - `echo`（boolean，可选）：默认是否回显。默认值为 `true`。
   - `check`（boolean，可选）：默认在失败时是否抛错。默认值为 `false`。
   - `confirm`（boolean，可选）：默认执行前是否要求确认。默认值为 `false`。
@@ -382,7 +382,7 @@ local project_root = ptool.path.dirname(script_dir)
 
 - `ptool` 自带 API 抛出的都是结构化错误。`ptool.try` 会把它们转换成上面的 `err` table，方便调用方根据 `err.kind` 和其他字段做分支处理。
 - 普通 Lua 错误也会被捕获。这种情况下，`err.kind` 为 `lua_error`，并且只保证 `message` 一定存在。
-- 对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })` 和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。
+- 对于 `ptool.fs.read`、`ptool.http.request`、`ptool.run(..., { check = true })`、`ptool.pipe(..., { check = true })` 和 `res:assert_ok()` 这类 API，推荐使用 `ptool.try` 来做错误处理。
 
 示例：
 
@@ -580,6 +580,63 @@ ptool.config({
 
 local res = ptool.run_shell("printf 'out'; printf 'err' >&2; exit 7")
 print(res.ok, res.code)
+res:assert_ok()
+```
+
+## ptool.pipe
+
+> `v0.9.0` - 引入。
+
+`ptool.pipe(stages[, options])` 会在不调用 shell 的情况下执行本地管道。
+
+- `stages`（table，必填）：管道阶段列表。至少需要两个阶段。
+- `options`（table，可选）：单次调用覆盖项。
+- 返回：一个与 `ptool.run(...)` 类似的结果 table。
+
+阶段规则：
+
+- 每个阶段都可以是一个命令字符串，例如 `"printf hello"`。
+- 每个阶段也可以是一个数组，例如 `{"tr", "a-z", "A-Z"}`，其中第一项是命令，其余项是参数。
+- 每个阶段也可以是一个 table，例如 `{ cmd = "tr", args = {"a-z", "A-Z"} }`。
+- 阶段命令字符串和字符串形式的参数行会像 `ptool.run(...)` 一样，按 shell 风格（`shlex`）规则拆分。
+
+返回值规则：
+
+- `ok`（boolean）：是否每个阶段都以状态码 `0` 退出。
+- `code`（integer|nil）：整个管道的汇总状态。成功时，它是最后一个阶段的状态码；失败时，它是最后一个非零状态码；如果相关阶段被信号终止，则为 `nil`。
+- `codes`（integer|nil）[]：按阶段顺序返回每个阶段的退出状态。
+- `cmd`（string）：整个管道的展示形式，例如 ``printf hello | tr a-z A-Z``。
+- `cwd`（string）：该管道实际使用的工作目录。
+- `stdout`（string，可选）：当 `stdout = "capture"` 时存在。它会捕获最后一个阶段的 stdout。
+- `stderr`（string，可选）：当 `stderr = "capture"` 时存在。它会按阶段顺序合并所有阶段的 stderr。
+- `assert_ok(self)`（function）：当任意阶段失败时，抛出与 `ptool.run(...)` 相同结构的 `command_failed` 错误。
+
+行为说明：
+
+- `options` 支持与 `ptool.run(options)` 相同的单次调用字段，只是 `cmd` 和 `args` 被位置参数 `stages` table 取代。
+- `echo`、`check`、`confirm` 和 `retry` 的默认值仍然来自 `ptool.config({ run = { ... } })`。
+- `stdin` 会连接到第一个阶段。
+- `stdout` 指的是最后一个阶段的输出。
+- `stderr` 会应用到所有阶段。
+- 当 `check = true` 时，只要任一阶段失败，就会抛出结构化的 `command_failed` 错误；而 `retry = true` 则会提示是否重跑整个管道。
+
+示例：
+
+```lua
+local res = ptool.pipe(
+  {
+    "printf hello",
+    {"tr", "a-z", "A-Z"},
+  },
+  {
+    stdout = "capture",
+    trim = true,
+  }
+)
+
+print(res.ok, res.code)
+print(res.codes[1], res.codes[2])
+print(res.stdout)
 res:assert_ok()
 ```
 

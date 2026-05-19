@@ -7,6 +7,7 @@ mod fs;
 mod git;
 mod hash;
 mod http;
+mod interactive_output;
 mod json;
 mod log;
 mod net;
@@ -18,6 +19,7 @@ mod re;
 mod redis;
 mod script_args;
 mod semver;
+mod shell;
 mod ssh;
 mod strings;
 mod template;
@@ -34,8 +36,9 @@ pub use datetime::{
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
 pub use exec::{
-    ExecOptions, RunOptions, RunResult, RunStdin, RunStreamMode, exec_replace,
-    format_command_for_display, format_run_failed_message, resolve_run_cwd, run_command,
+    ExecOptions, PipeCommand, PipeOptions, PipeResult, RunOptions, RunResult, RunStdin,
+    RunStreamMode, exec_replace, format_command_for_display, format_pipeline_for_display,
+    format_run_failed_message, resolve_run_cwd, run_command, run_pipeline,
 };
 pub use fs::{
     FsCopyOptions, FsCopyResult, FsFileHandle, FsGlobOptions, FsMkdirOptions, FsOpenOptions,
@@ -250,11 +253,15 @@ impl PtoolEngine {
     }
 
     pub fn shell_split(&self, input: &str) -> Result<Vec<String>> {
-        shlex::split(input).ok_or_else(|| {
-            Error::new(ErrorKind::InvalidArgs, "failed to parse shell words")
-                .with_op("ptool.sh.split")
-                .with_input(input.to_string())
-        })
+        shell::split(input)
+    }
+
+    pub fn shell_quote(&self, input: &str) -> Result<String> {
+        shell::quote(input)
+    }
+
+    pub fn shell_join(&self, words: &[String]) -> Result<String> {
+        shell::join(words)
     }
 
     pub fn path_join<I, S>(&self, segments: I) -> Result<String>
@@ -782,6 +789,11 @@ impl PtoolEngine {
         exec::run_command(&options, current_dir)
     }
 
+    pub fn run_pipeline(&self, options: &PipeOptions, current_dir: &Path) -> Result<PipeResult> {
+        let options = self.apply_env_overrides_to_pipe_options(options);
+        exec::run_pipeline(&options, current_dir)
+    }
+
     pub fn exec_replace(&self, options: &ExecOptions, current_dir: &Path) -> Result<()> {
         let options = self.apply_env_overrides_to_exec_options(options);
         exec::exec_replace(&options, current_dir)
@@ -802,6 +814,12 @@ impl PtoolEngine {
 
 impl PtoolEngine {
     fn apply_env_overrides_to_run_options(&self, options: &RunOptions) -> RunOptions {
+        let mut next = options.clone();
+        self.apply_env_overrides(&mut next.env, &mut next.env_remove);
+        next
+    }
+
+    fn apply_env_overrides_to_pipe_options(&self, options: &PipeOptions) -> PipeOptions {
         let mut next = options.clone();
         self.apply_env_overrides(&mut next.env, &mut next.env_remove);
         next

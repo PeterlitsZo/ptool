@@ -1,9 +1,13 @@
+use crate::interactive_output::{
+    InteractiveOutputSink, InteractiveOutputViewport, spawn_interactive_output_thread,
+};
 use crate::{Error, ErrorKind, Result};
 use std::fs::{File, OpenOptions};
 use std::io::{self, Read, Write};
 #[cfg(unix)]
 use std::os::unix::process::CommandExt;
 use std::path::{Path, PathBuf};
+use std::process::Child;
 use std::process::Command as ProcessCommand;
 use std::process::Stdio;
 use std::thread;
@@ -45,6 +49,33 @@ pub struct RunResult {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PipeCommand {
+    pub cmd: String,
+    pub args: Vec<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PipeOptions {
+    pub commands: Vec<PipeCommand>,
+    pub cwd: Option<String>,
+    pub env: Vec<(String, String)>,
+    pub env_remove: Vec<String>,
+    pub stdin: RunStdin,
+    pub trim: bool,
+    pub stdout: RunStreamMode,
+    pub stderr: RunStreamMode,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PipeResult {
+    pub ok: bool,
+    pub code: Option<i32>,
+    pub codes: Vec<Option<i32>>,
+    pub stdout: Option<String>,
+    pub stderr: Option<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct ExecOptions {
     pub cmd: String,
     pub args: Vec<String>,
@@ -59,6 +90,17 @@ pub struct ExecOptions {
 enum OutputHandle {
     Capture(thread::JoinHandle<io::Result<Vec<u8>>>),
     Inherit(thread::JoinHandle<io::Result<()>>),
+}
+
+struct PipelineStageStdio<'a> {
+    stdin_mode: &'a RunStdin,
+    stdout_mode: &'a RunStreamMode,
+    stderr_mode: &'a RunStreamMode,
+    cwd: &'a Path,
+    pipeline: &'a str,
+    is_first: bool,
+    is_last: bool,
+    previous_stdout: Option<std::process::ChildStdout>,
 }
 
 pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
@@ -86,6 +128,13 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
     let mut child = command
         .spawn()
         .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
+    let interactive_output = InteractiveOutputViewport::maybe_new(
+        matches!(options.stdout, RunStreamMode::Inherit),
+        matches!(options.stderr, RunStreamMode::Inherit),
+    );
+    let interactive_sink = interactive_output
+        .as_ref()
+        .map(InteractiveOutputViewport::sink);
 
     let stdin_handle = match &options.stdin {
         RunStdin::Bytes(bytes) => child.stdin.take().map(|mut pipe| {
@@ -99,14 +148,13 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
         RunStdin::Inherit | RunStdin::File { .. } => None,
     };
 
-    let stdout_handle = child
-        .stdout
-        .take()
-        .map(|reader| spawn_output_thread(reader, &options.stdout, false));
+    let stdout_handle = child.stdout.take().map(|reader| {
+        spawn_output_thread(reader, &options.stdout, false, interactive_sink.clone())
+    });
     let stderr_handle = child
         .stderr
         .take()
-        .map(|reader| spawn_output_thread(reader, &options.stderr, true));
+        .map(|reader| spawn_output_thread(reader, &options.stderr, true, interactive_sink));
 
     let status = child
         .wait()
@@ -116,20 +164,29 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
         finish_io_thread(handle, "stdin", &options.cmd, &resolved_cwd)?;
     }
 
-    let stdout = collect_process_output(
+    let stdout_result = collect_process_output(
         stdout_handle,
         &options.stdout,
         "stdout",
         &options.cmd,
         &resolved_cwd,
-    )?;
-    let stderr = collect_process_output(
+    );
+    let stderr_result = collect_process_output(
         stderr_handle,
         &options.stderr,
         "stderr",
         &options.cmd,
         &resolved_cwd,
-    )?;
+    );
+
+    let interactive_result = if let Some(viewport) = interactive_output {
+        finish_interactive_output(viewport, &options.cmd, &resolved_cwd)
+    } else {
+        Ok(())
+    };
+    let stdout = stdout_result?;
+    let stderr = stderr_result?;
+    interactive_result?;
 
     Ok(RunResult {
         ok: status.success(),
@@ -163,6 +220,146 @@ pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
     exec_current_process(command, &options.cmd, &resolved_cwd)
 }
 
+pub fn run_pipeline(options: &PipeOptions, current_dir: &Path) -> Result<PipeResult> {
+    validate_pipeline_options(options)?;
+
+    let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
+    let pipeline_for_error = format_pipeline_for_display(&options.commands);
+    let interactive_output = InteractiveOutputViewport::maybe_new(
+        matches!(options.stdout, RunStreamMode::Inherit),
+        matches!(options.stderr, RunStreamMode::Inherit),
+    );
+    let interactive_sink = interactive_output
+        .as_ref()
+        .map(InteractiveOutputViewport::sink);
+
+    let mut children = Vec::with_capacity(options.commands.len());
+    let mut previous_stdout = None;
+    let mut stdin_handle = None;
+    let mut stdout_handle = None;
+    let mut stderr_handles = Vec::with_capacity(options.commands.len());
+
+    for (index, stage) in options.commands.iter().enumerate() {
+        let is_first = index == 0;
+        let is_last = index + 1 == options.commands.len();
+
+        let mut command = ProcessCommand::new(&stage.cmd);
+        configure_command(
+            &mut command,
+            &stage.cmd,
+            &stage.args,
+            &resolved_cwd,
+            &options.env,
+            &options.env_remove,
+        );
+        configure_pipeline_stdio(
+            &mut command,
+            PipelineStageStdio {
+                stdin_mode: &options.stdin,
+                stdout_mode: &options.stdout,
+                stderr_mode: &options.stderr,
+                cwd: &resolved_cwd,
+                pipeline: &pipeline_for_error,
+                is_first,
+                is_last,
+                previous_stdout: previous_stdout.take(),
+            },
+        )?;
+
+        let mut child = match command.spawn() {
+            Ok(child) => child,
+            Err(err) => {
+                cleanup_spawned_children(children);
+                return Err(build_pipe_io_error(&pipeline_for_error, &resolved_cwd, err));
+            }
+        };
+
+        if is_first {
+            stdin_handle = match &options.stdin {
+                RunStdin::Bytes(bytes) => child.stdin.take().map(|mut pipe| {
+                    let bytes = bytes.clone();
+                    thread::spawn(move || -> std::io::Result<()> {
+                        pipe.write_all(&bytes)?;
+                        pipe.flush()?;
+                        Ok(())
+                    })
+                }),
+                RunStdin::Inherit | RunStdin::File { .. } => None,
+            };
+        }
+
+        if is_last {
+            stdout_handle = child.stdout.take().map(|reader| {
+                spawn_output_thread(reader, &options.stdout, false, interactive_sink.clone())
+            });
+        } else {
+            let next_stdin = child.stdout.take().ok_or_else(|| {
+                build_pipe_io_error(
+                    &pipeline_for_error,
+                    &resolved_cwd,
+                    io::Error::other(format!(
+                        "failed to capture stdout for pipeline stage `{}`",
+                        stage.cmd
+                    )),
+                )
+            })?;
+            previous_stdout = Some(next_stdin);
+        }
+
+        let stderr_mode = pipeline_stderr_mode(&options.stderr, index == 0);
+        let stderr_handle = child.stderr.take().map(|reader| {
+            spawn_output_thread(reader, &stderr_mode, true, interactive_sink.clone())
+        });
+        stderr_handles.push(stderr_handle);
+        children.push(child);
+    }
+
+    let mut ok = true;
+    let mut codes = Vec::with_capacity(children.len());
+    for mut child in children {
+        let status = child
+            .wait()
+            .map_err(|err| build_pipe_io_error(&pipeline_for_error, &resolved_cwd, err))?;
+        ok &= status.success();
+        codes.push(status.code());
+    }
+
+    if let Some(handle) = stdin_handle {
+        finish_io_thread(handle, "stdin", &pipeline_for_error, &resolved_cwd)?;
+    }
+
+    let stdout_result = collect_process_output(
+        stdout_handle,
+        &options.stdout,
+        "stdout",
+        &pipeline_for_error,
+        &resolved_cwd,
+    );
+    let stderr_result = collect_pipeline_stderr(
+        stderr_handles,
+        &options.stderr,
+        &pipeline_for_error,
+        &resolved_cwd,
+    );
+
+    let interactive_result = if let Some(viewport) = interactive_output {
+        finish_interactive_output(viewport, &pipeline_for_error, &resolved_cwd)
+    } else {
+        Ok(())
+    };
+    let stdout = stdout_result?;
+    let stderr = stderr_result?;
+    interactive_result?;
+
+    Ok(PipeResult {
+        ok,
+        code: summarize_pipeline_code(ok, &codes),
+        codes,
+        stdout: bytes_to_captured_string(&stdout, &options.stdout, options.trim),
+        stderr: bytes_to_captured_string(&stderr, &options.stderr, options.trim),
+    })
+}
+
 pub fn resolve_run_cwd(current_dir: &Path, cwd: Option<&str>) -> PathBuf {
     let base = current_dir.to_path_buf();
     match cwd {
@@ -185,6 +382,14 @@ pub fn format_command_for_display(cmd: &str, args: &[String]) -> String {
         parts.push(shell_quote(arg));
     }
     parts.join(" ")
+}
+
+pub fn format_pipeline_for_display(commands: &[PipeCommand]) -> String {
+    commands
+        .iter()
+        .map(|command| format_command_for_display(&command.cmd, &command.args))
+        .collect::<Vec<_>>()
+        .join(" | ")
 }
 
 pub fn format_run_failed_message(
@@ -224,6 +429,39 @@ fn configure_stdio(
     Ok(())
 }
 
+fn configure_pipeline_stdio(
+    command: &mut ProcessCommand,
+    stage: PipelineStageStdio<'_>,
+) -> Result<()> {
+    if let Some(previous_stdout) = stage.previous_stdout {
+        command.stdin(Stdio::from(previous_stdout));
+    } else {
+        command.stdin(match stage.stdin_mode {
+            RunStdin::Inherit => Stdio::inherit(),
+            RunStdin::Bytes(_) => Stdio::piped(),
+            RunStdin::File { path } => {
+                Stdio::from(open_stdin_redirect_file(path, stage.cwd, stage.pipeline)?)
+            }
+        });
+    }
+
+    command.stdout(if stage.is_last {
+        configure_output_stdio(stage.stdout_mode, "stdout", stage.cwd, stage.pipeline)?
+    } else {
+        Stdio::piped()
+    });
+
+    let stderr_mode = pipeline_stderr_mode(stage.stderr_mode, stage.is_first);
+    command.stderr(configure_output_stdio(
+        &stderr_mode,
+        "stderr",
+        stage.cwd,
+        stage.pipeline,
+    )?);
+
+    Ok(())
+}
+
 fn configure_command(
     command: &mut ProcessCommand,
     _cmd: &str,
@@ -258,6 +496,16 @@ fn bytes_to_captured_string(bytes: &[u8], mode: &RunStreamMode, trim: bool) -> O
     }
 }
 
+fn pipeline_stderr_mode(mode: &RunStreamMode, is_first_stage: bool) -> RunStreamMode {
+    match mode {
+        RunStreamMode::File { path, append } => RunStreamMode::File {
+            path: path.clone(),
+            append: *append || !is_first_stage,
+        },
+        _ => mode.clone(),
+    }
+}
+
 fn spawn_reader_thread<R>(mut reader: R) -> thread::JoinHandle<std::io::Result<Vec<u8>>>
 where
     R: Read + Send + 'static,
@@ -269,15 +517,21 @@ where
     })
 }
 
-fn spawn_output_thread<R>(reader: R, mode: &RunStreamMode, use_stderr: bool) -> OutputHandle
+fn spawn_output_thread<R>(
+    reader: R,
+    mode: &RunStreamMode,
+    use_stderr: bool,
+    interactive_sink: Option<InteractiveOutputSink>,
+) -> OutputHandle
 where
     R: Read + Send + 'static,
 {
     match mode {
         RunStreamMode::Capture => OutputHandle::Capture(spawn_reader_thread(reader)),
-        RunStreamMode::Inherit => {
-            OutputHandle::Inherit(spawn_prefixed_output_thread(reader, use_stderr))
-        }
+        RunStreamMode::Inherit => OutputHandle::Inherit(match interactive_sink {
+            Some(sink) => spawn_interactive_output_thread(reader, sink),
+            None => spawn_prefixed_output_thread(reader, use_stderr),
+        }),
         RunStreamMode::Null | RunStreamMode::File { .. } => {
             unreachable!("non-piped stream modes must not spawn output threads")
         }
@@ -363,6 +617,23 @@ fn finish_io_thread(
     }
 }
 
+fn finish_interactive_output(
+    viewport: InteractiveOutputViewport,
+    cmd: &str,
+    cwd: &Path,
+) -> Result<()> {
+    viewport.finish().map_err(|err| {
+        build_run_io_error(
+            cmd,
+            cwd,
+            io::Error::new(
+                err.kind(),
+                format!("failed to render interactive command output: {err}"),
+            ),
+        )
+    })
+}
+
 fn collect_process_output(
     handle: Option<OutputHandle>,
     mode: &RunStreamMode,
@@ -415,6 +686,31 @@ fn collect_process_output(
     }
 }
 
+fn collect_pipeline_stderr(
+    handles: Vec<Option<OutputHandle>>,
+    mode: &RunStreamMode,
+    cmd: &str,
+    cwd: &Path,
+) -> Result<Vec<u8>> {
+    match mode {
+        RunStreamMode::Capture => {
+            let mut stderr = Vec::new();
+            for handle in handles {
+                let bytes = collect_process_output(handle, mode, "stderr", cmd, cwd)?;
+                stderr.extend(bytes);
+            }
+            Ok(stderr)
+        }
+        RunStreamMode::Inherit => {
+            for handle in handles {
+                collect_process_output(handle, mode, "stderr", cmd, cwd)?;
+            }
+            Ok(Vec::new())
+        }
+        RunStreamMode::Null | RunStreamMode::File { .. } => Ok(Vec::new()),
+    }
+}
+
 fn configure_output_stdio(
     mode: &RunStreamMode,
     stream_name: &str,
@@ -432,6 +728,13 @@ fn configure_output_stdio(
             cwd,
             cmd,
         )?)),
+    }
+}
+
+fn cleanup_spawned_children(children: Vec<Child>) {
+    for mut child in children {
+        let _ = child.kill();
+        let _ = child.wait();
     }
 }
 
@@ -500,6 +803,49 @@ fn shell_quote(value: &str) -> String {
 
     let escaped = value.replace('\'', "'\"'\"'");
     format!("'{escaped}'")
+}
+
+fn validate_pipeline_options(options: &PipeOptions) -> Result<()> {
+    if options.commands.len() < 2 {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            "ptool.pipe requires at least two pipeline stages",
+        )
+        .with_op("ptool.pipe"));
+    }
+
+    for command in &options.commands {
+        if command.cmd.is_empty() {
+            return Err(Error::new(
+                ErrorKind::InvalidArgs,
+                "ptool.pipe pipeline stage command must not be empty",
+            )
+            .with_op("ptool.pipe"));
+        }
+    }
+
+    Ok(())
+}
+
+fn summarize_pipeline_code(ok: bool, codes: &[Option<i32>]) -> Option<i32> {
+    if ok {
+        return codes.last().copied().flatten();
+    }
+
+    if codes
+        .iter()
+        .any(|code| code.is_none() || code.is_some_and(|value| value != 0))
+    {
+        for code in codes.iter().rev() {
+            match code {
+                Some(0) => continue,
+                Some(code) => return Some(*code),
+                None => return None,
+            }
+        }
+    }
+
+    None
 }
 
 fn validate_exec_stdio(options: &ExecOptions) -> Result<()> {
@@ -608,6 +954,19 @@ fn build_run_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {
         ),
     )
     .with_op("ptool.run")
+    .with_cmd(cmd)
+    .with_detail(format!("cwd: {}", cwd.display()))
+}
+
+fn build_pipe_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {
+    Error::new(
+        ErrorKind::Io,
+        format!(
+            "failed to run pipeline `{cmd}` in `{}`: {err}",
+            cwd.display()
+        ),
+    )
+    .with_op("ptool.pipe")
     .with_cmd(cmd)
     .with_detail(format!("cwd: {}", cwd.display()))
 }
