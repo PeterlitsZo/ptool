@@ -13,12 +13,13 @@ const outputDir = path.join(websiteDir, 'static', 'raw');
 const locales = ['en', 'zh-Hans', 'es', 'pt-BR', 'ja'];
 const currentVersionName = 'current';
 const currentVersionPath = 'unreleased';
+const manifestOutputSubdir = 'manifests';
 
 async function main() {
   await rm(outputDir, {recursive: true, force: true});
   await mkdir(outputDir, {recursive: true});
 
-  const manifest = [];
+  const manifests = new Map();
   const stableVersions = await readVersionNames();
   const lastVersionName = stableVersions[0] ?? null;
 
@@ -27,7 +28,7 @@ async function main() {
     locale: 'en',
     sourceDir: docsDir,
     outputSubdir: path.join('docs'),
-    manifest,
+    manifests,
     versionName: currentVersionName,
   });
 
@@ -36,7 +37,7 @@ async function main() {
       locale: 'en',
       sourceDir: path.join(versionedDocsDir, `version-${versionName}`),
       outputSubdir: path.join('versioned_docs', `version-${versionName}`),
-      manifest,
+      manifests,
       versionName,
     });
   }
@@ -56,7 +57,7 @@ async function main() {
         'current',
       ),
       outputSubdir: path.join('i18n', locale, 'docs'),
-      manifest,
+      manifests,
       versionName: currentVersionName,
     });
 
@@ -75,16 +76,18 @@ async function main() {
           'versioned_docs',
           `version-${versionName}`,
         ),
-        manifest,
+        manifests,
         versionName,
       });
     }
   }
 
-  manifest.sort((a, b) => a.permalink.localeCompare(b.permalink));
+  await writeChildManifests(manifests);
+
+  const generatedAt = new Date().toISOString();
   await writeFile(
     path.join(outputDir, 'manifest.json'),
-    `${JSON.stringify({generatedAt: new Date().toISOString(), docs: manifest}, null, 2)}\n`,
+    `${JSON.stringify(createManifestIndex({generatedAt, lastVersionName, manifests}), null, 2)}\n`,
     'utf8',
   );
 }
@@ -94,10 +97,11 @@ async function exportTree({
   lastVersionName,
   sourceDir,
   outputSubdir,
-  manifest,
+  manifests,
   versionName,
 }) {
   const files = await collectMarkdownFiles(sourceDir);
+  const docs = [];
 
   for (const file of files) {
     const relativePath = path.relative(sourceDir, file);
@@ -105,7 +109,7 @@ async function exportTree({
     await mkdir(path.dirname(outputPath), {recursive: true});
     await cp(file, outputPath);
 
-    manifest.push(
+    docs.push(
       await createManifestEntry({
         locale,
         lastVersionName,
@@ -116,6 +120,9 @@ async function exportTree({
       }),
     );
   }
+
+  docs.sort((a, b) => a.permalink.localeCompare(b.permalink));
+  manifests.set(getManifestKey(locale, versionName), docs);
 }
 
 async function readVersionNames() {
@@ -159,17 +166,57 @@ async function createManifestEntry({
 }) {
   const relativePath = path.relative(sourceDir, file);
   const rawUrl = `/${toPosixPath(path.join('raw', outputSubdir, relativePath))}`;
-  const sourcePath = toPosixPath(path.relative(websiteDir, file));
   const docPath = normalizeDocPath(relativePath);
 
   return {
     title: await extractTitle(file),
-    locale,
-    sourcePath,
     rawUrl,
-    version: versionName,
     permalink: toPermalink({locale, docPath, lastVersionName, versionName}),
   };
+}
+
+async function writeChildManifests(manifests) {
+  for (const [key, docs] of manifests.entries()) {
+    const {locale, version} = parseManifestKey(key);
+    const manifestPath = path.join(outputDir, manifestOutputSubdir, locale, `${version}.json`);
+
+    await mkdir(path.dirname(manifestPath), {recursive: true});
+    await writeFile(
+      manifestPath,
+      `${JSON.stringify({locale, version, docs}, null, 2)}\n`,
+      'utf8',
+    );
+  }
+}
+
+function createManifestIndex({generatedAt, lastVersionName, manifests}) {
+  const localeIndex = {};
+
+  for (const key of Array.from(manifests.keys()).sort()) {
+    const {locale, version} = parseManifestKey(key);
+    const versionIndex = (localeIndex[locale] ??= {});
+    versionIndex[version] = `/${toPosixPath(
+      path.join('raw', manifestOutputSubdir, locale, `${version}.json`),
+    )}`;
+  }
+
+  return {
+    generatedAt,
+    defaultLocale: 'en',
+    currentVersion: currentVersionName,
+    currentVersionPath,
+    latestStableVersion: lastVersionName,
+    manifests: localeIndex,
+  };
+}
+
+function getManifestKey(locale, version) {
+  return `${locale}::${version}`;
+}
+
+function parseManifestKey(key) {
+  const [locale, version] = key.split('::');
+  return {locale, version};
 }
 
 function normalizeDocPath(relativePath) {

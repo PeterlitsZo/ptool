@@ -170,8 +170,8 @@ function HomepageAiAccess(): ReactNode {
             </Heading>
             <p>
               <Translate id="homepage.ai.manifest.body">
-                Tell your assistant to fetch the manifest first. It lists every
-                document title, locale, permalink, and raw Markdown URL.
+                Tell your assistant to fetch the manifest index first. It
+                points to smaller manifests grouped by locale and version.
               </Translate>
             </p>
             <a className={styles.inlineLink} href={manifestHref}>
@@ -184,8 +184,8 @@ function HomepageAiAccess(): ReactNode {
             </Heading>
             <p>
               <Translate id="homepage.ai.raw.body">
-                Each document also has a stable raw Markdown URL. Use the
-                manifest, or point to a page directly.
+                Each document still has a stable raw Markdown URL. Use a
+                locale/version manifest, or point to a page directly.
               </Translate>
             </p>
             <div className={styles.aiExamples}>
@@ -205,14 +205,14 @@ function HomepageAiAccess(): ReactNode {
             </Heading>
             <p>
               <Translate id="homepage.ai.prompt.body">
-                Example: read the manifest, select the matching locale and
-                page, then load the raw Markdown instead of scraping the
-                rendered site.
+                Example: read the manifest index, open the matching
+                locale/version manifest, then load the raw Markdown instead of
+                scraping the rendered site.
               </Translate>
             </p>
             <pre className={styles.aiPrompt}>
               <code>
-                {`Fetch /raw/manifest.json, find the page for "/docs/intro", then read its rawUrl.`}
+                {`Fetch /raw/manifest.json, open /raw/manifests/en/current.json, find the page for "/docs/unreleased/intro", then read its rawUrl.`}
               </code>
             </pre>
           </article>

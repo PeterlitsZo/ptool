@@ -44,6 +44,45 @@
   "homepage.description": {
     "message": "ptool のドキュメント。シェルと自動化ワークフロー向けの Lua ベースのスクリプティングツールです。"
   },
+  "homepage.ai.kicker": {
+    "message": "AI 向け"
+  },
+  "homepage.ai.title": {
+    "message": "レンダリング済み HTML ではなく生の Markdown を渡す"
+  },
+  "homepage.ai.intro": {
+    "message": "ptool は元のドキュメントを静的ファイルとして公開するため、エージェントは生の Markdown を直接読めます。"
+  },
+  "homepage.ai.manifest.title": {
+    "message": "1. まずここから"
+  },
+  "homepage.ai.manifest.body": {
+    "message": "まずアシスタントに manifest index を読ませてください。そこから言語別・バージョン別の小さな manifest をたどれます。"
+  },
+  "homepage.ai.raw.title": {
+    "message": "2. 1 ページを開く"
+  },
+  "homepage.ai.raw.body": {
+    "message": "各ドキュメントには安定した生 Markdown URL があります。言語/バージョン manifest を使うことも、ページを直接指定することもできます。"
+  },
+  "homepage.ai.prompt.title": {
+    "message": "3. モデルへの指示"
+  },
+  "homepage.ai.prompt.body": {
+    "message": "例: manifest index を読み、対応する言語/バージョン manifest を開き、レンダリング済みサイトをスクレイプする代わりに生の Markdown を読み込ませます。"
+  },
+  "docItemFooter.aiAccess.title": {
+    "message": "AI アクセス:"
+  },
+  "docItemFooter.aiAccess.body": {
+    "message": "このページの生 Markdown URL をアシスタントに渡すか、docs manifest index から始めてください。"
+  },
+  "docItemFooter.aiAccess.rawLink": {
+    "message": "生 Markdown"
+  },
+  "docItemFooter.aiAccess.manifestLink": {
+    "message": "Docs Manifest Index"
+  },
   "theme.ErrorPageContent.title": {
     "message": "エラーが発生しました",
     "description": "The title of the fallback page when the page crashed"

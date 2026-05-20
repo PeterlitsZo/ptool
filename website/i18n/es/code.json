@@ -44,6 +44,45 @@
   "homepage.description": {
     "message": "Documentación de ptool, una herramienta de scripting basada en Lua para flujos de shell y automatización."
   },
+  "homepage.ai.kicker": {
+    "message": "Para IA"
+  },
+  "homepage.ai.title": {
+    "message": "Da a los asistentes Markdown original en lugar de HTML renderizado"
+  },
+  "homepage.ai.intro": {
+    "message": "ptool publica los documentos fuente como archivos estáticos para que los agentes puedan leer el Markdown original directamente."
+  },
+  "homepage.ai.manifest.title": {
+    "message": "1. Empieza aquí"
+  },
+  "homepage.ai.manifest.body": {
+    "message": "Pídele al asistente que lea primero el índice de manifest. Desde ahí puede seguir manifests más pequeños agrupados por idioma y versión."
+  },
+  "homepage.ai.raw.title": {
+    "message": "2. Abre una página"
+  },
+  "homepage.ai.raw.body": {
+    "message": "Cada documento sigue teniendo una URL estable de Markdown original. Usa un manifest de idioma/versión o apunta a una página directamente."
+  },
+  "homepage.ai.prompt.title": {
+    "message": "3. Dile al modelo qué hacer"
+  },
+  "homepage.ai.prompt.body": {
+    "message": "Ejemplo: lee el índice de manifest, abre el manifest de idioma/versión correspondiente y luego carga el Markdown original en lugar de extraer el sitio renderizado."
+  },
+  "docItemFooter.aiAccess.title": {
+    "message": "Acceso para IA:"
+  },
+  "docItemFooter.aiAccess.body": {
+    "message": "Dale a tu asistente la URL de Markdown original de esta página, o empieza desde el índice de manifests de la documentación."
+  },
+  "docItemFooter.aiAccess.rawLink": {
+    "message": "Markdown original"
+  },
+  "docItemFooter.aiAccess.manifestLink": {
+    "message": "Índice de manifests"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Esta página ha fallado.",
     "description": "The title of the fallback page when the page crashed"

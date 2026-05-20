@@ -44,6 +44,45 @@
   "homepage.description": {
     "message": "ptool 文档。它是一个基于 Lua 的脚本工具，用于 shell 与自动化工作流。"
   },
+  "homepage.ai.kicker": {
+    "message": "面向 AI"
+  },
+  "homepage.ai.title": {
+    "message": "给助手原始 Markdown，而不是渲染后的 HTML"
+  },
+  "homepage.ai.intro": {
+    "message": "ptool 会把源文档作为静态文件发布，方便 agent 直接读取原始 Markdown。"
+  },
+  "homepage.ai.manifest.title": {
+    "message": "1. 从这里开始"
+  },
+  "homepage.ai.manifest.body": {
+    "message": "先让助手读取 manifest 索引。它会指向按语言和版本拆分的更小 manifest。"
+  },
+  "homepage.ai.raw.title": {
+    "message": "2. 打开单页"
+  },
+  "homepage.ai.raw.body": {
+    "message": "每篇文档仍然有稳定的原始 Markdown URL。可以先用语言/版本 manifest，也可以直接访问页面。"
+  },
+  "homepage.ai.prompt.title": {
+    "message": "3. 告诉模型要做什么"
+  },
+  "homepage.ai.prompt.body": {
+    "message": "例如：先读 manifest 索引，再打开匹配的语言/版本 manifest，然后读取原始 Markdown，而不是抓取渲染后的站点。"
+  },
+  "docItemFooter.aiAccess.title": {
+    "message": "AI 访问："
+  },
+  "docItemFooter.aiAccess.body": {
+    "message": "把本页的原始 Markdown URL 给你的助手，或者从文档 manifest 索引开始。"
+  },
+  "docItemFooter.aiAccess.rawLink": {
+    "message": "原始 Markdown"
+  },
+  "docItemFooter.aiAccess.manifestLink": {
+    "message": "文档 Manifest 索引"
+  },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",
     "description": "The title of the fallback page when the page crashed"

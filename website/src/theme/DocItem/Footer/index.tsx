@@ -53,7 +53,7 @@ export default function DocItemFooter(): ReactNode {
             </strong>{' '}
             <Translate id="docItemFooter.aiAccess.body">
               Give your assistant the raw Markdown URL for this page, or start
-              from the docs manifest.
+              from the docs manifest index.
             </Translate>
           </p>
           <div className="margin-bottom--none">
@@ -65,7 +65,7 @@ export default function DocItemFooter(): ReactNode {
             {' · '}
             <a href={manifestHref}>
               <Translate id="docItemFooter.aiAccess.manifestLink">
-                Docs Manifest
+                Docs Manifest Index
               </Translate>
             </a>
           </div>

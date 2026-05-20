@@ -8,6 +8,12 @@
   line to `stderr` and exits the current `ptool` process immediately with
   status code `1`, and documented it across all supported current locales.
 
+### Changed
+
+- Changed the published raw docs manifest so `/raw/manifest.json` is now a
+  compact manifest index that points to smaller locale/version manifests,
+  reducing the discovery payload for AI and other machine consumers.
+
 ## v0.9.1 (2026-05-19)
 
 ### Fixed

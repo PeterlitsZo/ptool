@@ -44,6 +44,45 @@
   "homepage.description": {
     "message": "Documentação do ptool, uma ferramenta de scripting com Lua para fluxos de shell e automação."
   },
+  "homepage.ai.kicker": {
+    "message": "Para IA"
+  },
+  "homepage.ai.title": {
+    "message": "Dê aos assistentes Markdown bruto em vez de HTML renderizado"
+  },
+  "homepage.ai.intro": {
+    "message": "O ptool publica a documentação-fonte como arquivos estáticos para que agentes possam ler o Markdown original diretamente."
+  },
+  "homepage.ai.manifest.title": {
+    "message": "1. Comece aqui"
+  },
+  "homepage.ai.manifest.body": {
+    "message": "Peça ao assistente para ler primeiro o índice de manifestos. Ele aponta para manifestos menores agrupados por idioma e versão."
+  },
+  "homepage.ai.raw.title": {
+    "message": "2. Abra uma página"
+  },
+  "homepage.ai.raw.body": {
+    "message": "Cada documento continua tendo uma URL estável de Markdown bruto. Use um manifesto de idioma/versão ou aponte diretamente para uma página."
+  },
+  "homepage.ai.prompt.title": {
+    "message": "3. Diga ao modelo o que fazer"
+  },
+  "homepage.ai.prompt.body": {
+    "message": "Exemplo: leia o índice de manifestos, abra o manifesto correspondente de idioma/versão e então carregue o Markdown bruto em vez de raspar o site renderizado."
+  },
+  "docItemFooter.aiAccess.title": {
+    "message": "Acesso para IA:"
+  },
+  "docItemFooter.aiAccess.body": {
+    "message": "Dê ao seu assistente a URL de Markdown bruto desta página ou comece pelo índice de manifestos da documentação."
+  },
+  "docItemFooter.aiAccess.rawLink": {
+    "message": "Markdown bruto"
+  },
+  "docItemFooter.aiAccess.manifestLink": {
+    "message": "Índice de manifestos"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Esta página deu erro.",
     "description": "The title of the fallback page when the page crashed"

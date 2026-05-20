@@ -31,7 +31,7 @@ export default function DocItemMetadata(): ReactNode {
           <link
             rel="alternate"
             type="application/json"
-            title="ptool docs manifest"
+            title="ptool docs manifest index"
             href={manifestHref}
           />
         </Head>
