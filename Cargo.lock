@@ -2372,9 +2372,14 @@ version = "0.9.1"
 dependencies = [
  "clap_lex",
  "indoc",
+ "ptool-console",
  "ptool-lua",
  "shadow-rs",
 ]
+
+[[package]]
+name = "ptool-console"
+version = "0.9.1"
 
 [[package]]
 name = "ptool-engine"
@@ -2396,6 +2401,7 @@ dependencies = [
  "minijinja",
  "murmur3",
  "owo-colors",
+ "ptool-console",
  "ratatui",
  "redis",
  "regex",
@@ -2426,6 +2432,7 @@ dependencies = [
  "jiff",
  "mlua",
  "owo-colors",
+ "ptool-console",
  "ptool-engine",
  "rustyline",
  "serde_json",

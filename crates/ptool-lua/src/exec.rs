@@ -176,11 +176,13 @@ pub(crate) fn run_pipeline_command(
             )
         })?;
         print_local_command_echo(
+            engine.console(),
             &local_user_host.user,
             &local_user_host.host,
             display_cwd,
             display_command,
-        );
+        )
+        .map_err(|err| console_error(err, "ptool.pipe", &cmd_for_error, display_cwd))?;
     }
 
     if options.confirm {
@@ -193,7 +195,13 @@ pub(crate) fn run_pipeline_command(
                 .with_op("ptool.pipe"),
             )
         })?;
-        confirm_before_run("ptool.pipe", display_cwd, display_command, &cmd_for_error)?;
+        confirm_before_run(
+            engine,
+            "ptool.pipe",
+            display_cwd,
+            display_command,
+            &cmd_for_error,
+        )?;
     }
 
     let mut is_retry = false;
@@ -218,11 +226,13 @@ pub(crate) fn run_pipeline_command(
                 )
             })?;
             print_local_command_echo(
+                engine.console(),
                 &local_user_host.user,
                 &local_user_host.host,
                 display_cwd,
                 display_command,
-            );
+            )
+            .map_err(|err| console_error(err, "ptool.pipe", &cmd_for_error, display_cwd))?;
         }
 
         let result = engine
@@ -240,6 +250,7 @@ pub(crate) fn run_pipeline_command(
                     )
                 })?;
                 if prompt_retry_after_pipeline_failure(
+                    engine,
                     display_cwd,
                     display_command,
                     &result.codes,
@@ -307,11 +318,13 @@ pub(crate) fn exec_command(
             )
         })?;
         print_local_command_echo(
+            engine.console(),
             &local_user_host.user,
             &local_user_host.host,
             display_cwd,
             display_command,
-        );
+        )
+        .map_err(|err| console_error(err, "ptool.exec", &cmd_for_error, display_cwd))?;
     }
 
     if options.confirm {
@@ -324,7 +337,7 @@ pub(crate) fn exec_command(
                 .with_op("ptool.exec"),
             )
         })?;
-        confirm_before_exec(display_cwd, display_command, &cmd_for_error)?;
+        confirm_before_exec(engine, display_cwd, display_command, &cmd_for_error)?;
     }
 
     engine
@@ -382,11 +395,13 @@ fn execute_run_options(
             )
         })?;
         print_local_command_echo(
+            engine.console(),
             &local_user_host.user,
             &local_user_host.host,
             display_cwd,
             display_command,
-        );
+        )
+        .map_err(|err| console_error(err, op, &cmd_for_error, display_cwd))?;
     }
 
     if options.confirm {
@@ -399,7 +414,7 @@ fn execute_run_options(
                 .with_op(op),
             )
         })?;
-        confirm_before_run(op, display_cwd, display_command, &cmd_for_error)?;
+        confirm_before_run(engine, op, display_cwd, display_command, &cmd_for_error)?;
     }
 
     let mut is_retry = false;
@@ -424,11 +439,13 @@ fn execute_run_options(
                 )
             })?;
             print_local_command_echo(
+                engine.console(),
                 &local_user_host.user,
                 &local_user_host.host,
                 display_cwd,
                 display_command,
-            );
+            )
+            .map_err(|err| console_error(err, op, &cmd_for_error, display_cwd))?;
         }
 
         let result = engine
@@ -446,6 +463,7 @@ fn execute_run_options(
                     )
                 })?;
                 if prompt_retry_after_failure(
+                    engine,
                     op,
                     display_cwd,
                     display_command,
@@ -1347,6 +1365,7 @@ fn build_pipe_failed_error(
 }
 
 fn confirm_before_run(
+    engine: &PtoolEngine,
     op: &'static str,
     cwd: &Path,
     command: &str,
@@ -1354,7 +1373,6 @@ fn confirm_before_run(
 ) -> mlua::Result<()> {
     let prompt = format!("Run command -- {}?", command);
     let help_msg = format!("The cwd is {}", cwd.display());
-    let engine = PtoolEngine::new();
     match engine.prompt_confirm(
         op,
         &prompt,
@@ -1378,10 +1396,14 @@ fn confirm_before_run(
     }
 }
 
-fn confirm_before_exec(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::Result<()> {
+fn confirm_before_exec(
+    engine: &PtoolEngine,
+    cwd: &Path,
+    command: &str,
+    cmd_for_error: &str,
+) -> mlua::Result<()> {
     let prompt = format!("Exec command -- {command}?");
     let help_msg = format!("The cwd is {}", cwd.display());
-    let engine = PtoolEngine::new();
     match engine.prompt_confirm(
         "ptool.exec",
         &prompt,
@@ -1406,6 +1428,7 @@ fn confirm_before_exec(cwd: &Path, command: &str, cmd_for_error: &str) -> mlua::
 }
 
 fn prompt_retry_after_failure(
+    engine: &PtoolEngine,
     op: &'static str,
     cwd: &Path,
     command: &str,
@@ -1418,7 +1441,6 @@ fn prompt_retry_after_failure(
         .unwrap_or_else(|| "terminated by signal".to_string());
     let prompt = format!("Command failed with status {code}. Retry -- {command}?");
     let help_msg = build_retry_help_message(cwd, stderr);
-    let engine = PtoolEngine::new();
     engine
         .prompt_confirm(
             op,
@@ -1437,6 +1459,7 @@ fn prompt_retry_after_failure(
 }
 
 fn prompt_retry_after_pipeline_failure(
+    engine: &PtoolEngine,
     cwd: &Path,
     command: &str,
     codes: &[Option<i32>],
@@ -1453,7 +1476,6 @@ fn prompt_retry_after_pipeline_failure(
         help_msg.push_str(&stderr_summary);
     }
 
-    let engine = PtoolEngine::new();
     engine
         .prompt_confirm(
             "ptool.pipe",
@@ -1642,4 +1664,16 @@ fn engine_error(err: ptool_engine::Error, op: &str, cmd: &str, cwd: &Path) -> ml
         err = err.with_cwd(cwd.display().to_string());
     }
     lua_error::to_mlua_error(err)
+}
+
+fn console_error(err: std::io::Error, op: &str, cmd: &str, cwd: &Path) -> mlua::Error {
+    lua_error::to_mlua_error(
+        LuaError::new(
+            "io_error",
+            format!("{op} failed to write to console: {err}"),
+        )
+        .with_op(op)
+        .with_cmd(cmd)
+        .with_cwd(cwd.display().to_string()),
+    )
 }

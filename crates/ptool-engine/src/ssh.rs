@@ -7,7 +7,7 @@ use crate::http::{
 use crate::interactive_output::{
     InteractiveOutputSink, InteractiveOutputViewport, spawn_interactive_output_thread,
 };
-use crate::{Error, ErrorKind, Result};
+use crate::{Console, Error, ErrorKind, Result};
 use reqwest::StatusCode;
 use reqwest::header::AUTHORIZATION;
 use shlex::try_quote;
@@ -122,6 +122,7 @@ pub struct SshTransferResult {
 
 struct ConnectionState {
     closed: bool,
+    console: Console,
     info: SshConnectionInfo,
     options: ConnectOptions,
     remote_http_client: Option<RemoteHttpClient>,
@@ -237,6 +238,7 @@ impl Drop for TempArchivePath {
 }
 
 pub fn connect(
+    console: Console,
     _runtime: Arc<Runtime>,
     request: SshConnectRequest,
     current_dir: &Path,
@@ -265,6 +267,7 @@ pub fn connect(
     Ok(SshConnection {
         state: Rc::new(RefCell::new(ConnectionState {
             closed: false,
+            console,
             info,
             options,
             remote_http_client: None,
@@ -273,6 +276,10 @@ pub fn connect(
 }
 
 impl SshConnection {
+    pub fn console(&self) -> Console {
+        self.state.borrow().console
+    }
+
     pub fn info(&self) -> SshConnectionInfo {
         self.state.borrow().info.clone()
     }
@@ -341,12 +348,14 @@ impl SshConnection {
         })?;
 
         if options.echo {
-            println!(
-                "[ssh upload {}] {} -> {}",
-                self.info().target,
-                local_path.display(),
-                destination_path
-            );
+            self.console()
+                .write_stdout_line(&format!(
+                    "[ssh upload {}] {} -> {}",
+                    self.info().target,
+                    local_path.display(),
+                    destination_path
+                ))
+                .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
         let command = build_upload_command(&destination_path, options)?;
@@ -383,12 +392,14 @@ impl SshConnection {
         prepare_local_destination(local_path, options, "local_path")?;
 
         if options.echo {
-            println!(
-                "[ssh download {}] {} -> {}",
-                self.info().target,
-                remote_path,
-                local_path.display()
-            );
+            self.console()
+                .write_stdout_line(&format!(
+                    "[ssh download {}] {} -> {}",
+                    self.info().target,
+                    remote_path,
+                    local_path.display()
+                ))
+                .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
         let command = build_download_command(remote_path)?;
@@ -676,12 +687,14 @@ impl SshConnection {
         let destination_root =
             self.resolve_remote_directory_destination(local_path, remote_path, options)?;
         if options.echo {
-            println!(
-                "[ssh upload {}] {} -> {}",
-                self.info().target,
-                local_path.display(),
-                remote_path
-            );
+            self.console()
+                .write_stdout_line(&format!(
+                    "[ssh upload {}] {} -> {}",
+                    self.info().target,
+                    local_path.display(),
+                    remote_path
+                ))
+                .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
         let archive_path = TempArchivePath::create("ssh-upload")?;
@@ -718,12 +731,14 @@ impl SshConnection {
         let destination_root =
             self.resolve_local_directory_destination(&source_root, local_path, options)?;
         if options.echo {
-            println!(
-                "[ssh download {}] {} -> {}",
-                self.info().target,
-                remote_path,
-                local_path.display()
-            );
+            self.console()
+                .write_stdout_line(&format!(
+                    "[ssh download {}] {} -> {}",
+                    self.info().target,
+                    remote_path,
+                    local_path.display()
+                ))
+                .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
         let command = build_download_directory_command(&source_root)?;
@@ -883,7 +898,13 @@ impl SshConnection {
     ) -> Result<BinaryExecResult> {
         let options = self.ensure_open_options()?;
         let mut command = build_ssh_command(&options, remote_command);
-        run_ssh_command(&mut command, stdin, stdout_mode, stderr_mode)
+        run_ssh_command(
+            &mut command,
+            self.console(),
+            stdin,
+            stdout_mode,
+            stderr_mode,
+        )
     }
 }
 
@@ -1232,6 +1253,7 @@ fn build_ssh_command(options: &ConnectOptions, remote_command: &str) -> ProcessC
 
 fn run_ssh_command(
     command: &mut ProcessCommand,
+    console: Console,
     stdin: Option<Vec<u8>>,
     stdout_mode: ProcessOutputMode,
     stderr_mode: ProcessOutputMode,
@@ -1242,6 +1264,7 @@ fn run_ssh_command(
         .spawn()
         .map_err(|err| ssh_error(format!("failed to spawn `ssh`: {err}")))?;
     let interactive_output = InteractiveOutputViewport::maybe_new(
+        console,
         matches!(stdout_mode, ProcessOutputMode::Inherit),
         matches!(stderr_mode, ProcessOutputMode::Inherit),
     );
@@ -1260,12 +1283,17 @@ fn run_ssh_command(
     });
 
     let stdout_handle = child.stdout.take().map(|reader| {
-        spawn_process_output_thread(reader, &stdout_mode, false, interactive_sink.clone())
+        spawn_process_output_thread(
+            reader,
+            &stdout_mode,
+            false,
+            interactive_sink.clone(),
+            console,
+        )
     });
-    let stderr_handle = child
-        .stderr
-        .take()
-        .map(|reader| spawn_process_output_thread(reader, &stderr_mode, true, interactive_sink));
+    let stderr_handle = child.stderr.take().map(|reader| {
+        spawn_process_output_thread(reader, &stderr_mode, true, interactive_sink, console)
+    });
 
     let status = child
         .wait()
@@ -1332,6 +1360,7 @@ fn spawn_process_output_thread<R>(
     mode: &ProcessOutputMode,
     use_stderr: bool,
     interactive_sink: Option<InteractiveOutputSink>,
+    console: Console,
 ) -> ProcessOutputHandle
 where
     R: Read + Send + 'static,
@@ -1340,7 +1369,7 @@ where
         ProcessOutputMode::Capture => ProcessOutputHandle::Capture(spawn_reader_thread(reader)),
         ProcessOutputMode::Inherit => ProcessOutputHandle::Inherit(match interactive_sink {
             Some(sink) => spawn_interactive_output_thread(reader, sink),
-            None => spawn_prefixed_output_thread(reader, use_stderr),
+            None => spawn_prefixed_output_thread(reader, use_stderr, console),
         }),
         ProcessOutputMode::Null => unreachable!("null stream mode must not spawn output threads"),
     }
@@ -1349,17 +1378,18 @@ where
 fn spawn_prefixed_output_thread<R>(
     mut reader: R,
     use_stderr: bool,
+    console: Console,
 ) -> thread::JoinHandle<io::Result<()>>
 where
     R: Read + Send + 'static,
 {
     thread::spawn(move || {
         if use_stderr {
-            let stderr = io::stderr();
+            let stderr = console.stderr();
             let mut writer = stderr.lock();
             forward_prefixed_stream(&mut reader, &mut writer)
         } else {
-            let stdout = io::stdout();
+            let stdout = console.stdout();
             let mut writer = stdout.lock();
             forward_prefixed_stream(&mut reader, &mut writer)
         }

@@ -132,12 +132,14 @@ impl LuaSshConnection {
                 .resolve_display_cwd(options.display_cwd.as_deref())
                 .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
             print_ssh_command_echo(
+                &self.connection.console(),
                 &info.user,
                 &info.host,
                 info.port,
                 &display_cwd,
                 &options.command,
-            );
+            )
+            .map_err(|err| ssh_console_error(RUN_SIGNATURE, &info.target, &options.command, err))?;
             options.echo = false;
         }
         let result = self
@@ -156,12 +158,16 @@ impl LuaSshConnection {
                 .resolve_display_cwd(options.display_cwd.as_deref())
                 .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
             print_ssh_command_echo(
+                &self.connection.console(),
                 &info.user,
                 &info.host,
                 info.port,
                 &display_cwd,
                 &options.command,
-            );
+            )
+            .map_err(|err| {
+                ssh_console_error(RUN_CAPTURE_SIGNATURE, &info.target, &options.command, err)
+            })?;
             options.echo = false;
         }
         let result = self
@@ -934,4 +940,21 @@ fn parse_stream_mode(
 
 fn ssh_error(context: &str, err: EngineError) -> mlua::Error {
     crate::lua_error::lua_error_from_engine(err, context)
+}
+
+fn ssh_console_error(
+    context: &str,
+    target: &str,
+    command: &str,
+    err: std::io::Error,
+) -> mlua::Error {
+    crate::lua_error::to_mlua_error(
+        crate::lua_error::LuaError::new(
+            "io_error",
+            format!("{context} failed to write to console: {err}"),
+        )
+        .with_op(context)
+        .with_cmd(command)
+        .with_detail(format!("ssh target: {target}")),
+    )
 }

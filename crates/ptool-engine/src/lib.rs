@@ -64,6 +64,7 @@ pub use prompt::{
     PromptSelectOptions, PromptTextOptions, prompt_confirm, prompt_multiselect, prompt_secret,
     prompt_select, prompt_text,
 };
+pub use ptool_console::Console;
 pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
 pub use redis::{RedisArg, RedisConnection, RedisReply};
 pub use script_args::{
@@ -96,6 +97,7 @@ pub(crate) const DISPLAY_STREAM_PREFIX: &str = "  | ";
 
 #[derive(Clone, Debug)]
 pub struct PtoolEngine {
+    console: Console,
     runtime: Arc<Runtime>,
     env_overrides: Arc<Mutex<BTreeMap<String, Option<String>>>>,
 }
@@ -108,15 +110,24 @@ impl Default for PtoolEngine {
 
 impl PtoolEngine {
     pub fn new() -> Self {
+        Self::new_with_console(Console::new())
+    }
+
+    pub fn new_with_console(console: Console) -> Self {
         let runtime = Builder::new_multi_thread()
             .enable_all()
             .build()
             .expect("failed to build ptool-engine tokio runtime");
 
         Self {
+            console,
             runtime: Arc::new(runtime),
             env_overrides: Arc::new(Mutex::new(BTreeMap::new())),
         }
+    }
+
+    pub fn console(&self) -> &Console {
+        &self.console
     }
 
     pub fn ansi_style(&self, text: String, options: StyleOptions) -> String {
@@ -124,7 +135,7 @@ impl PtoolEngine {
     }
 
     pub fn log(&self, level: LogLevel, message: &str) -> Result<()> {
-        log::write_line(level, message)
+        log::write_line(&self.console, level, message)
     }
 
     pub fn ptool_version(&self) -> &'static str {
@@ -481,7 +492,7 @@ impl PtoolEngine {
         dst: &str,
         options: FsCopyOptions,
     ) -> Result<FsCopyResult> {
-        fs::copy_local(src, dst, options)
+        fs::copy_local(src, dst, options, &self.console)
     }
 
     pub fn parse_url(&self, input: &str) -> Result<UrlParts> {
@@ -786,12 +797,12 @@ impl PtoolEngine {
 
     pub fn run_command(&self, options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
         let options = self.apply_env_overrides_to_run_options(options);
-        exec::run_command(&options, current_dir)
+        exec::run_command(&options, current_dir, &self.console)
     }
 
     pub fn run_pipeline(&self, options: &PipeOptions, current_dir: &Path) -> Result<PipeResult> {
         let options = self.apply_env_overrides_to_pipe_options(options);
-        exec::run_pipeline(&options, current_dir)
+        exec::run_pipeline(&options, current_dir, &self.console)
     }
 
     pub fn exec_replace(&self, options: &ExecOptions, current_dir: &Path) -> Result<()> {
@@ -804,11 +815,16 @@ impl PtoolEngine {
         request: SshConnectRequest,
         current_dir: &Path,
     ) -> Result<SshConnection> {
-        ssh::connect(Arc::clone(&self.runtime), request, current_dir)
+        ssh::connect(
+            self.console,
+            Arc::clone(&self.runtime),
+            request,
+            current_dir,
+        )
     }
 
     pub fn tui_session(&self, options: TuiSessionOptions) -> Result<TuiSession> {
-        tui::TuiSession::new(options)
+        tui::TuiSession::new(self.console, options)
     }
 }
 

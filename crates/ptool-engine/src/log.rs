@@ -1,6 +1,6 @@
-use crate::{Color, Error, ErrorKind, Result, StyleOptions};
+use crate::{Color, Console, Error, ErrorKind, Result, StyleOptions};
 use jiff::Zoned;
-use std::io::{self, IsTerminal, Write};
+use std::io;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum LogLevel {
@@ -67,17 +67,19 @@ pub(crate) fn format_line(level: LogLevel, message: &str, color_enabled: bool) -
     }
 }
 
-pub(crate) fn write_line(level: LogLevel, message: &str) -> Result<()> {
+pub(crate) fn write_line(console: &Console, level: LogLevel, message: &str) -> Result<()> {
     if level.use_stderr() {
-        let color_enabled = io::stderr().is_terminal();
+        let color_enabled = console.stderr_is_terminal();
         let rendered = format_line(level, message, color_enabled);
-        let mut stderr = io::stderr().lock();
-        writeln!(stderr, "{rendered}").map_err(|err| io_error(err, level))?;
+        console
+            .write_stderr_line(&rendered)
+            .map_err(|err| io_error(err, level))?;
     } else {
-        let color_enabled = io::stdout().is_terminal();
+        let color_enabled = console.stdout_is_terminal();
         let rendered = format_line(level, message, color_enabled);
-        let mut stdout = io::stdout().lock();
-        writeln!(stdout, "{rendered}").map_err(|err| io_error(err, level))?;
+        console
+            .write_stdout_line(&rendered)
+            .map_err(|err| io_error(err, level))?;
     }
 
     Ok(())

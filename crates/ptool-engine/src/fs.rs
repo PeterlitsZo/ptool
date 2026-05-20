@@ -1,4 +1,4 @@
-use crate::{Error, ErrorKind, Result};
+use crate::{Console, Error, ErrorKind, Result};
 use glob::MatchOptions;
 use std::fs;
 use std::io::{Read, Seek, SeekFrom, Write};
@@ -225,7 +225,12 @@ pub fn glob(pattern: &str, current_dir: &Path, options: FsGlobOptions) -> Result
     Ok(matches)
 }
 
-pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopyResult> {
+pub fn copy_local(
+    src: &str,
+    dst: &str,
+    options: FsCopyOptions,
+    console: &Console,
+) -> Result<FsCopyResult> {
     ensure_non_empty_named_path(src, "src")?;
     ensure_non_empty_named_path(dst, "dst")?;
 
@@ -237,7 +242,9 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
             let resolved_dst = dst_path.display().to_string();
 
             if options.echo {
-                println!("[copy] {src} -> {dst}");
+                console
+                    .write_stdout_line(&format!("[copy] {src} -> {dst}"))
+                    .map_err(|err| io_error(err).with_op("ptool.fs.copy"))?;
             }
 
             copy_file(src_path, &dst_path, src, &resolved_dst)?
@@ -248,7 +255,9 @@ pub fn copy_local(src: &str, dst: &str, options: FsCopyOptions) -> Result<FsCopy
             prepare_directory_copy_destination(&destination_root, options)?;
 
             if options.echo {
-                println!("[copy] {src} -> {dst}");
+                console
+                    .write_stdout_line(&format!("[copy] {src} -> {dst}"))
+                    .map_err(|err| io_error(err).with_op("ptool.fs.copy"))?;
             }
 
             copy_directory(src_path, &destination_root, options)?

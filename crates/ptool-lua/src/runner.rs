@@ -1,9 +1,10 @@
 use std::cell::RefCell;
-use std::io::{self, IsTerminal, Write};
+use std::io::{self, IsTerminal};
 use std::ops::Range;
 use std::rc::Rc;
 
 use mlua::{Error as LuaError, Lua, LuaOptions, MultiValue, StdLib, Table};
+use ptool_console::Console;
 use rustyline::DefaultEditor;
 use rustyline::error::ReadlineError;
 
@@ -22,29 +23,38 @@ pub fn run_script(
     filename: &str,
     script_args: &[String],
 ) -> Result<(), Box<dyn std::error::Error>> {
+    run_script_with_console(Console::new(), filename, script_args)
+}
+
+pub fn run_script_with_console(
+    console: Console,
+    filename: &str,
+    script_args: &[String],
+) -> Result<(), Box<dyn std::error::Error>> {
     let script = std::fs::read_to_string(filename)?;
     let script = strip_shebang_preserve_lines(script);
-    let (lua, _) = create_lua_runtime(filename, script_args)?;
+    let (lua, _) = create_lua_runtime(console, filename, script_args)?;
     lua.load(&script).set_name(filename).exec()?;
     Ok(())
 }
 
 pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
-    if !io::stdin().is_terminal() || !io::stdout().is_terminal() {
+    run_repl_with_console(Console::new())
+}
+
+pub fn run_repl_with_console(console: Console) -> Result<(), Box<dyn std::error::Error>> {
+    if !io::stdin().is_terminal() || !console.stdout_is_terminal() {
         return Err(io::Error::other("ptool repl requires an interactive TTY").into());
     }
 
-    let (lua, world) = create_lua_runtime(REPL_SCRIPT_NAME, &[])?;
+    let (lua, world) = create_lua_runtime(console, REPL_SCRIPT_NAME, &[])?;
     let repl_env = create_repl_environment(&lua)?;
     let mut editor = DefaultEditor::new()?;
     let mut chunk = String::new();
     let mut prompt = REPL_PROMPT;
 
-    with_stdout_lock(|stdout| {
-        writeln!(stdout, "ptool repl ({})", env!("CARGO_PKG_VERSION"))?;
-        writeln!(stdout, "Press Ctrl-D to exit.")?;
-        Ok(())
-    })?;
+    console.write_stdout_line(&format!("ptool repl ({})", env!("CARGO_PKG_VERSION")))?;
+    console.write_stdout_line("Press Ctrl-D to exit.")?;
 
     loop {
         let line = match editor.readline(prompt) {
@@ -55,10 +65,7 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
                 continue;
             }
             Err(ReadlineError::Eof) => {
-                with_stdout_lock(|stdout| {
-                    writeln!(stdout)?;
-                    Ok(())
-                })?;
+                console.write_stdout("\n")?;
                 break;
             }
             Err(err) => return Err(err.into()),
@@ -83,10 +90,7 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
         {
             Ok(values) => {
                 if let Some(rendered) = render_repl_values(&world, values)? {
-                    with_stdout_lock(|stdout| {
-                        writeln!(stdout, "{rendered}")?;
-                        Ok(())
-                    })?;
+                    console.write_stdout_line(&rendered)?;
                 }
                 chunk.clear();
                 prompt = REPL_PROMPT;
@@ -98,14 +102,10 @@ pub fn run_repl() -> Result<(), Box<dyn std::error::Error>> {
                 prompt = REPL_CONTINUATION_PROMPT;
             }
             Err(err) => {
-                with_stdout_lock(|stdout| {
-                    writeln!(
-                        stdout,
-                        "error: {}",
-                        crate::lua_error::render_error_report(&err)
-                    )?;
-                    Ok(())
-                })?;
+                console.write_stdout_line(&format!(
+                    "error: {}",
+                    crate::lua_error::render_error_report(&err)
+                ))?;
                 chunk.clear();
                 prompt = REPL_PROMPT;
             }
@@ -122,12 +122,6 @@ fn create_repl_environment(lua: &Lua) -> mlua::Result<Table> {
     env.set_metatable(Some(mt))?;
     env.set("_G", env.clone())?;
     Ok(env)
-}
-
-fn with_stdout_lock<T>(f: impl FnOnce(&mut io::StdoutLock<'_>) -> io::Result<T>) -> io::Result<T> {
-    let stdout = io::stdout();
-    let mut stdout = stdout.lock();
-    f(&mut stdout)
 }
 
 fn preprocess_repl_chunk(chunk: &str) -> String {
@@ -284,12 +278,16 @@ fn is_identifier_continue(byte: u8) -> bool {
 }
 
 fn create_lua_runtime(
+    console: Console,
     script_name: &str,
     script_args: &[String],
 ) -> Result<LuaRuntime, Box<dyn std::error::Error>> {
     let lua = Lua::new_with(lua_stdlibs(), LuaOptions::default())?;
     let runtime_script_name = (script_name != REPL_SCRIPT_NAME).then_some(script_name);
-    let world = Rc::new(RefCell::new(crate::LuaWorld::new(runtime_script_name)?));
+    let world = Rc::new(RefCell::new(crate::LuaWorld::new_with_console(
+        console,
+        runtime_script_name,
+    )?));
     crate::lua_api::install_ptool_module(&lua, Rc::clone(&world), script_name, script_args)?;
     Ok((lua, world))
 }

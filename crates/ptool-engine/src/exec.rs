@@ -1,7 +1,7 @@
 use crate::interactive_output::{
     InteractiveOutputSink, InteractiveOutputViewport, spawn_interactive_output_thread,
 };
-use crate::{Error, ErrorKind, Result};
+use crate::{Console, Error, ErrorKind, Result};
 use std::fs::{File, OpenOptions};
 use std::io::{self, Read, Write};
 #[cfg(unix)]
@@ -103,7 +103,11 @@ struct PipelineStageStdio<'a> {
     previous_stdout: Option<std::process::ChildStdout>,
 }
 
-pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult> {
+pub fn run_command(
+    options: &RunOptions,
+    current_dir: &Path,
+    console: &Console,
+) -> Result<RunResult> {
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
 
     let mut command = ProcessCommand::new(&options.cmd);
@@ -129,6 +133,7 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
         .spawn()
         .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
     let interactive_output = InteractiveOutputViewport::maybe_new(
+        *console,
         matches!(options.stdout, RunStreamMode::Inherit),
         matches!(options.stderr, RunStreamMode::Inherit),
     );
@@ -149,12 +154,17 @@ pub fn run_command(options: &RunOptions, current_dir: &Path) -> Result<RunResult
     };
 
     let stdout_handle = child.stdout.take().map(|reader| {
-        spawn_output_thread(reader, &options.stdout, false, interactive_sink.clone())
+        spawn_output_thread(
+            reader,
+            &options.stdout,
+            false,
+            interactive_sink.clone(),
+            *console,
+        )
     });
-    let stderr_handle = child
-        .stderr
-        .take()
-        .map(|reader| spawn_output_thread(reader, &options.stderr, true, interactive_sink));
+    let stderr_handle = child.stderr.take().map(|reader| {
+        spawn_output_thread(reader, &options.stderr, true, interactive_sink, *console)
+    });
 
     let status = child
         .wait()
@@ -220,12 +230,17 @@ pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
     exec_current_process(command, &options.cmd, &resolved_cwd)
 }
 
-pub fn run_pipeline(options: &PipeOptions, current_dir: &Path) -> Result<PipeResult> {
+pub fn run_pipeline(
+    options: &PipeOptions,
+    current_dir: &Path,
+    console: &Console,
+) -> Result<PipeResult> {
     validate_pipeline_options(options)?;
 
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
     let pipeline_for_error = format_pipeline_for_display(&options.commands);
     let interactive_output = InteractiveOutputViewport::maybe_new(
+        *console,
         matches!(options.stdout, RunStreamMode::Inherit),
         matches!(options.stderr, RunStreamMode::Inherit),
     );
@@ -290,7 +305,13 @@ pub fn run_pipeline(options: &PipeOptions, current_dir: &Path) -> Result<PipeRes
 
         if is_last {
             stdout_handle = child.stdout.take().map(|reader| {
-                spawn_output_thread(reader, &options.stdout, false, interactive_sink.clone())
+                spawn_output_thread(
+                    reader,
+                    &options.stdout,
+                    false,
+                    interactive_sink.clone(),
+                    *console,
+                )
             });
         } else {
             let next_stdin = child.stdout.take().ok_or_else(|| {
@@ -308,7 +329,13 @@ pub fn run_pipeline(options: &PipeOptions, current_dir: &Path) -> Result<PipeRes
 
         let stderr_mode = pipeline_stderr_mode(&options.stderr, index == 0);
         let stderr_handle = child.stderr.take().map(|reader| {
-            spawn_output_thread(reader, &stderr_mode, true, interactive_sink.clone())
+            spawn_output_thread(
+                reader,
+                &stderr_mode,
+                true,
+                interactive_sink.clone(),
+                *console,
+            )
         });
         stderr_handles.push(stderr_handle);
         children.push(child);
@@ -522,6 +549,7 @@ fn spawn_output_thread<R>(
     mode: &RunStreamMode,
     use_stderr: bool,
     interactive_sink: Option<InteractiveOutputSink>,
+    console: Console,
 ) -> OutputHandle
 where
     R: Read + Send + 'static,
@@ -530,7 +558,7 @@ where
         RunStreamMode::Capture => OutputHandle::Capture(spawn_reader_thread(reader)),
         RunStreamMode::Inherit => OutputHandle::Inherit(match interactive_sink {
             Some(sink) => spawn_interactive_output_thread(reader, sink),
-            None => spawn_prefixed_output_thread(reader, use_stderr),
+            None => spawn_prefixed_output_thread(reader, use_stderr, console),
         }),
         RunStreamMode::Null | RunStreamMode::File { .. } => {
             unreachable!("non-piped stream modes must not spawn output threads")
@@ -541,17 +569,18 @@ where
 fn spawn_prefixed_output_thread<R>(
     mut reader: R,
     use_stderr: bool,
+    console: Console,
 ) -> thread::JoinHandle<io::Result<()>>
 where
     R: Read + Send + 'static,
 {
     thread::spawn(move || {
         if use_stderr {
-            let stderr = io::stderr();
+            let stderr = console.stderr();
             let mut writer = stderr.lock();
             forward_prefixed_stream(&mut reader, &mut writer)
         } else {
-            let stdout = io::stdout();
+            let stdout = console.stdout();
             let mut writer = stdout.lock();
             forward_prefixed_stream(&mut reader, &mut writer)
         }

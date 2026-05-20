@@ -1,6 +1,5 @@
-use std::io::IsTerminal;
-
 use owo_colors::Style as OwoStyle;
+use ptool_console::Console;
 
 /// ANSI styling options for terminal output.
 pub struct StyleOptions {
@@ -15,7 +14,7 @@ pub struct StyleOptions {
 impl Default for StyleOptions {
     fn default() -> Self {
         Self {
-            enabled: std::io::stdout().is_terminal(),
+            enabled: Console::new().stdout_is_terminal(),
             fg: None,
             bold: false,
             dimmed: false,

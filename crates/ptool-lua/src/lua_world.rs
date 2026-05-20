@@ -1,4 +1,5 @@
 use mlua::{Function, Lua, MultiValue, String as LuaString, Table, Value, Variadic};
+use ptool_console::Console;
 use ptool_engine::PtoolEngine;
 use std::path::{Path, PathBuf};
 use std::process;
@@ -47,7 +48,14 @@ pub struct LuaWorld {
 
 impl LuaWorld {
     pub fn new(script_name: Option<&str>) -> Result<Self, Box<dyn std::error::Error>> {
-        let engine = PtoolEngine::new();
+        Self::new_with_console(Console::new(), script_name)
+    }
+
+    pub fn new_with_console(
+        console: Console,
+        script_name: Option<&str>,
+    ) -> Result<Self, Box<dyn std::error::Error>> {
+        let engine = PtoolEngine::new_with_console(console);
         let script_path = script_name
             .map(|path| engine.path_runtime_abspath(path))
             .transpose()?;

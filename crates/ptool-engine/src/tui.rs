@@ -1,4 +1,4 @@
-use crate::{Error, ErrorKind, Result};
+use crate::{Console, Error, ErrorKind, Result};
 use crossterm::event::{
     self, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers, MouseEventKind,
 };
@@ -120,14 +120,15 @@ pub enum TuiNodeKind {
 type Backend = CrosstermBackend<Stdout>;
 
 pub struct TuiSession {
+    console: Console,
     terminal: Option<Terminal<Backend>>,
     tick_rate: Duration,
     last_tick_at: Instant,
 }
 
 impl TuiSession {
-    pub fn new(options: TuiSessionOptions) -> Result<Self> {
-        if !io::stdin().is_terminal() || !io::stdout().is_terminal() {
+    pub fn new(console: Console, options: TuiSessionOptions) -> Result<Self> {
+        if !io::stdin().is_terminal() || !console.stdout_is_terminal() {
             return Err(Error::new(
                 ErrorKind::NotInteractive,
                 "ptool.tui.run(options) requires an interactive TTY",
@@ -143,21 +144,24 @@ impl TuiSession {
             .with_detail("`tick_ms` must be > 0"));
         }
 
-        let mut stdout = io::stdout();
+        let mut stdout = console.stdout();
         execute!(stdout, EnterAlternateScreen).map_err(|err| io_error("ptool.tui.run", err))?;
         enable_raw_mode().map_err(|err| {
-            let _ = execute!(io::stdout(), LeaveAlternateScreen);
+            let mut stdout = console.stdout();
+            let _ = execute!(stdout, LeaveAlternateScreen);
             io_error("ptool.tui.run", err)
         })?;
 
         let backend = CrosstermBackend::new(stdout);
         let terminal = Terminal::new(backend).map_err(|err| {
             let _ = disable_raw_mode();
-            let _ = execute!(io::stdout(), LeaveAlternateScreen);
+            let mut stdout = console.stdout();
+            let _ = execute!(stdout, LeaveAlternateScreen);
             io_error("ptool.tui.run", err)
         })?;
 
         Ok(Self {
+            console,
             terminal: Some(terminal),
             tick_rate: options.tick_rate,
             last_tick_at: Instant::now(),
@@ -225,7 +229,8 @@ impl Drop for TuiSession {
             let _ = terminal.show_cursor();
         }
         let _ = disable_raw_mode();
-        let _ = execute!(io::stdout(), LeaveAlternateScreen);
+        let mut stdout = self.console.stdout();
+        let _ = execute!(stdout, LeaveAlternateScreen);
     }
 }
 

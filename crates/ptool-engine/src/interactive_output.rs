@@ -1,3 +1,4 @@
+use crate::Console;
 use crossterm::QueueableCommand;
 use crossterm::cursor::{MoveToColumn, MoveUp};
 use crossterm::terminal::{self, Clear, ClearType};
@@ -28,6 +29,7 @@ enum WriterTarget {
 }
 
 struct ViewportRenderer {
+    console: Console,
     target: WriterTarget,
     lines: VecDeque<Vec<u8>>,
     total_lines: usize,
@@ -37,17 +39,21 @@ struct ViewportRenderer {
 }
 
 impl InteractiveOutputViewport {
-    pub(crate) fn maybe_new(stdout_inherit: bool, stderr_inherit: bool) -> Option<Self> {
+    pub(crate) fn maybe_new(
+        console: Console,
+        stdout_inherit: bool,
+        stderr_inherit: bool,
+    ) -> Option<Self> {
         if !stdout_inherit && !stderr_inherit {
             return None;
         }
         if !io::stdin().is_terminal() {
             return None;
         }
-        if stdout_inherit && !io::stdout().is_terminal() {
+        if stdout_inherit && !console.stdout_is_terminal() {
             return None;
         }
-        if stderr_inherit && !io::stderr().is_terminal() {
+        if stderr_inherit && !console.stderr_is_terminal() {
             return None;
         }
 
@@ -57,8 +63,9 @@ impl InteractiveOutputViewport {
             WriterTarget::Stderr
         };
         let (sender, receiver) = mpsc::channel::<Vec<u8>>();
+        let renderer_console = console;
         let handle = thread::spawn(move || {
-            let mut renderer = ViewportRenderer::new(target);
+            let mut renderer = ViewportRenderer::new(renderer_console, target);
             while let Ok(chunk) = receiver.recv() {
                 renderer.push_chunk(&chunk)?;
             }
@@ -126,8 +133,9 @@ where
 }
 
 impl ViewportRenderer {
-    fn new(target: WriterTarget) -> Self {
+    fn new(console: Console, target: WriterTarget) -> Self {
         Self {
+            console,
             target,
             lines: VecDeque::new(),
             total_lines: 0,
@@ -165,8 +173,8 @@ impl ViewportRenderer {
             self.redraw()?;
         }
         match self.target {
-            WriterTarget::Stdout => io::stdout().lock().flush(),
-            WriterTarget::Stderr => io::stderr().lock().flush(),
+            WriterTarget::Stdout => self.console.flush_stdout(),
+            WriterTarget::Stderr => self.console.flush_stderr(),
         }
     }
 
@@ -200,12 +208,12 @@ impl ViewportRenderer {
 
         match self.target {
             WriterTarget::Stdout => {
-                let stdout = io::stdout();
+                let stdout = self.console.stdout();
                 let mut writer = stdout.lock();
                 redraw_writer(&mut writer, self.rendered_rows, &visible_lines)?;
             }
             WriterTarget::Stderr => {
-                let stderr = io::stderr();
+                let stderr = self.console.stderr();
                 let mut writer = stderr.lock();
                 redraw_writer(&mut writer, self.rendered_rows, &visible_lines)?;
             }

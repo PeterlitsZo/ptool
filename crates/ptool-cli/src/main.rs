@@ -1,5 +1,6 @@
 use clap_lex::RawArgs;
 use indoc::formatdoc;
+use ptool_console::Console;
 use shadow_rs::shadow;
 use std::ffi::OsStr;
 use std::process;
@@ -67,43 +68,46 @@ impl ParseError {
 }
 
 fn main() {
+    let console = Console::new();
     let raw = RawArgs::from_args();
     let mut cursor = raw.cursor();
     let bin = raw
         .next_os(&mut cursor)
         .unwrap_or_else(|| OsStr::new(APP_NAME));
 
-    match parse_cli(&raw, &mut cursor, bin) {
+    match parse_cli(&console, &raw, &mut cursor, bin) {
         Ok(ParsedCli::Run {
             filename,
             script_args,
         }) => {
-            if let Err(err) = ptool_lua::run_script(&filename, &script_args) {
-                eprintln!(
+            if let Err(err) = ptool_lua::run_script_with_console(console, &filename, &script_args) {
+                let message = format!(
                     "Failed to run Lua script `{filename}`:\n{}",
                     ptool_lua::format_error_report(err.as_ref())
                 );
+                let _ = console.write_stderr_line(&message);
                 process::exit(1);
             }
         }
         Ok(ParsedCli::Repl) => {
-            if let Err(err) = ptool_lua::run_repl() {
-                eprintln!(
+            if let Err(err) = ptool_lua::run_repl_with_console(console) {
+                let message = format!(
                     "Failed to start REPL:\n{}",
                     ptool_lua::format_error_report(err.as_ref())
                 );
+                let _ = console.write_stderr_line(&message);
                 process::exit(1);
             }
         }
         Ok(ParsedCli::ExitSuccess) => {}
         Err(err) => {
-            eprintln!("error: {}", err.message);
-            eprintln!();
+            let _ = console.write_stderr_line(&format!("error: {}", err.message));
+            let _ = console.write_stderr_line("");
             match err.usage {
-                UsageKind::Top => eprintln!("{}", top_usage(bin)),
-                UsageKind::Run => eprintln!("{}", run_usage(bin)),
-                UsageKind::Repl => eprintln!("{}", repl_usage(bin)),
-                UsageKind::Version => eprintln!("{}", version_usage(bin)),
+                UsageKind::Top => write_stderr(&console, &top_usage(bin)),
+                UsageKind::Run => write_stderr(&console, &run_usage(bin)),
+                UsageKind::Repl => write_stderr(&console, &repl_usage(bin)),
+                UsageKind::Version => write_stderr(&console, &version_usage(bin)),
             }
             process::exit(2);
         }
@@ -111,6 +115,7 @@ fn main() {
 }
 
 fn parse_cli(
+    console: &Console,
     raw: &RawArgs,
     cursor: &mut clap_lex::ArgCursor,
     bin: &OsStr,
@@ -122,16 +127,16 @@ fn parse_cli(
     let command_value = parsed_arg_to_string(command.to_value_os(), "argument")?;
     match command_value.as_str() {
         "-h" | "--help" => {
-            println!("{}", top_usage(bin));
+            write_stdout(console, &top_usage(bin));
             Ok(ParsedCli::ExitSuccess)
         }
         "-V" | "--version" => {
-            print_version();
+            print_version(console);
             Ok(ParsedCli::ExitSuccess)
         }
-        "run" => parse_run(raw, cursor, bin),
-        "repl" => parse_repl(raw, cursor, bin),
-        "version" => parse_version(raw, cursor, bin),
+        "run" => parse_run(console, raw, cursor, bin),
+        "repl" => parse_repl(console, raw, cursor, bin),
+        "version" => parse_version(console, raw, cursor, bin),
         value if value.ends_with(".lua") => parse_run_with_filename(raw, cursor, value.to_string()),
         value if value.starts_with('-') => Err(ParseError::top(format!(
             "unexpected argument `{value}` found"
@@ -168,6 +173,7 @@ fn parse_run_with_filename(
 }
 
 fn parse_run(
+    console: &Console,
     raw: &RawArgs,
     cursor: &mut clap_lex::ArgCursor,
     bin: &OsStr,
@@ -179,7 +185,7 @@ fn parse_run(
     };
 
     if next.to_value_os() == OsStr::new("-h") || next.to_value_os() == OsStr::new("--help") {
-        println!("{}", run_usage(bin));
+        write_stdout(console, &run_usage(bin));
         return Ok(ParsedCli::ExitSuccess);
     }
 
@@ -194,6 +200,7 @@ fn parse_run(
 }
 
 fn parse_repl(
+    console: &Console,
     raw: &RawArgs,
     cursor: &mut clap_lex::ArgCursor,
     bin: &OsStr,
@@ -201,7 +208,7 @@ fn parse_repl(
     if let Some(next) = raw.next(cursor) {
         let value = parsed_arg_to_string(next.to_value_os(), "argument")?;
         if value == "-h" || value == "--help" {
-            println!("{}", repl_usage(bin));
+            write_stdout(console, &repl_usage(bin));
             return Ok(ParsedCli::ExitSuccess);
         }
 
@@ -214,6 +221,7 @@ fn parse_repl(
 }
 
 fn parse_version(
+    console: &Console,
     raw: &RawArgs,
     cursor: &mut clap_lex::ArgCursor,
     bin: &OsStr,
@@ -221,7 +229,7 @@ fn parse_version(
     if let Some(next) = raw.next(cursor) {
         let value = parsed_arg_to_string(next.to_value_os(), "argument")?;
         if value == "-h" || value == "--help" {
-            println!("{}", version_usage(bin));
+            write_stdout(console, &version_usage(bin));
             return Ok(ParsedCli::ExitSuccess);
         }
 
@@ -230,11 +238,11 @@ fn parse_version(
         )));
     }
 
-    print_version();
+    print_version(console);
     Ok(ParsedCli::ExitSuccess)
 }
 
-fn print_version() {
+fn print_version(console: &Console) {
     let mut lines = vec![
         ("name", APP_NAME.to_string()),
         ("version", APP_VERSION.to_string()),
@@ -263,8 +271,16 @@ fn print_version() {
         .max()
         .unwrap_or(0);
     for (label, value) in lines {
-        println!("{label:>width$}  {value}");
+        write_stdout(console, &format!("{label:>width$}  {value}"));
     }
+}
+
+fn write_stdout(console: &Console, text: &str) {
+    let _ = console.write_stdout_line(text);
+}
+
+fn write_stderr(console: &Console, text: &str) {
+    let _ = console.write_stderr_line(text);
 }
 
 fn build_profile() -> &'static str {
