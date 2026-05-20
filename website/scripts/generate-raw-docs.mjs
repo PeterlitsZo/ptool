@@ -167,12 +167,25 @@ async function createManifestEntry({
   const relativePath = path.relative(sourceDir, file);
   const rawUrl = `/${toPosixPath(path.join('raw', outputSubdir, relativePath))}`;
   const docPath = normalizeDocPath(relativePath);
+  const content = await readFile(file, 'utf8');
+  const parsedDoc = parseDocContent(content, file);
 
-  return {
-    title: await extractTitle(file),
+  const entry = {
+    title: parsedDoc.title,
+    description: parsedDoc.description,
     rawUrl,
     permalink: toPermalink({locale, docPath, lastVersionName, versionName}),
   };
+
+  if (parsedDoc.apis.length > 0) {
+    entry.apis = parsedDoc.apis;
+  }
+
+  if (parsedDoc.userdatas.length > 0) {
+    entry.userdatas = parsedDoc.userdatas;
+  }
+
+  return entry;
 }
 
 async function writeChildManifests(manifests) {
@@ -250,6 +263,10 @@ function toPermalink({locale, docPath, lastVersionName, versionName}) {
 
 async function extractTitle(file) {
   const content = await readFile(file, 'utf8');
+  return extractTitleFromContent(content, file);
+}
+
+function extractTitleFromContent(content, file = 'document') {
   const frontmatterTitle = content.match(/^title:\s+(.+)$/mu)?.[1]?.trim();
   if (frontmatterTitle) {
     return stripQuotes(frontmatterTitle);
@@ -261,6 +278,382 @@ async function extractTitle(file) {
   }
 
   return path.basename(file, path.extname(file));
+}
+
+function parseDocContent(content, file) {
+  const title = extractTitleFromContent(content, file);
+  const markdown = stripFrontmatter(content);
+  const tree = parseMarkdownSections(markdown);
+  const docSection = tree.children.find((child) => child.level === 1) ?? tree;
+  const description =
+    extractSummaryFromLines(docSection.contentLines, {maxParagraphs: 2}) ?? title;
+  const apis = extractApis(docSection);
+  const userdatas = extractUserdatas(docSection);
+
+  return {title, description, apis, userdatas};
+}
+
+function stripFrontmatter(content) {
+  return content.replace(/^---\n[\s\S]*?\n---\n*/u, '');
+}
+
+function parseMarkdownSections(content) {
+  const root = createSectionNode({level: 0, title: ''});
+  const stack = [root];
+  const lines = content.split(/\r?\n/u);
+  let inCodeBlock = false;
+  let codeFenceMarker = null;
+
+  for (const line of lines) {
+    const fenceMatch = line.match(/^(```+|~~~+)/u);
+    if (fenceMatch) {
+      const marker = fenceMatch[1][0];
+      if (!inCodeBlock) {
+        inCodeBlock = true;
+        codeFenceMarker = marker;
+      } else if (codeFenceMarker === marker) {
+        inCodeBlock = false;
+        codeFenceMarker = null;
+      }
+      stack.at(-1).contentLines.push(line);
+      continue;
+    }
+
+    if (!inCodeBlock) {
+      const headingMatch = line.match(/^(#{1,6})\s+(.+)$/u);
+      if (headingMatch) {
+        const level = headingMatch[1].length;
+        const title = headingMatch[2].trim();
+        while (stack.at(-1).level >= level) {
+          stack.pop();
+        }
+
+        const node = createSectionNode({level, title});
+        stack.at(-1).children.push(node);
+        stack.push(node);
+        continue;
+      }
+    }
+
+    stack.at(-1).contentLines.push(line);
+  }
+
+  return root;
+}
+
+function createSectionNode({level, title}) {
+  return {
+    level,
+    title,
+    contentLines: [],
+    children: [],
+  };
+}
+
+function extractApis(docSection) {
+  const apis = [];
+
+  for (const section of getChildSections(docSection, 2)) {
+    if (isModuleApiHeading(section.title)) {
+      apis.push({
+        fullName: section.title.trim(),
+        description:
+          extractSummaryFromLines(section.contentLines, {maxParagraphs: 2}) ??
+          section.title.trim(),
+      });
+    }
+
+    apis.push(...extractApiLinksFromLines(section.contentLines));
+  }
+
+  return dedupeByFullName(apis);
+}
+
+function extractUserdatas(docSection) {
+  const userdatas = [];
+
+  for (const section of getChildSections(docSection, 2)) {
+    if (isModuleApiHeading(section.title)) {
+      continue;
+    }
+
+    const methods = extractMethods(section);
+    if (methods.length === 0 && !containsUserdataSignal(section.contentLines)) {
+      continue;
+    }
+
+    const fullName = deriveUserdataFullName(section, methods);
+    if (!fullName) {
+      continue;
+    }
+
+    userdatas.push({
+      fullName,
+      description:
+        extractSummaryFromLines(section.contentLines, {
+          maxParagraphs: 2,
+          skipPatterns: USERDATA_BOILERPLATE_PATTERNS,
+        }) ?? section.title.trim(),
+      methods,
+    });
+  }
+
+  return dedupeByFullName(userdatas);
+}
+
+function getChildSections(section, level) {
+  return section.children.filter((child) => child.level === level);
+}
+
+function isModuleApiHeading(title) {
+  return /^ptool\./u.test(title.trim());
+}
+
+function extractApiLinksFromLines(lines) {
+  const apis = [];
+
+  for (const item of collectListItems(lines)) {
+    const match = item.match(/^\[([^\]]+)\]\([^)]+\)[:：]\s*(.+)$/u);
+    if (!match) {
+      continue;
+    }
+
+    const fullName = normalizeInlineMarkdown(match[1]);
+    if (!/(?:^| )(?:Lua )?API$/u.test(fullName)) {
+      continue;
+    }
+
+    apis.push({
+      fullName,
+      description: normalizeInlineMarkdown(match[2]),
+    });
+  }
+
+  return apis;
+}
+
+function extractMethods(section) {
+  return getChildSections(section, section.level + 1)
+    .map((methodSection) => {
+      const fullName = extractCanonicalApiName(methodSection.contentLines);
+      if (!fullName) {
+        return null;
+      }
+
+      return {
+        fullName,
+        description:
+          extractSummaryFromLines(methodSection.contentLines, {maxParagraphs: 2}) ??
+          methodSection.title.trim(),
+      };
+    })
+    .filter(Boolean);
+}
+
+function extractCanonicalApiName(lines) {
+  for (const line of lines) {
+    if (!/API/u.test(line)) {
+      continue;
+    }
+
+    const match = line.match(/`([^`]+:[^`]+)`/u);
+    if (match) {
+      return match[1].trim();
+    }
+  }
+
+  return null;
+}
+
+function deriveUserdataFullName(section, methods) {
+  const firstMethodName = methods[0]?.fullName;
+  if (firstMethodName?.includes(':')) {
+    return firstMethodName.split(':')[0];
+  }
+
+  return section.title.trim() || null;
+}
+
+function containsUserdataSignal(lines) {
+  return lines.some((line) =>
+    /userdata|用户数据|方法：|Methods:/iu.test(line),
+  );
+}
+
+function extractSummaryFromLines(lines, {maxParagraphs = 1, skipPatterns = []} = {}) {
+  const paragraphs = collectParagraphs(lines);
+  const accepted = [];
+
+  for (const paragraph of paragraphs) {
+    if (shouldSkipParagraph(paragraph, skipPatterns)) {
+      continue;
+    }
+
+    accepted.push(paragraph);
+    if (accepted.length >= maxParagraphs) {
+      break;
+    }
+  }
+
+  if (accepted.length > 0) {
+    return accepted.join(' ');
+  }
+
+  const fallback = paragraphs.find((paragraph) => paragraph.length > 0);
+  return fallback ?? null;
+}
+
+function collectParagraphs(lines) {
+  const paragraphs = [];
+  let block = [];
+  let inCodeBlock = false;
+  let codeFenceMarker = null;
+
+  const flush = () => {
+    if (block.length === 0) {
+      return;
+    }
+
+    const paragraph = normalizeInlineMarkdown(block.join(' ').trim());
+    if (paragraph) {
+      paragraphs.push(paragraph);
+    }
+    block = [];
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    const fenceMatch = rawLine.match(/^(```+|~~~+)/u);
+    if (fenceMatch) {
+      const marker = fenceMatch[1][0];
+      if (!inCodeBlock) {
+        flush();
+        inCodeBlock = true;
+        codeFenceMarker = marker;
+      } else if (codeFenceMarker === marker) {
+        inCodeBlock = false;
+        codeFenceMarker = null;
+      }
+      continue;
+    }
+
+    if (inCodeBlock) {
+      continue;
+    }
+
+    if (!line) {
+      flush();
+      continue;
+    }
+
+    block.push(line);
+  }
+
+  flush();
+  return paragraphs;
+}
+
+function shouldSkipParagraph(paragraph, skipPatterns) {
+  if (!paragraph) {
+    return true;
+  }
+
+  if (
+    /^(?:[-*]|\d+\.)\s/u.test(paragraph) ||
+    paragraph.startsWith('>') ||
+    paragraph.startsWith('|') ||
+    paragraph.endsWith(':') ||
+    paragraph.endsWith('：')
+  ) {
+    return true;
+  }
+
+  return [...STRUCTURAL_LABEL_PATTERNS, ...skipPatterns].some((pattern) =>
+    pattern.test(paragraph),
+  );
+}
+
+function normalizeInlineMarkdown(value) {
+  return value
+    .replace(/\[([^\]]+)\]\([^)]+\)/gu, '$1')
+    .replace(/`([^`]+)`/gu, '$1')
+    .replace(/\*\*([^*]+)\*\*/gu, '$1')
+    .replace(/\*([^*]+)\*/gu, '$1')
+    .replace(/\s+/gu, ' ')
+    .trim();
+}
+
+function collectListItems(lines) {
+  const items = [];
+  let current = null;
+  let inCodeBlock = false;
+  let codeFenceMarker = null;
+
+  const flush = () => {
+    if (!current) {
+      return;
+    }
+    items.push(current.trim());
+    current = null;
+  };
+
+  for (const rawLine of lines) {
+    const fenceMatch = rawLine.match(/^(```+|~~~+)/u);
+    if (fenceMatch) {
+      const marker = fenceMatch[1][0];
+      if (!inCodeBlock) {
+        flush();
+        inCodeBlock = true;
+        codeFenceMarker = marker;
+      } else if (codeFenceMarker === marker) {
+        inCodeBlock = false;
+        codeFenceMarker = null;
+      }
+      continue;
+    }
+
+    if (inCodeBlock) {
+      continue;
+    }
+
+    const trimmed = rawLine.trim();
+    if (!trimmed) {
+      flush();
+      continue;
+    }
+
+    const bulletMatch = rawLine.match(/^\s*-\s+(.*)$/u);
+    if (bulletMatch) {
+      flush();
+      current = bulletMatch[1];
+      continue;
+    }
+
+    if (current && /^\s{2,}\S/u.test(rawLine)) {
+      current = `${current} ${trimmed}`;
+      continue;
+    }
+
+    flush();
+  }
+
+  flush();
+  return items;
+}
+
+function dedupeByFullName(items) {
+  const seen = new Set();
+  const deduped = [];
+
+  for (const item of items) {
+    if (!item?.fullName || seen.has(item.fullName)) {
+      continue;
+    }
+    seen.add(item.fullName);
+    deduped.push(item);
+  }
+
+  return deduped;
 }
 
 function stripQuotes(value) {
@@ -276,5 +669,20 @@ function stripQuotes(value) {
 function toPosixPath(filePath) {
   return filePath.split(path.sep).join('/');
 }
+
+const USERDATA_BOILERPLATE_PATTERNS = [
+  /^It is implemented as a Lua userdata\.$/u,
+  /^It is implemented as a Lua userdata\.$/iu,
+  /^它被实现为一个 Lua userdata。$/u,
+  /^它实现为 Lua userdata。$/u,
+  /^它实现为 Lua 用户数据（userdata）。$/u,
+];
+
+const STRUCTURAL_LABEL_PATTERNS = [
+  /^Canonical API name:/iu,
+  /^规范 API 名称：/u,
+  /^(?:Arguments|Notes|Example|Examples|Behavior|Methods|Fields|Command argument rules|Reply conversion rules):$/iu,
+  /^(?:参数|说明|示例|行为说明|方法|字段|支持的模式|返回值规则|通用行为|类型映射|阶段规则|支持的数据库|字段和方法|元方法)：$/u,
+];
 
 await main();
