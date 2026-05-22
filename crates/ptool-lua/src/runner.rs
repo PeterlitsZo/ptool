@@ -1,16 +1,13 @@
+use mlua::{Error as LuaError, Lua, LuaOptions, MultiValue, StdLib, Table};
+use ptool_console::Console;
+use rustyline::DefaultEditor;
+use rustyline::error::ReadlineError;
 use std::cell::RefCell;
 use std::io::{self, IsTerminal};
 use std::ops::Range;
 use std::rc::Rc;
 
-use mlua::{Error as LuaError, Lua, LuaOptions, MultiValue, StdLib, Table};
-use ptool_console::Console;
-use rustyline::DefaultEditor;
-use rustyline::error::ReadlineError;
-
 const REPL_SCRIPT_NAME: &str = "=(ptool repl)";
-const REPL_PROMPT: &str = ">>> ";
-const REPL_CONTINUATION_PROMPT: &str = "... ";
 
 type SharedLuaWorld = Rc<RefCell<crate::LuaWorld>>;
 type LuaRuntime = (Lua, SharedLuaWorld);
@@ -51,21 +48,20 @@ pub fn run_repl_with_console(console: Console) -> Result<(), Box<dyn std::error:
     let repl_env = create_repl_environment(&lua)?;
     let mut editor = DefaultEditor::new()?;
     let mut chunk = String::new();
-    let mut prompt = REPL_PROMPT;
+    let mut prompt = console.repl_prompt();
 
-    console.write_stdout_line(&format!("ptool repl ({})", env!("CARGO_PKG_VERSION")))?;
-    console.write_stdout_line("Press Ctrl-D to exit.")?;
+    console.repl_banner(env!("CARGO_PKG_VERSION"))?;
 
     loop {
         let line = match editor.readline(prompt) {
             Ok(line) => line,
             Err(ReadlineError::Interrupted) => {
                 chunk.clear();
-                prompt = REPL_PROMPT;
+                prompt = console.repl_prompt();
                 continue;
             }
             Err(ReadlineError::Eof) => {
-                console.write_stdout("\n")?;
+                console.repl_exit()?;
                 break;
             }
             Err(err) => return Err(err.into()),
@@ -90,24 +86,21 @@ pub fn run_repl_with_console(console: Console) -> Result<(), Box<dyn std::error:
         {
             Ok(values) => {
                 if let Some(rendered) = render_repl_values(&world, values)? {
-                    console.write_stdout_line(&rendered)?;
+                    console.repl_result(&rendered)?;
                 }
                 chunk.clear();
-                prompt = REPL_PROMPT;
+                prompt = console.repl_prompt();
             }
             Err(LuaError::SyntaxError {
                 incomplete_input: true,
                 ..
             }) => {
-                prompt = REPL_CONTINUATION_PROMPT;
+                prompt = console.repl_continuation_prompt();
             }
             Err(err) => {
-                console.write_stdout_line(&format!(
-                    "error: {}",
-                    crate::lua_error::render_error_report(&err)
-                ))?;
+                console.repl_runtime_error(&crate::lua_error::render_error_report(&err))?;
                 chunk.clear();
-                prompt = REPL_PROMPT;
+                prompt = console.repl_prompt();
             }
         }
     }

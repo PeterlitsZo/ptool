@@ -81,34 +81,29 @@ fn main() {
             script_args,
         }) => {
             if let Err(err) = ptool_lua::run_script_with_console(console, &filename, &script_args) {
-                let message = format!(
-                    "Failed to run Lua script `{filename}`:\n{}",
-                    ptool_lua::format_error_report(err.as_ref())
+                let _ = console.show_script_run_error(
+                    &filename,
+                    &ptool_lua::format_error_report(err.as_ref()),
                 );
-                let _ = console.write_stderr_line(&message);
                 process::exit(1);
             }
         }
         Ok(ParsedCli::Repl) => {
             if let Err(err) = ptool_lua::run_repl_with_console(console) {
-                let message = format!(
-                    "Failed to start REPL:\n{}",
-                    ptool_lua::format_error_report(err.as_ref())
-                );
-                let _ = console.write_stderr_line(&message);
+                let _ =
+                    console.show_repl_start_error(&ptool_lua::format_error_report(err.as_ref()));
                 process::exit(1);
             }
         }
         Ok(ParsedCli::ExitSuccess) => {}
         Err(err) => {
-            let _ = console.write_stderr_line(&format!("error: {}", err.message));
-            let _ = console.write_stderr_line("");
-            match err.usage {
-                UsageKind::Top => write_stderr(&console, &top_usage(bin)),
-                UsageKind::Run => write_stderr(&console, &run_usage(bin)),
-                UsageKind::Repl => write_stderr(&console, &repl_usage(bin)),
-                UsageKind::Version => write_stderr(&console, &version_usage(bin)),
-            }
+            let usage = match err.usage {
+                UsageKind::Top => top_usage(bin),
+                UsageKind::Run => run_usage(bin),
+                UsageKind::Repl => repl_usage(bin),
+                UsageKind::Version => version_usage(bin),
+            };
+            let _ = console.show_parse_error(&err.message, &usage);
             process::exit(2);
         }
     }
@@ -127,7 +122,7 @@ fn parse_cli(
     let command_value = parsed_arg_to_string(command.to_value_os(), "argument")?;
     match command_value.as_str() {
         "-h" | "--help" => {
-            write_stdout(console, &top_usage(bin));
+            let _ = console.show_help(&top_usage(bin));
             Ok(ParsedCli::ExitSuccess)
         }
         "-V" | "--version" => {
@@ -185,7 +180,7 @@ fn parse_run(
     };
 
     if next.to_value_os() == OsStr::new("-h") || next.to_value_os() == OsStr::new("--help") {
-        write_stdout(console, &run_usage(bin));
+        let _ = console.show_help(&run_usage(bin));
         return Ok(ParsedCli::ExitSuccess);
     }
 
@@ -208,7 +203,7 @@ fn parse_repl(
     if let Some(next) = raw.next(cursor) {
         let value = parsed_arg_to_string(next.to_value_os(), "argument")?;
         if value == "-h" || value == "--help" {
-            write_stdout(console, &repl_usage(bin));
+            let _ = console.show_help(&repl_usage(bin));
             return Ok(ParsedCli::ExitSuccess);
         }
 
@@ -229,7 +224,7 @@ fn parse_version(
     if let Some(next) = raw.next(cursor) {
         let value = parsed_arg_to_string(next.to_value_os(), "argument")?;
         if value == "-h" || value == "--help" {
-            write_stdout(console, &version_usage(bin));
+            let _ = console.show_help(&version_usage(bin));
             return Ok(ParsedCli::ExitSuccess);
         }
 
@@ -271,16 +266,8 @@ fn print_version(console: &Console) {
         .max()
         .unwrap_or(0);
     for (label, value) in lines {
-        write_stdout(console, &format!("{label:>width$}  {value}"));
+        let _ = console.show_version_entry(label, width, &value);
     }
-}
-
-fn write_stdout(console: &Console, text: &str) {
-    let _ = console.write_stdout_line(text);
-}
-
-fn write_stderr(console: &Console, text: &str) {
-    let _ = console.write_stderr_line(text);
 }
 
 fn build_profile() -> &'static str {

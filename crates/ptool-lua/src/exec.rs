@@ -1,4 +1,3 @@
-use crate::command_echo::print_local_command_echo;
 use crate::lua_error::{self, LuaError};
 use crate::lua_world::RunConfig;
 use mlua::{Lua, Table, Value, Variadic};
@@ -175,14 +174,15 @@ pub(crate) fn run_pipeline_command(
                 .with_op("ptool.pipe"),
             )
         })?;
-        print_local_command_echo(
-            engine.console(),
-            &local_user_host.user,
-            &local_user_host.host,
-            display_cwd,
-            display_command,
-        )
-        .map_err(|err| console_error(err, "ptool.pipe", &cmd_for_error, display_cwd))?;
+        engine
+            .console()
+            .command_echo_local(
+                &local_user_host.user,
+                &local_user_host.host,
+                display_cwd,
+                display_command,
+            )
+            .map_err(|err| console_error(err, "ptool.pipe", &cmd_for_error, display_cwd))?;
     }
 
     if options.confirm {
@@ -225,14 +225,15 @@ pub(crate) fn run_pipeline_command(
                     .with_op("ptool.pipe"),
                 )
             })?;
-            print_local_command_echo(
-                engine.console(),
-                &local_user_host.user,
-                &local_user_host.host,
-                display_cwd,
-                display_command,
-            )
-            .map_err(|err| console_error(err, "ptool.pipe", &cmd_for_error, display_cwd))?;
+            engine
+                .console()
+                .command_echo_local(
+                    &local_user_host.user,
+                    &local_user_host.host,
+                    display_cwd,
+                    display_command,
+                )
+                .map_err(|err| console_error(err, "ptool.pipe", &cmd_for_error, display_cwd))?;
         }
 
         let result = engine
@@ -317,14 +318,15 @@ pub(crate) fn exec_command(
                 .with_op("ptool.exec"),
             )
         })?;
-        print_local_command_echo(
-            engine.console(),
-            &local_user_host.user,
-            &local_user_host.host,
-            display_cwd,
-            display_command,
-        )
-        .map_err(|err| console_error(err, "ptool.exec", &cmd_for_error, display_cwd))?;
+        engine
+            .console()
+            .command_echo_local(
+                &local_user_host.user,
+                &local_user_host.host,
+                display_cwd,
+                display_command,
+            )
+            .map_err(|err| console_error(err, "ptool.exec", &cmd_for_error, display_cwd))?;
     }
 
     if options.confirm {
@@ -394,14 +396,15 @@ fn execute_run_options(
                 .with_op(op),
             )
         })?;
-        print_local_command_echo(
-            engine.console(),
-            &local_user_host.user,
-            &local_user_host.host,
-            display_cwd,
-            display_command,
-        )
-        .map_err(|err| console_error(err, op, &cmd_for_error, display_cwd))?;
+        engine
+            .console()
+            .command_echo_local(
+                &local_user_host.user,
+                &local_user_host.host,
+                display_cwd,
+                display_command,
+            )
+            .map_err(|err| console_error(err, op, &cmd_for_error, display_cwd))?;
     }
 
     if options.confirm {
@@ -438,14 +441,15 @@ fn execute_run_options(
                     .with_op(op),
                 )
             })?;
-            print_local_command_echo(
-                engine.console(),
-                &local_user_host.user,
-                &local_user_host.host,
-                display_cwd,
-                display_command,
-            )
-            .map_err(|err| console_error(err, op, &cmd_for_error, display_cwd))?;
+            engine
+                .console()
+                .command_echo_local(
+                    &local_user_host.user,
+                    &local_user_host.host,
+                    display_cwd,
+                    display_command,
+                )
+                .map_err(|err| console_error(err, op, &cmd_for_error, display_cwd))?;
         }
 
         let result = engine

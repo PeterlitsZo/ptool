@@ -4,3 +4,5 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+jiff = "0.2.24"
+owo-colors = "4.3.0"

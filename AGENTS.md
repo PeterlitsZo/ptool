@@ -12,6 +12,9 @@ interpreter and injects a large set of utility functions (registered under the
 
 ## Project Structure
 
+- `ptool-console` is responsible for terminal-facing presentation and output
+  behavior. It owns user-visible console rendering such as logs, prompts,
+  command echoes, help/error text, and other terminal/UI formatting concerns.
 - `ptool` is responsible for Lua-facing functionality. It handles Lua runtime
   integration and Lua API exposure, and should delegate shared core logic to
   `ptool-engine` when appropriate.
@@ -67,6 +70,17 @@ interpreter and injects a large set of utility functions (registered under the
   logic in `ptool-engine` by default. Keep `ptool` limited to Lua-facing
   adaptation, argument conversion, and API exposure unless there is a clear,
   defensible reason the logic cannot live in the engine.
+- All terminal-facing output and presentation concerns MUST go through
+  `ptool-console`. This includes stdout/stderr messaging, log rendering,
+  prompts, REPL UI text, command echo formatting, help/error output, transfer
+  echoes, and any other user-visible terminal formatting.
+- `ptool-cli`, `ptool`, and `ptool-engine` MUST NOT embed terminal formatting
+  knowledge directly when `ptool-console` can own it. Those crates should
+  express output intent semantically and delegate rendering/presentation policy
+  to `ptool-console`.
+- If a feature needs to decide how something should appear in the terminal,
+  that policy SHOULD live in `ptool-console` by default. Keep other crates
+  focused on behavior, control flow, and data rather than terminal details.
 
 ## Behavioral Rules
 

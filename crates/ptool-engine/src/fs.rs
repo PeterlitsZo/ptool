@@ -243,7 +243,7 @@ pub fn copy_local(
 
             if options.echo {
                 console
-                    .write_stdout_line(&format!("[copy] {src} -> {dst}"))
+                    .copy_echo(src, dst)
                     .map_err(|err| io_error(err).with_op("ptool.fs.copy"))?;
             }
 
@@ -256,7 +256,7 @@ pub fn copy_local(
 
             if options.echo {
                 console
-                    .write_stdout_line(&format!("[copy] {src} -> {dst}"))
+                    .copy_echo(src, dst)
                     .map_err(|err| io_error(err).with_op("ptool.fs.copy"))?;
             }
 

@@ -8,6 +8,7 @@ use crate::interactive_output::{
     InteractiveOutputSink, InteractiveOutputViewport, spawn_interactive_output_thread,
 };
 use crate::{Console, Error, ErrorKind, Result};
+use ptool_console::SshTransferKind;
 use reqwest::StatusCode;
 use reqwest::header::AUTHORIZATION;
 use shlex::try_quote;
@@ -349,12 +350,12 @@ impl SshConnection {
 
         if options.echo {
             self.console()
-                .write_stdout_line(&format!(
-                    "[ssh upload {}] {} -> {}",
-                    self.info().target,
-                    local_path.display(),
-                    destination_path
-                ))
+                .ssh_transfer_echo(
+                    SshTransferKind::Upload,
+                    &self.info().target,
+                    &local_path.display().to_string(),
+                    &destination_path,
+                )
                 .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
@@ -393,12 +394,12 @@ impl SshConnection {
 
         if options.echo {
             self.console()
-                .write_stdout_line(&format!(
-                    "[ssh download {}] {} -> {}",
-                    self.info().target,
+                .ssh_transfer_echo(
+                    SshTransferKind::Download,
+                    &self.info().target,
                     remote_path,
-                    local_path.display()
-                ))
+                    &local_path.display().to_string(),
+                )
                 .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
@@ -688,12 +689,12 @@ impl SshConnection {
             self.resolve_remote_directory_destination(local_path, remote_path, options)?;
         if options.echo {
             self.console()
-                .write_stdout_line(&format!(
-                    "[ssh upload {}] {} -> {}",
-                    self.info().target,
-                    local_path.display(),
-                    remote_path
-                ))
+                .ssh_transfer_echo(
+                    SshTransferKind::Upload,
+                    &self.info().target,
+                    &local_path.display().to_string(),
+                    remote_path,
+                )
                 .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 
@@ -732,12 +733,12 @@ impl SshConnection {
             self.resolve_local_directory_destination(&source_root, local_path, options)?;
         if options.echo {
             self.console()
-                .write_stdout_line(&format!(
-                    "[ssh download {}] {} -> {}",
-                    self.info().target,
+                .ssh_transfer_echo(
+                    SshTransferKind::Download,
+                    &self.info().target,
                     remote_path,
-                    local_path.display()
-                ))
+                    &local_path.display().to_string(),
+                )
                 .map_err(|err| ssh_error(format!("failed to write console output: {err}")))?;
         }
 

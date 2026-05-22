@@ -1,4 +1,3 @@
-use crate::command_echo::print_ssh_command_echo;
 use mlua::{Lua, Table, UserData, UserDataFields, UserDataMethods, Value, Variadic};
 use ptool_engine::{
     Error as EngineError, PtoolEngine, SshAuthRequest, SshConnectRequest, SshConnection,
@@ -131,15 +130,18 @@ impl LuaSshConnection {
                 .connection
                 .resolve_display_cwd(options.display_cwd.as_deref())
                 .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
-            print_ssh_command_echo(
-                &self.connection.console(),
-                &info.user,
-                &info.host,
-                info.port,
-                &display_cwd,
-                &options.command,
-            )
-            .map_err(|err| ssh_console_error(RUN_SIGNATURE, &info.target, &options.command, err))?;
+            self.connection
+                .console()
+                .command_echo_ssh(
+                    &info.user,
+                    &info.host,
+                    info.port,
+                    &display_cwd,
+                    &options.command,
+                )
+                .map_err(|err| {
+                    ssh_console_error(RUN_SIGNATURE, &info.target, &options.command, err)
+                })?;
             options.echo = false;
         }
         let result = self
@@ -157,17 +159,18 @@ impl LuaSshConnection {
                 .connection
                 .resolve_display_cwd(options.display_cwd.as_deref())
                 .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
-            print_ssh_command_echo(
-                &self.connection.console(),
-                &info.user,
-                &info.host,
-                info.port,
-                &display_cwd,
-                &options.command,
-            )
-            .map_err(|err| {
-                ssh_console_error(RUN_CAPTURE_SIGNATURE, &info.target, &options.command, err)
-            })?;
+            self.connection
+                .console()
+                .command_echo_ssh(
+                    &info.user,
+                    &info.host,
+                    info.port,
+                    &display_cwd,
+                    &options.command,
+                )
+                .map_err(|err| {
+                    ssh_console_error(RUN_CAPTURE_SIGNATURE, &info.target, &options.command, err)
+                })?;
             options.echo = false;
         }
         let result = self

@@ -1,5 +1,4 @@
 mod ansi;
-mod command_echo;
 mod datetime;
 mod db;
 mod exec;

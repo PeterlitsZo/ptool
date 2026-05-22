@@ -2380,6 +2380,10 @@ dependencies = [
 [[package]]
 name = "ptool-console"
 version = "0.9.1"
+dependencies = [
+ "jiff",
+ "owo-colors",
+]
 
 [[package]]
 name = "ptool-engine"
