@@ -1,7 +1,14 @@
-# v0.10.0
+# ROADMAP
+
+## v0.11.0
+
+- [ ] Enhance the `ptool-console` crate.
+- [ ] Support `p.etcd` module.
+
+## v0.10.0
 
 - [ ] Support `p.s3`.
-- [ ] Support `p.log.fatal` -- log fatal message and exit.
+- [x] Support `p.log.fatal` -- log fatal message and exit.
 - [ ] Let the `p.run` (and more) show colored output.
 - [ ] For `p.run_shell`, do not show the `bash -c`.
 - [ ] Structured and colorful error reported:
@@ -16,10 +23,9 @@
         !     cwd: /Users/peterlits/Proj/ft/ft-user-service
       ```
 - [ ] Support `p.consul` module.
-- [ ] Support `p.etcd` module.
 - [ ] Let `p.tbl` have `any` and `all` methods, etc.
 
-# v0.9.0
+## v0.9.0
 
 - [x] Enhance the `p.semvar`:
   - Support `Version:is_release` and `Version:is_prerelease`.
@@ -34,7 +40,7 @@
 - [x] If the ptool is running in a interactive shell, let `p.run` (and more)
       only show the last line of stdout / stderr.
 
-# v0.8.0
+## v0.8.0
 
 - [x] Enhance `p.log` and `p.run`, `p.ask` to have better style?
   - The custom `prompt_prefix`? The background color?
@@ -52,7 +58,7 @@
       p.proc.wait_gone(pids, { timeout = "1s" })
       ```
 
-# v0.7.0
+## v0.7.0
 
 - [x] Support `p.git` module.
 - [x] Let `p.run` support `stdin`?
@@ -63,7 +69,7 @@
 - [x] Support `p.exec`.
 - [x] Let the API document have groups.
 
-# v0.6.0
+## v0.6.0
 
 - [x] Update CI (to avoid "Node.js 20 actions are deprecated." warnings.)
 - [x] Make the document website better.
@@ -80,7 +86,7 @@
       with p.http.request.
 - [x] Add `p.datetime` module?
 
-# v0.5.0
+## v0.5.0
 
 - [x] Remove non-essential built-in Lua modules.
 - [x] Add a function to get script itself's path.
@@ -93,7 +99,7 @@
   - `p.ask.select("Select bump type", { "patch", "minor", "major", "skip" })`
 - [x] Support YAML.
 
-# v0.4.0
+## v0.4.0
 
 - [x] More i18n support.
 - [x] Support show the user and host in `p.run`, ssh connection's `run`, etc.
@@ -108,7 +114,7 @@
 - [x] Support JSON API.
 - [x] Support more TOML API.
 
-# v0.3.0
+## v0.3.0
 
 - [x] Rename `ptool` crate to `ptool-lua`.
 - [x] Support more OS and arch.
@@ -127,7 +133,7 @@
 - [x] Support the subcommand for `ptool.args`.
 - [x] Remove `russh` and just use `ssh` command.
 
-# v0.2.0
+## v0.2.0
 
 - [x] Add crate ptool-engine, and let the ptool-engine manage its tokio runtime,
       and move some core logic from `ptool` into `ptool-engine`.
@@ -145,7 +151,7 @@
 - [x] Support `p.fs.glob`, etc.
 - [x] Make `p.ssh`'s connection support `:exists`, `:is_file`, `:is_dir`, etc.
 
-# v0.1.0
+## v0.1.0
 
 - [x] Support disabling echo for `ptool.run`.
 - [x] Support handling shebang.

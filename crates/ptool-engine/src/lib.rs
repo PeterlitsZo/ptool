@@ -7,7 +7,6 @@ mod fs;
 mod git;
 mod hash;
 mod http;
-mod interactive_output;
 mod json;
 mod log;
 mod net;

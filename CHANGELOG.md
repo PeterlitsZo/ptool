@@ -14,6 +14,13 @@
   compact manifest index that points to smaller locale/version manifests,
   reducing the discovery payload for AI and other machine consumers.
 
+### Fixed
+
+- Fixed inherited command streaming for `ptool.run(...)`,
+  `ptool.run_shell(...)`, `ptool.pipe(...)`, and
+  `ptool.ssh.Connection:run(...)` by restoring the stable prefixed line
+  output path instead of the buggy scrolling viewport introduced in `v0.9.0`.
+
 ## v0.9.1 (2026-05-19)
 
 ### Fixed
