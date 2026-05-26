@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added the `ptool.s3` / `p.s3` module for S3-compatible object storage
+  access, with connection helpers plus `read`, `write`, `delete`, `exists`,
+  `list`, and `stat` object operations, and documented it across all supported
+  current locales.
 - Added `ptool.log.fatal(...)` / `p.log.fatal(...)`, which writes a fatal log
   line to `stderr` and exits the current `ptool` process immediately with
   status code `1`, and documented it across all supported current locales.

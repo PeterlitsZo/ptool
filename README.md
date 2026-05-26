@@ -46,7 +46,9 @@ with a missing API. It accepts plain versions such as `v0.1.0` and Cargo-style
 requirements such as `^0.6.0` or `>= v0.6.0, < 0.7.0`.
 
 Useful runtime helpers include `p.os.getenv(...)`, `p.os.setenv(...)`,
-`p.os.unsetenv(...)`, `p.os.homedir()`, and `p.os.tmpdir()`.
+`p.os.unsetenv(...)`, `p.os.homedir()`, and `p.os.tmpdir()`. Storage helpers
+such as `p.redis.connect(...)` and `p.s3.connect(...)` are also available for
+scripts that need to talk to Redis or S3-compatible object storage.
 
 See [Getting Started][1] and [Lua API Overview][2] for the full documentation.
 

@@ -46,5 +46,6 @@
 - [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
 - [Git API](./git.md): リポジトリを開いてステータスを検査し、libgit2 でサポートされるハンドルを介してクローン、フェッチ、またはプッシュします。
 - [Redis API](./redis.md): Redis 接続を開き、生の Redis コマンドを送信します。
+- [S3 API](./s3.md): Open S3-compatible object storage connections and work with objects.
 
 このページを入り口として使い、そのあと必要なモジュールページに移動して 完全な関数リファレンスを参照してください。

@@ -16,6 +16,7 @@ mod proc;
 mod prompt;
 mod re;
 mod redis;
+mod s3;
 mod script_args;
 mod semver;
 mod shell;
@@ -66,6 +67,7 @@ pub use prompt::{
 pub use ptool_console::Console;
 pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
 pub use redis::{RedisArg, RedisConnection, RedisReply};
+pub use s3::{S3ConnectOptions, S3Connection, S3Entry};
 pub use script_args::{
     ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
     ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,
@@ -437,6 +439,11 @@ impl PtoolEngine {
 
     pub fn redis_connect(&self, url: &str) -> Result<RedisConnection> {
         redis::connect(Arc::clone(&self.runtime), url)
+    }
+
+    pub fn s3_connect(&self, options: S3ConnectOptions) -> Result<S3Connection> {
+        let options = options.with_env_fallback(|name| self.env_get(name))?;
+        s3::connect(Arc::clone(&self.runtime), options)
     }
 
     pub fn fs_read(&self, path: &str) -> Result<Vec<u8>> {

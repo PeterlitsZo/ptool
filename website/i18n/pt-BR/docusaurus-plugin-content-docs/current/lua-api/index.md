@@ -46,5 +46,6 @@ Os módulos são agrupados por domínio. Dentro de cada grupo, as entradas são 
 - [API de banco de dados](./db.md): Abre conexões de banco de dados e executa consultas SQL.
 - [API Git](./git.md): Abra repositórios, inspecione o status e clone, busque ou envie por meio de identificadores apoiados por libgit2.
 - [API de Redis](./redis.md): Abre conexões Redis e envia comandos Redis brutos.
+- [API de S3](./s3.md): Abre conexões de armazenamento de objetos compatíveis com S3 e trabalha com objetos.
 
 Use esta página como ponto de entrada e depois salte para o módulo necessário para consultar a referência completa das funções.

@@ -68,6 +68,7 @@ const sidebars: SidebarsConfig = {
             'lua-api/db',
             'lua-api/git',
             'lua-api/redis',
+            'lua-api/s3',
           ],
         },
       ],

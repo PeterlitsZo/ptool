@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 16:02+0800\n"
+"POT-Creation-Date: 2026-05-25 16:35+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,7 +182,13 @@ msgstr "[Git API]{1}：打开仓库、查看状态，并通过 libgit2 驱动的
 msgid "[Redis API]{1}: Open Redis connections and send raw Redis commands."
 msgstr "[Redis API]{1}：打开 Redis 连接并发送原始 Redis 命令。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:64
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:63
+msgid ""
+"[S3 API]{1}: Open S3-compatible object storage connections and work with "
+"objects."
+msgstr "[S3 API]{1}：打开 S3 兼容对象存储连接并操作对象。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:66
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

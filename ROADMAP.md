@@ -4,10 +4,11 @@
 
 - [ ] Enhance the `ptool-console` crate.
 - [ ] Support `p.etcd` module.
+- [ ] Enhance the `LuaError`. Make it be a enum.
 
 ## v0.10.0
 
-- [ ] Support `p.s3`.
+- [x] Support `p.s3`.
 - [x] Support `p.log.fatal` -- log fatal message and exit.
 - [ ] Let the `p.run` (and more) show colored output.
 - [ ] For `p.run_shell`, do not show the `bash -c`.

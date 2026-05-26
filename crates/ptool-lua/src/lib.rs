@@ -17,6 +17,7 @@ mod prompt;
 mod re;
 mod redis;
 mod runner;
+mod s3;
 mod script_args;
 mod semver;
 mod sh;

@@ -75,6 +75,7 @@ fn create_ptool_module(
     let datetime_module = create_ptool_datetime_module(lua, Rc::clone(&world))?;
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let redis_module = create_ptool_redis_module(lua, Rc::clone(&world))?;
+    let s3_module = create_ptool_s3_module(lua, Rc::clone(&world))?;
     let git_module = create_ptool_git_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
     let fs_module = create_ptool_fs_module(lua, Rc::clone(&world))?;
@@ -116,6 +117,7 @@ fn create_ptool_module(
     module.set("datetime", datetime_module)?;
     module.set("db", db_module)?;
     module.set("redis", redis_module)?;
+    module.set("s3", s3_module)?;
     module.set("git", git_module)?;
     module.set("ssh", ssh_module)?;
     module.set("fs", fs_module)?;
@@ -413,6 +415,14 @@ fn create_ptool_redis_module(
         lua.create_function(move |_, value: Value| world.borrow().redis_connect(value))?;
     redis_module.set("connect", connect_fn)?;
     Ok(redis_module)
+}
+
+fn create_ptool_s3_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let s3_module = lua.create_table()?;
+    let connect_fn =
+        lua.create_function(move |_, options: Table| world.borrow().s3_connect(options))?;
+    s3_module.set("connect", connect_fn)?;
+    Ok(s3_module)
 }
 
 fn create_ptool_git_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
