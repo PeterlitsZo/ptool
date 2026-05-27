@@ -43,6 +43,7 @@
 
 ## 开发与存储
 
+- [Consul API](./consul.md)：打开 Consul KV 连接，并使用键或原始 Consul HTTP 端点。
 - [Database API](./db.md)：打开数据库连接并执行 SQL 查询。
 - [Git API](./git.md)：打开仓库、查看状态，并通过 libgit2 驱动的句柄执行 clone、fetch 或 push。
 - [Redis API](./redis.md)：打开 Redis 连接并发送原始 Redis 命令。

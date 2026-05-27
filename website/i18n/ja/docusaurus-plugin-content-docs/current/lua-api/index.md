@@ -43,6 +43,7 @@
 
 ## 開発とストレージ
 
+- [Consul API](./consul.md): Consul KV 接続を開き、キーまたは生の Consul HTTP エンドポイントを扱う。
 - [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
 - [Git API](./git.md): リポジトリを開いてステータスを検査し、libgit2 でサポートされるハンドルを介してクローン、フェッチ、またはプッシュします。
 - [Redis API](./redis.md): Redis 接続を開き、生の Redis コマンドを送信します。

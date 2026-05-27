@@ -56,6 +56,8 @@ alphabetical order.
 
 ## Development & Storage
 
+- [Consul API](./consul.md): Open Consul KV connections and work with keys or
+  raw Consul HTTP endpoints.
 - [Database API](./db.md): Open database connections and run SQL queries.
 - [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or
   push through libgit2-backed handles.

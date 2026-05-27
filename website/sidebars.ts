@@ -65,6 +65,7 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Development & Storage',
           items: [
+            'lua-api/consul',
             'lua-api/db',
             'lua-api/git',
             'lua-api/redis',

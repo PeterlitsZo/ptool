@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 16:35+0800\n"
+"POT-Creation-Date: 2026-05-27 15:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,10 +180,18 @@ msgid "Development & Storage"
 msgstr "開発とストレージ"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:59
+msgid ""
+"[Consul API]{1}: Open Consul KV connections and work with keys or raw Consul "
+"HTTP endpoints."
+msgstr ""
+"[Consul API]{1}: Consul KV 接続を開き、キーまたは生の Consul HTTP エンド"
+"ポイントを扱う。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:61
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr "[データベース API]{1}: データベース接続を開き、SQL クエリを実行する。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:60
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:62
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
@@ -191,11 +199,11 @@ msgstr ""
 "[Git API]{1}: リポジトリを開いてステータスを検査し、libgit2 でサポートされる"
 "ハンドルを介してクローン、フェッチ、またはプッシュします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:62
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:64
 msgid "[Redis API]{1}: Open Redis connections and send raw Redis commands."
 msgstr "[Redis API]{1}: Redis 接続を開き、生の Redis コマンドを送信します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:63
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:65
 msgid ""
 "[S3 API]{1}: Open S3-compatible object storage connections and work with "
 "objects."
@@ -203,7 +211,7 @@ msgstr ""
 "[S3 API]{1}: Open S3-compatible object storage connections and work with "
 "objects."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:66
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:68
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

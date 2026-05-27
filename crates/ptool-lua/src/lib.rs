@@ -1,4 +1,5 @@
 mod ansi;
+mod consul;
 mod datetime;
 mod db;
 mod exec;

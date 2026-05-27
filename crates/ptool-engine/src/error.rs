@@ -29,6 +29,7 @@ pub enum ErrorKind {
     Io,
     Db,
     Redis,
+    Consul,
     S3,
     Git,
     SemverOverflow,

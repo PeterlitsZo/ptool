@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 16:35+0800\n"
+"POT-Creation-Date: 2026-05-27 15:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,12 +206,20 @@ msgid "Development & Storage"
 msgstr "Desenvolvimento e armazenamento"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:59
+msgid ""
+"[Consul API]{1}: Open Consul KV connections and work with keys or raw Consul "
+"HTTP endpoints."
+msgstr ""
+"[API Consul]{1}: Abre conexões Consul KV e trabalha com chaves ou "
+"endpoints HTTP brutos do Consul."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:61
 msgid "[Database API]{1}: Open database connections and run SQL queries."
 msgstr ""
 "[API de banco de dados]{1}: Abre conexões de banco de dados e executa "
 "consultas SQL."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:60
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:62
 msgid ""
 "[Git API]{1}: Open repositories, inspect status, and clone, fetch, or push "
 "through libgit2-backed handles."
@@ -219,19 +227,19 @@ msgstr ""
 "[API Git]{1}: Abra repositórios, inspecione o status e clone, busque ou "
 "envie por meio de identificadores apoiados por libgit2."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:62
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:64
 msgid "[Redis API]{1}: Open Redis connections and send raw Redis commands."
 msgstr "[API de Redis]{1}: Abre conexões Redis e envia comandos Redis brutos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:63
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:65
 msgid ""
 "[S3 API]{1}: Open S3-compatible object storage connections and work with "
 "objects."
 msgstr ""
-"[API de S3]{1}: Abre conexões de armazenamento de objetos compatíveis "
-"com S3 e trabalha com objetos."
+"[API de S3]{1}: Abre conexões de armazenamento de objetos compatíveis com S3 "
+"e trabalha com objetos."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:66
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/index.md:68
 msgid ""
 "Use this page as the entrypoint, then jump to the module page you need for "
 "the full function reference."

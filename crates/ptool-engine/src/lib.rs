@@ -1,4 +1,5 @@
 mod ansi;
+mod consul;
 mod datetime;
 mod db;
 mod error;
@@ -30,6 +31,10 @@ mod yaml;
 mod zip;
 
 pub use ansi::{Color, StyleOptions};
+pub use consul::{
+    ConsulConnectOptions, ConsulConnection, ConsulDeleteOptions, ConsulGetOptions, ConsulKvEntry,
+    ConsulListOptions, ConsulPutOptions,
+};
 pub use datetime::{
     DateTimeFromUnixOptions, DateTimeParseOptions, DateTimeUnixUnit, DateTimeValue,
 };
@@ -439,6 +444,11 @@ impl PtoolEngine {
 
     pub fn redis_connect(&self, url: &str) -> Result<RedisConnection> {
         redis::connect(Arc::clone(&self.runtime), url)
+    }
+
+    pub fn consul_connect(&self, options: ConsulConnectOptions) -> Result<ConsulConnection> {
+        let options = options.with_env_fallback(|name| self.env_get(name))?;
+        consul::connect(options)
     }
 
     pub fn s3_connect(&self, options: S3ConnectOptions) -> Result<S3Connection> {

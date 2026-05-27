@@ -2656,6 +2656,7 @@ name = "ptool-engine"
 version = "0.9.1"
 dependencies = [
  "adler2",
+ "base64",
  "blake2",
  "blake3",
  "bzip2",

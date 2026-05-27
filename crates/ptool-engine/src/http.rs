@@ -47,6 +47,13 @@ pub struct HttpResponse {
 }
 
 pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
+    request_with_op(HTTP_REQUEST_OP, options)
+}
+
+pub(crate) fn request_with_op(
+    op: &'static str,
+    options: HttpRequestOptions,
+) -> Result<HttpResponse> {
     let HttpRequestOptions {
         url,
         method,
@@ -67,7 +74,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
 
     if basic_auth.is_some() && bearer_token.is_some() {
         return Err(invalid_http_options_for(
-            HTTP_REQUEST_OP,
+            op,
             "`basic_auth` and `bearer_token` are mutually exclusive",
         ));
     }
@@ -86,7 +93,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
 
     let client = client_builder
         .build()
-        .map_err(|err| http_error_for(HTTP_REQUEST_OP, format!("request build failed: {err:?}")))?;
+        .map_err(|err| http_error_for(op, format!("request build failed: {err:?}")))?;
 
     let mut headers = parse_headers(headers)?;
     let body = build_request_body(body, json, form, &mut headers)?;
@@ -110,7 +117,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
 
     let response = request
         .send()
-        .map_err(|err| http_error_for(HTTP_REQUEST_OP, format!("request failed: {err:?}")))?;
+        .map_err(|err| http_error_for(op, format!("request failed: {err:?}")))?;
 
     let status_code = response.status();
     let status = i64::from(status_code.as_u16());
@@ -118,7 +125,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
     let url = response.url().to_string();
     let headers = collect_response_headers(response.headers());
     if fail_on_http_error && is_http_error(status_code) {
-        return Err(http_status_error_for(HTTP_REQUEST_OP, status_code, &url));
+        return Err(http_status_error_for(op, status_code, &url));
     }
 
     Ok(HttpResponse {
@@ -127,7 +134,7 @@ pub fn request(options: HttpRequestOptions) -> Result<HttpResponse> {
         url,
         headers,
         body: BodyState::Unread(response),
-        op: HTTP_REQUEST_OP,
+        op,
     })
 }
 

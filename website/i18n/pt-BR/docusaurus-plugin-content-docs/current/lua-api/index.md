@@ -43,6 +43,7 @@ Os módulos são agrupados por domínio. Dentro de cada grupo, as entradas são 
 
 ## Desenvolvimento e armazenamento
 
+- [API Consul](./consul.md): Abre conexões Consul KV e trabalha com chaves ou endpoints HTTP brutos do Consul.
 - [API de banco de dados](./db.md): Abre conexões de banco de dados e executa consultas SQL.
 - [API Git](./git.md): Abra repositórios, inspecione o status e clone, busque ou envie por meio de identificadores apoiados por libgit2.
 - [API de Redis](./redis.md): Abre conexões Redis e envia comandos Redis brutos.

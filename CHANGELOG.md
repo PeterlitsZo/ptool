@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added the `ptool.consul` / `p.consul` module for Consul KV access, with
+  connection helpers, metadata-rich `get` / `list` reads, CAS-aware `put` /
+  `delete` writes, a raw `request` escape hatch, and documentation across all
+  supported current locales.
 - Added the `ptool.s3` / `p.s3` module for S3-compatible object storage
   access, with connection helpers plus `read`, `write`, `delete`, `exists`,
   `list`, and `stat` object operations, and documented it across all supported

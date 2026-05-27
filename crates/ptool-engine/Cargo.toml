@@ -5,6 +5,7 @@ edition.workspace = true
 
 [dependencies]
 adler2 = "2.0.1"
+base64 = "0.22.1"
 blake2 = "0.10.6"
 blake3 = "1.8.5"
 bzip2 = "0.6.1"
