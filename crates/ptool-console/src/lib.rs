@@ -129,6 +129,22 @@ impl Console {
     ) -> io::Result<()> {
         self.command_echo(
             &[format_user_host(user, host), cwd.display().to_string()],
+            None,
+            command,
+        )
+    }
+
+    pub fn command_echo_local_shell(
+        &self,
+        user: &str,
+        host: &str,
+        cwd: &Path,
+        shell: &str,
+        command: &str,
+    ) -> io::Result<()> {
+        self.command_echo(
+            &[format_user_host(user, host), cwd.display().to_string()],
+            Some(shell),
             command,
         )
     }
@@ -150,6 +166,7 @@ impl Console {
                     cwd.to_string()
                 },
             ],
+            None,
             command,
         )
     }
@@ -215,7 +232,12 @@ impl Console {
         self.write_stdout_line(&format!("[ssh {} {target}] {from} -> {to}", kind.label()))
     }
 
-    fn command_echo(&self, segments: &[String], command: &str) -> io::Result<()> {
+    fn command_echo(
+        &self,
+        segments: &[String],
+        shell: Option<&str>,
+        command: &str,
+    ) -> io::Result<()> {
         let color_enabled = self.stdout_is_terminal();
         let time = format!("[{}]", Zoned::now().strftime("%Y-%m-%d %H:%M:%S"));
         let mut rendered = format!(
@@ -234,9 +256,17 @@ impl Console {
         }
 
         rendered.push('\n');
+        rendered.push_str(&style_if(color_enabled, "└", |text| {
+            text.dimmed().to_string()
+        }));
+        if let Some(shell) = shell {
+            rendered.push(' ');
+            rendered.push_str(&style_if(color_enabled, shell, |text| {
+                text.bold().to_string()
+            }));
+        }
         rendered.push_str(&format!(
-            "{} {}",
-            style_if(color_enabled, "└", |text| text.dimmed().to_string()),
+            " {}",
             style_if(color_enabled, "$", |text| text.green().bold().to_string())
         ));
         rendered.push_str(&render_command_lines(command, color_enabled));

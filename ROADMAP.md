@@ -10,8 +10,8 @@
 
 - [x] Support `p.s3`.
 - [x] Support `p.log.fatal` -- log fatal message and exit.
-- [ ] Let the `p.run` (and more) show colored output.
-- [ ] For `p.run_shell`, do not show the `bash -c`.
+- [ ] ~~Let the `p.run` (and more) show colored output.~~
+- [x] For `p.run_shell`, do not show the `bash -c`.
 - [ ] Structured and colorful error reported:
       ```
         ! Failed to run Lua script `./scripts/build.lua`:

@@ -24,6 +24,8 @@
   `ptool.run_shell(...)`, `ptool.pipe(...)`, and
   `ptool.ssh.Connection:run(...)` by restoring the stable prefixed line
   output path instead of the buggy scrolling viewport introduced in `v0.9.0`.
+- Fixed `ptool.run_shell(...)` command echoes so shell-driven runs now render
+  as `<shell> $ <command>` instead of exposing the internal `-c` wrapper.
 
 ## v0.9.1 (2026-05-19)
 

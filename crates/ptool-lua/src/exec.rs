@@ -113,29 +113,163 @@ pub(crate) fn run_shell_command(
     defaults: RunConfig,
     shell: &str,
 ) -> mlua::Result<Value> {
-    execute_run_options(
-        lua,
-        current_dir,
-        engine,
-        RunOptions {
-            inner: ptool_engine::RunOptions {
-                cmd: shell.to_owned(),
-                args: vec!["-c".to_string(), command],
-                cwd: None,
-                env: Vec::new(),
-                env_remove: Vec::new(),
-                stdin: StdinMode::Inherit,
-                trim: false,
-                stdout: RUN_STREAM_DEFAULTS.stdout.clone(),
-                stderr: RUN_STREAM_DEFAULTS.stderr.clone(),
-            },
-            echo: defaults.echo,
-            check: defaults.check,
-            confirm: defaults.confirm,
-            retry: defaults.retry,
+    let display_command = format_shell_command_for_display(shell, &command);
+    let options = RunOptions {
+        inner: ptool_engine::RunOptions {
+            cmd: shell.to_owned(),
+            args: vec!["-c".to_string(), command.clone()],
+            cwd: None,
+            env: Vec::new(),
+            env_remove: Vec::new(),
+            stdin: StdinMode::Inherit,
+            trim: false,
+            stdout: RUN_STREAM_DEFAULTS.stdout.clone(),
+            stderr: RUN_STREAM_DEFAULTS.stderr.clone(),
         },
-        "ptool.run_shell",
-    )
+        echo: defaults.echo,
+        check: defaults.check,
+        confirm: defaults.confirm,
+        retry: defaults.retry,
+    };
+    let cmd_for_error = options.inner.cmd.clone();
+    let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
+    let local_user_host = options.echo.then(|| engine.current_user_host());
+    let display = if options.echo || options.confirm || (options.check && options.retry) {
+        Some((resolved_cwd.clone(), display_command))
+    } else {
+        None
+    };
+
+    if options.echo {
+        let (display_cwd, _) = display.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.run_shell internal error: missing display info",
+                )
+                .with_op("ptool.run_shell"),
+            )
+        })?;
+        let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.run_shell internal error: missing local user/host info",
+                )
+                .with_op("ptool.run_shell"),
+            )
+        })?;
+        engine
+            .console()
+            .command_echo_local_shell(
+                &local_user_host.user,
+                &local_user_host.host,
+                display_cwd,
+                shell,
+                &command,
+            )
+            .map_err(|err| console_error(err, "ptool.run_shell", &cmd_for_error, display_cwd))?;
+    }
+
+    if options.confirm {
+        let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+            lua_error::to_mlua_error(
+                LuaError::new(
+                    "internal_error",
+                    "ptool.run_shell internal error: missing display info",
+                )
+                .with_op("ptool.run_shell"),
+            )
+        })?;
+        confirm_before_run(
+            engine,
+            "ptool.run_shell",
+            display_cwd,
+            display_command,
+            &cmd_for_error,
+        )?;
+    }
+
+    let mut is_retry = false;
+    loop {
+        if is_retry && options.echo {
+            let (display_cwd, _) = display.as_ref().ok_or_else(|| {
+                lua_error::to_mlua_error(
+                    LuaError::new(
+                        "internal_error",
+                        "ptool.run_shell internal error: missing display info",
+                    )
+                    .with_op("ptool.run_shell"),
+                )
+            })?;
+            let local_user_host = local_user_host.as_ref().ok_or_else(|| {
+                lua_error::to_mlua_error(
+                    LuaError::new(
+                        "internal_error",
+                        "ptool.run_shell internal error: missing local user/host info",
+                    )
+                    .with_op("ptool.run_shell"),
+                )
+            })?;
+            engine
+                .console()
+                .command_echo_local_shell(
+                    &local_user_host.user,
+                    &local_user_host.host,
+                    display_cwd,
+                    shell,
+                    &command,
+                )
+                .map_err(|err| {
+                    console_error(err, "ptool.run_shell", &cmd_for_error, display_cwd)
+                })?;
+        }
+
+        let result = engine
+            .run_command(&options.inner, current_dir)
+            .map_err(|err| engine_error(err, "ptool.run_shell", &cmd_for_error, &resolved_cwd))?;
+        if options.check && !result.ok {
+            if options.retry {
+                let (display_cwd, display_command) = display.as_ref().ok_or_else(|| {
+                    lua_error::to_mlua_error(
+                        LuaError::new(
+                            "internal_error",
+                            "ptool.run_shell internal error: missing display info",
+                        )
+                        .with_op("ptool.run_shell"),
+                    )
+                })?;
+                if prompt_retry_after_failure(
+                    engine,
+                    "ptool.run_shell",
+                    display_cwd,
+                    display_command,
+                    result.code,
+                    result.stderr.as_deref(),
+                    &cmd_for_error,
+                )? {
+                    is_retry = true;
+                    continue;
+                }
+            }
+
+            return Err(build_run_failed_error(
+                "ptool.run_shell",
+                &cmd_for_error,
+                result.code,
+                result.stderr.as_deref(),
+                Some(&resolved_cwd.display().to_string()),
+            ));
+        }
+
+        return build_run_result(
+            lua,
+            result,
+            "ptool.run_shell",
+            cmd_for_error,
+            resolved_cwd.display().to_string(),
+        );
+    }
 }
 
 pub(crate) fn run_pipeline_command(
@@ -1240,6 +1374,14 @@ fn build_run_result(
     result.set("assert_ok", assert_ok_fn)?;
 
     Ok(Value::Table(result))
+}
+
+fn format_shell_command_for_display(shell: &str, command: &str) -> String {
+    if command.is_empty() {
+        shell.to_string()
+    } else {
+        format!("{shell}: {command}")
+    }
 }
 
 fn build_pipe_result(
