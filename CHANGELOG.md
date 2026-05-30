@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added more `ptool.tbl` / `p.tbl` helpers for dense Lua list tables:
+  `any`, `all`, `find`, `find_index`, `count`, `includes`, `reduce`, and
+  `flat_map`, and documented the expanded API across all supported current
+  locales.
 - Added `ptool.is_root()` / `p.is_root()` for checking whether the current
   `ptool` process is running as root, plus a `sudo = true` option on local
   process helpers such as `ptool.run(...)`, `ptool.run_capture(...)`, and

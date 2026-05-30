@@ -909,6 +909,64 @@ impl LuaWorld {
         crate::tbl::join(lua, lists)
     }
 
+    pub(crate) fn tbl_any(&self, lua: &Lua, list: Table, callback: Function) -> mlua::Result<bool> {
+        crate::tbl::any(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_all(&self, lua: &Lua, list: Table, callback: Function) -> mlua::Result<bool> {
+        crate::tbl::all(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_find(
+        &self,
+        lua: &Lua,
+        list: Table,
+        callback: Function,
+    ) -> mlua::Result<Value> {
+        crate::tbl::find(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_find_index(
+        &self,
+        lua: &Lua,
+        list: Table,
+        callback: Function,
+    ) -> mlua::Result<Value> {
+        crate::tbl::find_index(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_count(
+        &self,
+        lua: &Lua,
+        list: Table,
+        callback: Function,
+    ) -> mlua::Result<i64> {
+        crate::tbl::count(lua, list, callback)
+    }
+
+    pub(crate) fn tbl_includes(&self, lua: &Lua, list: Table, value: Value) -> mlua::Result<bool> {
+        crate::tbl::includes(lua, list, value)
+    }
+
+    pub(crate) fn tbl_reduce(
+        &self,
+        lua: &Lua,
+        list: Table,
+        initial: Value,
+        callback: Function,
+    ) -> mlua::Result<Value> {
+        crate::tbl::reduce(lua, list, initial, callback)
+    }
+
+    pub(crate) fn tbl_flat_map(
+        &self,
+        lua: &Lua,
+        list: Table,
+        callback: Function,
+    ) -> mlua::Result<Table> {
+        crate::tbl::flat_map(lua, list, callback)
+    }
+
     pub(crate) fn re_compile(&self, args: Variadic<Value>) -> mlua::Result<crate::re::LuaRegex> {
         crate::re::compile(&self.engine, args)
     }

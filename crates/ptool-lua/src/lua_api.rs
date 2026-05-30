@@ -860,6 +860,46 @@ fn create_ptool_str_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
 fn create_ptool_tbl_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
     let tbl_module = lua.create_table()?;
 
+    let any_state = Rc::clone(&world);
+    let any_fn = lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+        any_state.borrow().tbl_any(lua, list, callback)
+    })?;
+    let all_state = Rc::clone(&world);
+    let all_fn = lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+        all_state.borrow().tbl_all(lua, list, callback)
+    })?;
+    let find_state = Rc::clone(&world);
+    let find_fn = lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+        find_state.borrow().tbl_find(lua, list, callback)
+    })?;
+    let find_index_state = Rc::clone(&world);
+    let find_index_fn =
+        lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+            find_index_state
+                .borrow()
+                .tbl_find_index(lua, list, callback)
+        })?;
+    let count_state = Rc::clone(&world);
+    let count_fn = lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+        count_state.borrow().tbl_count(lua, list, callback)
+    })?;
+    let includes_state = Rc::clone(&world);
+    let includes_fn = lua.create_function(move |lua, (list, value): (Table, Value)| {
+        includes_state.borrow().tbl_includes(lua, list, value)
+    })?;
+    let reduce_state = Rc::clone(&world);
+    let reduce_fn = lua.create_function(
+        move |lua, (list, initial, callback): (Table, Value, mlua::Function)| {
+            reduce_state
+                .borrow()
+                .tbl_reduce(lua, list, initial, callback)
+        },
+    )?;
+    let flat_map_state = Rc::clone(&world);
+    let flat_map_fn =
+        lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
+            flat_map_state.borrow().tbl_flat_map(lua, list, callback)
+        })?;
     let map_state = Rc::clone(&world);
     let map_fn = lua.create_function(move |lua, (list, callback): (Table, mlua::Function)| {
         map_state.borrow().tbl_map(lua, list, callback)
@@ -876,6 +916,14 @@ fn create_ptool_tbl_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
     let join_fn = lua
         .create_function(move |lua, lists: Variadic<Value>| world.borrow().tbl_join(lua, lists))?;
 
+    tbl_module.set("any", any_fn)?;
+    tbl_module.set("all", all_fn)?;
+    tbl_module.set("find", find_fn)?;
+    tbl_module.set("find_index", find_index_fn)?;
+    tbl_module.set("count", count_fn)?;
+    tbl_module.set("includes", includes_fn)?;
+    tbl_module.set("reduce", reduce_fn)?;
+    tbl_module.set("flat_map", flat_map_fn)?;
     tbl_module.set("map", map_fn)?;
     tbl_module.set("filter", filter_fn)?;
     tbl_module.set("concat", concat_fn)?;

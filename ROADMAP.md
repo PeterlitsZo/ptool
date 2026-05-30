@@ -31,7 +31,7 @@
       ```
 - [x] Support `p.consul` module.
 - [x] Let `p.tbl` have `any` and `all` methods, etc.
-- [ ] Support `p.is_root` method? Let p.run support option `sudo`?
+- [x] Support `p.is_root` method? Let p.run support option `sudo`?
 
 ## v0.9.0
 
