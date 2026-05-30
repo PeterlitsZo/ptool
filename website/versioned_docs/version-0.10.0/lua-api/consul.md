@@ -4,7 +4,7 @@ Consul KV helpers are available under `ptool.consul` and `p.consul`.
 
 ## ptool.consul.connect
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.consul.connect(options)` opens a Consul connection and returns a
 `Connection` object.
@@ -39,7 +39,7 @@ local consul = ptool.consul.connect({
 
 ## Connection
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `Connection` represents an open Consul connection returned by
 `ptool.consul.connect()`.
@@ -76,7 +76,7 @@ Read options:
 
 ### get
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 Canonical API name: `ptool.consul.Connection:get`.
 
@@ -105,7 +105,7 @@ end
 
 ### put
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 Canonical API name: `ptool.consul.Connection:put`.
 
@@ -137,7 +137,7 @@ print(ok)
 
 ### delete
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 Canonical API name: `ptool.consul.Connection:delete`.
 
@@ -155,7 +155,7 @@ Notes:
 
 ### list
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 Canonical API name: `ptool.consul.Connection:list`.
 
@@ -183,7 +183,7 @@ end
 
 ### request
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 Canonical API name: `ptool.consul.Connection:request`.
 

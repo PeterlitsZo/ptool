@@ -31,7 +31,7 @@ local args = ptool.sh.split("clippy --all-targets -- -D warnings")
 
 ## ptool.sh.quote
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.sh.quote(word)` 会对单个 shell word 进行引用，使其可以安全地嵌入到 shell 命令字符串中。
 
@@ -52,7 +52,7 @@ print(word) -- 'hello world'
 
 ## ptool.sh.join
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.sh.join(words)` 会把参数数组拼成一个 shell 命令字符串，并在需要时对其中的 word 进行引用。
 

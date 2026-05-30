@@ -71,32 +71,6 @@ print(ptool.version())
 print(p.version())
 ```
 
-## ptool.is_root
-
-> `Unreleased` - Introducido.
-
-`ptool.is_root()` devuelve si el proceso actual de `ptool` se está ejecutando como el usuario root.
-
-- Devuelve: `boolean`.
-
-Comportamiento:
-
-- En plataformas tipo Unix, esto comprueba si el usuario efectivo actual es root.
-- En plataformas no Unix, actualmente esto devuelve `false`.
-- Esto es útil junto con `sudo = true` en ayudantes de comandos locales como `ptool.run(...)` y `ptool.exec(...)`.
-
-Ejemplo:
-
-```lua
-if not ptool.is_root() then
-  ptool.run({
-    cmd = "apt-get",
-    args = {"update"},
-    sudo = true,
-  })
-end
-```
-
 ## ptool.unindent
 
 > `v0.1.0` - Introducido.

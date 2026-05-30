@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-27 15:17+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:7"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:9
@@ -91,7 +91,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:42
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:42"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:44
@@ -199,7 +199,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:79
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:79"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:81
@@ -248,7 +248,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:108
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:108"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:110
@@ -307,7 +307,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:140
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:140"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:142
@@ -356,7 +356,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:158
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:158"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:160
@@ -404,7 +404,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:186
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:186"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:188

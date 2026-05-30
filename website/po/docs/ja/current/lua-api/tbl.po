@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-30 23:26+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,11 @@ msgid "Table helpers are available under `ptool.tbl` and `p.tbl`."
 msgstr "テーブル向けヘルパーは `ptool.tbl` と `p.tbl` で利用できます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:5
-msgid "These APIs are designed for dense list tables with contiguous integer keys starting at `1`."
-msgstr "これらの API は、`1` から始まる連続した整数キーを持つ密なリストテーブルを 対象にしています。"
+msgid ""
+"These APIs are designed for dense list tables with contiguous integer keys "
+"starting at `1`."
+msgstr "これらの API は、`1` から始まる連続した整数キーを持つ密なリストテーブルを 対"
+"象にしています。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:8
 msgid "ptool.tbl.map"
@@ -34,8 +37,11 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:12
-msgid "`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a new list."
-msgstr "`ptool.tbl.map(list, fn)` はリストテーブルの各要素を変換し、新しいリストを 返します。"
+msgid ""
+"`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a "
+"new list."
+msgstr "`ptool.tbl.map(list, fn)` はリストテーブルの各要素を変換し、新しいリストを 返"
+"します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15"
@@ -43,8 +49,11 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list` (table, 必須): 密なリストテーブル。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:16
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a non-`nil` value."
-msgstr "`fn` (function, 必須): `(value, index)` を受け取り、`nil` 以外を返す コールバック。"
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a non-`nil` value."
+msgstr "`fn` (function, 必須): `(value, index)` を受け取り、`nil` 以外を返す コールバ"
+"ック。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18"
@@ -62,7 +71,9 @@ msgid "`fn` is called once for each item in order."
 msgstr "`fn` は各要素に対して順番に 1 回ずつ呼び出されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:23
-msgid "If `fn` returns `nil`, the call raises an error instead of creating holes in the result."
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of creating holes in "
+"the result."
 msgstr "`fn` が `nil` を返すと、結果に穴を作らずエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:25
@@ -79,8 +90,12 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:39
-msgid "`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and returns them in a new dense list."
-msgstr "`ptool.tbl.filter(list, fn)` はコールバック結果が truthy の要素だけを残し、 新しい密なリストとして返します。"
+msgid ""
+"`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and "
+"returns them in a new dense list."
+msgstr ""
+"`ptool.tbl.filter(list, fn)` はコールバック結果が truthy の要素だけを残し、 "
+"新しい密なリストとして返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42"
@@ -120,12 +135,16 @@ msgstr "ptool.tbl.any"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:64
-msgid "`ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy result for at least one item."
-msgstr "`ptool.tbl.any(list, fn)` は、コールバックが少なくとも 1 つの要素に対して truthy な結果を返した場合に `true` を返します。"
+msgid ""
+"`ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy "
+"result for at least one item."
+msgstr ""
+"`ptool.tbl.any(list, fn)` は、コールバックが少なくとも 1 つの要素に対して "
+"truthy な結果を返した場合に `true` を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67"
@@ -149,8 +168,11 @@ msgstr "動作:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy として扱われます。"
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy "
+"として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:75
 msgid "Iteration stops as soon as a truthy result is found."
@@ -167,12 +189,16 @@ msgstr "ptool.tbl.all"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:90
-msgid "`ptool.tbl.all(list, fn)` returns `true` only when the callback produces a truthy result for every item."
-msgstr "`ptool.tbl.all(list, fn)` は、コールバックがすべての要素に対して truthy な結果を返した場合にのみ `true` を返します。"
+msgid ""
+"`ptool.tbl.all(list, fn)` returns `true` only when the callback produces a "
+"truthy result for every item."
+msgstr ""
+"`ptool.tbl.all(list, fn)` は、コールバックがすべての要素に対して truthy な結"
+"果を返した場合にのみ `true` を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:93
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:93"
@@ -196,8 +222,11 @@ msgstr "動作:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy として扱われます。"
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy "
+"として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:101
 msgid "Iteration stops as soon as a falsy result is found."
@@ -213,12 +242,15 @@ msgstr "ptool.tbl.find"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:116
-msgid "`ptool.tbl.find(list, fn)` returns the first original list value whose callback result is truthy."
-msgstr "`ptool.tbl.find(list, fn)` は、コールバック結果が truthy になる最初の元のリスト値を返します。"
+msgid ""
+"`ptool.tbl.find(list, fn)` returns the first original list value whose "
+"callback result is truthy."
+msgstr "`ptool.tbl.find(list, fn)` は、コールバック結果が truthy になる最初の元のリス"
+"ト値を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:119
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:119"
@@ -241,8 +273,11 @@ msgstr "動作:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:125
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:125"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy として扱われます。"
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy "
+"として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:127
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:127"
@@ -260,12 +295,16 @@ msgstr "ptool.tbl.find_index"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:142
-msgid "`ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item whose callback result is truthy."
-msgstr "`ptool.tbl.find_index(list, fn)` は、コールバック結果が truthy になる最初の要素の 1 始まりのインデックスを返します。"
+msgid ""
+"`ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item "
+"whose callback result is truthy."
+msgstr ""
+"`ptool.tbl.find_index(list, fn)` は、コールバック結果が truthy になる最初の要"
+"素の 1 始まりのインデックスを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:145
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:145"
@@ -288,8 +327,11 @@ msgstr "動作:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:151"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy として扱われます。"
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy "
+"として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:153
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:153"
@@ -307,12 +349,15 @@ msgstr "ptool.tbl.count"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:168
-msgid "`ptool.tbl.count(list, fn)` counts how many items produce a truthy callback result."
-msgstr "`ptool.tbl.count(list, fn)` は、コールバックが truthy な結果を返した要素数を数えます。"
+msgid ""
+"`ptool.tbl.count(list, fn)` counts how many items produce a truthy callback "
+"result."
+msgstr "`ptool.tbl.count(list, fn)` は、コールバックが truthy な結果を返した要素数を"
+"数えます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:171
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:171"
@@ -335,8 +380,11 @@ msgstr "動作:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:177"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy として扱われます。"
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr "`nil` と `false` は falsy として扱われます。それ以外の Lua 値はすべて truthy "
+"として扱われます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:179
 msgid "Empty lists return `0`."
@@ -348,12 +396,15 @@ msgstr "ptool.tbl.includes"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:193
-msgid "`ptool.tbl.includes(list, value)` returns `true` when the list contains the given value."
-msgstr "`ptool.tbl.includes(list, value)` は、リストが指定した値を含む場合に `true` を返します。"
+msgid ""
+"`ptool.tbl.includes(list, value)` returns `true` when the list contains the "
+"given value."
+msgstr "`ptool.tbl.includes(list, value)` は、リストが指定した値を含む場合に `true` "
+"を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:196
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:196"
@@ -393,8 +444,8 @@ msgstr "ptool.tbl.reduce"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:216
 msgid "`ptool.tbl.reduce(list, initial, fn)` folds a list into a single value."
@@ -410,8 +461,11 @@ msgid "`initial` (any, required): The explicit initial accumulator value."
 msgstr "`initial` (any, 必須): 明示的な初期アキュムレータ値。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:220
-msgid "`fn` (function, required): A callback that receives `(acc, value, index)` and must return a non-`nil` value."
-msgstr "`fn` (function, 必須): `(acc, value, index)` を受け取り、`nil` 以外を返すコールバック。"
+msgid ""
+"`fn` (function, required): A callback that receives `(acc, value, index)` "
+"and must return a non-`nil` value."
+msgstr "`fn` (function, 必須): `(acc, value, index)` を受け取り、`nil` 以外を返すコー"
+"ルバック。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:222
 msgid "Returns: `any`."
@@ -436,8 +490,11 @@ msgid "Each callback result becomes the next accumulator value."
 msgstr "各コールバック結果が次のアキュムレータ値になります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:229
-msgid "If `fn` returns `nil`, the call raises an error instead of losing the accumulator state."
-msgstr "`fn` が `nil` を返した場合、アキュムレータ状態を失わないようにエラーになります。"
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of losing the "
+"accumulator state."
+msgstr "`fn` が `nil` を返した場合、アキュムレータ状態を失わないようにエラーになりま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:231
 msgid "Empty lists return `initial` unchanged."
@@ -449,12 +506,16 @@ msgstr "ptool.tbl.flat_map"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 追加。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:245
-msgid "`ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then concatenates those returned lists into one new dense list."
-msgstr "`ptool.tbl.flat_map(list, fn)` は、各要素を密なリストテーブルにマップし、その返されたリストを 1 つの新しい密なリストへ連結します。"
+msgid ""
+"`ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then "
+"concatenates those returned lists into one new dense list."
+msgstr ""
+"`ptool.tbl.flat_map(list, fn)` は、各要素を密なリストテーブルにマップし、その"
+"返されたリストを 1 つの新しい密なリストへ連結します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:248
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:248"
@@ -462,8 +523,11 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list` (table, 必須): 密なリストテーブル。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:249
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a dense list table."
-msgstr "`fn` (function, 必須): `(value, index)` を受け取り、密なリストテーブルを返すコールバック。"
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a dense list table."
+msgstr "`fn` (function, 必須): `(value, index)` を受け取り、密なリストテーブルを返す"
+"コールバック。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:251
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:251"
@@ -502,8 +566,11 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:272
-msgid "`ptool.tbl.concat(...)` concatenates one or more dense list tables into a new list."
-msgstr "`ptool.tbl.concat(...)` は 1 個以上の密なリストテーブルを結合して新しい リストを返します。"
+msgid ""
+"`ptool.tbl.concat(...)` concatenates one or more dense list tables into a "
+"new list."
+msgstr "`ptool.tbl.concat(...)` は 1 個以上の密なリストテーブルを結合して新しい リス"
+"トを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:275
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:275"
@@ -578,6 +645,38 @@ msgstr "キーは連続しており、欠番を含められません。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:312
 msgid "Sparse tables and dictionary-style tables raise errors."
 msgstr "疎なテーブルや辞書スタイルのテーブルはエラーになります。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 追加。"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
 #~ msgid "`v0.6.0` - Introduced."

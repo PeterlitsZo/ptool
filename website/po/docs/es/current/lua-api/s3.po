@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 16:35+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr "ptool.s3.connect"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:9
 msgid ""
@@ -142,8 +142,8 @@ msgstr "Connection"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:55
 msgid ""
@@ -251,8 +251,8 @@ msgstr "read"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:91
 msgid "Canonical API name: `ptool.s3.Connection:read`."
@@ -284,8 +284,8 @@ msgstr "write"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:108
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:108"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:110
 msgid "Canonical API name: `ptool.s3.Connection:write`."
@@ -329,8 +329,8 @@ msgstr "delete"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:134
 msgid "Canonical API name: `ptool.s3.Connection:delete`."
@@ -351,8 +351,8 @@ msgstr "exists"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:144
 msgid "Canonical API name: `ptool.s3.Connection:exists`."
@@ -377,8 +377,8 @@ msgstr "list"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:155
 msgid "Canonical API name: `ptool.s3.Connection:list`."
@@ -416,8 +416,8 @@ msgstr "stat"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:177"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:179
 msgid "Canonical API name: `ptool.s3.Connection:stat`."
@@ -441,3 +441,35 @@ msgstr "Returns: `table`."
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:186"
 msgid "Example:"
 msgstr "Example:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:108"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:177"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."

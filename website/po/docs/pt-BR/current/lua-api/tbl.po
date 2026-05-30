@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-30 23:26+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,12 @@ msgid "Table helpers are available under `ptool.tbl` and `p.tbl`."
 msgstr "Os utilitários de tabelas estão disponíveis em `ptool.tbl` e `p.tbl`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:5
-msgid "These APIs are designed for dense list tables with contiguous integer keys starting at `1`."
-msgstr "Essas APIs foram projetadas para tabelas de lista densas, com chaves inteiras contíguas começando em `1`."
+msgid ""
+"These APIs are designed for dense list tables with contiguous integer keys "
+"starting at `1`."
+msgstr ""
+"Essas APIs foram projetadas para tabelas de lista densas, com chaves "
+"inteiras contíguas começando em `1`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:8
 msgid "ptool.tbl.map"
@@ -34,8 +38,12 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:12
-msgid "`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a new list."
-msgstr "`ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e retorna uma nova lista."
+msgid ""
+"`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a "
+"new list."
+msgstr ""
+"`ptool.tbl.map(list, fn)` transforma cada item de uma tabela de lista e "
+"retorna uma nova lista."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15"
@@ -43,8 +51,12 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list` (table, obrigatório): Uma tabela de lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:16
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a non-`nil` value."
-msgstr "`fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve retornar um valor diferente de `nil`."
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a non-`nil` value."
+msgstr ""
+"`fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve "
+"retornar um valor diferente de `nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18"
@@ -62,8 +74,11 @@ msgid "`fn` is called once for each item in order."
 msgstr "`fn` é chamado uma vez para cada item, em ordem."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:23
-msgid "If `fn` returns `nil`, the call raises an error instead of creating holes in the result."
-msgstr "Se `fn` retornar `nil`, a chamada falha em vez de criar buracos no resultado."
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of creating holes in "
+"the result."
+msgstr ""
+"Se `fn` retornar `nil`, a chamada falha em vez de criar buracos no resultado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:25
 msgid "The input table is not modified."
@@ -79,8 +94,12 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:39
-msgid "`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and returns them in a new dense list."
-msgstr "`ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja truthy e os retorna em uma nova lista densa."
+msgid ""
+"`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and "
+"returns them in a new dense list."
+msgstr ""
+"`ptool.tbl.filter(list, fn)` mantém os itens cujo resultado do callback seja "
+"truthy e os retorna em uma nova lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42"
@@ -120,12 +139,16 @@ msgstr "ptool.tbl.any"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:64
-msgid "`ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy result for at least one item."
-msgstr "`ptool.tbl.any(list, fn)` retorna `true` quando o callback produz um resultado truthy para pelo menos um item."
+msgid ""
+"`ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy "
+"result for at least one item."
+msgstr ""
+"`ptool.tbl.any(list, fn)` retorna `true` quando o callback produz um "
+"resultado truthy para pelo menos um item."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67"
@@ -149,8 +172,12 @@ msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` e `false` são tratados como falsy. Todos os outros valores Lua são tratados como truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr ""
+"`nil` e `false` são tratados como falsy. Todos os outros valores Lua são "
+"tratados como truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:75
 msgid "Iteration stops as soon as a truthy result is found."
@@ -167,12 +194,16 @@ msgstr "ptool.tbl.all"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:90
-msgid "`ptool.tbl.all(list, fn)` returns `true` only when the callback produces a truthy result for every item."
-msgstr "`ptool.tbl.all(list, fn)` retorna `true` somente quando o callback produz um resultado truthy para cada item."
+msgid ""
+"`ptool.tbl.all(list, fn)` returns `true` only when the callback produces a "
+"truthy result for every item."
+msgstr ""
+"`ptool.tbl.all(list, fn)` retorna `true` somente quando o callback produz um "
+"resultado truthy para cada item."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:93
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:93"
@@ -196,8 +227,12 @@ msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` e `false` são tratados como falsy. Todos os outros valores Lua são tratados como truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr ""
+"`nil` e `false` são tratados como falsy. Todos os outros valores Lua são "
+"tratados como truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:101
 msgid "Iteration stops as soon as a falsy result is found."
@@ -213,12 +248,16 @@ msgstr "ptool.tbl.find"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:116
-msgid "`ptool.tbl.find(list, fn)` returns the first original list value whose callback result is truthy."
-msgstr "`ptool.tbl.find(list, fn)` retorna o primeiro valor original da lista cujo resultado do callback é truthy."
+msgid ""
+"`ptool.tbl.find(list, fn)` returns the first original list value whose "
+"callback result is truthy."
+msgstr ""
+"`ptool.tbl.find(list, fn)` retorna o primeiro valor original da lista cujo "
+"resultado do callback é truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:119
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:119"
@@ -241,8 +280,12 @@ msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:125
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:125"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` e `false` são tratados como falsy. Todos os outros valores Lua são tratados como truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr ""
+"`nil` e `false` são tratados como falsy. Todos os outros valores Lua são "
+"tratados como truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:127
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:127"
@@ -260,12 +303,16 @@ msgstr "ptool.tbl.find_index"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:142
-msgid "`ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item whose callback result is truthy."
-msgstr "`ptool.tbl.find_index(list, fn)` retorna o índice baseado em 1 do primeiro item cujo resultado do callback é truthy."
+msgid ""
+"`ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item "
+"whose callback result is truthy."
+msgstr ""
+"`ptool.tbl.find_index(list, fn)` retorna o índice baseado em 1 do primeiro "
+"item cujo resultado do callback é truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:145
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:145"
@@ -288,8 +335,12 @@ msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:151"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` e `false` são tratados como falsy. Todos os outros valores Lua são tratados como truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr ""
+"`nil` e `false` são tratados como falsy. Todos os outros valores Lua são "
+"tratados como truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:153
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:153"
@@ -307,12 +358,16 @@ msgstr "ptool.tbl.count"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:168
-msgid "`ptool.tbl.count(list, fn)` counts how many items produce a truthy callback result."
-msgstr "`ptool.tbl.count(list, fn)` conta quantos itens produzem um resultado truthy no callback."
+msgid ""
+"`ptool.tbl.count(list, fn)` counts how many items produce a truthy callback "
+"result."
+msgstr ""
+"`ptool.tbl.count(list, fn)` conta quantos itens produzem um resultado truthy "
+"no callback."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:171
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:171"
@@ -335,8 +390,12 @@ msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:177"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
-msgstr "`nil` e `false` são tratados como falsy. Todos os outros valores Lua são tratados como truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
+msgstr ""
+"`nil` e `false` são tratados como falsy. Todos os outros valores Lua são "
+"tratados como truthy."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:179
 msgid "Empty lists return `0`."
@@ -348,12 +407,16 @@ msgstr "ptool.tbl.includes"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:193
-msgid "`ptool.tbl.includes(list, value)` returns `true` when the list contains the given value."
-msgstr "`ptool.tbl.includes(list, value)` retorna `true` quando a lista contém o valor fornecido."
+msgid ""
+"`ptool.tbl.includes(list, value)` returns `true` when the list contains the "
+"given value."
+msgstr ""
+"`ptool.tbl.includes(list, value)` retorna `true` quando a lista contém o "
+"valor fornecido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:196
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:196"
@@ -393,8 +456,8 @@ msgstr "ptool.tbl.reduce"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:216
 msgid "`ptool.tbl.reduce(list, initial, fn)` folds a list into a single value."
@@ -410,8 +473,12 @@ msgid "`initial` (any, required): The explicit initial accumulator value."
 msgstr "`initial` (any, obrigatório): O valor inicial explícito do acumulador."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:220
-msgid "`fn` (function, required): A callback that receives `(acc, value, index)` and must return a non-`nil` value."
-msgstr "`fn` (function, obrigatório): Um callback que recebe `(acc, value, index)` e deve retornar um valor diferente de `nil`."
+msgid ""
+"`fn` (function, required): A callback that receives `(acc, value, index)` "
+"and must return a non-`nil` value."
+msgstr ""
+"`fn` (function, obrigatório): Um callback que recebe `(acc, value, index)` e "
+"deve retornar um valor diferente de `nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:222
 msgid "Returns: `any`."
@@ -436,8 +503,12 @@ msgid "Each callback result becomes the next accumulator value."
 msgstr "Cada resultado do callback se torna o próximo valor do acumulador."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:229
-msgid "If `fn` returns `nil`, the call raises an error instead of losing the accumulator state."
-msgstr "Se `fn` retornar `nil`, a chamada gera um erro em vez de perder o estado do acumulador."
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of losing the "
+"accumulator state."
+msgstr ""
+"Se `fn` retornar `nil`, a chamada gera um erro em vez de perder o estado do "
+"acumulador."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:231
 msgid "Empty lists return `initial` unchanged."
@@ -449,12 +520,16 @@ msgstr "ptool.tbl.flat_map"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:245
-msgid "`ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then concatenates those returned lists into one new dense list."
-msgstr "`ptool.tbl.flat_map(list, fn)` mapeia cada item para uma tabela de lista densa e então concatena essas listas retornadas em uma nova lista densa."
+msgid ""
+"`ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then "
+"concatenates those returned lists into one new dense list."
+msgstr ""
+"`ptool.tbl.flat_map(list, fn)` mapeia cada item para uma tabela de lista "
+"densa e então concatena essas listas retornadas em uma nova lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:248
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:248"
@@ -462,8 +537,12 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list` (table, obrigatório): Uma tabela de lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:249
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a dense list table."
-msgstr "`fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve retornar uma tabela de lista densa."
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a dense list table."
+msgstr ""
+"`fn` (function, obrigatório): Um callback que recebe `(value, index)` e deve "
+"retornar uma tabela de lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:251
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:251"
@@ -486,7 +565,8 @@ msgstr "Cada resultado do callback deve ser uma tabela de lista densa."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:257
 msgid "Returning a non-table or a non-dense list raises an error."
-msgstr "Retornar um valor que não seja tabela ou uma lista não densa gera um erro."
+msgstr ""
+"Retornar um valor que não seja tabela ou uma lista não densa gera um erro."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:258
 msgid "Empty lists return an empty list."
@@ -502,8 +582,12 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:272
-msgid "`ptool.tbl.concat(...)` concatenates one or more dense list tables into a new list."
-msgstr "`ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma nova lista."
+msgid ""
+"`ptool.tbl.concat(...)` concatenates one or more dense list tables into a "
+"new list."
+msgstr ""
+"`ptool.tbl.concat(...)` concatena uma ou mais tabelas de lista densas em uma "
+"nova lista."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:275
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:275"
@@ -578,6 +662,38 @@ msgstr "As chaves devem ser contíguas, sem buracos."
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:312
 msgid "Sparse tables and dictionary-style tables raise errors."
 msgstr "Tabelas esparsas e tabelas no estilo dicionário geram erro."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
 #~ msgid "`v0.6.0` - Introduced."

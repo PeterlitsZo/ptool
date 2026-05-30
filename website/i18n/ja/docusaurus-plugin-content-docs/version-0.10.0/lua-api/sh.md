@@ -31,7 +31,7 @@ local args = ptool.sh.split("clippy --all-targets -- -D warnings")
 
 ## ptool.sh.quote
 
-> `Unreleased` - 導入。
+> `v0.10.0` - 追加。
 
 `ptool.sh.quote(word)` は単一の shell word を引用し、シェルコマンド文字列へ安全に埋め込めるようにします。
 
@@ -52,7 +52,7 @@ print(word) -- 'hello world'
 
 ## ptool.sh.join
 
-> `Unreleased` - 導入。
+> `v0.10.0` - 追加。
 
 `ptool.sh.join(words)` は引数配列をシェルコマンド文字列へ結合し、必要に応じて words を引用します。
 

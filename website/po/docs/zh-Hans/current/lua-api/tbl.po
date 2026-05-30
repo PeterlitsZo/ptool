@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-30 23:26+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,9 @@ msgid "Table helpers are available under `ptool.tbl` and `p.tbl`."
 msgstr "表辅助能力位于 `ptool.tbl` 和 `p.tbl` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:5
-msgid "These APIs are designed for dense list tables with contiguous integer keys starting at `1`."
+msgid ""
+"These APIs are designed for dense list tables with contiguous integer keys "
+"starting at `1`."
 msgstr "这些 API 只面向从 `1` 开始、整数键连续且无空洞的顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:8
@@ -34,7 +36,9 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:12
-msgid "`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a new list."
+msgid ""
+"`ptool.tbl.map(list, fn)` transforms each item in a list table and returns a "
+"new list."
 msgstr "`ptool.tbl.map(list, fn)` 对顺序表中的每一项做映射，并返回一个新的顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:15
@@ -43,8 +47,11 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list`（table，必填）：一个致密的顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:16
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a non-`nil` value."
-msgstr "`fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回非 `nil` 的值。"
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a non-`nil` value."
+msgstr "`fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回非 `nil`"
+" 的值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:18"
@@ -62,7 +69,9 @@ msgid "`fn` is called once for each item in order."
 msgstr "`fn` 会按顺序对每一项调用一次。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:23
-msgid "If `fn` returns `nil`, the call raises an error instead of creating holes in the result."
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of creating holes in "
+"the result."
 msgstr "如果 `fn` 返回 `nil`，会直接抛错，而不是在结果里制造空洞。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:25
@@ -79,8 +88,11 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:39
-msgid "`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and returns them in a new dense list."
-msgstr "`ptool.tbl.filter(list, fn)` 保留回调结果为 truthy 的项，并返回新的致密顺序表。"
+msgid ""
+"`ptool.tbl.filter(list, fn)` keeps items whose callback result is truthy and "
+"returns them in a new dense list."
+msgstr "`ptool.tbl.filter(list, fn)` 保留回调结果为 truthy 的项，并返回新的致密顺序表"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:42"
@@ -120,11 +132,13 @@ msgstr "ptool.tbl.any"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:64
-msgid "`ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy result for at least one item."
+msgid ""
+"`ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy "
+"result for at least one item."
 msgstr "`ptool.tbl.any(list, fn)` 会在回调对至少一项返回 truthy 结果时返回 `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:67
@@ -149,7 +163,9 @@ msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:73"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
 msgstr "`nil` 和 `false` 会被视为 falsy，其他所有 Lua 值都会被视为 truthy。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:75
@@ -167,12 +183,15 @@ msgstr "ptool.tbl.all"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:90
-msgid "`ptool.tbl.all(list, fn)` returns `true` only when the callback produces a truthy result for every item."
-msgstr "`ptool.tbl.all(list, fn)` 只有在回调对每一项都返回 truthy 结果时才会返回 `true`。"
+msgid ""
+"`ptool.tbl.all(list, fn)` returns `true` only when the callback produces a "
+"truthy result for every item."
+msgstr "`ptool.tbl.all(list, fn)` 只有在回调对每一项都返回 truthy 结果时才会返回 "
+"`true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:93
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:93"
@@ -196,7 +215,9 @@ msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:99"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
 msgstr "`nil` 和 `false` 会被视为 falsy，其他所有 Lua 值都会被视为 truthy。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:101
@@ -213,11 +234,13 @@ msgstr "ptool.tbl.find"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:116
-msgid "`ptool.tbl.find(list, fn)` returns the first original list value whose callback result is truthy."
+msgid ""
+"`ptool.tbl.find(list, fn)` returns the first original list value whose "
+"callback result is truthy."
 msgstr "`ptool.tbl.find(list, fn)` 会返回回调结果为 truthy 的第一项原始值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:119
@@ -241,7 +264,9 @@ msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:125
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:125"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
 msgstr "`nil` 和 `false` 会被视为 falsy，其他所有 Lua 值都会被视为 truthy。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:127
@@ -260,12 +285,15 @@ msgstr "ptool.tbl.find_index"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:142
-msgid "`ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item whose callback result is truthy."
-msgstr "`ptool.tbl.find_index(list, fn)` 会返回回调结果为 truthy 的第一项的 1 基索引。"
+msgid ""
+"`ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item "
+"whose callback result is truthy."
+msgstr "`ptool.tbl.find_index(list, fn)` 会返回回调结果为 truthy 的第一项的 1 基索引"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:145
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:145"
@@ -288,7 +316,9 @@ msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:151
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:151"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
 msgstr "`nil` 和 `false` 会被视为 falsy，其他所有 Lua 值都会被视为 truthy。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:153
@@ -307,11 +337,13 @@ msgstr "ptool.tbl.count"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:168
-msgid "`ptool.tbl.count(list, fn)` counts how many items produce a truthy callback result."
+msgid ""
+"`ptool.tbl.count(list, fn)` counts how many items produce a truthy callback "
+"result."
 msgstr "`ptool.tbl.count(list, fn)` 会统计有多少项的回调结果为 truthy。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:171
@@ -335,7 +367,9 @@ msgstr "行为说明："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:177"
-msgid "`nil` and `false` are treated as falsy. All other Lua values are treated as truthy."
+msgid ""
+"`nil` and `false` are treated as falsy. All other Lua values are treated as "
+"truthy."
 msgstr "`nil` 和 `false` 会被视为 falsy，其他所有 Lua 值都会被视为 truthy。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:179
@@ -348,11 +382,13 @@ msgstr "ptool.tbl.includes"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:193
-msgid "`ptool.tbl.includes(list, value)` returns `true` when the list contains the given value."
+msgid ""
+"`ptool.tbl.includes(list, value)` returns `true` when the list contains the "
+"given value."
 msgstr "`ptool.tbl.includes(list, value)` 会在列表包含给定值时返回 `true`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:196
@@ -393,8 +429,8 @@ msgstr "ptool.tbl.reduce"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:216
 msgid "`ptool.tbl.reduce(list, initial, fn)` folds a list into a single value."
@@ -410,8 +446,11 @@ msgid "`initial` (any, required): The explicit initial accumulator value."
 msgstr "`initial`（any，必填）：显式提供的初始累加器值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:220
-msgid "`fn` (function, required): A callback that receives `(acc, value, index)` and must return a non-`nil` value."
-msgstr "`fn`（function，必填）：回调函数，接收 `(acc, value, index)`，并且必须返回非 `nil` 的值。"
+msgid ""
+"`fn` (function, required): A callback that receives `(acc, value, index)` "
+"and must return a non-`nil` value."
+msgstr "`fn`（function，必填）：回调函数，接收 `(acc, value, index)`，并且必须返回非 "
+"`nil` 的值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:222
 msgid "Returns: `any`."
@@ -436,7 +475,9 @@ msgid "Each callback result becomes the next accumulator value."
 msgstr "每次回调的返回值都会成为下一次的累加器值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:229
-msgid "If `fn` returns `nil`, the call raises an error instead of losing the accumulator state."
+msgid ""
+"If `fn` returns `nil`, the call raises an error instead of losing the "
+"accumulator state."
 msgstr "如果 `fn` 返回 `nil`，调用会直接报错，而不是丢失累加器状态。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:231
@@ -449,12 +490,16 @@ msgstr "ptool.tbl.flat_map"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:245
-msgid "`ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then concatenates those returned lists into one new dense list."
-msgstr "`ptool.tbl.flat_map(list, fn)` 会把每一项映射为一个致密顺序表，再把这些返回的顺序表按顺序拼接成一个新的致密顺序表。"
+msgid ""
+"`ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then "
+"concatenates those returned lists into one new dense list."
+msgstr ""
+"`ptool.tbl.flat_map(list, fn)` 会把每一项映射为一个致密顺序表，再把这些返回的"
+"顺序表按顺序拼接成一个新的致密顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:248
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:248"
@@ -462,8 +507,11 @@ msgid "`list` (table, required): A dense list table."
 msgstr "`list`（table，必填）：一个致密的顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:249
-msgid "`fn` (function, required): A callback that receives `(value, index)` and must return a dense list table."
-msgstr "`fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回一个致密顺序表。"
+msgid ""
+"`fn` (function, required): A callback that receives `(value, index)` and "
+"must return a dense list table."
+msgstr "`fn`（function，必填）：回调函数，接收 `(value, index)`，并且必须返回一个致密"
+"顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:251
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:251"
@@ -502,7 +550,9 @@ msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:272
-msgid "`ptool.tbl.concat(...)` concatenates one or more dense list tables into a new list."
+msgid ""
+"`ptool.tbl.concat(...)` concatenates one or more dense list tables into a "
+"new list."
 msgstr "`ptool.tbl.concat(...)` 将一个或多个致密顺序表按顺序拼接成新的顺序表。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:275
@@ -578,6 +628,38 @@ msgstr "键必须连续，不能有空洞。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:312
 msgid "Sparse tables and dictionary-style tables raise errors."
 msgstr "稀疏表和字典风格的表都会抛错。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
 #~ msgid "`v0.6.0` - Introduced."

@@ -54,7 +54,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.any
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.any(list, fn)` は、コールバックが少なくとも 1 つの要素に対して truthy な結果を返した場合に `true` を返します。
 
@@ -78,7 +78,7 @@ print(has_even) -- true
 
 ## ptool.tbl.all
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.all(list, fn)` は、コールバックがすべての要素に対して truthy な結果を返した場合にのみ `true` を返します。
 
@@ -102,7 +102,7 @@ print(all_short) -- true
 
 ## ptool.tbl.find
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.find(list, fn)` は、コールバック結果が truthy になる最初の元のリスト値を返します。
 
@@ -126,7 +126,7 @@ print(found) -- 15
 
 ## ptool.tbl.find_index
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.find_index(list, fn)` は、コールバック結果が truthy になる最初の要素の 1 始まりのインデックスを返します。
 
@@ -150,7 +150,7 @@ print(index) -- 2
 
 ## ptool.tbl.count
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.count(list, fn)` は、コールバックが truthy な結果を返した要素数を数えます。
 
@@ -173,7 +173,7 @@ print(total) -- 3
 
 ## ptool.tbl.includes
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.includes(list, value)` は、リストが指定した値を含む場合に `true` を返します。
 
@@ -195,7 +195,7 @@ print(has_blue) -- true
 
 ## ptool.tbl.reduce
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.reduce(list, initial, fn)` は、リストを単一の値へ畳み込みます。
 
@@ -222,7 +222,7 @@ print(total) -- 30
 
 ## ptool.tbl.flat_map
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 追加。
 
 `ptool.tbl.flat_map(list, fn)` は、各要素を密なリストテーブルにマップし、その返されたリストを 1 つの新しい密なリストへ連結します。
 

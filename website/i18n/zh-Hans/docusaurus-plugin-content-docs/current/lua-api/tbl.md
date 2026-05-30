@@ -54,7 +54,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.any
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.any(list, fn)` 会在回调对至少一项返回 truthy 结果时返回 `true`。
 
@@ -78,7 +78,7 @@ print(has_even) -- true
 
 ## ptool.tbl.all
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.all(list, fn)` 只有在回调对每一项都返回 truthy 结果时才会返回 `true`。
 
@@ -102,7 +102,7 @@ print(all_short) -- true
 
 ## ptool.tbl.find
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.find(list, fn)` 会返回回调结果为 truthy 的第一项原始值。
 
@@ -126,7 +126,7 @@ print(found) -- 15
 
 ## ptool.tbl.find_index
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.find_index(list, fn)` 会返回回调结果为 truthy 的第一项的 1 基索引。
 
@@ -150,7 +150,7 @@ print(index) -- 2
 
 ## ptool.tbl.count
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.count(list, fn)` 会统计有多少项的回调结果为 truthy。
 
@@ -173,7 +173,7 @@ print(total) -- 3
 
 ## ptool.tbl.includes
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.includes(list, value)` 会在列表包含给定值时返回 `true`。
 
@@ -195,7 +195,7 @@ print(has_blue) -- true
 
 ## ptool.tbl.reduce
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.reduce(list, initial, fn)` 会把一个列表折叠成单个值。
 
@@ -222,7 +222,7 @@ print(total) -- 30
 
 ## ptool.tbl.flat_map
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.tbl.flat_map(list, fn)` 会把每一项映射为一个致密顺序表，再把这些返回的顺序表按顺序拼接成一个新的致密顺序表。
 

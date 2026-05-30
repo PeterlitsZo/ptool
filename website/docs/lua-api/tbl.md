@@ -59,7 +59,7 @@ print(ptool.inspect(out)) -- { "bb", "ccc" }
 
 ## ptool.tbl.any
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.any(list, fn)` returns `true` when the callback produces a truthy
 result for at least one item.
@@ -85,7 +85,7 @@ print(has_even) -- true
 
 ## ptool.tbl.all
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.all(list, fn)` returns `true` only when the callback produces a
 truthy result for every item.
@@ -111,7 +111,7 @@ print(all_short) -- true
 
 ## ptool.tbl.find
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.find(list, fn)` returns the first original list value whose callback
 result is truthy.
@@ -137,7 +137,7 @@ print(found) -- 15
 
 ## ptool.tbl.find_index
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.find_index(list, fn)` returns the 1-based index of the first item
 whose callback result is truthy.
@@ -163,7 +163,7 @@ print(index) -- 2
 
 ## ptool.tbl.count
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.count(list, fn)` counts how many items produce a truthy callback
 result.
@@ -188,7 +188,7 @@ print(total) -- 3
 
 ## ptool.tbl.includes
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.includes(list, value)` returns `true` when the list contains the
 given value.
@@ -211,7 +211,7 @@ print(has_blue) -- true
 
 ## ptool.tbl.reduce
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.reduce(list, initial, fn)` folds a list into a single value.
 
@@ -240,7 +240,7 @@ print(total) -- 30
 
 ## ptool.tbl.flat_map
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.tbl.flat_map(list, fn)` maps each item to a dense list table and then
 concatenates those returned lists into one new dense list.

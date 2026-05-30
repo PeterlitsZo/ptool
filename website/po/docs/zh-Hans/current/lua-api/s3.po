@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 16:35+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,15 +28,14 @@ msgstr "ptool.s3.connect"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:9
 msgid ""
 "`ptool.s3.connect(options)` opens an S3-compatible object storage connection "
 "and returns a `Connection` object."
-msgstr ""
-"`ptool.s3.connect(options)` 打开一个 S3 兼容对象存储连接，并返回一个 "
+msgstr "`ptool.s3.connect(options)` 打开一个 S3 兼容对象存储连接，并返回一个 "
 "`Connection` 对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:12
@@ -55,9 +54,8 @@ msgstr "`region`（string，选填）：AWS 区域或服务提供商区域。"
 msgid ""
 "`endpoint` (string, optional): A custom S3-compatible endpoint URL such as "
 "MinIO, R2, or another object storage service."
-msgstr ""
-"`endpoint`（string，选填）：自定义的 S3 兼容 endpoint URL，例如 MinIO、R2 "
-"或其他对象存储服务。"
+msgstr "`endpoint`（string，选填）：自定义的 S3 兼容 endpoint URL，例如 MinIO、R2 或"
+"其他对象存储服务。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:18
 msgid "`access_key_id` (string, optional): The access key ID."
@@ -80,8 +78,7 @@ msgstr "`root`（string，选填）：应用到所有对象操作的根前缀。
 msgid ""
 "`allow_anonymous` (boolean, optional): When `true`, allow unsigned requests "
 "if credentials are not configured. Defaults to `false`."
-msgstr ""
-"`allow_anonymous`（boolean，选填）：当为 `true` 时，如果未配置凭证，则允许未"
+msgstr "`allow_anonymous`（boolean，选填）：当为 `true` 时，如果未配置凭证，则允许未"
 "签名请求。默认为 `false`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:25
@@ -125,8 +122,8 @@ msgid ""
 "Environment fallback uses `ptool`'s runtime environment view, so values set "
 "through `p.os.setenv(...)` are also visible to `ptool.s3.connect(...)`."
 msgstr ""
-"环境变量回退使用 `ptool` 的运行时环境视图，因此通过 `p.os.setenv(...)` 设置"
-"的值也会被 `ptool.s3.connect(...)` 看到。"
+"环境变量回退使用 `ptool` 的运行时环境视图，因此通过 `p.os.setenv(...)` 设置的"
+"值也会被 `ptool.s3.connect(...)` 看到。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:38
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:38"
@@ -139,8 +136,8 @@ msgstr "Connection"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:55
 msgid ""
@@ -192,8 +189,7 @@ msgstr "除非另有说明，对象路径必须是非空字符串。"
 msgid ""
 "Leading `/` is ignored, so `/foo/bar.txt` and `foo/bar.txt` target the same "
 "object."
-msgstr ""
-"前导 `/` 会被忽略，因此 `/foo/bar.txt` 和 `foo/bar.txt` 指向同一个对象。"
+msgstr "前导 `/` 会被忽略，因此 `/foo/bar.txt` 和 `foo/bar.txt` 指向同一个对象。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:74
 msgid ""
@@ -243,8 +239,8 @@ msgstr "read"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:91
 msgid "Canonical API name: `ptool.s3.Connection:read`."
@@ -275,8 +271,8 @@ msgstr "write"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:108
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:108"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:110
 msgid "Canonical API name: `ptool.s3.Connection:write`."
@@ -319,8 +315,8 @@ msgstr "delete"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:134
 msgid "Canonical API name: `ptool.s3.Connection:delete`."
@@ -341,8 +337,8 @@ msgstr "exists"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:144
 msgid "Canonical API name: `ptool.s3.Connection:exists`."
@@ -367,8 +363,8 @@ msgstr "list"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:155
 msgid "Canonical API name: `ptool.s3.Connection:list`."
@@ -402,8 +398,8 @@ msgstr "stat"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:177
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:177"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - 引入。"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:179
 msgid "Canonical API name: `ptool.s3.Connection:stat`."
@@ -427,3 +423,35 @@ msgstr "返回：`table`。"
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:186"
 msgid "Example:"
 msgstr "示例："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:108"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:177"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - 引入。"

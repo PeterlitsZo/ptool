@@ -71,32 +71,6 @@ print(ptool.version())
 print(p.version())
 ```
 
-## ptool.is_root
-
-> `Unreleased` - 引入。
-
-`ptool.is_root()` 会返回当前 `ptool` 进程是否正以 root 用户身份运行。
-
-- 返回：`boolean`。
-
-行为说明：
-
-- 在类 Unix 平台上，它会检查当前有效用户是否为 root。
-- 在非 Unix 平台上，它目前返回 `false`。
-- 这适合与 `ptool.run(...)`、`ptool.exec(...)` 等本地命令辅助函数上的 `sudo = true` 搭配使用。
-
-示例：
-
-```lua
-if not ptool.is_root() then
-  ptool.run({
-    cmd = "apt-get",
-    args = {"update"},
-    sudo = true,
-  })
-end
-```
-
 ## ptool.unindent
 
 > `v0.1.0` - 引入。

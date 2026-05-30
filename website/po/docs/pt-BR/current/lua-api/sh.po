@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 10:03+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,20 @@ msgstr "API de shell"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:3
 msgid "Shell parsing helpers are available under `ptool.sh` and `p.sh`."
-msgstr "As utilidades de parsing de shell estão disponíveis em `ptool.sh` e `p.sh`."
+msgstr ""
+"As utilidades de parsing de shell estão disponíveis em `ptool.sh` e `p.sh`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:5
-msgid "These helpers work at the shell-word level. They are intended for splitting, quoting, and joining argument strings using POSIX shell-style rules, not for parsing full shell syntax such as pipelines, redirections, command substitution, or variable expansion."
-msgstr "Esses helpers funcionam no nível de shell words. Eles servem para dividir, citar e juntar strings de argumentos usando regras de shell no estilo POSIX, e não para fazer parse da sintaxe completa de shell, como pipelines, redirecionamentos, substituição de comandos ou expansão de variáveis."
+msgid ""
+"These helpers work at the shell-word level. They are intended for splitting, "
+"quoting, and joining argument strings using POSIX shell-style rules, not for "
+"parsing full shell syntax such as pipelines, redirections, command "
+"substitution, or variable expansion."
+msgstr ""
+"Esses helpers funcionam no nível de shell words. Eles servem para dividir, "
+"citar e juntar strings de argumentos usando regras de shell no estilo POSIX, "
+"e não para fazer parse da sintaxe completa de shell, como pipelines, "
+"redirecionamentos, substituição de comandos ou expansão de variáveis."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:10
 msgid "ptool.sh.split"
@@ -33,8 +42,12 @@ msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:14
-msgid "`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array."
-msgstr "`ptool.sh.split(command)` faz o parse de uma string de comando usando regras em estilo shell e retorna um array de argumentos."
+msgid ""
+"`ptool.sh.split(command)` parses a command string using shell-style rules "
+"and returns an argument array."
+msgstr ""
+"`ptool.sh.split(command)` faz o parse de uma string de comando usando regras "
+"em estilo shell e retorna um array de argumentos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:17
 msgid "`command` (string, required): The command string to split."
@@ -50,8 +63,12 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:22
-msgid "This parses shell words only. It does not interpret shell operators or execute expansions."
-msgstr "Isto faz parse apenas de shell words. Não interpreta operadores de shell nem executa expansões."
+msgid ""
+"This parses shell words only. It does not interpret shell operators or "
+"execute expansions."
+msgstr ""
+"Isto faz parse apenas de shell words. Não interpreta operadores de shell nem "
+"executa expansões."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:25
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:25"
@@ -68,12 +85,16 @@ msgstr "ptool.sh.quote"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:41
-msgid "`ptool.sh.quote(word)` quotes a single shell word so it can be embedded safely into a shell command string."
-msgstr "`ptool.sh.quote(word)` aplica quoting a uma única shell word para que ela possa ser embutida com segurança em uma string de comando de shell."
+msgid ""
+"`ptool.sh.quote(word)` quotes a single shell word so it can be embedded "
+"safely into a shell command string."
+msgstr ""
+"`ptool.sh.quote(word)` aplica quoting a uma única shell word para que ela "
+"possa ser embutida com segurança em uma string de comando de shell."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:44
 msgid "`word` (string, required): The shell word to quote."
@@ -90,12 +111,17 @@ msgid "Behavior:"
 msgstr "Comportamento:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:49
-msgid "The returned string is shell-safe and semantically equivalent to the input word."
-msgstr "A string retornada é segura para shell e semanticamente equivalente à word de entrada."
+msgid ""
+"The returned string is shell-safe and semantically equivalent to the input "
+"word."
+msgstr ""
+"A string retornada é segura para shell e semanticamente equivalente à word "
+"de entrada."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:51
 msgid "This preserves shell-word meaning, not the original textual spelling."
-msgstr "Isto preserva o significado da shell word, não a grafia textual original."
+msgstr ""
+"Isto preserva o significado da shell word, não a grafia textual original."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:53"
@@ -108,12 +134,16 @@ msgstr "ptool.sh.join"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduzido."
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:64
-msgid "`ptool.sh.join(words)` joins an argument array into a shell command string, quoting words when needed."
-msgstr "`ptool.sh.join(words)` junta um array de argumentos em uma string de comando de shell, aplicando quoting às words quando necessário."
+msgid ""
+"`ptool.sh.join(words)` joins an argument array into a shell command string, "
+"quoting words when needed."
+msgstr ""
+"`ptool.sh.join(words)` junta um array de argumentos em uma string de comando "
+"de shell, aplicando quoting às words quando necessário."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:67
 msgid "`words` (string[], required): The shell words to join."
@@ -138,14 +168,30 @@ msgid "The output is suitable for passing to a POSIX-style shell."
 msgstr "A saída é adequada para ser passada a um shell no estilo POSIX."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:74
-msgid "This aims for shell-word round-tripping, so `ptool.sh.split(ptool.sh.join(words))` is equivalent to `words`."
-msgstr "Isto busca round-tripping no nível de shell words, então `ptool.sh.split(ptool.sh.join(words))` é equivalente a `words`."
+msgid ""
+"This aims for shell-word round-tripping, so `ptool.sh.split"
+"(ptool.sh.join(words))` is equivalent to `words`."
+msgstr ""
+"Isto busca round-tripping no nível de shell words, então `ptool.sh.split"
+"(ptool.sh.join(words))` é equivalente a `words`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:76
-msgid "`ptool.sh.join(ptool.sh.split(command))` may normalize quoting and spacing instead of preserving the original command text."
-msgstr "`ptool.sh.join(ptool.sh.split(command))` pode normalizar quoting e espaçamento em vez de preservar o texto original do comando."
+msgid ""
+"`ptool.sh.join(ptool.sh.split(command))` may normalize quoting and spacing "
+"instead of preserving the original command text."
+msgstr ""
+"`ptool.sh.join(ptool.sh.split(command))` pode normalizar quoting e "
+"espaçamento em vez de preservar o texto original do comando."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:79
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:79"
 msgid "Example:"
 msgstr "Exemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduzido."

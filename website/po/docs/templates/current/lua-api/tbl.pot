@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-30 23:26+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:62"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:64
@@ -181,7 +181,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:88"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:90
@@ -231,7 +231,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:114"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:116
@@ -282,7 +282,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:140"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:142
@@ -333,7 +333,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:166"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:168
@@ -378,7 +378,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:191"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:193
@@ -425,7 +425,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:214"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:216
@@ -485,7 +485,7 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:243"
-msgid "`Unreleased` - Introduced."
+msgid "`v0.10.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/tbl.md:245

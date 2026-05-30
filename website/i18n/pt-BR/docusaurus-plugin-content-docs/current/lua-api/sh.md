@@ -31,7 +31,7 @@ O `args` acima equivale a:
 
 ## ptool.sh.quote
 
-> `Unreleased` - Introduzido.
+> `v0.10.0` - Introduzido.
 
 `ptool.sh.quote(word)` aplica quoting a uma única shell word para que ela possa ser embutida com segurança em uma string de comando de shell.
 
@@ -52,7 +52,7 @@ print(word) -- 'hello world'
 
 ## ptool.sh.join
 
-> `Unreleased` - Introduzido.
+> `v0.10.0` - Introduzido.
 
 `ptool.sh.join(words)` junta um array de argumentos em uma string de comando de shell, aplicando quoting às words quando necessário.
 

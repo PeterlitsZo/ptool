@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-27 15:17+0800\n"
+"POT-Creation-Date: 2026-05-31 00:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,10 +25,9 @@ msgid "ptool.consul.connect"
 msgstr "ptool.consul.connect"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:7
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:7"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:7"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:9
 msgid ""
@@ -44,11 +43,11 @@ msgstr "`options` fields:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:14
 msgid ""
-"`address` (string, optional): The Consul HTTP address such as `http://"
-"127.0.0.1:8500` or `127.0.0.1:8500`."
+"`address` (string, optional): The Consul HTTP address such as "
+"`http://127.0.0.1:8500` or `127.0.0.1:8500`."
 msgstr ""
-"`address` (string, optional): The Consul HTTP address such as `http://"
-"127.0.0.1:8500` or `127.0.0.1:8500`."
+"`address` (string, optional): The Consul HTTP address such as "
+"`http://127.0.0.1:8500` or `127.0.0.1:8500`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:16
 msgid ""
@@ -93,8 +92,7 @@ msgstr ""
 "through `p.os.setenv(...)` are also visible to `ptool.consul.connect(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:29
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:29"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:29"
 msgid "Example:"
 msgstr "Example:"
 
@@ -103,10 +101,9 @@ msgid "Connection"
 msgstr "Connection"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:42
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:42"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:42"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:44
 msgid ""
@@ -219,10 +216,9 @@ msgid "get"
 msgstr "get"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:79
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:79"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:79"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:81
 msgid "Canonical API name: `ptool.consul.Connection:get`."
@@ -233,14 +229,12 @@ msgid "`conn:get(key[, options])` reads a single Consul KV entry."
 msgstr "`conn:get(key[, options])` reads a single Consul KV entry."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:85
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:85"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:85"
 msgid "`key` (string, required): The Consul key."
 msgstr "`key` (string, required): The Consul key."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:86
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:86"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:86"
 msgid "`options` (table, optional): Read options."
 msgstr "`options` (table, optional): Read options."
 
@@ -249,8 +243,7 @@ msgid "Returns: `table | nil`."
 msgstr "Returns: `table | nil`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:89
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:89"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:89"
 msgid "Behavior:"
 msgstr "Behavior:"
 
@@ -263,8 +256,7 @@ msgid "The returned `value` field is the decoded raw bytes as a Lua string."
 msgstr "The returned `value` field is the decoded raw bytes as a Lua string."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:94
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:94"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:94"
 msgid "Example:"
 msgstr "Example:"
 
@@ -273,10 +265,9 @@ msgid "put"
 msgstr "put"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:108
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:108"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:108"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:110
 msgid "Canonical API name: `ptool.consul.Connection:put`."
@@ -287,8 +278,7 @@ msgid "`conn:put(key, value[, options])` writes a Consul KV entry."
 msgstr "`conn:put(key, value[, options])` writes a Consul KV entry."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:114
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:114"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:114"
 msgid "`key` (string, required): The Consul key."
 msgstr "`key` (string, required): The Consul key."
 
@@ -297,8 +287,7 @@ msgid "`value` (string, required): The raw bytes to store."
 msgstr "`value` (string, required): The raw bytes to store."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:116
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:116"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:116"
 msgid "`options` (table, optional):"
 msgstr "`options` (table, optional):"
 
@@ -307,20 +296,17 @@ msgid "`flags` (integer, optional): Consul KV flags."
 msgstr "`flags` (integer, optional): Consul KV flags."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:116
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:116"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:116"
 msgid "`cas` (integer, optional): Check-and-set modify index."
 msgstr "`cas` (integer, optional): Check-and-set modify index."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:119
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:119"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:119"
 msgid "Returns: `boolean`."
 msgstr "Returns: `boolean`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:121
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:121"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:121"
 msgid "Behavior:"
 msgstr "Behavior:"
 
@@ -329,8 +315,7 @@ msgid "Returns the boolean result produced by Consul."
 msgstr "Returns the boolean result produced by Consul."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:125
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:125"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:125"
 msgid "Example:"
 msgstr "Example:"
 
@@ -339,10 +324,9 @@ msgid "delete"
 msgstr "delete"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:140
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:140"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:140"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:142
 msgid "Canonical API name: `ptool.consul.Connection:delete`."
@@ -357,14 +341,12 @@ msgid "`key` (string, required): The Consul key or prefix."
 msgstr "`key` (string, required): The Consul key or prefix."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:147
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:147"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:147"
 msgid "`options` (table, optional):"
 msgstr "`options` (table, optional):"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:147
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:147"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:147"
 msgid "`cas` (integer, optional): Check-and-set modify index."
 msgstr "`cas` (integer, optional): Check-and-set modify index."
 
@@ -373,14 +355,12 @@ msgid "`recurse` (boolean, optional): When `true`, delete the whole subtree."
 msgstr "`recurse` (boolean, optional): When `true`, delete the whole subtree."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:150
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:150"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:150"
 msgid "Returns: `boolean`."
 msgstr "Returns: `boolean`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:152
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:152"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:152"
 msgid "Notes:"
 msgstr "Notes:"
 
@@ -393,10 +373,9 @@ msgid "list"
 msgstr "list"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:158
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:158"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:158"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:160
 msgid "Canonical API name: `ptool.consul.Connection:list`."
@@ -411,8 +390,7 @@ msgid "`prefix` (string, required): The prefix to list."
 msgstr "`prefix` (string, required): The prefix to list."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:165
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:165"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:165"
 msgid "`options` (table, optional): Read options."
 msgstr "`options` (table, optional): Read options."
 
@@ -421,8 +399,7 @@ msgid "Returns: `table`."
 msgstr "Returns: `table`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:168
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:168"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:168"
 msgid "Behavior:"
 msgstr "Behavior:"
 
@@ -435,8 +412,7 @@ msgid "Returns an empty array when the prefix does not exist."
 msgstr "Returns an empty array when the prefix does not exist."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:173
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:173"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:173"
 msgid "Example:"
 msgstr "Example:"
 
@@ -445,10 +421,9 @@ msgid "request"
 msgstr "request"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:186
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:186"
-msgid "`Unreleased` - Introduced."
-msgstr "`Unreleased` - Introduced."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:186"
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - 追加。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:188
 msgid "Canonical API name: `ptool.consul.Connection:request`."
@@ -474,19 +449,18 @@ msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:197
 msgid ""
-"`path` (string, optional): A Consul-relative path such as `\"/v1/status/"
-"leader\"`."
+"`path` (string, optional): A Consul-relative path such as `"
+"\"/v1/status/leader\"`."
 msgstr ""
-"`path` (string, optional): A Consul-relative path such as `\"/v1/status/"
-"leader\"`."
+"`path` (string, optional): A Consul-relative path such as `"
+"\"/v1/status/leader\"`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:199
 msgid "`url` (string, optional): An explicit absolute URL."
 msgstr "`url` (string, optional): An explicit absolute URL."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:201
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:201"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:201"
 msgid "Notes:"
 msgstr "Notes:"
 
@@ -503,7 +477,41 @@ msgstr ""
 "`timeout_ms` when they are configured and not overridden by the request."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:207
-msgctxt ""
-"/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:207"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:207"
 msgid "Example:"
 msgstr "Example:"
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:7"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:42"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:79"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:108"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:140"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:158"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
+
+#~ msgctxt ""
+#~ "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/consul.md:186"
+#~ msgid "`Unreleased` - Introduced."
+#~ msgstr "`Unreleased` - Introduced."
