@@ -35,6 +35,6 @@ mod zip;
 pub use lua_world::{LuaWorld, LuaWorldConfig, RunConfig};
 pub use runner::{run_repl, run_repl_with_console, run_script, run_script_with_console};
 
-pub fn format_error_report(err: &(dyn std::error::Error + 'static)) -> String {
+pub fn format_error_report(err: &(dyn std::error::Error + 'static)) -> ptool_console::ErrorReport {
     lua_error::render_any_error(err)
 }

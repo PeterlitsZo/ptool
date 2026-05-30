@@ -1,4 +1,5 @@
 use mlua::{Lua, Table};
+use ptool_console::ErrorReport;
 use ptool_engine::{Error as EngineError, ErrorKind as EngineErrorKind};
 use std::error::Error as StdError;
 use std::fmt;
@@ -104,17 +105,14 @@ impl LuaError {
         let code = status
             .map(|value| value.to_string())
             .unwrap_or_else(|| "terminated by signal".to_string());
-        let mut message = format!("{op} command `{cmd}` failed with status {code}");
         let trimmed_stderr = stderr.map(str::trim).filter(|value| !value.is_empty());
-        if let Some(stderr) = trimmed_stderr {
-            message.push_str(": ");
-            message.push_str(stderr);
-        }
-
-        let mut error = Self::new("command_failed", message)
-            .with_op(op)
-            .with_cmd(cmd)
-            .with_detail(format!("status: {code}"));
+        let mut error = Self::new(
+            "command_failed",
+            format!("{op} command `{cmd}` failed with status {code}"),
+        )
+        .with_op(op)
+        .with_cmd(cmd)
+        .with_detail(format!("status: {code}"));
         if let Some(status) = status {
             error = error.with_status(status);
         }
@@ -186,29 +184,26 @@ impl LuaError {
         Ok(table)
     }
 
-    pub(crate) fn render_report(&self) -> String {
-        let mut lines = vec![self.message.clone()];
-        push_report_field(&mut lines, "kind", Some(self.kind.as_str()));
-        push_report_field(&mut lines, "op", self.op.as_deref());
-        push_report_field(&mut lines, "detail", self.detail.as_deref());
-        push_report_field(&mut lines, "path", self.path.as_deref());
-        push_report_field(&mut lines, "cmd", self.cmd.as_deref());
+    pub(crate) fn to_report(&self) -> ErrorReport {
+        let mut report = ErrorReport::new(self.message.clone());
+        push_report_field(&mut report, "kind", Some(self.kind.as_str()));
+        push_report_field(&mut report, "op", self.op.as_deref());
+        push_report_field(&mut report, "detail", self.detail.as_deref());
+        push_report_field(&mut report, "path", self.path.as_deref());
+        push_report_field(&mut report, "cmd", self.cmd.as_deref());
         push_report_field(
-            &mut lines,
+            &mut report,
             "status",
             self.status.as_ref().map(ToString::to_string).as_deref(),
         );
-        push_report_field(&mut lines, "url", self.url.as_deref());
-        push_report_field(&mut lines, "input", self.input.as_deref());
-        push_report_field(&mut lines, "cwd", self.cwd.as_deref());
-        push_report_field(&mut lines, "target", self.target.as_deref());
+        push_report_field(&mut report, "url", self.url.as_deref());
+        push_report_field(&mut report, "input", self.input.as_deref());
+        push_report_field(&mut report, "cwd", self.cwd.as_deref());
+        push_report_field(&mut report, "target", self.target.as_deref());
         if let Some(stderr) = self.stderr.as_deref().filter(|value| !value.is_empty()) {
-            lines.push("stderr:".to_string());
-            for line in stderr.lines() {
-                lines.push(format!("  {line}"));
-            }
+            report.push_block("stderr", stderr.lines());
         }
-        lines.join("\n")
+        report
     }
 }
 
@@ -247,21 +242,21 @@ pub(crate) fn caught_error_to_table(lua: &Lua, err: &mlua::Error) -> mlua::Resul
     }
 }
 
-pub(crate) fn render_error_report(err: &mlua::Error) -> String {
+pub(crate) fn render_error_report(err: &mlua::Error) -> ErrorReport {
     match extract_lua_error(err) {
-        Some(lua_err) => lua_err.render_report(),
-        None => err.to_string(),
+        Some(lua_err) => lua_err.to_report(),
+        None => ErrorReport::new(err.to_string()),
     }
 }
 
-pub(crate) fn render_any_error(err: &(dyn StdError + 'static)) -> String {
+pub(crate) fn render_any_error(err: &(dyn StdError + 'static)) -> ErrorReport {
     if let Some(lua_err) = err.downcast_ref::<LuaError>() {
-        return lua_err.render_report();
+        return lua_err.to_report();
     }
     if let Some(lua_err) = err.downcast_ref::<mlua::Error>() {
         return render_error_report(lua_err);
     }
-    err.to_string()
+    ErrorReport::new(err.to_string())
 }
 
 fn extract_lua_error(err: &mlua::Error) -> Option<&LuaError> {
@@ -317,8 +312,8 @@ fn engine_kind_name(kind: EngineErrorKind) -> &'static str {
     }
 }
 
-fn push_report_field(lines: &mut Vec<String>, name: &str, value: Option<&str>) {
+fn push_report_field(report: &mut ErrorReport, name: &str, value: Option<&str>) {
     if let Some(value) = value.filter(|value| !value.is_empty()) {
-        lines.push(format!("{name}: {value}"));
+        report.push_field(name, value);
     }
 }

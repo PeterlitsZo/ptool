@@ -10,6 +10,18 @@ const REPL_CONTINUATION_PROMPT: &str = "... ";
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Console;
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct ErrorReport {
+    summary: String,
+    details: Vec<ErrorDetail>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum ErrorDetail {
+    Field { name: String, value: String },
+    Block { name: String, lines: Vec<String> },
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum LogLevel {
     Trace,
@@ -188,8 +200,8 @@ impl Console {
         self.write_stdout_line(rendered)
     }
 
-    pub fn repl_runtime_error(&self, report: &str) -> io::Result<()> {
-        self.write_stdout_line(&format!("error: {report}"))
+    pub fn repl_runtime_error(&self, report: &ErrorReport) -> io::Result<()> {
+        self.render_error_report(OutputTarget::Stdout, None, report)
     }
 
     pub fn repl_exit(&self) -> io::Result<()> {
@@ -206,12 +218,16 @@ impl Console {
         self.write_stderr_line(usage)
     }
 
-    pub fn show_script_run_error(&self, filename: &str, report: &str) -> io::Result<()> {
-        self.write_stderr_line(&format!("Failed to run Lua script `{filename}`:\n{report}"))
+    pub fn show_script_run_error(&self, filename: &str, report: &ErrorReport) -> io::Result<()> {
+        self.render_error_report(
+            OutputTarget::Stderr,
+            Some(&format!("Failed to run Lua script `{filename}`:")),
+            report,
+        )
     }
 
-    pub fn show_repl_start_error(&self, report: &str) -> io::Result<()> {
-        self.write_stderr_line(&format!("Failed to start REPL:\n{report}"))
+    pub fn show_repl_start_error(&self, report: &ErrorReport) -> io::Result<()> {
+        self.render_error_report(OutputTarget::Stderr, Some("Failed to start REPL:"), report)
     }
 
     pub fn show_version_entry(&self, label: &str, width: usize, value: &str) -> io::Result<()> {
@@ -272,6 +288,51 @@ impl Console {
         rendered.push_str(&render_command_lines(command, color_enabled));
         self.write_stdout(&rendered)
     }
+
+    fn render_error_report(
+        &self,
+        target: OutputTarget,
+        heading: Option<&str>,
+        report: &ErrorReport,
+    ) -> io::Result<()> {
+        let rendered = render_error_report(target.is_terminal(self), heading, report);
+        target.write(self, &rendered)
+    }
+}
+
+impl ErrorReport {
+    pub fn new(summary: impl Into<String>) -> Self {
+        Self {
+            summary: summary.into(),
+            details: Vec::new(),
+        }
+    }
+
+    pub fn summary(&self) -> &str {
+        &self.summary
+    }
+
+    pub fn details(&self) -> &[ErrorDetail] {
+        &self.details
+    }
+
+    pub fn push_field(&mut self, name: impl Into<String>, value: impl Into<String>) {
+        self.details.push(ErrorDetail::Field {
+            name: name.into(),
+            value: value.into(),
+        });
+    }
+
+    pub fn push_block(
+        &mut self,
+        name: impl Into<String>,
+        lines: impl IntoIterator<Item = impl Into<String>>,
+    ) {
+        self.details.push(ErrorDetail::Block {
+            name: name.into(),
+            lines: lines.into_iter().map(Into::into).collect(),
+        });
+    }
 }
 
 impl LogLevel {
@@ -327,6 +388,13 @@ impl OutputTarget {
             Self::Stderr => console.write_stderr_line(text),
         }
     }
+
+    fn write(self, console: &Console, text: &str) -> io::Result<()> {
+        match self {
+            Self::Stdout => console.write_stdout(text),
+            Self::Stderr => console.write_stderr(text),
+        }
+    }
 }
 
 fn style_if(enabled: bool, text: &str, style: impl FnOnce(&str) -> String) -> String {
@@ -354,6 +422,77 @@ fn render_command_lines(command: &str, color_enabled: bool) -> String {
     }
     rendered.push('\n');
     rendered
+}
+
+fn render_error_report(color_enabled: bool, heading: Option<&str>, report: &ErrorReport) -> String {
+    let mut rendered = String::new();
+    let detail_depth = if heading.is_some() { 2 } else { 1 };
+
+    if let Some(heading) = heading {
+        push_error_line(&mut rendered, color_enabled, 0, heading);
+        push_error_line(&mut rendered, color_enabled, 1, report.summary());
+    } else {
+        push_error_line(&mut rendered, color_enabled, 0, report.summary());
+    }
+
+    for detail in report.details() {
+        match detail {
+            ErrorDetail::Field { name, value } => {
+                push_error_field_line(&mut rendered, color_enabled, detail_depth, name, value);
+            }
+            ErrorDetail::Block { name, lines } => {
+                push_error_field_line(&mut rendered, color_enabled, detail_depth, name, "");
+                for line in lines {
+                    push_error_line(&mut rendered, color_enabled, detail_depth + 1, line);
+                }
+            }
+        }
+    }
+
+    rendered
+}
+
+fn push_error_line(rendered: &mut String, color_enabled: bool, depth: usize, text: &str) {
+    for line in text.split('\n') {
+        rendered.push_str(&style_if(color_enabled, "  !", |value| {
+            value.red().bold().to_string()
+        }));
+        rendered.push_str(&"  ".repeat(depth));
+        rendered.push(' ');
+        rendered.push_str(&style_if(color_enabled, line, |value| {
+            if depth == 0 {
+                value.red().bold().to_string()
+            } else if depth == 1 {
+                value.bold().to_string()
+            } else {
+                value.to_string()
+            }
+        }));
+        rendered.push('\n');
+    }
+}
+
+fn push_error_field_line(
+    rendered: &mut String,
+    color_enabled: bool,
+    depth: usize,
+    name: &str,
+    value: &str,
+) {
+    rendered.push_str(&style_if(color_enabled, "  !", |text| {
+        text.red().bold().to_string()
+    }));
+    rendered.push_str(&"  ".repeat(depth));
+    rendered.push(' ');
+    rendered.push_str(&style_if(color_enabled, name, |text| {
+        text.cyan().bold().to_string()
+    }));
+    rendered.push(':');
+    if !value.is_empty() {
+        rendered.push(' ');
+        rendered.push_str(value);
+    }
+    rendered.push('\n');
 }
 
 fn format_user_host(user: &str, host: &str) -> String {

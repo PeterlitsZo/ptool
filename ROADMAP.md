@@ -12,7 +12,7 @@
 - [x] Support `p.log.fatal` -- log fatal message and exit.
 - [ ] ~~Let the `p.run` (and more) show colored output.~~
 - [x] For `p.run_shell`, do not show the `bash -c`.
-- [ ] Structured and colorful error reported:
+- [x] Structured and colorful error reported:
       ```
         ! Failed to run Lua script `./scripts/build.lua`:
         !   ptool.run command `cargo` failed with status 101
@@ -23,8 +23,9 @@
         !     status: 101
         !     cwd: /Users/peterlits/Proj/ft/ft-user-service
       ```
-- [ ] Support `p.consul` module.
+- [x] Support `p.consul` module.
 - [ ] Let `p.tbl` have `any` and `all` methods, etc.
+- [ ] Support `p.is_root` method?
 
 ## v0.9.0
 
