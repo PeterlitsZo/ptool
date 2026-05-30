@@ -1,0 +1,186 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:1
+msgid "JSON API"
+msgstr "API JSON"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:3
+msgid ""
+"JSON parsing and serialization helpers are available under `ptool.json` and "
+"`p.json`."
+msgstr ""
+"Las utilidades para analizar y serializar JSON están disponibles bajo "
+"`ptool.json` y `p.json`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:6
+msgid "ptool.json.parse"
+msgstr "ptool.json.parse"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:8
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:8"
+msgid "`v0.3.0` - Introduced."
+msgstr "`v0.3.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:10
+msgid "`ptool.json.parse(input)` parses a JSON string into a Lua value."
+msgstr ""
+"`ptool.json.parse(input)` analiza una cadena JSON y la convierte en un valor "
+"Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:12
+msgid "`input` (string, required): The JSON text."
+msgstr "`input` (string, obligatorio): El texto JSON."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:13
+msgid "Returns: The parsed Lua value. The root can be any JSON type."
+msgstr ""
+"Devuelve: El valor Lua analizado. La raíz puede ser cualquier tipo JSON."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:15
+msgid "Type mapping:"
+msgstr "Asignación de tipos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:17
+msgid "JSON object -> Lua table"
+msgstr "Objeto JSON -> tabla Lua"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:18
+msgid "JSON array -> Lua sequence table (1-based)"
+msgstr "Array JSON -> tabla secuencial Lua (base 1)"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:19
+msgid "JSON string -> Lua string"
+msgstr "Cadena JSON -> cadena Lua"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:20
+msgid "JSON integer that fits in `i64` -> Lua integer"
+msgstr "Entero JSON que cabe en `i64` -> entero Lua"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:21
+msgid "Other JSON number -> Lua number"
+msgstr "Otro número JSON -> número Lua"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:22
+msgid "JSON boolean -> Lua boolean"
+msgstr "Booleano JSON -> booleano Lua"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:23
+msgid "JSON null -> Lua `nil`"
+msgstr "JSON null -> Lua `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:25
+msgid "Error behavior:"
+msgstr "Comportamiento ante errores:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:27
+msgid "An error is raised if `input` is not a string."
+msgstr "Se produce un error si `input` no es una cadena."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:28
+msgid ""
+"A JSON syntax error raises an error whose message includes the parser detail "
+"from `serde_json`."
+msgstr ""
+"Un error de sintaxis JSON produce un error cuyo mensaje incluye el detalle "
+"del analizador de `serde_json`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:31"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:41
+msgid "ptool.json.stringify"
+msgstr "ptool.json.stringify"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
+msgid "`v0.3.0` - Introduced."
+msgstr "`v0.3.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:45
+msgid ""
+"`ptool.json.stringify(value[, options])` converts a Lua value to a JSON "
+"string."
+msgstr ""
+"`ptool.json.stringify(value[, options])` convierte un valor Lua en una "
+"cadena JSON."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:47
+msgid "`value` (JSON-compatible Lua value, required): The value to encode."
+msgstr ""
+"`value` (valor Lua compatible con JSON, obligatorio): El valor que se va a "
+"codificar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:48
+msgid "`options` (table, optional): Serialization options."
+msgstr "`options` (table, opcional): Opciones de serialización."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:49
+msgid ""
+"`options.pretty` (boolean, optional): When `true`, output pretty-printed "
+"JSON. Defaults to `false`."
+msgstr ""
+"`options.pretty` (boolean, opcional): Cuando es `true`, genera JSON con "
+"formato legible. Por defecto es `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:51
+msgid "Returns: The encoded JSON string."
+msgstr "Devuelve: La cadena JSON codificada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:53
+msgid "Behavior:"
+msgstr "Comportamiento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:55
+msgid "Default output is compact JSON with no extra whitespace."
+msgstr "La salida por defecto es JSON compacto, sin espacios adicionales."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:56
+msgid "Pretty output uses indented multi-line JSON."
+msgstr "La salida pretty usa JSON multilínea con indentación."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:57
+msgid ""
+"Values must be JSON-compatible. Functions, threads, userdata, and other non-"
+"serializable Lua values raise an error."
+msgstr ""
+"Los valores deben ser compatibles con JSON. Funciones, threads, userdata y "
+"otros valores Lua no serializables producen un error."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60"
+msgid "Example:"
+msgstr "Ejemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:72
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
+msgid ""
+"`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and "
+"are not preserved as JSON object fields."
+msgstr ""
+"Los valores `nil` dentro de tablas Lua siguen el comportamiento de "
+"conversión serde de `mlua` y no se conservan como campos de objetos JSON."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
+msgid ""
+"Array/object detection for Lua tables follows `mlua`'s serde conversion "
+"rules."
+msgstr ""
+"La detección de array/objeto para tablas Lua sigue las reglas de conversión "
+"serde de `mlua`."

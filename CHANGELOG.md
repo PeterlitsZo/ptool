@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+TODO...
+
+## v0.10.0 (2026-05-30)
+
 ### Added
 
 - Added more `ptool.tbl` / `p.tbl` helpers for dense Lua list tables:

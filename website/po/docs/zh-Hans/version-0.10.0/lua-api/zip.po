@@ -1,0 +1,180 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-16 16:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:1
+msgid "Zip API"
+msgstr "Zip API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:3
+msgid "Compression helpers are available under `ptool.zip` and `p.zip`."
+msgstr "压缩辅助能力位于 `ptool.zip` 和 `p.zip` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:5
+msgid ""
+"`ptool.zip` works on raw Lua strings, so it can be used for both text and "
+"binary payloads."
+msgstr "`ptool.zip` 直接处理原始 Lua 字符串，因此既可用于文本，也可用于二进制载荷。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:8
+msgid "Supported format names:"
+msgstr "支持的格式名："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:10
+msgid "`gzip` and `gz`"
+msgstr "`gzip` 和 `gz`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:11
+msgid "`zlib`"
+msgstr "`zlib`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:12
+msgid "`deflate`"
+msgstr "`deflate`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:13
+msgid "`bzip2` and `bz2`"
+msgstr "`bzip2` 和 `bz2`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:14
+msgid "`xz`"
+msgstr "`xz`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:15
+msgid "`zstd`, `zst`, and `zstandard`"
+msgstr "`zstd`、`zst` 和 `zstandard`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:17
+msgid "ptool.zip.compress"
+msgstr "ptool.zip.compress"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:19
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:19"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:21
+msgid ""
+"`ptool.zip.compress(format, input)` compresses a Lua string with the "
+"requested format."
+msgstr "`ptool.zip.compress(format, input)` 使用指定格式压缩 Lua 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:24
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:24"
+msgid "`format` (string, required): The compression format name."
+msgstr "`format`（string，必填）：压缩格式名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:25
+msgid ""
+"`input` (string, required): The input Lua string. Compression uses the "
+"string's raw bytes unchanged."
+msgstr "`input`（string，必填）：输入的 Lua 字符串。压缩时会原样使用字符串的原始字节。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:27
+msgid "Returns: `string` (compressed bytes as a Lua string)."
+msgstr "返回：`string`（以 Lua 字符串表示的压缩后字节）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:29
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:29"
+msgid "Error behavior:"
+msgstr "错误行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:31"
+msgid "An error is raised if `format` is not a supported format name."
+msgstr "如果 `format` 不是受支持的格式名，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:32
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:32"
+msgid "An error is raised if `input` is not a string."
+msgstr "如果 `input` 不是字符串，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:33
+msgid "An error is raised if the encoder fails for the requested format."
+msgstr "如果请求格式对应的编码器失败，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:35
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:35"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:44
+msgid "ptool.zip.decompress"
+msgstr "ptool.zip.decompress"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:46
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:46"
+msgid "`v0.8.0` - Introduced."
+msgstr "`v0.8.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:48
+msgid ""
+"`ptool.zip.decompress(format, input)` decompresses a Lua string with the "
+"requested format."
+msgstr "`ptool.zip.decompress(format, input)` 使用指定格式解压 Lua 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:51
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:51"
+msgid "`format` (string, required): The compression format name."
+msgstr "`format`（string，必填）：压缩格式名。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:52
+msgid "`input` (string, required): The compressed Lua string."
+msgstr "`input`（string，必填）：压缩后的 Lua 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:53
+msgid "Returns: `string` (decompressed bytes as a Lua string)."
+msgstr "返回：`string`（以 Lua 字符串表示的解压后字节）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:55
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:55"
+msgid "Error behavior:"
+msgstr "错误行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:57
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:57"
+msgid "An error is raised if `format` is not a supported format name."
+msgstr "如果 `format` 不是受支持的格式名，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:58
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:58"
+msgid "An error is raised if `input` is not a string."
+msgstr "如果 `input` 不是字符串，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:59
+msgid ""
+"An error is raised if `input` is not valid data for the requested format."
+msgstr "如果 `input` 不是该格式的有效数据，会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:61
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:61"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:70
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:72
+msgid ""
+"`ptool.zip` does not infer formats from file names. Pass the format "
+"explicitly."
+msgstr "`ptool.zip` 不会从文件名推断格式。请显式传入格式。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/terse-bay/ptool/website/docs/lua-api/zip.md:74
+msgid ""
+"`ptool.zip` operates on a single byte string and does not expose ZIP archive-"
+"entry APIs such as listing files inside a `.zip` container."
+msgstr ""
+"`ptool.zip` 只处理单个字节串，不提供 ZIP 档案条目 API，例如列出 `.zip` 容器"
+"里的文件。"

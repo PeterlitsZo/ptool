@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 10:03+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:1
+msgid "Shell API"
+msgstr "シェル API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:3
+msgid "Shell parsing helpers are available under `ptool.sh` and `p.sh`."
+msgstr "シェル解析ヘルパーは `ptool.sh` と `p.sh` にあります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:5
+msgid "These helpers work at the shell-word level. They are intended for splitting, quoting, and joining argument strings using POSIX shell-style rules, not for parsing full shell syntax such as pipelines, redirections, command substitution, or variable expansion."
+msgstr "これらのヘルパーは shell-word レベルで動作します。POSIX 風のシェル規則で引数文字列を分割・引用・結合するためのものであり、パイプ、リダイレクト、コマンド置換、変数展開のような完全なシェル構文を解析するものではありません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:10
+msgid "ptool.sh.split"
+msgstr "ptool.sh.split"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:12
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:14
+msgid "`ptool.sh.split(command)` parses a command string using shell-style rules and returns an argument array."
+msgstr "`ptool.sh.split(command)` はシェル風ルールでコマンド文字列を解析し、 引数配列を返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:17
+msgid "`command` (string, required): The command string to split."
+msgstr "`command` (string, 必須): 分割するコマンド文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:18
+msgid "Returns: `string[]`."
+msgstr "戻り値: `string[]`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:20
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:20"
+msgid "Behavior:"
+msgstr "動作:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:22
+msgid "This parses shell words only. It does not interpret shell operators or execute expansions."
+msgstr "これは shell words だけを解析します。シェル演算子を解釈したり、展開を実行したりはしません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:25
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:25"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:31
+msgid "The `args` above is equivalent to:"
+msgstr "上の `args` は次と等価です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:37
+msgid "ptool.sh.quote"
+msgstr "ptool.sh.quote"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:39"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 導入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:41
+msgid "`ptool.sh.quote(word)` quotes a single shell word so it can be embedded safely into a shell command string."
+msgstr "`ptool.sh.quote(word)` は単一の shell word を引用し、シェルコマンド文字列へ安全に埋め込めるようにします。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:44
+msgid "`word` (string, required): The shell word to quote."
+msgstr "`word` (string, 必須): 引用する shell word。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:45
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:45"
+msgid "Returns: `string`."
+msgstr "戻り値: `string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:47
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:47"
+msgid "Behavior:"
+msgstr "動作:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:49
+msgid "The returned string is shell-safe and semantically equivalent to the input word."
+msgstr "返される文字列はシェルに対して安全で、入力 word と意味的に等価です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:51
+msgid "This preserves shell-word meaning, not the original textual spelling."
+msgstr "保持されるのは shell word としての意味であり、元のテキスト表記そのものではありません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:53
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:53"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:60
+msgid "ptool.sh.join"
+msgstr "ptool.sh.join"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:62"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 導入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:64
+msgid "`ptool.sh.join(words)` joins an argument array into a shell command string, quoting words when needed."
+msgstr "`ptool.sh.join(words)` は引数配列をシェルコマンド文字列へ結合し、必要に応じて words を引用します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:67
+msgid "`words` (string[], required): The shell words to join."
+msgstr "`words` (string[], 必須): 結合する shell words。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:68
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:68"
+msgid "Returns: `string`."
+msgstr "戻り値: `string`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:70
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:70"
+msgid "Behavior:"
+msgstr "動作:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:72
+msgid "Consecutive words are joined with a single space."
+msgstr "連続する words は単一の空白で結合されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:73
+msgid "The output is suitable for passing to a POSIX-style shell."
+msgstr "出力は POSIX 風シェルへ渡すのに適しています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:74
+msgid "This aims for shell-word round-tripping, so `ptool.sh.split(ptool.sh.join(words))` is equivalent to `words`."
+msgstr "これは shell-word レベルの往復性を目指しているため、`ptool.sh.split(ptool.sh.join(words))` は `words` と等価になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:76
+msgid "`ptool.sh.join(ptool.sh.split(command))` may normalize quoting and spacing instead of preserving the original command text."
+msgstr "`ptool.sh.join(ptool.sh.split(command))` は、元のコマンド文字列をそのまま保つのではなく、引用や空白を正規化することがあります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/sh.md:79"
+msgid "Example:"
+msgstr "例:"

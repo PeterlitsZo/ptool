@@ -22,7 +22,7 @@ minijinja = { version = "2.18.0", features = ["json", "urlencode"] }
 murmur3 = "0.5.2"
 opendal = { version = "0.56.0", features = ["services-s3"] }
 owo-colors = "4.3.0"
-ptool-console = { version = "0.9.1", path = "../ptool-console" }
+ptool-console = { path = "../ptool-console" }
 ratatui = "0.30.0"
 redis = { version = "1.2.1", features = ["tokio-comp"] }
 regex = "1.12.3"
