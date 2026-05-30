@@ -71,6 +71,32 @@ print(ptool.version())
 print(p.version())
 ```
 
+## ptool.is_root
+
+> `Unreleased` - 追加。
+
+`ptool.is_root()` は、現在の `ptool` プロセスが root ユーザーとして実行されているかどうかを返します。
+
+- 戻り値: `boolean`。
+
+挙動:
+
+- Unix 系プラットフォームでは、現在の実効ユーザーが root かどうかを確認します。
+- 非 Unix プラットフォームでは、現在は `false` を返します。
+- これは `ptool.run(...)` や `ptool.exec(...)` などのローカルコマンドヘルパーで `sudo = true` と組み合わせて使うのに便利です。
+
+例:
+
+```lua
+if not ptool.is_root() then
+  ptool.run({
+    cmd = "apt-get",
+    args = {"update"},
+    sudo = true,
+  })
+end
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.
@@ -478,6 +504,7 @@ res:assert_ok()
 - `args` (string[], 任意): 引数リスト。
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
+- `sudo` (boolean, optional): 現在のユーザーが root でない場合に、コマンドを `sudo` 経由で実行するかどうか。デフォルトは `false` です。
 - `stdin` (string|table, 任意): 子プロセスの stdin の入力元。
   - 文字列を指定すると、その文字列が子プロセスの stdin に送られます。
   - テーブル `{ file = "path" }` を指定すると、ファイルから stdin を読み込みます。
@@ -499,8 +526,12 @@ res:assert_ok()
   - `"null"`: 出力を破棄します。
   - `{ file = "path" }`: stderr をファイルへ書き込み、最初に内容を切り詰めます。
   - `{ file = "path", append = true }`: stderr をファイルへ追記します。
-- `ptool.run(cmdline, options)` や `ptool.run(cmd, args, options)` などのショートカット呼び出し形式が使用される場合、呼び出しごとの `options` テーブルは同じ意味の `stdin` および `trim` も受け入れます。
+- `ptool.run(cmdline, options)` や `ptool.run(cmd, args, options)` などのショートカット呼び出し形式を使う場合、呼び出しごとの `options` テーブルでは、同じ意味で `sudo`、`stdin`、`trim` も指定できます。
 - ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス `cwd` からの相対パスとして解決されます。
+- `sudo = true` の場合:
+  - 現在のユーザーがすでに root なら、`ptool.run(...)` は `sudo` を付けずにコマンドを直接実行します。
+  - そうでなければ、`ptool.run(...)` は `sudo <cmd> <args...>` としてコマンドを実行します。
+  - Windows では、現在は `unsupported` エラーになります。
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -531,6 +562,12 @@ ptool.run({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.run({
+  cmd = "apt-get",
+  args = {"update"},
+  sudo = true,
 })
 
 local res = ptool.run({
@@ -720,6 +757,7 @@ ptool.exec({ cmd = "echo", args = {"hello", "world"} })
 - `args` (string[], 任意): 引数リスト。
 - `cwd` (string, 任意): 子プロセスの作業ディレクトリ。
 - `env` (table, 任意): 追加の環境変数。キーは変数名、値は変数値です。
+- `sudo` (boolean, optional): 現在のユーザーが root でない場合に、置換先コマンドを `sudo` 経由で実行するかどうか。デフォルトは `false` です。
 - `stdin` (table, 任意): 子プロセスの stdin の入力元。
   - `{ file = "path" }`: ファイルから stdin を読み込みます。
 - `echo` (boolean, 任意): 置換前にコマンド情報を表示するかどうか。省略時は `ptool.config({ run = { echo = ... } })` の値が使われ、それも未設定ならデフォルトは `true` です。
@@ -736,6 +774,10 @@ ptool.exec({ cmd = "echo", args = {"hello", "world"} })
   - `{ file = "path", append = true }`: stderr をファイルへ追記します。
 - `ptool.run` と異なり、`ptool.exec` は文字列 `stdin`、`stdout = "capture"`、`stderr = "capture"`、`trim`、`check`、`retry` をサポートしません。
 - ファイルリダイレクトのパスは、絶対パスが指定されない限り、有効な子プロセス `cwd` からの相対パスとして解決されます。
+- `sudo = true` の場合:
+  - 現在のユーザーがすでに root なら、`ptool.exec(...)` は現在のプロセスをそのコマンドへ直接置き換えます。
+  - そうでなければ、`ptool.exec(...)` は現在のプロセスを `sudo <cmd> <args...>` へ置き換えます。
+  - Windows では、現在は `unsupported` エラーになります。
 - `confirm = true` の場合:
   - ユーザーが実行を拒否すると即座にエラーになります。
   - 現在の環境が非対話 (TTY なし) なら即座にエラーになります。
@@ -762,5 +804,11 @@ ptool.exec({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.exec({
+  cmd = "systemctl",
+  args = {"restart", "nginx"},
+  sudo = true,
 })
 ```

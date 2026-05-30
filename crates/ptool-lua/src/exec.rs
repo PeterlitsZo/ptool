@@ -3,7 +3,8 @@ use crate::lua_world::RunConfig;
 use mlua::{Lua, Table, Value, Variadic};
 use ptool_engine::{
     PipeCommand, PipeResult, PromptConfirmOptions, PtoolEngine, RunResult, RunStdin, RunStreamMode,
-    format_command_for_display, format_pipeline_for_display, resolve_run_cwd,
+    format_command_for_display, format_pipeline_for_display, resolve_effective_command,
+    resolve_run_cwd,
 };
 use std::path::Path;
 
@@ -37,6 +38,7 @@ struct RunOptions {
 struct RunCallOverrides {
     cwd: Option<String>,
     env: Option<Vec<(String, String)>>,
+    sudo: Option<bool>,
     stdin: Option<StdinMode>,
     trim: Option<bool>,
     echo: Option<bool>,
@@ -56,6 +58,7 @@ struct ExecOptions {
 struct ExecCallOverrides {
     cwd: Option<String>,
     env: Option<Vec<(String, String)>>,
+    sudo: Option<bool>,
     stdin: Option<StdinMode>,
     stdout: Option<StreamMode>,
     stderr: Option<StreamMode>,
@@ -118,6 +121,7 @@ pub(crate) fn run_shell_command(
         inner: ptool_engine::RunOptions {
             cmd: shell.to_owned(),
             args: vec!["-c".to_string(), command.clone()],
+            sudo: false,
             cwd: None,
             env: Vec::new(),
             env_remove: Vec::new(),
@@ -427,7 +431,12 @@ pub(crate) fn exec_command(
     let local_user_host = options.echo.then(|| engine.current_user_host());
 
     let display = if options.echo || options.confirm {
-        let command = format_command_for_display(&options.inner.cmd, &options.inner.args);
+        let command = resolve_display_command(
+            &options.inner.cmd,
+            &options.inner.args,
+            options.inner.sudo,
+            "ptool.exec",
+        )?;
         Some((resolved_cwd.clone(), command))
     } else {
         None
@@ -505,7 +514,12 @@ fn execute_run_options(
     let resolved_cwd = resolve_run_cwd(current_dir, options.inner.cwd.as_deref());
     let local_user_host = options.echo.then(|| engine.current_user_host());
     let display = if options.echo || options.confirm || (options.check && options.retry) {
-        let command = format_command_for_display(&options.inner.cmd, &options.inner.args);
+        let command = resolve_display_command(
+            &options.inner.cmd,
+            &options.inner.args,
+            options.inner.sudo,
+            op,
+        )?;
         Some((resolved_cwd.clone(), command))
     } else {
         None
@@ -646,6 +660,7 @@ fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Resul
                     inner: ptool_engine::ExecOptions {
                         cmd,
                         args,
+                        sudo: false,
                         cwd: None,
                         env: Vec::new(),
                         env_remove: Vec::new(),
@@ -668,6 +683,7 @@ fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Resul
                 inner: ptool_engine::ExecOptions {
                     cmd: cmd.to_str()?.to_owned(),
                     args: parse_argsline(&argsline.to_str()?)?,
+                    sudo: false,
                     cwd: None,
                     env: Vec::new(),
                     env_remove: Vec::new(),
@@ -691,6 +707,7 @@ fn parse_exec_options(args: Variadic<Value>, defaults: RunConfig) -> mlua::Resul
                         inner: ptool_engine::ExecOptions {
                             cmd: cmd_or_cmdline.to_str()?.to_owned(),
                             args: parse_string_list(second_table)?,
+                            sudo: false,
                             cwd: None,
                             env: Vec::new(),
                             env_remove: Vec::new(),
@@ -768,6 +785,7 @@ fn parse_run_options(
                     inner: ptool_engine::RunOptions {
                         cmd,
                         args,
+                        sudo: false,
                         cwd: None,
                         env: Vec::new(),
                         env_remove: Vec::new(),
@@ -795,6 +813,7 @@ fn parse_run_options(
                 inner: ptool_engine::RunOptions {
                     cmd: cmd.to_str()?.to_owned(),
                     args: parse_argsline(&argsline.to_str()?)?,
+                    sudo: false,
                     cwd: None,
                     env: Vec::new(),
                     env_remove: Vec::new(),
@@ -825,6 +844,7 @@ fn parse_run_options(
                         inner: ptool_engine::RunOptions {
                             cmd: cmd_or_cmdline.to_str()?.to_owned(),
                             args: parse_string_list(second_table)?,
+                            sudo: false,
                             cwd: None,
                             env: Vec::new(),
                             env_remove: Vec::new(),
@@ -1123,6 +1143,7 @@ fn parse_full_options_table(
         inner: ptool_engine::RunOptions {
             cmd,
             args,
+            sudo: options.get::<Option<bool>>("sudo")?.unwrap_or(false),
             cwd,
             env,
             env_remove: Vec::new(),
@@ -1152,6 +1173,7 @@ fn parse_exec_full_options_table(options: Table, defaults: RunConfig) -> mlua::R
         inner: ptool_engine::ExecOptions {
             cmd,
             args: parse_named_args(&options)?,
+            sudo: options.get::<Option<bool>>("sudo")?.unwrap_or(false),
             cwd: options.get("cwd")?,
             env: parse_env_table(options.get::<Option<Table>>("env")?)?,
             env_remove: Vec::new(),
@@ -1238,6 +1260,7 @@ fn parse_overrides_table(options: Table, context: &str) -> mlua::Result<RunCallO
     Ok(RunCallOverrides {
         cwd: options.get("cwd")?,
         env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
+        sudo: options.get::<Option<bool>>("sudo")?,
         stdin: parse_optional_stdin(options.get::<Option<Value>>("stdin")?, context)?,
         trim: options.get::<Option<bool>>("trim")?,
         echo: options.get::<Option<bool>>("echo")?,
@@ -1261,6 +1284,7 @@ fn parse_exec_overrides_table(options: Table, context: &str) -> mlua::Result<Exe
     Ok(ExecCallOverrides {
         cwd: options.get("cwd")?,
         env: parse_optional_env_table(options.get::<Option<Table>>("env")?)?,
+        sudo: options.get::<Option<bool>>("sudo")?,
         stdin: parse_optional_stdin(options.get::<Option<Value>>("stdin")?, context)?,
         stdout: parse_stream_mode(options.get::<Option<Value>>("stdout")?, "stdout", context)?,
         stderr: parse_stream_mode(options.get::<Option<Value>>("stderr")?, "stderr", context)?,
@@ -1292,6 +1316,7 @@ fn apply_overrides(
         inner: ptool_engine::RunOptions {
             cmd,
             args,
+            sudo: overrides.sudo.unwrap_or(false),
             cwd: overrides.cwd,
             env: overrides.env.unwrap_or_default(),
             env_remove: Vec::new(),
@@ -1321,6 +1346,7 @@ fn apply_exec_overrides(
         inner: ptool_engine::ExecOptions {
             cmd,
             args,
+            sudo: overrides.sudo.unwrap_or(false),
             cwd: overrides.cwd,
             env: overrides.env.unwrap_or_default(),
             env_remove: Vec::new(),
@@ -1466,6 +1492,17 @@ fn parse_stream_mode(
             format!("`{field_name}` must be a string or table"),
         )),
     }
+}
+
+fn resolve_display_command(
+    cmd: &str,
+    args: &[String],
+    sudo: bool,
+    op: &str,
+) -> mlua::Result<String> {
+    let (cmd, args) = resolve_effective_command(cmd, args, sudo, op)
+        .map_err(|err| crate::lua_error::lua_error_from_engine(err, op))?;
+    Ok(format_command_for_display(&cmd, &args))
 }
 
 fn build_run_failed_error(

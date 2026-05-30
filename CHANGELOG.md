@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added `ptool.is_root()` / `p.is_root()` for checking whether the current
+  `ptool` process is running as root, plus a `sudo = true` option on local
+  process helpers such as `ptool.run(...)`, `ptool.run_capture(...)`, and
+  `ptool.exec(...)` so scripts can elevate only when needed.
 - Added the `ptool.consul` / `p.consul` module for Consul KV access, with
   connection helpers, metadata-rich `get` / `list` reads, CAS-aware `put` /
   `delete` writes, a raw `request` escape hatch, and documentation across all

@@ -204,6 +204,10 @@ impl LuaWorld {
         crate::version::current_ptool_version(&self.engine).to_string()
     }
 
+    pub(crate) fn is_root(&self) -> bool {
+        self.engine.is_root()
+    }
+
     pub(crate) fn unindent(&self, input: String) -> String {
         self.engine.text_unindent(&input)
     }

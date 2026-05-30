@@ -71,6 +71,32 @@ print(ptool.version())
 print(p.version())
 ```
 
+## ptool.is_root
+
+> `Unreleased` - Introduzido.
+
+`ptool.is_root()` retorna se o processo atual do `ptool` está sendo executado como o usuário root.
+
+- Retorna: `boolean`.
+
+Comportamento:
+
+- Em plataformas do tipo Unix, isso verifica se o usuário efetivo atual é root.
+- Em plataformas não Unix, atualmente isso retorna `false`.
+- Isso é útil junto com `sudo = true` em helpers de comando locais como `ptool.run(...)` e `ptool.exec(...)`.
+
+Exemplo:
+
+```lua
+if not ptool.is_root() then
+  ptool.run({
+    cmd = "apt-get",
+    args = {"update"},
+    sudo = true,
+  })
+end
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.
@@ -478,6 +504,7 @@ res:assert_ok()
 - `args` (string[], opcional): A lista de argumentos.
 - `cwd` (string, opcional): O diretório de trabalho do processo filho.
 - `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
+- `sudo` (boolean, optional): Se deve executar o comando via `sudo` quando o usuário atual não for root. O padrão é `false`.
 - `stdin` (string|table, opcional): Fonte de stdin do processo filho.
   - Uma string envia esse conteúdo para o stdin do processo filho.
   - Uma tabela `{ file = "path" }` lê o stdin a partir de um arquivo.
@@ -499,8 +526,12 @@ res:assert_ok()
   - `"null"`: Descarta a saída.
   - `{ file = "path" }`: Escreve stderr em um arquivo, truncando-o antes.
   - `{ file = "path", append = true }`: Acrescenta stderr ao final de um arquivo.
-- Quando formulários de chamada de atalho como `ptool.run(cmdline, options)` ou `ptool.run(cmd, args, options)` são usados, a tabela `options` por chamada também aceita `stdin` e `trim` com o mesmo significado.
+- Quando formas de chamada abreviadas como `ptool.run(cmdline, options)` ou `ptool.run(cmd, args, options)` são usadas, a tabela `options` por chamada também aceita `sudo`, `stdin` e `trim` com o mesmo significado.
 - Os caminhos de redirecionamento para arquivos são resolvidos em relação ao `cwd` efetivo do processo filho, a menos que um caminho absoluto seja fornecido.
+- Quando `sudo = true`:
+  - Se o usuário atual já for root, `ptool.run(...)` executa o comando diretamente sem adicionar `sudo`.
+  - Caso contrário, `ptool.run(...)` executa o comando como `sudo <cmd> <args...>`.
+  - No Windows, atualmente isso gera um erro `unsupported`.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
@@ -531,6 +562,12 @@ ptool.run({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.run({
+  cmd = "apt-get",
+  args = {"update"},
+  sudo = true,
 })
 
 local res = ptool.run({
@@ -720,6 +757,7 @@ Regras de argumento:
 - `args` (string[], opcional): A lista de argumentos.
 - `cwd` (string, opcional): O diretório de trabalho do processo filho.
 - `env` (table, opcional): Variáveis de ambiente adicionais, em que chaves são nomes de variáveis e valores são valores de variáveis.
+- `sudo` (boolean, optional): Se deve executar o comando de substituição via `sudo` quando o usuário atual não for root. O padrão é `false`.
 - `stdin` (table, opcional): Fonte de stdin do processo filho.
   - `{ file = "path" }`: Lê stdin a partir de um arquivo.
 - `echo` (boolean, opcional): Se informações do comando devem ser exibidas antes da substituição. Se omitido, é usado o valor de `ptool.config({ run = { echo = ... } })`; se ele também estiver ausente, o padrão é `true`.
@@ -736,6 +774,10 @@ Regras de argumento:
   - `{ file = "path", append = true }`: Acrescenta stderr ao final de um arquivo.
 - Diferentemente de `ptool.run`, `ptool.exec` não oferece suporte a `stdin` como string, `stdout = "capture"`, `stderr = "capture"`, `trim`, `check` nem `retry`.
 - Os caminhos de redirecionamento para arquivos são resolvidos em relação ao `cwd` efetivo do processo filho, a menos que um caminho absoluto seja fornecido.
+- Quando `sudo = true`:
+  - Se o usuário atual já for root, `ptool.exec(...)` substitui o processo atual diretamente pelo comando.
+  - Caso contrário, `ptool.exec(...)` substitui o processo atual por `sudo <cmd> <args...>`.
+  - No Windows, atualmente isso gera um erro `unsupported`.
 - Quando `confirm = true`:
   - Se o usuário recusar a execução, um erro é gerado imediatamente.
   - Se o ambiente atual não for interativo (sem TTY), um erro é gerado imediatamente.
@@ -762,5 +804,11 @@ ptool.exec({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.exec({
+  cmd = "systemctl",
+  args = {"restart", "nginx"},
+  sudo = true,
 })
 ```

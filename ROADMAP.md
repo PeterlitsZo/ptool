@@ -1,10 +1,16 @@
 # ROADMAP
 
-## v0.11.0
+## v0.12.0
 
 - [ ] Enhance the `ptool-console` crate.
+
+## v0.11.0
+
 - [ ] Support `p.etcd` module.
 - [ ] Enhance the `LuaError`. Make it be a enum.
+- [ ] Support `p.which` or `p.which_or_fatal` to check for command existence.
+- [ ] Support `p.template.write` to write to file directly.
+- [ ] Support `p.guard(cond):or_fatal("...")`.
 
 ## v0.10.0
 
@@ -24,8 +30,8 @@
         !     cwd: /Users/peterlits/Proj/ft/ft-user-service
       ```
 - [x] Support `p.consul` module.
-- [ ] Let `p.tbl` have `any` and `all` methods, etc.
-- [ ] Support `p.is_root` method?
+- [x] Let `p.tbl` have `any` and `all` methods, etc.
+- [ ] Support `p.is_root` method? Let p.run support option `sudo`?
 
 ## v0.9.0
 

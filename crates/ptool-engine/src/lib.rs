@@ -43,7 +43,8 @@ pub use error::{Error, ErrorKind, Result};
 pub use exec::{
     ExecOptions, PipeCommand, PipeOptions, PipeResult, RunOptions, RunResult, RunStdin,
     RunStreamMode, exec_replace, format_command_for_display, format_pipeline_for_display,
-    format_run_failed_message, resolve_run_cwd, run_command, run_pipeline,
+    format_run_failed_message, resolve_effective_command, resolve_run_cwd, run_command,
+    run_pipeline,
 };
 pub use fs::{
     FsCopyOptions, FsCopyResult, FsFileHandle, FsGlobOptions, FsMkdirOptions, FsOpenOptions,
@@ -157,6 +158,10 @@ impl PtoolEngine {
 
     pub fn current_user_host(&self) -> UserHost {
         platform::detect_current_user_host()
+    }
+
+    pub fn is_root(&self) -> bool {
+        platform::detect_current_is_root()
     }
 
     pub fn env_get(&self, name: &str) -> Result<Option<String>> {

@@ -87,6 +87,35 @@ print(ptool.version())
 print(p.version())
 ```
 
+## ptool.is_root
+
+> `Unreleased` - Introduced.
+
+`ptool.is_root()` returns whether the current `ptool` process is running as the
+root user.
+
+- Returns: `boolean`.
+
+Behavior:
+
+- On Unix-like platforms, this checks whether the current effective user is
+  root.
+- On non-Unix platforms, this currently returns `false`.
+- This is useful together with `sudo = true` on local command helpers such as
+  `ptool.run(...)` and `ptool.exec(...)`.
+
+Example:
+
+```lua
+if not ptool.is_root() then
+  ptool.run({
+    cmd = "apt-get",
+    args = {"update"},
+    sudo = true,
+  })
+end
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.
@@ -552,6 +581,8 @@ following fields:
 - `cwd` (string, optional): The child process working directory.
 - `env` (table, optional): Additional environment variables, where keys are
   variable names and values are variable values.
+- `sudo` (boolean, optional): Whether to run the command through `sudo` when
+  the current user is not root. Defaults to `false`.
 - `stdin` (string|table, optional): Child process stdin source.
   - A string sends that string to the child process stdin.
   - A table `{ file = "path" }` reads stdin from a file.
@@ -586,9 +617,14 @@ following fields:
   - `{ file = "path", append = true }`: Append stderr to a file.
 - When shortcut call forms such as `ptool.run(cmdline, options)` or
   `ptool.run(cmd, args, options)` are used, the per-call `options` table also
-  accepts `stdin` and `trim` with the same meaning.
+  accepts `sudo`, `stdin`, and `trim` with the same meaning.
 - File redirect paths are resolved relative to the effective child-process
   `cwd`, unless an absolute path is provided.
+- When `sudo = true`:
+  - If the current user is already root, `ptool.run(...)` executes the command
+    directly without adding `sudo`.
+  - Otherwise, `ptool.run(...)` executes the command as `sudo <cmd> <args...>`.
+  - On Windows, this currently raises an `unsupported` error.
 - When `confirm = true`:
   - If the user refuses the execution, an error is raised immediately.
   - If the current environment is not interactive (no TTY), an error is raised
@@ -621,6 +657,12 @@ ptool.run({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.run({
+  cmd = "apt-get",
+  args = {"update"},
+  sudo = true,
 })
 
 local res = ptool.run({
@@ -837,6 +879,8 @@ following fields:
 - `cwd` (string, optional): The child process working directory.
 - `env` (table, optional): Additional environment variables, where keys are
   variable names and values are variable values.
+- `sudo` (boolean, optional): Whether to run the replacement command through
+  `sudo` when the current user is not root. Defaults to `false`.
 - `stdin` (table, optional): Child process stdin source.
   - `{ file = "path" }`: Read stdin from a file.
 - `echo` (boolean, optional): Whether to echo command information before
@@ -859,6 +903,12 @@ following fields:
   `stdout = "capture"`, `stderr = "capture"`, `trim`, `check`, or `retry`.
 - File redirect paths are resolved relative to the effective child-process
   `cwd`, unless an absolute path is provided.
+- When `sudo = true`:
+  - If the current user is already root, `ptool.exec(...)` replaces the current
+    process with the command directly.
+  - Otherwise, `ptool.exec(...)` replaces the current process with
+    `sudo <cmd> <args...>`.
+  - On Windows, this currently raises an `unsupported` error.
 - When `confirm = true`:
   - If the user refuses the execution, an error is raised immediately.
   - If the current environment is not interactive (no TTY), an error is raised
@@ -886,5 +936,11 @@ ptool.exec({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.exec({
+  cmd = "systemctl",
+  args = {"restart", "nginx"},
+  sudo = true,
 })
 ```

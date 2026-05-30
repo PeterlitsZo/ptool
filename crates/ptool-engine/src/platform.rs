@@ -26,6 +26,7 @@ pub struct UserHost {
 }
 
 static CURRENT_USER_HOST: OnceLock<UserHost> = OnceLock::new();
+static CURRENT_IS_ROOT: OnceLock<bool> = OnceLock::new();
 
 pub(crate) fn detect_current_os() -> OS {
     normalize_os(std::env::consts::OS)
@@ -49,6 +50,10 @@ pub(crate) fn detect_current_username() -> Option<String> {
 
 pub(crate) fn detect_current_hostname() -> Option<String> {
     detect_current_host()
+}
+
+pub(crate) fn detect_current_is_root() -> bool {
+    *CURRENT_IS_ROOT.get_or_init(detect_current_is_root_uncached)
 }
 
 pub(crate) fn getenv(name: &str) -> Option<String> {
@@ -115,6 +120,33 @@ fn detect_current_user_host_uncached() -> UserHost {
 
 fn detect_current_host() -> Option<String> {
     first_non_empty_env_var(&["HOSTNAME", "COMPUTERNAME"]).or_else(detect_host_via_hostname_command)
+}
+
+#[cfg(unix)]
+fn detect_current_is_root_uncached() -> bool {
+    if let Some(uid) = first_non_empty_env_var(&["EUID", "UID"])
+        && uid == "0"
+    {
+        return true;
+    }
+    if detect_current_username().as_deref() == Some("root") {
+        return true;
+    }
+
+    let output = ProcessCommand::new("id").arg("-u").output().ok();
+    let Some(output) = output else {
+        return false;
+    };
+    if !output.status.success() {
+        return false;
+    }
+
+    String::from_utf8_lossy(&output.stdout).trim() == "0"
+}
+
+#[cfg(not(unix))]
+fn detect_current_is_root_uncached() -> bool {
+    false
 }
 
 fn first_non_empty_env_var(keys: &[&str]) -> Option<String> {

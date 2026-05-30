@@ -71,6 +71,32 @@ print(ptool.version())
 print(p.version())
 ```
 
+## ptool.is_root
+
+> `Unreleased` - 引入。
+
+`ptool.is_root()` 会返回当前 `ptool` 进程是否正以 root 用户身份运行。
+
+- 返回：`boolean`。
+
+行为说明：
+
+- 在类 Unix 平台上，它会检查当前有效用户是否为 root。
+- 在非 Unix 平台上，它目前返回 `false`。
+- 这适合与 `ptool.run(...)`、`ptool.exec(...)` 等本地命令辅助函数上的 `sudo = true` 搭配使用。
+
+示例：
+
+```lua
+if not ptool.is_root() then
+  ptool.run({
+    cmd = "apt-get",
+    args = {"update"},
+    sudo = true,
+  })
+end
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - 引入。
@@ -478,6 +504,7 @@ res:assert_ok()
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
+- `sudo`（boolean，可选）：当当前用户不是 root 时，是否通过 `sudo` 运行该命令。默认为 `false`。
 - `stdin`（string|table，可选）：子进程 stdin 的输入来源。
   - 传入字符串时，会将该字符串发送到子进程 stdin。
   - 传入表 `{ file = "path" }` 时，会从文件读取 stdin。
@@ -499,8 +526,12 @@ res:assert_ok()
   - `"null"`：丢弃输出。
   - `{ file = "path" }`：将 stderr 写入文件，并先清空文件原有内容。
   - `{ file = "path", append = true }`：将 stderr 追加到文件末尾。
-- 当使用 `ptool.run(cmdline, options)` 或 `ptool.run(cmd, args, options)` 这类快捷调用形式时，单次调用的 `options` 表同样支持 `stdin` 和 `trim`，含义一致。
+- 当使用 `ptool.run(cmdline, options)` 或 `ptool.run(cmd, args, options)` 这样的快捷调用形式时，单次调用的 `options` 表也接受 `sudo`、`stdin` 和 `trim`，含义相同。
 - 文件重定向路径会相对于实际子进程 `cwd` 解析；如果提供的是绝对路径，则直接使用该绝对路径。
+- 当 `sudo = true` 时：
+  - 如果当前用户已经是 root，`ptool.run(...)` 会直接执行该命令，而不会添加 `sudo`。
+  - 否则，`ptool.run(...)` 会以 `sudo <cmd> <args...>` 的形式执行该命令。
+  - 在 Windows 上，这目前会抛出 `unsupported` 错误。
 - 当 `confirm = true` 时：
   - 如果用户拒绝执行，会立即抛出错误。
   - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
@@ -531,6 +562,12 @@ ptool.run({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.run({
+  cmd = "apt-get",
+  args = {"update"},
+  sudo = true,
 })
 
 local res = ptool.run({
@@ -720,6 +757,7 @@ ptool.exec({ cmd = "echo", args = {"hello", "world"} })
 - `args`（string[]，可选）：参数列表。
 - `cwd`（string，可选）：子进程工作目录。
 - `env`（table，可选）：附加环境变量，键和值都应为字符串。
+- `sudo`（boolean，可选）：当当前用户不是 root 时，是否通过 `sudo` 运行替换命令。默认为 `false`。
 - `stdin`（table，可选）：子进程 stdin 的输入来源。
   - `{ file = "path" }`：从文件读取 stdin。
 - `echo`（boolean，可选）：替换前是否回显命令信息。如果省略，则使用 `ptool.config({ run = { echo = ... } })` 中的值；若仍未设置，则默认是 `true`。
@@ -736,6 +774,10 @@ ptool.exec({ cmd = "echo", args = {"hello", "world"} })
   - `{ file = "path", append = true }`：将 stderr 追加到文件末尾。
 - 与 `ptool.run` 不同，`ptool.exec` 不支持字符串形式的 `stdin`、`stdout = "capture"`、`stderr = "capture"`、`trim`、`check` 或 `retry`。
 - 文件重定向路径会相对于实际子进程 `cwd` 解析；如果提供的是绝对路径，则直接使用该绝对路径。
+- 当 `sudo = true` 时：
+  - 如果当前用户已经是 root，`ptool.exec(...)` 会直接用该命令替换当前进程。
+  - 否则，`ptool.exec(...)` 会用 `sudo <cmd> <args...>` 替换当前进程。
+  - 在 Windows 上，这目前会抛出 `unsupported` 错误。
 - 当 `confirm = true` 时：
   - 如果用户拒绝执行，会立即抛出错误。
   - 如果当前环境不是交互式环境（无 TTY），也会立即抛出错误。
@@ -762,5 +804,11 @@ ptool.exec({
   stdin = { file = "input.txt" },
   stdout = { file = "output.log" },
   stderr = { file = "error.log", append = true },
+})
+
+ptool.exec({
+  cmd = "systemctl",
+  args = {"restart", "nginx"},
+  sudo = true,
 })
 ```

@@ -28,6 +28,7 @@ pub enum RunStreamMode {
 pub struct RunOptions {
     pub cmd: String,
     pub args: Vec<String>,
+    pub sudo: bool,
     pub cwd: Option<String>,
     pub env: Vec<(String, String)>,
     pub env_remove: Vec<String>,
@@ -76,6 +77,7 @@ pub struct PipeResult {
 pub struct ExecOptions {
     pub cmd: String,
     pub args: Vec<String>,
+    pub sudo: bool,
     pub cwd: Option<String>,
     pub env: Vec<(String, String)>,
     pub env_remove: Vec<String>,
@@ -106,12 +108,14 @@ pub fn run_command(
     console: &Console,
 ) -> Result<RunResult> {
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
+    let (cmd, args) =
+        resolve_effective_command(&options.cmd, &options.args, options.sudo, "ptool.run")?;
 
-    let mut command = ProcessCommand::new(&options.cmd);
+    let mut command = ProcessCommand::new(&cmd);
     configure_command(
         &mut command,
-        &options.cmd,
-        &options.args,
+        &cmd,
+        &args,
         &resolved_cwd,
         &options.env,
         &options.env_remove,
@@ -123,12 +127,12 @@ pub fn run_command(
         &options.stdout,
         &options.stderr,
         &resolved_cwd,
-        &options.cmd,
+        &cmd,
     )?;
 
     let mut child = command
         .spawn()
-        .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
+        .map_err(|err| build_run_io_error(&cmd, &resolved_cwd, err))?;
 
     let stdin_handle = match &options.stdin {
         RunStdin::Bytes(bytes) => child.stdin.take().map(|mut pipe| {
@@ -153,24 +157,24 @@ pub fn run_command(
 
     let status = child
         .wait()
-        .map_err(|err| build_run_io_error(&options.cmd, &resolved_cwd, err))?;
+        .map_err(|err| build_run_io_error(&cmd, &resolved_cwd, err))?;
 
     if let Some(handle) = stdin_handle {
-        finish_io_thread(handle, "stdin", &options.cmd, &resolved_cwd)?;
+        finish_io_thread(handle, "stdin", &cmd, &resolved_cwd)?;
     }
 
     let stdout_result = collect_process_output(
         stdout_handle,
         &options.stdout,
         "stdout",
-        &options.cmd,
+        &cmd,
         &resolved_cwd,
     );
     let stderr_result = collect_process_output(
         stderr_handle,
         &options.stderr,
         "stderr",
-        &options.cmd,
+        &cmd,
         &resolved_cwd,
     );
     let stdout = stdout_result?;
@@ -187,11 +191,13 @@ pub fn run_command(
 pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
     let resolved_cwd = resolve_run_cwd(current_dir, options.cwd.as_deref());
     validate_exec_stdio(options)?;
-    let mut command = ProcessCommand::new(&options.cmd);
+    let (cmd, args) =
+        resolve_effective_command(&options.cmd, &options.args, options.sudo, "ptool.exec")?;
+    let mut command = ProcessCommand::new(&cmd);
     configure_command(
         &mut command,
-        &options.cmd,
-        &options.args,
+        &cmd,
+        &args,
         &resolved_cwd,
         &options.env,
         &options.env_remove,
@@ -202,10 +208,10 @@ pub fn exec_replace(options: &ExecOptions, current_dir: &Path) -> Result<()> {
         &options.stdout,
         &options.stderr,
         &resolved_cwd,
-        &options.cmd,
+        &cmd,
     )?;
 
-    exec_current_process(command, &options.cmd, &resolved_cwd)
+    exec_current_process(command, &cmd, &resolved_cwd)
 }
 
 pub fn run_pipeline(
@@ -389,6 +395,28 @@ pub fn format_run_failed_message(
         }
     }
     message
+}
+
+pub fn resolve_effective_command(
+    cmd: &str,
+    args: &[String],
+    sudo: bool,
+    op: &str,
+) -> Result<(String, Vec<String>)> {
+    if !sudo || crate::platform::detect_current_is_root() {
+        return Ok((cmd.to_string(), args.to_vec()));
+    }
+
+    if cfg!(windows) {
+        return Err(
+            Error::new(ErrorKind::Unsupported, "sudo is not supported on Windows").with_op(op),
+        );
+    }
+
+    let mut effective_args = Vec::with_capacity(args.len() + 1);
+    effective_args.push(cmd.to_string());
+    effective_args.extend(args.iter().cloned());
+    Ok(("sudo".to_string(), effective_args))
 }
 
 fn configure_stdio(
