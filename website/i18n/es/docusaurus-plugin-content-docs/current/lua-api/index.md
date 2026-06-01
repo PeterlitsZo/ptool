@@ -45,6 +45,7 @@ Los módulos se agrupan por dominio. Dentro de cada grupo, las entradas se enume
 
 - [API de Consul](./consul.md): Abre conexiones a Consul KV y trabaja con claves o endpoints HTTP sin procesar de Consul.
 - [API de base de datos](./db.md): Abre conexiones de base de datos y ejecuta consultas SQL.
+- [Etcd API](./etcd.md): Open etcd v3 KV connections and work with keys or raw etcd HTTP endpoints.
 - [Git API](./git.md): abre repositorios, inspecciona el estado y clona, recupera o introduce identificadores respaldados por libgit2.
 - [API de Redis](./redis.md): Abre conexiones Redis y envía comandos Redis sin procesar.
 - [S3 API](./s3.md): Open S3-compatible object storage connections and work with objects.

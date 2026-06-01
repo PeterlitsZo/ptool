@@ -45,6 +45,7 @@
 
 - [Consul API](./consul.md): Consul KV 接続を開き、キーまたは生の Consul HTTP エンドポイントを扱う。
 - [データベース API](./db.md): データベース接続を開き、SQL クエリを実行する。
+- [Etcd API](./etcd.md): Open etcd v3 KV connections and work with keys or raw etcd HTTP endpoints.
 - [Git API](./git.md): リポジトリを開いてステータスを検査し、libgit2 でサポートされるハンドルを介してクローン、フェッチ、またはプッシュします。
 - [Redis API](./redis.md): Redis 接続を開き、生の Redis コマンドを送信します。
 - [S3 API](./s3.md): Open S3-compatible object storage connections and work with objects.

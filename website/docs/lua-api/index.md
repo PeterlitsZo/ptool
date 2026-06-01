@@ -59,6 +59,8 @@ alphabetical order.
 - [Consul API](./consul.md): Open Consul KV connections and work with keys or
   raw Consul HTTP endpoints.
 - [Database API](./db.md): Open database connections and run SQL queries.
+- [Etcd API](./etcd.md): Open etcd v3 KV connections and work with keys or raw
+  etcd HTTP endpoints.
 - [Git API](./git.md): Open repositories, inspect status, and clone, fetch, or
   push through libgit2-backed handles.
 - [Redis API](./redis.md): Open Redis connections and send raw Redis commands.

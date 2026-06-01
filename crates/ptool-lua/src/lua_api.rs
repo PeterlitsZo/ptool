@@ -78,6 +78,7 @@ fn create_ptool_module(
     let db_module = create_ptool_db_module(lua, Rc::clone(&world))?;
     let redis_module = create_ptool_redis_module(lua, Rc::clone(&world))?;
     let consul_module = create_ptool_consul_module(lua, Rc::clone(&world))?;
+    let etcd_module = create_ptool_etcd_module(lua, Rc::clone(&world))?;
     let s3_module = create_ptool_s3_module(lua, Rc::clone(&world))?;
     let git_module = create_ptool_git_module(lua, Rc::clone(&world))?;
     let ssh_module = create_ptool_ssh_module(lua, Rc::clone(&world))?;
@@ -122,6 +123,7 @@ fn create_ptool_module(
     module.set("db", db_module)?;
     module.set("redis", redis_module)?;
     module.set("consul", consul_module)?;
+    module.set("etcd", etcd_module)?;
     module.set("s3", s3_module)?;
     module.set("git", git_module)?;
     module.set("ssh", ssh_module)?;
@@ -431,6 +433,14 @@ fn create_ptool_consul_module(
         lua.create_function(move |_, options: Table| world.borrow().consul_connect(options))?;
     consul_module.set("connect", connect_fn)?;
     Ok(consul_module)
+}
+
+fn create_ptool_etcd_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
+    let etcd_module = lua.create_table()?;
+    let connect_fn =
+        lua.create_function(move |_, options: Table| world.borrow().etcd_connect(options))?;
+    etcd_module.set("connect", connect_fn)?;
+    Ok(etcd_module)
 }
 
 fn create_ptool_s3_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {

@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-TODO...
+### Added
+
+- Added the `ptool.etcd` / `p.etcd` module for etcd v3 KV access, with
+  connection helpers, single-key `get`, `put`, `delete`, prefix `list`,
+  and a raw `request` escape hatch for direct etcd API access.
 
 ## v0.10.0 (2026-05-30)
 

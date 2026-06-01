@@ -630,6 +630,13 @@ impl LuaWorld {
         crate::consul::connect(options, &self.engine)
     }
 
+    pub(crate) fn etcd_connect(
+        &self,
+        options: Table,
+    ) -> mlua::Result<crate::etcd::LuaEtcdConnection> {
+        crate::etcd::connect(options, &self.engine)
+    }
+
     pub(crate) fn s3_connect(&self, options: Table) -> mlua::Result<crate::s3::LuaS3Connection> {
         crate::s3::connect(options, &self.engine)
     }

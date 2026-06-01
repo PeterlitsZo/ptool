@@ -2,6 +2,7 @@ mod ansi;
 mod consul;
 mod datetime;
 mod db;
+mod etcd;
 mod exec;
 mod fs;
 mod git;

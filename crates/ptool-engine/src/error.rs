@@ -30,6 +30,7 @@ pub enum ErrorKind {
     Db,
     Redis,
     Consul,
+    Etcd,
     S3,
     Git,
     SemverOverflow,

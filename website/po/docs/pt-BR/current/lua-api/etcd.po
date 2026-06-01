@@ -1,0 +1,589 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-01 15:36+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:1
+msgid "Etcd API"
+msgstr "Etcd API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:3
+msgid "Etcd v3 KV helpers are available under `ptool.etcd` and `p.etcd`."
+msgstr "Etcd v3 KV helpers are available under `ptool.etcd` and `p.etcd`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:5
+msgid "ptool.etcd.connect"
+msgstr "ptool.etcd.connect"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:7"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:9
+msgid ""
+"`ptool.etcd.connect(options)` opens an etcd connection and returns a "
+"`Connection` object."
+msgstr ""
+"`ptool.etcd.connect(options)` opens an etcd connection and returns a "
+"`Connection` object."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:12
+msgid "`options` fields:"
+msgstr "`options` fields:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:14
+msgid ""
+"`address` (string, required): The etcd HTTP address such as "
+"`http://127.0.0.1:2379` or `127.0.0.1:2379`."
+msgstr ""
+"`address` (string, required): The etcd HTTP address such as "
+"`http://127.0.0.1:2379` or `127.0.0.1:2379`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:16
+msgid ""
+"`token` (string, optional): Authorization header value sent with requests."
+msgstr ""
+"`token` (string, optional): Authorization header value sent with requests."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:17
+msgid "`username` (string, optional): etcd auth username."
+msgstr "`username` (string, optional): etcd auth username."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:18
+msgid "`password` (string, optional): etcd auth password."
+msgstr "`password` (string, optional): etcd auth password."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:19
+msgid ""
+"`api_prefix` (string, optional): API prefix appended under `address`. "
+"Defaults to `\"v3\"`, which targets the standard v3 gRPC-gateway endpoints."
+msgstr ""
+"`api_prefix` (string, optional): API prefix appended under `address`. "
+"Defaults to `\"v3\"`, which targets the standard v3 gRPC-gateway endpoints."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:21
+msgid ""
+"`timeout_ms` (integer, optional): Default request timeout in milliseconds."
+msgstr ""
+"`timeout_ms` (integer, optional): Default request timeout in milliseconds."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:23
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:23"
+msgid "Notes:"
+msgstr "Notes:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:25
+msgid "`token` cannot be combined with `username` or `password`."
+msgstr "`token` cannot be combined with `username` or `password`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:26
+msgid "`username` and `password` must be provided together."
+msgstr "`username` and `password` must be provided together."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:27
+msgid ""
+"When `username` and `password` are used, `ptool.etcd.connect(...)` "
+"authenticates through `auth/authenticate` and stores the returned token on "
+"the connection."
+msgstr ""
+"When `username` and `password` are used, `ptool.etcd.connect(...)` "
+"authenticates through `auth/authenticate` and stores the returned token on "
+"the connection."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:31
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:31"
+msgid "Example:"
+msgstr "Example:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:42
+msgid "Connection"
+msgstr "Connection"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:44
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:44"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:46
+msgid ""
+"`Connection` represents an open etcd connection returned by "
+"`ptool.etcd.connect()`."
+msgstr ""
+"`Connection` represents an open etcd connection returned by "
+"`ptool.etcd.connect()`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:49
+msgid "It is implemented as a Lua userdata."
+msgstr "It is implemented as a Lua userdata."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:51
+msgid "Methods:"
+msgstr "Methods:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:53
+msgid "`conn:get(key[, options])` -> `table | nil`"
+msgstr "`conn:get(key[, options])` -> `table | nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:54
+msgid "`conn:put(key, value[, options])` -> `table`"
+msgstr "`conn:put(key, value[, options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:55
+msgid "`conn:delete(key[, options])` -> `table`"
+msgstr "`conn:delete(key[, options])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:56
+msgid "`conn:list([prefix[, options]])` -> `table`"
+msgstr "`conn:list([prefix[, options]])` -> `table`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:57
+msgid "`conn:request(options)` -> `Response`"
+msgstr "`conn:request(options)` -> `Response`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:59
+msgid "KV entry table shape:"
+msgstr "KV entry table shape:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:61
+msgid "`key` (string): The decoded raw key bytes as a Lua string."
+msgstr "`key` (string): The decoded raw key bytes as a Lua string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:62
+msgid "`value` (string): The decoded raw value bytes as a Lua string."
+msgstr "`value` (string): The decoded raw value bytes as a Lua string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:63
+msgid "`create_revision` (integer): The key creation revision."
+msgstr "`create_revision` (integer): The key creation revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:64
+msgid "`mod_revision` (integer): The last modification revision."
+msgstr "`mod_revision` (integer): The last modification revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:65
+msgid "`version` (integer): The number of times the key has been modified."
+msgstr "`version` (integer): The number of times the key has been modified."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:66
+msgid ""
+"`lease` (integer): The attached lease ID, or `0` when no lease is attached."
+msgstr ""
+"`lease` (integer): The attached lease ID, or `0` when no lease is attached."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:68
+msgid "Response header table shape:"
+msgstr "Response header table shape:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:70
+msgid ""
+"`cluster_id` (string): The etcd cluster ID rendered as a decimal string."
+msgstr ""
+"`cluster_id` (string): The etcd cluster ID rendered as a decimal string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:71
+msgid ""
+"`member_id` (string): The responding member ID rendered as a decimal string."
+msgstr ""
+"`member_id` (string): The responding member ID rendered as a decimal string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:72
+msgid "`revision` (integer): The store revision for the response."
+msgstr "`revision` (integer): The store revision for the response."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:73
+msgid "`raft_term` (string): The raft term rendered as a decimal string."
+msgstr "`raft_term` (string): The raft term rendered as a decimal string."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:75
+msgid "get"
+msgstr "get"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:77
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:77"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:79
+msgid "Canonical API name: `ptool.etcd.Connection:get`."
+msgstr "Canonical API name: `ptool.etcd.Connection:get`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:81
+msgid "`conn:get(key[, options])` reads a single etcd KV entry."
+msgstr "`conn:get(key[, options])` reads a single etcd KV entry."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:83
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:83"
+msgid "`key` (string, required): The raw key bytes."
+msgstr "`key` (string, required): The raw key bytes."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:84
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:84"
+msgid "`options` (table, optional):"
+msgstr "`options` (table, optional):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:84
+msgid "`revision` (integer, optional): Reads the key at a specific revision."
+msgstr "`revision` (integer, optional): Reads the key at a specific revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:84
+msgid ""
+"`serializable` (boolean, optional): Uses serializable reads instead of "
+"linearizable reads."
+msgstr ""
+"`serializable` (boolean, optional): Uses serializable reads instead of "
+"linearizable reads."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:88
+msgid "Returns: `table | nil`."
+msgstr "Returns: `table | nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:90
+msgid "Behavior:"
+msgstr "Behavior:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:92
+msgid "Returns `nil` when the key does not exist."
+msgstr "Returns `nil` when the key does not exist."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:93
+msgid "`key` and `value` are binary-safe Lua strings."
+msgstr "`key` and `value` are binary-safe Lua strings."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:95
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:95"
+msgid "Example:"
+msgstr "Example:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:107
+msgid "put"
+msgstr "put"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:109
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:109"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:111
+msgid "Canonical API name: `ptool.etcd.Connection:put`."
+msgstr "Canonical API name: `ptool.etcd.Connection:put`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:113
+msgid "`conn:put(key, value[, options])` writes an etcd KV entry."
+msgstr "`conn:put(key, value[, options])` writes an etcd KV entry."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:115
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:115"
+msgid "`key` (string, required): The raw key bytes."
+msgstr "`key` (string, required): The raw key bytes."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:116
+msgid "`value` (string, required): The raw value bytes."
+msgstr "`value` (string, required): The raw value bytes."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:117
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:117"
+msgid "`options` (table, optional):"
+msgstr "`options` (table, optional):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:117
+msgid "`lease` (integer, optional): Lease ID to attach to the key."
+msgstr "`lease` (integer, optional): Lease ID to attach to the key."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:117
+msgid ""
+"`prev_kv` (boolean, optional): When `true`, include the previous KV entry."
+msgstr ""
+"`prev_kv` (boolean, optional): When `true`, include the previous KV entry."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:117
+msgid "`ignore_value` (boolean, optional): Reuse the current value."
+msgstr "`ignore_value` (boolean, optional): Reuse the current value."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:117
+msgid "`ignore_lease` (boolean, optional): Reuse the current lease."
+msgstr "`ignore_lease` (boolean, optional): Reuse the current lease."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:122
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:122"
+msgid "Returns: `table`."
+msgstr "Returns: `table`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:124
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:124"
+msgid "Return table shape:"
+msgstr "Return table shape:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:126
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:126"
+msgid "`header` (table | nil): Response header metadata."
+msgstr "`header` (table | nil): Response header metadata."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:127
+msgid ""
+"`prev_kv` (table | nil): Previous KV entry when `prev_kv = true` and a "
+"previous key existed."
+msgstr ""
+"`prev_kv` (table | nil): Previous KV entry when `prev_kv = true` and a "
+"previous key existed."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:130
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:130"
+msgid "Example:"
+msgstr "Example:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:143
+msgid "delete"
+msgstr "delete"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:145
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:145"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:147
+msgid "Canonical API name: `ptool.etcd.Connection:delete`."
+msgstr "Canonical API name: `ptool.etcd.Connection:delete`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:149
+msgid "`conn:delete(key[, options])` deletes one key or a whole key prefix."
+msgstr "`conn:delete(key[, options])` deletes one key or a whole key prefix."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:151
+msgid ""
+"`key` (string, required): The raw key bytes. When `prefix = true`, an empty "
+"string deletes the full keyspace."
+msgstr ""
+"`key` (string, required): The raw key bytes. When `prefix = true`, an empty "
+"string deletes the full keyspace."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:153
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:153"
+msgid "`options` (table, optional):"
+msgstr "`options` (table, optional):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:153
+msgid ""
+"`prefix` (boolean, optional): When `true`, delete the full prefix range."
+msgstr ""
+"`prefix` (boolean, optional): When `true`, delete the full prefix range."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:153
+msgid "`prev_kv` (boolean, optional): When `true`, include deleted KV entries."
+msgstr "`prev_kv` (boolean, optional): When `true`, include deleted KV entries."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:156
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:156"
+msgid "Returns: `table`."
+msgstr "Returns: `table`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:158
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:158"
+msgid "Return table shape:"
+msgstr "Return table shape:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:160
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:160"
+msgid "`header` (table | nil): Response header metadata."
+msgstr "`header` (table | nil): Response header metadata."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:161
+msgid "`deleted` (integer): Number of deleted keys."
+msgstr "`deleted` (integer): Number of deleted keys."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:162
+msgid "`prev_kvs` (table): Dense Lua array of deleted KV entries."
+msgstr "`prev_kvs` (table): Dense Lua array of deleted KV entries."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:164
+msgid "list"
+msgstr "list"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:166
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:166"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:168
+msgid "Canonical API name: `ptool.etcd.Connection:list`."
+msgstr "Canonical API name: `ptool.etcd.Connection:list`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:170
+msgid "`conn:list([prefix[, options]])` lists etcd KV entries under a prefix."
+msgstr "`conn:list([prefix[, options]])` lists etcd KV entries under a prefix."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:172
+msgid ""
+"`prefix` (string, optional): The prefix to list. When omitted or empty, the "
+"whole keyspace is scanned."
+msgstr ""
+"`prefix` (string, optional): The prefix to list. When omitted or empty, the "
+"whole keyspace is scanned."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174"
+msgid "`options` (table, optional):"
+msgstr "`options` (table, optional):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`limit` (integer, optional): Maximum number of returned entries."
+msgstr "`limit` (integer, optional): Maximum number of returned entries."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`revision` (integer, optional): Reads at a specific revision."
+msgstr "`revision` (integer, optional): Reads at a specific revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`serializable` (boolean, optional): Uses serializable reads."
+msgstr "`serializable` (boolean, optional): Uses serializable reads."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`keys_only` (boolean, optional): Return keys without values."
+msgstr "`keys_only` (boolean, optional): Return keys without values."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`count_only` (boolean, optional): Return only the count."
+msgstr "`count_only` (boolean, optional): Return only the count."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`min_mod_revision` (integer, optional): Minimum modification revision."
+msgstr "`min_mod_revision` (integer, optional): Minimum modification revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`max_mod_revision` (integer, optional): Maximum modification revision."
+msgstr "`max_mod_revision` (integer, optional): Maximum modification revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`min_create_revision` (integer, optional): Minimum creation revision."
+msgstr "`min_create_revision` (integer, optional): Minimum creation revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid "`max_create_revision` (integer, optional): Maximum creation revision."
+msgstr "`max_create_revision` (integer, optional): Maximum creation revision."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid ""
+"`sort_order` (string, optional): One of `\"none\"`, `\"ascend\"`, or `"
+"\"descend\"`."
+msgstr ""
+"`sort_order` (string, optional): One of `\"none\"`, `\"ascend\"`, or `"
+"\"descend\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:174
+msgid ""
+"`sort_target` (string, optional): One of `\"key\"`, `\"version\"`, `"
+"\"create\"`, `\"mod\"`, or `\"value\"`."
+msgstr ""
+"`sort_target` (string, optional): One of `\"key\"`, `\"version\"`, `"
+"\"create\"`, `\"mod\"`, or `\"value\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:188
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:188"
+msgid "Returns: `table`."
+msgstr "Returns: `table`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:190
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:190"
+msgid "Return table shape:"
+msgstr "Return table shape:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:192
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:192"
+msgid "`header` (table | nil): Response header metadata."
+msgstr "`header` (table | nil): Response header metadata."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:193
+msgid "`kvs` (table): Dense Lua array of KV entries."
+msgstr "`kvs` (table): Dense Lua array of KV entries."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:194
+msgid "`count` (integer): Number of matched keys reported by etcd."
+msgstr "`count` (integer): Number of matched keys reported by etcd."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:195
+msgid "`more` (boolean): Whether more results remain on the server."
+msgstr "`more` (boolean): Whether more results remain on the server."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:197
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:197"
+msgid "Example:"
+msgstr "Example:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:212
+msgid "request"
+msgstr "request"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:214
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:214"
+msgid "`v0.11.0` - Introduced."
+msgstr "`v0.11.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:216
+msgid "Canonical API name: `ptool.etcd.Connection:request`."
+msgstr "Canonical API name: `ptool.etcd.Connection:request`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:218
+msgid ""
+"`conn:request(options)` sends a raw HTTP request through the current etcd "
+"connection defaults and returns the same `Response` object shape as "
+"`ptool.http.request(...)`."
+msgstr ""
+"`conn:request(options)` sends a raw HTTP request through the current etcd "
+"connection defaults and returns the same `Response` object shape as "
+"`ptool.http.request(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:222
+msgid ""
+"`options` supports the same request fields as `ptool.http.request(options)`, "
+"plus:"
+msgstr ""
+"`options` supports the same request fields as `ptool.http.request(options)`, "
+"plus:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:225
+msgid ""
+"`path` (string, optional): An etcd-relative path such as `\"/kv/txn\"` or `"
+"\"/v3/kv/txn\"`."
+msgstr ""
+"`path` (string, optional): An etcd-relative path such as `\"/kv/txn\"` or `"
+"\"/v3/kv/txn\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:227
+msgid "`url` (string, optional): An explicit absolute URL."
+msgstr "`url` (string, optional): An explicit absolute URL."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:229
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:229"
+msgid "Notes:"
+msgstr "Notes:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:231
+msgid "Exactly one of `path` or `url` is required."
+msgstr "Exactly one of `path` or `url` is required."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:232
+msgid ""
+"Connection defaults automatically add the configured authorization header "
+"and `timeout_ms` when they are not overridden by the request."
+msgstr ""
+"Connection defaults automatically add the configured authorization header "
+"and `timeout_ms` when they are not overridden by the request."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:234
+msgid ""
+"Relative `path` values are resolved against the configured `api_prefix`."
+msgstr ""
+"Relative `path` values are resolved against the configured `api_prefix`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:236
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/etcd.md:236"
+msgid "Example:"
+msgstr "Example:"

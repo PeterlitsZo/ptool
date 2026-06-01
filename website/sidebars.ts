@@ -67,6 +67,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'lua-api/consul',
             'lua-api/db',
+            'lua-api/etcd',
             'lua-api/git',
             'lua-api/redis',
             'lua-api/s3',

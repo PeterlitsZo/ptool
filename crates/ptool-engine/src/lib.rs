@@ -3,6 +3,7 @@ mod consul;
 mod datetime;
 mod db;
 mod error;
+mod etcd;
 mod exec;
 mod fs;
 mod git;
@@ -40,6 +41,11 @@ pub use datetime::{
 };
 pub use db::{DbBindValue, DbConnection, DbExecuteResult, DbParams, DbQueryResult, DbRow, DbValue};
 pub use error::{Error, ErrorKind, Result};
+pub use etcd::{
+    EtcdConnectOptions, EtcdConnection, EtcdDeleteOptions, EtcdDeleteResponse, EtcdGetOptions,
+    EtcdKvEntry, EtcdListOptions, EtcdListResponse, EtcdPutOptions, EtcdPutResponse,
+    EtcdResponseHeader,
+};
 pub use exec::{
     ExecOptions, PipeCommand, PipeOptions, PipeResult, RunOptions, RunResult, RunStdin,
     RunStreamMode, exec_replace, format_command_for_display, format_pipeline_for_display,
@@ -454,6 +460,10 @@ impl PtoolEngine {
     pub fn consul_connect(&self, options: ConsulConnectOptions) -> Result<ConsulConnection> {
         let options = options.with_env_fallback(|name| self.env_get(name))?;
         consul::connect(options)
+    }
+
+    pub fn etcd_connect(&self, options: EtcdConnectOptions) -> Result<EtcdConnection> {
+        etcd::connect(options)
     }
 
     pub fn s3_connect(&self, options: S3ConnectOptions) -> Result<S3Connection> {
