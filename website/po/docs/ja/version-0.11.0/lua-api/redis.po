@@ -1,0 +1,260 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 16:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:1
+msgid "Redis API"
+msgstr "Redis API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:3
+msgid ""
+"Redis connection helpers are available under `ptool.redis` and `p.redis`."
+msgstr "Redis 接続ヘルパーは `ptool.redis` と `p.redis` にあります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:5
+msgid "ptool.redis.connect"
+msgstr "ptool.redis.connect"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:7"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:9
+msgid ""
+"`ptool.redis.connect(url_or_options)` opens a Redis connection and returns a "
+"`Connection` object."
+msgstr ""
+"`ptool.redis.connect(url_or_options)` は Redis 接続を開き、`Connection` オブ"
+"ジェクトを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:12
+msgid "Arguments:"
+msgstr "引数:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "`url_or_options` (string|table, required):"
+msgstr "`url_or_options` (string|table, 必須):"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "When a string is provided, it is treated as the Redis URL."
+msgstr "文字列が渡された場合は、Redis URL として扱われます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "When a table is provided, it currently supports:"
+msgstr "テーブルが渡された場合、現在サポートされるのは次のとおりです:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "`url` (string, required): The Redis URL."
+msgstr "`url` (string, 必須): Redis URL。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:19
+msgid "Common URL examples:"
+msgstr "一般的な URL の例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:29
+msgid "Notes:"
+msgstr "補足:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:31
+msgid ""
+"The connection is intended for direct command execution through `conn:call"
+"(...)`."
+msgstr "この接続は `conn:call(...)` による直接的なコマンド実行を目的としています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:33
+msgid ""
+"This API does not currently provide dedicated pub/sub, pipeline, or "
+"transaction helpers."
+msgstr ""
+"現在この API には、専用の pub/sub、pipeline、transaction ヘルパーはありませ"
+"ん。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:36
+msgid "Connection"
+msgstr "Connection"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:38"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:40
+msgid ""
+"`Connection` represents an open Redis connection returned by "
+"`ptool.redis.connect()`."
+msgstr ""
+"`Connection` は `ptool.redis.connect()` が返すオープンな Redis 接続を表しま"
+"す。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:43
+msgid "It is implemented as a Lua userdata."
+msgstr "これは Lua userdata として実装されています。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:45
+msgid "Methods:"
+msgstr "メソッド:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:47
+msgid "`conn:call(command, ...)` -> `any`"
+msgstr "`conn:call(command, ...)` -> `any`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:48
+msgid "`conn:close()` -> `nil`"
+msgstr "`conn:close()` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:50
+msgid "Command argument rules:"
+msgstr "コマンド引数のルール:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:52
+msgid "`command` must be a non-empty string."
+msgstr "`command` は空でない文字列である必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:53
+msgid "Remaining arguments are passed to Redis as a flat argument list."
+msgstr "残りの引数はフラットな引数リストとして Redis に渡されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "Supported argument value types are:"
+msgstr "サポートされる引数値の型:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`boolean`"
+msgstr "`boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`integer`"
+msgstr "`integer`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`number`"
+msgstr "`number`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`string`"
+msgstr "`string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:59
+msgid ""
+"`nil`, tables, functions, threads, and userdata are not supported as Redis "
+"command arguments."
+msgstr ""
+"`nil`、table、function、thread、userdata は Redis コマンド引数としてサポート"
+"されません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:61
+msgid ""
+"Lua strings are passed as raw bytes, so binary-safe Redis values are "
+"supported."
+msgstr ""
+"Lua 文字列は生バイト列として渡されるため、バイナリセーフな Redis 値を扱えま"
+"す。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:64
+msgid "Reply conversion rules:"
+msgstr "レスポンス変換ルール:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:66
+msgid "Null replies become `nil`."
+msgstr "null レスポンスは `nil` になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:67
+msgid "Integer replies become Lua integers."
+msgstr "整数レスポンスは Lua 整数になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:68
+msgid "Bulk strings, simple strings, and verbatim strings become Lua strings."
+msgstr ""
+"bulk string、simple string、verbatim string は Lua 文字列になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:69
+msgid "Array and set replies become dense Lua array tables."
+msgstr "array と set のレスポンスは密な Lua 配列テーブルになります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:70
+msgid ""
+"Map replies become Lua tables when the map keys can be represented as Lua "
+"strings, integers, numbers, or booleans."
+msgstr ""
+"map レスポンスは、キーを Lua の文字列、整数、数値、真偽値として表現できる場"
+"合に Lua テーブルになります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:72
+msgid "Double replies become Lua numbers."
+msgstr "double レスポンスは Lua 数値になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:73
+msgid "Boolean replies become Lua booleans."
+msgstr "boolean レスポンスは Lua 真偽値になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:74
+msgid "Big number replies become Lua strings."
+msgstr "big number レスポンスは Lua 文字列になります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:75
+msgid ""
+"Push replies become tables shaped like `{ kind = \"...\", data = {...} }`."
+msgstr ""
+"push レスポンスは `{ kind = \"...\", data = {...} }` の形をしたテーブルにな"
+"ります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:77
+msgid "call"
+msgstr "call"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:79"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:81
+msgid "Canonical API name: `ptool.redis.Connection:call`."
+msgstr "正規 API 名: `ptool.redis.Connection:call`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:83
+msgid ""
+"`conn:call(command, ...)` sends a Redis command and returns the converted "
+"reply."
+msgstr ""
+"`conn:call(command, ...)` は Redis コマンドを送信し、変換後のレスポンスを返"
+"します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:86
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:102
+msgid "close"
+msgstr "close"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:104
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:104"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:106
+msgid "Canonical API name: `ptool.redis.Connection:close`."
+msgstr "正規 API 名: `ptool.redis.Connection:close`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:108
+msgid "`conn:close()` closes the connection."
+msgstr "`conn:close()` は接続を閉じます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:110
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:112
+msgid "After closing, the connection can no longer be used."
+msgstr "閉じたあとは、その接続を再利用できません。"

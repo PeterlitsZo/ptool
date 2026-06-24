@@ -1,0 +1,165 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 11:32+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:1
+msgid "Hash API"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:3
+msgid "Hashing helpers are available under `ptool.hash` and `p.hash`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:5
+msgid "All hash helpers share the same shape:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:7
+msgid ""
+"`input` (string, required): The input Lua string. The digest or checksum is "
+"computed from the string's raw bytes."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:9
+msgid "Returns: `string` (lowercase hexadecimal output)."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:11
+msgid "Cryptographic digests"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:13
+msgid "`ptool.hash.sha1(input)`: SHA-1 digest. Introduced in `v0.2.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:14
+msgid "`ptool.hash.sha224(input)`: SHA-224 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:15
+msgid "`ptool.hash.sha256(input)`: SHA-256 digest. Introduced in `v0.2.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:16
+msgid "`ptool.hash.sha384(input)`: SHA-384 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:17
+msgid "`ptool.hash.sha512(input)`: SHA-512 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:18
+msgid ""
+"`ptool.hash.sha512_224(input)`: SHA-512/224 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:19
+msgid ""
+"`ptool.hash.sha512_256(input)`: SHA-512/256 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:20
+msgid "`ptool.hash.sha3_224(input)`: SHA3-224 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:21
+msgid "`ptool.hash.sha3_256(input)`: SHA3-256 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:22
+msgid "`ptool.hash.sha3_384(input)`: SHA3-384 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:23
+msgid "`ptool.hash.sha3_512(input)`: SHA3-512 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:24
+msgid ""
+"`ptool.hash.blake2s256(input)`: BLAKE2s-256 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:25
+msgid ""
+"`ptool.hash.blake2b512(input)`: BLAKE2b-512 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:26
+msgid "`ptool.hash.blake3(input)`: BLAKE3 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:27
+msgid "`ptool.hash.md5(input)`: MD5 digest. Introduced in `v0.2.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:29
+msgid "Checksums and fast non-cryptographic hashes"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:31
+msgid ""
+"`ptool.hash.crc32(input)`: CRC-32/ISO-HDLC checksum. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:32
+msgid ""
+"`ptool.hash.crc64(input)`: CRC-64/ECMA-182 checksum. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:33
+msgid "`ptool.hash.adler32(input)`: Adler-32 checksum. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:34
+msgid "`ptool.hash.xxh32(input)`: xxHash32 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:35
+msgid "`ptool.hash.xxh64(input)`: xxHash64 digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:36
+msgid ""
+"`ptool.hash.xxh3_64(input)`: XXH3 64-bit digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:37
+msgid ""
+"`ptool.hash.xxh3_128(input)`: XXH3 128-bit digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:38
+msgid ""
+"`ptool.hash.murmur3_32(input)`: MurmurHash3 32-bit digest. Introduced in "
+"`v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:39
+msgid ""
+"`ptool.hash.murmur3_128(input)`: MurmurHash3 x64 128-bit digest. Introduced "
+"in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:40
+msgid ""
+"`ptool.hash.fnv1a32(input)`: FNV-1a 32-bit digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:41
+msgid ""
+"`ptool.hash.fnv1a64(input)`: FNV-1a 64-bit digest. Introduced in `v0.9.0`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:43
+msgid "Example"
+msgstr ""

@@ -1,0 +1,157 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:12+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:1
+msgid "Log API"
+msgstr "API de log"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:3
+msgid "`ptool.log` exposes level-based terminal logging helpers under both `ptool.log` and `p.log`."
+msgstr "`ptool.log` expõe utilitários de logging por nível tanto em `ptool.log` quanto em `p.log`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:6
+msgid "Every log call renders a line in this format:"
+msgstr "Cada chamada de log gera uma linha neste formato:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:12
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:14
+msgid "The timestamp uses local time in `YYYY-MM-DD HH:MM:SS` format."
+msgstr "O timestamp usa a hora local no formato `YYYY-MM-DD HH:MM:SS`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:15
+msgid "The level label uses the full names `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, and `FATAL`."
+msgstr "O rótulo de nível usa os nomes completos `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` e `FATAL`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:17
+msgid "Colored output is enabled automatically when `ptool` is writing to a terminal."
+msgstr "A saída colorida é habilitada automaticamente quando o `ptool` está escrevendo em um terminal."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:19
+msgid "`ptool.log.error(...)` and `ptool.log.fatal(...)` write to `stderr`. Other levels write to `stdout`."
+msgstr "`ptool.log.error(...)` e `ptool.log.fatal(...)` escrevem em `stderr`. Os demais níveis escrevem em `stdout`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:21
+msgid "`ptool.log.fatal(...)` exits the current `ptool` process with status code `1` immediately after printing the log line."
+msgstr "`ptool.log.fatal(...)` encerra o processo atual do `ptool` com código de status `1` imediatamente após imprimir a linha de log."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:23
+msgid "Multiple arguments are joined with spaces. Non-string values are rendered in a single-line inspected form."
+msgstr "Vários argumentos são unidos com espaços. Valores que não são string são renderizados em uma forma inspect de linha única."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:26
+msgid "ptool.log.trace"
+msgstr "ptool.log.trace"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:28
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:28"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:34
+msgid "Writes a trace-level log line."
+msgstr "Escreve uma linha de log no nível trace."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:36
+msgid "ptool.log.debug"
+msgstr "ptool.log.debug"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:38"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:44
+msgid "Writes a debug-level log line."
+msgstr "Escreve uma linha de log no nível debug."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:46
+msgid "ptool.log.info"
+msgstr "ptool.log.info"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:48
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:48"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:54
+msgid "Writes an info-level log line."
+msgstr "Escreve uma linha de log no nível info."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:56
+msgid "ptool.log.warn"
+msgstr "ptool.log.warn"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:58
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:58"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:64
+msgid "Writes a warning-level log line."
+msgstr "Escreve uma linha de log no nível warn."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:66
+msgid "ptool.log.error"
+msgstr "ptool.log.error"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:68
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:68"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:74
+msgid "Writes an error-level log line to `stderr`."
+msgstr "Escreve uma linha de log no nível error em `stderr`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:76
+msgid "ptool.log.fatal"
+msgstr "ptool.log.fatal"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:78
+msgid "`v0.10.0` - Introduced."
+msgstr "`v0.10.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:84
+msgid "Writes a fatal-level log line to `stderr`, then exits the current `ptool` process with status code `1`."
+msgstr "Escreve uma linha de log no nível fatal em `stderr` e depois encerra o processo atual do `ptool` com código de status `1`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:87
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:96
+msgid "Example output:"
+msgstr "Saída de exemplo:"
+
+#~ msgid "`ptool.log.error(...)` writes to `stderr`. Other levels write to `stdout`."
+#~ msgstr "`ptool.log.error(...)` escreve em `stderr`. Os demais níveis escrevem em `stdout`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:35"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:45"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:55"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/log.md:65"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introduced."

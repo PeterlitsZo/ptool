@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+TODO...
+
+## v0.11.0 (2026-06-24)
+
 ### Added
 
 - Added the `ptool.etcd` / `p.etcd` module for etcd v3 KV access, with
