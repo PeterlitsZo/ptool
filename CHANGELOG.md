@@ -8,6 +8,14 @@
   connection helpers, single-key `get`, `put`, `delete`, prefix `list`,
   and a raw `request` escape hatch for direct etcd API access.
 
+### Fixed
+
+- Fixed S3 connections from static musl Linux builds failing to reach hosts
+  that resolve fine under glibc or macOS DNS (for example internal names like
+  `es1.ft`) by switching the S3 HTTP client to a hickory-dns pure-Rust
+  resolver, which reads `/etc/resolv.conf` and `/etc/hosts` directly instead of
+  relying on the system `getaddrinfo`.
+
 ## v0.10.0 (2026-05-30)
 
 ### Added

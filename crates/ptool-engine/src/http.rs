@@ -80,10 +80,15 @@ pub(crate) fn request_with_op(
     }
 
     let url = build_request_url(&url, &query)?;
-    let mut client_builder = Client::builder().timeout(Duration::from_millis(parse_timeout_ms(
-        timeout_ms,
-        "timeout_ms",
-    )?));
+    // Keep ptool.http.request on the system getaddrinfo resolver (macOS Bonjour,
+    // glibc NSS). The `hickory-dns` reqwest feature would otherwise flip this
+    // client to hickory too; S3 opts into hickory explicitly (see s3.rs).
+    let mut client_builder = Client::builder()
+        .no_hickory_dns()
+        .timeout(Duration::from_millis(parse_timeout_ms(
+            timeout_ms,
+            "timeout_ms",
+        )?));
     if let Some(connect_timeout_ms) = connect_timeout_ms {
         client_builder = client_builder.connect_timeout(Duration::from_millis(
             parse_timeout_value(connect_timeout_ms, "connect_timeout_ms")?,

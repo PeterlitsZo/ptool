@@ -1,5 +1,7 @@
 use crate::{Error, ErrorKind, Result};
-use opendal::{EntryMode, Metadata, Operator, services::S3};
+use opendal::{
+    EntryMode, Metadata, Operator, layers::HttpClientLayer, raw::HttpClient, services::S3,
+};
 use std::sync::Arc;
 use tokio::runtime::Runtime;
 
@@ -60,8 +62,23 @@ pub(crate) fn connect(runtime: Arc<Runtime>, options: S3ConnectOptions) -> Resul
         builder = builder.allow_anonymous();
     }
 
+    // ptool ships as a static musl binary, whose getaddrinfo cannot resolve some
+    // internal names (e.g. es1.ft) that glibc/macOS resolve fine. Use a
+    // hickory-dns (pure-Rust) HTTP client so S3 resolves /etc/resolv.conf and
+    // /etc/hosts itself instead of going through the system getaddrinfo. See
+    // OpenDAL's HTTP optimization guide.
+    let http_client = reqwest::Client::builder()
+        .hickory_dns(true)
+        .build()
+        .map_err(|err| {
+            Error::new(ErrorKind::S3, format!("failed to build HTTP client: {err}"))
+                .with_op("ptool.s3.connect")
+                .with_detail(err.to_string())
+        })?;
+
     let operator = Operator::new(builder)
         .map_err(|err| opendal_error("ptool.s3.connect", "create S3 operator", err))?
+        .layer(HttpClientLayer::new(HttpClient::with(http_client)))
         .finish();
 
     Ok(S3Connection { runtime, operator })
