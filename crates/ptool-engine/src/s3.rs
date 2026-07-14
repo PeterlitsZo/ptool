@@ -2,6 +2,8 @@ use crate::{Error, ErrorKind, Result};
 use opendal::{
     EntryMode, Metadata, Operator, layers::HttpClientLayer, raw::HttpClient, services::S3,
 };
+use std::future::IntoFuture;
+use std::ops::Bound;
 use std::sync::Arc;
 use tokio::runtime::Runtime;
 
@@ -23,6 +25,29 @@ pub struct S3Connection {
     operator: Operator,
 }
 
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct S3WriteOptions {
+    pub content_type: Option<String>,
+    pub cache_control: Option<String>,
+    pub content_disposition: Option<String>,
+    pub content_encoding: Option<String>,
+    pub metadata: Option<Vec<(String, String)>>,
+    pub if_not_exists: bool,
+    pub if_match: Option<String>,
+    pub if_none_match: Option<String>,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct S3ReadOptions {
+    pub range: Option<S3Range>,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct S3Range {
+    pub start: Option<u64>,
+    pub end: Option<u64>,
+}
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct S3Entry {
     pub path: String,
@@ -30,6 +55,8 @@ pub struct S3Entry {
     pub etag: Option<String>,
     pub last_modified: Option<String>,
     pub content_type: Option<String>,
+    pub version: Option<String>,
+    pub metadata: Option<Vec<(String, String)>>,
     pub is_file: bool,
     pub is_dir: bool,
     pub mode: String,
@@ -85,21 +112,57 @@ pub(crate) fn connect(runtime: Arc<Runtime>, options: S3ConnectOptions) -> Resul
 }
 
 impl S3Connection {
-    pub fn read(&self, path: &str) -> Result<Vec<u8>> {
+    pub fn read(&self, path: &str, options: &S3ReadOptions) -> Result<Vec<u8>> {
         let path = normalize_object_path(path, "ptool.s3.Connection:read", false)?;
+        let mut reader = self.operator.read_with(&path);
+        if let Some(range) = &options.range {
+            reader = reader.range(range.to_bounds());
+        }
         let buffer = self
             .runtime
-            .block_on(self.operator.read(&path))
+            .block_on(reader.into_future())
             .map_err(|err| opendal_error("ptool.s3.Connection:read", "read object", err))?;
         Ok(buffer.to_vec())
     }
 
-    pub fn write(&self, path: &str, content: &[u8]) -> Result<()> {
+    pub fn write(&self, path: &str, content: &[u8], options: &S3WriteOptions) -> Result<S3Entry> {
         let path = normalize_object_path(path, "ptool.s3.Connection:write", false)?;
-        self.runtime
-            .block_on(self.operator.write(&path, content.to_vec()))
+        let mut writer = self.operator.write_with(&path, content.to_vec());
+
+        if let Some(content_type) = &options.content_type {
+            writer = writer.content_type(content_type);
+        }
+        if let Some(cache_control) = &options.cache_control {
+            writer = writer.cache_control(cache_control);
+        }
+        if let Some(content_disposition) = &options.content_disposition {
+            writer = writer.content_disposition(content_disposition);
+        }
+        if let Some(content_encoding) = &options.content_encoding {
+            writer = writer.content_encoding(content_encoding);
+        }
+        if let Some(metadata) = &options.metadata {
+            writer = writer.user_metadata(metadata.clone());
+        }
+        if options.if_not_exists {
+            writer = writer.if_not_exists(true);
+        }
+        if let Some(if_match) = &options.if_match {
+            writer = writer.if_match(if_match);
+        }
+        if let Some(if_none_match) = &options.if_none_match {
+            writer = writer.if_none_match(if_none_match);
+        }
+
+        let metadata = self
+            .runtime
+            .block_on(writer.into_future())
             .map_err(|err| opendal_error("ptool.s3.Connection:write", "write object", err))?;
-        Ok(())
+        Ok(write_metadata_to_entry(
+            path,
+            content.len() as u64,
+            metadata,
+        ))
     }
 
     pub fn delete(&self, path: &str) -> Result<()> {
@@ -189,10 +252,45 @@ fn metadata_to_entry(path: String, metadata: Metadata) -> Result<S3Entry> {
         etag: metadata.etag().map(ToOwned::to_owned),
         last_modified: metadata.last_modified().map(|value| value.to_string()),
         content_type: metadata.content_type().map(ToOwned::to_owned),
+        version: metadata.version().map(ToOwned::to_owned),
+        metadata: metadata.user_metadata().map(|metadata| {
+            metadata
+                .iter()
+                .map(|(k, v)| (k.clone(), v.clone()))
+                .collect()
+        }),
         is_file: metadata.is_file(),
         is_dir: metadata.is_dir(),
         mode: entry_mode_name(mode).to_string(),
     })
+}
+
+fn write_metadata_to_entry(path: String, size: u64, metadata: Metadata) -> S3Entry {
+    S3Entry {
+        path,
+        size,
+        etag: metadata.etag().map(ToOwned::to_owned),
+        last_modified: metadata.last_modified().map(|value| value.to_string()),
+        content_type: metadata.content_type().map(ToOwned::to_owned),
+        version: metadata.version().map(ToOwned::to_owned),
+        metadata: metadata.user_metadata().map(|metadata| {
+            metadata
+                .iter()
+                .map(|(k, v)| (k.clone(), v.clone()))
+                .collect()
+        }),
+        is_file: true,
+        is_dir: false,
+        mode: "file".to_string(),
+    }
+}
+
+impl S3Range {
+    fn to_bounds(&self) -> (Bound<u64>, Bound<u64>) {
+        let start = self.start.map(Bound::Included).unwrap_or(Bound::Unbounded);
+        let end = self.end.map(Bound::Excluded).unwrap_or(Bound::Unbounded);
+        (start, end)
+    }
 }
 
 fn entry_mode_name(mode: EntryMode) -> &'static str {

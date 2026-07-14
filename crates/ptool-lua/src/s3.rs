@@ -1,9 +1,11 @@
 use mlua::{Lua, Table, UserData, UserDataMethods, Value};
-use ptool_engine::{PtoolEngine, S3ConnectOptions, S3Connection, S3Entry};
+use ptool_engine::{
+    PtoolEngine, S3ConnectOptions, S3Connection, S3Entry, S3Range, S3ReadOptions, S3WriteOptions,
+};
 
 const CONNECT_SIGNATURE: &str = "ptool.s3.connect(options)";
-const READ_SIGNATURE: &str = "ptool.s3.Connection:read(path)";
-const WRITE_SIGNATURE: &str = "ptool.s3.Connection:write(path, content)";
+const READ_SIGNATURE: &str = "ptool.s3.Connection:read(path[, options])";
+const WRITE_SIGNATURE: &str = "ptool.s3.Connection:write(path, content[, options])";
 const DELETE_SIGNATURE: &str = "ptool.s3.Connection:delete(path)";
 const EXISTS_SIGNATURE: &str = "ptool.s3.Connection:exists(path)";
 const LIST_SIGNATURE: &str = "ptool.s3.Connection:list([prefix])";
@@ -24,10 +26,15 @@ pub(crate) fn connect(options: Table, engine: &PtoolEngine) -> mlua::Result<LuaS
 
 impl UserData for LuaS3Connection {
     fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
-        methods.add_method("read", |lua, this, path: String| this.read(lua, path));
+        methods.add_method(
+            "read",
+            |lua, this, (path, options): (String, Option<Table>)| this.read(lua, path, options),
+        );
         methods.add_method(
             "write",
-            |_, this, (path, content): (String, mlua::String)| this.write(path, content),
+            |lua, this, (path, content, options): (String, mlua::String, Option<Table>)| {
+                this.write(lua, path, content, options)
+            },
         );
         methods.add_method("delete", |_, this, path: String| this.delete(path));
         methods.add_method("exists", |_, this, path: String| this.exists(path));
@@ -39,18 +46,28 @@ impl UserData for LuaS3Connection {
 }
 
 impl LuaS3Connection {
-    fn read(&self, lua: &Lua, path: String) -> mlua::Result<mlua::String> {
+    fn read(&self, lua: &Lua, path: String, options: Option<Table>) -> mlua::Result<mlua::String> {
+        let options = parse_read_options(options)?;
         let bytes = self
             .connection
-            .read(&path)
+            .read(&path, &options)
             .map_err(|err| s3_error(READ_SIGNATURE, err))?;
         lua.create_string(&bytes)
     }
 
-    fn write(&self, path: String, content: mlua::String) -> mlua::Result<()> {
-        self.connection
-            .write(&path, content.as_bytes().as_ref())
-            .map_err(|err| s3_error(WRITE_SIGNATURE, err))
+    fn write(
+        &self,
+        lua: &Lua,
+        path: String,
+        content: mlua::String,
+        options: Option<Table>,
+    ) -> mlua::Result<Table> {
+        let options = parse_write_options(options)?;
+        let entry = self
+            .connection
+            .write(&path, content.as_bytes().as_ref(), &options)
+            .map_err(|err| s3_error(WRITE_SIGNATURE, err))?;
+        s3_entry_to_lua(lua, entry, WRITE_SIGNATURE)
     }
 
     fn delete(&self, path: String) -> mlua::Result<()> {
@@ -72,7 +89,7 @@ impl LuaS3Connection {
             .map_err(|err| s3_error(LIST_SIGNATURE, err))?;
         let table = lua.create_table()?;
         for (index, entry) in entries.into_iter().enumerate() {
-            table.raw_set(index + 1, s3_entry_to_lua(lua, entry)?)?;
+            table.raw_set(index + 1, s3_entry_to_lua(lua, entry, LIST_SIGNATURE)?)?;
         }
         Ok(table)
     }
@@ -82,7 +99,7 @@ impl LuaS3Connection {
             .connection
             .stat(&path)
             .map_err(|err| s3_error(STAT_SIGNATURE, err))?;
-        s3_entry_to_lua(lua, entry)
+        s3_entry_to_lua(lua, entry, STAT_SIGNATURE)
     }
 }
 
@@ -113,6 +130,65 @@ fn parse_connect_options(options: Table) -> mlua::Result<S3ConnectOptions> {
     })
 }
 
+fn parse_write_options(options: Option<Table>) -> mlua::Result<S3WriteOptions> {
+    let Some(options) = options else {
+        return Ok(S3WriteOptions::default());
+    };
+
+    validate_option_keys(
+        &options,
+        WRITE_SIGNATURE,
+        &[
+            "content_type",
+            "cache_control",
+            "content_disposition",
+            "content_encoding",
+            "metadata",
+            "if_not_exists",
+            "if_match",
+            "if_none_match",
+        ],
+    )?;
+
+    Ok(S3WriteOptions {
+        content_type: optional_non_empty_string(&options, "content_type", WRITE_SIGNATURE)?,
+        cache_control: optional_non_empty_string(&options, "cache_control", WRITE_SIGNATURE)?,
+        content_disposition: optional_non_empty_string(
+            &options,
+            "content_disposition",
+            WRITE_SIGNATURE,
+        )?,
+        content_encoding: optional_non_empty_string(&options, "content_encoding", WRITE_SIGNATURE)?,
+        metadata: optional_string_map(&options, "metadata", WRITE_SIGNATURE)?,
+        if_not_exists: options
+            .get::<Option<bool>>("if_not_exists")?
+            .unwrap_or(false),
+        if_match: optional_non_empty_string(&options, "if_match", WRITE_SIGNATURE)?,
+        if_none_match: optional_non_empty_string(&options, "if_none_match", WRITE_SIGNATURE)?,
+    })
+}
+
+fn parse_read_options(options: Option<Table>) -> mlua::Result<S3ReadOptions> {
+    let Some(options) = options else {
+        return Ok(S3ReadOptions::default());
+    };
+
+    validate_option_keys(&options, READ_SIGNATURE, &["range"])?;
+
+    let range = match options.get::<Option<Table>>("range")? {
+        Some(range) => {
+            validate_option_keys(&range, READ_SIGNATURE, &["start", "end"])?;
+            Some(S3Range {
+                start: optional_u64(&range, "start", READ_SIGNATURE)?,
+                end: optional_u64(&range, "end", READ_SIGNATURE)?,
+            })
+        }
+        None => None,
+    };
+
+    Ok(S3ReadOptions { range })
+}
+
 fn validate_connect_option_keys(options: &Table) -> mlua::Result<()> {
     for pair in options.pairs::<Value, Value>() {
         let (key, _) = pair?;
@@ -138,6 +214,28 @@ fn validate_connect_option_keys(options: &Table) -> mlua::Result<()> {
         }
     }
 
+    Ok(())
+}
+
+fn validate_option_keys(options: &Table, signature: &str, allowed: &[&str]) -> mlua::Result<()> {
+    for pair in options.pairs::<Value, Value>() {
+        let (key, _) = pair?;
+        let key = match key {
+            Value::String(value) => value.to_str()?.to_string(),
+            _ => {
+                return Err(crate::lua_error::invalid_option(
+                    signature,
+                    "option keys must be strings",
+                ));
+            }
+        };
+        if !allowed.iter().any(|allowed| *allowed == key) {
+            return Err(crate::lua_error::invalid_option(
+                signature,
+                format!("unknown option `{key}`"),
+            ));
+        }
+    }
     Ok(())
 }
 
@@ -176,23 +274,83 @@ fn optional_non_empty_string(
     Ok(value)
 }
 
-fn s3_entry_to_lua(lua: &Lua, entry: S3Entry) -> mlua::Result<Table> {
+fn optional_string_map(
+    options: &Table,
+    field: &str,
+    signature: &str,
+) -> mlua::Result<Option<Vec<(String, String)>>> {
+    let Some(value) = options.get::<Option<Table>>(field)? else {
+        return Ok(None);
+    };
+
+    let mut entries = Vec::new();
+    for pair in value.pairs::<Value, Value>() {
+        let (key, value) = pair?;
+        let key = match key {
+            Value::String(value) => value.to_str()?.to_string(),
+            _ => {
+                return Err(crate::lua_error::invalid_argument(
+                    signature,
+                    format!("`{field}` keys must be strings"),
+                ));
+            }
+        };
+        let value = match value {
+            Value::String(value) => value.to_str()?.to_string(),
+            _ => {
+                return Err(crate::lua_error::invalid_argument(
+                    signature,
+                    format!("`{field}` values must be strings"),
+                ));
+            }
+        };
+        entries.push((key, value));
+    }
+
+    Ok(Some(entries))
+}
+
+fn optional_u64(options: &Table, field: &str, signature: &str) -> mlua::Result<Option<u64>> {
+    let value = options.get::<Option<i64>>(field)?;
+    value
+        .map(|value| {
+            u64::try_from(value).map_err(|_| {
+                crate::lua_error::invalid_argument(
+                    signature,
+                    format!("`{field}` must be a non-negative integer"),
+                )
+            })
+        })
+        .transpose()
+}
+
+fn s3_entry_to_lua(lua: &Lua, entry: S3Entry, signature: &str) -> mlua::Result<Table> {
     let table = lua.create_table()?;
     table.set("path", entry.path)?;
-    table.set("size", lua_size(entry.size)?)?;
+    table.set("size", lua_size(entry.size, signature)?)?;
     table.set("etag", entry.etag)?;
     table.set("last_modified", entry.last_modified)?;
     table.set("content_type", entry.content_type)?;
+    table.set("version", entry.version)?;
+    match entry.metadata {
+        Some(metadata) => {
+            let metadata_table = lua.create_table()?;
+            for (key, value) in metadata {
+                metadata_table.set(key, value)?;
+            }
+            table.set("metadata", metadata_table)?;
+        }
+        None => table.set("metadata", Value::Nil)?,
+    }
     table.set("is_file", entry.is_file)?;
     table.set("is_dir", entry.is_dir)?;
     table.set("mode", entry.mode)?;
     Ok(table)
 }
 
-fn lua_size(size: u64) -> mlua::Result<i64> {
-    i64::try_from(size).map_err(|_| {
-        crate::lua_error::invalid_argument(STAT_SIGNATURE, "`size` exceeds Lua integer range")
-    })
+fn lua_size(size: u64, op: &str) -> mlua::Result<i64> {
+    i64::try_from(size)
+        .map_err(|_| crate::lua_error::invalid_argument(op, "`size` exceeds Lua integer range"))
 }
 
 fn s3_error(signature: &str, err: ptool_engine::Error) -> mlua::Error {

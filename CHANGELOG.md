@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-TODO...
+### Changed
+
+- Enhanced the `ptool.s3` / `p.s3` module so reads can request byte ranges,
+  writes can set object headers, metadata, and conditional write options, and
+  write/list/stat entry tables expose version and user metadata when available.
 
 ## v0.11.0 (2026-06-24)
 
