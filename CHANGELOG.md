@@ -7,6 +7,10 @@
 - Enhanced the `ptool.s3` / `p.s3` module so reads can request byte ranges,
   writes can set object headers, metadata, and conditional write options, and
   write/list/stat entry tables expose version and user metadata when available.
+- Added `ptool.ssh.Connection:run_shell(...)`, which runs remote shell command
+  strings through the configured `ptool.config({ shell = ... })` shell and
+  echoes them using the same shell-first presentation as local
+  `ptool.run_shell(...)`.
 
 ## v0.11.0 (2026-06-24)
 

@@ -697,7 +697,12 @@ impl LuaWorld {
     }
 
     pub(crate) fn ssh_connect(&self, value: Value) -> mlua::Result<crate::ssh::LuaSshConnection> {
-        crate::ssh::connect(value, self.current_dir(), &self.engine)
+        crate::ssh::connect(
+            value,
+            self.current_dir(),
+            &self.engine,
+            self.config.shell.clone(),
+        )
     }
 
     pub(crate) fn fs_read(&self, lua: &Lua, path: String) -> mlua::Result<mlua::String> {

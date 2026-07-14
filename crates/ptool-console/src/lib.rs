@@ -183,6 +183,29 @@ impl Console {
         )
     }
 
+    pub fn command_echo_ssh_shell(
+        &self,
+        user: &str,
+        host: &str,
+        port: u16,
+        cwd: &str,
+        shell: &str,
+        command: &str,
+    ) -> io::Result<()> {
+        self.command_echo(
+            &[
+                format_ssh_target(user, host, port),
+                if cwd.is_empty() {
+                    "<unknown remote cwd>".to_string()
+                } else {
+                    cwd.to_string()
+                },
+            ],
+            Some(shell),
+            command,
+        )
+    }
+
     pub fn repl_banner(&self, version: &str) -> io::Result<()> {
         self.write_stdout_line(&format!("ptool repl ({version})"))?;
         self.write_stdout_line("Press Ctrl-D to exit.")

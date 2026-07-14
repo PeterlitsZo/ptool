@@ -1,13 +1,17 @@
 # ROADMAP
 
+## v0.13.0
+
+- [ ] Enhance the `ptool-console` crate.
+
 ## v0.12.0
 
 - [x] Enhance the `p.s3` module.
+- [ ] Support the `p.ssh.Connection`'s `run_shell` method.
 - [ ] Enhance the `LuaError`. Make it be a enum.
 - [ ] Support `p.which` or `p.which_or_fatal` to check for command existence.
 - [ ] Support `p.template.write` to write to file directly.
 - [ ] Support `p.guard(cond):or_fatal("...")`.
-- [ ] Enhance the `ptool-console` crate.
 
 ## v0.11.0
 

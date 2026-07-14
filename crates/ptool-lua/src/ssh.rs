@@ -9,6 +9,7 @@ use std::path::Path;
 
 const CONNECT_SIGNATURE: &str = "ptool.ssh.connect(target_or_options)";
 const RUN_SIGNATURE: &str = "ptool.ssh.Connection:run(...)";
+const RUN_SHELL_SIGNATURE: &str = "ptool.ssh.Connection:run_shell(command)";
 const RUN_CAPTURE_SIGNATURE: &str = "ptool.ssh.Connection:run_capture(...)";
 const HTTP_REQUEST_SIGNATURE: &str = "ptool.ssh.Connection:http_request(options)";
 const CLOSE_SIGNATURE: &str = "ptool.ssh.Connection:close()";
@@ -45,6 +46,7 @@ const RUN_CAPTURE_STREAM_DEFAULTS: ExecStreamDefaults = ExecStreamDefaults {
 #[derive(Clone)]
 pub(crate) struct LuaSshConnection {
     connection: SshConnection,
+    shell: String,
 }
 
 #[derive(Clone)]
@@ -57,12 +59,13 @@ pub(crate) fn connect(
     value: Value,
     current_dir: &Path,
     engine: &PtoolEngine,
+    shell: String,
 ) -> mlua::Result<LuaSshConnection> {
     let request = parse_connect_request(value)?;
     let connection = engine
         .ssh_connect(request, current_dir)
         .map_err(|err| ssh_error(CONNECT_SIGNATURE, err))?;
-    Ok(LuaSshConnection { connection })
+    Ok(LuaSshConnection { connection, shell })
 }
 
 impl UserData for LuaSshConnection {
@@ -76,6 +79,9 @@ impl UserData for LuaSshConnection {
     fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
         methods.add_method("run", |lua, this, args: Variadic<Value>| {
             this.run(lua, args)
+        });
+        methods.add_method("run_shell", |lua, this, command: String| {
+            this.run_shell(lua, command)
         });
         methods.add_method("run_capture", |lua, this, args: Variadic<Value>| {
             this.run_capture(lua, args)
@@ -123,36 +129,28 @@ impl LuaSshConnection {
     }
 
     fn run(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
-        let mut options = parse_run_call(args)?;
-        let info = self.info();
-        if options.echo {
-            let display_cwd = self
-                .connection
-                .resolve_display_cwd(options.display_cwd.as_deref())
-                .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
-            self.connection
-                .console()
-                .command_echo_ssh(
-                    &info.user,
-                    &info.host,
-                    info.port,
-                    &display_cwd,
-                    &options.command,
-                )
-                .map_err(|err| {
-                    ssh_console_error(RUN_SIGNATURE, &info.target, &options.command, err)
-                })?;
-            options.echo = false;
-        }
-        let result = self
-            .connection
-            .run(options)
-            .map_err(|err| ssh_error(RUN_SIGNATURE, err))?;
-        build_exec_result(lua, result, info.target)
+        self.run_with_options(lua, parse_run_call(args)?, RUN_SIGNATURE)
+    }
+
+    fn run_shell(&self, lua: &Lua, command: String) -> mlua::Result<Table> {
+        self.run_shell_with_options(
+            lua,
+            parse_run_shell_call(&self.shell, command.clone())?,
+            &self.shell,
+            &command,
+        )
     }
 
     fn run_capture(&self, lua: &Lua, args: Variadic<Value>) -> mlua::Result<Table> {
-        let mut options = parse_run_capture_call(args)?;
+        self.run_with_options(lua, parse_run_capture_call(args)?, RUN_CAPTURE_SIGNATURE)
+    }
+
+    fn run_with_options(
+        &self,
+        lua: &Lua,
+        mut options: SshExecOptions,
+        signature: &'static str,
+    ) -> mlua::Result<Table> {
         let info = self.info();
         if options.echo {
             let display_cwd = self
@@ -168,15 +166,48 @@ impl LuaSshConnection {
                     &display_cwd,
                     &options.command,
                 )
+                .map_err(|err| ssh_console_error(signature, &info.target, &options.command, err))?;
+            options.echo = false;
+        }
+        let result = self
+            .connection
+            .run(options)
+            .map_err(|err| ssh_error(signature, err))?;
+        build_exec_result(lua, result, info.target)
+    }
+
+    fn run_shell_with_options(
+        &self,
+        lua: &Lua,
+        mut options: SshExecOptions,
+        shell: &str,
+        display_command: &str,
+    ) -> mlua::Result<Table> {
+        let info = self.info();
+        if options.echo {
+            let display_cwd = self
+                .connection
+                .resolve_display_cwd(options.display_cwd.as_deref())
+                .unwrap_or_else(|_| "<unknown remote cwd>".to_string());
+            self.connection
+                .console()
+                .command_echo_ssh_shell(
+                    &info.user,
+                    &info.host,
+                    info.port,
+                    &display_cwd,
+                    shell,
+                    display_command,
+                )
                 .map_err(|err| {
-                    ssh_console_error(RUN_CAPTURE_SIGNATURE, &info.target, &options.command, err)
+                    ssh_console_error(RUN_SHELL_SIGNATURE, &info.target, display_command, err)
                 })?;
             options.echo = false;
         }
         let result = self
             .connection
             .run(options)
-            .map_err(|err| ssh_error(RUN_CAPTURE_SIGNATURE, err))?;
+            .map_err(|err| ssh_error(RUN_SHELL_SIGNATURE, err))?;
         build_exec_result(lua, result, info.target)
     }
 
@@ -508,6 +539,23 @@ pub(crate) fn build_transfer_result(lua: &Lua, result: TransferResult) -> mlua::
 
 fn parse_run_call(args: Variadic<Value>) -> mlua::Result<SshExecOptions> {
     parse_run_call_with_defaults(args, RUN_SIGNATURE, RUN_STREAM_DEFAULTS)
+}
+
+fn parse_run_shell_call(shell: &str, command: String) -> mlua::Result<SshExecOptions> {
+    ensure_non_empty_string(shell, RUN_SHELL_SIGNATURE, "shell")?;
+    ensure_non_empty_string(&command, RUN_SHELL_SIGNATURE, "command")?;
+    let remote_command =
+        quote_words_for_shell([shell, "-c", command.as_str()], RUN_SHELL_SIGNATURE)?;
+    Ok(SshExecOptions {
+        command: remote_command,
+        display_cwd: None,
+        stdin: None,
+        trim: false,
+        echo: true,
+        stdout: RUN_STREAM_DEFAULTS.stdout,
+        stderr: RUN_STREAM_DEFAULTS.stderr,
+        check: false,
+    })
 }
 
 fn parse_run_capture_call(args: Variadic<Value>) -> mlua::Result<SshExecOptions> {
