@@ -39,6 +39,121 @@ pub enum SshTransferKind {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum GitAction<'a> {
+    Clone {
+        url: &'a str,
+        destination: &'a str,
+    },
+    Init {
+        path: &'a str,
+    },
+    Add {
+        repository: &'a str,
+        paths: &'a [String],
+    },
+    Commit {
+        repository: &'a str,
+        message: &'a str,
+    },
+    Checkout {
+        repository: &'a str,
+        revision: &'a str,
+    },
+    Switch {
+        repository: &'a str,
+        branch: &'a str,
+    },
+    CreateBranch {
+        repository: &'a str,
+        branch: &'a str,
+    },
+    DeleteBranch {
+        repository: &'a str,
+        branch: &'a str,
+    },
+    RenameBranch {
+        repository: &'a str,
+        branch: &'a str,
+        new_name: &'a str,
+    },
+    SetUpstream {
+        repository: &'a str,
+        branch: &'a str,
+        upstream: Option<&'a str>,
+    },
+    CreateTag {
+        repository: &'a str,
+        tag: &'a str,
+    },
+    DeleteTag {
+        repository: &'a str,
+        tag: &'a str,
+    },
+    ChangeRemote {
+        repository: &'a str,
+        operation: &'a str,
+        remote: &'a str,
+    },
+    Restore {
+        repository: &'a str,
+        paths: &'a [String],
+    },
+    Reset {
+        repository: &'a str,
+        revision: &'a str,
+        mode: &'a str,
+    },
+    Remove {
+        repository: &'a str,
+        paths: &'a [String],
+    },
+    Clean {
+        repository: &'a str,
+        paths: &'a [String],
+    },
+    Fetch {
+        repository: &'a str,
+        remote: &'a str,
+    },
+    Push {
+        repository: &'a str,
+        remote: &'a str,
+        refspecs: &'a [String],
+    },
+    Pull {
+        repository: &'a str,
+        remote: &'a str,
+        branch: &'a str,
+    },
+    Integrate {
+        repository: &'a str,
+        operation: &'a str,
+        revision: &'a str,
+    },
+    Stash {
+        repository: &'a str,
+        operation: &'a str,
+    },
+    Config {
+        repository: &'a str,
+        scope: &'a str,
+        name: &'a str,
+    },
+    Advanced {
+        repository: &'a str,
+        operation: &'a str,
+        target: &'a str,
+    },
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct GitConfirmation {
+    pub prompt: String,
+    pub help: Option<String>,
+    pub cancelled_detail: String,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum OutputTarget {
     Stdout,
     Stderr,
@@ -111,6 +226,187 @@ impl Console {
 
     pub fn flush_stderr(&self) -> io::Result<()> {
         self.with_stderr_lock(|stderr| stderr.flush())
+    }
+
+    pub fn git_confirmation(&self, action: GitAction<'_>) -> GitConfirmation {
+        let repository_help = |repository: &str| Some(format!("The repository is {repository}"));
+        match action {
+            GitAction::Clone { url, destination } => GitConfirmation {
+                prompt: format!("Clone repository -- {url} -> {destination}?"),
+                help: Some(format!("The destination path is {destination}")),
+                cancelled_detail: format!("clone into `{destination}` cancelled by user"),
+            },
+            GitAction::Init { path } => GitConfirmation {
+                prompt: format!("Initialize Git repository -- {path}?"),
+                help: Some(format!("The repository path is {path}")),
+                cancelled_detail: format!("git init at `{path}` cancelled by user"),
+            },
+            GitAction::Add { repository, paths } => GitConfirmation {
+                prompt: format!("Stage Git path(s) -- {}?", preview_items(paths)),
+                help: repository_help(repository),
+                cancelled_detail: "git add cancelled by user".to_string(),
+            },
+            GitAction::Commit {
+                repository,
+                message,
+            } => GitConfirmation {
+                prompt: format!("Create Git commit -- {message}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git commit cancelled by user".to_string(),
+            },
+            GitAction::Checkout {
+                repository,
+                revision,
+            } => GitConfirmation {
+                prompt: format!("Checkout Git revision -- {revision}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git checkout cancelled by user".to_string(),
+            },
+            GitAction::Switch { repository, branch } => GitConfirmation {
+                prompt: format!("Switch Git branch -- {branch}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git switch cancelled by user".to_string(),
+            },
+            GitAction::CreateBranch { repository, branch } => GitConfirmation {
+                prompt: format!("Create Git branch -- {branch}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git branch creation cancelled by user".to_string(),
+            },
+            GitAction::DeleteBranch { repository, branch } => GitConfirmation {
+                prompt: format!("Delete Git branch -- {branch}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git branch deletion cancelled by user".to_string(),
+            },
+            GitAction::RenameBranch {
+                repository,
+                branch,
+                new_name,
+            } => GitConfirmation {
+                prompt: format!("Rename Git branch -- {branch} -> {new_name}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git branch rename cancelled by user".to_string(),
+            },
+            GitAction::SetUpstream {
+                repository,
+                branch,
+                upstream,
+            } => GitConfirmation {
+                prompt: match upstream {
+                    Some(upstream) => format!("Set Git upstream -- {branch} -> {upstream}?"),
+                    None => format!("Unset Git upstream -- {branch}?"),
+                },
+                help: repository_help(repository),
+                cancelled_detail: "git upstream change cancelled by user".to_string(),
+            },
+            GitAction::CreateTag { repository, tag } => GitConfirmation {
+                prompt: format!("Create Git tag -- {tag}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git tag creation cancelled by user".to_string(),
+            },
+            GitAction::DeleteTag { repository, tag } => GitConfirmation {
+                prompt: format!("Delete Git tag -- {tag}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git tag deletion cancelled by user".to_string(),
+            },
+            GitAction::ChangeRemote {
+                repository,
+                operation,
+                remote,
+            } => GitConfirmation {
+                prompt: format!("{operation} Git remote -- {remote}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git remote change cancelled by user".to_string(),
+            },
+            GitAction::Restore { repository, paths } => GitConfirmation {
+                prompt: format!("Restore Git path(s) -- {}?", preview_items(paths)),
+                help: repository_help(repository),
+                cancelled_detail: "git restore cancelled by user".to_string(),
+            },
+            GitAction::Reset {
+                repository,
+                revision,
+                mode,
+            } => GitConfirmation {
+                prompt: format!("Reset Git repository -- {mode} to {revision}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git reset cancelled by user".to_string(),
+            },
+            GitAction::Remove { repository, paths } => GitConfirmation {
+                prompt: format!("Remove Git path(s) -- {}?", preview_items(paths)),
+                help: repository_help(repository),
+                cancelled_detail: "git remove cancelled by user".to_string(),
+            },
+            GitAction::Clean { repository, paths } => GitConfirmation {
+                prompt: format!("Clean Git path(s) -- {}?", preview_items(paths)),
+                help: repository_help(repository),
+                cancelled_detail: "git clean cancelled by user".to_string(),
+            },
+            GitAction::Fetch { repository, remote } => GitConfirmation {
+                prompt: format!("Fetch Git remote -- {remote}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git fetch cancelled by user".to_string(),
+            },
+            GitAction::Push {
+                repository,
+                remote,
+                refspecs,
+            } => GitConfirmation {
+                prompt: format!(
+                    "Push Git remote -- {remote} ({})?",
+                    if refspecs.is_empty() {
+                        "default refspec".to_string()
+                    } else {
+                        preview_items(refspecs)
+                    }
+                ),
+                help: repository_help(repository),
+                cancelled_detail: "git push cancelled by user".to_string(),
+            },
+            GitAction::Pull {
+                repository,
+                remote,
+                branch,
+            } => GitConfirmation {
+                prompt: format!("Pull Git branch -- {remote}/{branch}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git pull cancelled by user".to_string(),
+            },
+            GitAction::Integrate {
+                repository,
+                operation,
+                revision,
+            } => GitConfirmation {
+                prompt: format!("{operation} Git revision -- {revision}?"),
+                help: repository_help(repository),
+                cancelled_detail: format!("git {} cancelled by user", operation.to_lowercase()),
+            },
+            GitAction::Stash {
+                repository,
+                operation,
+            } => GitConfirmation {
+                prompt: format!("{operation} Git stash?"),
+                help: repository_help(repository),
+                cancelled_detail: "git stash operation cancelled by user".to_string(),
+            },
+            GitAction::Config {
+                repository,
+                scope,
+                name,
+            } => GitConfirmation {
+                prompt: format!("Change Git {scope} config -- {name}?"),
+                help: repository_help(repository),
+                cancelled_detail: "git config change cancelled by user".to_string(),
+            },
+            GitAction::Advanced {
+                repository,
+                operation,
+                target,
+            } => GitConfirmation {
+                prompt: format!("{operation} Git resource -- {target}?"),
+                help: repository_help(repository),
+                cancelled_detail: format!("git {} cancelled by user", operation.to_lowercase()),
+            },
+        }
     }
 
     pub fn log(&self, level: LogLevel, message: &str) -> io::Result<()> {
@@ -516,6 +812,15 @@ fn push_error_field_line(
         rendered.push_str(value);
     }
     rendered.push('\n');
+}
+
+fn preview_items(items: &[String]) -> String {
+    let preview = items.iter().take(3).cloned().collect::<Vec<_>>().join(", ");
+    if items.len() > 3 {
+        format!("{preview}, ...")
+    } else {
+        preview
+    }
 }
 
 fn format_user_host(user: &str, host: &str) -> String {

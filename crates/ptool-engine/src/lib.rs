@@ -57,10 +57,21 @@ pub use fs::{
     FsRemoveOptions, FsSeekWhence,
 };
 pub use git::{
-    GitAddOptions, GitCheckoutOptions, GitCloneOptions, GitCommitOptions, GitFetchOptions,
-    GitFetchStats, GitHeadInfo, GitPushOptions, GitRemoteAuth, GitRepository, GitSignature,
-    GitStatusEntry, GitStatusOptions, GitStatusSummary, GitSwitchOptions, clone_repo as git_clone,
-    discover as git_discover, open as git_open,
+    GitAddOptions, GitApplyCommitOptions, GitBlameHunk, GitBlameOptions, GitBranchCreateOptions,
+    GitBranchDeleteOptions, GitBranchInfo, GitBranchKind, GitBranchListOptions, GitCheckoutOptions,
+    GitCleanOptions, GitCloneOptions, GitCommitInfo, GitCommitOptions, GitConfigEntry,
+    GitConfigScope, GitConfigValue, GitConflictEntry, GitDescribeOptions, GitDiffDelta,
+    GitDiffOptions, GitDiffSummary, GitFastForwardMode, GitFetchOptions, GitFetchStats,
+    GitHeadInfo, GitInitOptions, GitIntegrateResult, GitLogOptions, GitMergeOptions, GitObjectInfo,
+    GitPullOptions, GitPullStrategy, GitPushOptions, GitPushRejection, GitPushResult,
+    GitRebaseContinueOptions, GitRebaseOptions, GitRebaseResult, GitRemoteAddOptions,
+    GitRemoteAuth, GitRemoteInfo, GitRemoveOptions, GitRepository, GitResetMode, GitResetOptions,
+    GitRestoreOptions, GitSignature, GitSignatureInfo, GitStashApplyOptions, GitStashInfo,
+    GitStashSaveOptions, GitStatusEntry, GitStatusOptions, GitStatusSummary, GitSubmoduleInfo,
+    GitSubmoduleInitOptions, GitSubmoduleSyncOptions, GitSubmoduleUpdateOptions, GitSwitchOptions,
+    GitTagCreateOptions, GitTagDownload, GitTagInfo, GitWorktreeAddOptions, GitWorktreeInfo,
+    GitWorktreePruneOptions, clone_repo as git_clone, discover as git_discover, init as git_init,
+    open as git_open,
 };
 pub use http::{HttpRequestOptions, HttpResponse};
 pub use json::{JsonPathSegment, JsonStringifyOptions, JsonValue};
@@ -647,6 +658,15 @@ impl PtoolEngine {
 
     pub fn db_connect(&self, url: &str, current_dir: &Path) -> Result<DbConnection> {
         db::connect(Arc::clone(&self.runtime), url, current_dir)
+    }
+
+    pub fn git_init(
+        &self,
+        path: Option<&str>,
+        current_dir: &Path,
+        options: GitInitOptions,
+    ) -> Result<GitRepository> {
+        git::init(path, current_dir, options)
     }
 
     pub fn git_open(&self, path: Option<&str>, current_dir: &Path) -> Result<GitRepository> {

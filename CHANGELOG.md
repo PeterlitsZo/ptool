@@ -7,6 +7,12 @@
 - Added path-based `get` and `set` helpers to `ptool.json` / `p.json`, plus a
   matching `set` helper for `ptool.yaml` / `p.yaml`, so scripts can read or
   update nested values without manually parsing and serializing the document.
+- Expanded `ptool.git` / `p.git` into a complete repository workflow API with
+  repository initialization, history and diff inspection, branch and tag CRUD,
+  remote management, pull and merge operations, restore/reset/clean and config
+  helpers, cherry-pick/revert/stash/rebase flows, worktree and submodule
+  management, and blame support, with synchronized documentation for every
+  supported current locale.
 
 ### Changed
 

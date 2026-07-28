@@ -665,6 +665,14 @@ impl LuaWorld {
         crate::s3::connect(options, &self.engine)
     }
 
+    pub(crate) fn git_init(
+        &self,
+        path: Option<String>,
+        options: Option<Table>,
+    ) -> mlua::Result<crate::git::LuaGitRepo> {
+        crate::git::init(path, options, self.current_dir(), &self.engine)
+    }
+
     pub(crate) fn git_open(&self, path: Option<String>) -> mlua::Result<crate::git::LuaGitRepo> {
         crate::git::open(path, self.current_dir(), &self.engine)
     }

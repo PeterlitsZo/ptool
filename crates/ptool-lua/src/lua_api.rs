@@ -463,6 +463,35 @@ fn create_ptool_s3_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlu
 
 fn create_ptool_git_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> mlua::Result<Table> {
     let git_module = lua.create_table()?;
+    let init_state = Rc::clone(&world);
+    let init_fn = lua.create_function(move |_, args: mlua::Variadic<Value>| match args.len() {
+        0 => init_state.borrow().git_init(None, None),
+        1 => match args.first() {
+            Some(Value::String(path)) => init_state
+                .borrow()
+                .git_init(Some(path.to_str()?.to_string()), None),
+            Some(Value::Table(options)) => {
+                init_state.borrow().git_init(None, Some(options.clone()))
+            }
+            _ => Err(crate::lua_error::invalid_argument(
+                "ptool.git.init(path?, options?)",
+                "expects a path string or options table",
+            )),
+        },
+        2 => match (args.first(), args.get(1)) {
+            (Some(Value::String(path)), Some(Value::Table(options))) => init_state
+                .borrow()
+                .git_init(Some(path.to_str()?.to_string()), Some(options.clone())),
+            _ => Err(crate::lua_error::invalid_argument(
+                "ptool.git.init(path?, options?)",
+                "expects (path, options)",
+            )),
+        },
+        _ => Err(crate::lua_error::invalid_argument(
+            "ptool.git.init(path?, options?)",
+            "accepts at most 2 arguments",
+        )),
+    })?;
     let open_state = Rc::clone(&world);
     let open_fn =
         lua.create_function(move |_, path: Option<String>| open_state.borrow().git_open(path))?;
@@ -475,6 +504,7 @@ fn create_ptool_git_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> ml
             world.borrow().git_clone(url, path, options)
         },
     )?;
+    git_module.set("init", init_fn)?;
     git_module.set("open", open_fn)?;
     git_module.set("discover", discover_fn)?;
     git_module.set("clone", clone_fn)?;

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 09:34+0800\n"
+"POT-Creation-Date: 2026-07-28 13:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,909 +11,1442 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:1
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:1
 msgid "Git API"
 msgstr "Git API"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:3
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:3
 msgid "Git repository helpers are available under `ptool.git` and `p.git`."
 msgstr "Git リポジトリ ヘルパーは、`ptool.git` および `p.git` で利用できます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:5
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:5
 msgid "This module is backed by `git2` / `libgit2`, not by invoking the `git` command-line tool."
 msgstr "このモジュールは、`git` コマンド ライン ツールの呼び出しではなく、`git2` / `libgit2` によってサポートされます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:8
-msgid "Mutating operations such as `ptool.git.clone(...)`, `repo:add(...)`, `repo:commit(...)`, `repo:checkout(...)`, `repo:switch(...)`, `repo:fetch(...)`, and `repo:push(...)` accept `confirm = true` in their options table to ask the user for confirmation before the action runs."
-msgstr "`ptool.git.clone(...)`、`repo:add(...)`、`repo:commit(...)`、`repo:checkout(...)`、`repo:switch(...)`、`repo:fetch(...)`、`repo:push(...)` のような変更系操作では、実行前にユーザー確認を求めるため、options テーブルで `confirm = true` を受け付けます。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:8
+msgid "Mutating operations accept `confirm = true` in their options table to ask the user for confirmation before the action runs. Destructive operations also use separate safety flags such as `force = true`; confirmation never replaces the required safety flag."
+msgstr "リポジトリを変更する操作では、オプションテーブルに `confirm = true` を指定すると、実行前にユーザーへ確認できます。破壊的な操作では `force = true` などの独立した安全フラグも使用し、確認は必須の安全フラグの代わりにはなりません。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:13
-msgid "ptool.git.open"
-msgstr "ptool.git.open"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:13
+msgid "Unknown option names are rejected instead of being silently ignored."
+msgstr "不明なオプション名は黙って無視されず、エラーとして拒否されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:15
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:15"
-msgid "`v0.6.0` - Introduced."
-msgstr "`v0.6.0` - 導入されました。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:15
+msgid "ptool.git.init"
+msgstr "ptool.git.init"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:17
-msgid "`ptool.git.open(path?)` opens a repository directly and returns a `Repo` object."
-msgstr "`ptool.git.open(path?)` はリポジトリを直接開き、`Repo` オブジェクトを返します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:17
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:17"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:20
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:20"
-msgid "Arguments:"
-msgstr "引数:"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:19
+msgid "`ptool.git.init(path?, options?)` initializes a repository and returns a `Repo` object."
+msgstr "`ptool.git.init(path?, options?)` はリポジトリを初期化し、`Repo` オブジェクトを返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:22
-msgid "`path` (string, optional): Repository path. If omitted, the current `ptool` runtime directory is used."
-msgstr "`path` (文字列、オプション): リポジトリのパス。省略した場合、現在の `ptool` ランタイム ディレクトリが使用されます。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:22
+msgid "Options:"
+msgstr "オプション："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:25
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:25"
-msgid "Behavior:"
-msgstr "挙動:"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:24
+msgid "`bare` (boolean): Create a bare repository. Defaults to `false`."
+msgstr "`bare` (boolean): bare リポジトリを作成します。既定値は `false` です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:27
-msgid "Relative paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
-msgstr "相対パスは現在の `ptool` ランタイム ディレクトリから解決されるため、`ptool.cd(...)` の後に続きます。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:25
+msgid "`initial_head` (string): Initial branch name, for example `\"main\"`."
+msgstr "`initial_head` (string): 初期ブランチ名です。例：`\"main\"`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:29
-msgid "This does not search parent directories. Use `ptool.git.discover(...)` when you want repository discovery behavior."
-msgstr "これは親ディレクトリを検索しません。リポジトリ検出動作が必要な場合は、`ptool.git.discover(...)` を使用します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:26
+msgid "`confirm` (boolean): Ask before creating the repository."
+msgstr "`confirm` (boolean): リポジトリを作成する前に確認します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:32
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:32"
-msgid "Example:"
-msgstr "例:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:39
-msgid "ptool.git.discover"
-msgstr "ptool.git.discover"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41"
-msgid "`v0.6.0` - Introduced."
-msgstr "`v0.6.0` - 導入されました。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:43
-msgid "`ptool.git.discover(path?)` finds a repository starting from `path` and walking up parent directories, then returns a `Repo` object."
-msgstr "`ptool.git.discover(path?)` は、`path` から開始して親ディレクトリをたどってリポジトリを検索し、`Repo` オブジェクトを返します。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46"
-msgid "Arguments:"
-msgstr "引数:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:48
-msgid "`path` (string, optional): Starting path. If omitted, the current `ptool` runtime directory is used."
-msgstr "`path` (文字列、オプション): 開始パス。省略した場合、現在の `ptool` ランタイム ディレクトリが使用されます。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51"
-msgid "Behavior:"
-msgstr "挙動:"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:53
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:28
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:28"
 msgid "Relative paths are resolved from the current `ptool` runtime directory."
 msgstr "相対パスは現在の `ptool` ランタイムディレクトリから解決されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:54
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:36
+msgid "ptool.git.open"
+msgstr "ptool.git.open"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:38"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:40
+msgid "`ptool.git.open(path?)` opens a repository directly and returns a `Repo` object."
+msgstr "`ptool.git.open(path?)` はリポジトリを直接開き、`Repo` オブジェクトを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:43"
+msgid "Arguments:"
+msgstr "引数:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:45
+msgid "`path` (string, optional): Repository path. If omitted, the current `ptool` runtime directory is used."
+msgstr "`path` (文字列、オプション): リポジトリのパス。省略した場合、現在の `ptool` ランタイム ディレクトリが使用されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:48
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:48"
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:50
+msgid "Relative paths are resolved from the current `ptool` runtime directory, so they follow `ptool.cd(...)`."
+msgstr "相対パスは現在の `ptool` ランタイム ディレクトリから解決されるため、`ptool.cd(...)` の後に続きます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:52
+msgid "This does not search parent directories. Use `ptool.git.discover(...)` when you want repository discovery behavior."
+msgstr "これは親ディレクトリを検索しません。リポジトリ検出動作が必要な場合は、`ptool.git.discover(...)` を使用します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:55
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:55"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:62
+msgid "ptool.git.discover"
+msgstr "ptool.git.discover"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:64
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:64"
+msgid "`v0.6.0` - Introduced."
+msgstr "`v0.6.0` - 導入されました。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:66
+msgid "`ptool.git.discover(path?)` finds a repository starting from `path` and walking up parent directories, then returns a `Repo` object."
+msgstr "`ptool.git.discover(path?)` は、`path` から開始して親ディレクトリをたどってリポジトリを検索し、`Repo` オブジェクトを返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:69
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:69"
+msgid "Arguments:"
+msgstr "引数:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:71
+msgid "`path` (string, optional): Starting path. If omitted, the current `ptool` runtime directory is used."
+msgstr "`path` (文字列、オプション): 開始パス。省略した場合、現在の `ptool` ランタイム ディレクトリが使用されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:74
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:74"
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:76"
+msgid "Relative paths are resolved from the current `ptool` runtime directory."
+msgstr "相対パスは現在の `ptool` ランタイムディレクトリから解決されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:77
 msgid "This is useful when a script may run from a subdirectory inside a worktree."
 msgstr "これは、スクリプトがワークツリー内のサブディレクトリから実行される可能性がある場合に便利です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:56
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:56"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:79"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:63
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:86
 msgid "ptool.git.clone"
 msgstr "ptool.git.clone"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:88
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:88"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:67
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:90
 msgid "`ptool.git.clone(url, path[, options])` clones a repository and returns a `Repo` object for the cloned repository."
 msgstr "`ptool.git.clone(url, path[, options])` はリポジトリのクローンを作成し、クローンされたリポジトリの `Repo` オブジェクトを返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:70
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:70"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:93
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:93"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:72
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:95
 msgid "`url` (string, required): Remote repository URL."
 msgstr "`url` (文字列、必須): リモート リポジトリ URL。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:73
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:96
 msgid "`path` (string, required): Destination path."
 msgstr "`path` (文字列、必須): 宛先パス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
 msgid "`options` (table, optional): Clone options. Supported fields:"
 msgstr "`options` (テーブル、オプション): クローン オプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
 msgid "`branch` (string, optional): Branch name to check out after cloning."
 msgstr "`branch` (文字列、オプション): クローン作成後にチェックアウトするブランチ名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
 msgid "`bare` (boolean, optional): Whether to create a bare repository. Defaults to `false`."
 msgstr "`bare` (ブール値、オプション): ベア リポジトリを作成するかどうか。デフォルトは`false`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
+msgid "`depth` (integer, optional): Positive shallow-clone depth."
+msgstr "`depth` (integer、任意): shallow clone の正の深さです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
+msgid "`checkout` (boolean, optional): Whether to check out the selected branch. Defaults to `true`."
+msgstr "`checkout` (boolean、任意): 選択したブランチをチェックアウトするかどうかです。既定値は `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
+msgid "`remote` (string, optional): Name assigned to the cloned remote. Defaults to `\"origin\"`."
+msgstr "`remote` (string、任意): clone したリモートに付ける名前です。既定値は `\"origin\"` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
+msgid "`tags` (string, optional): `\"auto\"`, `\"all\"`, or `\"none\"`. Defaults to `\"auto\"`."
+msgstr "`tags` (string、任意): `\"auto\"`、`\"all\"`、`\"none\"` のいずれかです。既定値は `\"auto\"` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before cloning. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): クローン前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:97
 msgid "`auth` (table, optional): Remote authentication settings."
 msgstr "`auth` (テーブル、オプション): リモート認証設定。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:82
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:112
 msgid "`auth` fields:"
 msgstr "`auth` のフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:84
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:114
 msgid "`kind` (string, required): Authentication mode. Supported values:"
 msgstr "`kind` (文字列、必須): 認証モード。サポートされている値:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:84
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:114
 msgid "`\"default\"`: Use libgit2 default credentials."
 msgstr "`\"default\"`: libgit2 のデフォルトの資格情報を使用します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:84
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:114
 msgid "`\"ssh_agent\"`: Authenticate through the local SSH agent."
 msgstr "`\"ssh_agent\"`: ローカル SSH エージェントを通じて認証します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:84
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:114
+msgid "`\"ssh_key\"`: Authenticate with an SSH private key."
+msgstr "`\"ssh_key\"`: SSH 秘密鍵で認証します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:114
 msgid "`\"userpass\"`: Use a plaintext username and password."
 msgstr "`\"userpass\"`: プレーンテキストのユーザー名とパスワードを使用します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:88
-msgid "`username` (string, optional): Username for `\"ssh_agent\"`."
-msgstr "`username` (文字列、オプション): `\"ssh_agent\"` のユーザー名。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:114
+msgid "`\"credential_helper\"`: Ask the configured Git credential helper."
+msgstr "`\"credential_helper\"`: 設定済みの Git credential helper に問い合わせます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:89
-msgid "`username` (string, required): Username for `\"userpass\"`."
-msgstr "`username` (文字列、必須): `\"userpass\"` のユーザー名。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:120
+msgid "`username` (string): Optional for `\"ssh_agent\"` and `\"credential_helper\"`; required for `\"ssh_key\"` and `\"userpass\"`."
+msgstr "`username` (string): `\"ssh_agent\"` と `\"credential_helper\"` では任意、`\"ssh_key\"` と `\"userpass\"` では必須です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:90
-msgid "`password` (string, required): Password for `\"userpass\"`."
-msgstr "`password` (文字列、必須): `\"userpass\"` のパスワード。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:122
+msgid "`private_key` (string, required for `\"ssh_key\"`): Private key path. Relative paths are resolved from the current `ptool` runtime directory."
+msgstr "`private_key` (string、`\"ssh_key\"` では必須): 秘密鍵のパスです。相対パスは現在の `ptool` ランタイムディレクトリを基準に解決されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:124
+msgid "`public_key` (string, optional): Public key path."
+msgstr "`public_key` (string、任意): 公開鍵のパスです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:125
+msgid "`passphrase` (string, optional): SSH private-key passphrase."
+msgstr "`passphrase` (string、任意): SSH 秘密鍵のパスフレーズです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:126
+msgid "`password` (string, required for `\"userpass\"`): Password."
+msgstr "`password` (string、`\"userpass\"` では必須): パスワードです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:128
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:128"
 msgid "Behavior:"
 msgstr "挙動:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:94
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:130
 msgid "Relative destination paths are resolved from the current `ptool` runtime directory."
 msgstr "相対宛先パスは、現在の `ptool` ランタイム ディレクトリから解決されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:96
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:132
 msgid "Authentication options are also used by `repo:fetch(...)` and `repo:push(...)`."
 msgstr "認証オプションは、`repo:fetch(...)` および `repo:push(...)` でも使用されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:99
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:99"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:135
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:135"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:116
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:152
 msgid "Repo"
 msgstr "Repo"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:118
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:118"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:154
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:154"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:120
-msgid "`Repo` represents an open Git repository handle returned by `ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`."
-msgstr "`Repo` は、`ptool.git.open()`、`ptool.git.discover()`、または `ptool.git.clone()` によって返される、開いている Git リポジトリ ハンドルを表します。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:156
+msgid "`Repo` represents an open Git repository handle returned by `ptool.git.init()`, `ptool.git.open()`, `ptool.git.discover()`, or `ptool.git.clone()`."
+msgstr "`Repo` は、`ptool.git.init()`、`ptool.git.open()`、`ptool.git.discover()`、または `ptool.git.clone()` が返す、開かれた Git リポジトリのハンドルです。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:123
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:159
 msgid "It is implemented as a Lua userdata."
 msgstr "これは Lua userdata として実装されています。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:125
-msgid "Methods:"
-msgstr "メソッド:"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:161
+msgid "Methods are grouped below. Existing repository, status, staging, commit, checkout, switch, fetch, and push methods remain backward compatible. The workflow APIs described in the following sections are currently unreleased."
+msgstr ""
+"メソッドは以下でグループ別に説明します。既存の repository、status、staging、"
+"commit、checkout、switch、fetch、push メソッドは後方互換です。以降のセクショ"
+"ンで説明するワークフロー API は現在未リリースです。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:127
-msgid "`repo:path()` -> `string`"
-msgstr "`repo:path()` -> `string`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:128
-msgid "`repo:root()` -> `string|nil`"
-msgstr "`repo:root()` -> `string|nil`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:129
-msgid "`repo:is_bare()` -> `boolean`"
-msgstr "`repo:is_bare()` -> `boolean`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:130
-msgid "`repo:head()` -> `table`"
-msgstr "`repo:head()` -> `table`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:131
-msgid "`repo:current_branch()` -> `string|nil`"
-msgstr "`repo:current_branch()` -> `string|nil`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:132
-msgid "`repo:status([options])` -> `table`"
-msgstr "`repo:status([options])` -> `table`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:133
-msgid "`repo:is_clean([options])` -> `boolean`"
-msgstr "`repo:is_clean([options])` -> `boolean`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:134
-msgid "`repo:add(paths[, options])` -> `nil`"
-msgstr "`repo:add(paths[, options])` -> `nil`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:135
-msgid "`repo:commit(message[, options])` -> `string`"
-msgstr "`repo:commit(message[, options])` -> `string`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:136
-msgid "`repo:checkout(rev[, options])` -> `nil`"
-msgstr "`repo:checkout(rev[, options])` -> `nil`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:137
-msgid "`repo:switch(branch[, options])` -> `nil`"
-msgstr "`repo:switch(branch[, options])` -> `nil`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:138
-msgid "`repo:fetch([remote[, options]])` -> `table`"
-msgstr "`repo:fetch([remote[, options]])` -> `table`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:139
-msgid "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
-msgstr "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:141
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:165
 msgid "path"
 msgstr "path"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:143
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:143"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:167
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:167"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:145
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:169
 msgid "Canonical API name: `ptool.git.Repo:path`."
 msgstr "正規 API 名: `ptool.git.Repo:path`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:147
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:171
 msgid "`repo:path()` returns the repository git directory path."
 msgstr "`repo:path()` は、リポジトリの git ディレクトリ パスを返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:149
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:173
 msgid "Returns: `string`."
 msgstr "戻り値: `string`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:151"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:175
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:175"
 msgid "Notes:"
 msgstr "注意:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:153
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:177
 msgid "For a non-bare repository this is typically the `.git` directory."
 msgstr "非ベア リポジトリの場合、これは通常、`.git` ディレクトリです。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:154
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:178
 msgid "For a bare repository this is the repository directory itself."
 msgstr "ベア リポジトリの場合、これはリポジトリ ディレクトリ自体です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:156
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:180
 msgid "root"
 msgstr "root"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:158
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:158"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:182
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:182"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:160
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:184
 msgid "Canonical API name: `ptool.git.Repo:root`."
 msgstr "正規 API 名: `ptool.git.Repo:root`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:162
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:186
 msgid "`repo:root()` returns the worktree root directory."
 msgstr "`repo:root()` は、ワークツリーのルート ディレクトリを返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:164
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:164"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:188
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:188"
 msgid "Returns: `string|nil`."
 msgstr "戻り値: `string|nil`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:166
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:166"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:190
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:190"
 msgid "Notes:"
 msgstr "注意:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:168
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:192
 msgid "This returns `nil` for bare repositories."
 msgstr "これにより、ベア リポジトリの場合は `nil` が返されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:170
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:194
 msgid "is_bare"
 msgstr "is_bare"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:172
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:172"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:196
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:196"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:174
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:198
 msgid "Canonical API name: `ptool.git.Repo:is_bare`."
 msgstr "正規 API 名: `ptool.git.Repo:is_bare`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:176
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:200
 msgid "`repo:is_bare()` reports whether the repository is bare."
 msgstr "`repo:is_bare()` は、リポジトリがベアかどうかを報告します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:178
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:178"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:202
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:202"
 msgid "Returns: `boolean`."
 msgstr "戻り値: `boolean`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:180
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:204
 msgid "head"
 msgstr "head"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:182
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:182"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:206
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:206"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:184
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:208
 msgid "Canonical API name: `ptool.git.Repo:head`."
 msgstr "正規 API 名: `ptool.git.Repo:head`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:186
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:210
 msgid "`repo:head()` returns HEAD information as a table with:"
 msgstr "`repo:head()` は、HEAD 情報を以下のテーブルとして返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:188
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:212
 msgid "`oid` (string|nil): The current commit OID if available."
 msgstr "`oid` (文字列|nil): 現在のコミット OID (使用可能な場合)。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:189
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:213
 msgid "`shorthand` (string|nil): A short name for HEAD, such as a branch name."
 msgstr "`shorthand` (文字列|nil): ブランチ名などの HEAD の短縮名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:190
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:214
 msgid "`detached` (boolean): Whether HEAD is detached."
 msgstr "`detached` (ブール値): HEAD が切り離されているかどうか。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:191
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:215
 msgid "`unborn` (boolean): Whether the repository does not yet have an initial commit."
 msgstr "`unborn` (ブール値): リポジトリに初期コミットがまだ存在しないかどうか。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:194
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:194"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:218
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:218"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:202
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:226
 msgid "current_branch"
 msgstr "current_branch"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:204
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:204"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:228
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:228"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:206
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:230
 msgid "Canonical API name: `ptool.git.Repo:current_branch`."
 msgstr "正規 API 名: `ptool.git.Repo:current_branch`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:208
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:232
 msgid "`repo:current_branch()` returns the current local branch name."
 msgstr "`repo:current_branch()` は、現在のローカル ブランチ名を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:210
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:210"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:234
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:234"
 msgid "Returns: `string|nil`."
 msgstr "戻り値: `string|nil`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:236
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:236"
 msgid "Notes:"
 msgstr "注意:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:214
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:238
 msgid "This returns `nil` when HEAD is detached."
 msgstr "HEAD が切り離された場合、これは `nil` を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:215
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:239
 msgid "This also returns `nil` for an unborn branch before the first commit."
 msgstr "これは、最初のコミット前の unborn ブランチでも `nil` を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:217
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:241
 msgid "status"
 msgstr "status"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:219
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:219"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:243
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:243"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:221
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:245
 msgid "Canonical API name: `ptool.git.Repo:status`."
 msgstr "正規 API 名: `ptool.git.Repo:status`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:223
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:247
 msgid "`repo:status([options])` summarizes repository status and returns a table with:"
 msgstr "`repo:status([options])` はリポジトリのステータスを要約し、以下を含むテーブルを返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:225
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:249
 msgid "`root` (string|nil): The worktree root directory."
 msgstr "`root` (文字列|nil): ワークツリーのルート ディレクトリ。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:226
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:250
 msgid "`branch` (string|nil): The current local branch name."
 msgstr "`branch` (文字列|nil): 現在のローカル ブランチ名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:227
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:251
 msgid "`head` (table): The same HEAD information returned by `repo:head()`."
 msgstr "`head` (テーブル): `repo:head()` によって返される同じ HEAD 情報。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:228
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:252
 msgid "`upstream` (string|nil): The upstream branch name, when configured."
 msgstr "`upstream` (文字列|nil): 構成された場合の上流ブランチ名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:229
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:253
 msgid "`ahead` (integer): Number of commits ahead of upstream."
 msgstr "`ahead` (整数): アップストリームよりも先にあるコミットの数。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:230
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:254
 msgid "`behind` (integer): Number of commits behind upstream."
 msgstr "`behind` (整数): アップストリームの背後にあるコミットの数。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:231
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:255
 msgid "`clean` (boolean): Whether the repository has no visible status entries."
 msgstr "`clean` (ブール値): リポジトリに表示可能なステータス エントリがないかどうか。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:232
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:256
 msgid "`entries` (table): An array of status entry tables."
 msgstr "`entries` (テーブル): ステータスエントリテーブルの配列。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:234
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:258
 msgid "`entries[i]` contains:"
 msgstr "`entries[i]` には以下が含まれます:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:236
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:260
 msgid "`path` (string): Repository-relative path."
 msgstr "`path` (文字列): リポジトリの相対パス。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:237
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:261
 msgid "`index_status` (string|nil): Index-side status. Supported values currently include `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"`, and `\"typechange\"`."
 msgstr "`index_status` (文字列|nil): インデックス側のステータス。現在サポートされている値には、`\"new\"`、`\"modified\"`、`\"deleted\"`、`\"renamed\"`、`\"typechange\"` があります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:239
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:263
 msgid "`worktree_status` (string|nil): Worktree-side status. Supported values currently include `\"new\"`, `\"modified\"`, `\"deleted\"`, `\"renamed\"`, `\"typechange\"`, and `\"ignored\"`."
 msgstr "`worktree_status` (文字列|nil): ワークツリー側のステータス。現在サポートされている値には、`\"new\"`、`\"modified\"`、`\"deleted\"`、`\"renamed\"`、`\"typechange\"`、`\"ignored\"` があります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:242
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:266
 msgid "`conflicted` (boolean): Whether the path is conflicted."
 msgstr "`conflicted` (ブール値): パスが競合しているかどうか。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:243
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:267
 msgid "`ignored` (boolean): Whether the path is ignored."
 msgstr "`ignored` (ブール値): パスが無視されるかどうか。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:245
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:269
 msgid "`options` fields:"
 msgstr "`options` のフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:247
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:271
 msgid "`include_untracked` (boolean, optional): Whether to include untracked files. Defaults to `true`."
 msgstr "`include_untracked` (ブール値、オプション): 追跡されていないファイルを含めるかどうか。デフォルトは`true`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:249
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:273
 msgid "`include_ignored` (boolean, optional): Whether to include ignored files. Defaults to `false`."
 msgstr "`include_ignored` (ブール値、オプション): 無視されたファイルを含めるかどうか。デフォルトは`false`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:251
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:275
 msgid "`recurse_untracked_dirs` (boolean, optional): Whether to recurse into untracked directories. Defaults to `true`."
 msgstr "`recurse_untracked_dirs` (ブール値、オプション): 追跡されていないディレクトリを再帰するかどうか。デフォルトは`true`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:254
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:254"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:278
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:278"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:266
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:290
 msgid "is_clean"
 msgstr "is_clean"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:292
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:292"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:270
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:294
 msgid "Canonical API name: `ptool.git.Repo:is_clean`."
 msgstr "正規 API 名: `ptool.git.Repo:is_clean`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:272
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:296
 msgid "`repo:is_clean([options])` returns whether the repository is clean."
 msgstr "`repo:is_clean([options])` は、リポジトリがクリーンかどうかを返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:274
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:298
 msgid "`options` (table, optional): The same options accepted by `repo:status(...)`."
 msgstr "`options` (テーブル、オプション): `repo:status(...)` で受け入れられるのと同じオプション。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:275
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:275"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:299
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:299"
 msgid "Returns: `boolean`."
 msgstr "戻り値: `boolean`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:277
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:301
 msgid "add"
 msgstr "add"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:279
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:279"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:303
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:303"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:281
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:305
 msgid "Canonical API name: `ptool.git.Repo:add`."
 msgstr "正規 API 名: `ptool.git.Repo:add`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:283
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:307
 msgid "`repo:add(paths[, options])` stages one or more paths in the index."
 msgstr "`repo:add(paths[, options])` は、インデックス内の 1 つ以上のパスをステージングします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:309
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:309"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:287
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:311
 msgid "`paths` (string|string[], required): A path or an array of paths."
 msgstr "`paths` (文字列|文字列[]、必須): パスまたはパスの配列。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:288
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:312
 msgid "`options` (table, optional): Add options. Supported fields:"
 msgstr "`options` (テーブル、オプション): 追加オプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:288
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:312
 msgid "`update` (boolean, optional): Update only paths already known to the index. Defaults to `false`."
 msgstr "`update` (ブール値、オプション): インデックスにすでに認識されているパスのみを更新します。デフォルトは`false`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:288
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:312
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before staging paths. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): パスをステージする前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:294
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:294"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:318
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:318"
 msgid "Behavior:"
 msgstr "挙動:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:296
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:320
 msgid "Paths are interpreted relative to the repository worktree."
 msgstr "パスはリポジトリ ワークツリーに対して相対的に解釈されます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:322
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:322"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:305
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:329
 msgid "commit"
 msgstr "commit"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:307
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:307"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:331
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:331"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:309
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:333
 msgid "Canonical API name: `ptool.git.Repo:commit`."
 msgstr "正規 API 名: `ptool.git.Repo:commit`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:311
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:335
 msgid "`repo:commit(message[, options])` creates a commit from the current index and returns the new commit OID."
 msgstr "`repo:commit(message[, options])` は、現在のインデックスからコミットを作成し、新しいコミット OID を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:314
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:314"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:338
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:338"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:316
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:340
 msgid "`message` (string, required): Commit message."
 msgstr "`message` (文字列、必須): コミットメッセージ。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:341
 msgid "`options` (table, optional): Commit options. Supported fields:"
 msgstr "`options` (テーブル、オプション): コミットオプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:341
 msgid "`author` (table, optional): Author signature."
 msgstr "`author` (テーブル、オプション): 著者の署名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:341
 msgid "`committer` (table, optional): Committer signature."
 msgstr "`committer` (テーブル、オプション): コミッターの署名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:317
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:341
+msgid "`amend` (boolean, optional): Replace the current HEAD commit. Defaults to `false`."
+msgstr "`amend` (boolean、任意): 現在の HEAD commit を置き換えます。既定値は `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:341
+msgid "`allow_empty` (boolean, optional): Permit a commit whose tree is unchanged. Defaults to `true` for backward compatibility."
+msgstr "`allow_empty` (boolean、任意): ツリーが変わらない commit を許可します。後方互換性のため既定値は `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:341
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before creating the commit. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): コミットを作成する前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:323
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:351
 msgid "Signature fields:"
 msgstr "署名フィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:325
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:353
 msgid "`name` (string, required)"
 msgstr "`name` (文字列、必須)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:326
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:354
 msgid "`email` (string, required)"
 msgstr "`email` (文字列、必須)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:328
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:328"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:355
+msgid "`time_seconds` (integer, optional): Unix timestamp."
+msgstr "`time_seconds` (integer、任意): Unix タイムスタンプです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:356
+msgid "`offset_minutes` (integer, optional): Time-zone offset from UTC."
+msgstr "`offset_minutes` (integer、任意): UTC からのタイムゾーンオフセットです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:358
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:358"
 msgid "Behavior:"
 msgstr "挙動:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:330
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:360
 msgid "When `author` and `committer` are omitted, `ptool` tries to use the Git repository identity from configuration."
 msgstr "`author` と `committer` が省略された場合、`ptool` は構成からの Git リポジトリ ID の使用を試みます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:332
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:362
 msgid "If no identity is configured and no explicit signature is provided, an error is raised."
 msgstr "ID が構成されておらず、明示的な署名も提供されていない場合は、エラーが発生します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:335
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:335"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:365
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:365"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:348
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:378
 msgid "checkout"
 msgstr "チェックアウト"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:350
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:350"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:380
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:380"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:352
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:382
 msgid "Canonical API name: `ptool.git.Repo:checkout`."
 msgstr "正規 API 名: `ptool.git.Repo:checkout`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:354
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:384
 msgid "`repo:checkout(rev[, options])` checks out a revision."
 msgstr "`repo:checkout(rev[, options])` はリビジョンをチェックアウトします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:356
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:356"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:386
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:386"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:358
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:388
 msgid "`rev` (string, required): Revision expression such as a branch name, tag name, or commit OID."
 msgstr "`rev` (文字列、必須): ブランチ名、タグ名、コミット OID などのリビジョン式。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:360
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:390
 msgid "`options` (table, optional): Checkout options. Supported fields:"
 msgstr "`options` (テーブル、オプション): チェックアウト オプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:360
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:390
 msgid "`force` (boolean, optional): Whether to force checkout. Defaults to `false`."
 msgstr "`force` (ブール値、オプション): チェックアウトを強制するかどうか。デフォルトは`false`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:360
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:390
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before checking out the revision. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): リビジョンをチェックアウトする前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:366
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:366"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:396
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:396"
 msgid "Behavior:"
 msgstr "挙動:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:368
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:398
 msgid "This can detach HEAD when `rev` does not resolve to a named reference."
 msgstr "これにより、`rev` が名前付き参照に解決されない場合に HEAD が切り離される可能性があります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:370
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:400
 msgid "switch"
 msgstr "switch"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:372
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:372"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:402
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:402"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:374
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:404
 msgid "Canonical API name: `ptool.git.Repo:switch`."
 msgstr "正規 API 名: `ptool.git.Repo:switch`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:376
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:406
 msgid "`repo:switch(branch[, options])` switches HEAD to a local branch."
 msgstr "`repo:switch(branch[, options])` は HEAD をローカル ブランチに切り替えます。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:378
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:378"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:408
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:408"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:380
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:410
 msgid "`branch` (string, required): Local branch name."
 msgstr "`branch` (文字列、必須): ローカルブランチ名。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:381
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
 msgid "`options` (table, optional): Switch options. Supported fields:"
 msgstr "`options` (テーブル、オプション): Switch オプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:381
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
 msgid "`create` (boolean, optional): Whether to create the branch first. Defaults to `false`."
 msgstr "`create` (ブール値、オプション): ブランチを最初に作成するかどうか。デフォルトは`false`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:381
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
 msgid "`force` (boolean, optional): Whether to force the checkout. Defaults to `false`."
 msgstr "`force` (ブール値、オプション): チェックアウトを強制するかどうか。デフォルトは`false`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:381
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
 msgid "`start_point` (string, optional): Revision to branch from when `create = true`. Defaults to `HEAD`."
 msgstr "`start_point` (文字列、オプション): `create = true` の時点から分岐するリビジョン。デフォルトは`HEAD`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:381
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
+msgid "`track` (string, optional): Upstream reference for the new branch."
+msgstr "`track` (string、任意): 新しいブランチの upstream 参照です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
+msgid "`orphan` (boolean, optional): Create an orphan branch."
+msgstr "`orphan` (boolean、任意): orphan ブランチを作成します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:411
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before switching branches. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): ブランチを切り替える前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:391
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:391"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:423
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:423"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:401
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:433
 msgid "fetch"
 msgstr "fetch"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:403
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:403"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:435
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:435"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:405
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:437
 msgid "Canonical API name: `ptool.git.Repo:fetch`."
 msgstr "正規 API 名: `ptool.git.Repo:fetch`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:407
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:439
 msgid "`repo:fetch([remote[, options]])` fetches from a remote and returns transfer statistics."
 msgstr "`repo:fetch([remote[, options]])` はリモートからフェッチし、転送統計を返します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:410
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:410"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:442
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:442"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:412
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:412"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:444
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:444"
 msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
 msgstr "`remote` (文字列、オプション): リモート名。デフォルトは`\"origin\"`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:413
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
 msgid "`options` (table, optional): Fetch options. Supported fields:"
 msgstr "`options` (テーブル、オプション): Fetch オプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:413
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:413"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445"
 msgid "`refspecs` (string|string[], optional): One refspec or an array of refspecs."
 msgstr "`refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:413
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
+msgid "`depth` (integer, optional): Positive shallow-fetch depth."
+msgstr "`depth` (integer、任意): shallow fetch の正の深さです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
+msgid "`prune` (boolean, optional): Remove stale remote-tracking references."
+msgstr "`prune` (boolean、任意): 古い remote-tracking 参照を削除します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
+msgid "`tags` (string, optional): `\"auto\"`, `\"all\"`, or `\"none\"`."
+msgstr "`tags` (string、任意): `\"auto\"`、`\"all\"`、`\"none\"` のいずれかです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
+msgid "`update_fetchhead` (boolean, optional): Update `FETCH_HEAD`. Defaults to `true`."
+msgstr "`update_fetchhead` (boolean、任意): `FETCH_HEAD` を更新します。既定値は `true` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before fetching. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): fetch 前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:413
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:413"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:445"
 msgid "`auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`."
 msgstr "`auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:421
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:458
 msgid "Returns:"
 msgstr "戻り値:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:423
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:460
 msgid "`received_objects` (integer)"
 msgstr "`received_objects` (整数)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:424
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:461
 msgid "`indexed_objects` (integer)"
 msgstr "`indexed_objects` (整数)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:425
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:462
 msgid "`local_objects` (integer)"
 msgstr "`local_objects` (整数)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:426
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:463
 msgid "`total_objects` (integer)"
 msgstr "`total_objects` (整数)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:427
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:464
 msgid "`received_bytes` (integer)"
 msgstr "`received_bytes` (整数)"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:429
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:429"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:465
+msgid "`updated_refs` (string[])"
+msgstr "`updated_refs` (string[])"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:467
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:467"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:441
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:479
 msgid "push"
 msgstr "push"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:443
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:443"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:481
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:481"
 msgid "`v0.6.0` - Introduced."
 msgstr "`v0.6.0` - 導入されました。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:445
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:483
 msgid "Canonical API name: `ptool.git.Repo:push`."
 msgstr "正規 API 名: `ptool.git.Repo:push`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:447
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:485
 msgid "`repo:push([remote[, refspecs[, options]]])` pushes refs to a remote."
 msgstr "`repo:push([remote[, refspecs[, options]]])` は refs をリモートにプッシュします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:449
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:449"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:487
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:487"
 msgid "Arguments:"
 msgstr "引数:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:451
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:451"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:489
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:489"
 msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
 msgstr "`remote` (文字列、オプション): リモート名。デフォルトは`\"origin\"`です。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:452
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:452"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:490
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:490"
 msgid "`refspecs` (string|string[], optional): One refspec or an array of refspecs."
 msgstr "`refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:453
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:491
 msgid "`options` (table, optional): Push options. Supported fields:"
 msgstr "`options` (テーブル、オプション): Push オプション。サポートされているフィールド:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:453
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:491
+msgid "`force` (boolean, optional): Force each push refspec. Defaults to `false`."
+msgstr "`force` (boolean、任意): 各 push refspec を強制します。既定値は `false` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:491
+msgid "`set_upstream` (boolean, optional): Configure the pushed current branch to track the destination remote branch."
+msgstr "`set_upstream` (boolean、任意): push した現在のブランチが宛先のリモートブランチを追跡するよう設定します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:491
 msgid "`confirm` (boolean, optional): Whether to ask for confirmation before pushing. Defaults to `false`."
 msgstr "`confirm` (boolean, 任意): push 前に確認を求めるかどうか。デフォルトは `false`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:453
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:453"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:491
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:491"
 msgid "`auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`."
 msgstr "`auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:459
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:459"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:500
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:500"
 msgid "Behavior:"
 msgstr "挙動:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:461
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:502
 msgid "When `refspecs` is omitted, `ptool` tries to push the current local branch to the branch of the same name on the remote."
 msgstr "`refspecs` が省略された場合、`ptool` は現在のローカル ブランチをリモート上の同じ名前のブランチにプッシュしようとします。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:463
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:504
 msgid "Omitting `refspecs` while HEAD is detached raises an error."
 msgstr "HEAD が切り離されているときに `refspecs` を省略すると、エラーが発生します。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:465
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:465"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:505
+msgid "The returned table contains `ok`, `refspecs`, and `rejected`. Each rejected entry contains `reference` and `message`."
+msgstr "返されるテーブルには `ok`、`refspecs`、`rejected` が含まれます。拒否された各項目には `reference` と `message` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:508
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:508"
 msgid "Example:"
 msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:521
+msgid "Git workflow APIs"
+msgstr "Git ワークフロー API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:523
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:523"
+msgid "`Unreleased` - Introduced."
+msgstr "`Unreleased` - 導入されました。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:525
+msgid "The APIs in this section cover repository maintenance, releases, history inspection, collaboration, and CI automation. A string or a dense string array is accepted wherever a parameter is documented as `string|string[]`."
+msgstr "このセクションの API は、リポジトリ保守、リリース、履歴調査、共同作業、CI 自動化を対象とします。`string|string[]` と記載された引数には、文字列または密な文字列配列を渡せます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:529
+msgid "Shared result tables"
+msgstr "共通の結果テーブル"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:531
+msgid "Commit information returned by `commit_info()` and `log()` contains `oid`, `message`, `summary`, `author`, `committer`, and `parent_oids`. A signature table contains `name`, `email`, `time_seconds`, and `offset_minutes`."
+msgstr "`commit_info()` と `log()` が返す commit 情報には `oid`、`message`、`summary`、`author`、`committer`、`parent_oids` が含まれます。署名テーブルには `name`、`email`、`time_seconds`、`offset_minutes` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:535
+msgid "Integration methods return:"
+msgstr "統合メソッドは次を返します："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:547
+msgid "Rebase results use `\"rebased\"` or `\"conflicted\"` outcomes and add `current` and `total`. Operations that stop on conflicts can be continued or aborted with the corresponding API."
+msgstr "rebase の結果では `\"rebased\"` または `\"conflicted\"` の outcome を使用し、`current` と `total` が追加されます。競合で停止した操作は対応する API で続行または中止できます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:551
+msgid "Repository and status"
+msgstr "リポジトリと状態"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:563
+msgid "`status()` and `is_clean()` options are `include_untracked` (default `true`), `include_ignored`, `recurse_untracked_dirs` (default `true`), and `paths`. `GitStatusSummary` contains `root`, `branch`, `head`, `upstream`, `ahead`, `behind`, `clean`, and `entries`."
+msgstr "`status()` と `is_clean()` のオプションは、`include_untracked`（既定値 `true`）、`include_ignored`、`recurse_untracked_dirs`（既定値 `true`）、`paths` です。`GitStatusSummary` には `root`、`branch`、`head`、`upstream`、`ahead`、`behind`、`clean`、`entries` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:568
+msgid "History and diff"
+msgstr "履歴と diff"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:578
+msgid "`resolve()` returns `oid`, `kind`, and `shorthand`."
+msgstr "`resolve()` は `oid`、`kind`、`shorthand` を返します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:579
+msgid "`commit_info()` defaults to `HEAD`."
+msgstr "`commit_info()` の既定値は `HEAD` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:580
+msgid "`log()` accepts `rev`, `max_count` (default `100`), `skip`, `first_parent`, `reverse`, and `paths`."
+msgstr "`log()` は `rev`、`max_count`（既定値 `100`）、`skip`、`first_parent`、`reverse`、`paths` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:582
+msgid "`diff()` accepts `from`, `to`, `cached`, `paths`, `context_lines` (default `3`), and `find_renames` (default `true`). Without `from` or `to`, it compares the appropriate worktree, index, or HEAD state."
+msgstr "`diff()` は `from`、`to`、`cached`、`paths`、`context_lines`（既定値 `3`）、`find_renames`（既定値 `true`）を受け付けます。`from` または `to` がない場合、適切な worktree、index、HEAD の状態を比較します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:585
+msgid "A diff result contains `patch`, `files_changed`, `insertions`, `deletions`, and `deltas`. Each delta contains `status`, `old_path`, `new_path`, and `binary`."
+msgstr "diff の結果には `patch`、`files_changed`、`insertions`、`deletions`、`deltas` が含まれます。各 delta には `status`、`old_path`、`new_path`、`binary` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:588
+msgid "`describe()` accepts `rev`, `pattern`, `always`, `abbrev` (default `7`), and `dirty_suffix`."
+msgstr "`describe()` は `rev`、`pattern`、`always`、`abbrev`（既定値 `7`）、`dirty_suffix` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:601
+msgid "Branches"
+msgstr "ブランチ"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:611
+msgid "`branches()` accepts `kind = \"local\" | \"remote\" | \"all\"`; the default is `\"local\"`."
+msgstr "`branches()` は `kind = \"local\" | \"remote\" | \"all\"` を受け付け、既定値は `\"local\"` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:613
+msgid "Branch information contains `name`, `kind`, `oid`, `head`, `upstream`, `ahead`, and `behind`."
+msgstr "ブランチ情報には `name`、`kind`、`oid`、`head`、`upstream`、`ahead`、`behind` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:615
+msgid "`branch_create()` accepts `start_point`, `force`, `checkout`, `upstream`, and `confirm`. The default start point is `HEAD`."
+msgstr "`branch_create()` は `start_point`、`force`、`checkout`、`upstream`、`confirm` を受け付けます。既定の開始点は `HEAD` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:617
+msgid "`branch_delete()` accepts `force` and `confirm`. Deleting the current branch fails, and deleting an unmerged branch requires `force = true`."
+msgstr "`branch_delete()` は `force` と `confirm` を受け付けます。現在のブランチは削除できず、未マージのブランチを削除するには `force = true` が必要です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:619
+msgid "`branch_rename()` accepts `force` and `confirm`."
+msgstr "`branch_rename()` は `force` と `confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:620
+msgid "Pass `nil` to `branch_set_upstream()` to remove an upstream. Its options only contain `confirm`."
+msgstr "upstream を削除するには `branch_set_upstream()` に `nil` を渡します。オプションは `confirm` のみです。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:623
+msgid "Tags"
+msgstr "タグ"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:631
+msgid "`tag_create()` targets `HEAD` by default. Without `message` it creates a lightweight tag; with `message` it creates an annotated tag. Options are `message`, `tagger`, `force`, and `confirm`. A tagger uses the shared signature fields."
+msgstr "`tag_create()` の既定の対象は `HEAD` です。`message` がなければ lightweight tag、あれば annotated tag を作成します。オプションは `message`、`tagger`、`force`、`confirm` です。tagger は共通の署名フィールドを使用します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:636
+msgid "Tag information contains `name`, `oid`, `target_oid`, `target_kind`, `annotated`, `message`, and `tagger`. `tags(pattern)` uses Git's glob matching. Deleting a tag only changes the local repository; delete a remote tag with an explicit push refspec."
+msgstr "タグ情報には `name`、`oid`、`target_oid`、`target_kind`、`annotated`、`message`、`tagger` が含まれます。`tags(pattern)` は Git の glob マッチを使用します。タグの削除はローカルリポジトリだけを変更します。リモートタグは明示的な push refspec で削除してください。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:648
+msgid "Remotes and transfer"
+msgstr "リモートと転送"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:662
+msgid "Remote information contains `name`, `url`, `push_url`, `fetch_refspecs`, and `push_refspecs`. `remote_add()` accepts `push_url` and `confirm`. `remote_set_url()` accepts `push = true` to change the push URL instead of the fetch URL. Remove, rename, and set URL operations accept `confirm`."
+msgstr "リモート情報には `name`、`url`、`push_url`、`fetch_refspecs`、`push_refspecs` が含まれます。`remote_add()` は `push_url` と `confirm` を受け付けます。`remote_set_url()` に `push = true` を指定すると fetch URL ではなく push URL を変更します。削除、名前変更、URL 設定操作は `confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:667
+msgid "`fetch()` accepts `refspecs`, `auth`, `depth`, `prune`, `tags`, `update_fetchhead`, and `confirm`. `push()` accepts `auth`, `force`, `set_upstream`, and `confirm`."
+msgstr "`fetch()` は `refspecs`、`auth`、`depth`、`prune`、`tags`、`update_fetchhead`、`confirm` を受け付けます。`push()` は `auth`、`force`、`set_upstream`、`confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:671
+msgid "`pull()` defaults to remote `\"origin\"`, the current branch, and `strategy = \"ff_only\"`. It also accepts `strategy = \"merge\" | \"rebase\"`, the fetch options `auth`, `depth`, `prune`, `tags`, and `update_fetchhead`, plus `signature`, `message`, and `confirm`. Pull requires a clean repository before it starts."
+msgstr "`pull()` の既定値はリモート `\"origin\"`、現在のブランチ、`strategy = \"ff_only\"` です。さらに `strategy = \"merge\" | \"rebase\"`、fetch オプションの `auth`、`depth`、`prune`、`tags`、`update_fetchhead`、および `signature`、`message`、`confirm` を受け付けます。Pull の開始前にはリポジトリが clean である必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:677
+msgid "Worktree, index, and recovery"
+msgstr "Worktree、index、復旧"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:687
+msgid "`restore()` accepts `source` (default `\"HEAD\"`), `staged`, `worktree`, and `confirm`. When only `staged = true` is specified, the worktree is not changed."
+msgstr "`restore()` は `source`（既定値 `\"HEAD\"`）、`staged`、`worktree`、`confirm` を受け付けます。`staged = true` だけを指定した場合、worktree は変更されません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:690
+msgid "`reset()` accepts `mode = \"soft\" | \"mixed\" | \"hard\"`, `force`, and `confirm`. A hard reset requires `force = true`."
+msgstr "`reset()` は `mode = \"soft\" | \"mixed\" | \"hard\"`、`force`、`confirm` を受け付けます。hard reset には `force = true` が必要です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:692
+msgid "`remove()` accepts `cached`, `force`, and `confirm`."
+msgstr "`remove()` は `cached`、`force`、`confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:693
+msgid "`clean()` accepts `dry_run`, `force`, `dirs`, `ignored`, `paths`, and `confirm`. It defaults to `dry_run = true`. Actual deletion requires both `dry_run = false` and `force = true`. Directories are left untouched unless `dirs = true`."
+msgstr "`clean()` は `dry_run`、`force`、`dirs`、`ignored`、`paths`、`confirm` を受け付けます。既定値は `dry_run = true` です。実際の削除には `dry_run = false` と `force = true` の両方が必要です。`dirs = true` でない限りディレクトリは変更されません。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:703
+msgid "Configuration"
+msgstr "設定"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:712
+msgid "`scope` is `\"local\"`, `\"global\"`, or `\"system\"`; the default for reads is the highest-priority available value and the default for writes is `\"local\"`. Configuration entries contain `name`, `value`, and `scope`. System configuration is read-only. Global `config_set()` and `config_remove()` require `confirm = true` and always show a confirmation prompt."
+msgstr "`scope` は `\"local\"`、`\"global\"`、`\"system\"` のいずれかです。読み取りの既定値は利用可能な最優先値、書き込みの既定値は `\"local\"` です。設定項目には `name`、`value`、`scope` が含まれます。system 設定は読み取り専用です。global の `config_set()` と `config_remove()` には `confirm = true` が必要で、常に確認プロンプトが表示されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:718
+msgid "Merge, cherry-pick, and revert"
+msgstr "Merge、cherry-pick、revert"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:732
+msgid "`merge()` accepts `ff = \"allow\" | \"only\" | \"never\"`, `signature`, `message`, and `confirm`. Merge, cherry-pick, and revert require a clean repository before they start so abort can safely restore `ORIG_HEAD`."
+msgstr "`merge()` は `ff = \"allow\" | \"only\" | \"never\"`、`signature`、`message`、`confirm` を受け付けます。安全に abort して `ORIG_HEAD` を復元できるよう、merge、cherry-pick、revert の開始前にはリポジトリが clean である必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:736
+msgid "Cherry-pick and revert accept `commit` (default `true`), `signature`, `message`, `mainline`, and `confirm`. Set `commit = false` to update the index and worktree without creating a commit. Abort methods accept `confirm`."
+msgstr "Cherry-pick と revert は `commit`（既定値 `true`）、`signature`、`message`、`mainline`、`confirm` を受け付けます。commit を作成せず index と worktree を更新するには `commit = false` を指定します。abort メソッドは `confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:740
+msgid "Stash and rebase"
+msgstr "Stash と rebase"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:753
+msgid "Stash indices default to `0`. `stash_save()` accepts `include_untracked`, `include_ignored`, `keep_index`, `signature`, and `confirm`. Apply and pop accept `reinstate_index` and `confirm`; drop accepts `confirm`. Stash information contains `index`, `message`, and `oid`."
+msgstr "stash index の既定値は `0` です。`stash_save()` は `include_untracked`、`include_ignored`、`keep_index`、`signature`、`confirm` を受け付けます。apply と pop は `reinstate_index` と `confirm`、drop は `confirm` を受け付けます。stash 情報には `index`、`message`、`oid` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:758
+msgid "`rebase()` requires `upstream` and accepts `onto`, `branch` (default `\"HEAD\"`), `signature`, and `confirm`. The first version supports non-interactive pick operations; interactive squash, fixup, reword, and edit operations are not available. Continue accepts `signature` and `confirm`; abort accepts `confirm`."
+msgstr "`rebase()` は `upstream` が必須で、`onto`、`branch`（既定値 `\"HEAD\"`）、`signature`、`confirm` を受け付けます。初版では非対話型の pick 操作のみをサポートし、対話型の squash、fixup、reword、edit は利用できません。continue は `signature` と `confirm`、abort は `confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:763
+msgid "Advanced repositories"
+msgstr "高度なリポジトリ"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:778
+msgid "Worktree information contains `name`, `path`, `locked`, `lock_reason`, and `valid`. Add options are `reference`, `lock`, `checkout_existing`, and `confirm`. Prune options are `valid`, `locked`, `working_tree`, `force`, and `confirm`; lock and unlock also accept `confirm`."
+msgstr "worktree 情報には `name`、`path`、`locked`、`lock_reason`、`valid` が含まれます。add オプションは `reference`、`lock`、`checkout_existing`、`confirm` です。prune オプションは `valid`、`locked`、`working_tree`、`force`、`confirm` で、lock と unlock も `confirm` を受け付けます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:782
+msgid "Submodule information contains `name`, `path`, `url`, `branch`, `head_oid`, `index_oid`, and `workdir_oid`. Init options are `overwrite`, `recursive`, and `confirm`. Update options are `init`, `recursive`, `allow_fetch`, `auth`, and `confirm`. Sync options are `recursive` and `confirm`."
+msgstr "submodule 情報には `name`、`path`、`url`、`branch`、`head_oid`、`index_oid`、`workdir_oid` が含まれます。init オプションは `overwrite`、`recursive`、`confirm`、update オプションは `init`、`recursive`、`allow_fetch`、`auth`、`confirm`、sync オプションは `recursive`、`confirm` です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:786
+msgid "Recursive submodule processing is disabled unless `recursive = true`."
+msgstr "`recursive = true` でない限り、submodule の再帰処理は無効です。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:787
+msgid "`blame()` accepts `newest`, `oldest`, `min_line`, `max_line`, `first_parent`, copy/move tracking flags, `ignore_whitespace`, and `use_mailmap`. Each hunk contains `final_start_line`, `original_start_line`, `line_count`, `commit_oid`, `author`, `origin_path`, and `boundary`."
+msgstr "`blame()` は `newest`、`oldest`、`min_line`、`max_line`、`first_parent`、コピー／移動追跡フラグ、`ignore_whitespace`、`use_mailmap` を受け付けます。各 hunk には `final_start_line`、`original_start_line`、`line_count`、`commit_oid`、`author`、`origin_path`、`boundary` が含まれます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:792
+msgid "Safety and compatibility"
+msgstr "安全性と互換性"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:794
+msgid "All mutating methods that accept `confirm` default it to `false`. `force` and `confirm` express different intent: `force` enables behavior that is otherwise rejected, while `confirm` asks the user before an already-valid action runs."
+msgstr "`confirm` を受け付けるすべての変更メソッドで、既定値は `false` です。`force` と `confirm` は異なる意図を表します。`force` は通常拒否される動作を有効にし、`confirm` は有効な操作を実行する前にユーザーへ確認します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:798
+msgid "Existing defaults remain compatible: the default remote is `\"origin\"`, push without refspecs pushes the current branch, status includes untracked files, and empty commits remain allowed unless `allow_empty = false` is supplied."
+msgstr "既存の既定値は互換性を維持します。既定のリモートは `\"origin\"`、refspecs を省略した push は現在のブランチを送信し、status は未追跡ファイルを含み、`allow_empty = false` を指定しない限り空の commit は許可されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:802
+msgid "Network tag deletion is expressed as a push refspec:"
+msgstr "リモートタグの削除は push refspec で表します："
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:17"
+#~ msgid "`v0.11.0` - Introduced."
+#~ msgstr "`v0.11.0` - 導入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/git.md:523"
+#~ msgid "`v0.11.0` - Introduced."
+#~ msgstr "`v0.11.0` - 導入。"
+
+#~ msgid "Mutating operations such as `ptool.git.clone(...)`, `repo:add(...)`, `repo:commit(...)`, `repo:checkout(...)`, `repo:switch(...)`, `repo:fetch(...)`, and `repo:push(...)` accept `confirm = true` in their options table to ask the user for confirmation before the action runs."
+#~ msgstr "`ptool.git.clone(...)`、`repo:add(...)`、`repo:commit(...)`、`repo:checkout(...)`、`repo:switch(...)`、`repo:fetch(...)`、`repo:push(...)` のような変更系操作では、実行前にユーザー確認を求めるため、options テーブルで `confirm = true` を受け付けます。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:41"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:46"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:51"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:56"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:65"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:70"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgid "`username` (string, optional): Username for `\"ssh_agent\"`."
+#~ msgstr "`username` (文字列、オプション): `\"ssh_agent\"` のユーザー名。"
+
+#~ msgid "`username` (string, required): Username for `\"userpass\"`."
+#~ msgstr "`username` (文字列、必須): `\"userpass\"` のユーザー名。"
+
+#~ msgid "`password` (string, required): Password for `\"userpass\"`."
+#~ msgstr "`password` (文字列、必須): `\"userpass\"` のパスワード。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:92"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:99"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:118"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgid "Methods:"
+#~ msgstr "メソッド:"
+
+#~ msgid "`repo:path()` -> `string`"
+#~ msgstr "`repo:path()` -> `string`"
+
+#~ msgid "`repo:root()` -> `string|nil`"
+#~ msgstr "`repo:root()` -> `string|nil`"
+
+#~ msgid "`repo:is_bare()` -> `boolean`"
+#~ msgstr "`repo:is_bare()` -> `boolean`"
+
+#~ msgid "`repo:head()` -> `table`"
+#~ msgstr "`repo:head()` -> `table`"
+
+#~ msgid "`repo:current_branch()` -> `string|nil`"
+#~ msgstr "`repo:current_branch()` -> `string|nil`"
+
+#~ msgid "`repo:status([options])` -> `table`"
+#~ msgstr "`repo:status([options])` -> `table`"
+
+#~ msgid "`repo:is_clean([options])` -> `boolean`"
+#~ msgstr "`repo:is_clean([options])` -> `boolean`"
+
+#~ msgid "`repo:add(paths[, options])` -> `nil`"
+#~ msgstr "`repo:add(paths[, options])` -> `nil`"
+
+#~ msgid "`repo:commit(message[, options])` -> `string`"
+#~ msgstr "`repo:commit(message[, options])` -> `string`"
+
+#~ msgid "`repo:checkout(rev[, options])` -> `nil`"
+#~ msgstr "`repo:checkout(rev[, options])` -> `nil`"
+
+#~ msgid "`repo:switch(branch[, options])` -> `nil`"
+#~ msgstr "`repo:switch(branch[, options])` -> `nil`"
+
+#~ msgid "`repo:fetch([remote[, options]])` -> `table`"
+#~ msgstr "`repo:fetch([remote[, options]])` -> `table`"
+
+#~ msgid "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
+#~ msgstr "`repo:push([remote[, refspecs[, options]]])` -> `nil`"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:143"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:158"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:166"
+#~ msgid "Notes:"
+#~ msgstr "注意:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:172"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:182"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:194"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:204"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:210"
+#~ msgid "Returns: `string|nil`."
+#~ msgstr "戻り値: `string|nil`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:212"
+#~ msgid "Notes:"
+#~ msgstr "注意:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:219"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:254"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:268"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:275"
+#~ msgid "Returns: `boolean`."
+#~ msgstr "戻り値: `boolean`。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:279"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:285"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:294"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:298"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:307"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:314"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:328"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:335"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:350"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:356"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:366"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:372"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:378"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:391"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:403"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:410"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:429"
+#~ msgid "Example:"
+#~ msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:443"
+#~ msgid "`v0.6.0` - Introduced."
+#~ msgstr "`v0.6.0` - 導入されました。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:449"
+#~ msgid "Arguments:"
+#~ msgstr "引数:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:451"
+#~ msgid "`remote` (string, optional): Remote name. Defaults to `\"origin\"`."
+#~ msgstr "`remote` (文字列、オプション): リモート名。デフォルトは`\"origin\"`です。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:452"
+#~ msgid "`refspecs` (string|string[], optional): One refspec or an array of refspecs."
+#~ msgstr "`refspecs` (string|string[]、オプション): 1 つの refspec または refspec の配列。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:453"
+#~ msgid "`auth` (table, optional): Remote authentication settings. Uses the same structure as `ptool.git.clone(...)`."
+#~ msgstr "`auth` (テーブル、オプション): リモート認証設定。 `ptool.git.clone(...)`と同じ構造を採用しています。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:459"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:465"
+#~ msgid "Example:"
+#~ msgstr "例:"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36"
 #~ msgid "`v0.6.0` - Introduced."
@@ -1098,10 +1631,6 @@ msgstr "例:"
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:446"
 #~ msgid "Example:"
 #~ msgstr "例:"
-
-#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:10"
-#~ msgid "`Unreleased` - Introduced."
-#~ msgstr "`Unreleased` - 導入されました。"
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/git.md:36"
 #~ msgid "`Unreleased` - Introduced."
