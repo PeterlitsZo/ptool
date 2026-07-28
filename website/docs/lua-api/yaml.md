@@ -75,6 +75,45 @@ local first_name = p.yaml.get(text, {"items", 1, "name"})
 print(first_name)
 ```
 
+## ptool.yaml.set
+
+> Unreleased - Introduced.
+
+`ptool.yaml.set(input, path, value)` writes a value at a specified path in YAML
+text and returns the updated YAML text.
+
+- `input` (string, required): The YAML text.
+- `path` ((string|integer)[], required): A non-empty path array.
+- `value` (YAML-compatible Lua value, required): The value to write.
+- Returns: The updated YAML text.
+
+Behavior:
+
+- Existing mapping keys and sequence elements are replaced.
+- A missing final mapping key is created.
+- Missing intermediate mapping keys are created when the next path segment is
+  also a string key.
+- Sequences are not expanded. Every sequence index in the path must already
+  exist.
+- An error is raised when the path cannot be traversed through the expected
+  mapping or sequence type.
+
+Example:
+
+```lua
+local text = [[
+service:
+  name: api
+ports:
+  - 8080
+]]
+
+text = p.yaml.set(text, {"service", "enabled"}, true)
+text = p.yaml.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.yaml.stringify
 
 > `v0.4.0` - Introduced.
@@ -108,6 +147,6 @@ Notes:
 - Only single-document YAML is supported.
 - YAML mappings must use string keys.
 - Explicit YAML tags are not supported.
-- The `path` argument for `ptool.yaml.get` must be a non-empty array of strings
-  and/or positive integers.
+- The `path` argument for `ptool.yaml.get` and `ptool.yaml.set` must be a
+  non-empty array of strings and/or positive integers.
 - Integer path segments are 1-based so they match Lua array indexing.

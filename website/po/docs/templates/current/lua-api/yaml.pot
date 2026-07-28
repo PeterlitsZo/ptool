@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-07-28 09:51+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,72 +152,139 @@ msgid "Example:"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:78
-msgid "ptool.yaml.stringify"
+msgid "ptool.yaml.set"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80"
-msgid "`v0.4.0` - Introduced."
+msgid "Unreleased - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:82
-msgid "`ptool.yaml.stringify(value)` converts a Lua value to YAML text."
-msgstr ""
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:84
-msgid "`value` (YAML-compatible Lua value, required): The value to encode."
+msgid ""
+"`ptool.yaml.set(input, path, value)` writes a value at a specified path in "
+"YAML text and returns the updated YAML text."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:85
-msgid "Returns: The encoded YAML string."
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:85"
+msgid "`input` (string, required): The YAML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:86
+msgid "`path` ((string|integer)[], required): A non-empty path array."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87"
+msgid "`value` (YAML-compatible Lua value, required): The value to write."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:88
+msgid "Returns: The updated YAML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:90
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:90"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:89
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:92
+msgid "Existing mapping keys and sequence elements are replaced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:93
+msgid "A missing final mapping key is created."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94
+msgid ""
+"Missing intermediate mapping keys are created when the next path segment is "
+"also a string key."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:96
+msgid ""
+"Sequences are not expanded. Every sequence index in the path must already "
+"exist."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:98
+msgid ""
+"An error is raised when the path cannot be traversed through the expected "
+"mapping or sequence type."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:101
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:101"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:117
+msgid "ptool.yaml.stringify"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:119
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:119"
+msgid "`v0.4.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:121
+msgid "`ptool.yaml.stringify(value)` converts a Lua value to YAML text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:123
+msgid "`value` (YAML-compatible Lua value, required): The value to encode."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:124
+msgid "Returns: The encoded YAML string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:126
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:126"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:128
 msgid ""
 "Values must be YAML-compatible through the same Lua value mapping used by "
 "`ptool.json.stringify`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:91
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:130
 msgid "Lua sequence tables are encoded as YAML sequences."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:92
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:131
 msgid "Lua string-keyed tables are encoded as YAML mappings."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:133
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:133"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:145
 msgid "Notes:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:108
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:147
 msgid "Only single-document YAML is supported."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:109
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:148
 msgid "YAML mappings must use string keys."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:110
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:149
 msgid "Explicit YAML tags are not supported."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:111
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:150
 msgid ""
-"The `path` argument for `ptool.yaml.get` must be a non-empty array of "
-"strings and/or positive integers."
+"The `path` argument for `ptool.yaml.get` and `ptool.yaml.set` must be a non-"
+"empty array of strings and/or positive integers."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:113
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:152
 msgid "Integer path segments are 1-based so they match Lua array indexing."
 msgstr ""

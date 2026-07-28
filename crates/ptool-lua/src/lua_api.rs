@@ -280,11 +280,21 @@ fn create_ptool_json_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
     let parse_state = Rc::clone(&world);
     let parse_fn =
         lua.create_function(move |lua, input: Value| parse_state.borrow().json_parse(lua, input))?;
+    let get_state = Rc::clone(&world);
+    let get_fn = lua.create_function(move |lua, (input, path): (Value, Value)| {
+        get_state.borrow().json_get(lua, input, path)
+    })?;
+    let set_state = Rc::clone(&world);
+    let set_fn = lua.create_function(move |lua, (input, path, value): (Value, Value, Value)| {
+        set_state.borrow().json_set(lua, input, path, value)
+    })?;
     let stringify_fn =
         lua.create_function(move |lua, (value, options): (Value, Option<Table>)| {
             world.borrow().json_stringify(lua, value, options)
         })?;
     json_module.set("parse", parse_fn)?;
+    json_module.set("get", get_fn)?;
+    json_module.set("set", set_fn)?;
     json_module.set("stringify", stringify_fn)?;
     Ok(json_module)
 }
@@ -691,12 +701,17 @@ fn create_ptool_yaml_module(lua: &Lua, world: Rc<RefCell<crate::LuaWorld>>) -> m
     let get_fn = lua.create_function(move |lua, (input, path): (Value, Value)| {
         get_state.borrow().yaml_get(lua, input, path)
     })?;
+    let set_state = Rc::clone(&world);
+    let set_fn = lua.create_function(move |lua, (input, path, value): (Value, Value, Value)| {
+        set_state.borrow().yaml_set(lua, input, path, value)
+    })?;
     let stringify_state = Rc::clone(&world);
     let stringify_fn = lua.create_function(move |lua, value: Value| {
         stringify_state.borrow().yaml_stringify(lua, value)
     })?;
     yaml_module.set("parse", parse_fn)?;
     yaml_module.set("get", get_fn)?;
+    yaml_module.set("set", set_fn)?;
     yaml_module.set("stringify", stringify_fn)?;
     Ok(yaml_module)
 }

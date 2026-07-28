@@ -38,6 +38,65 @@ print(data.features[1])
 print(data.stars)
 ```
 
+## ptool.json.get
+
+> Unreleased - Introduced.
+
+`ptool.json.get(input, path)` reads the value at a specified path from JSON
+text.
+
+- `input` (string, required): The JSON text.
+- `path` ((string|integer)[], required): A non-empty path array, such as
+  `{"spec", "template", "metadata", "name"}` or `{"items", 1, "name"}`.
+- Returns: The corresponding Lua value, or `nil` if the path does not exist or
+  cannot be traversed through the expected object or array type.
+
+Behavior:
+
+- String path segments select object keys.
+- Integer path segments select array elements using Lua's 1-based indexing.
+
+Example:
+
+```lua
+local text = '{"items":[{"name":"alpha"},{"name":"beta"}]}'
+local first_name = p.json.get(text, {"items", 1, "name"})
+print(first_name)
+```
+
+## ptool.json.set
+
+> Unreleased - Introduced.
+
+`ptool.json.set(input, path, value)` writes a value at a specified path in JSON
+text and returns the updated JSON string.
+
+- `input` (string, required): The JSON text.
+- `path` ((string|integer)[], required): A non-empty path array.
+- `value` (JSON-compatible Lua value, required): The value to write.
+- Returns: The updated compact JSON string.
+
+Behavior:
+
+- Existing object keys and array elements are replaced.
+- A missing final object key is created.
+- Missing intermediate object keys are created when the next path segment is
+  also a string key.
+- Arrays are not expanded. Every array index in the path must already exist.
+- An error is raised when the path cannot be traversed through the expected
+  object or array type.
+
+Example:
+
+```lua
+local text = '{"service":{"name":"api"},"ports":[8080]}'
+
+text = p.json.set(text, {"service", "enabled"}, true)
+text = p.json.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.json.stringify
 
 > `v0.3.0` - Introduced.

@@ -63,7 +63,7 @@ pub use git::{
     discover as git_discover, open as git_open,
 };
 pub use http::{HttpRequestOptions, HttpResponse};
-pub use json::{JsonStringifyOptions, JsonValue};
+pub use json::{JsonPathSegment, JsonStringifyOptions, JsonValue};
 pub use log::LogLevel;
 pub use net::{HostKind, HostPortParts, IpParts, UrlParts};
 pub use platform::{Arch, OS, UserHost};
@@ -569,6 +569,19 @@ impl PtoolEngine {
         json::parse(input)
     }
 
+    pub fn json_get(&self, input: &str, path: &[JsonPathSegment]) -> Result<Option<JsonValue>> {
+        json::get(input, path)
+    }
+
+    pub fn json_set(
+        &self,
+        input: &str,
+        path: &[JsonPathSegment],
+        value: &JsonValue,
+    ) -> Result<String> {
+        json::set(input, path, value)
+    }
+
     pub fn json_stringify(
         &self,
         value: &JsonValue,
@@ -685,6 +698,15 @@ impl PtoolEngine {
 
     pub fn yaml_get(&self, input: &str, path: &[YamlPathSegment]) -> Result<Option<YamlValue>> {
         yaml::get(input, path)
+    }
+
+    pub fn yaml_set(
+        &self,
+        input: &str,
+        path: &[YamlPathSegment],
+        value: &YamlValue,
+    ) -> Result<String> {
+        yaml::set(input, path, value)
     }
 
     pub fn yaml_stringify(&self, value: &YamlValue) -> Result<String> {

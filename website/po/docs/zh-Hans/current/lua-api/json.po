@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-07-28 09:51+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,7 @@ msgid "JSON API"
 msgstr "JSON API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:3
-msgid ""
-"JSON parsing and serialization helpers are available under `ptool.json` and "
-"`p.json`."
+msgid "JSON parsing and serialization helpers are available under `ptool.json` and `p.json`."
 msgstr "JSON 解析与序列化辅助能力位于 `ptool.json` 和 `p.json` 下。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:6
@@ -36,6 +34,7 @@ msgid "`ptool.json.parse(input)` parses a JSON string into a Lua value."
 msgstr "`ptool.json.parse(input)` 将 JSON 字符串解析为 Lua 值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:12"
 msgid "`input` (string, required): The JSON text."
 msgstr "`input`（string，必填）：JSON 文本。"
 
@@ -84,9 +83,7 @@ msgid "An error is raised if `input` is not a string."
 msgstr "如果 `input` 不是字符串，会抛出错误。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:28
-msgid ""
-"A JSON syntax error raises an error whose message includes the parser detail "
-"from `serde_json`."
+msgid "A JSON syntax error raises an error whose message includes the parser detail from `serde_json`."
 msgstr "如果 JSON 语法有误，会抛出错误，错误信息中包含 `serde_json` 返回的解析细节。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:31
@@ -95,76 +92,181 @@ msgid "Example:"
 msgstr "示例："
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:41
-msgid "ptool.json.stringify"
-msgstr "ptool.json.stringify"
+msgid "ptool.json.get"
+msgstr "ptool.json.get"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
-msgid "`v0.3.0` - Introduced."
-msgstr "`v0.3.0` - 引入。"
+msgid "Unreleased - Introduced."
+msgstr "未发布 - 引入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:45
-msgid ""
-"`ptool.json.stringify(value[, options])` converts a Lua value to a JSON "
-"string."
-msgstr "`ptool.json.stringify(value[, options])` 将 Lua 值编码为 JSON 字符串。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:47
-msgid "`value` (JSON-compatible Lua value, required): The value to encode."
-msgstr "`value`（兼容 JSON 的 Lua 值，必填）：要编码的值。"
+msgid "`ptool.json.get(input, path)` reads the value at a specified path from JSON text."
+msgstr "`ptool.json.get(input, path)` 从 JSON 文本中读取指定路径上的值。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:48
-msgid "`options` (table, optional): Serialization options."
-msgstr "`options`（table，可选）：序列化选项。"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:48"
+msgid "`input` (string, required): The JSON text."
+msgstr "`input`（string，必填）：JSON 文本。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:49
-msgid ""
-"`options.pretty` (boolean, optional): When `true`, output pretty-printed "
-"JSON. Defaults to `false`."
-msgstr "`options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。 默认"
-"为 `false`。"
+msgid "`path` ((string|integer)[], required): A non-empty path array, such as `{\"spec\", \"template\", \"metadata\", \"name\"}` or `{\"items\", 1, \"name\"}`."
+msgstr ""
+"`path`（(string|integer)[]，必填）：非空路径数组，例如 `{\"spec\", "
+"\"template\", \"metadata\", \"name\"}` 或 `{\"items\", 1, \"name\"}`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:51
-msgid "Returns: The encoded JSON string."
-msgstr "返回：编码后的 JSON 字符串。"
+msgid "Returns: The corresponding Lua value, or `nil` if the path does not exist or cannot be traversed through the expected object or array type."
+msgstr "返回：对应的 Lua 值；如果路径不存在，或无法按预期的 object/array 类型遍历，则"
+"返回 `nil`。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:53
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:54
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:54"
 msgid "Behavior:"
 msgstr "行为说明："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:55
-msgid "Default output is compact JSON with no extra whitespace."
-msgstr "默认输出紧凑 JSON，不额外插入空白。"
-
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:56
-msgid "Pretty output uses indented multi-line JSON."
-msgstr "pretty 输出为带缩进的多行 JSON。"
+msgid "String path segments select object keys."
+msgstr "字符串路径段用于选择 object key。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:57
-msgid ""
-"Values must be JSON-compatible. Functions, threads, userdata, and other non-"
-"serializable Lua values raise an error."
-msgstr "值必须与 JSON 兼容。函数、thread、userdata 以及其他不可序列化的 Lua 值会报错"
-"。"
+msgid "Integer path segments select array elements using Lua's 1-based indexing."
+msgstr "整数路径段用于选择 array 元素，使用 Lua 的 1-based 索引。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:59
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:59"
 msgid "Example:"
 msgstr "示例："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:72
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:67
+msgid "ptool.json.set"
+msgstr "ptool.json.set"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69"
+msgid "Unreleased - Introduced."
+msgstr "未发布 - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:71
+msgid "`ptool.json.set(input, path, value)` writes a value at a specified path in JSON text and returns the updated JSON string."
+msgstr ""
+"`ptool.json.set(input, path, value)` 将值写入 JSON 文本中的指定路径，并返回更"
+"新后的 JSON 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74"
+msgid "`input` (string, required): The JSON text."
+msgstr "`input`（string，必填）：JSON 文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:75
+msgid "`path` ((string|integer)[], required): A non-empty path array."
+msgstr "`path`（(string|integer)[]，必填）：非空路径数组。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
+msgid "`value` (JSON-compatible Lua value, required): The value to write."
+msgstr "`value`（兼容 JSON 的 Lua 值，必填）：要写入的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:77
+msgid "Returns: The updated compact JSON string."
+msgstr "返回：更新后的紧凑 JSON 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:79"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:81
+msgid "Existing object keys and array elements are replaced."
+msgstr "现有的 object key 和 array 元素会被替换。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:82
+msgid "A missing final object key is created."
+msgstr "如果最后一个 object key 不存在，则会创建它。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:83
+msgid "Missing intermediate object keys are created when the next path segment is also a string key."
+msgstr "如果下一个路径段也是字符串 key，则会创建缺失的中间 object key。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:85
+msgid "Arrays are not expanded. Every array index in the path must already exist."
+msgstr "array 不会自动扩展；路径中的每个 array 索引都必须已经存在。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:86
+msgid "An error is raised when the path cannot be traversed through the expected object or array type."
+msgstr "如果无法按预期的 object/array 类型遍历路径，则会抛出错误。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:89
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:89"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:100
+msgid "ptool.json.stringify"
+msgstr "ptool.json.stringify"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:102
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:102"
+msgid "`v0.3.0` - Introduced."
+msgstr "`v0.3.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:104
+msgid "`ptool.json.stringify(value[, options])` converts a Lua value to a JSON string."
+msgstr "`ptool.json.stringify(value[, options])` 将 Lua 值编码为 JSON 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:106
+msgid "`value` (JSON-compatible Lua value, required): The value to encode."
+msgstr "`value`（兼容 JSON 的 Lua 值，必填）：要编码的值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:107
+msgid "`options` (table, optional): Serialization options."
+msgstr "`options`（table，可选）：序列化选项。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:108
+msgid "`options.pretty` (boolean, optional): When `true`, output pretty-printed JSON. Defaults to `false`."
+msgstr "`options.pretty`（boolean，可选）：当为 `true` 时输出带缩进的易读 JSON。 默认为 `false`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:110
+msgid "Returns: The encoded JSON string."
+msgstr "返回：编码后的 JSON 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:112"
+msgid "Behavior:"
+msgstr "行为说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:114
+msgid "Default output is compact JSON with no extra whitespace."
+msgstr "默认输出紧凑 JSON，不额外插入空白。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:115
+msgid "Pretty output uses indented multi-line JSON."
+msgstr "pretty 输出为带缩进的多行 JSON。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:116
+msgid "Values must be JSON-compatible. Functions, threads, userdata, and other non-serializable Lua values raise an error."
+msgstr "值必须与 JSON 兼容。函数、thread、userdata 以及其他不可序列化的 Lua 值会报错。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:119
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:119"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:131
 msgid "Notes:"
 msgstr "说明："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
-msgid ""
-"`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and "
-"are not preserved as JSON object fields."
-msgstr "Lua table 中的 `nil` 值遵循 `mlua` 的 serde 转换行为，不会以 JSON 对象字段的"
-"形式保留下来。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:133
+msgid "`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and are not preserved as JSON object fields."
+msgstr "Lua table 中的 `nil` 值遵循 `mlua` 的 serde 转换行为，不会以 JSON 对象字段的形式保留下来。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
-msgid ""
-"Array/object detection for Lua tables follows `mlua`'s serde conversion "
-"rules."
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:135
+msgid "Array/object detection for Lua tables follows `mlua`'s serde conversion rules."
 msgstr "Lua table 该被视为数组还是对象，遵循 `mlua` 的 serde 转换规则。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
+#~ msgid "`v0.3.0` - Introduced."
+#~ msgstr "`v0.3.0` - 引入。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60"
+#~ msgid "Example:"
+#~ msgstr "示例："

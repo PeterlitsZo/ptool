@@ -1,17 +1,13 @@
-use crate::{Error, ErrorKind, JsonValue, Result};
+use crate::{Error, ErrorKind, JsonPathSegment, JsonValue, Result};
 use serde_norway::Value as RawYamlValue;
 
 const GET_OP: &str = "ptool.yaml.get";
 const PARSE_OP: &str = "ptool.yaml.parse";
+const SET_OP: &str = "ptool.yaml.set";
 const STRINGIFY_OP: &str = "ptool.yaml.stringify";
 
 pub type YamlValue = JsonValue;
-
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub enum YamlPathSegment {
-    Key(String),
-    Index(usize),
-}
+pub type YamlPathSegment = JsonPathSegment;
 
 pub(crate) fn parse(input: &str) -> Result<YamlValue> {
     let parsed: RawYamlValue = serde_norway::from_str(input)
@@ -20,18 +16,27 @@ pub(crate) fn parse(input: &str) -> Result<YamlValue> {
 }
 
 pub(crate) fn get(input: &str, path: &[YamlPathSegment]) -> Result<Option<YamlValue>> {
-    ensure_non_empty_path(path, GET_OP)?;
+    crate::json::ensure_non_empty_path(path, GET_OP)?;
 
     let parsed = parse_with_op(input, GET_OP)?;
-    let Some(value) = get_value_by_path(&parsed, path) else {
-        return Ok(None);
-    };
-    Ok(Some(value.clone()))
+    Ok(crate::json::get_value_by_path(&parsed, path).cloned())
+}
+
+pub(crate) fn set(input: &str, path: &[YamlPathSegment], value: &YamlValue) -> Result<String> {
+    crate::json::ensure_non_empty_path(path, SET_OP)?;
+
+    let mut parsed = parse_with_op(input, SET_OP)?;
+    crate::json::set_value_by_path(&mut parsed, path, value.clone(), SET_OP)?;
+    stringify_with_op(&parsed, SET_OP)
 }
 
 pub(crate) fn stringify(value: &YamlValue) -> Result<String> {
+    stringify_with_op(value, STRINGIFY_OP)
+}
+
+fn stringify_with_op(value: &YamlValue, op: &str) -> Result<String> {
     serde_norway::to_string(value)
-        .map_err(|err| invalid_yaml(STRINGIFY_OP, format!("yaml stringify failed: {err}")))
+        .map_err(|err| invalid_yaml(op, format!("yaml stringify failed: {err}")))
 }
 
 fn parse_with_op(input: &str, op: &str) -> Result<YamlValue> {
@@ -84,30 +89,6 @@ fn raw_yaml_to_value(value: &RawYamlValue, op: &str) -> Result<YamlValue> {
         }
         RawYamlValue::Tagged(_) => Err(invalid_yaml(op, "yaml tags are not supported")),
     }
-}
-
-fn get_value_by_path<'a>(root: &'a YamlValue, path: &[YamlPathSegment]) -> Option<&'a YamlValue> {
-    let mut current = root;
-    for segment in path {
-        current = match segment {
-            YamlPathSegment::Key(key) => match current {
-                YamlValue::Object(values) => values.get(key)?,
-                _ => return None,
-            },
-            YamlPathSegment::Index(index) => match current {
-                YamlValue::Array(values) => values.get(*index)?,
-                _ => return None,
-            },
-        };
-    }
-    Some(current)
-}
-
-fn ensure_non_empty_path(path: &[YamlPathSegment], op: &str) -> Result<()> {
-    if path.is_empty() {
-        return Err(Error::new(ErrorKind::EmptyPath, "path must not be empty").with_op(op));
-    }
-    Ok(())
 }
 
 fn invalid_yaml(op: &str, msg: impl Into<String>) -> Error {

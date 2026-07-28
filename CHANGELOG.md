@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+
+- Added path-based `get` and `set` helpers to `ptool.json` / `p.json`, plus a
+  matching `set` helper for `ptool.yaml` / `p.yaml`, so scripts can read or
+  update nested values without manually parsing and serializing the document.
+
 ### Changed
 
 - Enhanced the `ptool.s3` / `p.s3` module so reads can request byte ranges,

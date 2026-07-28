@@ -455,6 +455,20 @@ impl LuaWorld {
         crate::json::parse(lua, &self.engine, input)
     }
 
+    pub(crate) fn json_get(&self, lua: &Lua, input: Value, path: Value) -> mlua::Result<Value> {
+        crate::json::get(lua, &self.engine, input, path)
+    }
+
+    pub(crate) fn json_set(
+        &self,
+        lua: &Lua,
+        input: Value,
+        path: Value,
+        value: Value,
+    ) -> mlua::Result<String> {
+        crate::json::set(lua, &self.engine, input, path, value)
+    }
+
     pub(crate) fn json_stringify(
         &self,
         lua: &Lua,
@@ -470,6 +484,16 @@ impl LuaWorld {
 
     pub(crate) fn yaml_get(&self, lua: &Lua, input: Value, path: Value) -> mlua::Result<Value> {
         crate::yaml::get(lua, &self.engine, input, path)
+    }
+
+    pub(crate) fn yaml_set(
+        &self,
+        lua: &Lua,
+        input: Value,
+        path: Value,
+        value: Value,
+    ) -> mlua::Result<String> {
+        crate::yaml::set(lua, &self.engine, input, path, value)
     }
 
     pub(crate) fn yaml_stringify(&self, lua: &Lua, value: Value) -> mlua::Result<String> {

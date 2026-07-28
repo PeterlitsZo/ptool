@@ -71,6 +71,41 @@ local first_name = p.yaml.get(text, {"items", 1, "name"})
 print(first_name)
 ```
 
+## ptool.yaml.set
+
+> 未发布 - 引入。
+
+`ptool.yaml.set(input, path, value)` 将值写入 YAML 文本中的指定路径，并返回更新后的 YAML 文本。
+
+- `input`（string，必填）：YAML 文本。
+- `path`（(string|integer)[]，必填）：非空路径数组。
+- `value`（兼容 YAML 的 Lua 值，必填）：要写入的值。
+- 返回：更新后的 YAML 文本。
+
+行为说明：
+
+- 现有的 mapping key 和 sequence 元素会被替换。
+- 如果最后一个 mapping key 不存在，则会创建它。
+- 如果下一个路径段也是字符串 key，则会创建缺失的中间 mapping key。
+- sequence 不会自动扩展；路径中的每个 sequence 索引都必须已经存在。
+- 如果无法按预期的 mapping/sequence 类型遍历路径，则会抛出错误。
+
+示例：
+
+```lua
+local text = [[
+service:
+  name: api
+ports:
+  - 8080
+]]
+
+text = p.yaml.set(text, {"service", "enabled"}, true)
+text = p.yaml.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.yaml.stringify
 
 > `v0.4.0` - 引入。
@@ -103,5 +138,5 @@ print(text)
 - 目前只支持单文档 YAML。
 - YAML mapping 的 key 必须是字符串。
 - 不支持显式 YAML tag。
-- `ptool.yaml.get` 的 `path` 参数必须是由字符串和/或正整数构成的非空数组。
+- `ptool.yaml.get` 和 `ptool.yaml.set` 的 `path` 参数必须是由字符串和/或正整数构成的非空数组。
 - 整数路径段为 1-based，以与 Lua 数组索引保持一致。

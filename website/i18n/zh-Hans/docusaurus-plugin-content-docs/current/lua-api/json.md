@@ -36,6 +36,59 @@ print(data.features[1])
 print(data.stars)
 ```
 
+## ptool.json.get
+
+> 未发布 - 引入。
+
+`ptool.json.get(input, path)` 从 JSON 文本中读取指定路径上的值。
+
+- `input`（string，必填）：JSON 文本。
+- `path`（(string|integer)[]，必填）：非空路径数组，例如 `{"spec", "template", "metadata", "name"}` 或 `{"items", 1, "name"}`。
+- 返回：对应的 Lua 值；如果路径不存在，或无法按预期的 object/array 类型遍历，则返回 `nil`。
+
+行为说明：
+
+- 字符串路径段用于选择 object key。
+- 整数路径段用于选择 array 元素，使用 Lua 的 1-based 索引。
+
+示例：
+
+```lua
+local text = '{"items":[{"name":"alpha"},{"name":"beta"}]}'
+local first_name = p.json.get(text, {"items", 1, "name"})
+print(first_name)
+```
+
+## ptool.json.set
+
+> 未发布 - 引入。
+
+`ptool.json.set(input, path, value)` 将值写入 JSON 文本中的指定路径，并返回更新后的 JSON 字符串。
+
+- `input`（string，必填）：JSON 文本。
+- `path`（(string|integer)[]，必填）：非空路径数组。
+- `value`（兼容 JSON 的 Lua 值，必填）：要写入的值。
+- 返回：更新后的紧凑 JSON 字符串。
+
+行为说明：
+
+- 现有的 object key 和 array 元素会被替换。
+- 如果最后一个 object key 不存在，则会创建它。
+- 如果下一个路径段也是字符串 key，则会创建缺失的中间 object key。
+- array 不会自动扩展；路径中的每个 array 索引都必须已经存在。
+- 如果无法按预期的 object/array 类型遍历路径，则会抛出错误。
+
+示例：
+
+```lua
+local text = '{"service":{"name":"api"},"ports":[8080]}'
+
+text = p.json.set(text, {"service", "enabled"}, true)
+text = p.json.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.json.stringify
 
 > `v0.3.0` - 引入。

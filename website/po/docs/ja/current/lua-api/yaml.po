@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-07-28 09:51+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,7 @@ msgid "YAML API"
 msgstr "YAML API"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:3
-msgid ""
-"YAML parsing and serialization helpers are available under `ptool.yaml` and "
-"`p.yaml`."
+msgid "YAML parsing and serialization helpers are available under `ptool.yaml` and `p.yaml`."
 msgstr "YAML の解析とシリアライズのヘルパーは `ptool.yaml` と `p.yaml` に あります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:6
@@ -85,17 +83,12 @@ msgid "An error is raised if `input` is not a string."
 msgstr "`input` が文字列でない場合はエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:28
-msgid ""
-"A YAML syntax error raises an error whose message includes parser detail."
+msgid "A YAML syntax error raises an error whose message includes parser detail."
 msgstr "YAML 構文エラーでは、パーサー詳細を含むメッセージでエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:29
-msgid ""
-"An error is raised if the YAML value cannot be represented as a Lua value in "
-"`ptool`, such as a mapping with non-string keys or an explicit YAML tag."
-msgstr ""
-"非文字列キーを持つ mapping や明示的な YAML tag など、`ptool` の Lua 値へ 変換"
-"できない YAML 値でもエラーになります。"
+msgid "An error is raised if the YAML value cannot be represented as a Lua value in `ptool`, such as a mapping with non-string keys or an explicit YAML tag."
+msgstr "非文字列キーを持つ mapping や明示的な YAML tag など、`ptool` の Lua 値へ 変換できない YAML 値でもエラーになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:32
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:32"
@@ -112,11 +105,8 @@ msgid "`v0.4.0` - Introduced."
 msgstr "`v0.4.0` - Introduced."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:52
-msgid ""
-"`ptool.yaml.get(input, path)` reads the value at a specified path from YAML "
-"text."
-msgstr "`ptool.yaml.get(input, path)` は YAML テキストから指定パスの値を読み出します"
-"。"
+msgid "`ptool.yaml.get(input, path)` reads the value at a specified path from YAML text."
+msgstr "`ptool.yaml.get(input, path)` は YAML テキストから指定パスの値を読み出します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:55
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:55"
@@ -124,17 +114,11 @@ msgid "`input` (string, required): The YAML text."
 msgstr "`input` (string, 必須): YAML テキスト。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:56
-msgid ""
-"`path` ((string|integer)[], required): A non-empty path array, such as `{"
-"\"spec\", \"template\", \"metadata\", \"name\"}` or `{\"items\", 1, \"name\""
-"}`."
-msgstr ""
-"`path` ((string|integer)[], 必須): `{\"spec\", \"template\", \"metadata\", "
-"\"name\"}` や `{\"items\", 1, \"name\"}` のような空でないパス配列。"
+msgid "`path` ((string|integer)[], required): A non-empty path array, such as `{\"spec\", \"template\", \"metadata\", \"name\"}` or `{\"items\", 1, \"name\"}`."
+msgstr "`path` ((string|integer)[], 必須): `{\"spec\", \"template\", \"metadata\", \"name\"}` や `{\"items\", 1, \"name\"}` のような空でないパス配列。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:58
-msgid ""
-"Returns: The corresponding Lua value, or `nil` if the path does not exist."
+msgid "Returns: The corresponding Lua value, or `nil` if the path does not exist."
 msgstr "戻り値: 対応する Lua 値。パスが存在しない場合は `nil`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:60
@@ -147,8 +131,7 @@ msgid "String path segments select mapping keys."
 msgstr "文字列のパス要素は mapping key を選択します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:63
-msgid ""
-"Integer path segments select sequence elements using Lua's 1-based indexing."
+msgid "Integer path segments select sequence elements using Lua's 1-based indexing."
 msgstr "整数のパス要素は Lua の 1-based 添字で sequence 要素を選択します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:65
@@ -157,74 +140,144 @@ msgid "Example:"
 msgstr "例:"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:78
-msgid "ptool.yaml.stringify"
-msgstr "ptool.yaml.stringify"
+msgid "ptool.yaml.set"
+msgstr "ptool.yaml.set"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80"
-msgid "`v0.4.0` - Introduced."
-msgstr "`v0.4.0` - Introduced."
+msgid "Unreleased - Introduced."
+msgstr "未リリース - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:82
-msgid "`ptool.yaml.stringify(value)` converts a Lua value to YAML text."
-msgstr "`ptool.yaml.stringify(value)` は Lua 値を YAML テキストへ変換します。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:84
-msgid "`value` (YAML-compatible Lua value, required): The value to encode."
-msgstr "`value` (YAML 互換 Lua 値, 必須): エンコードする値。"
+msgid "`ptool.yaml.set(input, path, value)` writes a value at a specified path in YAML text and returns the updated YAML text."
+msgstr ""
+"`ptool.yaml.set(input, path, value)` は YAML テキスト内の指定パスに値を書き込"
+"み、更新後の YAML テキストを返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:85
-msgid "Returns: The encoded YAML string."
-msgstr "戻り値: エンコードされた YAML 文字列。"
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:85"
+msgid "`input` (string, required): The YAML text."
+msgstr "`input` (string, 必須): YAML テキスト。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:86
+msgid "`path` ((string|integer)[], required): A non-empty path array."
+msgstr "`path` ((string|integer)[], 必須): 空でないパス配列。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87"
+msgid "`value` (YAML-compatible Lua value, required): The value to write."
+msgstr "`value` (YAML 互換 Lua 値, 必須): 書き込む値。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:88
+msgid "Returns: The updated YAML text."
+msgstr "戻り値: 更新後の YAML テキスト。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:90
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:90"
 msgid "Behavior:"
 msgstr "挙動:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:89
-msgid ""
-"Values must be YAML-compatible through the same Lua value mapping used by "
-"`ptool.json.stringify`."
-msgstr "値は `ptool.json.stringify` と同じ Lua 値マッピングで YAML に変換可能である "
-"必要があります。"
-
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:91
-msgid "Lua sequence tables are encoded as YAML sequences."
-msgstr "Lua sequence table は YAML sequence としてエンコードされます。"
-
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:92
-msgid "Lua string-keyed tables are encoded as YAML mappings."
-msgstr "文字列キーを持つ Lua table は YAML mapping としてエンコードされます。"
+msgid "Existing mapping keys and sequence elements are replaced."
+msgstr "既存の mapping キーと sequence 要素は置き換えられます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:93
+msgid "A missing final mapping key is created."
+msgstr "最後の mapping キーが存在しない場合は作成されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94"
+msgid "Missing intermediate mapping keys are created when the next path segment is also a string key."
+msgstr "存在しない中間 mapping キーは、次のパス要素も文字列キーの場合に作成されます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:96
+msgid "Sequences are not expanded. Every sequence index in the path must already exist."
+msgstr "sequence は拡張されません。パス内のすべての sequence インデックスが既に存在し"
+"ている必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:98
+msgid "An error is raised when the path cannot be traversed through the expected mapping or sequence type."
+msgstr "想定される mapping/sequence 型としてパスを辿れない場合はエラーになります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:101
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:101"
 msgid "Example:"
 msgstr "例:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:117
+msgid "ptool.yaml.stringify"
+msgstr "ptool.yaml.stringify"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:119
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:119"
+msgid "`v0.4.0` - Introduced."
+msgstr "`v0.4.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:121
+msgid "`ptool.yaml.stringify(value)` converts a Lua value to YAML text."
+msgstr "`ptool.yaml.stringify(value)` は Lua 値を YAML テキストへ変換します。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:123
+msgid "`value` (YAML-compatible Lua value, required): The value to encode."
+msgstr "`value` (YAML 互換 Lua 値, 必須): エンコードする値。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:124
+msgid "Returns: The encoded YAML string."
+msgstr "戻り値: エンコードされた YAML 文字列。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:126
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:126"
+msgid "Behavior:"
+msgstr "挙動:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:128
+msgid "Values must be YAML-compatible through the same Lua value mapping used by `ptool.json.stringify`."
+msgstr "値は `ptool.json.stringify` と同じ Lua 値マッピングで YAML に変換可能である 必要があります。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:130
+msgid "Lua sequence tables are encoded as YAML sequences."
+msgstr "Lua sequence table は YAML sequence としてエンコードされます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:131
+msgid "Lua string-keyed tables are encoded as YAML mappings."
+msgstr "文字列キーを持つ Lua table は YAML mapping としてエンコードされます。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:133
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:133"
+msgid "Example:"
+msgstr "例:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:145
 msgid "Notes:"
 msgstr "注意:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:108
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:147
 msgid "Only single-document YAML is supported."
 msgstr "現在は単一ドキュメントの YAML のみ対応しています。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:109
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:148
 msgid "YAML mappings must use string keys."
 msgstr "YAML mapping のキーは文字列である必要があります。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:110
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:149
 msgid "Explicit YAML tags are not supported."
 msgstr "明示的な YAML tag は対応していません。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:111
-msgid ""
-"The `path` argument for `ptool.yaml.get` must be a non-empty array of "
-"strings and/or positive integers."
-msgstr "`ptool.yaml.get` の `path` 引数は、文字列および正の整数から成る空でない配列で"
-" ある必要があります。"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:150
+msgid "The `path` argument for `ptool.yaml.get` and `ptool.yaml.set` must be a non-empty array of strings and/or positive integers."
+msgstr ""
+"`ptool.yaml.get` と `ptool.yaml.set` の `path` 引数は、文字列および正の整数か"
+"らなる空でない配列でなければなりません。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:113
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:152
 msgid "Integer path segments are 1-based so they match Lua array indexing."
 msgstr "整数のパス要素は Lua の配列添字に合わせて 1-based です。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80"
+#~ msgid "`v0.4.0` - Introduced."
+#~ msgstr "`v0.4.0` - Introduced."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:87"
+#~ msgid "Behavior:"
+#~ msgstr "挙動:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:94"
+#~ msgid "Example:"
+#~ msgstr "例:"

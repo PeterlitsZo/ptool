@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-07-28 09:51+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,6 +36,7 @@ msgid "`ptool.json.parse(input)` parses a JSON string into a Lua value."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:12"
 msgid "`input` (string, required): The JSON text."
 msgstr ""
 
@@ -95,72 +96,192 @@ msgid "Example:"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:41
-msgid "ptool.json.stringify"
+msgid "ptool.json.get"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
-msgid "`v0.3.0` - Introduced."
+msgid "Unreleased - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:45
+msgid ""
+"`ptool.json.get(input, path)` reads the value at a specified path from JSON "
+"text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:48
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:48"
+msgid "`input` (string, required): The JSON text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:49
+msgid ""
+"`path` ((string|integer)[], required): A non-empty path array, such as `{"
+"\"spec\", \"template\", \"metadata\", \"name\"}` or `{\"items\", 1, \"name\""
+"}`."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:51
+msgid ""
+"Returns: The corresponding Lua value, or `nil` if the path does not exist or "
+"cannot be traversed through the expected object or array type."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:54
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:54"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:56
+msgid "String path segments select object keys."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:57
+msgid ""
+"Integer path segments select array elements using Lua's 1-based indexing."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:59
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:59"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:67
+msgid "ptool.json.set"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69"
+msgid "Unreleased - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:71
+msgid ""
+"`ptool.json.set(input, path, value)` writes a value at a specified path in "
+"JSON text and returns the updated JSON string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74"
+msgid "`input` (string, required): The JSON text."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:75
+msgid "`path` ((string|integer)[], required): A non-empty path array."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
+msgid "`value` (JSON-compatible Lua value, required): The value to write."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:77
+msgid "Returns: The updated compact JSON string."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:79"
+msgid "Behavior:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:81
+msgid "Existing object keys and array elements are replaced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:82
+msgid "A missing final object key is created."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:83
+msgid ""
+"Missing intermediate object keys are created when the next path segment is "
+"also a string key."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:85
+msgid ""
+"Arrays are not expanded. Every array index in the path must already exist."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:86
+msgid ""
+"An error is raised when the path cannot be traversed through the expected "
+"object or array type."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:89
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:89"
+msgid "Example:"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:100
+msgid "ptool.json.stringify"
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:102
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:102"
+msgid "`v0.3.0` - Introduced."
+msgstr ""
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:104
 msgid ""
 "`ptool.json.stringify(value[, options])` converts a Lua value to a JSON "
 "string."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:47
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:106
 msgid "`value` (JSON-compatible Lua value, required): The value to encode."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:48
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:107
 msgid "`options` (table, optional): Serialization options."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:49
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:108
 msgid ""
 "`options.pretty` (boolean, optional): When `true`, output pretty-printed "
 "JSON. Defaults to `false`."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:51
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:110
 msgid "Returns: The encoded JSON string."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:53
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:112"
 msgid "Behavior:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:55
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:114
 msgid "Default output is compact JSON with no extra whitespace."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:56
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:115
 msgid "Pretty output uses indented multi-line JSON."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:57
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:116
 msgid ""
 "Values must be JSON-compatible. Functions, threads, userdata, and other non-"
 "serializable Lua values raise an error."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:60"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:119
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:119"
 msgid "Example:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:72
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:131
 msgid "Notes:"
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:133
 msgid ""
 "`nil` values inside Lua tables follow `mlua`'s serde conversion behavior and "
 "are not preserved as JSON object fields."
 msgstr ""
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:76
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:135
 msgid ""
 "Array/object detection for Lua tables follows `mlua`'s serde conversion "
 "rules."

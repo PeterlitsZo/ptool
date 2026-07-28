@@ -71,6 +71,41 @@ local first_name = p.yaml.get(text, {"items", 1, "name"})
 print(first_name)
 ```
 
+## ptool.yaml.set
+
+> 未リリース - 導入。
+
+`ptool.yaml.set(input, path, value)` は YAML テキスト内の指定パスに値を書き込み、更新後の YAML テキストを返します。
+
+- `input` (string, 必須): YAML テキスト。
+- `path` ((string|integer)[], 必須): 空でないパス配列。
+- `value` (YAML 互換 Lua 値, 必須): 書き込む値。
+- 戻り値: 更新後の YAML テキスト。
+
+挙動:
+
+- 既存の mapping キーと sequence 要素は置き換えられます。
+- 最後の mapping キーが存在しない場合は作成されます。
+- 存在しない中間 mapping キーは、次のパス要素も文字列キーの場合に作成されます。
+- sequence は拡張されません。パス内のすべての sequence インデックスが既に存在している必要があります。
+- 想定される mapping/sequence 型としてパスを辿れない場合はエラーになります。
+
+例:
+
+```lua
+local text = [[
+service:
+  name: api
+ports:
+  - 8080
+]]
+
+text = p.yaml.set(text, {"service", "enabled"}, true)
+text = p.yaml.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.yaml.stringify
 
 > `v0.4.0` - Introduced.
@@ -103,5 +138,5 @@ print(text)
 - 現在は単一ドキュメントの YAML のみ対応しています。
 - YAML mapping のキーは文字列である必要があります。
 - 明示的な YAML tag は対応していません。
-- `ptool.yaml.get` の `path` 引数は、文字列および正の整数から成る空でない配列で ある必要があります。
+- `ptool.yaml.get` と `ptool.yaml.set` の `path` 引数は、文字列および正の整数からなる空でない配列でなければなりません。
 - 整数のパス要素は Lua の配列添字に合わせて 1-based です。

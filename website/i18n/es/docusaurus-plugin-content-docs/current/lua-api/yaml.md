@@ -71,6 +71,41 @@ local first_name = p.yaml.get(text, {"items", 1, "name"})
 print(first_name)
 ```
 
+## ptool.yaml.set
+
+> Sin publicar - Introducido.
+
+`ptool.yaml.set(input, path, value)` escribe un valor en una ruta especificada de un texto YAML y devuelve el texto YAML actualizado.
+
+- `input` (string, obligatorio): El texto YAML.
+- `path` ((string|integer)[], obligatorio): Un arreglo de ruta no vacío.
+- `value` (valor Lua compatible con YAML, obligatorio): El valor que se va a escribir.
+- Devuelve: El texto YAML actualizado.
+
+Comportamiento:
+
+- Se reemplazan las claves de mappings y los elementos de secuencias existentes.
+- Se crea la clave final del mapping si no existe.
+- Las claves intermedias de mappings que falten se crean cuando el siguiente segmento de ruta también es una clave string.
+- Las secuencias no se expanden. Todos los índices de secuencia de la ruta deben existir.
+- Se produce un error cuando la ruta no puede recorrerse mediante el tipo de mapping o secuencia esperado.
+
+Ejemplo:
+
+```lua
+local text = [[
+service:
+  name: api
+ports:
+  - 8080
+]]
+
+text = p.yaml.set(text, {"service", "enabled"}, true)
+text = p.yaml.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.yaml.stringify
 
 > `v0.4.0` - Introduced.
@@ -103,5 +138,5 @@ Notas:
 - Solo se admite YAML de un único documento.
 - Los mappings YAML deben usar claves string.
 - Los tags YAML explícitos no están soportados.
-- El argumento `path` de `ptool.yaml.get` debe ser un arreglo no vacío de strings y/o enteros positivos.
+- El argumento `path` de `ptool.yaml.get` y `ptool.yaml.set` debe ser un arreglo no vacío de strings y/o enteros positivos.
 - Los segmentos integer son base 1 para coincidir con la indexación de arrays de Lua.

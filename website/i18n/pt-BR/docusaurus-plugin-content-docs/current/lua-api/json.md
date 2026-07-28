@@ -36,6 +36,59 @@ print(data.features[1])
 print(data.stars)
 ```
 
+## ptool.json.get
+
+> Não lançado - Introduzido.
+
+`ptool.json.get(input, path)` lê o valor em um caminho especificado de um texto JSON.
+
+- `input` (string, obrigatório): O texto JSON.
+- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio, como `{"spec", "template", "metadata", "name"}` ou `{"items", 1, "name"}`.
+- Retorna: O valor Lua correspondente, ou `nil` se o caminho não existir ou não puder ser percorrido usando o tipo esperado de objeto ou array.
+
+Comportamento:
+
+- Segmentos de caminho string selecionam chaves de objetos.
+- Segmentos de caminho integer selecionam elementos de arrays usando índices Lua base 1.
+
+Exemplo:
+
+```lua
+local text = '{"items":[{"name":"alpha"},{"name":"beta"}]}'
+local first_name = p.json.get(text, {"items", 1, "name"})
+print(first_name)
+```
+
+## ptool.json.set
+
+> Não lançado - Introduzido.
+
+`ptool.json.set(input, path, value)` grava um valor em um caminho especificado de um texto JSON e retorna a string JSON atualizada.
+
+- `input` (string, obrigatório): O texto JSON.
+- `path` ((string|integer)[], obrigatório): Um array de caminho não vazio.
+- `value` (valor Lua compatível com JSON, obrigatório): O valor a gravar.
+- Retorna: A string JSON compacta atualizada.
+
+Comportamento:
+
+- Chaves de objeto e elementos de array existentes são substituídos.
+- Uma chave de objeto final ausente é criada.
+- Chaves de objeto intermediárias ausentes são criadas quando o próximo segmento do caminho também é uma chave string.
+- Arrays não são expandidos. Todos os índices de array no caminho já devem existir.
+- Um erro é gerado quando o caminho não pode ser percorrido usando o tipo esperado de objeto ou array.
+
+Exemplo:
+
+```lua
+local text = '{"service":{"name":"api"},"ports":[8080]}'
+
+text = p.json.set(text, {"service", "enabled"}, true)
+text = p.json.set(text, {"ports", 1}, 9090)
+
+print(text)
+```
+
 ## ptool.json.stringify
 
 > `v0.3.0` - Introduced.
