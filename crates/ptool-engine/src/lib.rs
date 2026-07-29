@@ -102,7 +102,7 @@ pub use ssh::{
     SshExecResult, SshHostKeyRequest, SshStreamMode, SshTransferOptions, SshTransferResult,
 };
 use std::collections::{BTreeMap, BTreeSet};
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::sync::Arc;
 use std::sync::Mutex;
 pub use strings::{IndentOptions, SplitLinesOptions, SplitOptions};
@@ -880,6 +880,16 @@ impl PtoolEngine {
     pub fn exec_replace(&self, options: &ExecOptions, current_dir: &Path) -> Result<()> {
         let options = self.apply_env_overrides_to_exec_options(options);
         exec::exec_replace(&options, current_dir)
+    }
+
+    pub fn which(&self, cmd: &str, current_dir: &Path, op: &str) -> Result<Option<PathBuf>> {
+        let env = self.env_vars();
+        exec::which(cmd, current_dir, &env, op)
+    }
+
+    pub fn which_or_fatal(&self, cmd: &str, current_dir: &Path, op: &str) -> Result<PathBuf> {
+        let env = self.env_vars();
+        exec::which_or_fatal(cmd, current_dir, &env, op)
     }
 
     pub fn ssh_connect(

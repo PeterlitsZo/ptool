@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added `ptool.which(...)` / `p.which(...)` and
+  `ptool.which_or_fatal(...)` / `p.which_or_fatal(...)` for checking command
+  availability before running external tools.
 - Added path-based `get` and `set` helpers to `ptool.json` / `p.json`, plus a
   matching `set` helper for `ptool.yaml` / `p.yaml`, so scripts can read or
   update nested values without manually parsing and serializing the document.

@@ -97,6 +97,58 @@ if not ptool.is_root() then
 end
 ```
 
+## ptool.which
+
+> `Unreleased` - 引入。
+
+`ptool.which(command)` 会检查本地命令是否可用于运行。
+
+- `command`（string，必填）：要检查的命令名或可执行文件路径。
+- 返回：`string|nil`。
+- 找到命令时，返回值是解析后的可执行文件路径。
+- 找不到命令时，返回值是 `nil`。
+- 空命令名会引发错误。
+
+行为说明：
+
+- 不含路径分隔符的命令名会通过当前有效的 `PATH` 解析，包括通过 `ptool.os.setenv(...)` 和 `ptool.os.unsetenv(...)` 做出的变更。
+- 类似路径的命令会直接检查。相对路径会从当前 `ptool` 工作目录解析。
+- 在类 Unix 平台上，目标必须是具有可执行权限的文件。
+- 在 Windows 上，查找也会遵循 `PATHEXT` 中的可执行扩展名。
+
+示例：
+
+```lua
+local git = ptool.which("git")
+if git then
+  ptool.run(git, {"status"})
+end
+```
+
+## ptool.which_or_fatal
+
+> `Unreleased` - 引入。
+
+`ptool.which_or_fatal(command)` 会检查本地命令是否可用，并在命令缺失时引发错误。
+
+- `command`（string，必填）：要检查的命令名或可执行文件路径。
+- 返回：`string`。
+- 找到命令时，返回值是解析后的可执行文件路径。
+- 找不到命令时，脚本会带错误退出。
+- 空命令名会引发错误。
+
+行为说明：
+
+- 查找遵循与 `ptool.which(...)` 相同的规则。
+- 当脚本需要外部工具才能继续时，可以使用它。
+
+示例：
+
+```lua
+local docker = ptool.which_or_fatal("docker")
+ptool.run(docker, {"version"})
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - 引入。

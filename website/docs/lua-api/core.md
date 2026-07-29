@@ -116,6 +116,62 @@ if not ptool.is_root() then
 end
 ```
 
+## ptool.which
+
+> `Unreleased` - Introduced.
+
+`ptool.which(command)` checks whether a local command is available to run.
+
+- `command` (string, required): The command name or executable path to check.
+- Returns: `string|nil`.
+- When the command is found, the return value is the resolved executable path.
+- When the command cannot be found, the return value is `nil`.
+- Empty command names raise an error.
+
+Behavior:
+
+- Command names without path separators are resolved through the current
+  effective `PATH`, including changes made with `ptool.os.setenv(...)` and
+  `ptool.os.unsetenv(...)`.
+- Path-like commands are checked directly. Relative paths are resolved from the
+  current `ptool` working directory.
+- On Unix-like platforms, the target must be a file with executable permission.
+- On Windows, lookup also respects `PATHEXT` for executable extensions.
+
+Example:
+
+```lua
+local git = ptool.which("git")
+if git then
+  ptool.run(git, {"status"})
+end
+```
+
+## ptool.which_or_fatal
+
+> `Unreleased` - Introduced.
+
+`ptool.which_or_fatal(command)` checks whether a local command is available and
+raises an error if it is missing.
+
+- `command` (string, required): The command name or executable path to check.
+- Returns: `string`.
+- When the command is found, the return value is the resolved executable path.
+- When the command cannot be found, the script exits with an error.
+- Empty command names raise an error.
+
+Behavior:
+
+- Lookup follows the same rules as `ptool.which(...)`.
+- Use this when a script requires an external tool before continuing.
+
+Example:
+
+```lua
+local docker = ptool.which_or_fatal("docker")
+ptool.run(docker, {"version"})
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.

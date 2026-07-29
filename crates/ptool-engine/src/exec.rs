@@ -397,6 +397,55 @@ pub fn format_run_failed_message(
     message
 }
 
+pub fn which(
+    cmd: &str,
+    current_dir: &Path,
+    env: &[(String, String)],
+    op: &str,
+) -> Result<Option<PathBuf>> {
+    validate_which_command(cmd, op)?;
+
+    let path = Path::new(cmd);
+    if is_path_command(cmd, path) {
+        let candidate = if path.is_absolute() {
+            path.to_path_buf()
+        } else {
+            current_dir.join(path)
+        };
+        return Ok(first_executable_candidate(&candidate, env));
+    }
+
+    let Some(path_value) = env_value(env, "PATH") else {
+        return Ok(None);
+    };
+
+    for dir in std::env::split_paths(path_value) {
+        let dir = resolve_path_search_dir(&dir, current_dir);
+        let candidate = dir.join(cmd);
+        if let Some(path) = first_executable_candidate(&candidate, env) {
+            return Ok(Some(path));
+        }
+    }
+
+    Ok(None)
+}
+
+pub fn which_or_fatal(
+    cmd: &str,
+    current_dir: &Path,
+    env: &[(String, String)],
+    op: &str,
+) -> Result<PathBuf> {
+    which(cmd, current_dir, env, op)?.ok_or_else(|| {
+        let message = if is_path_command(cmd, Path::new(cmd)) {
+            format!("{op} command `{cmd}` was not found or is not executable")
+        } else {
+            format!("{op} command `{cmd}` was not found on PATH")
+        };
+        Error::new(ErrorKind::Io, message).with_op(op).with_cmd(cmd)
+    })
+}
+
 pub fn resolve_effective_command(
     cmd: &str,
     args: &[String],
@@ -488,6 +537,81 @@ fn configure_command(
     for (key, value) in env {
         command.env(key, value);
     }
+}
+
+fn validate_which_command(cmd: &str, op: &str) -> Result<()> {
+    if cmd.trim().is_empty() {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!("{op} requires a non-empty command"),
+        )
+        .with_op(op));
+    }
+    Ok(())
+}
+
+fn is_path_command(cmd: &str, path: &Path) -> bool {
+    path.is_absolute()
+        || path.components().count() > 1
+        || cmd.contains('/')
+        || (cfg!(windows) && cmd.contains('\\'))
+}
+
+fn resolve_path_search_dir(dir: &Path, current_dir: &Path) -> PathBuf {
+    if dir.as_os_str().is_empty() {
+        return current_dir.to_path_buf();
+    }
+    if dir.is_absolute() {
+        dir.to_path_buf()
+    } else {
+        current_dir.join(dir)
+    }
+}
+
+fn first_executable_candidate(path: &Path, env: &[(String, String)]) -> Option<PathBuf> {
+    executable_candidates(path, env)
+        .into_iter()
+        .find(|candidate| is_executable_file(candidate, env))
+}
+
+#[cfg(not(windows))]
+fn executable_candidates(path: &Path, _env: &[(String, String)]) -> Vec<PathBuf> {
+    vec![path.to_path_buf()]
+}
+
+#[cfg(windows)]
+fn executable_candidates(path: &Path, env: &[(String, String)]) -> Vec<PathBuf> {
+    let mut candidates = vec![path.to_path_buf()];
+    if path.extension().is_none() {
+        for extension in windows_path_extensions(env) {
+            let mut candidate = path.to_path_buf();
+            let Some(file_name) = candidate.file_name() else {
+                continue;
+            };
+            let mut file_name = file_name.to_os_string();
+            file_name.push(extension);
+            candidate.set_file_name(file_name);
+            candidates.push(candidate);
+        }
+    }
+    candidates
+}
+
+fn env_value<'a>(env: &'a [(String, String)], name: &str) -> Option<&'a str> {
+    env.iter()
+        .rev()
+        .find(|(key, _)| env_key_matches(key, name))
+        .map(|(_, value)| value.as_str())
+}
+
+#[cfg(windows)]
+fn env_key_matches(key: &str, name: &str) -> bool {
+    key.eq_ignore_ascii_case(name)
+}
+
+#[cfg(not(windows))]
+fn env_key_matches(key: &str, name: &str) -> bool {
+    key == name
 }
 
 fn bytes_to_captured_string(bytes: &[u8], mode: &RunStreamMode, trim: bool) -> Option<String> {
@@ -906,34 +1030,63 @@ fn build_exec_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {
 
 #[cfg(unix)]
 fn lookup_executable_path(cmd: &str, cwd: &Path) -> Option<PathBuf> {
-    let candidate = PathBuf::from(cmd);
-    if candidate.components().count() > 1 || candidate.is_absolute() {
-        return Some(if candidate.is_absolute() {
-            candidate
-        } else {
-            cwd.join(candidate)
-        });
-    }
-
-    let path = std::env::var_os("PATH")?;
-    for dir in std::env::split_paths(&path) {
-        let candidate = dir.join(cmd);
-        if is_executable_file(&candidate) {
-            return Some(candidate);
-        }
-    }
-
-    None
+    let env = std::env::vars().collect::<Vec<_>>();
+    which(cmd, cwd, &env, "ptool.exec").ok().flatten()
 }
 
 #[cfg(unix)]
-fn is_executable_file(path: &Path) -> bool {
+fn is_executable_file(path: &Path, _env: &[(String, String)]) -> bool {
     use std::os::unix::fs::PermissionsExt;
 
     let Ok(metadata) = std::fs::metadata(path) else {
         return false;
     };
     metadata.is_file() && metadata.permissions().mode() & 0o111 != 0
+}
+
+#[cfg(windows)]
+fn is_executable_file(path: &Path, env: &[(String, String)]) -> bool {
+    let Ok(metadata) = std::fs::metadata(path) else {
+        return false;
+    };
+    metadata.is_file() && has_windows_executable_extension(path, env)
+}
+
+#[cfg(windows)]
+fn has_windows_executable_extension(path: &Path, env: &[(String, String)]) -> bool {
+    let Some(extension) = path.extension().and_then(|value| value.to_str()) else {
+        return true;
+    };
+    let extension = format!(".{extension}");
+    windows_path_extensions(env)
+        .iter()
+        .any(|candidate| candidate.eq_ignore_ascii_case(&extension))
+}
+
+#[cfg(windows)]
+fn windows_path_extensions(env: &[(String, String)]) -> Vec<String> {
+    let value = env_value(env, "PATHEXT").unwrap_or(".COM;.EXE;.BAT;.CMD");
+    value
+        .split(';')
+        .filter_map(|extension| {
+            let extension = extension.trim();
+            if extension.is_empty() {
+                None
+            } else if extension.starts_with('.') {
+                Some(extension.to_string())
+            } else {
+                Some(format!(".{extension}"))
+            }
+        })
+        .collect()
+}
+
+#[cfg(not(any(unix, windows)))]
+fn is_executable_file(path: &Path, _env: &[(String, String)]) -> bool {
+    let Ok(metadata) = std::fs::metadata(path) else {
+        return false;
+    };
+    metadata.is_file()
 }
 
 fn build_run_io_error(cmd: &str, cwd: &Path, err: std::io::Error) -> Error {

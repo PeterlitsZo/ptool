@@ -97,6 +97,58 @@ if not ptool.is_root() then
 end
 ```
 
+## ptool.which
+
+> `Unreleased` - 追加。
+
+`ptool.which(command)` は、ローカルコマンドが実行可能かどうかを確認します。
+
+- `command` (string, 必須): 確認するコマンド名または実行ファイルパス。
+- 戻り値: `string|nil`。
+- コマンドが見つかった場合、戻り値は解決済みの実行ファイルパスです。
+- コマンドが見つからない場合、戻り値は `nil` です。
+- 空のコマンド名はエラーになります。
+
+挙動:
+
+- パス区切りを含まないコマンド名は、`ptool.os.setenv(...)` や `ptool.os.unsetenv(...)` による変更を含む、現在有効な `PATH` から解決されます。
+- パス形式のコマンドは直接確認されます。相対パスは現在の `ptool` 作業ディレクトリから解決されます。
+- Unix 系プラットフォームでは、対象は実行権限を持つファイルである必要があります。
+- Windows では、検索時に実行可能拡張子として `PATHEXT` も考慮されます。
+
+例:
+
+```lua
+local git = ptool.which("git")
+if git then
+  ptool.run(git, {"status"})
+end
+```
+
+## ptool.which_or_fatal
+
+> `Unreleased` - 追加。
+
+`ptool.which_or_fatal(command)` は、ローカルコマンドが利用可能かどうかを確認し、見つからない場合はエラーを発生させます。
+
+- `command` (string, 必須): 確認するコマンド名または実行ファイルパス。
+- 戻り値: `string`。
+- コマンドが見つかった場合、戻り値は解決済みの実行ファイルパスです。
+- コマンドが見つからない場合、スクリプトはエラーで終了します。
+- 空のコマンド名はエラーになります。
+
+挙動:
+
+- 検索は `ptool.which(...)` と同じ規則に従います。
+- スクリプトが続行前に外部ツールを必要とする場合に使います。
+
+例:
+
+```lua
+local docker = ptool.which_or_fatal("docker")
+ptool.run(docker, {"version"})
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introduced.

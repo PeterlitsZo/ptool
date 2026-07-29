@@ -152,6 +152,26 @@ impl LuaWorld {
         crate::exec::exec_command(lua, args, self.current_dir(), &self.engine, self.config.run)
     }
 
+    pub(crate) fn which(&self, lua: &Lua, cmd: String) -> mlua::Result<Value> {
+        match self
+            .engine
+            .which(&cmd, self.current_dir(), "ptool.which")
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.which"))?
+        {
+            Some(path) => Ok(Value::String(
+                lua.create_string(path.to_string_lossy().as_ref())?,
+            )),
+            None => Ok(Value::Nil),
+        }
+    }
+
+    pub(crate) fn which_or_fatal(&self, cmd: String) -> mlua::Result<String> {
+        self.engine
+            .which_or_fatal(&cmd, self.current_dir(), "ptool.which_or_fatal")
+            .map(|path| path.to_string_lossy().into_owned())
+            .map_err(|err| crate::lua_error::lua_error_from_engine(err, "ptool.which_or_fatal"))
+    }
+
     pub(crate) fn configure(&mut self, options: Table) -> mlua::Result<()> {
         let mut next_run = self.config.run;
         let mut next_shell = self.config.shell.clone();

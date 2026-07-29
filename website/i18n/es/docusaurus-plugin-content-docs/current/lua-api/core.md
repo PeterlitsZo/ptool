@@ -97,6 +97,58 @@ if not ptool.is_root() then
 end
 ```
 
+## ptool.which
+
+> `Unreleased` - Introducido.
+
+`ptool.which(command)` comprueba si un comando local está disponible para ejecutarse.
+
+- `command` (string, obligatorio): El nombre del comando o la ruta del ejecutable que se debe comprobar.
+- Devuelve: `string|nil`.
+- Cuando se encuentra el comando, el valor devuelto es la ruta resuelta del ejecutable.
+- Cuando no se encuentra el comando, el valor devuelto es `nil`.
+- Los nombres de comando vacíos producen un error.
+
+Comportamiento:
+
+- Los nombres de comando sin separadores de ruta se resuelven mediante el `PATH` efectivo actual, incluidos los cambios hechos con `ptool.os.setenv(...)` y `ptool.os.unsetenv(...)`.
+- Los comandos con forma de ruta se comprueban directamente. Las rutas relativas se resuelven desde el directorio de trabajo actual de `ptool`.
+- En plataformas tipo Unix, el destino debe ser un archivo con permiso de ejecución.
+- En Windows, la búsqueda también respeta `PATHEXT` para las extensiones ejecutables.
+
+Ejemplo:
+
+```lua
+local git = ptool.which("git")
+if git then
+  ptool.run(git, {"status"})
+end
+```
+
+## ptool.which_or_fatal
+
+> `Unreleased` - Introducido.
+
+`ptool.which_or_fatal(command)` comprueba si un comando local está disponible y produce un error si falta.
+
+- `command` (string, obligatorio): El nombre del comando o la ruta del ejecutable que se debe comprobar.
+- Devuelve: `string`.
+- Cuando se encuentra el comando, el valor devuelto es la ruta resuelta del ejecutable.
+- Cuando no se encuentra el comando, el script termina con un error.
+- Los nombres de comando vacíos producen un error.
+
+Comportamiento:
+
+- La búsqueda sigue las mismas reglas que `ptool.which(...)`.
+- Úsalo cuando un script requiera una herramienta externa antes de continuar.
+
+Ejemplo:
+
+```lua
+local docker = ptool.which_or_fatal("docker")
+ptool.run(docker, {"version"})
+```
+
 ## ptool.unindent
 
 > `v0.1.0` - Introducido.

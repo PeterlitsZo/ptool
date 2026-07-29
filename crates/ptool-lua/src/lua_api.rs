@@ -38,6 +38,12 @@ fn create_ptool_module(
     let exec_state = Rc::clone(&world);
     let exec_fn =
         lua.create_function(move |lua, args: Variadic<Value>| exec_state.borrow().exec(lua, args))?;
+    let which_state = Rc::clone(&world);
+    let which_fn =
+        lua.create_function(move |lua, cmd: String| which_state.borrow().which(lua, cmd))?;
+    let which_or_fatal_state = Rc::clone(&world);
+    let which_or_fatal_fn = lua
+        .create_function(move |_, cmd: String| which_or_fatal_state.borrow().which_or_fatal(cmd))?;
     let config_state = Rc::clone(&world);
     let config_fn =
         lua.create_function(move |_, options: Table| config_state.borrow_mut().configure(options))?;
@@ -101,6 +107,8 @@ fn create_ptool_module(
     module.set("run_shell", run_shell_fn)?;
     module.set("run_capture", run_capture_fn)?;
     module.set("exec", exec_fn)?;
+    module.set("which", which_fn)?;
+    module.set("which_or_fatal", which_or_fatal_fn)?;
     module.set("config", config_fn)?;
     module.set("use", use_fn)?;
     module.set("version", version_fn)?;
