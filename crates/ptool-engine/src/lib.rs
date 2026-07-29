@@ -90,7 +90,11 @@ pub use prompt::{
 pub use ptool_console::Console;
 pub use re::{RegexCaptures, RegexMatch, RegexOptions, RegexPattern};
 pub use redis::{RedisArg, RedisConnection, RedisReply};
-pub use s3::{S3ConnectOptions, S3Connection, S3Entry, S3Range, S3ReadOptions, S3WriteOptions};
+pub use s3::{
+    S3AclGrants, S3BucketCannedAcl, S3ConnectOptions, S3Connection, S3Entry, S3ObjectCannedAcl,
+    S3PutBucketAclOptions, S3PutObjectAclOptions, S3Range, S3ReadOptions, S3RequestPayer,
+    S3WriteOptions,
+};
 pub use script_args::{
     ParsedScriptArgs, ScriptArgDefault, ScriptArgKind, ScriptArgSpec, ScriptArgValue,
     ScriptArgValues, ScriptArgsParseError, ScriptArgsSchema, parse_script_args,

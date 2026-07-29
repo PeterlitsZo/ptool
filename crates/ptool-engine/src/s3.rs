@@ -1,11 +1,19 @@
 use crate::{Error, ErrorKind, Result};
+use aws_sdk_s3::config::{BehaviorVersion, Credentials, Region};
+use aws_sdk_s3::operation::put_bucket_acl::builders::PutBucketAclFluentBuilder;
+use aws_sdk_s3::operation::put_object_acl::builders::PutObjectAclFluentBuilder;
+use aws_sdk_s3::types::{BucketCannedAcl, ObjectCannedAcl, RequestPayer};
 use opendal::{
     EntryMode, Metadata, Operator, layers::HttpClientLayer, raw::HttpClient, services::S3,
 };
+use std::error::Error as StdError;
 use std::future::IntoFuture;
 use std::ops::Bound;
 use std::sync::Arc;
 use tokio::runtime::Runtime;
+
+const PUT_BUCKET_ACL_OP: &str = "ptool.s3.Connection:put_bucket_acl";
+const PUT_OBJECT_ACL_OP: &str = "ptool.s3.Connection:put_object_acl";
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct S3ConnectOptions {
@@ -23,6 +31,112 @@ pub struct S3ConnectOptions {
 pub struct S3Connection {
     runtime: Arc<Runtime>,
     operator: Operator,
+    sdk_client: aws_sdk_s3::Client,
+    bucket: String,
+    root: String,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum S3BucketCannedAcl {
+    AuthenticatedRead,
+    Private,
+    PublicRead,
+    PublicReadWrite,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum S3ObjectCannedAcl {
+    AuthenticatedRead,
+    AwsExecRead,
+    BucketOwnerFullControl,
+    BucketOwnerRead,
+    Private,
+    PublicRead,
+    PublicReadWrite,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum S3RequestPayer {
+    Requester,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct S3AclGrants {
+    pub full_control: Option<String>,
+    pub read: Option<String>,
+    pub read_acp: Option<String>,
+    pub write: Option<String>,
+    pub write_acp: Option<String>,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct S3PutBucketAclOptions {
+    pub acl: Option<S3BucketCannedAcl>,
+    pub grants: S3AclGrants,
+    pub expected_bucket_owner: Option<String>,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct S3PutObjectAclOptions {
+    pub acl: Option<S3ObjectCannedAcl>,
+    pub grants: S3AclGrants,
+    pub expected_bucket_owner: Option<String>,
+    pub version_id: Option<String>,
+    pub request_payer: Option<S3RequestPayer>,
+}
+
+impl TryFrom<&str> for S3BucketCannedAcl {
+    type Error = Error;
+
+    fn try_from(value: &str) -> Result<Self> {
+        match value {
+            "authenticated-read" => Ok(Self::AuthenticatedRead),
+            "private" => Ok(Self::Private),
+            "public-read" => Ok(Self::PublicRead),
+            "public-read-write" => Ok(Self::PublicReadWrite),
+            _ => Err(Error::new(
+                ErrorKind::InvalidArgs,
+                "`acl` must be one of `authenticated-read`, `private`, `public-read`, or `public-read-write`",
+            )
+            .with_op(PUT_BUCKET_ACL_OP)),
+        }
+    }
+}
+
+impl TryFrom<&str> for S3ObjectCannedAcl {
+    type Error = Error;
+
+    fn try_from(value: &str) -> Result<Self> {
+        match value {
+            "authenticated-read" => Ok(Self::AuthenticatedRead),
+            "aws-exec-read" => Ok(Self::AwsExecRead),
+            "bucket-owner-full-control" => Ok(Self::BucketOwnerFullControl),
+            "bucket-owner-read" => Ok(Self::BucketOwnerRead),
+            "private" => Ok(Self::Private),
+            "public-read" => Ok(Self::PublicRead),
+            "public-read-write" => Ok(Self::PublicReadWrite),
+            _ => Err(Error::new(
+                ErrorKind::InvalidArgs,
+                "`acl` must be one of `authenticated-read`, `aws-exec-read`, `bucket-owner-full-control`, `bucket-owner-read`, `private`, `public-read`, or `public-read-write`",
+            )
+            .with_op(PUT_OBJECT_ACL_OP)),
+        }
+    }
+}
+
+impl TryFrom<&str> for S3RequestPayer {
+    type Error = Error;
+
+    fn try_from(value: &str) -> Result<Self> {
+        match value {
+            "requester" => Ok(Self::Requester),
+            _ => Err(Error::new(
+                ErrorKind::InvalidArgs,
+                "`request_payer` must be `requester`",
+            )
+            .with_op(PUT_OBJECT_ACL_OP)),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
@@ -65,6 +179,8 @@ pub struct S3Entry {
 pub(crate) fn connect(runtime: Arc<Runtime>, options: S3ConnectOptions) -> Result<S3Connection> {
     ensure_non_empty("bucket", &options.bucket, "ptool.s3.connect")?;
 
+    let sdk_client = build_aws_sdk_client(&options);
+    let root = normalize_root_prefix(options.root.as_deref());
     let mut builder = S3::default().bucket(&options.bucket).disable_config_load();
 
     if let Some(root) = &options.root {
@@ -108,7 +224,13 @@ pub(crate) fn connect(runtime: Arc<Runtime>, options: S3ConnectOptions) -> Resul
         .layer(HttpClientLayer::new(HttpClient::with(http_client)))
         .finish();
 
-    Ok(S3Connection { runtime, operator })
+    Ok(S3Connection {
+        runtime,
+        operator,
+        sdk_client,
+        bucket: options.bucket,
+        root,
+    })
 }
 
 impl S3Connection {
@@ -202,6 +324,53 @@ impl S3Connection {
             .map_err(|err| opendal_error("ptool.s3.Connection:stat", "stat object", err))?;
         metadata_to_entry(path, metadata)
     }
+
+    pub fn put_bucket_acl(&self, options: &S3PutBucketAclOptions) -> Result<()> {
+        validate_bucket_acl_options(options)?;
+
+        let mut request = self.sdk_client.put_bucket_acl().bucket(self.bucket.clone());
+        if let Some(acl) = options.acl {
+            request = request.acl(bucket_canned_acl(acl));
+        }
+        if let Some(owner) = &options.expected_bucket_owner {
+            request = request.expected_bucket_owner(owner.clone());
+        }
+        request = apply_bucket_grants(request, &options.grants);
+
+        self.runtime
+            .block_on(request.send())
+            .map_err(|err| aws_sdk_error(PUT_BUCKET_ACL_OP, "put bucket ACL", err))?;
+        Ok(())
+    }
+
+    pub fn put_object_acl(&self, path: &str, options: &S3PutObjectAclOptions) -> Result<()> {
+        validate_object_acl_options(options)?;
+        let key = object_key(&self.root, path, PUT_OBJECT_ACL_OP)?;
+
+        let mut request = self
+            .sdk_client
+            .put_object_acl()
+            .bucket(self.bucket.clone())
+            .key(key);
+        if let Some(acl) = options.acl {
+            request = request.acl(object_canned_acl(acl));
+        }
+        if let Some(owner) = &options.expected_bucket_owner {
+            request = request.expected_bucket_owner(owner.clone());
+        }
+        if let Some(version_id) = &options.version_id {
+            request = request.version_id(version_id.clone());
+        }
+        if let Some(request_payer) = options.request_payer {
+            request = request.request_payer(request_payer_value(request_payer));
+        }
+        request = apply_object_grants(request, &options.grants);
+
+        self.runtime
+            .block_on(request.send())
+            .map_err(|err| aws_sdk_error(PUT_OBJECT_ACL_OP, "put object ACL", err))?;
+        Ok(())
+    }
 }
 
 impl S3ConnectOptions {
@@ -221,6 +390,209 @@ impl S3ConnectOptions {
         self.session_token = fallback_option(self.session_token, &env_get, &["AWS_SESSION_TOKEN"])?;
         Ok(self)
     }
+}
+
+fn build_aws_sdk_client(options: &S3ConnectOptions) -> aws_sdk_s3::Client {
+    let region = options
+        .region
+        .clone()
+        .unwrap_or_else(|| "us-east-1".to_string());
+    let mut builder = aws_sdk_s3::Config::builder()
+        .behavior_version(BehaviorVersion::latest())
+        .region(Region::new(region));
+
+    if let Some(endpoint) = &options.endpoint {
+        builder = builder.endpoint_url(endpoint).force_path_style(true);
+    }
+
+    if let (Some(access_key_id), Some(secret_access_key)) =
+        (&options.access_key_id, &options.secret_access_key)
+    {
+        builder = builder.credentials_provider(Credentials::new(
+            access_key_id.clone(),
+            secret_access_key.clone(),
+            options.session_token.clone(),
+            None,
+            "ptool.s3.connect",
+        ));
+    }
+
+    aws_sdk_s3::Client::from_conf(builder.build())
+}
+
+impl S3AclGrants {
+    fn is_empty(&self) -> bool {
+        self.full_control.is_none()
+            && self.read.is_none()
+            && self.read_acp.is_none()
+            && self.write.is_none()
+            && self.write_acp.is_none()
+    }
+}
+
+fn validate_acl_selection(has_acl: bool, grants: &S3AclGrants, op: &str) -> Result<()> {
+    if !has_acl && grants.is_empty() {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            "requires `acl` or at least one `grant_*` option",
+        )
+        .with_op(op));
+    }
+    if has_acl && !grants.is_empty() {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            "`acl` cannot be combined with `grant_*` options",
+        )
+        .with_op(op));
+    }
+    Ok(())
+}
+
+fn validate_optional_non_empty(value: Option<&str>, field: &str, op: &str) -> Result<()> {
+    if matches!(value, Some("")) {
+        return Err(Error::new(
+            ErrorKind::InvalidArgs,
+            format!("`{field}` must not be empty"),
+        )
+        .with_op(op));
+    }
+    Ok(())
+}
+
+fn validate_grants(grants: &S3AclGrants, op: &str) -> Result<()> {
+    validate_optional_non_empty(grants.full_control.as_deref(), "grant_full_control", op)?;
+    validate_optional_non_empty(grants.read.as_deref(), "grant_read", op)?;
+    validate_optional_non_empty(grants.read_acp.as_deref(), "grant_read_acp", op)?;
+    validate_optional_non_empty(grants.write.as_deref(), "grant_write", op)?;
+    validate_optional_non_empty(grants.write_acp.as_deref(), "grant_write_acp", op)
+}
+
+fn validate_bucket_acl_options(options: &S3PutBucketAclOptions) -> Result<()> {
+    validate_acl_selection(options.acl.is_some(), &options.grants, PUT_BUCKET_ACL_OP)?;
+    validate_grants(&options.grants, PUT_BUCKET_ACL_OP)?;
+    validate_optional_non_empty(
+        options.expected_bucket_owner.as_deref(),
+        "expected_bucket_owner",
+        PUT_BUCKET_ACL_OP,
+    )
+}
+
+fn validate_object_acl_options(options: &S3PutObjectAclOptions) -> Result<()> {
+    validate_acl_selection(options.acl.is_some(), &options.grants, PUT_OBJECT_ACL_OP)?;
+    validate_grants(&options.grants, PUT_OBJECT_ACL_OP)?;
+    validate_optional_non_empty(
+        options.expected_bucket_owner.as_deref(),
+        "expected_bucket_owner",
+        PUT_OBJECT_ACL_OP,
+    )?;
+    validate_optional_non_empty(
+        options.version_id.as_deref(),
+        "version_id",
+        PUT_OBJECT_ACL_OP,
+    )
+}
+
+fn bucket_canned_acl(value: S3BucketCannedAcl) -> BucketCannedAcl {
+    match value {
+        S3BucketCannedAcl::AuthenticatedRead => BucketCannedAcl::AuthenticatedRead,
+        S3BucketCannedAcl::Private => BucketCannedAcl::Private,
+        S3BucketCannedAcl::PublicRead => BucketCannedAcl::PublicRead,
+        S3BucketCannedAcl::PublicReadWrite => BucketCannedAcl::PublicReadWrite,
+    }
+}
+
+fn object_canned_acl(value: S3ObjectCannedAcl) -> ObjectCannedAcl {
+    match value {
+        S3ObjectCannedAcl::AuthenticatedRead => ObjectCannedAcl::AuthenticatedRead,
+        S3ObjectCannedAcl::AwsExecRead => ObjectCannedAcl::AwsExecRead,
+        S3ObjectCannedAcl::BucketOwnerFullControl => ObjectCannedAcl::BucketOwnerFullControl,
+        S3ObjectCannedAcl::BucketOwnerRead => ObjectCannedAcl::BucketOwnerRead,
+        S3ObjectCannedAcl::Private => ObjectCannedAcl::Private,
+        S3ObjectCannedAcl::PublicRead => ObjectCannedAcl::PublicRead,
+        S3ObjectCannedAcl::PublicReadWrite => ObjectCannedAcl::PublicReadWrite,
+    }
+}
+
+fn request_payer_value(value: S3RequestPayer) -> RequestPayer {
+    match value {
+        S3RequestPayer::Requester => RequestPayer::Requester,
+    }
+}
+
+fn apply_bucket_grants(
+    mut request: PutBucketAclFluentBuilder,
+    grants: &S3AclGrants,
+) -> PutBucketAclFluentBuilder {
+    if let Some(value) = &grants.full_control {
+        request = request.grant_full_control(value.clone());
+    }
+    if let Some(value) = &grants.read {
+        request = request.grant_read(value.clone());
+    }
+    if let Some(value) = &grants.read_acp {
+        request = request.grant_read_acp(value.clone());
+    }
+    if let Some(value) = &grants.write {
+        request = request.grant_write(value.clone());
+    }
+    if let Some(value) = &grants.write_acp {
+        request = request.grant_write_acp(value.clone());
+    }
+    request
+}
+
+fn apply_object_grants(
+    mut request: PutObjectAclFluentBuilder,
+    grants: &S3AclGrants,
+) -> PutObjectAclFluentBuilder {
+    if let Some(value) = &grants.full_control {
+        request = request.grant_full_control(value.clone());
+    }
+    if let Some(value) = &grants.read {
+        request = request.grant_read(value.clone());
+    }
+    if let Some(value) = &grants.read_acp {
+        request = request.grant_read_acp(value.clone());
+    }
+    if let Some(value) = &grants.write {
+        request = request.grant_write(value.clone());
+    }
+    if let Some(value) = &grants.write_acp {
+        request = request.grant_write_acp(value.clone());
+    }
+    request
+}
+
+fn normalize_root_prefix(root: Option<&str>) -> String {
+    let root = root
+        .unwrap_or_default()
+        .split('/')
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>()
+        .join("/");
+    if root.is_empty() {
+        String::new()
+    } else {
+        format!("{root}/")
+    }
+}
+
+fn object_key(root: &str, path: &str, op: &str) -> Result<String> {
+    let path = path.trim().trim_start_matches('/');
+    if path.is_empty() {
+        return Err(Error::new(ErrorKind::EmptyPath, "path must not be empty").with_op(op));
+    }
+
+    let has_trailing_slash = path.ends_with('/');
+    let mut path = path
+        .split('/')
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>()
+        .join("/");
+    if has_trailing_slash {
+        path.push('/');
+    }
+    Ok(format!("{root}{path}"))
 }
 
 fn fallback_option(
@@ -322,4 +694,21 @@ fn opendal_error(op: &str, action: &str, err: opendal::Error) -> Error {
     Error::new(ErrorKind::S3, format!("failed to {action}: {err}"))
         .with_op(op)
         .with_detail(err.to_string())
+}
+
+fn aws_sdk_error(op: &str, action: &str, err: impl StdError + 'static) -> Error {
+    let mut detail = err.to_string();
+    let mut source = err.source();
+    while let Some(cause) = source {
+        let message = cause.to_string();
+        if !message.is_empty() {
+            detail.push_str(": ");
+            detail.push_str(&message);
+        }
+        source = cause.source();
+    }
+
+    Error::new(ErrorKind::S3, format!("failed to {action}: {detail}"))
+        .with_op(op)
+        .with_detail(detail)
 }

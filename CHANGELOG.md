@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `put_bucket_acl` and `put_object_acl` methods to `ptool.s3` /
+  `p.s3`, with support for canned ACLs and explicit grant headers.
 - Added `ptool.which(...)` / `p.which(...)` and
   `ptool.which_or_fatal(...)` / `p.which_or_fatal(...)` for checking command
   availability before running external tools.

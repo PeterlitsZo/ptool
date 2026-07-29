@@ -1,6 +1,8 @@
 use mlua::{Lua, Table, UserData, UserDataMethods, Value};
 use ptool_engine::{
-    PtoolEngine, S3ConnectOptions, S3Connection, S3Entry, S3Range, S3ReadOptions, S3WriteOptions,
+    PtoolEngine, S3AclGrants, S3BucketCannedAcl, S3ConnectOptions, S3Connection, S3Entry,
+    S3ObjectCannedAcl, S3PutBucketAclOptions, S3PutObjectAclOptions, S3Range, S3ReadOptions,
+    S3RequestPayer, S3WriteOptions,
 };
 
 const CONNECT_SIGNATURE: &str = "ptool.s3.connect(options)";
@@ -10,6 +12,8 @@ const DELETE_SIGNATURE: &str = "ptool.s3.Connection:delete(path)";
 const EXISTS_SIGNATURE: &str = "ptool.s3.Connection:exists(path)";
 const LIST_SIGNATURE: &str = "ptool.s3.Connection:list([prefix])";
 const STAT_SIGNATURE: &str = "ptool.s3.Connection:stat(path)";
+const PUT_BUCKET_ACL_SIGNATURE: &str = "ptool.s3.Connection:put_bucket_acl(options)";
+const PUT_OBJECT_ACL_SIGNATURE: &str = "ptool.s3.Connection:put_object_acl(path, options)";
 
 #[derive(Clone)]
 pub(crate) struct LuaS3Connection {
@@ -42,6 +46,13 @@ impl UserData for LuaS3Connection {
             this.list(lua, prefix)
         });
         methods.add_method("stat", |lua, this, path: String| this.stat(lua, path));
+        methods.add_method("put_bucket_acl", |_, this, options: Table| {
+            this.put_bucket_acl(options)
+        });
+        methods.add_method(
+            "put_object_acl",
+            |_, this, (path, options): (String, Table)| this.put_object_acl(path, options),
+        );
     }
 }
 
@@ -100,6 +111,20 @@ impl LuaS3Connection {
             .stat(&path)
             .map_err(|err| s3_error(STAT_SIGNATURE, err))?;
         s3_entry_to_lua(lua, entry, STAT_SIGNATURE)
+    }
+
+    fn put_bucket_acl(&self, options: Table) -> mlua::Result<()> {
+        let options = parse_put_bucket_acl_options(options)?;
+        self.connection
+            .put_bucket_acl(&options)
+            .map_err(|err| s3_error(PUT_BUCKET_ACL_SIGNATURE, err))
+    }
+
+    fn put_object_acl(&self, path: String, options: Table) -> mlua::Result<()> {
+        let options = parse_put_object_acl_options(options)?;
+        self.connection
+            .put_object_acl(&path, &options)
+            .map_err(|err| s3_error(PUT_OBJECT_ACL_SIGNATURE, err))
     }
 }
 
@@ -187,6 +212,93 @@ fn parse_read_options(options: Option<Table>) -> mlua::Result<S3ReadOptions> {
     };
 
     Ok(S3ReadOptions { range })
+}
+
+fn parse_put_bucket_acl_options(options: Table) -> mlua::Result<S3PutBucketAclOptions> {
+    validate_option_keys(
+        &options,
+        PUT_BUCKET_ACL_SIGNATURE,
+        &[
+            "acl",
+            "expected_bucket_owner",
+            "grant_full_control",
+            "grant_read",
+            "grant_read_acp",
+            "grant_write",
+            "grant_write_acp",
+        ],
+    )?;
+
+    let acl = optional_non_empty_string(&options, "acl", PUT_BUCKET_ACL_SIGNATURE)?
+        .map(|value| {
+            S3BucketCannedAcl::try_from(value.as_str())
+                .map_err(|err| s3_error(PUT_BUCKET_ACL_SIGNATURE, err))
+        })
+        .transpose()?;
+
+    Ok(S3PutBucketAclOptions {
+        acl,
+        grants: parse_acl_grants(&options, PUT_BUCKET_ACL_SIGNATURE)?,
+        expected_bucket_owner: optional_non_empty_string(
+            &options,
+            "expected_bucket_owner",
+            PUT_BUCKET_ACL_SIGNATURE,
+        )?,
+    })
+}
+
+fn parse_put_object_acl_options(options: Table) -> mlua::Result<S3PutObjectAclOptions> {
+    validate_option_keys(
+        &options,
+        PUT_OBJECT_ACL_SIGNATURE,
+        &[
+            "acl",
+            "expected_bucket_owner",
+            "grant_full_control",
+            "grant_read",
+            "grant_read_acp",
+            "grant_write",
+            "grant_write_acp",
+            "version_id",
+            "request_payer",
+        ],
+    )?;
+
+    let acl = optional_non_empty_string(&options, "acl", PUT_OBJECT_ACL_SIGNATURE)?
+        .map(|value| {
+            S3ObjectCannedAcl::try_from(value.as_str())
+                .map_err(|err| s3_error(PUT_OBJECT_ACL_SIGNATURE, err))
+        })
+        .transpose()?;
+    let request_payer =
+        optional_non_empty_string(&options, "request_payer", PUT_OBJECT_ACL_SIGNATURE)?
+            .map(|value| {
+                S3RequestPayer::try_from(value.as_str())
+                    .map_err(|err| s3_error(PUT_OBJECT_ACL_SIGNATURE, err))
+            })
+            .transpose()?;
+
+    Ok(S3PutObjectAclOptions {
+        acl,
+        grants: parse_acl_grants(&options, PUT_OBJECT_ACL_SIGNATURE)?,
+        expected_bucket_owner: optional_non_empty_string(
+            &options,
+            "expected_bucket_owner",
+            PUT_OBJECT_ACL_SIGNATURE,
+        )?,
+        version_id: optional_non_empty_string(&options, "version_id", PUT_OBJECT_ACL_SIGNATURE)?,
+        request_payer,
+    })
+}
+
+fn parse_acl_grants(options: &Table, signature: &str) -> mlua::Result<S3AclGrants> {
+    Ok(S3AclGrants {
+        full_control: optional_non_empty_string(options, "grant_full_control", signature)?,
+        read: optional_non_empty_string(options, "grant_read", signature)?,
+        read_acp: optional_non_empty_string(options, "grant_read_acp", signature)?,
+        write: optional_non_empty_string(options, "grant_write", signature)?,
+        write_acp: optional_non_empty_string(options, "grant_write_acp", signature)?,
+    })
 }
 
 fn validate_connect_option_keys(options: &Table) -> mlua::Result<()> {

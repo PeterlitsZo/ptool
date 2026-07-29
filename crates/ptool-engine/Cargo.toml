@@ -5,6 +5,7 @@ edition.workspace = true
 
 [dependencies]
 adler2 = "2.0.1"
+aws-sdk-s3 = { version = "=1.137.0", default-features = false, features = ["default-https-client", "http-1x", "rt-tokio", "rustls"] }
 base64 = "0.22.1"
 blake2 = "0.10.6"
 blake3 = "1.8.5"
