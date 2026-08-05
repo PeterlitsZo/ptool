@@ -7,10 +7,10 @@
 ## v0.12.0
 
 - [x] Enhance the `p.s3` module.
-- [ ] Support the `p.ssh.Connection`'s `run_shell` method.
+- [x] Support the `p.ssh.Connection`'s `run_shell` method.
 - [ ] Enhance the `LuaError`. Make it be a enum.
-- [ ] Support `p.which` or `p.which_or_fatal` to check for command existence.
-- [ ] Support `p.template.write` to write to file directly.
+- [x] Support `p.which` or `p.which_or_fatal` to check for command existence.
+- [x] Support `p.template.write` to write to file directly.
 - [ ] Support `p.guard(cond):or_fatal("...")`.
 
 ## v0.11.0

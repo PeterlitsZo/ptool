@@ -741,6 +741,10 @@ impl PtoolEngine {
         template::render(template, context)
     }
 
+    pub fn template_write(&self, path: &str, template: &str, context: &JsonValue) -> Result<()> {
+        template::write(path, template, context)
+    }
+
     pub fn text_unindent(&self, input: &str) -> String {
         text::unindent(input)
     }

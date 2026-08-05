@@ -47,3 +47,33 @@ local template = ptool.unindent([[
 
 print(ptool.template.render(template, {})) -- N/A
 ```
+
+## ptool.template.write
+
+> `v0.12.0` - Introduzido.
+
+`ptool.template.write(path, template, context)` renderiza uma string de template no estilo Jinja e grava o resultado renderizado diretamente em um arquivo.
+
+- `path` (string, obrigatório): O caminho do arquivo de destino.
+- `template` (string, obrigatório): O texto-fonte do template.
+- `context` (qualquer valor Lua serializável, obrigatório): O contexto do template.
+- Retorna: Nada.
+
+Exemplo:
+
+```lua
+local template = ptool.unindent([[
+  | server_name = {{ server.name }}
+  | port = {{ server.port }}
+]])
+
+ptool.template.write("server.conf", template, {
+  server = { name = "example.com", port = 8080 },
+})
+```
+
+Notas:
+
+- A renderização usa a mesma conversão de contexto e a mesma semântica de template que `ptool.template.render(...)`.
+- O arquivo de destino é criado se não existir e truncado se já existir, como em `ptool.fs.write(...)`.
+- Os diretórios pai não são criados automaticamente.

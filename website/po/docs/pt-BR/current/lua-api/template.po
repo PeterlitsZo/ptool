@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-08-05 16:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,76 +12,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:1
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:1
 msgid "Template API"
 msgstr "API de templates"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:3
-msgid ""
-"Template rendering helpers are available under `ptool.template` and "
-"`p.template`."
-msgstr ""
-"As utilidades de renderização de templates estão disponíveis em "
-"`ptool.template` e `p.template`."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:3
+msgid "Template rendering helpers are available under `ptool.template` and `p.template`."
+msgstr "As utilidades de renderização de templates estão disponíveis em `ptool.template` e `p.template`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:5
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:5
 msgid "ptool.template.render"
 msgstr "ptool.template.render"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:7
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:7
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - Introduced."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:9
-msgid ""
-"`ptool.template.render(template, context)` renders a Jinja-style template "
-"string and returns the rendered result."
-msgstr ""
-"`ptool.template.render(template, context)` renderiza uma string de template "
-"no estilo Jinja e retorna o resultado renderizado."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:9
+msgid "`ptool.template.render(template, context)` renders a Jinja-style template string and returns the rendered result."
+msgstr "`ptool.template.render(template, context)` renderiza uma string de template no estilo Jinja e retorna o resultado renderizado."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:12
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:12"
 msgid "`template` (string, required): The template source text."
 msgstr "`template` (string, obrigatório): O texto-fonte do template."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:13
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:13
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:13"
 msgid "`context` (any serializable Lua value, required): The template context."
-msgstr ""
-"`context` (qualquer valor Lua serializável, obrigatório): O contexto do "
-"template."
+msgstr "`context` (qualquer valor Lua serializável, obrigatório): O contexto do template."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:14
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:14
 msgid "Returns: The rendered string."
 msgstr "Retorna: A string renderizada."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:16
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:16
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:16"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:38
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:38"
 msgid "Notes:"
 msgstr "Notas:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:40
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:40
 msgid "The context must be serializable to data values."
 msgstr "O contexto precisa ser serializável como valores de dados."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:41
-msgid ""
-"Lua values such as `function`, `thread`, and unsupported `userdata` are not "
-"accepted as template context values."
-msgstr ""
-"Valores Lua como `function`, `thread` e `userdata` não suportado não são "
-"aceitos como valores de contexto do template."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:41
+msgid "Lua values such as `function`, `thread`, and unsupported `userdata` are not accepted as template context values."
+msgstr "Valores Lua como `function`, `thread` e `userdata` não suportado não são aceitos como valores de contexto do template."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:43
-msgid ""
-"Missing values use chainable undefined semantics. This means nested lookups "
-"such as `foo.bar.baz` can be passed to filters like `default(...)` without "
-"raising an error. When rendered directly without a fallback, undefined "
-"values become an empty string."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:43
+msgid "Missing values use chainable undefined semantics. This means nested lookups such as `foo.bar.baz` can be passed to filters like `default(...)` without raising an error. When rendered directly without a fallback, undefined values become an empty string."
+msgstr "Valores ausentes usam semântica de undefined encadeável. Isso significa que buscas aninhadas como `foo.bar.baz` podem ser passadas para filtros como `default(...)` sem gerar erro. Quando renderizados diretamente sem fallback, valores undefined tornam-se string vazia."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:56
+msgid "ptool.template.write"
+msgstr "ptool.template.write"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:58
+msgid "`v0.12.0` - Introduced."
+msgstr "`v0.12.0` - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:60
+msgid "`ptool.template.write(path, template, context)` renders a Jinja-style template string and writes the rendered result directly to a file."
 msgstr ""
-"Valores ausentes usam semântica de undefined encadeável. Isso significa que "
-"buscas aninhadas como `foo.bar.baz` podem ser passadas para filtros como "
-"`default(...)` sem gerar erro. Quando renderizados diretamente sem fallback, "
-"valores undefined tornam-se string vazia."
+"`ptool.template.write(path, template, context)` renderiza uma string de "
+"template no estilo Jinja e grava o resultado renderizado diretamente em um "
+"arquivo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:63
+msgid "`path` (string, required): The destination file path."
+msgstr "`path` (string, obrigatório): O caminho do arquivo de destino."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:64
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:64"
+msgid "`template` (string, required): The template source text."
+msgstr "`template` (string, obrigatório): O texto-fonte do template."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:65
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:65"
+msgid "`context` (any serializable Lua value, required): The template context."
+msgstr "`context` (qualquer valor Lua serializável, obrigatório): O contexto do template."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:66
+msgid "Returns: Nothing."
+msgstr "Retorna: Nada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:68
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:68"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:81
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:81"
+msgid "Notes:"
+msgstr "Notas:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:83
+msgid "Rendering uses the same context conversion and template semantics as `ptool.template.render(...)`."
+msgstr ""
+"A renderização usa a mesma conversão de contexto e a mesma semântica de "
+"template que `ptool.template.render(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:85
+msgid "The destination file is created if it does not exist and truncated if it already exists, matching `ptool.fs.write(...)`."
+msgstr ""
+"O arquivo de destino é criado se não existir e truncado se já existir, como "
+"em `ptool.fs.write(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:87
+msgid "Parent directories are not created automatically."
+msgstr "Os diretórios pai não são criados automaticamente."

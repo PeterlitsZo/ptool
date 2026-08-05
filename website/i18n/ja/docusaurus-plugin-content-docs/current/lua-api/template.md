@@ -47,3 +47,33 @@ local template = ptool.unindent([[
 
 print(ptool.template.render(template, {})) -- N/A
 ```
+
+## ptool.template.write
+
+> `v0.12.0` - 追加。
+
+`ptool.template.write(path, template, context)` は Jinja スタイルのテンプレート文字列をレンダリングし、その結果をファイルへ直接書き込みます。
+
+- `path`（string、必須）：出力先ファイルのパス。
+- `template` (string, 必須): テンプレートのソーステキスト。
+- `context` (任意のシリアライズ可能な Lua 値, 必須): テンプレート コンテキスト。
+- 戻り値: なし。
+
+例:
+
+```lua
+local template = ptool.unindent([[
+  | server_name = {{ server.name }}
+  | port = {{ server.port }}
+]])
+
+ptool.template.write("server.conf", template, {
+  server = { name = "example.com", port = 8080 },
+})
+```
+
+注意:
+
+- レンダリングでは `ptool.template.render(...)` と同じコンテキスト変換およびテンプレートのセマンティクスが使用されます。
+- 出力先ファイルが存在しない場合は作成され、存在する場合は切り詰められます。これは `ptool.fs.write(...)` と同じ動作です。
+- 親ディレクトリは自動的には作成されません。

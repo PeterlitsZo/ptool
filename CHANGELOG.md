@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added `ptool.template.write(path, template, context)` /
+  `p.template.write(path, template, context)` for rendering a template directly
+  to a file.
 - Added `put_bucket_acl` and `put_object_acl` methods to `ptool.s3` /
   `p.s3`, with support for canned ACLs and explicit grant headers.
 - Added `ptool.which(...)` / `p.which(...)` and

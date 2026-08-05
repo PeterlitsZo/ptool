@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"POT-Creation-Date: 2026-08-05 16:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,69 +12,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 3.16.3\n"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:1
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:1
 msgid "Template API"
 msgstr "Template API"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:3
-msgid ""
-"Template rendering helpers are available under `ptool.template` and "
-"`p.template`."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:3
+msgid "Template rendering helpers are available under `ptool.template` and `p.template`."
 msgstr "模板渲染辅助能力位于 `ptool.template` 和 `p.template` 下。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:5
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:5
 msgid "ptool.template.render"
 msgstr "ptool.template.render"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:7
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:7
 msgid "`v0.1.0` - Introduced."
 msgstr "`v0.1.0` - 引入。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:9
-msgid ""
-"`ptool.template.render(template, context)` renders a Jinja-style template "
-"string and returns the rendered result."
-msgstr "`ptool.template.render(template, context)` 渲染 Jinja 风格的模板字符串，并返"
-"回 渲染结果。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:9
+msgid "`ptool.template.render(template, context)` renders a Jinja-style template string and returns the rendered result."
+msgstr "`ptool.template.render(template, context)` 渲染 Jinja 风格的模板字符串，并返回 渲染结果。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:12
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:12
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:12"
 msgid "`template` (string, required): The template source text."
 msgstr "`template`（string，必填）：模板源文本。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:13
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:13
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:13"
 msgid "`context` (any serializable Lua value, required): The template context."
 msgstr "`context`（任意可序列化 Lua 值，必填）：模板上下文。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:14
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:14
 msgid "Returns: The rendered string."
 msgstr "返回：渲染后的字符串。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:16
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:16
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:16"
 msgid "Example:"
 msgstr "示例："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:38
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:38"
 msgid "Notes:"
 msgstr "说明："
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:40
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:40
 msgid "The context must be serializable to data values."
 msgstr "`context` 必须能被序列化成数据值。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:41
-msgid ""
-"Lua values such as `function`, `thread`, and unsupported `userdata` are not "
-"accepted as template context values."
-msgstr "`function`、`thread` 和不受支持的 `userdata` 等 Lua 值，不能作为模板上下文值"
-"。"
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:41
+msgid "Lua values such as `function`, `thread`, and unsupported `userdata` are not accepted as template context values."
+msgstr "`function`、`thread` 和不受支持的 `userdata` 等 Lua 值，不能作为模板上下文值。"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/template.md:43
-msgid ""
-"Missing values use chainable undefined semantics. This means nested lookups "
-"such as `foo.bar.baz` can be passed to filters like `default(...)` without "
-"raising an error. When rendered directly without a fallback, undefined "
-"values become an empty string."
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:43
+msgid "Missing values use chainable undefined semantics. This means nested lookups such as `foo.bar.baz` can be passed to filters like `default(...)` without raising an error. When rendered directly without a fallback, undefined values become an empty string."
+msgstr "缺失值采用可链式的 undefined 语义。这意味着像 `foo.bar.baz` 这样的嵌套访问， 可以安全传给 `default(...)` 之类的过滤器而不会报错。若直接渲染且没有后备值， undefined 会变成空字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:56
+msgid "ptool.template.write"
+msgstr "ptool.template.write"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:58
+msgid "`v0.12.0` - Introduced."
+msgstr "`v0.12.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:60
+msgid "`ptool.template.write(path, template, context)` renders a Jinja-style template string and writes the rendered result directly to a file."
 msgstr ""
-"缺失值采用可链式的 undefined 语义。这意味着像 `foo.bar.baz` 这样的嵌套访问， "
-"可以安全传给 `default(...)` 之类的过滤器而不会报错。若直接渲染且没有后备值， "
-"undefined 会变成空字符串。"
+"`ptool.template.write(path, template, context)` 会渲染 Jinja 风格的模板字符串"
+"，并将渲染结果直接写入文件。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:63
+msgid "`path` (string, required): The destination file path."
+msgstr "`path`（string，必填）：目标文件路径。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:64
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:64"
+msgid "`template` (string, required): The template source text."
+msgstr "`template`（string，必填）：模板源文本。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:65
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:65"
+msgid "`context` (any serializable Lua value, required): The template context."
+msgstr "`context`（任意可序列化 Lua 值，必填）：模板上下文。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:66
+msgid "Returns: Nothing."
+msgstr "返回：无。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:68
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:68"
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:81
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:81"
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:83
+msgid "Rendering uses the same context conversion and template semantics as `ptool.template.render(...)`."
+msgstr "渲染时使用与 `ptool.template.render(...)` 相同的上下文转换和模板语义。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:85
+msgid "The destination file is created if it does not exist and truncated if it already exists, matching `ptool.fs.write(...)`."
+msgstr "目标文件不存在时会创建；已存在时会被截断，这与 `ptool.fs.write(...)` 的行为一"
+"致。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/worktrees/ptool/full-lantern/ptool/website/docs/lua-api/template.md:87
+msgid "Parent directories are not created automatically."
+msgstr "不会自动创建父目录。"

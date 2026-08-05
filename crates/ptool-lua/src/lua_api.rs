@@ -1042,9 +1042,18 @@ fn create_ptool_template_module(
     world: Rc<RefCell<crate::LuaWorld>>,
 ) -> mlua::Result<Table> {
     let template_module = lua.create_table()?;
+    let render_state = Rc::clone(&world);
     let render_fn = lua.create_function(move |lua, (template, context): (String, Value)| {
-        world.borrow().template_render(lua, template, context)
+        render_state
+            .borrow()
+            .template_render(lua, template, context)
     })?;
+    let write_fn = lua.create_function(
+        move |lua, (path, template, context): (String, String, Value)| {
+            world.borrow().template_write(lua, path, template, context)
+        },
+    )?;
     template_module.set("render", render_fn)?;
+    template_module.set("write", write_fn)?;
     Ok(template_module)
 }

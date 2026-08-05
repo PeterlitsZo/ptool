@@ -47,3 +47,33 @@ local template = ptool.unindent([[
 
 print(ptool.template.render(template, {})) -- N/A
 ```
+
+## ptool.template.write
+
+> `v0.12.0` - 引入。
+
+`ptool.template.write(path, template, context)` 会渲染 Jinja 风格的模板字符串，并将渲染结果直接写入文件。
+
+- `path`（string，必填）：目标文件路径。
+- `template`（string，必填）：模板源文本。
+- `context`（任意可序列化 Lua 值，必填）：模板上下文。
+- 返回：无。
+
+示例：
+
+```lua
+local template = ptool.unindent([[
+  | server_name = {{ server.name }}
+  | port = {{ server.port }}
+]])
+
+ptool.template.write("server.conf", template, {
+  server = { name = "example.com", port = 8080 },
+})
+```
+
+说明：
+
+- 渲染时使用与 `ptool.template.render(...)` 相同的上下文转换和模板语义。
+- 目标文件不存在时会创建；已存在时会被截断，这与 `ptool.fs.write(...)` 的行为一致。
+- 不会自动创建父目录。

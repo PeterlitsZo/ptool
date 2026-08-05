@@ -839,6 +839,16 @@ impl LuaWorld {
         crate::template::render(lua, &self.engine, template, context)
     }
 
+    pub(crate) fn template_write(
+        &self,
+        lua: &Lua,
+        path: String,
+        template: String,
+        context: Value,
+    ) -> mlua::Result<()> {
+        crate::template::write(lua, &self.engine, path, template, context)
+    }
+
     pub(crate) fn path_join(&self, segments: Variadic<String>) -> mlua::Result<String> {
         crate::path::join(&self.engine, segments)
     }
