@@ -8,8 +8,10 @@
 
 - [x] Enhance the `p.s3` module.
 - [x] Support the `p.ssh.Connection`'s `run_shell` method.
+- [x] Add path-based `get` and `set` helpers to `p.json` and `p.yaml`.
+- [x] Expand the `p.git` module with repository workflow APIs.
+- [x] Support `p.which` and `p.which_or_fatal` to check for command existence.
 - [ ] Enhance the `LuaError`. Make it be a enum.
-- [x] Support `p.which` or `p.which_or_fatal` to check for command existence.
 - [x] Support `p.template.write` to write to file directly.
 - [ ] Support `p.guard(cond):or_fatal("...")`.
 

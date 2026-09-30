@@ -204,10 +204,14 @@ fn parse_zoned_input(input: &str) -> Result<Zoned> {
         }
     }
 
+    if let Ok(timestamp) = input.parse::<Timestamp>() {
+        return Ok(timestamp.to_zoned(TimeZone::UTC));
+    }
+
     Err(invalid_datetime(
         PARSE_OP,
         input,
-        "expected a timezone annotation like `[America/New_York]` or a numeric offset like `-04:00`",
+        "expected a timezone annotation like `[America/New_York]`, a numeric offset like `-04:00`, or `Z` for UTC",
     ))
 }
 

@@ -32,6 +32,10 @@
   echoes them using the same shell-first presentation as local
   `ptool.run_shell(...)`.
 
+### Fixed
+
+- Fixed `ptool.datetime.parse` rejecting UTC timestamps ending in `Z`.
+
 ## v0.11.0 (2026-06-24)
 
 ### Added
