@@ -1,6 +1,6 @@
 #!/usr/bin/env ptool
 
-p.use("v0.6.0")
+p.use("v0.11.0")
 p.config { run = { check = true } }
 
 -- Parse arguments.

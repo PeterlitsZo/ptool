@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.12.0 (2026-09-30)
+
 ### Added
 
 - Added `ptool.template.write(path, template, context)` /

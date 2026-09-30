@@ -1,0 +1,217 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 11:32+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:1
+msgid "Hash API"
+msgstr "Hash API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:3
+msgid "Hashing helpers are available under `ptool.hash` and `p.hash`."
+msgstr "哈希辅助能力位于 `ptool.hash` 和 `p.hash` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:5
+msgid "All hash helpers share the same shape:"
+msgstr "所有哈希辅助方法都采用相同的形式："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:7
+msgid ""
+"`input` (string, required): The input Lua string. The digest or checksum is "
+"computed from the string's raw bytes."
+msgstr ""
+"`input`（string，必填）：输入的 Lua 字符串。摘要或校验和基于字符串的原始字节"
+"计算。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:9
+msgid "Returns: `string` (lowercase hexadecimal output)."
+msgstr "返回：`string`（小写十六进制输出）。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:11
+msgid "Cryptographic digests"
+msgstr "加密哈希摘要"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:13
+msgid "`ptool.hash.sha1(input)`: SHA-1 digest. Introduced in `v0.2.0`."
+msgstr "`ptool.hash.sha1(input)`：SHA-1 摘要。于 `v0.2.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:14
+msgid "`ptool.hash.sha224(input)`: SHA-224 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha224(input)`：SHA-224 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:15
+msgid "`ptool.hash.sha256(input)`: SHA-256 digest. Introduced in `v0.2.0`."
+msgstr "`ptool.hash.sha256(input)`：SHA-256 摘要。于 `v0.2.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:16
+msgid "`ptool.hash.sha384(input)`: SHA-384 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha384(input)`：SHA-384 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:17
+msgid "`ptool.hash.sha512(input)`: SHA-512 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha512(input)`：SHA-512 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:18
+msgid ""
+"`ptool.hash.sha512_224(input)`: SHA-512/224 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha512_224(input)`：SHA-512/224 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:19
+msgid ""
+"`ptool.hash.sha512_256(input)`: SHA-512/256 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha512_256(input)`：SHA-512/256 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:20
+msgid "`ptool.hash.sha3_224(input)`: SHA3-224 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha3_224(input)`：SHA3-224 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:21
+msgid "`ptool.hash.sha3_256(input)`: SHA3-256 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha3_256(input)`：SHA3-256 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:22
+msgid "`ptool.hash.sha3_384(input)`: SHA3-384 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha3_384(input)`：SHA3-384 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:23
+msgid "`ptool.hash.sha3_512(input)`: SHA3-512 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.sha3_512(input)`：SHA3-512 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:24
+msgid ""
+"`ptool.hash.blake2s256(input)`: BLAKE2s-256 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.blake2s256(input)`：BLAKE2s-256 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:25
+msgid ""
+"`ptool.hash.blake2b512(input)`: BLAKE2b-512 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.blake2b512(input)`：BLAKE2b-512 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:26
+msgid "`ptool.hash.blake3(input)`: BLAKE3 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.blake3(input)`：BLAKE3 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:27
+msgid "`ptool.hash.md5(input)`: MD5 digest. Introduced in `v0.2.0`."
+msgstr "`ptool.hash.md5(input)`：MD5 摘要。于 `v0.2.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:29
+msgid "Checksums and fast non-cryptographic hashes"
+msgstr "校验和与快速非加密哈希"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:31
+msgid ""
+"`ptool.hash.crc32(input)`: CRC-32/ISO-HDLC checksum. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.crc32(input)`：CRC-32/ISO-HDLC 校验和。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:32
+msgid ""
+"`ptool.hash.crc64(input)`: CRC-64/ECMA-182 checksum. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.crc64(input)`：CRC-64/ECMA-182 校验和。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:33
+msgid "`ptool.hash.adler32(input)`: Adler-32 checksum. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.adler32(input)`：Adler-32 校验和。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:34
+msgid "`ptool.hash.xxh32(input)`: xxHash32 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.xxh32(input)`：xxHash32 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:35
+msgid "`ptool.hash.xxh64(input)`: xxHash64 digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.xxh64(input)`：xxHash64 摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:36
+msgid ""
+"`ptool.hash.xxh3_64(input)`: XXH3 64-bit digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.xxh3_64(input)`：XXH3 64 位摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:37
+msgid ""
+"`ptool.hash.xxh3_128(input)`: XXH3 128-bit digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.xxh3_128(input)`：XXH3 128 位摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:38
+msgid ""
+"`ptool.hash.murmur3_32(input)`: MurmurHash3 32-bit digest. Introduced in "
+"`v0.9.0`."
+msgstr "`ptool.hash.murmur3_32(input)`：MurmurHash3 32 位摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:39
+msgid ""
+"`ptool.hash.murmur3_128(input)`: MurmurHash3 x64 128-bit digest. Introduced "
+"in `v0.9.0`."
+msgstr "`ptool.hash.murmur3_128(input)`：MurmurHash3 x64 128 位摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:40
+msgid ""
+"`ptool.hash.fnv1a32(input)`: FNV-1a 32-bit digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.fnv1a32(input)`：FNV-1a 32 位摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:41
+msgid ""
+"`ptool.hash.fnv1a64(input)`: FNV-1a 64-bit digest. Introduced in `v0.9.0`."
+msgstr "`ptool.hash.fnv1a64(input)`：FNV-1a 64 位摘要。于 `v0.9.0` 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:43
+msgid "Example"
+msgstr "示例"
+
+#~ msgid "ptool.hash.sha256"
+#~ msgstr "ptool.hash.sha256"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:7"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgid "`ptool.hash.sha256(input)` returns the SHA-256 digest of a Lua string."
+#~ msgstr "`ptool.hash.sha256(input)` 返回 Lua 字符串的 SHA-256 摘要。"
+
+#~ msgid "ptool.hash.sha1"
+#~ msgstr "ptool.hash.sha1"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:22"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgid "`ptool.hash.sha1(input)` returns the SHA-1 digest of a Lua string."
+#~ msgstr "`ptool.hash.sha1(input)` 返回 Lua 字符串的 SHA-1 摘要。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:26"
+#~ msgid ""
+#~ "`input` (string, required): The input Lua string. The digest is computed "
+#~ "from the string's raw bytes."
+#~ msgstr "`input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:28"
+#~ msgid "Returns: `string` (lowercase hexadecimal digest)."
+#~ msgstr "返回：`string`（小写十六进制摘要）。"
+
+#~ msgid "ptool.hash.md5"
+#~ msgstr "ptool.hash.md5"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:37"
+#~ msgid "`v0.2.0` - Introduced."
+#~ msgstr "`v0.2.0` - 引入。"
+
+#~ msgid "`ptool.hash.md5(input)` returns the MD5 digest of a Lua string."
+#~ msgstr "`ptool.hash.md5(input)` 返回 Lua 字符串的 MD5 摘要。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:41"
+#~ msgid ""
+#~ "`input` (string, required): The input Lua string. The digest is computed "
+#~ "from the string's raw bytes."
+#~ msgstr "`input`（string，必填）：输入的 Lua 字符串。摘要基于字符串的原始字节计算。"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/hash.md:43"
+#~ msgid "Returns: `string` (lowercase hexadecimal digest)."
+#~ msgstr "返回：`string`（小写十六进制摘要）。"

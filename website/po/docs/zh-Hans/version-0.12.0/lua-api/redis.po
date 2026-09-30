@@ -1,0 +1,247 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 16:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:1
+msgid "Redis API"
+msgstr "Redis API"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:3
+msgid ""
+"Redis connection helpers are available under `ptool.redis` and `p.redis`."
+msgstr "Redis 连接辅助能力位于 `ptool.redis` 和 `p.redis` 下。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:5
+msgid "ptool.redis.connect"
+msgstr "ptool.redis.connect"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:7"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:9
+msgid ""
+"`ptool.redis.connect(url_or_options)` opens a Redis connection and returns a "
+"`Connection` object."
+msgstr ""
+"`ptool.redis.connect(url_or_options)` 打开 Redis 连接，并返回一个 "
+"`Connection` 对象。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:12
+msgid "Arguments:"
+msgstr "参数："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "`url_or_options` (string|table, required):"
+msgstr "`url_or_options`（string|table，必填）："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "When a string is provided, it is treated as the Redis URL."
+msgstr "传入字符串时，会被视为 Redis URL。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "When a table is provided, it currently supports:"
+msgstr "传入 table 时，目前支持："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:14
+msgid "`url` (string, required): The Redis URL."
+msgstr "`url`（string，必填）：Redis URL。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:19
+msgid "Common URL examples:"
+msgstr "常见 URL 示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:29
+msgid "Notes:"
+msgstr "说明："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:31
+msgid ""
+"The connection is intended for direct command execution through `conn:call"
+"(...)`."
+msgstr "该连接主要用于通过 `conn:call(...)` 直接执行命令。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:33
+msgid ""
+"This API does not currently provide dedicated pub/sub, pipeline, or "
+"transaction helpers."
+msgstr "该 API 目前不提供专门的 pub/sub、pipeline 或事务辅助方法。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:36
+msgid "Connection"
+msgstr "Connection"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:38
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:38"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:40
+msgid ""
+"`Connection` represents an open Redis connection returned by "
+"`ptool.redis.connect()`."
+msgstr "`Connection` 表示由 `ptool.redis.connect()` 返回的已打开 Redis 连接。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:43
+msgid "It is implemented as a Lua userdata."
+msgstr "它实现为 Lua userdata。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:45
+msgid "Methods:"
+msgstr "方法："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:47
+msgid "`conn:call(command, ...)` -> `any`"
+msgstr "`conn:call(command, ...)` -> `any`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:48
+msgid "`conn:close()` -> `nil`"
+msgstr "`conn:close()` -> `nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:50
+msgid "Command argument rules:"
+msgstr "命令参数规则："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:52
+msgid "`command` must be a non-empty string."
+msgstr "`command` 必须是非空字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:53
+msgid "Remaining arguments are passed to Redis as a flat argument list."
+msgstr "其余参数会作为扁平参数列表传给 Redis。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "Supported argument value types are:"
+msgstr "支持的参数值类型包括："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`boolean`"
+msgstr "`boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`integer`"
+msgstr "`integer`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`number`"
+msgstr "`number`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:54
+msgid "`string`"
+msgstr "`string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:59
+msgid ""
+"`nil`, tables, functions, threads, and userdata are not supported as Redis "
+"command arguments."
+msgstr "`nil`、table、function、thread 和 userdata 不能作为 Redis 命令参数。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:61
+msgid ""
+"Lua strings are passed as raw bytes, so binary-safe Redis values are "
+"supported."
+msgstr "Lua 字符串会按原始字节传递，因此支持二进制安全的 Redis 值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:64
+msgid "Reply conversion rules:"
+msgstr "回复值转换规则："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:66
+msgid "Null replies become `nil`."
+msgstr "空回复会转换为 `nil`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:67
+msgid "Integer replies become Lua integers."
+msgstr "整数回复会转换为 Lua 整数。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:68
+msgid "Bulk strings, simple strings, and verbatim strings become Lua strings."
+msgstr "bulk string、simple string 和 verbatim string 会转换为 Lua 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:69
+msgid "Array and set replies become dense Lua array tables."
+msgstr "array 和 set 回复会转换为致密 Lua 数组表。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:70
+msgid ""
+"Map replies become Lua tables when the map keys can be represented as Lua "
+"strings, integers, numbers, or booleans."
+msgstr ""
+"map 回复会在其键可以表示为 Lua 字符串、整数、数字或布尔值时转换为 Lua "
+"table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:72
+msgid "Double replies become Lua numbers."
+msgstr "double 回复会转换为 Lua 数字。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:73
+msgid "Boolean replies become Lua booleans."
+msgstr "布尔回复会转换为 Lua 布尔值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:74
+msgid "Big number replies become Lua strings."
+msgstr "big number 回复会转换为 Lua 字符串。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:75
+msgid ""
+"Push replies become tables shaped like `{ kind = \"...\", data = {...} }`."
+msgstr "push 回复会转换为形如 `{ kind = \"...\", data = {...} }` 的 table。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:77
+msgid "call"
+msgstr "call"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:79
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:79"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:81
+msgid "Canonical API name: `ptool.redis.Connection:call`."
+msgstr "规范 API 名称：`ptool.redis.Connection:call`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:83
+msgid ""
+"`conn:call(command, ...)` sends a Redis command and returns the converted "
+"reply."
+msgstr "`conn:call(command, ...)` 发送 Redis 命令，并返回转换后的回复值。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:86
+msgid "Example:"
+msgstr "示例："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:102
+msgid "close"
+msgstr "close"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:104
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:104"
+msgid "`v0.9.0` - Introduced."
+msgstr "`v0.9.0` - 引入。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:106
+msgid "Canonical API name: `ptool.redis.Connection:close`."
+msgstr "规范 API 名称：`ptool.redis.Connection:close`。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:108
+msgid "`conn:close()` closes the connection."
+msgstr "`conn:close()` 关闭该连接。"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:110
+msgid "Behavior:"
+msgstr "行为："
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:112
+msgid "After closing, the connection can no longer be used."
+msgstr "关闭后，该连接不能再使用。"

@@ -2,6 +2,8 @@
 
 ## v0.13.0
 
+- [ ] Enhance the `LuaError`. Make it be a enum.
+- [ ] Support `p.guard(cond):or_fatal("...")`.
 - [ ] Enhance the `ptool-console` crate.
 
 ## v0.12.0
@@ -11,9 +13,7 @@
 - [x] Add path-based `get` and `set` helpers to `p.json` and `p.yaml`.
 - [x] Expand the `p.git` module with repository workflow APIs.
 - [x] Support `p.which` and `p.which_or_fatal` to check for command existence.
-- [ ] Enhance the `LuaError`. Make it be a enum.
 - [x] Support `p.template.write` to write to file directly.
-- [ ] Support `p.guard(cond):or_fatal("...")`.
 
 ## v0.11.0
 
