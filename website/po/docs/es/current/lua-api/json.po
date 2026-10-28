@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-28 09:51+0800\n"
+"POT-Creation-Date: 2026-10-28 13:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,8 +97,8 @@ msgstr "ptool.json.get"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
-msgid "Unreleased - Introduced."
-msgstr "Sin publicar - Introducido."
+msgid "`v0.12.0` - Introduced."
+msgstr "`v0.12.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:45
 msgid "`ptool.json.get(input, path)` reads the value at a specified path from JSON text."
@@ -150,8 +150,8 @@ msgstr "ptool.json.set"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69"
-msgid "Unreleased - Introduced."
-msgstr "Sin publicar - Introducido."
+msgid "`v0.12.0` - Introduced."
+msgstr "`v0.12.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:71
 msgid "`ptool.json.set(input, path, value)` writes a value at a specified path in JSON text and returns the updated JSON string."
@@ -276,6 +276,14 @@ msgstr "Los valores `nil` dentro de tablas Lua siguen el comportamiento de conve
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:135
 msgid "Array/object detection for Lua tables follows `mlua`'s serde conversion rules."
 msgstr "La detección de array/objeto para tablas Lua sigue las reglas de conversión serde de `mlua`."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
+#~ msgid "Unreleased - Introduced."
+#~ msgstr "Sin publicar - Introducido."
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:69"
+#~ msgid "Unreleased - Introduced."
+#~ msgstr "Sin publicar - Introducido."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/json.md:43"
 #~ msgid "`v0.3.0` - Introduced."

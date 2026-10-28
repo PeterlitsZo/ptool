@@ -10,7 +10,7 @@ Los nombres de opciones desconocidos se rechazan en lugar de ignorarse silencios
 
 ## ptool.git.init
 
-> `Unreleased` - Introducido.
+> `v0.12.0` - Introducido.
 
 `ptool.git.init(path?, options?)` inicializa un repositorio y devuelve un objeto `Repo`.
 
@@ -464,7 +464,7 @@ repo:push("origin", "refs/heads/main:refs/heads/main")
 
 ## API de flujo de trabajo de Git
 
-> `Unreleased` - Introducido.
+> `v0.12.0` - Introducido.
 
 Las API de esta sección cubren mantenimiento de repositorios, publicaciones, inspección del historial, colaboración y automatización de CI. Se acepta una cadena o un array denso de cadenas cuando un parámetro se documenta como `string|string[]`.
 

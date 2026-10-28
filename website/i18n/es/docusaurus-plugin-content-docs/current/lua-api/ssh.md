@@ -95,6 +95,7 @@ Campos y métodos:
   - `conn.target` (string)
 - Métodos:
   - `conn:run(...)` -> `table`
+  - `conn:run_shell(command)` -> `table`
   - `conn:run_capture(...)` -> `table`
   - `conn:http_request(options)` -> `Response`
   - `conn:path(path)` -> `RemotePath`
@@ -199,6 +200,28 @@ local res2 = ssh:run({
 })
 
 print(res2.stdout)
+```
+
+### run_shell
+
+> `v0.12.0` - Introducido.
+
+Nombre canónico de la API: `ptool.ssh.Connection:run_shell`.
+
+`conn:run_shell(command)` ejecuta una cadena de comandos en el host remoto mediante `{shell, "-c", command}`, con los argumentos entrecomillados según las reglas del shell.
+
+- `command` (string, obligatorio): Una cadena de comandos de shell no vacía. El shell remoto evalúa las tuberías, las redirecciones y la expansión de variables.
+- El shell se toma de `ptool.config({ shell = ... })` al crear la conexión; el valor predeterminado es `"bash"` y debe existir en el host remoto. Los cambios posteriores de configuración no afectan a las conexiones existentes.
+- Este método solo acepta la cadena de comandos, sin tabla de opciones. Siempre muestra el comando, hereda stdout y stderr y devuelve los estados de salida distintos de cero sin generar un error. Los valores predeterminados de `ptool.config({ run = ... })` no se aplican a este método.
+- Devuelve: La misma tabla de resultados que `conn:run(...)`, con `ok`, `code`, `target` y `assert_ok`. Al heredar los flujos, `stdout` y `stderr` son `nil`.
+
+Ejemplo:
+
+```lua
+ptool.config({ shell = "bash" })
+local ssh = ptool.ssh.connect("deploy@example.com")
+local res = ssh:run_shell("printf '%s\n' hello | tr a-z A-Z")
+print(res.code)
 ```
 
 ### run_capture

@@ -117,6 +117,7 @@ Fields and methods:
   - `conn.target` (string)
 - Methods:
   - `conn:run(...)` -> `table`
+  - `conn:run_shell(command)` -> `table`
   - `conn:run_capture(...)` -> `table`
   - `conn:http_request(options)` -> `Response`
   - `conn:path(path)` -> `RemotePath`
@@ -236,6 +237,37 @@ local res2 = ssh:run({
 })
 
 print(res2.stdout)
+```
+
+### run_shell
+
+> `v0.12.0` - Introduced.
+
+Canonical API name: `ptool.ssh.Connection:run_shell`.
+
+`conn:run_shell(command)` executes a command string on the remote host using
+`{shell, "-c", command}` with shell-quoted arguments.
+
+- `command` (string, required): A non-empty shell command string. Pipes,
+  redirects, and variable expansion are evaluated by the remote shell.
+- The shell is captured from `ptool.config({ shell = ... })` when the
+  connection is created; it defaults to `"bash"` and must exist on the remote
+  host. Later configuration changes do not affect existing connections.
+- This method accepts only the command string, without an options table.
+  It always echoes the command, inherits stdout and stderr, and returns
+  nonzero exit statuses without raising an error. The defaults in
+  `ptool.config({ run = ... })` do not apply to this method.
+- Returns: The same result table as `conn:run(...)`, including `ok`, `code`,
+  `target`, and `assert_ok`. With inherited streams, `stdout` and `stderr`
+  are `nil`.
+
+Example:
+
+```lua
+ptool.config({ shell = "bash" })
+local ssh = ptool.ssh.connect("deploy@example.com")
+local res = ssh:run_shell("printf '%s\n' hello | tr a-z A-Z")
+print(res.code)
 ```
 
 ### run_capture

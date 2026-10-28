@@ -73,7 +73,7 @@ print(first_name)
 
 ## ptool.yaml.set
 
-> 未发布 - 引入。
+> `v0.12.0` - 引入。
 
 `ptool.yaml.set(input, path, value)` 将值写入 YAML 文本中的指定路径，并返回更新后的 YAML 文本。
 

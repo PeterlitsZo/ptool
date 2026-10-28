@@ -89,7 +89,7 @@ print(p.version())
 
 ## ptool.is_root
 
-> `Unreleased` - Introduced.
+> `v0.10.0` - Introduced.
 
 `ptool.is_root()` returns whether the current `ptool` process is running as the
 root user.
@@ -118,7 +118,7 @@ end
 
 ## ptool.which
 
-> `Unreleased` - Introduced.
+> `v0.12.0` - Introduced.
 
 `ptool.which(command)` checks whether a local command is available to run.
 
@@ -149,7 +149,7 @@ end
 
 ## ptool.which_or_fatal
 
-> `Unreleased` - Introduced.
+> `v0.12.0` - Introduced.
 
 `ptool.which_or_fatal(command)` checks whether a local command is available and
 raises an error if it is missing.
@@ -420,7 +420,8 @@ Currently supported fields:
   - `retry` (boolean, optional): Whether to ask the user whether to retry after
     a failed execution when `check = true`. Defaults to `false`.
 - `shell` (string, optional): Default shell command used by
-  `ptool.run_shell`. Defaults to `"bash"`.
+  `ptool.run_shell` and by SSH connections created after this setting is
+  applied. Defaults to `"bash"`. See [SSH `run_shell`](./ssh.md#run_shell).
 
 Example:
 

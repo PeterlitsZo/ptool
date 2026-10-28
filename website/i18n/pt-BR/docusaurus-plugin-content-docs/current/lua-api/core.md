@@ -73,7 +73,7 @@ print(p.version())
 
 ## ptool.is_root
 
-> `Unreleased` - Introduzido.
+> `v0.10.0` - Introduzido.
 
 `ptool.is_root()` retorna se o processo atual do `ptool` está sendo executado como o usuário root.
 
@@ -99,7 +99,7 @@ end
 
 ## ptool.which
 
-> `Unreleased` - Introduzido.
+> `v0.12.0` - Introduzido.
 
 `ptool.which(command)` verifica se um comando local está disponível para execução.
 
@@ -127,7 +127,7 @@ end
 
 ## ptool.which_or_fatal
 
-> `Unreleased` - Introduzido.
+> `v0.12.0` - Introduzido.
 
 `ptool.which_or_fatal(command)` verifica se um comando local está disponível e gera um erro se ele estiver ausente.
 
@@ -363,7 +363,7 @@ Campos atualmente suportados:
   - `check` (boolean, opcional): Se falhas devem gerar erro por padrão. O padrão é `false`.
   - `confirm` (boolean, opcional): Se deve exigir confirmação antes da execução por padrão. O padrão é `false`.
   - `retry` (boolean, opcional): Se deve perguntar ao usuário se ele deseja tentar novamente após uma execução com falha quando `check = true`. O padrão é `false`.
-- `shell` (string, opcional): Comando de shell padrão usado por `ptool.run_shell`. O padrão é `"bash"`.
+- `shell` (string, opcional): Comando de shell padrão usado por `ptool.run_shell` e pelas conexões SSH criadas após aplicar esta configuração. O padrão é `"bash"`. Veja [SSH `run_shell`](./ssh.md#run_shell).
 
 Exemplo:
 

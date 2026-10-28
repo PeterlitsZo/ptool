@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 09:44+0800\n"
+"POT-Creation-Date: 2026-10-28 13:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -268,8 +268,8 @@ msgstr "read"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:93
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:93"
-msgid "`v0.10.0` - Introduced. Unreleased - Changed."
-msgstr "`v0.10.0` - Introduced. Unreleased - Changed."
+msgid "`v0.10.0` - Introduced. `v0.12.0` - Changed."
+msgstr "`v0.10.0` - Introducido. `v0.12.0` - Modificado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:96
 msgid "Canonical API name: `ptool.s3.Connection:read`."
@@ -351,8 +351,8 @@ msgstr "write"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133"
-msgid "`v0.10.0` - Introduced. Unreleased - Changed."
-msgstr "`v0.10.0` - Introduced. Unreleased - Changed."
+msgid "`v0.10.0` - Introduced. `v0.12.0` - Changed."
+msgstr "`v0.10.0` - Introducido. `v0.12.0` - Modificado."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:136
 msgid "Canonical API name: `ptool.s3.Connection:write`."
@@ -908,6 +908,10 @@ msgstr ""
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:345"
 msgid "Example:"
 msgstr "Ejemplo:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133"
+#~ msgid "`v0.10.0` - Introduced. Unreleased - Changed."
+#~ msgstr "`v0.10.0` - Introduced. Unreleased - Changed."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:102"
 #~ msgid "`options` fields:"

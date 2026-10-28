@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-28 09:51+0800\n"
+"POT-Creation-Date: 2026-10-28 13:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,8 +144,8 @@ msgid "ptool.yaml.set"
 msgstr "ptool.yaml.set"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80
-msgid "Unreleased - Introduced."
-msgstr "Não lançado - Introduzido."
+msgid "`v0.12.0` - Introduced."
+msgstr "`v0.12.0` - Introduzido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:82
 msgid "`ptool.yaml.set(input, path, value)` writes a value at a specified path in YAML text and returns the updated YAML text."
@@ -276,6 +276,9 @@ msgstr ""
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:152
 msgid "Integer path segments are 1-based so they match Lua array indexing."
 msgstr "Segmentos integer são base 1 para combinar com a indexação de arrays do Lua."
+
+#~ msgid "Unreleased - Introduced."
+#~ msgstr "Não lançado - Introduzido."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/yaml.md:80"
 #~ msgid "`v0.4.0` - Introduced."

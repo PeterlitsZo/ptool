@@ -14,7 +14,7 @@ Unknown option names are rejected instead of being silently ignored.
 
 ## ptool.git.init
 
-> `Unreleased` - Introduced.
+> `v0.12.0` - Introduced.
 
 `ptool.git.init(path?, options?)` initializes a repository and returns a `Repo`
 object.
@@ -520,7 +520,7 @@ repo:push("origin", "refs/heads/main:refs/heads/main")
 
 ## Git workflow APIs
 
-> `Unreleased` - Introduced.
+> `v0.12.0` - Introduced.
 
 The APIs in this section cover repository maintenance, releases, history
 inspection, collaboration, and CI automation. A string or a dense string array

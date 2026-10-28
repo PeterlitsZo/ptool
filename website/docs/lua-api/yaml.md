@@ -77,7 +77,7 @@ print(first_name)
 
 ## ptool.yaml.set
 
-> Unreleased - Introduced.
+> `v0.12.0` - Introduced.
 
 `ptool.yaml.set(input, path, value)` writes a value at a specified path in YAML
 text and returns the updated YAML text.

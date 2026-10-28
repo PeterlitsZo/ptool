@@ -73,7 +73,7 @@ print(p.version())
 
 ## ptool.is_root
 
-> `Unreleased` - 追加。
+> `v0.10.0` - 導入。
 
 `ptool.is_root()` は、現在の `ptool` プロセスが root ユーザーとして実行されているかどうかを返します。
 
@@ -99,7 +99,7 @@ end
 
 ## ptool.which
 
-> `Unreleased` - 追加。
+> `v0.12.0` - 導入。
 
 `ptool.which(command)` は、ローカルコマンドが実行可能かどうかを確認します。
 
@@ -127,7 +127,7 @@ end
 
 ## ptool.which_or_fatal
 
-> `Unreleased` - 追加。
+> `v0.12.0` - 導入。
 
 `ptool.which_or_fatal(command)` は、ローカルコマンドが利用可能かどうかを確認し、見つからない場合はエラーを発生させます。
 
@@ -363,7 +363,7 @@ local token = ptool.ask.secret("API token?", {
   - `check` (boolean, 任意): 失敗時にデフォルトでエラーにするかどうか。 デフォルトは `false`。
   - `confirm` (boolean, 任意): 実行前にデフォルトで確認を要求するかどうか。 デフォルトは `false`。
   - `retry` (boolean, 任意): `check = true` のとき、実行失敗後に再試行するか どうかをユーザーへ尋ねるかどうか。デフォルトは `false`。
-- `shell` (string, 任意): `ptool.run_shell` で使うデフォルトのシェルコマンド。デフォルトは `"bash"`。
+- `shell`（string、省略可能）：`ptool.run_shell` と、この設定を適用した後に作成される SSH 接続で使用するデフォルトのシェルコマンド。デフォルトは `"bash"` です。[SSH `run_shell`](./ssh.md#run_shell) を参照してください。
 
 例:
 

@@ -73,7 +73,7 @@ print(first_name)
 
 ## ptool.yaml.set
 
-> Não lançado - Introduzido.
+> `v0.12.0` - Introduzido.
 
 `ptool.yaml.set(input, path, value)` grava um valor em um caminho especificado de um texto YAML e retorna o texto YAML atualizado.
 

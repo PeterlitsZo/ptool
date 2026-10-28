@@ -73,7 +73,7 @@ print(first_name)
 
 ## ptool.yaml.set
 
-> 未リリース - 導入。
+> `v0.12.0` - 導入。
 
 `ptool.yaml.set(input, path, value)` は YAML テキスト内の指定パスに値を書き込み、更新後の YAML テキストを返します。
 

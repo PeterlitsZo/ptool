@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 09:44+0800\n"
+"POT-Creation-Date: 2026-10-28 13:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "ptool.s3.connect"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:7"
 msgid "`v0.10.0` - Introduced."
-msgstr "`v0.10.0` - 追加。"
+msgstr "`v0.10.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:9
 msgid ""
@@ -144,7 +144,7 @@ msgstr "Connection"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:53"
 msgid "`v0.10.0` - Introduced."
-msgstr "`v0.10.0` - 追加。"
+msgstr "`v0.10.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:55
 msgid ""
@@ -268,8 +268,8 @@ msgstr "read"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:93
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:93"
-msgid "`v0.10.0` - Introduced. Unreleased - Changed."
-msgstr "`v0.10.0` - Introduced. Unreleased - Changed."
+msgid "`v0.10.0` - Introduced. `v0.12.0` - Changed."
+msgstr "`v0.10.0` - 導入。 `v0.12.0` - 変更。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:96
 msgid "Canonical API name: `ptool.s3.Connection:read`."
@@ -351,8 +351,8 @@ msgstr "write"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133"
-msgid "`v0.10.0` - Introduced. Unreleased - Changed."
-msgstr "`v0.10.0` - Introduced. Unreleased - Changed."
+msgid "`v0.10.0` - Introduced. `v0.12.0` - Changed."
+msgstr "`v0.10.0` - 導入。 `v0.12.0` - 変更。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:136
 msgid "Canonical API name: `ptool.s3.Connection:write`."
@@ -488,7 +488,7 @@ msgstr "delete"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:187
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:187"
 msgid "`v0.10.0` - Introduced."
-msgstr "`v0.10.0` - 追加。"
+msgstr "`v0.10.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:189
 msgid "Canonical API name: `ptool.s3.Connection:delete`."
@@ -510,7 +510,7 @@ msgstr "exists"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:197
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:197"
 msgid "`v0.10.0` - Introduced."
-msgstr "`v0.10.0` - 追加。"
+msgstr "`v0.10.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:199
 msgid "Canonical API name: `ptool.s3.Connection:exists`."
@@ -536,7 +536,7 @@ msgstr "list"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:208
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:208"
 msgid "`v0.10.0` - Introduced."
-msgstr "`v0.10.0` - 追加。"
+msgstr "`v0.10.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:210
 msgid "Canonical API name: `ptool.s3.Connection:list`."
@@ -575,7 +575,7 @@ msgstr "stat"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:232
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:232"
 msgid "`v0.10.0` - Introduced."
-msgstr "`v0.10.0` - 追加。"
+msgstr "`v0.10.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:234
 msgid "Canonical API name: `ptool.s3.Connection:stat`."
@@ -607,7 +607,7 @@ msgstr "put_bucket_acl"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:251
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:251"
 msgid "`v0.12.0` - Introduced."
-msgstr "`v0.12.0` - 追加。"
+msgstr "`v0.12.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:253
 msgid "Canonical API name: `ptool.s3.Connection:put_bucket_acl`."
@@ -741,7 +741,7 @@ msgstr "put_object_acl"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:303
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:303"
 msgid "`v0.12.0` - Introduced."
-msgstr "`v0.12.0` - 追加。"
+msgstr "`v0.12.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:305
 msgid "Canonical API name: `ptool.s3.Connection:put_object_acl`."
@@ -886,6 +886,10 @@ msgstr ""
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:345"
 msgid "Example:"
 msgstr "例:"
+
+#~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133"
+#~ msgid "`v0.10.0` - Introduced. Unreleased - Changed."
+#~ msgstr "`v0.10.0` - Introduced. Unreleased - Changed."
 
 #~ msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:102"
 #~ msgid "`options` fields:"

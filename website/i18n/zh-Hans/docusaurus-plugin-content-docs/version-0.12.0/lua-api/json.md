@@ -38,7 +38,7 @@ print(data.stars)
 
 ## ptool.json.get
 
-> 未发布 - 引入。
+> `v0.12.0` - 引入。
 
 `ptool.json.get(input, path)` 从 JSON 文本中读取指定路径上的值。
 
@@ -61,7 +61,7 @@ print(first_name)
 
 ## ptool.json.set
 
-> 未发布 - 引入。
+> `v0.12.0` - 引入。
 
 `ptool.json.set(input, path, value)` 将值写入 JSON 文本中的指定路径，并返回更新后的 JSON 字符串。
 

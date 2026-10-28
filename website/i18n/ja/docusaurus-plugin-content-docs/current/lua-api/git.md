@@ -10,7 +10,7 @@ Git リポジトリ ヘルパーは、`ptool.git` および `p.git` で利用で
 
 ## ptool.git.init
 
-> `Unreleased` - 導入されました。
+> `v0.12.0` - 導入。
 
 `ptool.git.init(path?, options?)` はリポジトリを初期化し、`Repo` オブジェクトを返します。
 
@@ -464,7 +464,7 @@ repo:push("origin", "refs/heads/main:refs/heads/main")
 
 ## Git ワークフロー API
 
-> `Unreleased` - 導入されました。
+> `v0.12.0` - 導入。
 
 このセクションの API は、リポジトリ保守、リリース、履歴調査、共同作業、CI 自動化を対象とします。`string|string[]` と記載された引数には、文字列または密な文字列配列を渡せます。
 

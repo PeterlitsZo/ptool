@@ -95,6 +95,7 @@ local ssh = ptool.ssh.connect({
   - `conn.target`（string）
 - 方法：
   - `conn:run(...)` -> `table`
+  - `conn:run_shell(command)` -> `table`
   - `conn:run_capture(...)` -> `table`
   - `conn:http_request(options)` -> `Response`
   - `conn:path(path)` -> `RemotePath`
@@ -199,6 +200,28 @@ local res2 = ssh:run({
 })
 
 print(res2.stdout)
+```
+
+### run_shell
+
+> `v0.12.0` - 引入。
+
+规范 API 名称：`ptool.ssh.Connection:run_shell`。
+
+`conn:run_shell(command)` 使用 `{shell, "-c", command}` 在远程主机上执行命令字符串，参数会按 shell 规则进行引用。
+
+- `command`（string，必填）：非空的 shell 命令字符串。管道、重定向和变量展开由远程 shell 处理。
+- 连接创建时会保存 `ptool.config({ shell = ... })` 中的 shell 设置；默认为 `"bash"`，且必须在远程主机上可用。之后的配置修改不会影响已有连接。
+- 此方法只接受命令字符串，不接受选项表。它始终回显命令并继承标准输出和标准错误；非零退出状态会直接返回，不会抛出错误。`ptool.config({ run = ... })` 中的默认配置不适用于此方法。
+- 返回值：与 `conn:run(...)` 相同的结果表，包含 `ok`、`code`、`target` 和 `assert_ok`。由于继承输出流，`stdout` 和 `stderr` 为 `nil`。
+
+示例：
+
+```lua
+ptool.config({ shell = "bash" })
+local ssh = ptool.ssh.connect("deploy@example.com")
+local res = ssh:run_shell("printf '%s\n' hello | tr a-z A-Z")
+print(res.code)
 ```
 
 ### run_capture

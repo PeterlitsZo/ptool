@@ -73,7 +73,7 @@ print(p.version())
 
 ## ptool.is_root
 
-> `Unreleased` - 引入。
+> `v0.10.0` - 引入。
 
 `ptool.is_root()` 会返回当前 `ptool` 进程是否正以 root 用户身份运行。
 
@@ -99,7 +99,7 @@ end
 
 ## ptool.which
 
-> `Unreleased` - 引入。
+> `v0.12.0` - 引入。
 
 `ptool.which(command)` 会检查本地命令是否可用于运行。
 
@@ -127,7 +127,7 @@ end
 
 ## ptool.which_or_fatal
 
-> `Unreleased` - 引入。
+> `v0.12.0` - 引入。
 
 `ptool.which_or_fatal(command)` 会检查本地命令是否可用，并在命令缺失时引发错误。
 
@@ -363,7 +363,7 @@ local token = ptool.ask.secret("API token?", {
   - `check`（boolean，可选）：默认在失败时是否抛错。默认值为 `false`。
   - `confirm`（boolean，可选）：默认执行前是否要求确认。默认值为 `false`。
   - `retry`（boolean，可选）：当 `check = true` 时，执行失败后是否询问用户是否重试。 默认值为 `false`。
-- `shell`（string，可选）：`ptool.run_shell` 使用的默认 shell 命令。默认值为 `"bash"`。
+- `shell`（string，可选）：`ptool.run_shell` 以及应用此设置后创建的 SSH 连接使用的默认 shell 命令。默认为 `"bash"`。参见 [SSH `run_shell`](./ssh.md#run_shell)。
 
 示例：
 

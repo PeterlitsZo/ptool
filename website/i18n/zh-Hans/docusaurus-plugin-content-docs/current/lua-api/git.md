@@ -10,7 +10,7 @@ Git 仓库辅助能力位于 `ptool.git` 和 `p.git` 下。
 
 ## ptool.git.init
 
-> `Unreleased` - 引入。
+> `v0.12.0` - 引入。
 
 `ptool.git.init(path?, options?)` 初始化仓库并返回一个 `Repo` 对象。
 
@@ -464,7 +464,7 @@ repo:push("origin", "refs/heads/main:refs/heads/main")
 
 ## Git 工作流 API
 
-> `Unreleased` - 引入。
+> `v0.12.0` - 引入。
 
 本节 API 覆盖仓库维护、发布、历史检查、协作和 CI 自动化。凡参数标记为 `string|string[]`，均可传入字符串或紧密字符串数组。
 

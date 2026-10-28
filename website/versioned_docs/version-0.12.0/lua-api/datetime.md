@@ -39,6 +39,8 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 Accepted inputs:
 
 - Zoned inputs such as `2024-07-15T16:24:59-04:00`.
+- UTC inputs ending in `Z`, such as `2024-07-15T20:24:59Z` (fixed in
+  `v0.12.0`).
 - Zoned inputs with bracketed timezone annotations when supported by the
   parser.
 - Naive inputs such as `2024-07-15 16:24:59`, but only when

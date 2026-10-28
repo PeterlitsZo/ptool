@@ -38,7 +38,7 @@ print(data.stars)
 
 ## ptool.json.get
 
-> 未リリース - 導入。
+> `v0.12.0` - 導入。
 
 `ptool.json.get(input, path)` は JSON テキストから指定パスの値を読み取ります。
 
@@ -61,7 +61,7 @@ print(first_name)
 
 ## ptool.json.set
 
-> 未リリース - 導入。
+> `v0.12.0` - 導入。
 
 `ptool.json.set(input, path, value)` は JSON テキスト内の指定パスに値を書き込み、更新後の JSON 文字列を返します。
 

@@ -34,6 +34,7 @@ print(utc_now:format("%Y-%m-%d %H:%M:%S %Z"))
 Entradas aceptadas:
 
 - Entradas zonificadas como `2024-07-15T16:24:59-04:00`.
+- Entradas UTC terminadas en `Z`, como `2024-07-15T20:24:59Z` (corregido en `v0.12.0`).
 - Entradas zonificadas con anotaciones de zona horaria entre corchetes cuando el analizador lo admite.
 - Entradas ingenuas como `2024-07-15 16:24:59`, pero solo cuando se proporciona `options.timezone`.
 

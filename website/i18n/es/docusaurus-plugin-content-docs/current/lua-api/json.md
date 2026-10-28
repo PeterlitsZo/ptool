@@ -38,7 +38,7 @@ print(data.stars)
 
 ## ptool.json.get
 
-> Sin publicar - Introducido.
+> `v0.12.0` - Introducido.
 
 `ptool.json.get(input, path)` lee el valor de una ruta especificada en un texto JSON.
 
@@ -61,7 +61,7 @@ print(first_name)
 
 ## ptool.json.set
 
-> Sin publicar - Introducido.
+> `v0.12.0` - Introducido.
 
 `ptool.json.set(input, path, value)` escribe un valor en una ruta especificada de un texto JSON y devuelve la cadena JSON actualizada.
 

@@ -40,7 +40,7 @@ print(data.stars)
 
 ## ptool.json.get
 
-> Unreleased - Introduced.
+> `v0.12.0` - Introduced.
 
 `ptool.json.get(input, path)` reads the value at a specified path from JSON
 text.
@@ -66,7 +66,7 @@ print(first_name)
 
 ## ptool.json.set
 
-> Unreleased - Introduced.
+> `v0.12.0` - Introduced.
 
 `ptool.json.set(input, path, value)` writes a value at a specified path in JSON
 text and returns the updated JSON string.
