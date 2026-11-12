@@ -35,7 +35,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash
 最新の安定版ではなく特定のリリースタグをインストールするには:
 
 ```sh
-curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.12.0
 ```
 
 `~/.local/bin` ではなく独自のバイナリディレクトリにインストールする には:
@@ -47,7 +47,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/
 ## 最小スクリプト
 
 ```lua
-ptool.use("v0.1.0")
+ptool.use("v0.12.0")
 
 ptool.run("echo", {"hello", "world"})
 ```

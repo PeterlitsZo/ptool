@@ -2,7 +2,7 @@
   "version": 1,
   "templates": {
     "current": {
-      "intro.md": "10522cdfe03902f62c6fd1f862aa7e09c80a2b5c5f44d0dbeed312a1262cb546",
+      "intro.md": "1d8aafb855d9967848ab23e27d9cca5866cd361bc6d2e1c3ff5b679913a0e123",
       "lua-api/ansi.md": "23a3505472a35d877c302ddae47c8bbef69d387503a1a4fa04a5dea88e8d4540",
       "lua-api/args.md": "6d65e91a39149fe74832d8bde6f81ba27ba9d3a0d7d5906aab5c378c162d01b1",
       "lua-api/consul.md": "786d048faefa71c898e439b29cd124e6494826fc0324a145ab1a09c46d89ce5a",
@@ -24,7 +24,7 @@
       "lua-api/proc.md": "602b542d21e97ac1983f91cd620d3599cd636d94925201b23835573dc0e69c9d",
       "lua-api/re.md": "421b2a4e3cd6794fd7fea0c2f51c3bb5fc48e5d8da8c82f5d5c924a80808ccd8",
       "lua-api/redis.md": "61293999108c8ae7d444a168fa77bf575e86d6639acde2f2fd15d48fd6239c47",
-      "lua-api/s3.md": "4e1a6f18ab54b2b04a3b9f40f4c4a08d15f8a8c7ba5c03971127564095b7d80a",
+      "lua-api/s3.md": "4856df4ad4a07a3063632f5e9e71903200a4ffe518cefc9532b222fb0e6bd894",
       "lua-api/semver.md": "3ad32304cc9998d6b6193588bd9dc8e5ba2110ce6f29d5528efd5f39ac2a15e3",
       "lua-api/sh.md": "eb0160e7dccdd4bb4b6cf6432af5bbd1e4a5b2e1079a7a3928e0abb0967e3ade",
       "lua-api/ssh.md": "bccdf857fbc15a19b1f8170055d4f5280af005764c6928f7a759032135d352ae",
@@ -272,7 +272,7 @@
   "locales": {
     "es": {
       "current": {
-        "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
+        "intro.pot": "a0f4bdfc886b2f94f3119cb74e48d96bffb8ae69ac9625421ad74fbad69e2fb3",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
         "lua-api/consul.pot": "41f95a6415fa347169bf6f37e1e6afa598a2ed40b461de6f6f77033dc0905329",
@@ -294,7 +294,7 @@
         "lua-api/proc.pot": "2e900fe1103d6a211c5cfb75b5647b92e0db0f157b677b40c68612b6879ceeac",
         "lua-api/re.pot": "ad0f932fed3491cf052971202a8ad38a4cb4abd609e1bda79d5c851a87711a2a",
         "lua-api/redis.pot": "113407cb39bd00b2367172743df0f09c6724a5de8f1a76fa1f6e8478e12ed015",
-        "lua-api/s3.pot": "9e7e201f641e0ff8bc7e6e3179e7af936453f5ae62a82896465d4b7ee9d2bf7c",
+        "lua-api/s3.pot": "8ea62070591cb317a8be95c125875a640d131a5538b6e17dff2f1d2447951b51",
         "lua-api/semver.pot": "ff0b14959d34dd9fe2c33536a4914b3ad4938a7af3253f095888d65946ac8ce5",
         "lua-api/sh.pot": "0556b14f1294585ec3dac8a6b106a309415a9db6010349814f50200be023a771",
         "lua-api/ssh.pot": "e35220049a50f38e85bff8be97fb247c665bb20d5e7464183eba9955c1ee092d",
@@ -541,7 +541,7 @@
     },
     "ja": {
       "current": {
-        "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
+        "intro.pot": "a0f4bdfc886b2f94f3119cb74e48d96bffb8ae69ac9625421ad74fbad69e2fb3",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
         "lua-api/consul.pot": "41f95a6415fa347169bf6f37e1e6afa598a2ed40b461de6f6f77033dc0905329",
@@ -563,7 +563,7 @@
         "lua-api/proc.pot": "2e900fe1103d6a211c5cfb75b5647b92e0db0f157b677b40c68612b6879ceeac",
         "lua-api/re.pot": "ad0f932fed3491cf052971202a8ad38a4cb4abd609e1bda79d5c851a87711a2a",
         "lua-api/redis.pot": "113407cb39bd00b2367172743df0f09c6724a5de8f1a76fa1f6e8478e12ed015",
-        "lua-api/s3.pot": "9e7e201f641e0ff8bc7e6e3179e7af936453f5ae62a82896465d4b7ee9d2bf7c",
+        "lua-api/s3.pot": "8ea62070591cb317a8be95c125875a640d131a5538b6e17dff2f1d2447951b51",
         "lua-api/semver.pot": "ff0b14959d34dd9fe2c33536a4914b3ad4938a7af3253f095888d65946ac8ce5",
         "lua-api/sh.pot": "0556b14f1294585ec3dac8a6b106a309415a9db6010349814f50200be023a771",
         "lua-api/ssh.pot": "e35220049a50f38e85bff8be97fb247c665bb20d5e7464183eba9955c1ee092d",
@@ -810,7 +810,7 @@
     },
     "pt-BR": {
       "current": {
-        "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
+        "intro.pot": "a0f4bdfc886b2f94f3119cb74e48d96bffb8ae69ac9625421ad74fbad69e2fb3",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
         "lua-api/consul.pot": "41f95a6415fa347169bf6f37e1e6afa598a2ed40b461de6f6f77033dc0905329",
@@ -832,7 +832,7 @@
         "lua-api/proc.pot": "2e900fe1103d6a211c5cfb75b5647b92e0db0f157b677b40c68612b6879ceeac",
         "lua-api/re.pot": "ad0f932fed3491cf052971202a8ad38a4cb4abd609e1bda79d5c851a87711a2a",
         "lua-api/redis.pot": "113407cb39bd00b2367172743df0f09c6724a5de8f1a76fa1f6e8478e12ed015",
-        "lua-api/s3.pot": "9e7e201f641e0ff8bc7e6e3179e7af936453f5ae62a82896465d4b7ee9d2bf7c",
+        "lua-api/s3.pot": "8ea62070591cb317a8be95c125875a640d131a5538b6e17dff2f1d2447951b51",
         "lua-api/semver.pot": "ff0b14959d34dd9fe2c33536a4914b3ad4938a7af3253f095888d65946ac8ce5",
         "lua-api/sh.pot": "0556b14f1294585ec3dac8a6b106a309415a9db6010349814f50200be023a771",
         "lua-api/ssh.pot": "e35220049a50f38e85bff8be97fb247c665bb20d5e7464183eba9955c1ee092d",
@@ -1079,7 +1079,7 @@
     },
     "zh-Hans": {
       "current": {
-        "intro.pot": "1afc71c32a937905634d6e05c0c6227594a85629fe7575660d592e48fe6f3f23",
+        "intro.pot": "a0f4bdfc886b2f94f3119cb74e48d96bffb8ae69ac9625421ad74fbad69e2fb3",
         "lua-api/ansi.pot": "a1b422533d84fa7334067aac193fd95f6446faba5d6288b8dfe1e69b2c662fdc",
         "lua-api/args.pot": "7b8f2fbba932136baf9938accd57fce35c1db5f6ff8c85f51ce0bfc78ff01ff6",
         "lua-api/consul.pot": "41f95a6415fa347169bf6f37e1e6afa598a2ed40b461de6f6f77033dc0905329",
@@ -1101,7 +1101,7 @@
         "lua-api/proc.pot": "2e900fe1103d6a211c5cfb75b5647b92e0db0f157b677b40c68612b6879ceeac",
         "lua-api/re.pot": "ad0f932fed3491cf052971202a8ad38a4cb4abd609e1bda79d5c851a87711a2a",
         "lua-api/redis.pot": "113407cb39bd00b2367172743df0f09c6724a5de8f1a76fa1f6e8478e12ed015",
-        "lua-api/s3.pot": "9e7e201f641e0ff8bc7e6e3179e7af936453f5ae62a82896465d4b7ee9d2bf7c",
+        "lua-api/s3.pot": "8ea62070591cb317a8be95c125875a640d131a5538b6e17dff2f1d2447951b51",
         "lua-api/semver.pot": "ff0b14959d34dd9fe2c33536a4914b3ad4938a7af3253f095888d65946ac8ce5",
         "lua-api/sh.pot": "0556b14f1294585ec3dac8a6b106a309415a9db6010349814f50200be023a771",
         "lua-api/ssh.pot": "e35220049a50f38e85bff8be97fb247c665bb20d5e7464183eba9955c1ee092d",

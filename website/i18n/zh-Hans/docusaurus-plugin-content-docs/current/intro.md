@@ -35,7 +35,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash
 如果你想安装某个指定的发布标签，而不是最新稳定版：
 
 ```sh
-curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.2.0
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.12.0
 ```
 
 如果你想安装到自定义二进制目录，而不是 `~/.local/bin`：
@@ -47,7 +47,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/
 ## 最小脚本
 
 ```lua
-ptool.use("v0.1.0")
+ptool.use("v0.12.0")
 
 ptool.run("echo", {"hello", "world"})
 ```

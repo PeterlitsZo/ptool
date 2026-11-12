@@ -170,44 +170,48 @@ msgid "`conn:read(path[, options])` -> `string`"
 msgstr "`conn:read(path[, options])` -> `string`"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:63
+msgid "`conn:presign_read(path[, options])` -> `string`"
+msgstr "`conn:presign_read(path[, options])` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:64
 msgid "`conn:write(path, content[, options])` -> `table`"
 msgstr "`conn:write(path, content[, options])` -> `table`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:64
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:65
 msgid "`conn:delete(path)` -> `nil`"
 msgstr "`conn:delete(path)` -> `nil`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:65
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:66
 msgid "`conn:exists(path)` -> `boolean`"
 msgstr "`conn:exists(path)` -> `boolean`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:66
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:67
 msgid "`conn:list([prefix])` -> `table`"
 msgstr "`conn:list([prefix])` -> `table`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:67
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:68
 msgid "`conn:stat(path)` -> `table`"
 msgstr "`conn:stat(path)` -> `table`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:68
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:69
 msgid "`conn:put_bucket_acl(options)` -> `nil`"
 msgstr "`conn:put_bucket_acl(options)` -> `nil`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:69
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:70
 msgid "`conn:put_object_acl(path, options)` -> `nil`"
 msgstr "`conn:put_object_acl(path, options)` -> `nil`"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:71
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:72
 msgid "Path rules:"
 msgstr "Regras de caminho:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:73
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:74
 msgid "Object paths must be non-empty strings unless otherwise noted."
 msgstr ""
 "Os caminhos de objetos devem ser strings não vazias, salvo indicação em "
 "contrário."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:74
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:75
 msgid ""
 "Leading `/` is ignored, so `/foo/bar.txt` and `foo/bar.txt` target the same "
 "object."
@@ -215,77 +219,77 @@ msgstr ""
 "A barra inicial `/` é ignorada, então `/foo/bar.txt` e `foo/bar.txt` apontam "
 "para o mesmo objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:76
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:77
 msgid ""
 "Paths are relative to `root` when `root` is configured on the connection."
 msgstr ""
 "Os caminhos são relativos a `root` quando `root` está configurado na conexão."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:78
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:79
 msgid "Entry table shape:"
 msgstr "Estrutura da tabela de entrada:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:80
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:81
 msgid "`path` (string): The object path relative to the connection root."
 msgstr "`path` (string): O caminho do objeto relativo à raiz da conexão."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:81
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:82
 msgid "`size` (integer): The object size in bytes."
 msgstr "`size` (integer): O tamanho do objeto em bytes."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:82
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:83
 msgid "`etag` (string | nil): The object ETag when available."
 msgstr "`etag` (string | nil): O ETag do objeto, quando disponível."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:83
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:84
 msgid ""
 "`last_modified` (string | nil): The last-modified timestamp when available."
 msgstr ""
 "`last_modified` (string | nil): O timestamp da última modificação, quando "
 "disponível."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:84
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:85
 msgid "`content_type` (string | nil): The object content type when available."
 msgstr ""
 "`content_type` (string | nil): O tipo de conteúdo do objeto, quando "
 "disponível."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:85
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:86
 msgid "`version` (string | nil): The object version when available."
 msgstr "`version` (string | nil): A versão do objeto, quando disponível."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:86
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:87
 msgid "`metadata` (table | nil): User-defined object metadata when available."
 msgstr ""
 "`metadata` (table | nil): Metadados definidos pelo usuário do objeto, quando "
 "disponíveis."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:87
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:88
 msgid "`is_file` (boolean): Whether the entry is a file."
 msgstr "`is_file` (boolean): Se a entrada é um arquivo."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:88
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89
 msgid "`is_dir` (boolean): Whether the entry is a directory."
 msgstr "`is_dir` (boolean): Se a entrada é um diretório."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:89
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:90
 msgid "`mode` (string): One of `\"file\"`, `\"dir\"`, or `\"unknown\"`."
 msgstr "`mode` (string): Um entre `\"file\"`, `\"dir\"` ou `\"unknown\"`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:91
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:92
 msgid "read"
 msgstr "read"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:93
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:93"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:94
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:94"
 msgid "`v0.10.0` - Introduced. `v0.12.0` - Changed."
 msgstr "`v0.10.0` - Introduzido. `v0.12.0` - Alterado."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:96
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:97
 msgid "Canonical API name: `ptool.s3.Connection:read`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:read`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:98
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:99
 msgid ""
 "`conn:read(path[, options])` reads an object as raw bytes and returns a Lua "
 "string."
@@ -293,25 +297,26 @@ msgstr ""
 "`conn:read(path[, options])` lê um objeto como bytes brutos e retorna uma "
 "string Lua."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:100
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:100"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:101
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:101"
 msgid "`path` (string, required): The object path."
 msgstr "`path` (string, obrigatório): O caminho do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:101
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:102
 msgid "`options` (table, optional): Read options."
 msgstr "`options` (table, optional): Opções de leitura."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:102
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:103
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:103"
 msgid "Returns: `string`."
 msgstr "Retorna: `string`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:104
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:104"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:105
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:105"
 msgid "`options` fields:"
 msgstr "Campos de `options`:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:107
 msgid ""
 "`range` (table, optional): Reads a byte range using half-open bounds `["
 "start, end)`."
@@ -319,55 +324,55 @@ msgstr ""
 "`range` (table, optional): Lê um intervalo de bytes usando limites "
 "semiabertos `[start, end)`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:107
 msgid "`start` (integer, optional): The first byte offset to include."
 msgstr "`start` (integer, optional): O primeiro deslocamento de byte a incluir."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:106
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:107
 msgid "`end` (integer, optional): The first byte offset to exclude."
 msgstr "`end` (integer, optional): O primeiro deslocamento de byte a excluir."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:111
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:111"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:112
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:112"
 msgid "Behavior:"
 msgstr "Comportamento:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:113
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:114
 msgid "Omitting `range` reads the full object."
 msgstr "Omitir `range` lê o objeto inteiro."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:114
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:115
 msgid "`{ start = N }` reads from byte `N` to the end."
 msgstr "`{ start = N }` lê do byte `N` até o fim."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:115
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:116
 msgid ""
 "`{ end = N }` reads from the beginning up to, but not including, byte `N`."
 msgstr "`{ end = N }` lê do início até, mas sem incluir, o byte `N`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:116
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:117
 msgid "`{ start = A, end = B }` reads bytes `A` through `B - 1`."
 msgstr "`{ start = A, end = B }` lê os bytes de `A` até `B - 1`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:118
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:118"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:119
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:119"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:131
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:132
 msgid "write"
 msgstr "write"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:133"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:134
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:134"
 msgid "`v0.10.0` - Introduced. `v0.12.0` - Changed."
 msgstr "`v0.10.0` - Introduzido. `v0.12.0` - Alterado."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:136
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:137
 msgid "Canonical API name: `ptool.s3.Connection:write`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:write`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:138
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:139
 msgid ""
 "`conn:write(path, content[, options])` writes a Lua string to an object as "
 "raw bytes and returns an entry table."
@@ -375,41 +380,41 @@ msgstr ""
 "`conn:write(path, content[, options])` grava uma string Lua em um objeto "
 "como bytes brutos e retorna uma tabela de entrada."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:141
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:141"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142"
 msgid "`path` (string, required): The object path."
 msgstr "`path` (string, obrigatório): O caminho do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:142
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:143
 msgid "`content` (string, required): The bytes to upload."
 msgstr "`content` (string, obrigatório): Os bytes a enviar."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:143
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:144
 msgid "`options` (table, optional): Write options."
 msgstr "`options` (table, optional): Opções de gravação."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:144
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:144"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:145
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:145"
 msgid "Returns: `table`."
 msgstr "Retorna: `table`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:146
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:146"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:147
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:147"
 msgid "`options` fields:"
 msgstr "Campos de `options`:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:148
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:149
 msgid "`content_type` (string, optional): Sets the object content type."
 msgstr "`content_type` (string, optional): Define o tipo de conteúdo do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:149
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:150
 msgid ""
 "`cache_control` (string, optional): Sets the object cache-control header."
 msgstr ""
 "`cache_control` (string, optional): Define o cabeçalho cache-control do "
 "objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:150
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:151
 msgid ""
 "`content_disposition` (string, optional): Sets the object content-"
 "disposition header."
@@ -417,7 +422,7 @@ msgstr ""
 "`content_disposition` (string, optional): Define o cabeçalho content-"
 "disposition do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:152
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:153
 msgid ""
 "`content_encoding` (string, optional): Sets the object content-encoding "
 "header."
@@ -425,7 +430,7 @@ msgstr ""
 "`content_encoding` (string, optional): Define o cabeçalho content-encoding "
 "do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:154
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:155
 msgid ""
 "`metadata` (table, optional): Sets user-defined metadata as string key/value "
 "pairs."
@@ -433,7 +438,7 @@ msgstr ""
 "`metadata` (table, optional): Define metadados personalizados como pares "
 "string chave/valor."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:156
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:157
 msgid ""
 "`if_not_exists` (boolean, optional): Write only when the object does not "
 "already exist. Defaults to `false`."
@@ -441,13 +446,13 @@ msgstr ""
 "`if_not_exists` (boolean, optional): Grava somente quando o objeto ainda não "
 "existe. O padrão é `false`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:158
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:159
 msgid ""
 "`if_match` (string, optional): Write only when the current ETag matches."
 msgstr ""
 "`if_match` (string, optional): Grava somente quando o ETag atual corresponde."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:159
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:160
 msgid ""
 "`if_none_match` (string, optional): Write only when the current ETag does "
 "not match."
@@ -455,20 +460,20 @@ msgstr ""
 "`if_none_match` (string, optional): Grava somente quando o ETag atual não "
 "corresponde."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:162
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:162"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:163
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:163"
 msgid "Behavior:"
 msgstr "Comportamento:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:164
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:165
 msgid "`content` is uploaded byte-for-byte."
 msgstr "`content` é enviado byte a byte."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:165
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:166
 msgid "Embedded NUL bytes and non-UTF-8 bytes are preserved."
 msgstr "Bytes NUL embutidos e bytes não UTF-8 são preservados."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:166
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:167
 msgid ""
 "The returned entry avoids an immediate follow-up `stat()` call for common "
 "metadata."
@@ -476,7 +481,7 @@ msgstr ""
 "A entrada retornada evita uma chamada `stat()` imediata de acompanhamento "
 "para metadados comuns."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:168
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:169
 msgid ""
 "Some S3-compatible services may not echo user-defined `metadata` or `etag` "
 "in the write response. When that happens, those fields remain `nil` until a "
@@ -486,73 +491,73 @@ msgstr ""
 "definidos pelo usuário na resposta de gravação. Quando isso acontece, esses "
 "campos permanecem `nil` até um `stat()` posterior."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:172
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:172"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:173
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:173"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:185
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:186
 msgid "delete"
 msgstr "delete"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:187
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:187"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:188
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:188"
 msgid "`v0.10.0` - Introduced."
 msgstr "`v0.10.0` - Introduzido."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:189
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:190
 msgid "Canonical API name: `ptool.s3.Connection:delete`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:delete`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:191
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:192
 msgid "`conn:delete(path)` deletes an object."
 msgstr "`conn:delete(path)` exclui um objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:193
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:193"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:194
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:194"
 msgid "`path` (string, required): The object path."
 msgstr "`path` (string, obrigatório): O caminho do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:195
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:196
 msgid "exists"
 msgstr "exists"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:197
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:197"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:198
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:198"
 msgid "`v0.10.0` - Introduced."
 msgstr "`v0.10.0` - Introduzido."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:199
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:200
 msgid "Canonical API name: `ptool.s3.Connection:exists`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:exists`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:201
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:202
 msgid "`conn:exists(path)` checks whether an object exists."
 msgstr "`conn:exists(path)` verifica se um objeto existe."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:203
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:203"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:204
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:204"
 msgid "`path` (string, required): The object path."
 msgstr "`path` (string, obrigatório): O caminho do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:204
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:205
 msgid "Returns: `boolean`."
 msgstr "Retorna: `boolean`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:206
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:207
 msgid "list"
 msgstr "list"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:208
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:208"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:209
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:209"
 msgid "`v0.10.0` - Introduced."
 msgstr "`v0.10.0` - Introduzido."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:210
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:211
 msgid "Canonical API name: `ptool.s3.Connection:list`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:list`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:212
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:213
 msgid ""
 "`conn:list([prefix])` lists entries under a prefix and returns a dense Lua "
 "array table."
@@ -560,7 +565,7 @@ msgstr ""
 "`conn:list([prefix])` lista entradas sob um prefixo e retorna uma tabela "
 "array Lua densa."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:215
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:216
 msgid ""
 "`prefix` (string, optional): The prefix to list. Defaults to the connection "
 "root."
@@ -568,62 +573,62 @@ msgstr ""
 "`prefix` (string, opcional): O prefixo a listar. O padrão é a raiz da "
 "conexão."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:217
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:217"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:218
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:218"
 msgid "Returns: `table`."
 msgstr "Retorna: `table`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:219
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:219"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:220
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:220"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:230
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:231
 msgid "stat"
 msgstr "stat"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:232
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:232"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:233
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:233"
 msgid "`v0.10.0` - Introduced."
 msgstr "`v0.10.0` - Introduzido."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:234
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:235
 msgid "Canonical API name: `ptool.s3.Connection:stat`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:stat`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:236
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:237
 msgid "`conn:stat(path)` returns metadata for a single object."
 msgstr "`conn:stat(path)` retorna metadados de um único objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:238
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:238"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:239
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:239"
 msgid "`path` (string, required): The object path."
 msgstr "`path` (string, obrigatório): O caminho do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:239
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:239"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:240
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:240"
 msgid "Returns: `table`."
 msgstr "Retorna: `table`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:241
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:241"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:242
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:242"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:249
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:250
 msgid "put_bucket_acl"
 msgstr "put_bucket_acl"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:251
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:251"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:252
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:252"
 msgid "`v0.12.0` - Introduced."
 msgstr "`v0.12.0` - Introduzido."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:253
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:254
 msgid "Canonical API name: `ptool.s3.Connection:put_bucket_acl`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:put_bucket_acl`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:255
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:256
 msgid ""
 "`conn:put_bucket_acl(options)` replaces the bucket ACL and returns `nil` on "
 "success."
@@ -631,21 +636,21 @@ msgstr ""
 "`conn:put_bucket_acl(options)` substitui a ACL do bucket e retorna `nil` em "
 "caso de sucesso."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:258
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:259
 msgid "`options` (table, required): Bucket ACL options."
 msgstr "`options` (table, obrigatório): Opções da ACL do bucket."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:259
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:259"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:260
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:260"
 msgid "Returns: `nil`."
 msgstr "Retorna: `nil`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:261
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:261"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:262
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:262"
 msgid "`options` fields:"
 msgstr "Campos de `options`:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:263
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:264
 msgid ""
 "`acl` (string, optional): A canned bucket ACL. Accepted values are "
 "`\"authenticated-read\"`, `\"private\"`, `\"public-read\"`, and `\"public-"
@@ -655,8 +660,8 @@ msgstr ""
 "são `\"authenticated-read\"`, `\"private\"`, `\"public-read\"` e `\"public-"
 "read-write\"`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:266
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:266"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:267
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:267"
 msgid ""
 "`expected_bucket_owner` (string, optional): Fails the request if the bucket "
 "is not owned by this AWS account ID."
@@ -664,8 +669,8 @@ msgstr ""
 "`expected_bucket_owner` (string, opcional): A requisição falha se o bucket "
 "não pertencer a este ID de conta da AWS."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:268
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:268"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:269
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:269"
 msgid ""
 "`grant_full_control` (string, optional): Value for the `x-amz-grant-full-"
 "control` header."
@@ -673,14 +678,14 @@ msgstr ""
 "`grant_full_control` (string, opcional): Valor do cabeçalho `x-amz-grant-"
 "full-control`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:270
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:270"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:271
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:271"
 msgid ""
 "`grant_read` (string, optional): Value for the `x-amz-grant-read` header."
 msgstr "`grant_read` (string, opcional): Valor do cabeçalho `x-amz-grant-read`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:271
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:271"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:272
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:272"
 msgid ""
 "`grant_read_acp` (string, optional): Value for the `x-amz-grant-read-acp` "
 "header."
@@ -688,15 +693,15 @@ msgstr ""
 "`grant_read_acp` (string, opcional): Valor do cabeçalho `x-amz-grant-read-"
 "acp`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:273
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:273"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:274
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:274"
 msgid ""
 "`grant_write` (string, optional): Value for the `x-amz-grant-write` header."
 msgstr ""
 "`grant_write` (string, opcional): Valor do cabeçalho `x-amz-grant-write`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:274
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:274"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:275
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:275"
 msgid ""
 "`grant_write_acp` (string, optional): Value for the `x-amz-grant-write-acp` "
 "header."
@@ -704,13 +709,13 @@ msgstr ""
 "`grant_write_acp` (string, opcional): Valor do cabeçalho `x-amz-grant-write-"
 "acp`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:277
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:277"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:278
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:278"
 msgid "Behavior:"
 msgstr "Comportamento:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:279
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:279"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:280
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:280"
 msgid ""
 "Supply either `acl` or one or more `grant_*` fields. The two forms cannot be "
 "combined in one call."
@@ -718,12 +723,12 @@ msgstr ""
 "Forneça `acl` ou um ou mais campos `grant_*`. As duas formas não podem ser "
 "combinadas na mesma chamada."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:281
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:281"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:282
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:282"
 msgid "Every supplied string must be non-empty."
 msgstr "Todas as strings fornecidas devem ser não vazias."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:282
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:283
 msgid ""
 "Grant strings use the S3 grant-header syntax, such as an account ID, email "
 "address, or group URI accepted by the target provider."
@@ -732,7 +737,7 @@ msgstr ""
 "como um ID de conta, endereço de e-mail ou URI de grupo aceito pelo provedor "
 "de destino."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:284
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:285
 msgid ""
 "The operation targets the connection bucket. The connection's `root` prefix "
 "is not applied."
@@ -740,8 +745,8 @@ msgstr ""
 "A operação tem como alvo o bucket da conexão. O prefixo `root` da conexão "
 "não é aplicado."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:286
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:286"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:287
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:287"
 msgid ""
 "Many S3-compatible providers disable ACLs or do not implement the ACL APIs. "
 "In that case, the provider error is returned as an `s3_error`."
@@ -749,25 +754,25 @@ msgstr ""
 "Muitos provedores compatíveis com S3 desabilitam ACLs ou não implementam as "
 "APIs de ACL. Nesse caso, o erro do provedor é retornado como `s3_error`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:289
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:289"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:290
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:290"
 msgid "Example:"
 msgstr "Exemplo:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:301
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:302
 msgid "put_object_acl"
 msgstr "put_object_acl"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:303
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:303"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:304
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:304"
 msgid "`v0.12.0` - Introduced."
 msgstr "`v0.12.0` - Introduzido."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:305
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:306
 msgid "Canonical API name: `ptool.s3.Connection:put_object_acl`."
 msgstr "Nome canônico da API: `ptool.s3.Connection:put_object_acl`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:307
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:308
 msgid ""
 "`conn:put_object_acl(path, options)` replaces an object's ACL and returns "
 "`nil` on success."
@@ -775,26 +780,26 @@ msgstr ""
 "`conn:put_object_acl(path, options)` substitui a ACL de um objeto e retorna "
 "`nil` em caso de sucesso."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:310
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:310"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:311
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:311"
 msgid "`path` (string, required): The object path."
 msgstr "`path` (string, obrigatório): O caminho do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:311
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:312
 msgid "`options` (table, required): Object ACL options."
 msgstr "`options` (table, obrigatório): Opções da ACL do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:312
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:312"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:313
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:313"
 msgid "Returns: `nil`."
 msgstr "Retorna: `nil`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:314
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:314"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:315
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:315"
 msgid "`options` fields:"
 msgstr "Campos de `options`:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:316
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:317
 msgid ""
 "`acl` (string, optional): A canned object ACL. Accepted values are "
 "`\"authenticated-read\"`, `\"aws-exec-read\"`, `\"bucket-owner-full-control\""
@@ -806,8 +811,8 @@ msgstr ""
 "control\"`, `\"bucket-owner-read\"`, `\"private\"`, `\"public-read\"` e "
 "`\"public-read-write\"`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:320
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:320"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:321
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:321"
 msgid ""
 "`expected_bucket_owner` (string, optional): Fails the request if the bucket "
 "is not owned by this AWS account ID."
@@ -815,8 +820,8 @@ msgstr ""
 "`expected_bucket_owner` (string, opcional): A requisição falha se o bucket "
 "não pertencer a este ID de conta da AWS."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:322
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:322"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:323
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:323"
 msgid ""
 "`grant_full_control` (string, optional): Value for the `x-amz-grant-full-"
 "control` header."
@@ -824,14 +829,14 @@ msgstr ""
 "`grant_full_control` (string, opcional): Valor do cabeçalho `x-amz-grant-"
 "full-control`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:324
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:324"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:325
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:325"
 msgid ""
 "`grant_read` (string, optional): Value for the `x-amz-grant-read` header."
 msgstr "`grant_read` (string, opcional): Valor do cabeçalho `x-amz-grant-read`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:325
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:325"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:326
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:326"
 msgid ""
 "`grant_read_acp` (string, optional): Value for the `x-amz-grant-read-acp` "
 "header."
@@ -839,15 +844,15 @@ msgstr ""
 "`grant_read_acp` (string, opcional): Valor do cabeçalho `x-amz-grant-read-"
 "acp`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:327
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:327"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:328
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:328"
 msgid ""
 "`grant_write` (string, optional): Value for the `x-amz-grant-write` header."
 msgstr ""
 "`grant_write` (string, opcional): Valor do cabeçalho `x-amz-grant-write`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:328
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:328"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:329
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:329"
 msgid ""
 "`grant_write_acp` (string, optional): Value for the `x-amz-grant-write-acp` "
 "header."
@@ -855,12 +860,12 @@ msgstr ""
 "`grant_write_acp` (string, opcional): Valor do cabeçalho `x-amz-grant-write-"
 "acp`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:330
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:331
 msgid ""
 "`version_id` (string, optional): Applies the ACL to this object version."
 msgstr "`version_id` (string, opcional): Aplica a ACL a esta versão do objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:331
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:332
 msgid ""
 "`request_payer` (string, optional): Accepts only `\"requester\"` and sends "
 "the requester-pays acknowledgement."
@@ -868,13 +873,13 @@ msgstr ""
 "`request_payer` (string, opcional): Aceita somente `\"requester\"` e envia a "
 "confirmação de pagamento pelo solicitante."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:334
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:334"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:335
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:335"
 msgid "Behavior:"
 msgstr "Comportamento:"
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:336
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:336"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:337
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:337"
 msgid ""
 "Supply either `acl` or one or more `grant_*` fields. The two forms cannot be "
 "combined in one call."
@@ -882,19 +887,19 @@ msgstr ""
 "Forneça `acl` ou um ou mais campos `grant_*`. As duas formas não podem ser "
 "combinadas na mesma chamada."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:338
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:338"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:339
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:339"
 msgid "Every supplied string must be non-empty."
 msgstr "Todas as strings fornecidas devem ser não vazias."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:339
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:340
 msgid ""
 "Grant strings use the S3 grant-header syntax accepted by the target provider."
 msgstr ""
 "As strings de concessão usam a sintaxe dos cabeçalhos de concessão do S3 "
 "aceita pelo provedor de destino."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:340
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:341
 msgid ""
 "Leading `/` is ignored, and the connection's `root` prefix is applied to the "
 "object key in the same way as other object operations."
@@ -902,8 +907,8 @@ msgstr ""
 "A `/` inicial é ignorada, e o prefixo `root` da conexão é aplicado à chave "
 "do objeto da mesma forma que nas outras operações de objeto."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:342
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:342"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:343
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:343"
 msgid ""
 "Many S3-compatible providers disable ACLs or do not implement the ACL APIs. "
 "In that case, the provider error is returned as an `s3_error`."
@@ -911,8 +916,114 @@ msgstr ""
 "Muitos provedores compatíveis com S3 desabilitam ACLs ou não implementam as "
 "APIs de ACL. Nesse caso, o erro do provedor é retornado como `s3_error`."
 
-#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:345
-msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:345"
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:346
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:346"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:363
+msgid "presign_read"
+msgstr "presign_read"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:365
+msgid "Unreleased - Introduced."
+msgstr "Não lançado - Introduzido."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:367
+msgid "Canonical API name: `ptool.s3.Connection:presign_read`."
+msgstr "Nome canônico da API: `ptool.s3.Connection:presign_read`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:369
+msgid ""
+"`conn:presign_read(path[, options])` returns a presigned GET URL for "
+"downloading an object without sharing credentials."
+msgstr "`conn:presign_read(path[, options])` retorna uma URL GET pré-assinada para baixar um objeto sem compartilhar credenciais."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:371
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:371"
+msgid "`path` (string, required): The object path."
+msgstr "`path` (string, obrigatório): O caminho do objeto."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:372
+msgid "`options` (table, optional): Presigning options."
+msgstr "`options` (table, opcional): Opções de pré-assinatura."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:373
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:373"
+msgid "Returns: `string`."
+msgstr "Retorna: `string`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:375
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:375"
+msgid "`options` fields:"
+msgstr "Campos de `options`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:377
+msgid ""
+"`expires_in` (integer, optional): Validity in seconds, from 1 to 604800 "
+"(seven days). Defaults to 3600."
+msgstr "`expires_in` (integer, opcional): Validade em segundos, de 1 a 604800 (sete dias). O padrão é 3600."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:378
+msgid ""
+"`response_content_type` (string, optional): Overrides the download "
+"response's Content-Type."
+msgstr "`response_content_type` (string, opcional): Substitui o Content-Type da resposta de download."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:379
+msgid ""
+"`response_content_disposition` (string, optional): Overrides the download "
+"response's Content-Disposition, for example `attachment; filename="
+"\"report.pdf\"`."
+msgstr "`response_content_disposition` (string, opcional): Substitui o Content-Disposition da resposta de download, por exemplo `attachment; filename=\"report.pdf\"`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:380
+msgid "`version_id` (string, optional): Downloads this object version."
+msgstr "`version_id` (string, opcional): Baixa esta versão do objeto."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:382
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:382"
+msgid "Behavior:"
+msgstr "Comportamento:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:384
+msgid "Leading `/` is ignored, and the connection's `root` prefix is applied."
+msgstr "A `/` inicial é ignorada e o prefixo `root` da conexão é aplicado."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:385
+msgid ""
+"Signing is local: it does not download the object or check its existence or "
+"access permissions."
+msgstr "A assinatura é gerada localmente: não baixa o objeto nem verifica sua existência ou as permissões de acesso."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:386
+msgid ""
+"Both `access_key_id` and `secret_access_key` are required, including when "
+"`allow_anonymous` is enabled. Connection environment fallback and "
+"`session_token` are supported."
+msgstr "Tanto `access_key_id` quanto `secret_access_key` são obrigatórios, mesmo com `allow_anonymous` habilitado. São aceitos os valores alternativos das variáveis de ambiente da conexão e `session_token`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:387
+msgid ""
+"The URL may expire earlier if the signing credentials expire or access is "
+"revoked. Anyone holding the URL can use it while it remains valid."
+msgstr "A URL pode expirar antes se as credenciais de assinatura expirarem ou o acesso for revogado. Qualquer pessoa com a URL pode usá-la enquanto ela permanecer válida."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:388
+msgid ""
+"Optional strings must be non-empty. Unknown options and invalid expiration "
+"values are rejected."
+msgstr "As strings opcionais não podem estar vazias. Opções desconhecidas e valores de expiração inválidos são rejeitados."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:389
+msgid ""
+"The URL uses the configured endpoint, which must be reachable by the "
+"downloader. Response overrides depend on the S3-compatible provider's "
+"support."
+msgstr "A URL usa o endpoint configurado, que deve ser acessível para quem baixa. A substituição dos cabeçalhos de resposta depende do suporte do provedor compatível com S3."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:391
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:391"
 msgid "Example:"
 msgstr "Exemplo:"
 

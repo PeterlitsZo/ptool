@@ -2,9 +2,9 @@
 
 ## v0.13.0
 
-- [ ] Enhance the `LuaError`. Make it be a enum.
+- [ ] ~~Enhance the `LuaError`. Make it be a enum.~~
 - [ ] Support `p.guard(cond):or_fatal("...")`.
-- [ ] Enhance the `ptool-console` crate.
+- [ ] ~~Enhance the `ptool-console` crate.~~
 
 ## v0.12.0
 

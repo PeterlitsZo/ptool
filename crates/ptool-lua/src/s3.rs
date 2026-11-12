@@ -1,11 +1,12 @@
 use mlua::{Lua, Table, UserData, UserDataMethods, Value};
 use ptool_engine::{
     PtoolEngine, S3AclGrants, S3BucketCannedAcl, S3ConnectOptions, S3Connection, S3Entry,
-    S3ObjectCannedAcl, S3PutBucketAclOptions, S3PutObjectAclOptions, S3Range, S3ReadOptions,
-    S3RequestPayer, S3WriteOptions,
+    S3ObjectCannedAcl, S3PresignReadOptions, S3PutBucketAclOptions, S3PutObjectAclOptions, S3Range,
+    S3ReadOptions, S3RequestPayer, S3WriteOptions,
 };
 
 const CONNECT_SIGNATURE: &str = "ptool.s3.connect(options)";
+const PRESIGN_READ_SIGNATURE: &str = "ptool.s3.Connection:presign_read(path[, options])";
 const READ_SIGNATURE: &str = "ptool.s3.Connection:read(path[, options])";
 const WRITE_SIGNATURE: &str = "ptool.s3.Connection:write(path, content[, options])";
 const DELETE_SIGNATURE: &str = "ptool.s3.Connection:delete(path)";
@@ -38,6 +39,15 @@ impl UserData for LuaS3Connection {
             "write",
             |lua, this, (path, content, options): (String, mlua::String, Option<Table>)| {
                 this.write(lua, path, content, options)
+            },
+        );
+        methods.add_method(
+            "presign_read",
+            |_, this, (path, options): (String, Option<Table>)| {
+                let options = parse_presign_read_options(options)?;
+                this.connection
+                    .presign_read(&path, &options)
+                    .map_err(|err| s3_error(PRESIGN_READ_SIGNATURE, err))
             },
         );
         methods.add_method("delete", |_, this, path: String| this.delete(path));
@@ -190,6 +200,54 @@ fn parse_write_options(options: Option<Table>) -> mlua::Result<S3WriteOptions> {
             .unwrap_or(false),
         if_match: optional_non_empty_string(&options, "if_match", WRITE_SIGNATURE)?,
         if_none_match: optional_non_empty_string(&options, "if_none_match", WRITE_SIGNATURE)?,
+    })
+}
+
+fn parse_presign_read_options(options: Option<Table>) -> mlua::Result<S3PresignReadOptions> {
+    let Some(options) = options else {
+        return Ok(S3PresignReadOptions::default());
+    };
+    validate_option_keys(
+        &options,
+        PRESIGN_READ_SIGNATURE,
+        &[
+            "expires_in",
+            "response_content_type",
+            "response_content_disposition",
+            "version_id",
+        ],
+    )?;
+    let expires_in = match options.get::<Value>("expires_in")? {
+        Value::Nil => S3PresignReadOptions::default().expires_in,
+        Value::Integer(value) if value >= 0 => value as u64,
+        Value::Number(value)
+            if value.is_finite()
+                && value.fract() == 0.0
+                && value >= 0.0
+                && value < u64::MAX as f64 =>
+        {
+            value as u64
+        }
+        _ => {
+            return Err(crate::lua_error::invalid_argument(
+                PRESIGN_READ_SIGNATURE,
+                "`expires_in` must be a non-negative integer",
+            ));
+        }
+    };
+    Ok(S3PresignReadOptions {
+        expires_in,
+        response_content_type: optional_non_empty_string(
+            &options,
+            "response_content_type",
+            PRESIGN_READ_SIGNATURE,
+        )?,
+        response_content_disposition: optional_non_empty_string(
+            &options,
+            "response_content_disposition",
+            PRESIGN_READ_SIGNATURE,
+        )?,
+        version_id: optional_non_empty_string(&options, "version_id", PRESIGN_READ_SIGNATURE)?,
     })
 }
 

@@ -2,6 +2,7 @@ use crate::{Error, ErrorKind, Result};
 use aws_sdk_s3::config::{BehaviorVersion, Credentials, Region};
 use aws_sdk_s3::operation::put_bucket_acl::builders::PutBucketAclFluentBuilder;
 use aws_sdk_s3::operation::put_object_acl::builders::PutObjectAclFluentBuilder;
+use aws_sdk_s3::presigning::PresigningConfig;
 use aws_sdk_s3::types::{BucketCannedAcl, ObjectCannedAcl, RequestPayer};
 use opendal::{
     EntryMode, Metadata, Operator, layers::HttpClientLayer, raw::HttpClient, services::S3,
@@ -10,7 +11,10 @@ use std::error::Error as StdError;
 use std::future::IntoFuture;
 use std::ops::Bound;
 use std::sync::Arc;
+use std::time::Duration;
 use tokio::runtime::Runtime;
+
+const PRESIGN_READ_OP: &str = "ptool.s3.Connection:presign_read";
 
 const PUT_BUCKET_ACL_OP: &str = "ptool.s3.Connection:put_bucket_acl";
 const PUT_OBJECT_ACL_OP: &str = "ptool.s3.Connection:put_object_acl";
@@ -32,8 +36,28 @@ pub struct S3Connection {
     runtime: Arc<Runtime>,
     operator: Operator,
     sdk_client: aws_sdk_s3::Client,
+    has_signing_credentials: bool,
     bucket: String,
     root: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct S3PresignReadOptions {
+    pub expires_in: u64,
+    pub response_content_type: Option<String>,
+    pub response_content_disposition: Option<String>,
+    pub version_id: Option<String>,
+}
+
+impl Default for S3PresignReadOptions {
+    fn default() -> Self {
+        Self {
+            expires_in: 3600,
+            response_content_type: None,
+            response_content_disposition: None,
+            version_id: None,
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -179,6 +203,14 @@ pub struct S3Entry {
 pub(crate) fn connect(runtime: Arc<Runtime>, options: S3ConnectOptions) -> Result<S3Connection> {
     ensure_non_empty("bucket", &options.bucket, "ptool.s3.connect")?;
 
+    let has_signing_credentials = options
+        .access_key_id
+        .as_ref()
+        .is_some_and(|v| !v.is_empty())
+        && options
+            .secret_access_key
+            .as_ref()
+            .is_some_and(|v| !v.is_empty());
     let sdk_client = build_aws_sdk_client(&options);
     let root = normalize_root_prefix(options.root.as_deref());
     let mut builder = S3::default().bucket(&options.bucket).disable_config_load();
@@ -228,12 +260,58 @@ pub(crate) fn connect(runtime: Arc<Runtime>, options: S3ConnectOptions) -> Resul
         runtime,
         operator,
         sdk_client,
+        has_signing_credentials,
         bucket: options.bucket,
         root,
     })
 }
 
 impl S3Connection {
+    pub fn presign_read(&self, path: &str, options: &S3PresignReadOptions) -> Result<String> {
+        let key = object_key(&self.root, path, PRESIGN_READ_OP)?;
+        if !(1..=604800).contains(&options.expires_in) {
+            return Err(Error::new(
+                ErrorKind::InvalidArgs,
+                "`expires_in` must be an integer between 1 and 604800 seconds",
+            )
+            .with_op(PRESIGN_READ_OP));
+        }
+        for (field, value) in [
+            (
+                "response_content_type",
+                options.response_content_type.as_deref(),
+            ),
+            (
+                "response_content_disposition",
+                options.response_content_disposition.as_deref(),
+            ),
+            ("version_id", options.version_id.as_deref()),
+        ] {
+            validate_optional_non_empty(value, field, PRESIGN_READ_OP)?;
+        }
+        if !self.has_signing_credentials {
+            return Err(Error::new(
+                ErrorKind::S3,
+                "presigning requires both access_key_id and secret_access_key, even when allow_anonymous is true",
+            ).with_op(PRESIGN_READ_OP));
+        }
+        let config = PresigningConfig::expires_in(Duration::from_secs(options.expires_in))
+            .map_err(|err| aws_sdk_error(PRESIGN_READ_OP, "configure presigning", err))?;
+        let request = self
+            .sdk_client
+            .get_object()
+            .bucket(&self.bucket)
+            .key(key)
+            .set_response_content_type(options.response_content_type.clone())
+            .set_response_content_disposition(options.response_content_disposition.clone())
+            .set_version_id(options.version_id.clone());
+        let signed = self
+            .runtime
+            .block_on(request.presigned(config))
+            .map_err(|err| aws_sdk_error(PRESIGN_READ_OP, "presign read", err))?;
+        Ok(signed.uri().to_string())
+    }
+
     pub fn read(&self, path: &str, options: &S3ReadOptions) -> Result<Vec<u8>> {
         let path = normalize_object_path(path, "ptool.s3.Connection:read", false)?;
         let mut reader = self.operator.read_with(&path);
