@@ -1,0 +1,334 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 15:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.16.3\n"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:1
+msgid "Regex API"
+msgstr "API de regex"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:3
+msgid "Regular expression helpers are available under `ptool.re` and `p.re`."
+msgstr ""
+"As utilidades de expressão regular estão disponíveis em `ptool.re` e `p.re`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:5
+msgid "ptool.re.compile"
+msgstr "ptool.re.compile"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:7
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:7"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:9
+msgid ""
+"`ptool.re.compile(pattern[, opts])` compiles a regular expression and "
+"returns a `Regex` object."
+msgstr ""
+"`ptool.re.compile(pattern[, opts])` compila uma expressão regular e retorna "
+"um objeto `Regex`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:12
+msgid "`pattern` (string, required): The regex pattern."
+msgstr "`pattern` (string, obrigatório): O padrão regex."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:13
+msgid "`opts` (table, optional): Compile options. Currently supported:"
+msgstr ""
+"`opts` (table, opcional): Opções de compilação. Atualmente, há suporte a:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:13
+msgid ""
+"`case_insensitive` (boolean, optional): Whether matching is case-"
+"insensitive. Defaults to `false`."
+msgstr ""
+"`case_insensitive` (boolean, opcional): Se a correspondência é case "
+"insensitive. O padrão é `false`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:17
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:17"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:24
+msgid "ptool.re.escape"
+msgstr "ptool.re.escape"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:26
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:26"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:28
+msgid "`ptool.re.escape(text)` escapes plain text into a regex literal string."
+msgstr ""
+"`ptool.re.escape(text)` escapa texto simples para uma string literal de "
+"regex."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:30
+msgid "`text` (string, required): The text to escape."
+msgstr "`text` (string, obrigatório): O texto a escapar."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:31
+msgid "Returns: The escaped string."
+msgstr "Retorna: A string escapada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:33
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:33"
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:41
+msgid "Regex"
+msgstr "Regex"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:43
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:43"
+msgid "`v0.1.0` - Introduced."
+msgstr "`v0.1.0` - Introduced."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:45
+msgid ""
+"`Regex` represents a compiled regular expression returned by "
+"`ptool.re.compile(...)`."
+msgstr ""
+"`Regex` representa uma expressão regular compilada retornada por "
+"`ptool.re.compile(...)`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:48
+msgid "It is implemented as a Lua userdata."
+msgstr "Ela é implementada como userdata Lua."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:50
+msgid "Methods:"
+msgstr "Métodos:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:52
+msgid "`re:is_match(input)` -> `boolean`"
+msgstr "`re:is_match(input)` -> `boolean`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:53
+msgid "`re:find(input[, init])` -> `Match|nil`"
+msgstr "`re:find(input[, init])` -> `Match|nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:54
+msgid "`re:find_all(input)` -> `Match[]`"
+msgstr "`re:find_all(input)` -> `Match[]`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:55
+msgid "`re:captures(input)` -> `Captures|nil`"
+msgstr "`re:captures(input)` -> `Captures|nil`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:56
+msgid "`re:captures_all(input)` -> `Captures[]`"
+msgstr "`re:captures_all(input)` -> `Captures[]`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:57
+msgid "`re:replace(input, replacement)` -> `string`"
+msgstr "`re:replace(input, replacement)` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:58
+msgid "`re:replace_all(input, replacement)` -> `string`"
+msgstr "`re:replace_all(input, replacement)` -> `string`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:59
+msgid "`re:split(input[, limit])` -> `string[]`"
+msgstr "`re:split(input[, limit])` -> `string[]`"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:61
+msgid "is_match"
+msgstr "is_match"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:63
+msgid "Canonical API name: `ptool.re.Regex:is_match`."
+msgstr "Canonical API name: `ptool.re.Regex:is_match`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:65
+msgid "`re:is_match(input)` checks whether the regex matches `input`."
+msgstr "`re:is_match(input)` verifica se a regex corresponde a `input`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:67
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:67"
+msgid "`input` (string, required): The input text."
+msgstr "`input` (string, obrigatório): O texto de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:68
+msgid "Returns: `boolean`."
+msgstr "Retorna: `boolean`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:70
+msgid "find"
+msgstr "find"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:72
+msgid "Canonical API name: `ptool.re.Regex:find`."
+msgstr "Canonical API name: `ptool.re.Regex:find`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:74
+msgid "`re:find(input[, init])` returns the first match in `input`, or `nil`."
+msgstr ""
+"`re:find(input[, init])` retorna a primeira correspondência em `input`, ou "
+"`nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:76
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:76"
+msgid "`input` (string, required): The input text."
+msgstr "`input` (string, obrigatório): O texto de entrada."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:78
+msgid "Parameter notes:"
+msgstr "Notas sobre parâmetros:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:80
+msgid "`init` is a 1-based start position and defaults to `1`."
+msgstr "`init` é uma posição inicial baseada em 1 e o padrão é `1`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:81
+msgid "`limit` must be greater than `0`."
+msgstr "`limit` deve ser maior que `0`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:83
+msgid "Return structures:"
+msgstr "Estruturas de retorno:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:85
+msgid "`Match`:"
+msgstr "`Match`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:85
+msgid "`start` (integer): The 1-based start index."
+msgstr "`start` (integer): O índice inicial baseado em 1."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:85
+msgid "`finish` (integer): The end index, directly usable with `string.sub`."
+msgstr ""
+"`finish` (integer): O índice final, utilizável diretamente com `string.sub`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:85
+msgid "`text` (string): The matched text."
+msgstr "`text` (string): O texto correspondente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:89
+msgid "`Captures`:"
+msgstr "`Captures`:"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:89
+msgid "`full` (string): The full matched text."
+msgstr "`full` (string): O texto completo correspondente."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:89
+msgid ""
+"`groups` (table): An array of capture groups in capture order. Unmatched "
+"groups are `nil`."
+msgstr ""
+"`groups` (table): Um array dos grupos capturados na ordem de captura. Grupos "
+"não correspondidos são `nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:89
+msgid ""
+"`named` (table): A mapping of named capture groups, keyed by group name."
+msgstr ""
+"`named` (table): Um mapeamento de grupos capturados nomeados, indexado pelo "
+"nome do grupo."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:95
+msgid "find_all"
+msgstr "find_all"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:97
+msgid "Canonical API name: `ptool.re.Regex:find_all`."
+msgstr "Canonical API name: `ptool.re.Regex:find_all`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:99
+msgid "`re:find_all(input)` returns all matches in `input` as a `Match[]`."
+msgstr ""
+"`re:find_all(input)` retorna todas as correspondências em `input` como "
+"`Match[]`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:101
+msgid "captures"
+msgstr "captures"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:103
+msgid "Canonical API name: `ptool.re.Regex:captures`."
+msgstr "Canonical API name: `ptool.re.Regex:captures`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:105
+msgid ""
+"`re:captures(input)` returns the first capture set in `input`, or `nil`."
+msgstr ""
+"`re:captures(input)` retorna o primeiro conjunto de capturas em `input`, ou "
+"`nil`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:107
+msgid "captures_all"
+msgstr "captures_all"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:109
+msgid "Canonical API name: `ptool.re.Regex:captures_all`."
+msgstr "Canonical API name: `ptool.re.Regex:captures_all`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:111
+msgid ""
+"`re:captures_all(input)` returns all capture sets in `input` as a "
+"`Captures[]`."
+msgstr ""
+"`re:captures_all(input)` retorna todos os conjuntos de capturas em `input` "
+"como `Captures[]`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:113
+msgid "replace"
+msgstr "replace"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:115
+msgid "Canonical API name: `ptool.re.Regex:replace`."
+msgstr "Canonical API name: `ptool.re.Regex:replace`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:117
+msgid "`re:replace(input, replacement)` replaces the first match in `input`."
+msgstr ""
+"`re:replace(input, replacement)` substitui a primeira correspondência em "
+"`input`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:119
+msgid "replace_all"
+msgstr "replace_all"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:121
+msgid "Canonical API name: `ptool.re.Regex:replace_all`."
+msgstr "Canonical API name: `ptool.re.Regex:replace_all`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:123
+msgid "`re:replace_all(input, replacement)` replaces all matches in `input`."
+msgstr ""
+"`re:replace_all(input, replacement)` substitui todas as correspondências em "
+"`input`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:125
+msgid "split"
+msgstr "split"
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:127
+msgid "Canonical API name: `ptool.re.Regex:split`."
+msgstr "Canonical API name: `ptool.re.Regex:split`."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:129
+msgid ""
+"`re:split(input[, limit])` splits `input` using the regex as the separator."
+msgstr ""
+"`re:split(input[, limit])` divide `input` usando a regex como separador."
+
+#: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:131
+msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/re.md:131"
+msgid "Example:"
+msgstr "Exemplo:"

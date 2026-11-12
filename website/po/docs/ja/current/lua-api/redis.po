@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 16:02+0800\n"
+"POT-Creation-Date: 2026-11-12 13:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,9 +76,8 @@ msgstr "この接続は `conn:call(...)` による直接的なコマンド実行
 msgid ""
 "This API does not currently provide dedicated pub/sub, pipeline, or "
 "transaction helpers."
-msgstr ""
-"現在この API には、専用の pub/sub、pipeline、transaction ヘルパーはありませ"
-"ん。"
+msgstr "現在この API には、専用の pub/sub、pipeline、transaction ヘルパーはありません"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:36
 msgid "Connection"
@@ -93,9 +92,8 @@ msgstr "`v0.9.0` - Introduced."
 msgid ""
 "`Connection` represents an open Redis connection returned by "
 "`ptool.redis.connect()`."
-msgstr ""
-"`Connection` は `ptool.redis.connect()` が返すオープンな Redis 接続を表しま"
-"す。"
+msgstr "`Connection` は `ptool.redis.connect()` が返すオープンな Redis 接続を表します"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:43
 msgid "It is implemented as a Lua userdata."
@@ -149,17 +147,15 @@ msgstr "`string`"
 msgid ""
 "`nil`, tables, functions, threads, and userdata are not supported as Redis "
 "command arguments."
-msgstr ""
-"`nil`、table、function、thread、userdata は Redis コマンド引数としてサポート"
+msgstr "`nil`、table、function、thread、userdata は Redis コマンド引数としてサポート"
 "されません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:61
 msgid ""
 "Lua strings are passed as raw bytes, so binary-safe Redis values are "
 "supported."
-msgstr ""
-"Lua 文字列は生バイト列として渡されるため、バイナリセーフな Redis 値を扱えま"
-"す。"
+msgstr "Lua 文字列は生バイト列として渡されるため、バイナリセーフな Redis 値を扱えます"
+"。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:64
 msgid "Reply conversion rules:"
@@ -175,8 +171,7 @@ msgstr "整数レスポンスは Lua 整数になります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:68
 msgid "Bulk strings, simple strings, and verbatim strings become Lua strings."
-msgstr ""
-"bulk string、simple string、verbatim string は Lua 文字列になります。"
+msgstr "bulk string、simple string、verbatim string は Lua 文字列になります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:69
 msgid "Array and set replies become dense Lua array tables."
@@ -186,9 +181,8 @@ msgstr "array と set のレスポンスは密な Lua 配列テーブルにな�
 msgid ""
 "Map replies become Lua tables when the map keys can be represented as Lua "
 "strings, integers, numbers, or booleans."
-msgstr ""
-"map レスポンスは、キーを Lua の文字列、整数、数値、真偽値として表現できる場"
-"合に Lua テーブルになります。"
+msgstr "map レスポンスは、キーを Lua の文字列、整数、数値、真偽値として表現できる場合"
+"に Lua テーブルになります。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:72
 msgid "Double replies become Lua numbers."
@@ -205,9 +199,8 @@ msgstr "big number レスポンスは Lua 文字列になります。"
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:75
 msgid ""
 "Push replies become tables shaped like `{ kind = \"...\", data = {...} }`."
-msgstr ""
-"push レスポンスは `{ kind = \"...\", data = {...} }` の形をしたテーブルにな"
-"ります。"
+msgstr "push レスポンスは `{ kind = \"...\", data = {...} }` の形をしたテーブルになり"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:77
 msgid "call"
@@ -226,9 +219,8 @@ msgstr "正規 API 名: `ptool.redis.Connection:call`。"
 msgid ""
 "`conn:call(command, ...)` sends a Redis command and returns the converted "
 "reply."
-msgstr ""
-"`conn:call(command, ...)` は Redis コマンドを送信し、変換後のレスポンスを返"
-"します。"
+msgstr "`conn:call(command, ...)` は Redis コマンドを送信し、変換後のレスポンスを返し"
+"ます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:86
 msgid "Example:"

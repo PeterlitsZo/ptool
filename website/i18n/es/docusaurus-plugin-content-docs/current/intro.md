@@ -35,7 +35,7 @@ El instalador descarga la versión precompilada más reciente para la plataforma
 Para instalar una etiqueta de lanzamiento concreta en lugar de la última versión estable:
 
 ```sh
-curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.12.0
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.13.0
 ```
 
 Para instalarlo en un directorio binario personalizado en lugar de `~/.local/bin`:
@@ -47,7 +47,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/
 ## Script mínimo
 
 ```lua
-ptool.use("v0.12.0")
+ptool.use("v0.13.0")
 
 ptool.run("echo", {"hello", "world"})
 ```

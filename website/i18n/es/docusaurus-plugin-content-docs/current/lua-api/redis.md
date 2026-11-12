@@ -102,4 +102,3 @@ Nombre canónico de la API: `ptool.redis.Connection:close`.
 Comportamiento:
 
 - Después de cerrarla, la conexión ya no puede usarse.
-

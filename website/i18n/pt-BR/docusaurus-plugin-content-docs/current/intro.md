@@ -35,7 +35,7 @@ O instalador baixa a release pré-compilada mais recente para a plataforma atual
 Para instalar uma tag de release específica em vez da versão estável mais recente:
 
 ```sh
-curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.12.0
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.13.0
 ```
 
 Para instalar em um diretório de binários personalizado em vez de `~/.local/bin`:
@@ -47,7 +47,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/
 ## Script mínimo
 
 ```lua
-ptool.use("v0.12.0")
+ptool.use("v0.13.0")
 
 ptool.run("echo", {"hello", "world"})
 ```

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 11:15+0800\n"
+"POT-Creation-Date: 2026-11-12 13:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -821,7 +821,7 @@ msgid "presign_read"
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:365
-msgid "Unreleased - Introduced."
+msgid "`v0.13.0` - Introduced."
 msgstr ""
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:367

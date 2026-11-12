@@ -38,7 +38,7 @@ installs `ptool` to `~/.local/bin/ptool`, and prints a PATH hint if needed.
 To install a specific release tag instead of the latest stable release:
 
 ```sh
-curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.12.0
+curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- v0.13.0
 ```
 
 To install into a custom binary directory instead of `~/.local/bin`:
@@ -50,7 +50,7 @@ curl -fsSL https://peterlits.net/ptool/install.sh | bash -s -- --bin-dir "$HOME/
 ## Minimal script
 
 ```lua
-ptool.use("v0.12.0")
+ptool.use("v0.13.0")
 
 ptool.run("echo", {"hello", "world"})
 ```

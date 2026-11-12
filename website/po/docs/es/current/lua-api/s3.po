@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 13:33+0800\n"
+"POT-Creation-Date: 2026-11-12 13:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -919,8 +919,8 @@ msgid "presign_read"
 msgstr "presign_read"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:365
-msgid "Unreleased - Introduced."
-msgstr "Sin publicar - Introducido."
+msgid "`v0.13.0` - Introduced."
+msgstr "`v0.13.0` - Introducido."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:367
 msgid "Canonical API name: `ptool.s3.Connection:presign_read`."
@@ -930,7 +930,9 @@ msgstr "Nombre canónico de la API: `ptool.s3.Connection:presign_read`."
 msgid ""
 "`conn:presign_read(path[, options])` returns a presigned GET URL for "
 "downloading an object without sharing credentials."
-msgstr "`conn:presign_read(path[, options])` devuelve una URL GET prefirmada para descargar un objeto sin compartir credenciales."
+msgstr ""
+"`conn:presign_read(path[, options])` devuelve una URL GET prefirmada para "
+"descargar un objeto sin compartir credenciales."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:371
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:371"
@@ -955,20 +957,27 @@ msgstr "Campos de `options`:"
 msgid ""
 "`expires_in` (integer, optional): Validity in seconds, from 1 to 604800 "
 "(seven days). Defaults to 3600."
-msgstr "`expires_in` (integer, opcional): Validez en segundos, de 1 a 604800 (siete días). El valor predeterminado es 3600."
+msgstr ""
+"`expires_in` (integer, opcional): Validez en segundos, de 1 a 604800 "
+"(siete días). El valor predeterminado es 3600."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:378
 msgid ""
 "`response_content_type` (string, optional): Overrides the download "
 "response's Content-Type."
-msgstr "`response_content_type` (string, opcional): Sobrescribe el Content-Type de la respuesta de descarga."
+msgstr ""
+"`response_content_type` (string, opcional): Sobrescribe el Content-Type de "
+"la respuesta de descarga."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:379
 msgid ""
 "`response_content_disposition` (string, optional): Overrides the download "
 "response's Content-Disposition, for example `attachment; filename="
 "\"report.pdf\"`."
-msgstr "`response_content_disposition` (string, opcional): Sobrescribe el Content-Disposition de la respuesta de descarga, por ejemplo `attachment; filename=\"report.pdf\"`."
+msgstr ""
+"`response_content_disposition` (string, opcional): Sobrescribe el Content-"
+"Disposition de la respuesta de descarga, por ejemplo `attachment; filename="
+"\"report.pdf\"`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:380
 msgid "`version_id` (string, optional): Downloads this object version."
@@ -987,33 +996,46 @@ msgstr "Se ignora la `/` inicial y se aplica el prefijo `root` de la conexión."
 msgid ""
 "Signing is local: it does not download the object or check its existence or "
 "access permissions."
-msgstr "La firma se genera localmente: no descarga el objeto ni comprueba su existencia o los permisos de acceso."
+msgstr ""
+"La firma se genera localmente: no descarga el objeto ni comprueba su "
+"existencia o los permisos de acceso."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:386
 msgid ""
 "Both `access_key_id` and `secret_access_key` are required, including when "
 "`allow_anonymous` is enabled. Connection environment fallback and "
 "`session_token` are supported."
-msgstr "Se requieren tanto `access_key_id` como `secret_access_key`, incluso si `allow_anonymous` está habilitado. Se admiten las variables de entorno de respaldo de la conexión y `session_token`."
+msgstr ""
+"Se requieren tanto `access_key_id` como `secret_access_key`, incluso si "
+"`allow_anonymous` está habilitado. Se admiten las variables de entorno de "
+"respaldo de la conexión y `session_token`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:387
 msgid ""
 "The URL may expire earlier if the signing credentials expire or access is "
 "revoked. Anyone holding the URL can use it while it remains valid."
-msgstr "La URL puede caducar antes si caducan las credenciales de firma o se revoca el acceso. Cualquiera que tenga la URL puede usarla mientras siga siendo válida."
+msgstr ""
+"La URL puede caducar antes si caducan las credenciales de firma o se revoca "
+"el acceso. Cualquiera que tenga la URL puede usarla mientras siga siendo "
+"válida."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:388
 msgid ""
 "Optional strings must be non-empty. Unknown options and invalid expiration "
 "values are rejected."
-msgstr "Las cadenas opcionales no pueden estar vacías. Se rechazan las opciones desconocidas y los valores de caducidad no válidos."
+msgstr ""
+"Las cadenas opcionales no pueden estar vacías. Se rechazan las opciones "
+"desconocidas y los valores de caducidad no válidos."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:389
 msgid ""
 "The URL uses the configured endpoint, which must be reachable by the "
 "downloader. Response overrides depend on the S3-compatible provider's "
 "support."
-msgstr "La URL usa el endpoint configurado, que debe ser accesible para quien descarga. La sustitución de los encabezados de respuesta depende de la compatibilidad del proveedor S3."
+msgstr ""
+"La URL usa el endpoint configurado, que debe ser accesible para quien "
+"descarga. La sustitución de los encabezados de respuesta depende de la "
+"compatibilidad del proveedor S3."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:391
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:391"

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.13.0 (2026-11-12)
+
 ### Added
 
 - Added `ptool.s3.Connection:presign_read` for generating temporary download

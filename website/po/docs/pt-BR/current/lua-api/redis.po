@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 16:02+0800\n"
+"POT-Creation-Date: 2026-11-12 13:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,8 +73,8 @@ msgid ""
 "The connection is intended for direct command execution through `conn:call"
 "(...)`."
 msgstr ""
-"A conexão foi pensada para execução direta de comandos por meio de `conn:"
-"call(...)`."
+"A conexão foi pensada para execução direta de comandos por meio de `conn:call"
+"(...)`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:33
 msgid ""
@@ -98,8 +98,8 @@ msgid ""
 "`Connection` represents an open Redis connection returned by "
 "`ptool.redis.connect()`."
 msgstr ""
-"`Connection` representa uma conexão Redis aberta retornada por `ptool.redis."
-"connect()`."
+"`Connection` representa uma conexão Redis aberta retornada por "
+"`ptool.redis.connect()`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:43
 msgid "It is implemented as a Lua userdata."
@@ -181,8 +181,7 @@ msgstr "Respostas inteiras se tornam inteiros Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:68
 msgid "Bulk strings, simple strings, and verbatim strings become Lua strings."
-msgstr ""
-"Bulk strings, simple strings e verbatim strings se tornam strings Lua."
+msgstr "Bulk strings, simple strings e verbatim strings se tornam strings Lua."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:69
 msgid "Array and set replies become dense Lua array tables."
@@ -212,8 +211,8 @@ msgstr "Respostas de números grandes se tornam strings Lua."
 msgid ""
 "Push replies become tables shaped like `{ kind = \"...\", data = {...} }`."
 msgstr ""
-"Respostas push se tornam tabelas no formato `{ kind = \"...\", data = "
-"{...} }`."
+"Respostas push se tornam tabelas no formato `{ kind = \"...\", data = {...} "
+"}`."
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/redis.md:77
 msgid "call"

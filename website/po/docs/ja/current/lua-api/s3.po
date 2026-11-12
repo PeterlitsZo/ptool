@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 13:33+0800\n"
+"POT-Creation-Date: 2026-11-12 13:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -897,8 +897,8 @@ msgid "presign_read"
 msgstr "presign_read"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:365
-msgid "Unreleased - Introduced."
-msgstr "未リリース - 導入。"
+msgid "`v0.13.0` - Introduced."
+msgstr "`v0.13.0` - 導入。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:367
 msgid "Canonical API name: `ptool.s3.Connection:presign_read`."
@@ -908,7 +908,9 @@ msgstr "正式な API 名：`ptool.s3.Connection:presign_read`。"
 msgid ""
 "`conn:presign_read(path[, options])` returns a presigned GET URL for "
 "downloading an object without sharing credentials."
-msgstr "`conn:presign_read(path[, options])` は、認証情報を共有せずにオブジェクトをダウンロードするための署名付き GET URL を返します。"
+msgstr ""
+"`conn:presign_read(path[, options])` は、認証情報を共有せずにオブジェクトをダ"
+"ウンロードするための署名付き GET URL を返します。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:371
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:371"
@@ -933,24 +935,29 @@ msgstr "`options` のフィールド:"
 msgid ""
 "`expires_in` (integer, optional): Validity in seconds, from 1 to 604800 "
 "(seven days). Defaults to 3600."
-msgstr "`expires_in`（integer、省略可）：有効期間（秒）。1 から 604800（7 日間）まで。既定値は 3600 です。"
+msgstr "`expires_in`（integer、省略可）：有効期間（秒）。1 から 604800（7 日間）まで"
+"。既定値は 3600 です。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:378
 msgid ""
 "`response_content_type` (string, optional): Overrides the download "
 "response's Content-Type."
-msgstr "`response_content_type`（string、省略可）：ダウンロード応答の Content-Type を上書きします。"
+msgstr "`response_content_type`（string、省略可）：ダウンロード応答の Content-Type を"
+"上書きします。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:379
 msgid ""
 "`response_content_disposition` (string, optional): Overrides the download "
 "response's Content-Disposition, for example `attachment; filename="
 "\"report.pdf\"`."
-msgstr "`response_content_disposition`（string、省略可）：ダウンロード応答の Content-Disposition を上書きします。例：`attachment; filename=\"report.pdf\"`。"
+msgstr ""
+"`response_content_disposition`（string、省略可）：ダウンロード応答の Content-"
+"Disposition を上書きします。例：`attachment; filename=\"report.pdf\"`。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:380
 msgid "`version_id` (string, optional): Downloads this object version."
-msgstr "`version_id`（string、省略可）：このオブジェクトバージョンをダウンロードします。"
+msgstr "`version_id`（string、省略可）：このオブジェクトバージョンをダウンロードしま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:382
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:382"
@@ -965,33 +972,42 @@ msgstr "先頭の `/` は無視され、接続の `root` プレフィックス�
 msgid ""
 "Signing is local: it does not download the object or check its existence or "
 "access permissions."
-msgstr "署名はローカルで生成されます。オブジェクトのダウンロードや、存在・アクセス権限の確認は行いません。"
+msgstr "署名はローカルで生成されます。オブジェクトのダウンロードや、存在・アクセス権"
+"限の確認は行いません。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:386
 msgid ""
 "Both `access_key_id` and `secret_access_key` are required, including when "
 "`allow_anonymous` is enabled. Connection environment fallback and "
 "`session_token` are supported."
-msgstr "`allow_anonymous` が有効でも、`access_key_id` と `secret_access_key` の両方が必要です。接続の環境変数フォールバックと `session_token` に対応しています。"
+msgstr ""
+"`allow_anonymous` が有効でも、`access_key_id` と `secret_access_key` の両方が"
+"必要です。接続の環境変数フォールバックと `session_token` に対応しています。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:387
 msgid ""
 "The URL may expire earlier if the signing credentials expire or access is "
 "revoked. Anyone holding the URL can use it while it remains valid."
-msgstr "署名に使用した認証情報の期限切れやアクセス権限の取り消しにより、URL が早く無効になる場合があります。有効な間は URL を持つ誰でも利用できます。"
+msgstr ""
+"署名に使用した認証情報の期限切れやアクセス権限の取り消しにより、URL が早く無"
+"効になる場合があります。有効な間は URL を持つ誰でも利用できます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:388
 msgid ""
 "Optional strings must be non-empty. Unknown options and invalid expiration "
 "values are rejected."
-msgstr "省略可能な文字列に空文字列は指定できません。不明なオプションや無効な有効期間は拒否されます。"
+msgstr "省略可能な文字列に空文字列は指定できません。不明なオプションや無効な有効期間"
+"は拒否されます。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:389
 msgid ""
 "The URL uses the configured endpoint, which must be reachable by the "
 "downloader. Response overrides depend on the S3-compatible provider's "
 "support."
-msgstr "URL は設定されたエンドポイントを使用するため、ダウンロードする側からアクセスできる必要があります。応答の上書きは S3 互換プロバイダーの対応状況に依存します。"
+msgstr ""
+"URL は設定されたエンドポイントを使用するため、ダウンロードする側からアクセス"
+"できる必要があります。応答の上書きは S3 互換プロバイダーの対応状況に依存しま"
+"す。"
 
 #: /Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:391
 msgctxt "/Users/peterlits/Proj/PeterlitsZo/ptool/website/docs/lua-api/s3.md:391"
